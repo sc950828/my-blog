@@ -17,9 +17,9 @@
   - Object.assign 只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
   - Object.assign 可以用来处理数组，但是会把数组视为对象。 Object.assign([1, 2, 3], [4, 5]) 输出[4, 5, 3]
 
-- Object.create(**proto**,`[properties]`)
+- Object.create(`__proto__`,`[properties]`)
 
-  - 创建一个新的对象，该方法将**proto**作为原型对象，并将`[properties]`作为新对象的属性。
+  - 创建一个新的对象，该方法将`__proto__`作为原型对象，并将`[properties]`作为新对象的属性。
   - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
 
 - Object.defineProperty(obj,prop,descriptor)

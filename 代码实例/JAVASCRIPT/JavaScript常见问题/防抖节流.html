@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖与节流</title>
+</head>
+<body>
+  <button onclick="mydebounce('randy', 24)">防抖</button>
+  <button onclick="mythrottle('randy', 24)">防抖</button>
+  <script>
+    // 防抖 单位时间内没触发 就执行
+    function debounce(fn, time) {
+      let timer = null
+      return (...args) => {
+        if(timer) {
+          clearTimeout(timer)
+        }
+
+        timer = setTimeout(() => {
+          fn.apply(this, args)
+        },time)
+      }
+    }
+
+    const mydebounce = debounce(function(name, age) {
+      alert(name + ":" + age + "岁")
+    }, 2000)
+
+    // 节流 单位时间内只运行一次
+    function throttle(fn, time) {
+      let lastTime = null
+      return function() {
+        const args = arguments
+        if(+Date.now() - lastTime > time) {
+          fn.apply(this, args)
+          lastTime = +Date.now()
+        }
+      }
+    }
+
+    const mythrottle = throttle(function(name, age) {
+      console.log(name + ":" + age + "岁")
+    }, 3000)
+  </script>
+</body>
+</html>
