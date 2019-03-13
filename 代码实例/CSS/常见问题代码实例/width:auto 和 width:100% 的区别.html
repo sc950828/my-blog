@@ -6,6 +6,7 @@
     <title>width:auto 和 width:100% 的区别</title>
     <style>
       .outer, .outer1 {
+        border: 10px solid green;
         padding: 20px;
         margin: 30px;
         background-color: chocolate;
@@ -14,13 +15,13 @@
         background-color: antiquewhite;
         padding: 10px;
         margin: 10px;
+        border: 10px solid yellow;
       }
     </style>
   </head>
   <body>
     <div class="outer">
-      outer
-      <!-- width:100% 会使元素 content 的宽度等于父元素的 content box 的宽度。如果元素有内外边距则会超出父元素。 -->
+      <!-- width:100% 会使元素 content 的宽度等于父元素的 content box 的宽度。如果元素有内外边距或边框则会超出父元素。 -->
       <div class="inner" style="width: 100%;">inner width: 100%;</div>
     </div>
 

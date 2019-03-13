@@ -5,8 +5,10 @@
 - cookie 是不可跨域的。每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）。
 - cookie 容量小，一般只能存储 4k 大小的数据。同一域名下的请求都会带上 cookie
 - Cookie 又分为了会话 Cookie 与持久 Cookie，要区分这两种类型，非常的简单，持久 Cookie 就是我们设置了它的过期时间，而没设置过期时间的，都属于会话 Cookie。
-- 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 expires、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间，domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在确保安全的情况下传输，HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。
+- 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 expires/max-age、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间，domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在确保安全的情况下传输，HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。
 - 在发生 xhr 的跨域请求的时候，即使是同源下的 cookie，也不会被自动添加到请求头部，除非显示地规定。
+- 获取 cookie document.cookie
+- 设置 cookie document.cookie='name=xiaoming;expires='+oDate
 
 ### 2、什么是 session?
 

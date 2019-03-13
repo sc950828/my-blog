@@ -7,8 +7,12 @@
   </head>
 
   <body>
-    打开控制台查看
+    <div>打开控制台查看</div>
     <script>
+      window.addEventListener("storage", function() {
+        console.log("storage add item");
+      });
+
       if (typeof Storage !== undefined) {
         // localStorage
         console.log("---------localStorage---------");
@@ -49,6 +53,10 @@
         console.log("age: ", sessionStorage.getItem("age"));
       } else {
         alert("对不起，您的浏览器暂不支持web存储！");
+      }
+
+      function addStorage() {
+        localStorage.setItem("event", "test");
       }
     </script>
   </body>

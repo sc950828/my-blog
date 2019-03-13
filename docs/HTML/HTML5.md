@@ -219,3 +219,6 @@
   - sessionStorage 只在同源的同窗口（或标签页）中共享数据，也就是只在当前会话中共享。
   - localStorage 在所有同源窗口中都是共享的。
   - cookie 在所有同源窗口中都是共享的。
+- 获取方式
+  - sessionStorage localStorage通过getItem()方法获取
+  - cookie ajax请求可以用getResponseHeader获取，如果不是ajax，js无法获取响应头，只能用document.cookie获取设置的cookie，并且无法获取到服务器端设置了httponly的cookie。
