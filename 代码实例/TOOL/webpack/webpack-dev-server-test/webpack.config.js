@@ -27,8 +27,14 @@ module.exports = {
     // hotOnly: false,
     // 提供在服务器内部先于所有其他中间件执行自定义中间件的功能。这可以用于定义自定义处理程序
     before(app) {
-      console.log(__dirname);
-      console.log(__filename);
+      // 相当于直接写了后端的接口，哈哈 这种方法可以解决跨域
+      app.get("/api/info", (req, res) => {
+        res.json({
+          nickname: "我滴个大榴莲啊",
+          level: 8,
+          src: "https://music.163.com/song/media/outer/url?id=1382794914.mp3"
+        });
+      });
     },
     // 提供在服务器内部内部执行所有其他中间件之后执行自定义中间件的能力
     after(app) {

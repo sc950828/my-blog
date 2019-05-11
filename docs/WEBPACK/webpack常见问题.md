@@ -168,7 +168,7 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 
   - 打包过程中检测工程中没有引用过的模块并进行标记，在资源压缩时将它们从最终的 bundle 中去掉(只能对 ES6 Modlue 生效) 开发中尽可能使用 ES6 Module 的模块，提高 tree shaking 效率
   - 禁用 babel-loader 的模块依赖解析，否则 Webpack 接收到的就都是转换过的 CommonJS 形式的模块，无法进行 tree-shaking
-  - 使用 PurifyCSS(不在维护) 或者 uncss 去除无用 CSS 代码。purgecss-webpack-plugin 和 mini-css-extract-plugin 配合使用(建议)
+  - 使用 purgecss-webpack-plugin 去除无用的css
 
 - Scope hoisting
 
