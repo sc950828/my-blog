@@ -165,7 +165,7 @@
       var num = new Number(value); 如果一个参数值不能转换为一个数字将返回 NaN (非数字值)。
     方法
       Number.isFinite(x)  检测指定参数是否为无穷大。
-      Number.isNaN(x)  判断是否不是一个数字 不是数字为true。
+      Number.isNaN(x)  判断是不是NaN，是NaN就为true。
       Number.isInteger(): 用来判断给定的参数是否为整数。
       Number.isSafeInteger(): 判断传入的参数值是否是一个"安全整数"。安全整数范围为 -(2的53次方 - 1)到2的53次方 - 1之间的整数。
 
@@ -313,7 +313,7 @@ let s2 = Symbol("bar");
       decodeURIComponent()  把encodeURIComponent的字符串解码。
       eval() 执行JavaScript 字符串，并把它作为脚本代码来执行。
       isFinite()检查某个值是否为有穷大的数。
-      isNaN()  检查某个值是否不是数字。
+      isNaN()  检查某个值是否不是数字。不是数字返回true。
       Number()  把对象的值转换为数字。其实类似new Number() 只是省略的new关键字。
       String()  把对象的值转换为字符串。
       Boolean() 把对象转换成布尔类型。
@@ -417,19 +417,19 @@ let s2 = Symbol("bar");
         element.title	设置或返回元素的title属性
         element.tagName	作为一个字符串返回某个元素的标记名（大写）
         element.attributes 返回指定元素的所有属性数组。
+        element.className 返回元素的class字符串。
+        element.classList 返回元素的class数组。
+        element.id 返回元素的id。
         element.firstChild 返回元素的第一个子元素 包括里面的所有内容。
         element.lastChild 返回的最后一个子节点
+        element.childNodes 返回元素的子节点的数组。所有的后代元素都有。
+        element.children 返回元素的子元素集合。只有第一层子元素。
         element.parentNode 返回元素的父节点
         element.parentElement 返回元素的父元素
         element.previousSibling 返回指定元素前紧跟的一个元素。不可以跨父元素。
         element.previousElementSibling 返回指定元素之前的一个兄弟元素（相同节点树层中的上一个元素节点）。可以跨父元素。
         element.nextSibling 返回指定元素后紧跟的一个元素。不可以跨父元素。
         element.nextElementSibling 返回指定元素之后的下一个兄弟元素（相同节点树层中的下一个元素节点）。可以跨父元素。
-        element.childNodes 返回元素的子节点的数组。所有的后代元素都有。
-        element.children 返回元素的子元素集合。只有第一层子元素。
-        element.className 返回元素的class字符串。
-        element.classList 返回元素的class数组。
-        element.id 返回元素的id。
         element.nodeName 返回元素的标签名（大写）。
         element.nodeType 返回元素的节点类型。元素节点返回1 属性节点返回2 文本节点返回3 文档根节点9
         element.nodeValue 返回元素的节点值。
@@ -497,6 +497,9 @@ let s2 = Symbol("bar");
         onpagehide  该事件在用户离开当前网页跳转到另外一个页面时触发
         onresize  窗口或框架被重新调整大小。
         onscroll  当文档被滚动时发生的事件。
+        onstorage  该事件在 Web Storage(HTML 5 Web 存储)更新时触发
+        onmessage  该事件通过或者从对象(WebSocket, Web Worker, Event Source 或者子 frame 或父窗口)接收到消息时触发
+        onpopstate  该事件在窗口的浏览历史（history 对象）发生改变时触发。
       表单事件
         onblur  元素失去焦点时触发 不支持冒泡。
         onfocus  元素获取焦点时触发 不支持冒泡。

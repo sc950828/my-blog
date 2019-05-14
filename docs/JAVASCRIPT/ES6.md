@@ -31,7 +31,7 @@ function fn() {
   console.log("real", this); // {a: 100} ，该作用域下的 this 的真实的值
   var arr = [1, 2, 3];
   // 普通 JS
-  arr.map(function(item) {
+  arr.map(function (item) {
     console.log("js", this); // window 。普通函数，这里打印出来的是全局变量，令人费解
     return item + 1;
   });
@@ -56,7 +56,7 @@ function f(x, y = 7, z = 42) {
 当需要使用默认值的参数不是最后一个的时候我们需要显示指定为 undefined f(1, undefined, 4) 算出来是 12。
 当我们不用默认值的时候我们需要传 null。
 
-### 5、可变参数 也是 rest 参数
+### 5、可变参数 也是 rest 参数 ...
 
 ```js
 // ...arr 参数数组。

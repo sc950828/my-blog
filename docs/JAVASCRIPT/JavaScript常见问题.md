@@ -466,10 +466,18 @@ console.log(div1.getAttribute("data-user"));
 console.log(div1.getAttribute("data-user-age"));
 ```
 
-### 5、JS 如何获取盒模型对应的宽和高？
+### 47、JS 如何获取盒模型对应的宽和高？
 
 ```js
-dom.style.width / height; //获取的是内联样式的宽高
-dom.getCurrentStyle.width / height; //只有IE支持
-window.getComputedStyle(dom).width / height; //兼容性好
+//只能获取内联样式设置的宽高
+dom.style.width / height;
+
+//获取渲染后即时运行的宽高，值是准确的。但只支持 IE
+dom.currentStyle.width / height;
+
+//获取渲染后即时运行的宽高，值是准确的。兼容性更好
+window.getComputedStyle(dom).width / height;
+
+//获取渲染后即时运行的宽高，值是准确的。兼容性也很好，一般用来获取元素的绝对位置和大小。
+dom.getBoundingClientRect().width / height;
 ```

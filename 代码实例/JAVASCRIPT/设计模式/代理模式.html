@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>代理模式</title>
+  </head>
+  <body>
+    <script>
+      const user = { name: "randy", age: 24 };
+      const proxyUser = new Proxy(user, {
+        get(user, key) {
+          console.log(user, key);
+          return user[key];
+        },
+        set(user, key, newVal) {
+          console.log(user, key, newVal);
+          user[key] = newVal;
+        }
+      });
+      console.log(proxyUser.name);
+      proxyUser.name = "demi";
+      console.log(proxyUser);
+    </script>
+  </body>
+</html>

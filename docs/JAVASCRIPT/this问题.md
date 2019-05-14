@@ -1,5 +1,7 @@
 ### 1、this
 
+普通函数的 this 是在运行时绑定的。
+
 ```js
 // 全局环境下，this始终指向全局对象（window），无论是否严格模式；
 // 在浏览器中，全局对象为 window 对象：
@@ -36,7 +38,7 @@ var o = {
   prop: 37,
   f: function () {
     return this.prop;
-  },
+  }
 };
 //当 o.f()被调用时，函数内的this将绑定到o对象。
 console.log(o.f()); // logs 37
@@ -134,7 +136,8 @@ document
 - 箭头函数的 this 是在定义函数时绑定的，不是在执行过程中绑定的。简单的说，函数在定义时，this 就继承了定义函数的对象。
 - 箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this，否则 this 的值则被设置为全局对象。
 - 箭头函数不能通过 apply call bind 改变 this。
-- 箭头函数不能使用 arguments 不能用于构造函数。
+- 箭头函数不能使用 arguments。
+- 箭头函数不能用于构造函数。
 
 ```js
 // 作为普通函数
@@ -158,7 +161,7 @@ var obj = {
   b: () => console.log(this.i, this),
   c: function () {
     console.log(this.i, this);
-  },
+  }
 };
 obj.b(); // undefined window{...}
 obj.c(); // 10 Object {...}
@@ -191,7 +194,7 @@ setTimeout(() => {
 }, 100);
 
 // 事件对象
-document.getElementsByClassName("father")[0].addEventListener("click", (e) => {
+document.getElementsByClassName("father")[0].addEventListener("click", e => {
   // 始终指向window
   console.log(this);
 });
@@ -206,7 +209,7 @@ say(); // window
 say.call({ name: "randy" }); // 无效 还是window
 
 // 箭头函数不能用作构造函数
-var Father = (name) => {
+var Father = name => {
   this.name = name;
 };
 // console.log(new Father("randy")); //报错 箭头函数不能作为构造函数

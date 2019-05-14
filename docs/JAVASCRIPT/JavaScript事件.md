@@ -1,6 +1,7 @@
 ### 1、给 dom 绑定事件的方式有哪些？
 
-- 主要有三种：在 dom 元素上直接绑定 在 js 中获取 dom 元素再进行绑定 利用事件监听。利用事件监听的优点是可以给同一 dom 对象绑定多个事件。
+- 主要有三种：在 dom 元素上直接绑定，在 js 中获取 dom 元素再进行绑定 ，利用事件监听。
+- 利用事件监听的优点是可以给同一 dom 对象绑定多个事件。
 
 ```js
   //标准的事件监听 ie9及以上才支持
@@ -45,7 +46,8 @@
 ### 3、方法
 
 - preventDefault() 阻止默认行为 ie 下的方法 window.event.returnValue = false
-- stopPropagation() 阻止事件的冒泡或捕获。ie 下的方法 event.cancelBubble = true;
+- stopPropagation() 阻止事件的冒泡。ie 下的方法 event.cancelBubble = true;
+- stopImmediatePropagation() 阻止剩下的事件处理程序被执行。如果一个元素上绑定了三个事件，在其中一个事件上调用了这个方法，那其他 的两个事件将不会被执行。
 
 ### 4、load 和 DOMContentLoaded
 
@@ -69,7 +71,7 @@
 - target 是触发事件的元素
 - currentTarget 是挂载事件的元素
 
-### 8、mouseover 和 mouseenter 的区别是什么？
+### 8、mouseover mouseout 和 mouseenter mouseleave 的区别是什么？
 
 - mouseover：当鼠标移入元素或其子元素都会触发事件，所以有一个重复触发，有冒泡的过程。对应的移除事件是 mouseout
 - mouseenter：当鼠标移入元素本身（不包含元素的子元素）会触发事件，也就是不会冒泡，对应的移除事件是 mouseleave
@@ -83,3 +85,40 @@
 - 第二种事件模型是 IE 事件模型，在该事件模型中，一次事件共有两个过程，事件处理阶段，和事件冒泡阶段。事件处理阶段会首先执行目标元素绑定的监听事件。然后是事件冒泡阶段，冒泡指的是事件从目标元素冒泡到 document，依次检查经过的节点是否绑定了事件监听函数，如果有则执行。这种模型通过 attachEvent 来添加监听函数，可以添加多个监听函数，会按顺序依次执行。
 
 - 第三种是 DOM2 级事件模型，在该事件模型中，一次事件共有三个过程，第一个过程是事件捕获阶段。捕获指的是事件从 document 一直向下传播到目标元素，依次检查经过的节点是否绑定了事件监听函数，如果有则执行。后面两个阶段和 IE 事件模型的两个阶段相同。这种事件模型，事件绑定的函数是 addEventListener，其中第三个参数可以指定事件是否在捕获阶段执行。
+
+### 10、自定义事件
+
+```js
+// 监听自定义事件
+document.addEventListener("test", function () {
+  console.log("自定义事件触发了");
+});
+
+// 创建自定义事件 不能传递参数
+const myEvevt = new Event("test");
+
+setTimeout(function () {
+  // 触发自定义事件
+  if (document.dispatchEvent) {
+    document.dispatchEvent(myEvent2);
+  } else {
+    // 兼容低版本浏览器
+    document.fireEvent(myEvent2);
+  }
+}, 2000);
+
+document.addEventListener("test2", function (e) {
+  console.log("自定义事件触发了参数是", e.detail.name);
+});
+
+// 创建自定义事件 能传递参数
+const myEvent2 = new CustomEvent("test2", { detail: { name: "randy" } });
+
+setTimeout(function () {
+  if (document.dispatchEvent) {
+    document.dispatchEvent(myEvent2);
+  } else {
+    document.fireEvent(myEvent2);
+  }
+}, 3000);
+```
