@@ -165,18 +165,12 @@ Object.defineProperty() 只能对属性进行数据劫持，不能对整个对�
   - 3.target 如果不是双向绑定数据,那就直接 delete 就行不需要,通知 watcher
   - 4.以上条件都不满足,那么 target 就是双向绑定数据,delete 之后通知 watcher
 
-### 18、虚拟 DOM 实现原理？
-
-- 用 JavaScript 对象模拟真实 DOM 树，对真实 DOM 进行抽象；
-- diff 算法 — 比较两棵虚拟 DOM 树的差异；
-- pach 算法 — 将两个虚拟 DOM 对象的差异应用到真正的 DOM 树。
-
-### 19、vue3.0 特性
+### 18、vue3.0 特性
 
 - 源码采用 typescript 编写
 - 数据劫持由 Object.defineProperty 改为 proxy
 
-### 20、vue 中 key 值的作用？
+### 19、vue 中 key 值的作用？
 
 key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速
 
@@ -196,13 +190,13 @@ function createKeyToOldIdx(children, beginIdx, endIdx) {
 }
 ```
 
-### 21、vue 中 mixin 和 mixins 区别？
+### 20、vue 中 mixin 和 mixins 区别？
 
 mixin 用于全局混入，会影响到每个组件实例。
 
 mixins 应该是我们最常使用的扩展组件的方式了。如果多个组件中有相同的业务逻辑，就可以将这些逻辑剥离出来，通过 mixins 混入代码，比如上拉下拉加载数据这种逻辑等等。另外需要注意的是 mixins 混入的钩子函数会先于组件内的钩子函数执行，并且在遇到同名选项的时候也会有选择性的进行合并。只有生命周期函数和 watch 不会合并，并且 mixin 的生命周期函数和 watch 方法会先与组件运行。
 
-### 22、你对 vue 项目进行过哪些优化
+### 21、你对 vue 项目进行过哪些优化
 
     代码层面的优化
       v-if 和 v-show 区分使用场景
@@ -218,13 +212,21 @@ mixins 应该是我们最常使用的扩展组件的方式了。如果多个组�
       css尽量不用calc函数和!important
       图片根据实际情况选取jpg还是png图片
     webpack层面
+      Webpack 对图片进行压缩
+      减少 ES6 转为 ES5 的冗余代码
+      提取公共代码
+      模板预编译
+      提取组件的 CSS
+      优化 SourceMap
+      构建结果输出分析
+      Vue 项目的编译优化
     web技术层面
       开启gzip压缩
       开启浏览器缓存
       使用cdn，CDN可以通过不同的域名来加载文件，从而使下载文件的并发连接数大大增加，且CDN具有更好的可用性，更低的网络延迟和丢包率
       使用 Chrome Performance 查找性能瓶颈。
 
-### 23、vue 图片问题
+### 22、vue 图片问题
 
 - 在 data 里面定义图片路径，然后在 img 里面通过:src 绑定图片地址，图片是显示不出来的。因为 webpack 在打包的时候回检测引用图片的地方，并把图片压缩成 base64 的形式放在引用的地方，如果我们通过后面的 vue 动态绑定，我们是拿不到图片的。如果需要在 data 里面通过:src 的方式使用图片，我们可以使用 import 或 require 先把图片引进来，然后在使用。
 
@@ -232,6 +234,6 @@ mixins 应该是我们最常使用的扩展组件的方式了。如果多个组�
 
 - url-loader 会将引入的图片编码，生成 dataURI。相当于把图片数据翻译成一串字符，再把这些字符打包到文件当中，最终只需要引入这个文件就可以访问这个图片。当然如果图片较大，编码会消耗性能，因此 url-loader 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy，一般会放在 static 文件夹下面。
 
-### 24、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
+### 23、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
 
 箭头函数自己没有定义 this 上下文，而是绑定到其父函数的上下文中。当你在 Vue 程序中使用箭头函数（=>）时，this 关键字病不会绑定到 Vue 实例，因此会引发错误。所以强烈建议改用标准函数声明。

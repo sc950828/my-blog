@@ -47,7 +47,7 @@
 - 当我在 DevTools 中预设了一组很棒的代码块以后，甚至都不必再通过 Sources 来运行它们。使用 Command 菜单 才是最快的方式。
 - 我们打开 command 菜单，只需在它的输入框中输入 ! ，就可以根据名字来筛选预设代码块。
 
-### 9、console 中的 '\$'
+### 9、`console 中的 '$'`
 
 - `$`是 document.querySelector 的别名。`$(".div")` 选择类名为.div 的元素。
 - `$$`是 document.QuerySelectorAll 的别名。选择类名为.div 的元素数组。

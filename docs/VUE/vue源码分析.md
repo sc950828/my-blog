@@ -110,7 +110,7 @@ Vue.js 利用 createElement 方法创建 VNode
 
 实际上是遍历子虚拟节点，递归调用 createElm，调用原生 api 创建真实 DOM。
 
-### 4、响应式系统
+### 10、响应式系统
 
 ```js
 // 核心 Object.defineProperty(obj, prop, descriptor)
@@ -180,12 +180,12 @@ let o = new Vue({
 o._data.test = "hello,world."; /* 视图更新啦～ */
 ```
 
-### 5、发布订阅
+### 11、发布订阅
 
 ```js
 // 用 addSub 方法可以在目前的 Dep 对象中增加一个 Watcher 的订阅操作；
 // 用 notify 方法通知目前 Dep 对象的 subs 中的所有 Watcher 对象触发更新操作。
-// 订阅者 Dep
+// 订阅器 Dep
 class Dep {
   constructor() {
     this.subs = [];
@@ -217,7 +217,7 @@ class Watcher {
 Dep.target = null;
 ```
 
-### 6、编译
+### 12、编译
 
 ```js
 // 第一步 parse 会用正则等方式将 template 模板中进行字符串解析，得到指令、class、style等数据，形成 AST
@@ -276,7 +276,7 @@ Dep.target = null;
 // 这样就转换成render function
 ```
 
-### 7、diff 过程
+### 13、diff 过程
 
 diff 算法是通过同层的树节点进行比较而非对树进行逐层搜索遍历的方式，所以时间复杂度只有 O(n)，是一种相当高效的算法
 

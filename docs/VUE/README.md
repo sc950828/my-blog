@@ -13,3 +13,5 @@
 ### 6、[vue-router](/VUE/vue-router)
 
 ### 7、[vue常用技巧](/VUE/vue常用技巧)
+
+### 8、[源码分析](/VUE/源码分析)
