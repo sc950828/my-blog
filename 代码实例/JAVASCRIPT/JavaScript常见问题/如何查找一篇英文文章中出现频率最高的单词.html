@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>如何查找一篇英文文章中出现频率最高的单词</title>
+  </head>
+  <body>
+    <script>
+      const aticle =
+        "hello ，what you name。my name is randy，nice to meet you！";
+
+      // 单词
+      const aticleArr = aticle.toLowerCase().match(/[a-z]+/g)
+      // 字母
+      // const aticleArr = aticle.toLowerCase().match(/[a-z]/g)
+      console.log(aticleArr);
+      let maxNum = 0
+      let maxWord = ""
+      let tempArr = []
+      aticleArr.forEach(word => {
+        if(!tempArr.includes(word)) {
+          tempArr.push(word)
+          let len = aticle.toLowerCase().match(new RegExp(word, 'g')).length
+          if(len > maxNum) {
+            maxNum = len
+            maxWord = word
+          }
+        }
+      })
+      console.log(maxWord, maxNum);
+    </script>
+  </body>
+</html>

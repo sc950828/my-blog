@@ -10,7 +10,7 @@
 
 - 使用 Array.isArray()方法 ES5 新增的方法
 - 使用 instanceof xx instanceof Array 通过原型链来判断
-- Object.prototype.toString().call(arr) 常用于判断浏览器内置对象。null 也能正确判断出来。
+- Object.prototype.toString.call(arr) 常用于判断浏览器内置对象。null 也能正确判断出来。
 
 ### 3、立即执行函数(IIFE)的作用？
 
@@ -43,7 +43,7 @@
 ### 8. typeof 和 instanceof 区别是什么？
 
 - typeof 能判断基本数据类型，除了 null 以外(null 会被判断成 object 类型)，但是判断引用类型的时候除了 function 被判断成 function 其他的都会判断成 object
-- instanceof 不能判断基本数据类型，只能判断引用数据类型。原理利用的是原型链。A.**proto** 是不是等于类型的 protorype。
+- instanceof 不能判断基本数据类型，只能判断引用数据类型。原理利用的是原型链。`A.__proto__` 是不是等于类型的 protorype。
 
 ```js
 //instanceof原理
@@ -65,6 +65,7 @@ function instance_of(L, R) {
 
 ### 9、for in for of forEach map 区别？
 
+- 普通 for 循环支持 break
 - for of 得到的是数组的值，不能遍历对象，支持 break。
 - for in 得到的是数组的下标，遍历对象的时候得到的是 key，支持 break。能获取对象原型上的属性，属性描述需要是 enumerable。
 - forEach 只能遍历数组，不支持 break，要 break 需要 throw error 然后 try catch 住。
@@ -89,9 +90,7 @@ console.log(sum(1)(2)(3)); // 6
 
 ### 12、什么叫变量提升？
 
-- JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量或函数，然后再一行一行地运行。
-  这造成的结果，就是所有的变量的声明语句或申明的函数，都会被提升到代码的头部，这就叫做变量提升。
-  因为变量提升所以可以先使用变量然后在定义变量。
+- JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量或函数，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句或申明的函数，都会被提升到代码的头部，这就叫做变量提升。因为变量提升所以可以先使用变量然后在定义变量。
 - 但是后面变量只能定义，不能定义然后赋值。
 - 变量提升只适用于 var 申明的变量或者函数，使用 let const 申明的变量或者箭头函数不存在变量提升这一说。
 
@@ -231,7 +230,7 @@ console.log(greetign); //输出{} 这个对象没被申明 默认到 window 上 
 
 ### 32、内部属性 `[[Class]]` 是什么？
 
-所有 typeof 返回值为 "object" 的对象（如数组）都包含一个内部属性 `[[Class]]`（我们可以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问，一般通过 Object.prototype.toString(..) 来查看。
+所有 typeof 返回值为 "object" 的对象（如数组）都包含一个内部属性 `[[Class]]`（我们可以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问，一般通过 Object.prototype.toString.call() 来查看。
 例如：
 
 ```js
@@ -263,29 +262,24 @@ Object.prototype.toString.call(/regex-literal/i);
 
 ### 36、js 中整数的安全范围是多少？
 
-- 安全整数指的是，在这个范围内的整数转化为二进制存储的时候不会出现精度丢失，能够被“安全”呈现的最大整数是 2^53 - 1，
-  即 9007199254740991，在 ES6 中被定义为 Number.MAX_SAFE_INTEGER。最小整数是-9007199254740991，在 ES6 中被定义为 Number.MIN_SAFE_INTEGER。
+- 安全整数指的是，在这个范围内的整数转化为二进制存储的时候不会出现精度丢失，能够被“安全”呈现的最大整数是 2^53 - 1，即 9007199254740991，在 ES6 中被定义为 Number.MAX_SAFE_INTEGER。最小整数是-9007199254740991，在 ES6 中被定义为 Number.MIN_SAFE_INTEGER。
 - 如果某次计算的结果得到了一个超过 JavaScript 数值范围的值，那么这个值会被自动转换为特殊的 Infinity 值。如果某次
-  计算返回了正或负的 Infinity 值，那么该值将无法参与下一次的计算。判断一个数是不是有穷的，可以使用 isFinite 函数
-  来判断。
+  计算返回了正或负的 Infinity 值，那么该值将无法参与下一次的计算。判断一个数是不是有穷的，可以使用 isFinite 函数来判断。
 
 ### 37、typeof NaN 的结果是什么？
 
-- NaN 意指“不是一个数字”（not a number），NaN 是一个“警戒值”（sentinel value，有特殊用途的常规值），用于指出
-  数字类型中的错误情况，即“执行数学运算没有成功，这是失败后返回的结果”。
+- NaN 意指“不是一个数字”（not a number），NaN 是一个“警戒值”（sentinel value，有特殊用途的常规值），用于指出数字类型中的错误情况，即“执行数学运算没有成功，这是失败后返回的结果”。
 - typeof NaN; // "number"
-- NaN 是一个特殊值，它和自身不相等，是唯一一个自反（自反，reflexive，即 x === x 不成立）的值。而 NaN != NaN
-  为 true。
+- NaN 是一个特殊值，它和自身不相等，是唯一一个自反（自反，reflexive，即 x === x 不成立）的值。而 NaN != NaN 为 true。使用 Object.is()判断 NaN 会是 true。
 
 ### 38、全局函数 isNaN 和 Number.isNaN 函数的区别？
 
-- 全局函数 isNaN 接收参数后，会尝试将这个参数转换为数值，任何不能被转换为数值的的值都会返回 true，因此非数字值传入也会返回 true ，会影响 NaN 的判断。
-- 函数 Number.isNaN 会首先判断传入参数是否为数字，如果不是数字则返回 false，如果是数字再继续判断是否为 NaN ，这种方法对于 NaN 的判断更为准确。
+- 全局函数 isNaN 接收参数后，会尝试将这个参数转换为数值，任何不能被转换为数值的的值都会返回 true，因此非数字值传入也会返回 true ，会影响 NaN 的判断。这个是判断是否不是一个数字。
+- 函数 Number.isNaN 会首先判断传入参数是否为数字，如果不是数字则返回 false，如果是数字再继续判断是否为 NaN ，这种方法对于 NaN 的判断更为准确。专门针对 NaN 判断的。
 
 ### 39、Array 构造函数只有一个参数值时的表现？
 
-- Array 构造函数只带一个数字参数的时候，该参数会被作为数组的预设长度（length），而非只充当数组中的一个元素。这样
-  创建出来的只是一个空数组，只不过它的 length 属性被设置成了指定的值。
+- Array 构造函数只带一个数字参数的时候，该参数会被作为数组的预设长度（length），而非只充当数组中的一个元素。这样创建出来的只是一个空数组，只不过它的 length 属性被设置成了指定的值。
 - 构造函数 Array(..) 不要求必须带 new 关键字。不带时，它会被自动补上。
 
 ### 40、{} 和 [] 的 valueOf 和 toString 的结果是什么？
@@ -295,14 +289,11 @@ Object.prototype.toString.call(/regex-literal/i);
 
 ### 41、什么是假值对象？
 
-浏览器在某些特定情况下，在常规 JavaScript 语法基础上自己创建了一些外来值，这些就是“假值对象”。假值对象看起来和
-普通对象并无二致（都有属性，等等），但将它们强制类型转换为布尔值时结果为 false 最常见的例子是 document.all，它
-是一个类数组对象，包含了页面上的所有元素，由 DOM（而不是 JavaScript 引擎）提供给 JavaScript 程序使用。
+浏览器在某些特定情况下，在常规 JavaScript 语法基础上自己创建了一些外来值，这些就是“假值对象”。假值对象看起来和普通对象并无二致（都有属性，等等），但将它们强制类型转换为布尔值时结果为 false 最常见的例子是 document.all，它是一个类数组对象，包含了页面上的所有元素，由 DOM（而不是 JavaScript 引擎）提供给 JavaScript 程序使用。
 
 ### 42、如何实现数组的随机排序？
 
-    （1）使用数组 sort 方法对数组元素随机排序，让 Math.random() 出来的数与 0.5 比较，如果大于就返回 1 交换位
-      置，如果小于就返回 -1，不交换位置。
+    （1）使用数组 sort 方法对数组元素随机排序，让 Math.random() 出来的数与 0.5 比较，如果大于就返回 1 交换位置，如果小于就返回 -1，不交换位置。
 
     function randomSort(a, b) {
       return Math.random() > 0.5 ? -1 : 1;
@@ -372,8 +363,7 @@ Object.prototype.toString.call(/regex-literal/i);
 
 - （5）第五种模式是动态原型模式，这一种模式将原型方法赋值的创建过程移动到了构造函数的内部，通过对属性是否存在的判断，可以实现仅在第一次调用函数时对原型对象赋值一次的效果。这一种方式很好地对上面的混合模式进行了封装。
 
-- （6）第六种模式是寄生构造函数模式，这一种模式和工厂模式的实现基本相同，我对这个模式的理解是，它主要是基于一个已有的类型，在实例化时对实例化的对象进行扩展。这样既不用修改原来的构造函数，也达到了扩展对象的目的。它的一个
-  缺点和工厂模式一样，无法实现对象的识别。
+- （6）第六种模式是寄生构造函数模式，这一种模式和工厂模式的实现基本相同，我对这个模式的理解是，它主要是基于一个已有的类型，在实例化时对实例化的对象进行扩展。这样既不用修改原来的构造函数，也达到了扩展对象的目的。它的一个缺点和工厂模式一样，无法实现对象的识别。
 
 ### 44、什么是 DOM 和 BOM？
 
@@ -444,7 +434,7 @@ const EventUtils = {
 
 - 第二种方式可以通过对象的 constructor 属性来判断，对象的 constructor 属性指向该对象的构造函数，但是这种方式不是很安全，因为 constructor 属性可以被改写。
 
-- 第三种方式，如果需要判断的是某个内置的引用类型的话，可以使用 Object.prototype.toString() 方法来打印对象的`[[Class]]` 属性来进行判断。
+- 第三种方式，如果需要判断的是某个内置的引用类型的话，可以使用 Object.prototype.toString.call() 方法来打印对象的`[[Class]]` 属性来进行判断。
 
 ### 47、js 延迟加载的方式有哪些？
 
@@ -487,9 +477,8 @@ const EventUtils = {
 
 ### 49、JavaScript 类数组对象的定义？
 
-- 一个拥有 length 属性和若干索引属性的对象就可以被称为类数组对象，类数组对象和数组类似，但是不能调用数组的方法。
-- 常见的类数组对象有 arguments 和 DOM 方法的返回结果，还有一个函数也可以被看作是类数组对象，因为它含有 length
-  属性值，代表可接收的参数个数。
+- 一个拥有 length 属性和若干索引属性的对象就可以被称为类数组对象，类数组对象和数组类似，拥有长度，但是不能调用数组的方法。
+- 常见的类数组对象有 arguments 和 DOM 方法的返回结果。
 
   常见的类数组转换为数组的方法有这样几种：
 
@@ -530,6 +519,7 @@ const EventUtils = {
 - this === window ? 'browser' : 'node';
 
 - 通过判断 Global 对象是否为 window，如果不为 window，当前脚本没有运行在浏览器中。
+- 在 node 中 this===global
 
 ### 53、什么是“前端路由”？什么时候适合使用“前端路由”？“前端路由”有哪些优点和缺点？
 
@@ -621,13 +611,11 @@ JavaScript 的动画正好弥补了这两个缺点，控制能力很强，可以
 
 URI 指的是统一资源标识符，用唯一的标识来确定一个资源，它是一种抽象的定义，也就是说，不管使用什么方法来定义，只要能唯一的标识一个资源，就可以称为 URI。
 
-URL 指的是统一资源定位符，URN 指的是统一资源名称。URL 和 URN 是 URI 的子集，URL 可以理解为使用地址来标识资源，U
-RN 可以理解为使用名称来标识资源。
+URL 指的是统一资源定位符，URN 指的是统一资源名称。URL 和 URN 是 URI 的子集，URL 可以理解为使用地址来标识资源，URN 可以理解为使用名称来标识资源。
 
 ### 62、js 拖拽功能的实现
 
-一个元素的拖拽过程，我们可以分为三个步骤，第一步是鼠标按下目标元素，第二步是鼠标保持按下的状态移动鼠标，第三步是鼠
-标抬起，拖拽过程结束。
+一个元素的拖拽过程，我们可以分为三个步骤，第一步是鼠标按下目标元素，第二步是鼠标保持按下的状态移动鼠标，第三步是鼠标抬起，拖拽过程结束。
 
 这三步分别对应了三个事件，mousedown 事件，mousemove 事件和 mouseup 事件。只有在鼠标按下的状态移动鼠标我们才会执行拖拽事件，因此我们需要在 mousedown 事件中设置一个状态来标识鼠标已经按下，然后在 mouseup 事件中再取消这个状态。在 mousedown 事件中我们首先应该判断，目标元素是否为拖拽元素，如果是拖拽元素，我们就设置状态并且保存这个时候鼠标的位置。然后在 mousemove 事件中，我们通过判断鼠标现在的位置和以前位置的相对移动，来确定拖拽元素在移动中的坐标。最后 mouseup 事件触发后，清除状态，结束拖拽事件。
 
@@ -718,6 +706,7 @@ function getType(value) {
 
   // 判断数据是引用类型的情况
   if (typeof value === "object") {
+    // 内置对象的类型能判断出来 但是普通对象一直返回object 还需要使用instanceof判断
     let valueClass = Object.prototype.toString.call(value),
       type = valueClass.split(" ")[1].split("");
 
@@ -811,30 +800,27 @@ function findMostWord(article) {
   // 合法性判断
   if (!article) return;
 
-  // 参数处理
-  article = article.trim().toLowerCase();
-
-  let wordList = article.match(/[a-z]+/g),
-    visited = [],
-    maxNum = 0,
-    maxWord = "";
-
-  article = " " + wordList.join("  ") + " ";
-
-  // 遍历判断单词出现次数
-  wordList.forEach(function(item) {
-    if (visited.indexOf(item) < 0) {
-      let word = new RegExp(" " + item + " ", "g"),
-        num = article.match(word).length;
-
-      if (num > maxNum) {
-        maxNum = num;
-        maxWord = item;
+  const aticle = "hello ，what you name。my name is randy，nice to meet you！";
+  // 把单词提取出来
+  const aticleArr = aticle.toLowerCase().match(/[a-z]+/g);
+  // 把字母提取出
+  // const aticleArr = aticle.toLowerCase().match(/[a-z]/g)
+  let maxNum = 0;
+  let maxWord = "";
+  let tempArr = [];
+  // 循环单词数组
+  aticleArr.forEach(word => {
+    if (!tempArr.includes(word)) {
+      tempArr.push(word);
+      // 单词在文章中出现的次数
+      let len = aticle.toLowerCase().match(new RegExp(word, "g")).length;
+      if (len > maxNum) {
+        maxNum = len;
+        maxWord = word;
       }
     }
   });
-
-  return maxWord + "  " + maxNum;
+  console.log(maxWord, maxNum);
 }
 ```
 
@@ -842,7 +828,7 @@ function findMostWord(article) {
 
 1、encodeURI
 
-该方法不会对 ASCII 表中的字母和数字编码，同时也不会对 ASCII 中的标点符号编码 `-_.~*’()` 在 URI 中具有特殊含义的符号 `;/?:@&=+$,#`同样不会被编码。
+该方法不会对 ASCII 表中的字母和数字编码，同时也不会对 ASCII 中的标点符号编码 `-_.~*’()`， 在 URI 中具有特殊含义的符号 `;/?:@&=+$,#`同样不会被编码。
 
 ```js
 var url = "https://google.com/pathname?a=1&b=abcde&c=黄山#hash";

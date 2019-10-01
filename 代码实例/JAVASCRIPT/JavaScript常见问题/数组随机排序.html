@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组随机排序</title>
+  </head>
+  <body>
+    <script>
+      // sort
+      const arr1 = [1, 2, 3, 4, 5, 6, 7, 8];
+      arr1.sort(function(a, b) {
+        return Math.random() > 0.5 ? 1 : -1;
+      });
+      console.log(arr1);
+
+      // 随机从原数组抽取一个元素，加入到新数组
+      function randomArr1(arr) {
+        const newArr = [];
+        while (arr.length > 0) {
+          const randomIndex = Math.floor(Math.random() * arr.length);
+          newArr.push(arr[randomIndex]);
+          arr.splice(randomIndex, 1);
+        }
+
+        return newArr;
+      }
+      console.log(randomArr1(arr1));
+
+      const arr2 = [1, 2, 3, 4, 5, 6, 7, 8];
+      //类似洗牌算法
+      function randomArr2(arr) {
+        const len = arr.length;
+        let temp = null;
+        for (let index = 0; index < len; index++) {
+          const randomIndex = Math.floor(Math.random() * (len - index)) + index;
+          temp = arr[index];
+          arr[index] = arr[randomIndex];
+          arr[randomIndex] = temp;
+        }
+
+        return arr;
+      }
+      console.log(randomArr2(arr2));
+
+      // es6
+      function randomArr3(arr) {
+        const len = arr.length;
+        let temp = null;
+        for (let index = 0; index < len; index++) {
+          const randomIndex = Math.floor(Math.random() * (len - index)) + index;
+          // es6交换两变量
+          [arr[index], arr[randomIndex]] = [arr[randomIndex], arr[index]];
+        }
+
+        return arr;
+      }
+      console.log(randomArr3(arr2));
+    </script>
+  </body>
+</html>

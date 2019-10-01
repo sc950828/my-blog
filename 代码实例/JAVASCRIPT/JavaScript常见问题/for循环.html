@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>for</title>
+  </head>
+  <body>
+    <script>
+      // 普通for循环
+      for (let i = 0; i < 5; i++) {
+        console.log("普通for循环", i);
+        if (i > 2) {
+          // return; // 报错 不支持
+          break;
+        }
+      }
+
+      // for of
+      for (const i of [1, 2, 3]) {
+        console.log("for of", i);
+        if (i > 1) {
+          // return; // 报错 不支持
+          break;
+        }
+      }
+      // for of 不能遍历对象
+      // for (const i of {name: 'randy', age: 24}) {
+      //   console.log(i);
+      // }
+
+      // for in
+      for (const i in [1, 2, 3, 4, 5]) {
+        // 得到的是key
+        console.log("for in", i);
+        if (i > 1) {
+          // return; // 报错 不支持
+          break;
+        }
+      }
+
+      // forEach
+      [1, 2, 3].forEach(item => {
+        console.log("forEach", item);
+        if (item > 1) {
+          // break; // 不能写break 直接报错
+        }
+      });
+
+      [1, 2, 3].map(item => {
+        console.log("map", item);
+        if (item > 1) {
+          // break; // 不能写break 直接报错
+        }
+      });
+    </script>
+  </body>
+</html>

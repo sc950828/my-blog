@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据类型判断</title>
+  </head>
+  <body>
+    <script>
+      const arr1 = [1, 2];
+      // 使用toString判断需要经过一些列的转换
+      let typeStr = Object.prototype.toString.call(arr1);
+      typeArr = typeStr.split(" "); // ["[object", "Array]"]
+      typeArr1 = typeArr[1].split(""); // ["A", "r", "r", "a", "y", "]"]
+      typeArr1.pop(); // ["A", "r", "r", "a", "y"]
+      typeStr1 = typeArr1.join("").toLowerCase();
+      console.log(typeStr1);
+
+      function People(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      // 只能判断基本类型 能区分null Array等。 引用类型还是判断不出来
+      console.log(Object.prototype.toString.call(new People("randy", 24)));
+      console.log(new People("randy", 24) instanceof People);
+
+      console.log(Object.prototype.toString.call(null));
+      console.log(Object.prototype.toString.call(undefined));
+      console.log(Object.prototype.toString.call(123));
+      console.log(Object.prototype.toString.call("123"));
+      console.log(Object.prototype.toString.call(true));
+      console.log(Object.prototype.toString.call({}));
+
+      // 蛮有挑战
+      function Foo() {
+        getName = function() {
+          console.log(1);
+        };
+        return this;
+      }
+      Foo.getName = function() {
+        console.log(2);
+      };
+      Foo.prototype.getName = function() {
+        console.log(3);
+      };
+
+      var getName = function() {
+        console.log(4);
+      };
+      function getName() {
+        console.log(5);
+      }
+
+      console.log(new Foo());
+      console.log(window);
+      //请写出以下输出结果：
+      Foo.getName(); // 2
+      getName(); // 4
+      Foo().getName(); // 1
+      getName(); // 1
+      new Foo.getName(); // 2
+      new Foo().getName(); // 3
+      new new Foo().getName(); // 3
+    </script>
+  </body>
+</html>
