@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类型转换</title>
+  </head>
+  <body>
+    <script>
+      // 转数字
+      console.log("转数字");
+      console.log(Number(null)); //0
+      console.log(Number(undefined)); //NaN
+      console.log(Number(true)); // 1
+      console.log(Number(false)); //0
+      console.log(Number("a")); //NaN
+      console.log(Number("123")); //123
+
+      console.log({ name: "randy" }.valueOf()); //{name: "randy"}
+      console.log([1, 2].valueOf()); //[1, 2];
+
+      console.log({ name: "randy" }.toString()); // [object Object]
+      console.log([1, 2].toString()); //1,2
+      // 对象转数字 先调用valueOf()方法 再调用toString()
+      console.log(Number({})); //NaN
+      console.log(Number([1, 2])); //NaN
+      // Symbol不能转数字 回报错
+      // console.log(Number(Symbol()));
+
+      // 转字符串
+      console.log("转字符串");
+      console.log(String(null)); //'null'
+      console.log(String(undefined)); //'undefined'
+      console.log(String(true)); //'true'
+      console.log(String(false)); //'false'
+      console.log(String(1)); //'1'
+      console.log(String({ name: "randy" })); //[object Object]
+      console.log(String([1, 2])); // 1,2
+      // Symbol只能显示转字符串 不能隐式转换
+      console.log(String(Symbol()));
+
+      // 转布尔
+      console.log("转布尔", "除虚拟值以外都能转成true");
+      console.log(Boolean(""));
+      console.log(Boolean(0));
+      console.log(Boolean(+0));
+      console.log(Boolean(-0));
+      console.log(Boolean(null));
+      console.log(Boolean(undefined));
+      console.log(Boolean(NaN));
+      console.log(Boolean(false));
+      console.log(Boolean({}));
+      console.log(Boolean([]));
+      // Symbol转布尔始终返回true
+      console.log(Boolean(Symbol()));
+
+      // ==
+      console.log("==比较");
+      console.log("123 =='123'", 123 == "123");
+      console.log("1 == true", 1 == true);
+      console.log("0 == false", 0 == false);
+      console.log("10 == true", 10 == true);
+      console.log("-10 == false", -10 == false);
+      console.log("new Number(1) == 1", new Number(1) == 1);
+      console.log("true == '0'", true == "1"); //true先转为数字1 然后字符串'1'转数字1
+
+      // +
+      console.log("+");
+      console.log(typeof +"123");
+      console.log({name: 'randy'} + 123);//只要有一方是字符串就执行字符串拼接 否则执行计算
+      console.log([1,2] + 5);
+    </script>
+  </body>
+</html>
