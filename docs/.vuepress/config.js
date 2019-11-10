@@ -1,15 +1,22 @@
 module.exports = {
   title: "苏纯的博客",
-  description: "学无止境",
+  description: "前端路上的点点滴滴",
   head: [["link", { rel: "icon", href: "/randy.jpg" }]],
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
-      { text: "导航", link: "/Guide/" },
+      { text: "导航", link: "/GUIDE/" },
       { text: "代码实例", link: "http://sc950828.top" },
       { text: "GitHub地址", link: "https://github.com/sc950828" }
     ],
     sidebar: [
+      {
+        title: "技术官网",
+        children: [
+          ["/技术官网/前端基础官网", "前端基础官网"],
+          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
+        ]
+      },
       {
         title: "HTML",
         children: [
@@ -70,7 +77,18 @@ module.exports = {
           ["/VUE/vue", "vue"],
           ["/VUE/vue常见问题", "vue常见问题"],
           ["/VUE/vuex", "vuex"],
-          ["/VUE/vue内部运行机制", "vue内部运行机制"],
+          ["/VUE/vue-cli", "vue-cli"],
+          ["/VUE/vue-router", "vue-router"],
+          ["/VUE/vue内部运行机制", "vue内部运行机制"]
+        ]
+      },
+      {
+        title: "NODE",
+        children: [
+          ["/NODE/node", "node"],
+          ["/NODE/npm", "npm"],
+          ["/NODE/koa", "koa"],
+          ["/NODE/express", "express"]
         ]
       },
       {
@@ -93,14 +111,43 @@ module.exports = {
       {
         title: "计算机基础",
         children: [
-          ["/计算机基础/计算机基础", "计算机基础"]
+          ["/计算机基础/计算机基础", "计算机基础"],
+          ["/计算机基础/linux常用命令", "linux常用命令"],
+          ["/计算机基础/ubuntu", "ubuntu"],
+          ["/计算机基础/windows", "windows"],
+          ["/计算机基础/mac", "mac"],
         ]
       },
       {
-        title: "技术官网",
+        title: "GIT",
         children: [
-          ["/技术官网/前端基础官网", "前端基础官网"],
-          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
+          ["/GIT/git", "git"],
+          ["/GIT/gitreadme", "gitgitreadme"]
+        ]
+      },
+      {
+        title: "WEBPACK",
+        children: [["/WEBPACK/webpack", "webpack"]]
+      },
+      {
+        title: "Chrome",
+        children: [["/Chrome/Chrome调试技巧", "Chrome调试技巧"]]
+      },
+      {
+        title: "DOCKER",
+        children: [["/DOCKER/docker", "docker"]]
+      },
+      {
+        title: "NGINX",
+        children: [["/NGINX/nginx", "nginx"]]
+      },
+      {
+        title: "编辑器",
+        children: [
+          ["/编辑器/vscode", "vscode"],
+          ["/编辑器/editorconfig", "editorconfig"],
+          ["/编辑器/eslint", "eslint"],
+          ["/编辑器/babel", "babel"]
         ]
       },
     ]
