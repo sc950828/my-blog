@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ios上拉下拉到底会出现空白</title>
+  </head>
+  <body style="height: 2000px;">
+    ios上拉下拉到底会出现空白，其实主要出现在微信浏览器
+    <script>
+      document.body.addEventListener(
+        "touchmove",
+        function(e) {
+          e.preventDefault();
+        },
+        {
+          passive: false
+        }
+      );
+    </script>
+  </body>
+</html>

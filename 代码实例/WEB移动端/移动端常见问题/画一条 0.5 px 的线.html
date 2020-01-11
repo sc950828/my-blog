@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>画一条 0.5 px 的线</title>
+    <style>
+      .div1,
+      .div2 {
+        border-top: 1px solid gray;
+        margin-bottom: 20px;
+      }
+      .div3 {
+        border-top: 1px solid gray;
+        transform: scaleY(0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div>我是1px</div>
+    <div class="div1"></div>
+    <div>我通过viewport的initial-scale变成0.5px啦</div>
+    <div class="div2"></div>
+    <div>我通过scale变成0.5px啦</div>
+    <div class="div3"></div>
+  </body>
+</html>

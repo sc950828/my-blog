@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>系统中元素被点击时产生边框</title>
+    <style>
+      a,
+      button,
+      input,
+      textarea {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-user-modify: read-write-plaintext-only;
+      }
+    </style>
+  </head>
+  <body>
+    <button>系统中元素被点击时产生边框</button>
+    系统中元素被点击时会出现一个边框或者半透明灰色遮罩, 不同生产商定义出来额效果不一样。
+    <input type="text">
+  </body>
+</html>
