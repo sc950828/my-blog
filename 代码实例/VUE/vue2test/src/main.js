@@ -2,6 +2,11 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 
+// 取消 Vue 所有的日志与警告 默认是false
+Vue.config.silent = false
+// 配置是否允许 vue-devtools 检查代码 默认为true
+Vue.config.devtools = true
+
 Vue.config.productionTip = false;
 
 // 全局注册过滤器
@@ -22,9 +27,9 @@ Vue.directive("fixed", {
     console.log(el);
     console.log(binding);
     console.log(newVnode);
-    el.style.position = "fixed"
+    el.style.position = "fixed";
     // 参数和值
-    el.style[binding.arg] = binding.value + 'px'
+    el.style[binding.arg] = binding.value + "px";
   },
   update(el, binding, newVnode, oldVnode) {
     console.log("globle update");
@@ -46,7 +51,7 @@ Vue.directive("fixed", {
     console.log(binding);
     console.log(newVnode);
   }
-})
+});
 
 /* eslint-disable no-new */
 new Vue({

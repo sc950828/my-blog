@@ -68,5 +68,15 @@ export default [
     path: "/model",
     name: "Model",
     component: () => import("../views/model.vue")
+  },
+  {
+    path: "/parent",
+    name: "Parent",
+    component: () => import("../views/parent.vue")
+  },
+  {
+    path: "/name",
+    name: "Name",
+    component: () => import("../views/name.vue")
   }
 ];

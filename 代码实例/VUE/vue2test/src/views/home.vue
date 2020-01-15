@@ -25,6 +25,10 @@
     <router-link to="/nexttick">nexttick</router-link>
     <br />
     <router-link to="/model">model</router-link>
+    <br />
+    <router-link to="/parent">parent 父子组件</router-link>
+    <br />
+    <router-link to="/name">name 组件递归调用</router-link>
   </div>
 </template>
 
