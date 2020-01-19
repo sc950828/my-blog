@@ -10,10 +10,11 @@
 
 git clone xxxx `[文件夹名]` 克隆的时候可以带上名字，为该项目另起名字。把远程仓库克隆下来。
 
-### 3、add
+### 3、add rm
 
 - 从工作区到提交到暂存区。
 - git add 文件名 或者 . 或者 -A 或者 -u。 . 不包括删除(新版本支持了) u 不包括新增 A 是全部。
+- git rm 文件名 删除工作区文件，并且将这次删除放入暂存区
 
 ### 4、commit
 
@@ -116,3 +117,20 @@ git config --list
   - HEAD^^ 表示 HEAD 所指向的 commit 往前数两个 commit。
 - ~ 的用法：在 commit 的后面加上 ~ 号和一个数，可以把 commit 往回偏移，偏移的数量是 ~ 号后面的数。
   - 例如：HEAD~5 表示 HEAD 指向的 commit 往前数 5 个 commit。
+
+### 19、git pull 和 git fetch 的区别
+
+git fetch 只是将远程仓库的变化下载下来，并没有和本地分支合并。
+
+git pull 会将远程仓库的变化下载下来，并和当前分支合并。
+
+### 20、git rebase 和 git merge 的区别
+
+git merge 和 git merge 都是用于分支合并，关键在 commit 记录的处理上不同。
+
+git merge 会新建一个新的 commit 对象，然后两个分支以前的 commit 记录都指向这个新 commit 记录。这种方法会
+保留之前每个分支的 commit 历史。
+
+git rebase 会先找到两个分支的第一个共同的 commit 祖先记录，然后将提取当前分支这之后的所有 commit 记录，然后
+将这个 commit 记录添加到目标分支的最新提交后面。经过这个合并后，两个分支合并后的 commit 记录就变为了线性的记
+录了。

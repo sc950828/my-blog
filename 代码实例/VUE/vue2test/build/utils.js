@@ -1,14 +1,21 @@
 'use strict'
+// 使用nodejs自带的文件路径工具
 const path = require('path')
+// 引入config文件夹下的index.js
 const config = require('../config')
+// 把 css 从 js 中分离出来，打包成单独的 css 文件
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// 引入package.json
 const packageConfig = require('../package.json')
 
+// 返回静态文件存放路径
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
 
+  // assetsSubDirectory 生产 开发都是配置的static
+  // posix 跨平台方式
   return path.posix.join(assetsSubDirectory, _path)
 }
 

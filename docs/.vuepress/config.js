@@ -11,13 +11,6 @@ module.exports = {
     ],
     sidebar: [
       {
-        title: "技术官网",
-        children: [
-          ["/技术官网/前端基础官网", "前端基础官网"],
-          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
-        ]
-      },
-      {
         title: "HTML",
         children: [
           ["/HTML/HTML", "HTML"],
@@ -101,7 +94,10 @@ module.exports = {
       },
       {
         title: "WEBPACK",
-        children: [["/WEBPACK/webpack", "webpack"]]
+        children: [
+          ["/WEBPACK/webpack", "webpack"],
+          ["/WEBPACK/webpack常见问题", "webpack常见问题"]
+        ]
       },
       {
         title: "NODE",
@@ -111,6 +107,21 @@ module.exports = {
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"]
         ]
+      },
+      {
+        title: "GIT",
+        children: [
+          ["/GIT/git", "git"],
+          ["/GIT/gitreadme", "gitgitreadme"]
+        ]
+      },
+      {
+        title: "DOCKER",
+        children: [["/DOCKER/docker", "docker"]]
+      },
+      {
+        title: "NGINX",
+        children: [["/NGINX/nginx", "nginx"]]
       },
       {
         title: "计算机基础",
@@ -123,23 +134,11 @@ module.exports = {
         ]
       },
       {
-        title: "GIT",
+        title: "浏览器",
         children: [
-          ["/GIT/git", "git"],
-          ["/GIT/gitreadme", "gitgitreadme"]
+          ["/浏览器/Chrome调试技巧", "Chrome调试技巧"],
+          ["/浏览器/浏览器内核", "浏览器内核"]
         ]
-      },
-      {
-        title: "Chrome",
-        children: [["/Chrome/Chrome调试技巧", "Chrome调试技巧"]]
-      },
-      {
-        title: "DOCKER",
-        children: [["/DOCKER/docker", "docker"]]
-      },
-      {
-        title: "NGINX",
-        children: [["/NGINX/nginx", "nginx"]]
       },
       {
         title: "编辑器",
@@ -148,6 +147,13 @@ module.exports = {
           ["/编辑器/editorconfig", "editorconfig"],
           ["/编辑器/eslint", "eslint"],
           ["/编辑器/babel", "babel"]
+        ]
+      },
+      {
+        title: "技术官网",
+        children: [
+          ["/技术官网/前端基础官网", "前端基础官网"],
+          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
         ]
       }
     ]

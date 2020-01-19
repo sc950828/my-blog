@@ -8,6 +8,7 @@ module.exports = {
   dev: {
 
     // Paths
+    // 静态资源目录
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},
@@ -26,6 +27,7 @@ module.exports = {
     useEslint: true,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
+    // eslint代码检查的时候会用到
     showEslintErrorsInOverlay: false,
 
     /**
@@ -48,6 +50,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
+    // 打包的路径
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

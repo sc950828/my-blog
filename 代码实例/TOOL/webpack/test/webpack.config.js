@@ -105,7 +105,7 @@ module.exports = {
         test: /\.(png|jpg|gif|jpeg)/,
         use: [
           // {
-          //   loader: "file-loader" // 该loader可以不用安装 url-loader内置了file-loader
+          //   loader: "file-loader" // 该loader可以不用安装 file-loader内置了file-loader
           // },
           {
             loader: "url-loader",
@@ -124,6 +124,7 @@ module.exports = {
       filename: "index.html", // 新建的html文件名
       template: "./src/public/index.html" // 基于哪个模板创建html
     }),
+    // 分离css
     new MiniCssExtractPlugin({
       filename: "[name][hash].css"
     }),

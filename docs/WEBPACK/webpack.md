@@ -1,7 +1,9 @@
-### 1、什么是webpack
-  webpack 是一个现代 JavaScript 应用程序的静态模块打包器。
+### 1、什么是 webpack
+
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器。
 
 ### 2、使用
+
     需要安装webpack和webpack-cli。
     运行webpack会自动读取当前运行命令的目录下的webpack.config.js文件
     指定用某配置文件webpack-dev-server --config=./config/webpack.config.js
@@ -11,6 +13,7 @@
     webpack --watch 开启监听模式 边改动边打包 不会自动刷新浏览器。
 
 ### 3、创建本地服务器 webpack-dev-server 注意不会真正的打包
+
     实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用webpack。自动刷新
     第一步： 安装 npm install -g webpack-dev-server
     第二步： 配置npm命令 "server": "webpack-dev-server --config=./config/webpack.config.js" 使用npm run server来开启
@@ -33,6 +36,7 @@
       热替换模式启动后 修改文件不会自动实时刷新网页，下次以热模式启动后修改的都会自动刷新出来。
 
 ### 4、入口 entry
+
     入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。
     可以通过在 webpack 配置中配置 entry 属性，来指定一个入口起点（或多个入口起点）。默认值为 ./src/index.js。
     三种类型的入口文件写法
@@ -46,6 +50,7 @@
         命令行 webpack --context=xxx 必须是绝对路径
 
 ### 5、出口 output
+
     output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件，默认值为 ./dist/main.js
     注意，即使可以存在多个入口起点，但只指定一个输出配置。
 
@@ -58,10 +63,12 @@
         [chunkhash] chunk内容的hash值
 
 ### 6、模式 mode
-- 通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
-- 当设置为development会将 process.env.NODE_ENV 的值设为 development，production同理。
 
-### 7、加载器 loader 需要配置在module里面的rules数组里面
+- 通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
+- 当设置为 development 会将 process.env.NODE_ENV 的值设为 development，production 同理。
+
+### 7、加载器 loader 需要配置在 module 里面的 rules 数组里面
+
     loader从后往前解析。所以顺序不能错
     webpack只认识js，如果需要打包其他文件就需要用到loader。
     loader 可以将所有类型的文件转换为 webpack 能够处理的有效模块，然后你就可以利用 webpack 的打包能力，对它们进行处理。
@@ -143,21 +150,31 @@
       }
     };
 
-### 8、resolve 配置webpack如何寻找模块所对应的的文件
+### 8、resolve 配置 webpack 如何寻找模块所对应的的文件
+
 - alias 取别名
 - extensions 文件没后缀名时默认加 ['.js', '.json']等等
 
 ### 9、devtool
-    配置webpack如何生成source map默认值是false
-    代码映射，可以在sources里面看到源代码。方便开发者调试。
-    可以配置成 devtool: 'source-map'
+
+devtool 中的一些设置，可以帮助我们将编译后的代码映射回原始源代码。不同的值会明显影响到构建和重新构建的速度。
+
+```js
+//webpack.config.js 在开发模式下
+module.exports = {
+  devtool: "cheap-module-eval-source-map", // 开发环境下使用
+  devtool: "none" / "source-map" // 生产环境可以使用
+};
+```
 
 ### 10、watch
-    watch: false 默认是fasle 开启设置为true 
+
+    watch: false 默认是fasle 开启设置为true。在配置文件直接设置。
     也可以用命令行webpack --watch开启
     使用webpack-dev-server启动的默认开启了watch模式
 
 ### 11、插件 plugins
+
     插件目的在于解决 loader 无法实现的其他事。
     模块代码转换的工作由 loader 来处理，除此之外的其他任何工作都可以交由 plugin 来完成。
     由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
@@ -186,21 +203,33 @@
     };
 
 ### 12、命名
-- webpack.config.js 这个文件是webpack的配置文件，名字唯一。默认读取，名字要换需要指定 webpack --config=config/webpack.dev.js
-- 如果config文件在根目录并且名称为webpack.config.js 我们可以直接使用webpack命令进行打包，否则需要通过webpack --config=来指定config文件目录来进行打包。
 
-###  13、常用插件
-- extract-text-webpack-plugin 把css从js中分离出来，打包成单独的css文件。webpack4需要安装extract-text-webpack-plugin@next才行。
-- mini-css-extract-plugin 把css从js中纹理出来，打包成单独的css文件。webpack4推荐使用该插件。
-- html-webpack-plugin 自动创建html文件然后将生成的js和css自动引入html页面。
-- clean-webpakc-plugin 使用了hash所以文件改动就会生成新的js css，这个是用来清除这些js css的。
-- optimize-css-assets-webpack-plugin 压缩css
-- uglifyjs-webpack-plugin 压缩js
+- webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默认读取，名字要换需要指定 webpack --config=config/webpack.dev.js
+- 如果 config 文件在根目录并且名称为 webpack.config.js 我们可以直接使用 webpack 命令进行打包，否则需要通过 webpack --config=来指定 config 文件目录来进行打包。
 
-### 14、常用的loader
-- babel-loader 用babel处理js。(须同时安装babel-core babel-preset-env)
-- style-loader css-loader 处理css。
-- sass-loader 处理scss。(需同时安装node-sass)
-- less-loader 处理less。(需同时安装less)
-- postcss-loader 处理css。(需安装 postcss 还有使用到的插件 autoprefixer)
-- url-loader 处理图片。
+### 13、常用插件
+
+- extract-text-webpack-plugin 把 css 从 js 中分离出来，打包成单独的 css 文件。webpack4 需要安装 extract-text-webpack-plugin@next 才行。
+- mini-css-extract-plugin 把 css 从 js 中纹理出来，打包成单独的 css 文件。webpack4 推荐使用该插件。
+- html-webpack-plugin 自动创建 html 文件然后将生成的 js 和 css 自动引入 html 页面。
+- clean-webpakc-plugin 目录清理。使用了 hash 所以文件改动就会生成新的 js css，这个是用来清除这些 js css 的。
+- optimize-css-assets-webpack-plugin 压缩 css
+- uglifyjs-webpack-plugin：不支持 ES6 压缩 (Webpack4 以前)
+- terser-webpack-plugin: 支持压缩 ES6 (Webpack4)
+- webpack-parallel-uglify-plugin: 多进程执行代码压缩，提升构建速度
+- webpack-bundle-analyzer: 可视化 Webpack 输出文件的体积 (业务组件、依赖第三方模块)
+
+### 14、常用的 loader
+
+- babel-loader 用 babel 处理 js。(须同时安装 babel-core babel-preset-env)
+- style-loader css-loader 处理 css。
+- sass-loader 处理 scss。(需同时安装 node-sass)
+- less-loader 处理 less。(需同时安装 less)
+- postcss-loader 处理 css。(需安装 postcss 还有使用到的插件 autoprefixer)
+- url-loader 与 file-loader 类似，区别是用户可以设置一个阈值，大于阈值时返回其 publicPath，小于阈值时返回文件 base64 形式编码 (处理图片和字体)
+- file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件 (处理图片和字体)
+- image-loader：加载并且压缩图片文件
+- ts-loader: 将 TypeScript 转换成 JavaScript
+- eslint-loader：通过 ESLint 检查 JavaScript 代码
+- tslint-loader：通过 TSLint 检查 TypeScript 代码
+- vue-loader：加载 Vue.js 单文件组件
