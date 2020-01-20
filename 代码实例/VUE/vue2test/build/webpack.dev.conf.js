@@ -64,6 +64,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
+    // 这里需要和打包的publicPath相等
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin

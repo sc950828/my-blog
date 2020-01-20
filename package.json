@@ -12,5 +12,6 @@
     "blog"
   ],
   "author": "randy",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
