@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ios input不能自动获取焦点</title>
+  </head>
+  <body>
+    name<input type="text" autofocus />
+    <script>
+      document.getElementsByTagName("input")[0].focus();
+    </script>
+  </body>
+</html>

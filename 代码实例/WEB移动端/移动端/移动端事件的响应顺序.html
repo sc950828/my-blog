@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端事件的响应顺序</title>
+</head>
+<body>
+  <button id="btn1">移动端事件的响应顺序</button>
+  <script>
+    const btn1 = document.getElementById("btn1")
+    btn1.addEventListener("click", function() {
+      console.log("click");
+      // alert("click")
+    })
+    btn1.addEventListener("touchstart", function() {
+      console.log("touchstart");
+      // alert("touchstart")
+    })
+    btn1.addEventListener("touchend", function() {
+      console.log("touchend");
+      // alert("touchend")
+    })
+    btn1.addEventListener("touchmove", function() {
+      console.log("touchmove");
+      // alert("touchmove")
+    })
+  </script>
+</body>
+</html>

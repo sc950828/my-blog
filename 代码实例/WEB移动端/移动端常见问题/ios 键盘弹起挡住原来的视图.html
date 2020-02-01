@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ios 键盘弹起挡住原来的视图</title>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <div>name<input type="text" /></div>
+    <img src="./images/banner.png" width="300" height="300" alt="" />
+    <script>
+      const div1 = document.getElementById("div1");
+      let dom = document.createDocumentFragment();
+      for (let i = 0; i < 30; i++) {
+        let newDiv = document.createElement("div");
+        let text = document.createTextNode(i);
+        newDiv.appendChild(text);
+
+        dom.appendChild(newDiv);
+      }
+      div1.appendChild(dom);
+      window.addEventListener("resize", function() {
+        alert(1);
+        const img = document.getElementsByTagName("img")[0];
+        window.setTimeout(function() {
+          if ("scrollIntoView" in document.activeElement) {
+            img.scrollIntoView(false);
+          } else {
+            img.scrollIntoViewIfNeeded(false);
+          }
+        }, 0);
+        // if (
+        //   document.activeElement.tagName === "INPUT" ||
+        //   document.activeElement.tagName === "TEXTAREA"
+        // ) {
+        //   window.setTimeout(function() {
+        //     if ("scrollIntoView" in document.activeElement) {
+        //       document.activeElement.scrollIntoView(false);
+        //     } else {
+        //       document.activeElement.scrollIntoViewIfNeeded(false);
+        //     }
+        //   }, 0);
+        // }
+      });
+    </script>
+  </body>
+</html>

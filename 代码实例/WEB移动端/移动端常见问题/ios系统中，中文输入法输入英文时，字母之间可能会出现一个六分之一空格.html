@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ios 系统中，中文输入法输入英文时，字母之间可能会出现一个六分之一空格
+    </title>
+  </head>
+  <body>
+    <input type="text" oninput="input(event)">
+    <script>
+      function input(e) {
+        e.target.value = e.target.value.replace(/\u2006/g, '');
+      }
+    </script>
+  </body>
+</html>
