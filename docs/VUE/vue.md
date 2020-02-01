@@ -372,6 +372,13 @@ let unwatch = this.$watch("a", function(newValue, oldValue) {
 key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速。避免就地复用。
 有相同父元素的子元素必须有独特的 key。重复的 key 会造成渲染错误。
 
+key 的特殊属性主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试就地修改/复用相同类型元素的算法。而使用 key 时，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
+
+它也可以用于强制替换元素/组件而不是重复使用它。当你遇到如下场景时它可能会很有用：
+
+- 完整地触发组件的生命周期钩子
+- 触发过渡
+
 ### 38、你对 vue 项目进行过哪些优化
 
     代码层面的优化
@@ -398,11 +405,18 @@ key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操
 
 - 在 data 里面定义图片路径，然后在 img 里面通过:src 绑定图片地址，图片是显示不出来的。因为 webpack 在打包的时候回检测引用图片的地方，并把图片压缩成 base64 的形式放在引用的地方，如果我们通过后面的 vue 动态绑定，我们是拿不到图片的。如果需要在 data 里面通过:src 的方式使用图片，我们可以使用 import 或 require 先把图片引进来，然后在使用。
 
-- assets 和 static 两个文件都是静态的，但是它们是有区别的，static 文件夹下面的文件都是不能被 webpack 处理的，
-  你必须使用绝对路径来引用这些文件，取决于在 config.js 里面加入的 build.assetsPublicPath 和 build.assetsSubDirectory 这两个属性设置的。其他地方的文件或图片都会被 webpack 解析成模块依赖，这时候就可以用 url-loader 和 css-loader 去处理。如果在 js 中引用图片，因为 js 是动态的所以没有办法去处理，但是我可以使用 require 或 import 将图片当成模块加载进来，就会被 webpack 当成静态文件解析，这时候就可以被 url-loader 处理。
+- assets 和 static 两个文件都是静态的，但是它们是有区别的，static 文件夹下面的文件都是不能被 webpack 处理的，你必须使用绝对路径来引用这些文件，取决于在 config.js 里面加入的 build.assetsPublicPath 和 build.assetsSubDirectory 这两个属性设置的。其他地方的文件或图片都会被 webpack 解析成模块依赖，这时候就可以用 url-loader 和 css-loader 去处理。如果在 js 中引用图片，因为 js 是动态的所以没有办法去处理，但是我可以使用 require 或 import 将图片当成模块加载进来，就会被 webpack 当成静态文件解析，这时候就可以被 url-loader 处理。
 
 - url-loader 会将引入的图片编码，生成 dataURI。相当于把图片数据翻译成一串字符，再把这些字符打包到文件当中，最终只需要引入这个文件就可以访问这个图片。当然如果图片较大，编码会消耗性能，因此 url-loader 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy，一般会放在 static 文件夹下面。
 
 ### 40、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
 
 箭头函数自己没有定义 this 上下文，而是绑定到其父函数的上下文中。当你在 Vue 程序中使用箭头函数（=>）时，this 关键字病不会绑定到 Vue 实例，因此会引发错误。所以强烈建议改用标准函数声明。
+
+### 41、v-pre
+
+跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
+
+### 42、v-once
+
+只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。

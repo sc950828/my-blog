@@ -1,8 +1,6 @@
 <template>
-  <div class="solt-child-wrapper">
-    <slot name="header"></slot>
-    <slot></slot>
-    <slot name="footer"></slot>
+  <div class="wrapper">
+    <span v-pre>{{ <span>我不会被编译 这个感觉没啥用</span> }}</span>
   </div>
 </template>
 
@@ -23,10 +21,7 @@ export default {
   // 方法
   methods: {},
   // 生命周期函数 已创建
-  created() {
-    console.log("$slots", this.$slots);
-    console.log("$scopedSlots", this.$scopedSlots);
-  },
+  created() {},
   // 生命周期函数 已挂载
   mounted() {},
   // 生命周期函数 销毁前

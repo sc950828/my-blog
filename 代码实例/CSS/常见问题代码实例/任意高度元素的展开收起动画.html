@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任意高度元素的展开收起动画</title>
+    <style>
+      /* 使用max-height */
+      .father {
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 5s linear;
+        background-color: aquamarine;
+      }
+      .father:hover {
+        max-height: 1000px;
+      }
+      /* 使用max-height 尽量设置为超大，这样子元素就会在里面撑开 */
+      .son {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="father">
+      father
+      <div class="son"></div>
+    </div>
+  </body>
+</html>

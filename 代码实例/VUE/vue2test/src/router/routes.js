@@ -78,5 +78,15 @@ export default [
     path: "/name",
     name: "Name",
     component: () => import("../views/name.vue")
+  },
+  {
+    path: "/pre",
+    name: "Pre",
+    component: () => import("../views/pre.vue")
+  },
+  {
+    path: "/once",
+    name: "Once",
+    component: () => import("../views/once.vue")
   }
 ];

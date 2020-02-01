@@ -29,6 +29,10 @@
     <router-link to="/parent">parent 父子组件</router-link>
     <br />
     <router-link to="/name">name 组件递归调用</router-link>
+    <br />
+    <router-link to="/pre">v-pre指令</router-link>
+    <br />
+    <router-link to="/once">只渲染一次</router-link>
   </div>
 </template>
 

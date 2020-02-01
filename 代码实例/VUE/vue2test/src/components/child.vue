@@ -15,7 +15,12 @@ export default {
   components: {},
   // 属性
   props: {},
-  inject: ["sex"],
+  inject: {
+    sex: {
+      from: "sex",
+      default: "男"
+    }
+  },
   // 数据
   data() {
     return {
@@ -30,7 +35,8 @@ export default {
   methods: {},
   // 生命周期函数 已创建
   created() {
-    console.log(this.$parent);
+    console.log("$parent", this.$parent);
+    console.log("$root", this.$root);
   },
   // 生命周期函数 已挂载
   mounted() {},
