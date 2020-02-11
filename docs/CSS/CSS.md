@@ -196,16 +196,6 @@ font-style:oblique 是单纯的使文字倾斜，不管该字体有没有 italic
 
 （2）canvas 判断方法。我们可以动态的创建一个 canvas 对象，通过 canvas 的 toDataURL 将设置为 webp 格式，然后判断返回值中是否含有 image/webp 字段，如果包含则说明支持 WebP，反之则不支持。
 
-### 27、什么是 Cookie 隔离？（或者说：请求资源的时候不要让它带 cookie 怎么做）
-
-网站向服务器请求的时候，会自动带上 cookie 这样增加表头信息量，使请求变慢。
-
-如果静态文件都放在主域名下，那静态文件请求的时候都带有的 cookie 的数据提交给 server 的，非常浪费流量，所以不如隔离开，静态资源放 CDN 。
-
-因为 cookie 有域的限制，因此不能跨域提交请求，故使用非主要域名的时候，请求头中就不会带有 cookie 数据，这样可以降低请求头的大小，降低请求时间，从而达到降低整体请求延时的目的。
-
-同时这种方式不会将 cookie 传入 Web Server，也减少了 Web Server 对 cookie 的处理分析环节，提高了 webserver 的 http 请求的解析速度。
-
 ### 27、content 与替换元素的关系？
 
 content 属性生成的对象称为“匿名替换元素”。
