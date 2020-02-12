@@ -15,14 +15,26 @@
         border-top: 1px solid gray;
         transform: scaleY(0.5);
       }
+
+      .div4 {
+        margin-top: 20px;
+        border-width: 0px 0px 1px 0px;
+        border-style: solid;
+        border-color: gray;
+        border-image-source: url(./images/banner.png);
+        border-image-width: 1px;
+        border-image-slice: 1;
+      }
     </style>
   </head>
   <body>
     <div>我是1px</div>
     <div class="div1"></div>
-    <div>我通过viewport的initial-scale变成0.5px啦</div>
+    <div>我可以通过设置viewport的initial-scale=0.5变成0.5px</div>
     <div class="div2"></div>
     <div>我通过scale变成0.5px啦</div>
     <div class="div3"></div>
+
+    <div class="div4"></div>
   </body>
 </html>

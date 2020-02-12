@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取浏览器大小的常用 api</title>
+    <style>
+      .test {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        padding: 10px;
+        border: 20px solid green;
+        margin: 30px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body style="width: 2000px;height: 1000px;">
+    <div class="test">
+      <div style="width:200px;height:200px">
+        test div 宽高100 padding10 border20 margin30 滚动条占15 所以内容只有85
+      </div>
+    </div>
+
+    <div id="div1">screen.width：</div>
+    <div id="div2">screen.height：</div>
+    <div id="div3">screen.availWidth：</div>
+    <div id="div4">screen.availHeight：</div>
+    <div id="div5">window.outerWidth：</div>
+    <div id="div6">window.outerHeight：</div>
+    <div id="div7">window.innerWidth：</div>
+    <div id="div8">window.innerHeight：</div>
+    <div id="div9">document.documentElement.clientWidth：</div>
+    <div id="div10">document.documentElement.clientHeight：</div>
+    <div id="div11">test.clientWidth：</div>
+    <div id="div12">test.clientHeight：</div>
+    <div id="div13">test.offsetWidth：</div>
+    <div id="div14">test.offsetHeight：</div>
+    <div id="div15">test.scrollWidth：</div>
+    <div id="div16">test.scrollHeight：</div>
+    <div id="div17">test.clientTop：</div>
+    <div id="div18">test.clientLeft：</div>
+    <div id="div19">test.offsetTop：</div>
+    <div id="div20">test.offsetLeft：</div>
+    <div id="div21">test.scrollTop：</div>
+    <div id="div22">test.scrollLeft：</div>
+    <script>
+      const div1 = document.getElementById("div1");
+      div1.innerText += screen.width;
+      const div2 = document.getElementById("div2");
+      div2.innerText += screen.height;
+      const div3 = document.getElementById("div3");
+      div3.innerText += screen.availWidth;
+      const div4 = document.getElementById("div4");
+      div4.innerText += screen.availHeight;
+      const div5 = document.getElementById("div5");
+      div5.innerText += window.outerWidth;
+      const div6 = document.getElementById("div6");
+      div6.innerText += window.outerHeight;
+      const div7 = document.getElementById("div7");
+      div7.innerText += window.innerWidth;
+      const div8 = document.getElementById("div8");
+      div8.innerText += window.innerHeight;
+      const div9 = document.getElementById("div9");
+      div9.innerText += document.documentElement.clientWidth;
+      const div10 = document.getElementById("div10");
+      div10.innerText += document.documentElement.clientHeight;
+      const div11 = document.getElementById("div11");
+      div11.innerText += document.getElementsByClassName("test")[0].clientWidth;
+      const div12 = document.getElementById("div12");
+      div12.innerText += document.getElementsByClassName(
+        "test"
+      )[0].clientHeight;
+      const div13 = document.getElementById("div13");
+      div13.innerText += document.getElementsByClassName("test")[0].offsetWidth;
+      const div14 = document.getElementById("div14");
+      div14.innerText += document.getElementsByClassName(
+        "test"
+      )[0].offsetHeight;
+      const div15 = document.getElementById("div15");
+      div15.innerText += document.getElementsByClassName("test")[0].scrollWidth;
+      const div16 = document.getElementById("div16");
+      div16.innerText += document.getElementsByClassName(
+        "test"
+      )[0].scrollHeight;
+
+      const div17 = document.getElementById("div17");
+      div17.innerText += document.getElementsByClassName("test")[0].clientTop;
+      const div18 = document.getElementById("div18");
+      div18.innerText += document.getElementsByClassName("test")[0].clientLeft;
+      const div19 = document.getElementById("div19");
+      div19.innerText += document.getElementsByClassName("test")[0].offsetTop;
+      const div20 = document.getElementById("div20");
+      div20.innerText += document.getElementsByClassName("test")[0].offsetLeft;
+      const div21 = document.getElementById("div21");
+
+      document.getElementsByClassName("test")[0].scrollTo(10, 11);
+      div21.innerText += document.getElementsByClassName("test")[0].scrollTop;
+      const div22 = document.getElementById("div22");
+      div22.innerText += document.getElementsByClassName("test")[0].scrollLeft;
+    </script>
+  </body>
+</html>

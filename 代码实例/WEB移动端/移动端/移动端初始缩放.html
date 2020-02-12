@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <title>移动端初始缩放</title>
+    <style>
+      body {
+        margin: 0;
+        font-size: .5rem;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div>初始缩放比变化 相应的布局视口也会发生变化 所以响应的根元素字体大小就会变化</div>
+    <div class="div1">window.devicePixelRatio：</div>
+    <div class="div2">document.documentElement.clientWidth：</div>
+    <script>
+      const div1 = document.getElementsByClassName("div1")[0];
+      div1.innerText += window.devicePixelRatio
+      const div2 = document.getElementsByClassName("div2")[0];
+      div2.innerText += document.documentElement.clientWidth;
+
+      document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px'
+    </script>
+  </body>
+</html>
