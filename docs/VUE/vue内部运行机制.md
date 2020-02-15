@@ -2,21 +2,19 @@
 
 - 初始化及挂载
 
-  - 在 new Vue() 之后。 Vue 会调用 \_init 函数进行初始化，也就是这里的 init 过程，它会初始化生命周期、事件、 props、 methods、 data、 computed 与 watch 等。初始化之后调用 \$mount 会挂载组件，如果是运行时编译，即不存在 render function 但是存在 template 的情况，需要进行编译然后再挂载。
+  - 在 new Vue() 之后。 Vue 会调用 `_init` 函数进行初始化，也就是这里的 init 过程，它会初始化生命周期、事件、 props、 methods、 data、 computed 与 watch 等。初始化之后调用 `$mount` 会挂载组件，如果是运行时编译，即不存在 render function 但是存在 template 的情况，需要进行编译然后再挂载。
 
 - 编译渲染过程
 
-  - compile 编译可以分成 parse、optimize 与 generate 三个阶段，最终需要得到 render function
+  - compile 编译可以分成 parse、optimize 与 generate 三个阶段，最终得到需要的 render function
     - parse 会用正则等方式解析 template 模板中的指令、class、style 等数据，形成 AST。(抽象语法树)
-    - optimize 的主要作用是标记 static 静态节点，这是 Vue 在编译过程中的一处优化，为后面更新视图 patch 做的优化。
-      经过 optimize 这层的处理，每个节点会加上 static 属性，用来标记是否是静态的。后面当 update 更新界面时，会有一个 patch 的过程， diff 算法会直接跳过静态节点，从而减少了比较的过程，优化了 patch 的性能。
+    - optimize 的主要作用是标记 static 静态节点，这是 Vue 在编译过程中的一处优化，为后面更新视图 patch 做的优化。经过 optimize 这层的处理，每个节点会加上 static 属性，用来标记是否是静态的。后面当 update 更新界面时，会有一个 patch 的过程， diff 算法会直接跳过静态节点，从而减少了比较的过程，优化了 patch 的性能。
     - generate 是将 AST 转化成 render function 字符串的过程。
     - 最后通过执行 render 函数生成 Virtual DOM 最终映射为真实 DOM。
 
 - 响应式原理
 
-  - vue.js 则是采用数据劫持结合发布-订阅模式的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。init 的时候会循环遍历 data 的所有对象所有属性，使用 Object.defineProperty()来自定义对象属性的 get set 方法，定义一个对象属性的时候会创建该属性的发布者，(dep)
-    每个调用(get)该属性的时候，在 get 方法里把订阅者(watcher)push 到发布者里面。每个设置(set)该属性的时候，发布者循环订阅者，一个个通知修改。
+  - vue.js 则是采用数据劫持结合发布-订阅模式的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。init 的时候会循环遍历 data 的所有对象所有属性，使用 Object.defineProperty()来自定义对象属性的 get set 方法，定义一个对象属性的时候会创建该属性的发布者(dep)，每个调用(get)该属性的时候，在 get 方法里把订阅者(watcher)push 到发布者里面。每个设置(set)该属性的时候，发布者循环订阅者，一个个通知修改。
 
 - VDOM 虚拟 DOM
   - 由于 Virtual DOM 是以 JavaScript 对象为基础而不依赖真实平台环境，所以使它具有了跨平台的能力，比如说浏览器平台、Weex、Node 等。render function 会被转化成 VDOM。Virtual DOM 其实就是一个 JavaScript 对象,例如
