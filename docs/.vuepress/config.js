@@ -72,6 +72,23 @@ module.exports = {
         ]
       },
       {
+        title: "HTTP",
+        children: [
+          ["/HTTP/HTTP", "HTTP"],
+          ["/HTTP/HTTP常见问题", "HTTP常见问题"],
+          ["/HTTP/缓存", "缓存"],
+          ["/HTTP/跨域", "跨域"],
+          ["/HTTP/权限", "权限"],
+          ["/HTTP/前端性能优化", "前端性能优化"],
+          ["/HTTP/Ajax", "Ajax"],
+          ["/HTTP/Axios", "Axios"],
+          ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
+          ["/HTTP/Fetch", "Fetch"],
+          ["/HTTP/JqueryAjax", "JqueryAjax"],
+          ["/HTTP/web安全", "web安全"]
+        ]
+      },
+      {
         title: "VUE",
         children: [
           ["/VUE/vue", "vue"],
@@ -89,23 +106,6 @@ module.exports = {
           ["/NODE/npm", "npm"],
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"]
-        ]
-      },
-      {
-        title: "HTTP",
-        children: [
-          ["/HTTP/HTTP", "HTTP"],
-          ["/HTTP/HTTP常见问题", "HTTP常见问题"],
-          ["/HTTP/缓存", "缓存"],
-          ["/HTTP/跨域", "跨域"],
-          ["/HTTP/权限", "权限"],
-          ["/HTTP/前端性能优化", "前端性能优化"],
-          ["/HTTP/Ajax", "Ajax"],
-          ["/HTTP/Axios", "Axios"],
-          ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
-          ["/HTTP/Fetch", "Fetch"],
-          ["/HTTP/JqueryAjax", "JqueryAjax"],
-          ["/HTTP/web安全", "web安全"]
         ]
       },
       {
