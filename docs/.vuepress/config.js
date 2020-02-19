@@ -100,6 +100,10 @@ module.exports = {
         ]
       },
       {
+        title: "WEBPACK",
+        children: [["/WEBPACK/webpack", "webpack"]]
+      },
+      {
         title: "NODE",
         children: [
           ["/NODE/node", "node"],
@@ -124,10 +128,6 @@ module.exports = {
           ["/GIT/git", "git"],
           ["/GIT/gitreadme", "gitgitreadme"]
         ]
-      },
-      {
-        title: "WEBPACK",
-        children: [["/WEBPACK/webpack", "webpack"]]
       },
       {
         title: "Chrome",
