@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>构造继承</title>
+  </head>
+  <body>
+    <script>
+      // 父类
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+        this.sayFather = function() {
+          console.log("child sayFather", this.name, this.age);
+        };
+        this.fatherColors = ["green", "yellow"];
+      }
+      const Hello = {
+        hello() {
+          console.log("hello", this.name, this.age);
+        },
+        helloArr: ["1", "2"]
+      };
+      // 父类的原型
+      Father.prototype = Hello;
+      //子类
+      function Child(name, age) {
+        // this.name = name;
+        // this.age = age;
+        Father.call(this, name, age);
+        this.colors = ["red", "blue"];
+        this.say = function() {
+          console.log("child say", this.name, this.age);
+        };
+      }
+
+      // c1
+      let c1 = new Child("randy", 24);
+      console.log(c1);
+      c1.say();
+      c1.sayFather();
+      console.log(c1.colors);
+      console.log(c1.fatherColors);
+      // c2
+      let c2 = new Child("demi", 25);
+      console.log(c2);
+      c2.say();
+      c2.sayFather();
+      console.log(c2.colors);
+      console.log(c2.fatherColors);
+
+      // 获取父类原型方法
+      // c1.hello(); //报错  无法获取到父类原型上的方法
+      console.log(c1.helloArr); //undefined 无法获取到父类原型上的属性
+
+      // 修改属性 互不影响
+      c1.colors.push("black");
+      c1.fatherColors.push("black");
+      console.log(c1.colors); // ["red", "blue", "black"]
+      console.log(c2.colors); // ["red", "blue"]
+      console.log(c1.fatherColors); //["green", "yellow", "black"]
+      console.log(c2.fatherColors); // ["green", "yellow"]
+
+      // 修改方法 互不影响
+      c1.say = function() {
+        console.log("child update say", this.name, this.age);
+      };
+      c1.sayFather = function() {
+        console.log("child update sayFather", this.name, this.age);
+      };
+      c1.say(); //child update say randy 24
+      c2.say(); //child say demi 25
+      c1.sayFather(); // child update sayFather randy 24
+      c2.sayFather(); //child sayFather demi 25
+
+      // instanceof
+      console.log(c1 instanceof Child); // true
+      console.log(c1 instanceof Father); // false
+    </script>
+  </body>
+</html>

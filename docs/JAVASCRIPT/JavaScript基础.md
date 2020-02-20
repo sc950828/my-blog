@@ -386,7 +386,7 @@
         document.querySelector() 返回文档中匹配指定的CSS选择器的第一元素
         document.querySelectorAll() 返回文档中匹配的CSS选择器的所有元素节点列表。
         document.createAttribute() 创建一个属性节点
-        document.createComment() createComment() 方法可创建注释节点。
+        document.createComment() 方法可创建注释节点。
         document.createDocumentFragment() 创建空的 DocumentFragment 对象，并返回此对象。
         document.createElement() 创建元素节点。
         document.createTextNode() 创建文本节点。
