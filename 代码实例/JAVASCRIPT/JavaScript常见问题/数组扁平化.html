@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组扁平化</title>
+  </head>
+  <body>
+    <script>
+      // 1、使用toString()和split()方法
+      let arr1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, { name: "randy" }]
+      ];
+      // 这种方法适用于数字比较好
+      const newArr1 = arr1.toString().split(",");
+      console.log(newArr1);
+
+      // 2、使用reduce
+      let arr2 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, { name: "randy" }]
+      ];
+      // reduce
+      function flatten(arr) {
+        return arr.reduce((initialValue, currentValue) => {
+          return initialValue.concat(
+            Array.isArray(currentValue) ? flatten(currentValue) : currentValue
+          );
+        }, []);
+      }
+      console.log(flatten(arr2));
+
+      // 3、使用join()和split()方法
+      let arr3 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, { name: "randy" }]
+      ];
+      // 这种方法适用于数字比较好
+      const newArr3 = arr3.join(",").split(",");
+      console.log(newArr3);
+
+      // 4、递归
+      let arr4 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, { name: "randy" }]
+      ];
+      function flatten2(arr) {
+        let newArr = []
+        arr.forEach(item => {
+          if(Array.isArray(item)) {
+            newArr = newArr.concat(flatten2(item))
+          }else {
+            newArr.push(item)
+          }
+        })
+        return newArr
+      }
+      console.log(flatten2(arr4));
+
+      // 5、扩展运算符和contact
+      let arr5 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, { name: "randy" }]
+      ];
+      console.log([].concat(...arr5));
+    </script>
+  </body>
+</html>

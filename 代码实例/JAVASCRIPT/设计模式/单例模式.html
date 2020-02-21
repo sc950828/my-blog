@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单例模式</title>
+  </head>
+  <body>
+    <script>
+      // 保证一个类仅有一个实例，并提供一个访问它的全局访问点
+      function Manager(name) {
+        this.name = name;
+        this.getName = function() {
+          return this.name;
+        };
+      }
+
+      // 使用到了闭包
+      const singleModel = (function() {
+        let manager = null;
+        return function(name) {
+          if (!manager) {
+            manager = new Manager(name);
+          }
+          return manager;
+        };
+      })();
+
+      console.log(
+        "singleModel('randy')",
+        singleModel("randy")
+      );
+      console.log(
+        "singleModel('randy').getName()",
+        singleModel("randy").getName()
+      );
+      console.log(
+        "singleModel('demi').getName()",
+        singleModel("demi").getName()
+      );
+    </script>
+  </body>
+</html>

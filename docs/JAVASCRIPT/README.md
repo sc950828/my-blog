@@ -33,3 +33,13 @@
 ### 16、[Promise 与 Async 与 Await](/JAVASCRIPT/Promise与Async与Await)
 
 ### 17、[垃圾回收](/JAVASCRIPT/垃圾回收)
+
+### 18、[数据类型转换](/JAVASCRIPT/数据类型转换)
+
+### 19、[call 和 apply 和 bind](/JAVASCRIPT/call和apply和bind)
+
+### 20、[数组操作](/JAVASCRIPT/数组操作)
+
+### 21、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)
+
+### 22、[new 操作符实现](/JAVASCRIPT/new操作符实现)
