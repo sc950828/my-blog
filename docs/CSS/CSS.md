@@ -22,11 +22,16 @@
 
 ### 6、浮动怎么使用？浮动带来的影响和清除浮动的方式有哪些？
 *  float: left/right 开启左右浮动。不管是块级元素还是行内元素，设置浮动后的display属性值是block。
+*  优点：
+    * 图文混排的时候可以很好的使文字环绕在图片周围。
+    * 可以解决inline-block元素空白间隙的问题。
 *  影响：
     * 元素会脱离文档流，会影像后面元素的布局。
     * 浮动会导致父元素撑不开。
 *  清除浮动的方式：
     * 浮动元素后加空div标签 并添加样式clear:both，或者看具体情况也可以使用clear:left或者clear:right。
+    * 父元素使用伪类parent:after{content: ''; clear: both; display: block;}
+    * 父元素添加{overflow: hidden/auto;} 这个可以解决父元素高度塌陷的问题。
 
 ### 7、什么是bfc，怎么创建bfc？
 *  BFC是一个独立的布局环境，其中的元素布局是不受外界的影响。
