@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>伪类选择器</title>
+    <style>
+      /*
+        a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。
+        a:active 必须被置于 a:hover 之后，才是有效的。
+      */
+      /* 已访问的链接 */
+      a:visited {
+        color: #00ff00;
+      }
+
+      /* 未访问的链接 */
+      a:link {
+        color: red;
+      }
+
+      /* 鼠标划过链接 */
+      a:hover {
+        color: #ff00ff;
+      }
+
+      /* 已选中的链接 */
+      a:active {
+        color: #0000ff;
+      }
+
+      input {
+        color: green;
+      }
+
+      /* 获取焦点的 */
+      input:focus {
+        color: blue;
+      }
+
+      /* 可用的 */
+      input:enabled {
+        /* width: 100px;
+      height: 20px; */
+        background: #ffff00;
+      }
+
+      /* 选中的 */
+      input:checked + label {
+        color: brown;
+      }
+
+      /* 禁用的 */
+      input:disabled {
+        background-color: cadetblue;
+        color: transparent;
+      }
+
+      /* 无效的 */
+      input:invalid {
+        border: 1px solid red;
+      }
+
+      /* 空的 */
+      .div1:empty {
+        width: 100px;
+        height: 100px;
+        background-color: hotpink;
+      }
+
+      /* 只读 */
+      input:read-only {
+        color: indigo;
+        font-size: 20px;
+      }
+
+      /* 除了ready-only元素 */
+      input:read-write {
+        font-size: 24px;
+      }
+
+      /* 不匹配 */
+      div:not(.div1) {
+        color: lawngreen;
+      }
+
+      /* 根元素 body */
+      :root {
+        font-size: 16px;
+      }
+
+      /* 设置了required属性 */
+      .required1:required {
+        color: blue;
+      }
+
+      /* 没设置required属性 */
+      .required1:optional {
+        color: blueviolet;
+      }
+
+      .item1-1:first-child {
+        color: blueviolet;
+      }
+
+      .item1-1:nth-child(2) {
+        color: coral;
+      }
+
+      /* last-child 或者nth-last-child 要生效后面就不能再有元素 */
+      .item1-1:nth-last-child(2) {
+        background: #ffdd00;
+      }
+
+      /* last-child 或者nth-last-child 要生效后面就不能再有元素 */
+      .item1-1:last-child {
+        background: #ff0000;
+      }
+
+      /* 匹配自己是父元素唯一的子元素。E是子元素的选择器。 */
+      .item2-1:only-child {
+        background-color: darkgreen;
+      }
+
+      /* 第一个div */
+      .item3 > div:first-of-type {
+        color: darkorange;
+      }
+
+      /* 没限制是最后一个元素 */
+      .item3 > div:last-of-type {
+        color: darkorchid;
+      }
+
+      /*  */
+      .item3 > p:nth-of-type(2) {
+        color: darkred;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="https://www.baidu.com">focus link hover visited active</a> <br />
+    <input type="text" /> <br />
+    <input type="text" disabled placeholder="disabled" /><br />
+    <input type="checkbox" id="name1" /> <label for="name1">randy</label>
+    <input type="checkbox" id="name2" /> <label for="name2">demi</label> <br />
+    <input type="email" placeholder="请输入合法邮箱" />
+    <div class="div1"></div>
+    <input type="text" value="read-only" readonly />
+    <div class="div2">div2 not</div>
+    <input class="required1" type="text" required value="required" />
+    <input class="required1" type="text" value="no required" />
+
+    <div class="item1">
+      <div class="item1-1">item1-1 first-child</div>
+      <div class="item1-1">item1-1 nth-child(2)</div>
+      <div class="item1-1">item1-1 nth-last-child(2)</div>
+      <div class="item1-1">item1-1 last-child</div>
+      <!-- last-child 或者nth-last-child 要生效后面就不能再有元素-->
+      <!-- <div class="item1-2">item1-2</div>-->
+    </div>
+    <div class="item2">
+      <div class="item2-1">item2-1</div>
+      <!-- <div class="item2-2">item2-1</div> -->
+    </div>
+    <div class="item3">
+      <div class="item3-1">item3-1 div</div>
+      <p class="item3-1">item3-1 p</p>
+      <div class="item3-1">item3-1 div</div>
+    </div>
+    <div class="item3">
+      <p class="item3-1">item3-1 p</p>
+      <div class="item3-1">item3-1 div</div>
+      <div class="item3-1">item3-1 div</div>
+      <p class="item3-1">item3-1 p p:nth-of-type(2)</p>
+    </div>
+  </body>
+</html>

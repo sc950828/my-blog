@@ -1,0 +1,73 @@
+.box {
+  color: red;
+}
+
+.box2 {
+  height: 100px;
+}
+
+.box3 {
+  width: 100px;
+  height: 100px;
+}
+
+.box4 {
+  width: 200px;
+  height: 300px;
+}
+
+p.foo {
+  border-color: blue;
+}
+
+.common,
+.box5,
+.ceshi {
+  color: red;
+}
+
+.ceshi {
+  width: 100px;
+}
+
+.box5 {
+  border: 1px solid red;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+}
+
+.p {
+  color: yellow;
+}
+
+.item-1 {
+  width: 100px;
+}
+
+.item-2 {
+  width: 200px;
+}
+
+.item-3 {
+  width: 300px;
+}
+
+.items-1 {
+  width: 100px;
+}
+
+.items-2 {
+  width: 200px;
+}
+
+.box2 {
+  width: 100px;
+  height: 100px;
+}
+
+/*# sourceMappingURL=variable.css.map */

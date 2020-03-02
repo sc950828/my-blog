@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rotate</title>
+    <style>
+      /*
+        rotate(deg) 水平旋转 效果等同于rotateZ()
+        rotate3d(X, Y, Z) 沿X Y Z 轴旋转
+        rotateX(X) 沿X轴旋转
+        rotateY(Y) 沿Y轴旋转
+        rotateZ(Z) 沿Z轴旋转
+
+        角度单位有
+        deg 一个圆等于360deg(度)
+        grad 一个圆都等于400grad(梯度)
+        rad 一个圆等于2π(弧度)
+        turn 一个圆等于1turn(转)
+      */
+      .item1 {
+        transform: rotate(30deg);
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: lawngreen;
+      }
+
+      .item2 {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: lightblue;
+        transform: rotateX(60deg);
+      }
+
+      .item3 {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: lightgreen;
+        transform: rotateY(60deg);
+      }
+
+      .item4 {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: mediumorchid;
+        transform: rotateZ(30deg);
+      }
+
+      .item5 {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: purple;
+        /* 用的少 */
+        transform: rotate3d(0, 0, 0, 90deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">hello rotate</div>
+    <div class="item2">hello rotateX</div>
+    <div class="item3">hello rotateY</div>
+    <div class="item4">hello rotateZ</div>
+    <div class="item5">rotate3d</div>
+  </body>
+</html>

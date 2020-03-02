@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>inline-block元素间的间隙问题</title>
+    <style>
+      .div1 {
+        width: 100px;
+        height: 100px;
+        background-color: blueviolet;
+        display: inline-block;
+      }
+      .div2 {
+        width: 100px;
+        height: 100px;
+        background-color: burlywood;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 第一种解决办法 写在一行 -->
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <!-- 第二种办法 margin负值 -->
+    <div class="div1">div1</div>
+    <div class="div2" style="margin-left: -8px;">div2</div>
+    <!-- 第三种办法 父元素font-size:0-->
+    <div style="font-size: 0px;">
+      <div class="div1">div1</div>
+      <div class="div2">div2</div>
+    </div>
+    <!-- 第四种方法 使用浮动 -->
+    <div class="div1" style="float: left;">div1</div>
+    <div class="div2" style="float: left;">div2</div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+/* if */
+.div1 {
+  color: red;
+  color: blue;
+  color: green;
+}
+/* when */
+.item-3 {
+  color: red;
+}
+.item-2 {
+  color: red;
+}
+.item-1 {
+  color: red;
+}
+/* boolean */
+.div2 {
+  color: blue;
+  color: green;
+}
+/* list */
+.div3 {
+  color: yellow;
+  border-width: 5;
+}
+.cl-red {
+  color: value;
+}
+.cl-blue {
+  color: value;
+}
+.cl-yellow {
+  color: value;
+}
+.cl-green {
+  color: value;
+}
+.cl-pink {
+  color: value;
+}
+.cl-10px {
+  border-width: 10px;
+}
+.cl-20px {
+  border-width: 20px;
+}
+.cl-30px {
+  border-width: 30px;
+}
+.cl-40px {
+  border-width: 40px;
+}
+.cl-50px {
+  border-width: 50px;
+}
+.range-1 {
+  border-width: 1;
+}
+.range-2 {
+  border-width: 2;
+}
+.range-3 {
+  border-width: 3;
+}
+.range-4 {
+  border-width: 4;
+}
+.range-5 {
+  border-width: 5;
+}

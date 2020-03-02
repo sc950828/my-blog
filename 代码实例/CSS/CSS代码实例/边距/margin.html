@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>margin</title>
+    <style>
+      /*
+        margin设置上下外边距。
+        行内元素设置上下外边距无效。
+        没有背景色。
+        并且上下外边距会合并。都为正取较大值，都为负取绝对值大的值，一正一负取相加后的值。
+      */
+      .item1 {
+        margin: 20px 50px;
+        background-color: lightcyan;
+      }
+
+      .item2 {
+        margin: 20px 50px;
+        background-color: lightgreen;
+      }
+
+      .item3 {
+        background-color: lightpink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">padding div块级元素</div>
+    <span class="item2"
+      >padding span行内元素。行内元素设置上下外边距无效。</span
+    >
+    <div class="item3">测试</div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+@color1: red;
+@color2: blue;
+@color3: green;
+@counter: 3;
+
+/* if */
+.div1 {
+  color: if(2>1, @color1, @color2);
+  color: if((2>1) and (1>3), @color1, @color2);
+  color: if((1>2) or (3>2), @color3, @color2);
+}
+
+/* when */
+.xunhuan(@count) when(@count>0) {
+  .item-@{count} {
+    color: red;
+  }
+  .xunhuan(@count - 1)
+}
+.xunhuan(@counter);
+
+/* boolean */
+@bool1: boolean(1);
+@bool2: boolean(1>2);
+.div2 {
+  color: if(@bool1, @color1, @color2);
+  color: if(@bool2, @color2, @color3);
+}
+
+/* list */
+@list1: red, blue, yellow, green, pink;
+@list2: range(10px, 50px, 10); // 10px 20px 30px 40px 50px
+@list3: range(5);//1 2 3 4 5
+.div3 {
+  color: extract(@list1, 3);
+  border-width: length(@list2);
+}
+
+each(@list1, {
+  .cl-@{value} {
+    color: value;
+  }
+})
+
+each(@list2, {
+  .cl-@{value} {
+    border-width: @value;
+  }
+})
+
+each(@list3, {
+  .range-@{value} {
+    border-width: @value;
+  }
+})

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mouse event</title>
+    <style>
+      .div1 {
+        width: 300px;
+        height: 200px;
+        background-color: burlywood;
+        /* bfc */
+        overflow: hidden;
+      }
+
+      .item1 {
+        width: 100px;
+        height: 100px;
+        margin: 50px 100px;
+        background-color: cadetblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1">
+      <div class="item1"></div>
+    </div>
+
+    <script>
+      const div1 = document.getElementsByClassName("div1")[0];
+      const item1 = document.getElementsByClassName("item1")[0];
+      // 鼠标事件
+      div1.onclick = function(e) {
+        console.log("onclick", e);
+      };
+      div1.ondblclick = function(e) {
+        console.log("ondblclick", e);
+      };
+      div1.oncontextmenu = function(e) {
+        console.log("oncontextmenu", e);
+      };
+      div1.onmousedown = function(e) {
+        console.log("onmousedown", e);
+      };
+      div1.onmouseup = function(e) {
+        console.log("onmouseup", e);
+      };
+      // div1.onmousemove = function(e){
+      //   console.log("onmousemove", e);
+      // }
+      div1.onmouseenter = function(e) {
+        console.log("onmouseenter", e);
+      };
+      div1.onmouseleave = function(e) {
+        console.log("onmouseleave", e);
+      };
+      div1.onmouseover = function(e) {
+        console.log("onmouseover", e);
+      };
+      div1.onmouseout = function(e) {
+        console.log("onmouseout", e);
+      };
+    </script>
+  </body>
+</html>

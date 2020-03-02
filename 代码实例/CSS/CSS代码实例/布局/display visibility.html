@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>display visibility</title>
+    <style>
+      div {
+        width: 200px;
+        height: 100px;
+      }
+
+      /* display:none dom消失并且会释放空间 */
+      .item1 {
+        background-color: cornflowerblue;
+        display: none;
+      }
+
+      /*
+        visible：设置对象可视
+        hidden：设置对象隐藏
+        collapse：主要用来隐藏表格的行或列。隐藏的行或列能够被其他内容使用。对于表格外的其他对象，其作用等同于hidden。IE6及以下不支持此参数值
+      */
+      /* visibility:hidden dom会消失但是还是会占据空间 */
+      .item2 {
+        background-color: cyan;
+        visibility: hidden;
+      }
+
+      .item3 {
+        background-color: darkcyan;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">item1</div>
+    <div class="item2">item2</div>
+    <div class="item3">item3</div>
+  </body>
+</html>

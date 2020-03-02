@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>padding</title>
+    <style>
+      /*
+        padding设置内边距。
+        行内元素虽然能设置上下内边距但是会变大，占据其它元素的空间。
+        背景色会有。
+      */
+      .item1 {
+        padding: 20px 50px;
+        background-color: lightcyan;
+      }
+      .item2 {
+        padding: 20px 50px;
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="item1">padding div块级元素</div>
+    <span class="item2"
+      >padding
+      span行内元素。行内元素虽然能设置上下内边距但是会变大，占据其它元素的空间。</span
+    >
+    <div>测试</div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>position定位</title>
+    <style>
+      body {
+        height: 1500px;
+      }
+      div {
+        width: 200px;
+        height: 100px;
+      }
+      /* position 默认值static，没有定位 */
+
+      /*
+        relative 相对定位，原来的位置会被占据。
+        top right left bottom相对自己本身移动
+      */
+      .item1 {
+        background-color: aqua;
+        position: relative;
+        right: 50px;
+        bottom: 50px;
+      }
+
+      /*
+        absolute 绝对定位，会他脱离文档流。
+        top right left bottom相对父级有定位(非static)的元素或窗口。
+      */
+      .item2 {
+        background-color: blanchedalmond;
+        position: absolute; /* 相对窗口*/
+        right: 50px;
+        bottom: 50px;
+      }
+
+      .item3 {
+        position: relative;
+      }
+      .item4 {
+        background-color: blueviolet;
+        position: absolute; /* 相对有定位的父元素*/
+        left: 50px;
+        bottom: 50px;
+      }
+
+      /*
+        fixed 绝对定位，脱离文档流。top right left bottom相对窗口。
+        当出现滚动条时，对象不会随着滚动。
+        IE6及以下不支持此参数值。
+      */
+      .item5 {
+        background-color: chartreuse;
+        position: fixed;
+        left: 50px;
+        bottom: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">item1</div>
+    <div class="item2">item2</div>
+    <div class="item3">
+      item3
+      <div class="item4">item4</div>
+    </div>
+    <div class="item5">item5</div>
+  </body>
+</html>

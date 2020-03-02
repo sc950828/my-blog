@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>number</title>
+  </head>
+
+  <body>
+    <script>
+      const num1 = 10;
+      const num2 = new Number(10);
+      const num3 = 12.6;
+      const num4 = 17903942;
+      const num5 = 24.4564;
+      const num6 = 24.6453;
+      console.log("typeof num1", typeof num1, num1);
+      console.log("typeof num2", typeof num2, num2);
+      console.log("num1 == num2", num1 == num2);
+      console.log("num1 === num2", num1 === num2);
+
+      console.log("Number.isNaN(10)", Number.isNaN(num1));
+      console.log("Number.isFinite(10)", Number.isFinite(num1));
+      console.log("Number.isInteger(10)", Number.isInteger(num1));
+      console.log("Number.isInteger(12.6)", Number.isInteger(num3));
+      console.log("Number.isInteger(Infinity)", Number.isInteger(Infinity));
+      console.log("Number.isInteger(NaN)", Number.isInteger(NaN));
+      console.log("Number.isSafeInteger(10)", Number.isSafeInteger(num1));
+      console.log("Number.isSafeInteger(12.6)", Number.isSafeInteger(num3));
+
+      console.log("17903942.toExponential()", num4.toExponential());
+      console.log("24.4564.toFixed(2)", num5.toFixed(2));
+      console.log("24.6453.toPrecision(4)", num6.toPrecision(4));
+      console.log(
+        "24.6453.toString()",
+        num6.toString(),
+        typeof num6.toString()
+      );
+      console.log("24.6453.valueOf()", num6.valueOf(), typeof num6.valueOf());
+    </script>
+  </body>
+</html>

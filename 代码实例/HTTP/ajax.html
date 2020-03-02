@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ajax test</title>
+  <script>
+    let getXmlHttp
+    function get () {
+      if(window.XMLHttpRequest) {
+        getXmlHttp = new XMLHttpRequest()
+      } else {
+        getXmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
+      }
+
+      getXmlHttp.onreadystatechange = function () {
+        if(getXmlHttp.readyState == 4 && getXmlHttp.status == 200){
+          document.getElementById("show").innerText = getXmlHttp.responseText
+        }
+      }
+
+      getXmlHttp.open("get", "https://jsonplaceholder.typicode.com/users/1", true)
+      getXmlHttp.send()
+      console.log("异步get请求方法完成")
+    }
+
+    let syncXMLHttp
+    function syncget(){
+      if(window.XMLHttpRequest){
+        syncXMLHttp = new XMLHttpRequest()
+      } else {
+        syncXMLHttp = new ActiveXObject("Microsoft.XMLHTTP")
+      }
+      syncXMLHttp.open("get", "https://jsonplaceholder.typicode.com/users/1", false)
+      syncXMLHttp.send()
+      document.getElementById("show").innerText = syncXMLHttp.responseText
+      console.log("同步get请求完成")
+    }
+
+    let postXmlHttp
+    function post(){
+      if(window.XMLHttpRequest){
+        postXmlHttp = new XMLHttpRequest()
+      }else {
+        postXmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
+      }
+
+      postXmlHttp.onreadystatechange = function (){
+        if(postXmlHttp.readyState == 4 && postXmlHttp.status == 201){//这里写201是因为jsonplaceholder post请求返回的是201
+          document.getElementById("show").innerText = postXmlHttp.responseText
+        }
+      }
+
+      postXmlHttp.open("post", "https://jsonplaceholder.typicode.com/users", true)
+      postXmlHttp.send("{id: 72, name: 'randy'}")
+    }
+  </script>
+</head>
+<body>
+  <div id="show"></div>
+  <div>
+    <button onclick="get()">async ajax get异步</button>
+    <button onclick="syncget()">sync ajax get同步</button>
+  </div>
+  <div>
+    <button onclick="post()">ajax post</button>
+  </div>
+</body>
+</html>

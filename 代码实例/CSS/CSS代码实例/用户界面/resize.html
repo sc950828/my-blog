@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>resize</title>
+    <style>
+      /*
+        resize 设置对象的区域是否允许用户缩放，必须设置对象的overflow属性，值可以是auto,hidden或scroll。。
+          none：不允许用户调整元素大小。 默认值
+          both：用户可以调节元素的宽度和高度。
+          horizontal：用户可以调节元素的宽度
+          vertical：用户可以调节元素的高度。
+      */
+      .item1 {
+        width: 200px;
+        height: 100px;
+        background-color: cornflowerblue;
+        resize: both;
+        overflow: auto;
+      }
+
+      .item2 {
+        width: 200px;
+        height: 100px;
+        background-color: cornflowerblue;
+        resize: horizontal;
+        overflow: scroll;
+      }
+
+      .item3 {
+        width: 200px;
+        height: 100px;
+        background-color: cornflowerblue;
+        resize: vertical;
+        overflow: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">item1 both</div>
+    <div class="item2">item2 horizontal</div>
+    <div class="item3">item3 vertical</div>
+  </body>
+</html>

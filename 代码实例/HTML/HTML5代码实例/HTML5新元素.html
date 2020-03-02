@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5新元素</title>
+  </head>
+
+  <body>
+    <!-- <canvas> 新元素 -->
+    <canvas id="myCanvas"></canvas>
+
+    <!-- 新多媒体元素 -->
+    <audio controls src=""></audio>
+    <video controls width="320" height="240" src=""></video>
+    <video controls width="320" height="240">
+      <source src="" />
+    </video>
+    <embed src="" />
+
+    <!-- 新表单元素 -->
+    <form action="" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+      <input type="text" list="myDataList" />
+      <datalist id="myDataList">
+        <option value="randy"></option>
+        <option value="demi"></option>
+      </datalist>
+
+      0<input type="range" id="a" value="50" />100 +<input
+        type="number"
+        id="b"
+        value="50"
+      />=
+      <output name="x" for="a b"></output>
+    </form>
+
+    <!-- 新的语义化标签 -->
+    <header>头部区域标签，块级标签</header>
+    <footer>底部区域标签，块级标签</footer>
+    <nav>导航区域标签，块级标签</nav>
+    <section>类似div，块级标签</section>
+    <article>文章段落标签，块级标签</article>
+    <aside>侧边栏区域标签，块级标签</aside>
+    <figcaption>定义figure的标题</figcaption>
+    <figure>
+      表示一段独立的流内容，一般表示文档主题内容中的一个独立单元(视频，音频，图片)
+    </figure>
+    <dialog open> 定义对话框，比如提示框</dialog>
+
+    <!-- 新的其它标签 -->
+    <time datetime="2016-02-14">时间区域</time> 标签，内联标签
+    <progress value="20" max="100"></progress> 定义任何类型的任务的进度。
+    <mark>标记记号</mark> 标签，内联标签
+    <details>
+      <summary>含 details 元素的标题</summary>
+      用于描述文档或文档某个部分的细节
+    </details>
+    规定在文本中的<wbr />何处适合添加换行符。
+
+    <script type="text/javascript">
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(0, 0, 80, 100);
+    </script>
+  </body>
+</html>

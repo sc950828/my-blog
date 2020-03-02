@@ -9,6 +9,7 @@ npm run build
 # 进入生成的构建文件夹
 cd docs/.vuepress/dist
 
+# 初始化项目仓库并提交
 git init
 git add -A
 git commit -m 'deploy'

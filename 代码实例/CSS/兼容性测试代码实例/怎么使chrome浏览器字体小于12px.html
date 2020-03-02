@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>怎么使chrome浏览器字体小于12px</title>
+    <style>
+      .item1 {
+        /*在chrome更新到27版本之后就不可以用了*/
+        /* -webkit-text-size-adjust: none; */
+        font-size: 12px;
+        transform: scale(0.8, 0.8);
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <span class="item1">你好</span>
+  </body>
+</html>

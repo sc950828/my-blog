@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>skew</title>
+    <style>
+      /*
+        skew(xdeg, ydeg)扭曲
+      */
+      .item1 {
+        width: 100px;
+        height: 100px;
+        background-color: mediumspringgreen;
+        transform: skewX(30deg);
+      }
+
+      .item2 {
+        width: 100px;
+        height: 100px;
+        background-color: mediumvioletred;
+        transform: skewY(45deg);
+      }
+
+      .item3 {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        transform: skew(10deg, 10deg);
+      }
+
+      .item4 {
+        width: 100px;
+        height: 100px;
+        margin: 20px auto;
+        background-color: mediumspringgreen;
+        animation: skewx 10s linear 0s infinite;
+      }
+
+      @keyframes skewx {
+        from {
+          transform: skewX(0deg);
+        }
+        to {
+          transform: skewX(360deg);
+        }
+      }
+
+      .item5 {
+        width: 100px;
+        height: 100px;
+        margin: 20px auto;
+        background-color: mediumspringgreen;
+        animation: skewy 10s linear 0s infinite;
+      }
+
+      @keyframes skewy {
+        from {
+          transform: skewY(0deg);
+        }
+        to {
+          transform: skewY(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">item1 skewX(30deg)</div>
+    <div class="item2">item2 skewY(45deg)</div>
+    <div class="item3">item3 skew(10deg, 10deg)</div>
+    <div class="item4">skewX动画</div>
+    <div class="item5">skewY动画</div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>web存储</title>
+  </head>
+
+  <body>
+    <script>
+      if (typeof Storage !== undefined) {
+        // localStorage
+        console.log("---------localStorage---------");
+        localStorage.setItem("name", "randy");
+        localStorage.setItem("age", 12);
+        console.log("name: ", localStorage.getItem("name"));
+        console.log("age: ", localStorage.getItem("age"));
+        console.log("key0: ", localStorage.key(0));
+        console.log("key1: ", localStorage.key(1));
+        localStorage.removeItem("name");
+        console.log("name: ", localStorage.getItem("name"));
+        console.log("age: ", localStorage.getItem("age"));
+        localStorage.clear();
+        console.log("name: ", localStorage.getItem("name"));
+        console.log("age: ", localStorage.getItem("age"));
+
+        // sessionStorage
+        console.log("---------sessionStorage---------");
+        sessionStorage.setItem("name", "randy");
+        sessionStorage.setItem("age", 12);
+        console.log("name: ", sessionStorage.getItem("name"));
+        console.log("age: ", sessionStorage.getItem("age"));
+        console.log("key0: ", sessionStorage.key(0));
+        console.log("key1: ", sessionStorage.key(1));
+        sessionStorage.removeItem("name");
+        console.log("name: ", sessionStorage.getItem("name"));
+        console.log("age: ", sessionStorage.getItem("age"));
+        sessionStorage.clear();
+        console.log("name: ", sessionStorage.getItem("name"));
+        console.log("age: ", sessionStorage.getItem("age"));
+      } else {
+        alert("对不起，您的浏览器暂不支持web存储！");
+      }
+    </script>
+  </body>
+</html>

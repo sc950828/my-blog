@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>伪元素选择器</title>
+    <style>
+      .item1::first-letter {
+        color: orangered;
+      }
+
+      .item2::first-line {
+        color: orchid;
+      }
+
+      .item3::before {
+        content: "hello,";
+      }
+
+      .item3::after {
+        content: "randy";
+      }
+
+      input::placeholder {
+        color: palevioletred;
+      }
+
+      .item4::selection {
+        color: peru;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">伪元素选择器</div>
+    <div class="item2">
+      第一行<br />
+      第二行
+    </div>
+    <div class="item3"></div>
+    <input type="text" placeholder="我的颜色改变啦" />
+    <div class="item4">选择我 我就变色给你看</div>
+  </body>
+</html>

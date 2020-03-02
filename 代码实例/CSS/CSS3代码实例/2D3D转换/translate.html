@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>translate</title>
+    <style>
+      /*
+        translate 位移。类似相对定位，以前的空间还是会被占据。
+        translate(X, Y)在水平X轴Y轴上移动
+        translate3d(X, Y, Z) 在 X Y Z 三轴上移动
+        translateX 在水平X轴上移动
+        translateY 在水平Y轴上移动
+        translateZ 在水平Z轴上移动
+      */
+      .item1 {
+        transform: translate(10px, 20px);
+        width: 100px;
+        height: 100px;
+        background-color: lightslategrey;
+      }
+
+      .item2 {
+        transform: translate3d(20px, 20px, 30px);
+        width: 100px;
+        height: 100px;
+        background-color: lightpink;
+      }
+
+      .item3 {
+        transform: translateX(30px);
+        width: 100px;
+        height: 100px;
+        background-color: lightseagreen;
+      }
+
+      .item4 {
+        transform: translateY(30px);
+        width: 100px;
+        height: 100px;
+        background-color: lightpink;
+      }
+
+      .item5 {
+        transform: translateZ(30px);
+        width: 100px;
+        height: 100px;
+        background-color: lightseagreen;
+      }
+    </style>
+  </head>
+
+  <body>
+    <span>类似相对定位，以前的空间还是会被占据</span>
+    <div class="item1">translate 10px 20px</div>
+    <div class="item2">translate3d 20px 20px 30px</div>
+    <div class="item3">translateX 30px</div>
+    <div class="item4">translateY 30px</div>
+    <div class="item5">translateZ 30px</div>
+  </body>
+</html>

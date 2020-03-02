@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>border</title>
+    <style>
+      /*
+        border-style的常用值
+        none：无轮廓。border-color与border-width将被忽略
+        hidden：隐藏边框。IE7及以下尚不支持
+        dotted：点状轮廓。IE6下显示为dashed效果
+        dashed：虚线轮廓。
+        solid：实线轮廓
+        double：双线轮廓。两条单线与其间隔的和等于指定的border-width值
+        groove：3D凹槽轮廓。
+        ridge：3D凸槽轮廓。
+        inset：3D凹边轮廓。
+        outset：D凸边轮廓。
+      */
+      .item1 {
+        border: 1px solid lightseagreen;
+        /* 可以分开写，可以合并写 */
+        /*
+          border-width: 1px;
+          border-style: solid;
+          border-color: lightseagreen;
+        */
+      }
+
+      /* 每一个属性又可以单独一一设置 */
+      .item2 {
+        margin-top: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: green red black blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">item1</div>
+    <div class="item2">item2</div>
+  </body>
+</html>

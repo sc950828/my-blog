@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>keyboard event</title>
+  </head>
+
+  <body>
+    <script>
+      window.onkeydown = function(e) {
+        console.log("onkeydown", e.key);
+      };
+      window.onkeypress = function(e) {
+        console.log("onkeypress", e.key);
+      };
+      window.onkeyup = function(e) {
+        console.log("onkeyup", e.key);
+      };
+    </script>
+  </body>
+</html>

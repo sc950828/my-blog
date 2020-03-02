@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>品字布局</title>
+    <style>
+      html, body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        margin: 0 auto;
+      }
+      .div1 {
+        background-color: cadetblue;
+      }
+      .div2 {
+        float: left;
+        background-color: chartreuse;
+        /* 相对父容器 */
+        margin-left: 50%;
+        /* 相对元素本身 */
+        transform: translateX(-100%);
+      }
+      .div3 {
+        background-color: coral;
+        float: left;
+        /* 相对元素本身 */
+        transform: translateX(-100%);
+      }
+
+      .div4 {
+        width: 100%;
+        height: 50%;
+        background-color: coral;
+      }
+      .div5 {
+        float: left;
+        width: 50%;
+        height: 50%;
+        background-color: cornflowerblue;
+      }
+      .div6 {
+        float: left;
+        width: 50%;
+        height: 50%;
+        background-color: cornsilk;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 第一种固定大小品 -->
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="div3">div3</div>
+    <!-- 第二种全屏品 -->
+    <!-- <div class="div4">div4</div>
+    <div class="div5">div5</div>
+    <div class="div6">div6</div> -->
+  </body>
+</html>

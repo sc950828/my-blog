@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>error</title>
+  </head>
+
+  <body>
+    <script>
+      try {
+        console.log(arr1);
+      } catch (e) {
+        console.log(e);
+        console.log(e.name);
+        console.log(e.message);
+      }
+
+      const err1 = new Error("my error");
+      try {
+        throw err1;
+      } catch (e) {
+        console.log(e);
+        console.log(e.name);
+        console.log(e.message);
+      }
+
+      const err2 = new TypeError("my type error");
+      try {
+        throw err2;
+      } catch (e) {
+        console.log(e);
+        console.log(e.name);
+        console.log(e.message);
+      }
+    </script>
+  </body>
+</html>

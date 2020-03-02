@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>overflow</title>
+    <style>
+      /* overflow 默认visible */
+      .div1 {
+        width: 200px;
+        height: 100px;
+        display: inline-block;
+        margin-right: 20px;
+        border: 1px solid red;
+      }
+
+      .div2 {
+        width: 200px;
+        height: 100px;
+        display: inline-block;
+        margin-right: 20px;
+        border: 1px solid red;
+        overflow: hidden;
+      }
+
+      .div3 {
+        width: 200px;
+        height: 100px;
+        display: inline-block;
+        margin-right: 20px;
+        border: 1px solid red;
+        /* 不管三七二十一 x轴y轴的滚动条都会出现 */
+        overflow: scroll;
+      }
+
+      .div4 {
+        width: 200px;
+        height: 100px;
+        display: inline-block;
+        margin-right: 20px;
+        border: 1px solid red;
+        overflow: auto;
+      }
+
+      /* overflow-x overflow-y 控制单边显示或隐藏 */
+      .div5 {
+        width: 200px;
+        height: 100px;
+        border: 1px solid red;
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+
+      .div6 {
+        width: 300px;
+        height: 200px;
+        background-color: darkgray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1">
+      <p>visible</p>
+      visible： 不剪切内容。 hidden：
+      将超出对象尺寸的内容进行裁剪，将不出现滚动条。 scroll：
+      将超出对象尺寸的内容进行裁剪，并以滚动条的方式显示超出的内容。 auto：
+      在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。
+    </div>
+    <div class="div2">
+      <p>hidden</p>
+      visible： 不剪切内容。 hidden：
+      将超出对象尺寸的内容进行裁剪，将不出现滚动条。 scroll：
+      将超出对象尺寸的内容进行裁剪，并以滚动条的方式显示超出的内容。 auto：
+      在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。
+    </div>
+    <div class="div3">
+      <p>scroll</p>
+      visible： 不剪切内容。 hidden：
+      将超出对象尺寸的内容进行裁剪，将不出现滚动条。 scroll：
+      将超出对象尺寸的内容进行裁剪，并以滚动条的方式显示超出的内容。 auto：
+      在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。
+    </div>
+    <div class="div4">
+      <p>auto</p>
+      visible： 不剪切内容。 hidden：
+      将超出对象尺寸的内容进行裁剪，将不出现滚动条。 scroll：
+      将超出对象尺寸的内容进行裁剪，并以滚动条的方式显示超出的内容。 auto：
+      在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。
+    </div>
+
+    <div class="div5">
+      <div class="div6">div6</div>
+    </div>
+  </body>
+</html>

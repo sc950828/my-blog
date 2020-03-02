@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+  </head>
+
+  <body>
+    <div class="div1" name="div1">测试 createAttribute</div>
+
+    <script>
+      console.log("document.title", document.title);
+      console.log("document.cookie", document.cookie);
+      console.log("document.referrer", document.referrer);
+
+      const div1 = document.getElementsByName("div1")[0];
+      const attr1 = document.createAttribute("title");
+      attr1.value = "我是属性节点";
+      div1.setAttributeNode(attr1);
+
+      const comment1 = document.createComment("我是注释节点");
+      div1.appendChild(comment1);
+
+      const element1 = document.createElement("div");
+      const text1 = document.createTextNode("文本节点");
+      element1.appendChild(text1);
+      div1.insertBefore(element1, comment1);
+
+      const fragment1 = document.createDocumentFragment();
+      const element2 = document.createElement("ul");
+      const element3 = document.createElement("li");
+      const text2 = document.createTextNode("文本节点2");
+      element3.appendChild(text2);
+      element2.appendChild(element3);
+      fragment1.appendChild(element2);
+      div1.appendChild(fragment1);
+    </script>
+  </body>
+</html>

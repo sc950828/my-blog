@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>global</title>
+  </head>
+
+  <body>
+    <script>
+      const str1 =
+        "https://github.com/sc950828/web-base/blob/master/JavaScript/js%E5%9F%BA%E7%A1%80";
+      const str2 =
+        "https://github.com/sc950828/web-base/blob/master/JavaScript/js基础";
+
+      console.log("encodeURI(str2)", encodeURI(str2));
+      console.log("decodeURI(str1)", decodeURI(str1));
+
+      console.log("encodeURIComponent(str2)", encodeURIComponent(str2));
+      console.log(
+        "decodeURIComponent()",
+        decodeURIComponent(encodeURIComponent(str2))
+      );
+
+      eval("console.log('我是通过eval函数输出来的')");
+
+      console.log("isFinite(12)", isFinite(12));
+      console.log("isNaN(12)", isNaN(12));
+
+      console.log("String({name: 'randy'})", String({ name: "randy" }));
+      console.log("String(123)", String(123));
+      console.log("Number('12')", Number("12"));
+      console.log("Number('ab')", Number("ab"));
+      console.log("Boolean(1)", Boolean(1));
+      console.log("Boolean('')", Boolean(""));
+
+      console.log("parseInt('12.453')", parseInt("12.453"));
+      console.log("parseFloat('12.453')", parseFloat("12.453"));
+    </script>
+  </body>
+</html>

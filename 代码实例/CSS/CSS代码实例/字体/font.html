@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>font</title>
+    <style>
+      /*
+        normal：正常的字体。相当于number为400
+        bold：粗体。相当于number为700。
+        bolder：特粗体。也相当于strong和b对象的作用
+        lighter：细体
+      */
+      .item1 {
+        /* font-weight: bolder; */
+        font-weight: lighter;
+      }
+
+      .item2 {
+        font-family: serif;
+      }
+
+      .item3 {
+        font-family: sans-serif;
+      }
+
+      .item4 {
+        font-family: monospace;
+      }
+
+      .item5 {
+        font-family: cursive;
+      }
+
+      .item6 {
+        font-family: fantasy;
+      }
+
+      /*
+      font-variant设为small-caps时把小写字母转为大写，并且把字号换成以前的一半。 大写字母中文不变。
+    */
+      .item7 {
+        font-variant: small-caps;
+      }
+
+      /*
+        font-style 设置字的样式
+        normal：指定文本字体样式为正常的字体
+        italic：指定文本字体样式为斜体。对于没有斜体变量的特殊字体，将应用oblique
+        oblique：指定文本字体样式为倾斜的字体
+
+        italic和oblique的区别是什么？
+          italic是字体（如宋体、微软雅黑、楷体...）的一个属性，font-style:italic是使用了字体的italic属性。
+          但是，并不是所有的字体都有italic属性，这时候就得用到oblique属性了。
+          font-style:oblique是单纯的使文字倾斜，不管该字体有没有italic属性。
+      */
+      .item8 {
+        font-style: italic;
+      }
+
+      .item9 {
+        font-style: oblique;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">
+      默认值：由浏览器确定。字体名称。按优先顺序排列。以逗号隔开。如果字体名称包含空格或中文，则应使用引号括起
+    </div>
+
+    <div class="item2">
+      serif 衬线字体族
+      具有末端加粗、扩张或尖细末端，或以实际的衬线结尾的一类字体
+      典型的例子是宋体。
+    </div>
+    <div class="item3">
+      sans-serif 无衬线字体族 字体比较圆滑，线条粗线均匀 典型的例子是楷体。
+    </div>
+    <div class="item4">monospace 等宽字体族。</div>
+    <div class="item5">cursive 手写字体族 这类字体的字就像手写的一样。</div>
+    <div class="item6">
+      fantasy 梦幻字体族 主要用在图片中，字体看起来很艺术，实际网页上用得不多。
+    </div>
+    <div class="item7">my name is randy HEOOL 你好</div>
+    <div class="item8">my name is randy HEOOL 你好</div>
+    <div class="item9">my name is randy HEOOL 你好</div>
+  </body>
+</html>

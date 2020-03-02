@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frame event</title>
+  </head>
+
+  <body style="width: 1000px;height: 1000px;">
+    <button onclick="throwError()">抛错</button>
+    <a href="https://www.baidu.com">去百度</a>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOMContentLoaded");
+      });
+      window.onscroll = function(e) {
+        console.log("onscroll", e);
+      };
+      window.onload = function(e) {
+        console.log("onload", e);
+      };
+      window.onbeforeunload = function(e) {
+        console.log("onbeforeunload", e);
+        return "Are you sure you want to leave? onbeforeunload";
+      };
+      // 没测试出来
+      window.onunload = function(e) {
+        console.log("onunload", e);
+      };
+      window.onpageshow = function(e) {
+        console.log("onpageshow", e);
+      };
+      // 没测试出来
+      window.onpagehide = function(e) {
+        console.log("onpagehide", e);
+      };
+      window.onhashchange = function(e) {
+        window.open("", "my new window", "width=300,height=200");
+        console.log("onhashchange", e);
+      };
+      window.onresize = function(e) {
+        console.log("onresize", e);
+      };
+      window.onerror = function(e) {
+        console.log("onerror", e);
+      };
+
+      function throwError() {
+        throw new Error("手动抛出错误");
+      }
+    </script>
+  </body>
+</html>

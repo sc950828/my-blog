@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组合选择器</title>
+    <style>
+      .test div {
+        font-size: 20px;
+      }
+      /* 直接的子元素 */
+      .test > div {
+        font-size: 24px;
+      }
+      /* 后面所有的兄弟元素，前面的不算 */
+      .item ~ div {
+        color: violet;
+      }
+      /* 后面的第一个元素并且该元素就是div */
+      .item + div {
+        color: turquoise;
+      }
+      /* 统一设置 */
+      .test,
+      .item {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="test">
+      <div>组合选择器:</div>
+      <div>
+        <div>后代选择器 用空格</div>
+        <div class="item">子选择器用 ></div>
+        <div>兄弟选择器用 ~</div>
+        <div>相邻选择器用 +</div>
+        <div>分组选择器用 ,</div>
+      </div>
+    </div>
+  </body>
+</html>

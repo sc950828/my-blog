@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>word-wrap word-break white-space</title>
+    <style>
+      /*
+        white-space 设置对象内空格的处理方式。
+        normal：默认处理方式。不保留文字最前面的空格，其它空格做一个空格处理。会换行
+        pre：保留文字的格式但是不会换行
+        nowrap：不保留文字最前面的空格，其它空格做一个空格处理。不换行
+        pre-wrap：保留文字的格式但是会换行
+        pre-line：不保留文字最前面的空格，其它空格做一个空格处理。会换行
+      */
+      div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid gray;
+      }
+
+      .item1 {
+        white-space: normal;
+      }
+
+      .item2 {
+        white-space: pre;
+      }
+
+      .item3 {
+        white-space: nowrap;
+      }
+
+      .item4 {
+        white-space: pre-wrap;
+        margin-bottom: 100px;
+      }
+
+      .item5 {
+        white-space: pre-line;
+        margin-bottom: 100px;
+      }
+
+      /*
+        word-wrap 设置对象中的单词之间间隔。
+        normal：一个汉字(一个单词)如果长了不会换行 会溢出。
+        break-word：一个汉字(一个单词)如果长了会换行。
+      */
+      .item6 {
+        word-wrap: normal;
+      }
+
+      .item61 {
+        word-wrap: normal;
+      }
+
+      .item7 {
+        word-wrap: break-word;
+      }
+
+      .item71 {
+        word-wrap: break-word;
+        margin-bottom: 50px;
+      }
+
+      /*
+        word-break
+          break-all 一句话或者一个单词如果长了会换行。
+          keep-all 一句话或者一个单词如果长了永远不换行。
+      */
+
+      .item8,
+      .item81 {
+        word-break: keep-all;
+      }
+
+      .item9,
+      .item91 {
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">normal： 默 认 处 理方式。</div>
+    <div class="item2">
+      pre：用 等 宽 字 体 显 示 预 先
+      格式化的文本，不合并文字间的空白距离，当文字超出边界时不换行。可查阅pre对象
+    </div>
+    <div class="item3">
+      nowrap：强 制 在 同 一 行 内 显示所有文本，直到文本结束或者遭遇br对象。
+    </div>
+    <div class="item4">
+      pre-wrap：用 等 宽
+      字体显示预先格式化的文本，不合并文字间的空白距离，当文字碰到边界时发生换行。
+    </div>
+    <div class="item5">
+      pre-line：保 持 文 本 的换
+      行，不保留文字间的空白距离，当文字碰到边界时发生换行。
+    </div>
+
+    <div class="item6">hkjhkfadkfkfsfskfkahkahk hah</div>
+    <div class="item61">生活像一把无情刻刀 改变了我们模样</div>
+    <div class="item7">hkjhkasdfkasdsfkkfkahkahk 哈哈</div>
+    <div class="item71">改变了我们模样 改变了我们模样</div>
+
+    <div class="item8">hkjhkfadkfkfsfskfkahkahk hah</div>
+    <div class="item81">生活像一把无情刻刀，改变了我们模样</div>
+    <div class="item9">hkjhkasdfkasdsfkkfkahkahk haha</div>
+    <div class="item91">改变了我们模样，改变了我们模样</div>
+  </body>
+</html>

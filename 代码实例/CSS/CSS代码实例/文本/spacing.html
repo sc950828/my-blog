@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>letter-spacing word-spacing</title>
+    <style>
+      /*
+        letter-spacing 该属性将指定的间隔添加到每个文字(包括单词内的每个字母)之后。
+        word-spacing 
+          该属性将指定的间隔添加到每个单词(词内不发生)之后，但最后一个字将被排除在外。
+          判断是否为单词的依据是单词间是否有空格。
+      */
+      .item1 {
+        letter-spacing: 10px;
+        word-spacing: 20px;
+      }
+
+      .item2 {
+        letter-spacing: 10px;
+        word-spacing: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="item1">hello randy</div>
+    <div class="item2">hello randy hio</div>
+  </body>
+</html>

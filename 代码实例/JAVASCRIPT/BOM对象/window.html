@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window</title>
+  </head>
+
+  <body style="width: 2000px;height: 1000px;">
+    <button
+      onclick="getPageXOffsetAndPageYOffset()"
+      style="display: block;margin: 50px auto;"
+    >
+      pageXOffset pageYOffset
+    </button>
+    <button
+      onclick="getScreenXAndScreenY()"
+      style="display: block;margin: 50px auto;"
+    >
+      screenX screenY
+    </button>
+    <button
+      onclick="getScreenTopAndScreenLeft()"
+      style="display: block;margin: 50px auto;"
+    >
+      screenTop screenLeft
+    </button>
+    <button onclick="showAlert()" style="display: block;margin: 50px auto;">
+      alert框
+    </button>
+    <button onclick="showConfirm()" style="display: block;margin: 50px auto;">
+      confirm框
+    </button>
+    <button onclick="showPrompt()" style="display: block;margin: 50px auto;">
+      prompt框
+    </button>
+    <button onclick="myOpen()" style="display: block;margin: 50px auto;">
+      open 创建一个新窗口
+    </button>
+    <button onclick="myMoveBy()" style="display: block;margin: 50px auto;">
+      moveBy 移动窗口指定距离 200 100
+    </button>
+    <button onclick="myMoveTo()" style="display: block;margin: 50px auto;">
+      moveTo 移动窗口到指定位置 0 0
+    </button>
+    <button onclick="myResizeBy()" style="display: block;margin: 50px auto;">
+      resizeBy 窗口增大或缩小指定大小 正数增大 负数缩小
+    </button>
+    <button onclick="myResizeTo()" style="display: block;margin: 50px auto;">
+      resizeTo 窗口变为指定大小
+    </button>
+    <button onclick="myClose()" style="display: block;margin: 50px auto;">
+      close 关闭新窗口
+    </button>
+
+    <button onclick="myScrollBy()" style="display: block;margin: 50px auto;">
+      scrollBy 滚动滚动条指定距离 200 300
+    </button>
+    <button onclick="myScrollTo()" style="display: block;margin: 50px auto;">
+      scrollTo 滚动滚动条到指定位置 0 0
+    </button>
+
+    <script>
+      // 轮动条滚动的距离
+      function getPageXOffsetAndPageYOffset() {
+        console.log("window.pageXOffset", window.pageXOffset);
+        console.log("window.pageYOffset", window.pageYOffset);
+      }
+
+      // IE不支持
+      function getScreenXAndScreenY() {
+        console.log("window.screenX", window.screenX);
+        console.log("window.screenY", window.screenY);
+      }
+
+      // 火狐不支持
+      function getScreenTopAndScreenLeft() {
+        console.log("window.screenTop", window.screenTop);
+        console.log("window.screenLeft", window.screenLeft);
+      }
+      // 窗口大小
+      console.log("window.outerWidth", window.outerWidth);
+      console.log("window.outerHeight", window.outerHeight);
+      console.log("window.innerWidth", window.innerWidth);
+      console.log("window.innerHeight", window.innerHeight);
+
+      const name = "randy";
+      function setMyTimeout() {
+        setTimeout(function() {
+          console.log(name, "可以获取到外面的参数");
+          console.log("this", this);
+        }, 1000);
+      }
+      setMyTimeout();
+
+      // 传自定义参数, 使用箭头函数 this指向obj1。
+      function setMyTimeout2() {
+        setTimeout(
+          (param1, param2) => {
+            console.log("param1", param1);
+            console.log("param2", param2);
+            console.log("this", this);
+          },
+          1000,
+          "demi",
+          26
+        );
+      }
+      setMyTimeout2();
+
+      const obj1 = { myTimeout: setMyTimeout2 };
+      obj1.myTimeout();
+
+      let myinter = null;
+      function setMyInterval() {
+        myinter = setInterval(
+          (...params) => {
+            console.log("params[0], params[1]", params[0], params[1]);
+            console.log("this", this);
+            // 清除循环定时器
+            clearInterval(myinter);
+          },
+          1000,
+          "demi",
+          26
+        );
+      }
+      setMyInterval();
+
+      function showAlert() {
+        window.alert("警告框");
+      }
+      function showConfirm() {
+        const result = window.confirm("按下确定返回true，按下取消返回false");
+        console.log(result);
+      }
+      function showPrompt() {
+        const result = window.prompt(
+          "有两个参数，第一个提示消息第二个默认值",
+          "randy"
+        );
+        console.log(result);
+      }
+
+      let myWindow = null;
+      function myOpen() {
+        myWindow = window.open("", "my new window", "width=300,height=200");
+        myWindow.focus();
+      }
+      function myMoveBy() {
+        myWindow.moveBy(200, 100);
+      }
+      function myMoveTo() {
+        myWindow.moveTo(0, 0);
+      }
+      function myResizeBy() {
+        myWindow.resizeBy(100, 100);
+      }
+      function myResizeTo() {
+        myWindow.resizeTo(300, 200);
+      }
+      function myClose() {
+        myWindow.close();
+      }
+
+      function myScrollBy() {
+        window.scrollBy(200, 300);
+      }
+      function myScrollTo() {
+        window.scrollTo(0, 0);
+      }
+
+      console.log(
+        "getComputedStyle",
+        window.getComputedStyle(document.getElementsByTagName("button")[1])
+          .width
+      );
+    </script>
+  </body>
+</html>

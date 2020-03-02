@@ -1,0 +1,94 @@
+$color: red;
+//变量
+.box {
+  color: $color;
+}
+
+.box2 {
+  height: 100px;
+}
+
+// @mixin @include
+@mixin box($width: 100px, $height: 100px) {
+  width: $width;
+  height: $height;
+}
+
+.box3 {
+  @include box() //带括号或不带都可以;
+}
+
+.box4 {
+  @include box(200px, 300px);
+}
+
+//#{}
+$name: foo;
+$attr: border;
+p.#{$name} {
+  #{$attr}-color: blue;
+}
+
+.common {
+  color: red;
+}
+@mixin name {
+  width: 100px;
+}
+
+.ceshi {
+  @extend .common;
+  @include name; //只能使用混合
+  // @extend name; // 不能使用混合
+}
+
+%item {
+  border: 1px solid red;
+}
+
+//@extend
+.box5 {
+  @extend .common;
+  @extend %item; //如果不引入 %item不会被编译到css文件
+  // @include %item; //不能使用%xx定义的
+}
+
+//&
+a {
+  text-decoration: none;
+  &:hover {
+    color: red;
+  }
+}
+
+//if
+$max: 5;
+.p {
+  @if $max == 1 {
+    color: red;
+  } @else if $max == 2 {
+    color: blue;
+  } @else {
+    color: yellow;
+  }
+}
+
+//for
+@for $i from 1 through 3 {
+  .item-#{$i} {
+    width: $i * 100px;
+  }
+}
+
+@for $j from 1 to 3 {
+  .items-#{$j} {
+    width: $j * 100px;
+  }
+}
+
+//@each
+.box2 {
+  @each $i in width, height {
+    #{$i}: 100px;
+  }
+}
