@@ -1,0 +1,19 @@
+body {
+  background-color: aquamarine;
+}
+
+div {
+  transform: translateX(30px);
+  border-radius: 30px;
+}
+
+.div1 {
+  width: 200px;
+  height: 200px;
+  background-image: url(../images/test.jpg);
+  background-size: 100% 100%;
+}
+
+.div2 {
+  background-color: blanchedalmond;
+}

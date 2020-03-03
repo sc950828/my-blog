@@ -1,4 +1,4 @@
-1、数据类型
+### 1、数据类型
   基本数据类型 字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。
   引用数据类型 对象(Object)、数组(Array)、函数(Function)。
   判断数据类型用typeof
@@ -6,7 +6,7 @@
     判断基本数据类型的时候如果是通过构造函数创建的则是object。比如typeof new Number(1)则是object。
     typeof 引用数据类型除了typeof function 是 function其他的都是object。
 
-2、Object对象常用方法
+### 2、Object对象常用方法
   Object.assign(target, source1, source2,...) 返回一个新对象 target会受到影响 返回的对象等于新的target对象。
     该方法主要用于对象的合并，将源对象source的所有可枚举属性合并到目标对象target上,此方法只拷贝源对象的自身属性，不拷贝继承的属性。
     Object.assign方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
@@ -70,7 +70,7 @@
   obj1.isPrototypeOf(obj2)
     判断obj1是否存在于obj2的原型链上。 原型.isPrototypeOf(对象)
 
-3、String
+### 3、String
   创建Number有两种种方法
     var str = "xxx";或者var str = 'xxx'
     var str = new String("xxx");
@@ -103,7 +103,7 @@
     valueOf()  返回某个字符串对象的原始值。
     toString() 返回一个字符串。
 
-4、数组
+### 4、数组
   创建数组有三种方法
     var arr = [xx, xx];
     var arr = new Array(xx, xx, xx);
@@ -145,7 +145,7 @@
     arr.toString()  把数组转换为字符串，并返回结果。
     arr.valueOf()  返回数组对象的原始值。
 
-5、Number
+### 5、Number
   创建Number有两种方法
     var num = value;
     var num = new Number(value); 如果一个参数值不能转换为一个数字将返回 NaN (非数字值)。
@@ -161,7 +161,7 @@
     num.toString()  把数字转换为字符串，使用指定的基数。
     num.valueOf()  返回一个 Number 对象的基本数字值。
 
-6、Boolean
+### 6、Boolean
   创建Boolean有两种种方法
     var bool = true;
     var bool = new Boolean(true)
@@ -169,7 +169,7 @@
     toString() 把布尔值转换为字符串，并返回结果。
     valueOf() 返回 Boolean 对象的原始值。
 
-7、Math
+### 7、Math
   Math.abs(x)  返回 x 的绝对值。
   Math.ceil(x)  对数进行上舍入。取整数 没有小数部分
   Math.floor(x)  对 x 进行下舍入。取整数 没有小数部分
@@ -183,7 +183,7 @@
   Math.max(x,y,z,...,n)  返回 x,y,z,...,n 中的最高值。
   Math.min(x,y,z,...,n)  返回 x,y,z,...,n中的最低值。
 
-8、date
+### 8、date
   创建Date的方法
     var d = new Date();
     var d = new Date(milliseconds);
@@ -225,7 +225,7 @@
     只有getUTCHours比getHours少8个小时其它的UTC时间与Date对象的时间是一样的。属于世界时间比东八区北京时间小8。
     getMonth()会比现实小一个月，如果是自己通过setMonth()设置的则不会小。
 
-9、Error
+### 9、Error
   抛出自定义异常 throw new Error(message)。
   Error：普通异常。通常与 throw 语句和 try／catch 语句一起使用。 
   利用属性 name 可以声明或了解异常的类型，利用 message 属性可以设置和读取异常的详细信息。
@@ -237,7 +237,7 @@
     TypeError：当一个值的类型错误时抛出该异常。
     URLError：由 URL 的编码和解码方法抛出。
 
-10、正则表达式
+### 10、正则表达式
   创建有两种方法
     var patt=new RegExp("pattern", "modifiers"); 需要转义。比如\d要写成"\\d"
     或者更简单的方式:
@@ -263,7 +263,7 @@
     test  检索字符串中指定的值。返回 true 或 false。
     toString  返回正则表达式的字符串。返回/ /这种格式的正则。
 
-11、全局方法
+### 11、全局方法
   属性
     NaN 指示某个值不是数字值。
   方法
@@ -280,7 +280,7 @@
     parseFloat()  解析一个字符串并返回一个浮点数。
     parseInt()  解析一个字符串并返回一个整数。
 
-12、浏览器对象 BOM
+### 12、浏览器对象 BOM
   window
     属性
       outerWidth 返回窗口的外部宽度，包含工具条与滚动条。
@@ -350,7 +350,7 @@
         platform 返回运行浏览器的操作系统平台
         cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
 
-13、DOM
+### 13、DOM
   document
     属性
       document.documentElement 返回文档的根节点

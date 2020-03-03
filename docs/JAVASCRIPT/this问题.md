@@ -1,4 +1,4 @@
-1、this的4种绑定规则
+### 1、this的4种绑定规则
   this的4种绑定规则分别是：默认绑定、隐式绑定、显示绑定、new 绑定。优先级从低到高。
   1.默认绑定 作为普通函数执行 this指向window严格模式下指向undefined
     function foo() { 
@@ -35,10 +35,10 @@
       var bar2 = new foo(4);
       console.log(bar2.a); // 4
 
-2、es6箭头函数中的this和普通函数中的this
+### 2、es6箭头函数中的this和普通函数中的this
   普通函数的this对象是在运行时基于函数的执行环境绑定的：在全局函数中，this指向的是window；当函数被作为某个对象的方法调用时，this就等于那个对象。
   箭头函数的this是在定义函数时绑定的，不是在执行过程中绑定的。简单的说，函数在定义时，this就继承了定义函数的对象。
   箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this，箭头函数不能通过apply call bind改变this
   箭头函数不能使用arguments 不能用于构造函数。
 
-3、在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window。
+### 3、在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window。

@@ -1,0 +1,27 @@
+{
+  "name": "koaTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.7.0",
+    "koa-ejs": "^4.2.0",
+    "koa-router": "^7.4.0"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "mongoose": "^5.4.22",
+    "mongose": "0.0.2-security",
+    "validator": "^10.11.0"
+  }
+}

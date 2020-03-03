@@ -1,4 +1,4 @@
-1、fetch
+### 1、fetch
   fetch(url, options)
   优点
     使用更加简单，链式的异步处理(then)不会出现回调地狱。
@@ -9,12 +9,12 @@
     响应res当然它只是一个 HTTP 响应，而不是真的JSON。为了获取JSON的内容，我们需要使用await res.json()方法（在Bodymixin 中定义，被 Request 和 Response 对象实现）。
     fetch默认不会带cookie，如果要带上cookie的话需要添加配置项。
 
-2、options
+### 2、options
   method 设置请求方法
   body 传递参数
   headers 设置请求头
 
-3、axios
+### 3、axios
   axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES规范。
   优点
     从浏览器中创建XMLHttpRequests

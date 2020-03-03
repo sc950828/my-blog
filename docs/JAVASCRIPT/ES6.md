@@ -1,4 +1,4 @@
-1、let const是什么？和var区别是什么？
+### 1、let const是什么？和var区别是什么？
   是什么
     let const是es6新增的两种定义变量的方式。
     使用const申明的变量。基本类型变量的值不可以变，引用类型不能重新赋值。
@@ -9,11 +9,11 @@
     函数提升优先于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部并赋值为null。
     var 在全局作用域下声明变量会导致变量挂载在 window 上，而let const定义的变量不会。
 
-2、模板字符串
+### 2、模板字符串
   在模板字符串里面能使用变量。
   const foo = `this is a ${example}`;
  
-3、箭头函数是什么？和普通函数有什么区别？
+### 3、箭头函数是什么？和普通函数有什么区别？
   是什么
     箭头函数是es6新增的定义函数的方式。
   区别
@@ -39,7 +39,7 @@
     }
     fn.call({a: 100})
  
-4、默认参数
+### 4、默认参数
   function f(x, y = 7, z = 42) {
     return x + y + z
   }
@@ -47,21 +47,21 @@
   当需要使用默认值的参数不是最后一个的时候我们需要显示指定为undefined f(1, undefined, 4) 算出来是12。
   当我们不用默认值的时候我们需要传null。
 
-5、可变参数
+### 5、可变参数
   ...arr 参数数组。
   function f(...arr) {
     console.log(arr) //1,2,3
   }
   f(1, 2, 3)
 
-6、解构赋值
+### 6、解构赋值
   数组解构一一对应。
   对象解构key相同，不同使用newkey:key指定。
 
-7、for of遍历
+### 7、for of遍历
   可以break，得到的是值。而不像for in一样，得到的是数组的下标或对象的key。
  
-8、promise async await
+### 8、promise async await
   promise有三种状态: fulfilled, rejected, pending
   promise的优点
     一旦状态改变，就不会再变，任何时候都可以得到这个结果
@@ -71,7 +71,7 @@
     当处于pending状态时，无法得知目前进展到哪一个阶段
   Promise的构造函数是同步执行的。then 是异步执行的。
 
-9、Set Map
+### 9、Set Map
   Set可以去重，类似数组只是里面的元素不能重复，并且set的键值是相同的，不像数组有下标
     const set = new Set([1, 2, 3, 4, 4]);
     console.log(set) // Set(4) {1, 2, 3, 4} //重复的数会被忽略
@@ -91,12 +91,12 @@
       delete：删除成员
       clear：清空所有
 
-10、新的数据类型symbol
+### 10、新的数据类型symbol
   调用Symbol()返回的每个实例都是唯一的，因此当你比较两个Symbol实例的时候总是返回false
   1.可以用来做对象的key，但是使用Symbol()创建的对象的key通过Object.keys()或者for in 循环获取不到。
   2.可以用做常量的值，这样值就永远不会相同 const VAL = Symbol()
 
-11、class
+### 11、class
   class Name {
     constructor(x, y){
       this.x = x

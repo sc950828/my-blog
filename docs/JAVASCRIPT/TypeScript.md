@@ -1,4 +1,4 @@
-1、typescript
+### 1、typescript
   TypeScript是JavaScript的一个超集，主要提供了类型系统和对 ES6 的支持。
   优点
     TypeScript 增加了代码的可读性和可维护性
@@ -7,12 +7,12 @@
     增强了编辑器和 IDE 的功能，包括代码补全、接口提示、跳转到定义、重构等
     即使 TypeScript 编译报错，也可以生成 JavaScript 文件
 
-2、使用
+### 2、使用
   安装 npm install -g typescript
   编译 tsc xxx.ts
   监听并编译 tsc -w xxx.ts
 
-3、数据类型 定义变量的时候指定变量的数据类型
+### 3、数据类型 定义变量的时候指定变量的数据类型
   布尔类型 boolean
   数字 number
   字符串 string
@@ -40,7 +40,7 @@
       let strLength: number = (<string>someValue).length; //<>
       let strLength: number = (someValue as string).length; //as
 
-4、变量申明
+### 4、变量申明
   let
     当用let声明一个变量，它使用的是词法作用域或块作用域。块作用域变量在包含它们的块或for循环之外是不能访问的
     拥有块级作用域的变量的另一个特点是，它们不能在被声明之前读或写
@@ -81,7 +81,7 @@
   不确定参数
     const add(initDate: number, ...nums: number[]): number = xxx
 
-5、接口 interface 使用implements实现接口。 使用extends继承接口，可以多继承。
+### 5、接口 interface 使用implements实现接口。 使用extends继承接口，可以多继承。
   接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。主要用于约束对象、函数、类的结构。
   interface LabelledValue {
     label: string;
@@ -96,7 +96,7 @@
   类实现接口必须实现接口里面的所有方法
   接口可以继承接口并且可以多继承，类实现接口可以多实现
 
-6、类 class 使用extends实现继承，使用implements实现接口。可以实现多个接口
+### 6、类 class 使用extends实现继承，使用implements实现接口。可以实现多个接口
   class Greeter {
     public greeting: string;
     constructor(message: string) {
@@ -109,7 +109,7 @@
 
   let greeter = new Greeter("world");
 
-7、泛型
+### 7、泛型
   泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性
   function createArray<T>(length: number, value: T): Array<T> { //T就是泛型
     let result: T[] = [];
@@ -127,19 +127,19 @@
   protected 子类访问
   private 私有 private的变量在外面如果需要访问 就需要提供get set方法。
 
-9、类型别名 type
+### 9、类型别名 type
   type name = string 给string类型定义别名
   type user = {name: string, age: number}; const me: user = {name: 'randy', age: 24}
 
-10、非空检查 !
+### 10、非空检查 !
   我们可以通过!来进行非空的检查
   let str: string = `yayxs`;
   str!.substring(0, 1)
 
-11、ts中的函数与普通函数的区别
+### 11、ts中的函数与普通函数的区别
   支持约束参数类型 支持可选参数 支持重载 支持函数返回值类型定义
 
-12、抽象类与多态
+### 12、抽象类与多态
   什么是抽象类？
     抽象类通常作为基类，将多个事物中的共性抽离，方便其他派生类继承。
   抽象类有什么特点？
