@@ -8,9 +8,11 @@
 
   <body>
     <div id="div1"></div>
+    <div>拒绝了 好像是我没配https的原因。</div>
     <script>
       // 通过navigator对象的geolocation属性的getCurrentPosition(showPosition, showError)方法获取定位。
       var div1 = document.getElementById("div1");
+      // 通过navigator.geolocation判断是否支持地理定位。
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else {

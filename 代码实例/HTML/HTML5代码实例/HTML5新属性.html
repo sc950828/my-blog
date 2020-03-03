@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <!-- autocomplete -->
+    <!-- autocomplete 自动补全-->
     <form action="" autocomplete="on">
       First name:<input type="text" name="fname" /><br />
       Last name: <input type="text" name="lname" /><br />
@@ -20,18 +20,18 @@
       <input type="submit" />
     </form>
 
-    <!-- novalidate -->
+    <!-- novalidate 不验证-->
     <form action="" novalidate>
       E-mail: <input type="email" name="user_email" />
       <input type="submit" />
     </form>
 
-    <!-- autofocus -->
+    <!-- autofocus 自动获取焦点-->
     <form action="">
       First name:<input type="text" name="fname" autofocus />
     </form>
 
-    <!-- form -->
+    <!-- form 指明属于哪个form-->
     <form action="" id="form1">
       First name: <input type="text" name="fname" /><br />
       <input type="submit" value="提交" />
@@ -39,7 +39,7 @@
 
     Last name: <input type="text" name="lname" form="form1" />
 
-    <!-- formaction -->
+    <!-- formaction 覆盖表单的action-->
     <form action="demo1.php">
       First name: <input type="text" name="fname" /><br />
       Last name: <input type="text" name="lname" /><br />
@@ -47,7 +47,7 @@
       <input type="submit" formaction="demo2.php" value="提交" />
     </form>
 
-    <!-- ormenctype -->
+    <!-- ormenctype 覆盖表单的enctype-->
     <form action="" method="post">
       First name: <input type="text" name="fname" /><br />
       <input type="submit" value="提交" />
@@ -58,7 +58,7 @@
       />
     </form>
 
-    <!-- formmethod -->
+    <!-- formmethod 覆盖表单的method-->
     <form action="" method="get">
       First name: <input type="text" name="fname" /><br />
       Last name: <input type="text" name="lname" /><br />

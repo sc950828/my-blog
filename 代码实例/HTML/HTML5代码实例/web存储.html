@@ -7,34 +7,43 @@
   </head>
 
   <body>
+    打开控制台查看
     <script>
       if (typeof Storage !== undefined) {
         // localStorage
         console.log("---------localStorage---------");
+        console.log("localStorage.setItem(name, randy);");
+        console.log("localStorage.setItem(age, 12);");
         localStorage.setItem("name", "randy");
         localStorage.setItem("age", 12);
         console.log("name: ", localStorage.getItem("name"));
         console.log("age: ", localStorage.getItem("age"));
         console.log("key0: ", localStorage.key(0));
         console.log("key1: ", localStorage.key(1));
+        console.log("localStorage.removeItem(name);");
         localStorage.removeItem("name");
         console.log("name: ", localStorage.getItem("name"));
         console.log("age: ", localStorage.getItem("age"));
+        console.log("localStorage.clear();");
         localStorage.clear();
         console.log("name: ", localStorage.getItem("name"));
         console.log("age: ", localStorage.getItem("age"));
 
         // sessionStorage
         console.log("---------sessionStorage---------");
+        console.log("sessionStorage.setItem(name, randy);");
+        console.log("sessionStorage.setItem(age, 12);");
         sessionStorage.setItem("name", "randy");
         sessionStorage.setItem("age", 12);
         console.log("name: ", sessionStorage.getItem("name"));
         console.log("age: ", sessionStorage.getItem("age"));
         console.log("key0: ", sessionStorage.key(0));
         console.log("key1: ", sessionStorage.key(1));
+        console.log("sessionStorage.removeItem(name);");
         sessionStorage.removeItem("name");
         console.log("name: ", sessionStorage.getItem("name"));
         console.log("age: ", sessionStorage.getItem("age"));
+        console.log("sessionStorage.clear();");
         sessionStorage.clear();
         console.log("name: ", sessionStorage.getItem("name"));
         console.log("age: ", sessionStorage.getItem("age"));

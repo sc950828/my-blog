@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>WebWorker测试</title>
+    <title>WebWorker</title>
     <script>
       let w;
       function startWorker() {
         if (typeof Worker != "undefined") {
           // 创建worker对象
-          w = new Worker("webworker.js");
+          w = new Worker("WebWorker.js");
           // 通过onmessage监听worker.js发来的数据
           w.onmessage = function(event) {
             document.getElementById("countText").innerText = event.data;

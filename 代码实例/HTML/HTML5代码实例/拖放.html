@@ -29,15 +29,16 @@
     <div id="div2" ondragover="dragOver(event)" ondrop="drop(event)"></div>
 
     <script>
-      // 被拖动元素设置，开始被拖动。
+      // draggable="true"设置元素可以被拖动。
+      // 被拖动元素设置，ondragstart事件，开始被拖动发生什么。把元素id存到transfer里面
       function dragStart(e) {
         e.dataTransfer.setData("MyImg", e.target.id);
       }
-      // 接收拖动元素设置 阻止默认事件。
+      // 接收拖动元素设置 ondragover事件，在里面阻止默认事件。
       function dragOver(e) {
         e.preventDefault();
       }
-      // 接收滚动元素设置，停止拖动。阻止默认事件，获取拖动元素id。添加子元素。
+      // 接收滚动元素设置 ondrop，停止拖动。阻止默认事件，获取拖动元素id。添加子元素。
       function drop(e) {
         e.preventDefault();
         var id = e.dataTransfer.getData("MyImg");

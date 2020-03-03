@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# 1.0版本号 添加配置项
+
+CACHE:
+WebWorker.js
+
+NETWORK:
+../images/avatar.jpg
+
+FALLBACK:
+WebWorker.html
+
