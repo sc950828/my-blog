@@ -26,6 +26,23 @@
         max-height: 100px;
         background-color: lightblue;
       }
+      /*
+        优先级 min-width最高 其次是max-width 最后是width
+      */
+      .item5 {
+        min-width: 100px;
+        max-width: 50px;
+        width: 20px;
+        background-color: burlywood;
+      }
+
+      .item6 {
+        max-height: 100px;
+        min-height: 200px;
+        height: 50px;
+        width: auto;
+        background-color: cadetblue;
+      }
     </style>
   </head>
 
@@ -34,5 +51,7 @@
     <div class="item2">item2</div>
     <div class="item3">item3</div>
     <div class="item4">item4</div>
+    <div class="item5">item5</div>
+    <div class="item6">item6 min属性优先级最高 然后max 最后是宽高</div>
   </body>
 </html>

@@ -24,14 +24,20 @@
       .item3 {
         background-color: lightpink;
       }
+      /* 因为是原生的inline-block元素 所以可以设置上下内外边距 */
+      input {
+        margin: 10px 20px;
+        padding: 10px;
+      }
     </style>
   </head>
 
   <body>
-    <div class="item1">padding div块级元素</div>
+    <div class="item1">margin div块级元素</div>
     <span class="item2"
       >padding span行内元素。行内元素设置上下外边距无效。</span
     >
     <div class="item3">测试</div>
+    <input type="text" />
   </body>
 </html>

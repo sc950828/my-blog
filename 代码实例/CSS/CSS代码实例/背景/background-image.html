@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>background-image</title>
     <style>
+      /*
+        用来设置元素的背景图片
+      */
       div {
         width: 600px;
         height: 400px;
@@ -20,6 +23,9 @@
         contain：将背景图像等比缩放到宽度或高度与容器的宽度或高度相等，背景图像始终被包含在容器内。所以可能会有空隙。
       */
       .item1 {
+        border: 10px;
+        padding: 10px;
+        margin: 10px;
         background-size: 100% 100%;
       }
 
@@ -66,6 +72,7 @@
       .item5 {
         padding: 20px;
         border: 10px solid transparent;
+        margin: 10px;
         /* background-origin: border-box; */
         /* background-origin: padding-box; */
         background-origin: content-box;
@@ -75,8 +82,11 @@
   </head>
 
   <body>
+    <span>图片大小设置100%</span>
     <div class="item1"></div>
+    <span>图片大小设置cover</span>
     <div class="item2"></div>
+    <span>图片大小设置contain</span>
     <div class="item3"></div>
     <div class="item4">
       <section style="height: 800px;"></section>

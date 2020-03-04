@@ -57,6 +57,19 @@
         left: 50px;
         bottom: 50px;
       }
+
+      /* 这种方法也能完全居中 */
+      .item6 {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: chartreuse;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
     </style>
   </head>
 
@@ -68,5 +81,10 @@
       <div class="item4">item4</div>
     </div>
     <div class="item5">item5</div>
+    <div class="item6">
+      position: absolute; width: 200px; height: 200px; background-color:
+      chartreuse; top: 0; bottom: 0; left: 0; right: 0; margin: auto;
+      实现完全居中
+    </div>
   </body>
 </html>

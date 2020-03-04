@@ -1,7 +1,9 @@
-### 1、ECharts是什么？
-  ECharts，一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的矢量图形库 ZRender，提供直观，交互丰富，可高度个性化定制的数据可视化图表。
+### 1、ECharts 是什么？
 
-### 2、ECharts方法
+ECharts，一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari 等），底层依赖轻量级的矢量图形库 ZRender，提供直观，交互丰富，可高度个性化定制的数据可视化图表。
+
+### 2、ECharts 方法
+
     this.$echarts.init(dom, theme, options)
       dom是实例容器，一般是一个div， echarts3支持直接使用canvas作为容器。不能在单个容器上初始化多个 ECharts 实例。
       theme 主题，自带default light dark三种，也可以下载自定义更多的主题。
@@ -15,7 +17,8 @@
     this.$echarts.getInstanceByDom() 获取 dom 容器上的实例。
     this.$echarts.registerTheme() 设置主题,在init的时候也可以指定
 
-### 3、myChartInstance方法
+### 3、myChartInstance 方法
+
     myChartInstance.dispose() 销毁实例，实例销毁后无法再被使用
     myChartInstance.isDisposed() 当前实例是否已经被释放。没有释放返回undefined，释放了返回true
     myChartInstance.group 设置groupid，用于联动
@@ -51,5 +54,6 @@
     myChartInstance.clear() 清空当前实例，会移除实例中所有的组件和图表。清空后调用 getOption 方法返回一个{}空对象。
 
 ### 4、知识点
-*  1.init的时候需要指定chart的宽和高，不然就是容器的宽高，如果都没指定则没有图形。如果既指定了容器宽高又指定了chart的宽高，按chart的宽高来。
-*  2.legend图例的设置data需要和series里面每一项的name一一对应相等才能展示出图例。
+
+- 1.init 的时候需要指定 chart 的宽和高，不然就是容器的宽高，如果都没指定则没有图形。如果既指定了容器宽高又指定了 chart 的宽高，按 chart 的宽高来。
+- 2.legend 图例的设置 data 需要和 series 里面每一项的 name 一一对应相等才能展示出图例。

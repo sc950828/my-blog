@@ -31,9 +31,19 @@
       /* 每一个属性又可以单独一一设置 */
       .item2 {
         margin-top: 10px;
-        border-width: 1px;
+        border-width: 5px;
         border-style: solid;
         border-color: green red black blue;
+      }
+      /*
+        border-color默认使用color
+        border-style默认是none 所以只设置了border-width不会显示border
+      */
+      .item3 {
+        border-width: 20px;
+        color: red;
+        margin-top: 20px;
+        border-style: double;
       }
     </style>
   </head>
@@ -41,5 +51,6 @@
   <body>
     <div class="item1">item1</div>
     <div class="item2">item2</div>
+    <div class="item3">item3</div>
   </body>
 </html>

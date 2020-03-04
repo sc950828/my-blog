@@ -1,17 +1,21 @@
 ### 1、安装和编译
+
     npm install less -g
     lessc a.less b.css
 
 ### 2、变量
+
     定义 @key: value
     使用 常规使用是@key，但是变量当做选择器或者属性或者url时需要使用@{key}这种方式来使用
     变量是延迟加载的，不必在使用前声明。可以先使用再定义。
 
 ### 3、嵌套
+
     支持像div一样父子嵌套
     & 代表上级选择器
 
-### 4、混合mixin
+### 4、混合 mixin
+
     就是代码的复用
     .card { //如果写成.card()则这个混合不会出现在css中，就是不会输出。只有带括号就不会出现在css中。
       background: #f6f6f6;
@@ -36,6 +40,7 @@
     模式匹配 必须使用.mixin定义，根据传来的参数来匹配使用哪个mixin，使用@_匹配所有。
 
 ### 5、继承
+
     继承与混合最大的区别就是 &:extend 是同个选择器共用同一个声明
     /* Less */
     .animation{
@@ -60,21 +65,26 @@
     }
 
 ### 6、if
-  if(xxx, true执行, false执行)
+
+if(xxx, true 执行, false 执行)
 
 ### 7、boolean
-  boolean(xxx) 返回true或false
+
+boolean(xxx) 返回 true 或 false
 
 ### 8、range
+
     range(start, end, step) range(10px, 30px, 10)输出10px 20px 30px
     range(value) range(3)输出1 2 3
 
 ### 9、list
+
     lenght(@list) 返回某list或range的长度
     extract(index) 返回list某下标的元素，index从1开始
     each(@list, {xxx}) 循环list 在后面能通过@value获取到值。
 
-### 10、math函数
+### 10、math 函数
+
     round(1.67); // returns `2`
     ceil(2.4);   // returns `3`
     floor(2.6);  // returns `2`
@@ -82,8 +92,10 @@
     percentage(0.5); // returns `50%`
 
 ### 11、避免编译
-  ~"xxx" 或者 ~'xxx'
+
+~"xxx" 或者 ~'xxx'
 
 ### 12、注释
+
     /* 这是块注释 */ 这个会在编译后的css里面
     // 这是行注释 这个不会出现在编译后的css里面

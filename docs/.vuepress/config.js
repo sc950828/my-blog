@@ -6,6 +6,7 @@ module.exports = {
     nav: [
       { text: "首页", link: "/" },
       { text: "导航", link: "/Guide/" },
+      { text: "代码实例", link: "http://sc950828.top" },
       { text: "GitHub地址", link: "https://github.com/sc950828" }
     ],
     sidebar: [
@@ -16,23 +17,23 @@ module.exports = {
           ["/HTML/HTML5", "HTML5"]
         ]
       },
-      // {
-      //   title: "CSS",
-      //   children: [
-      //     ["/CSS/CSS", "CSS"],
-      //     ["/CSS/CSS3", "CSS3"],
-      //     ["/CSS/常见兼容性问题", "常见兼容性问题"],
-      //     ["/CSS/常见问题", "常见问题"],
-      //     ["/CSS/浏览器渲染流程", "浏览器渲染流程"],
-      //     ["/CSS/移动端", "移动端"],
-      //     ["/CSS/重绘 回流", "重绘 回流"],
-      //     ["/CSS/CSS选择器", "CSS选择器"],
-      //     ["/CSS/LESS", "LESS"],
-      //     ["/CSS/SCSS", "SCSS"],
-      //     ["/CSS/Postcss", "Postcss"],
-      //     ["/CSS/ECharts", "ECharts"]
-      //   ]
-      // },
+      {
+        title: "CSS",
+        children: [
+          ["/CSS/CSS", "CSS"],
+          ["/CSS/CSS3", "CSS3"],
+          ["/CSS/CSS选择器", "CSS选择器"],
+          ["/CSS/浏览器渲染流程", "浏览器渲染流程"],
+          ["/CSS/重绘与回流", "重绘与回流"],
+          ["/CSS/常见问题", "常见问题"],
+          ["/CSS/常见兼容性问题", "常见兼容性问题"],
+          ["/CSS/移动端", "移动端"],
+          ["/CSS/LESS", "LESS"],
+          ["/CSS/SCSS", "SCSS"],
+          ["/CSS/Postcss", "Postcss"],
+          ["/CSS/ECharts", "ECharts"]
+        ]
+      }
       // {
       //   title: "JAVASCRIPT",
       //   children: [

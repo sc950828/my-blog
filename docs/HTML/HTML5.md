@@ -1,6 +1,7 @@
 ### 1、HTML 和 HTML5 有何区别？
 
-- 文档申明不同，HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
+- 文档申明不同，HTML5 不基于 SGML，HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
+- HTML 基于 SGML ，所以需要对 DTD 进行引用。
 - HTML5 新增了语义化标签，语义更明确。
 - HTML 没有绘图功能，HTML5 新增 canvas 画布功能，能绘制图像。
 
@@ -115,18 +116,25 @@
 
 ### 7、离线缓存
 
-- manifest 文件的建议的文件扩展名是：".appcache"。
 - manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置。
 - manifest 文件可分为三个部分：
-  - CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+  - CACHE - 在此标题下列出的文件将在首次下载后进行缓存。优先级高于 NETWORK。
   - NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
   - FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
-- 在需要缓存的页面的 html 标签里调用 例如`<html manifest="demo.appcache">`
+- 在需要缓存的页面的 html 标签里调用 例如`<html manifest="demo.manifest">`
+- 如何更新缓存：
+  - （1）更新 manifest 文件
+  - （2）通过 javascript 操作
+  - （3）清除浏览器缓存
+- 注意事项
+  - 引用 manifest 的 html 必须与 manifest 文件同源，在同一个域下。
+  - FALLBACK 中的资源必须和 manifest 文件同源。
+  - 站点中的其他页面即使没有设置 manifest 属性，请求的资源如果在缓存中也从缓存中访问。
 
 ### 8、web 存储
 
 - localStorage 只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份 localStorage 数据。
-- sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口
+- sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口。
 - localStorage 会永久存在除非手动清除。
 - sessionStorage 在关闭页面或浏览器的时候就会清除。
 - localStorage 和 sessionStorage key 必须是字符串类型。存储的数据都是字符串类型的数据，取出来的数据也是字符串类型，因此如果存储的对象不是字符串，则要转换成字符串数据类型
@@ -182,4 +190,32 @@
 ### 14、语义化标签的好处？
 
 - 利于 SEO，方便搜索引擎识别页面结构。
-- 阅读起来更清晰。
+- 让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
+- 有利于开发者的维护和理解。
+
+### 15、如何处理 HTML5 新标签的浏览器兼容问题？
+
+通过 document.createElement 方法创建 html5 的标签。
+
+### 16、浏览器是怎么对 HTML5 的离线储存资源进行管理和加载的呢？
+
+- 在线的情况下，浏览器发现 html 头部有 manifest 属性，它会请求 manifest 文件，如果是第一次访问 app ，那么浏览器
+  就会根据 manifest 文件的内容下载相应的资源并且进行离线存储。如果已经访问过 app 并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的 manifest 文件与旧的 manifest 文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+
+- 离线的情况下，浏览器就直接使用离线存储的资源。
+
+### 17、请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+
+- cookie 数据始终在同源（协议、主机、端口相同）的 http 请求中携带（即使不需要），会在浏览器和服务器间来回传递。
+- 存储大小：
+  - cookie 数据大小不能超过 4 k 。
+  - sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大。
+- 有期时间：
+  - localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据。
+  - sessionStorage 数据在页面会话结束时会被清除。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会
+    保持原来的页面会话。在新标签或窗口打开一个页面时会在顶级浏览上下文中初始化一个新的会话。
+  - cookie 设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭。
+- 作用域：
+  - sessionStorage 只在同源的同窗口（或标签页）中共享数据，也就是只在当前会话中共享。
+  - localStorage 在所有同源窗口中都是共享的。
+  - cookie 在所有同源窗口中都是共享的。
