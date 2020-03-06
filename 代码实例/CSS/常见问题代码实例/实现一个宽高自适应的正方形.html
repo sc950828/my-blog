@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现一个宽高自适应的正方形</title>
+    <style>
+      .div1 {
+        width: 20vw;
+        height: 20vw;
+        background-color: tomato;
+        margin: auto;
+      }
+      /* 根据高度变化 */
+      .div2 {
+        width: 20vh;
+        height: 20vh;
+        background-color: turquoise;
+        margin: auto;
+      }
+      .div3 {
+        width: 20%;
+        background-color: violet;
+        margin: auto;
+      }
+      .div3::after {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="div3"></div>
+  </body>
+</html>

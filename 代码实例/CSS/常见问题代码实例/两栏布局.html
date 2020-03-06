@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两栏布局</title>
+    <style>
+      div {
+        height: 100px;
+      }
+      .div1 {
+        width: 100px;
+        background-color: violet;
+        float: left;
+      }
+      .div2 {
+        background-color: wheat;
+        margin-left: 100px;
+      }
+
+      .parent {
+        display: flex;
+      }
+      .div3 {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+      }
+      .div4 {
+        flex-grow: 1;
+        background-color: teal;
+      }
+      .parent1 {
+        position: relative;
+      }
+      .div5 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: springgreen;
+      }
+      .div6 {
+        height: 100px;
+        margin-left: 100px;
+        background-color: slategrey;
+      }
+      .div7 {
+        background-color:steelblue;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+      .div8 {
+        position: absolute;
+        right: 0;
+        height: 100px;
+        left: 100px;
+        background-color: turquoise;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="parent">
+      <div class="div3">div3</div>
+      <div class="div4">div4</div>
+    </div>
+    <div class="parent1">
+      <div class="div5">div5</div>
+      <div class="div6">div6</div>
+    </div>
+    <div class="parent1">
+      <div class="div7">div7</div>
+      <div class="div8">div8</div>
+    </div>
+  </body>
+</html>

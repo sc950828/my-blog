@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三栏布局</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      div {
+        height: 100px;
+      }
+      .div1 {
+        background-color: teal;
+        height: 100px;
+        position: absolute;
+        width: 100px;
+      }
+      .div2 {
+        height: 100px;
+        margin-left: 100px;
+        margin-right: 100px;
+        background-color: thistle;
+      }
+      .div3 {
+        background-color: tomato;
+        height: 100px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+      }
+      /* 中间元素需要放到最后面 */
+      .div5 {
+        float: left;
+        width: 100px;
+        background-color: turquoise;
+      }
+      .div6 {
+        margin-left: 100px;
+        height: 100px;
+        background-color: violet;
+        margin-right: 100px;
+      }
+      .div7 {
+        background-color: yellow;
+        width: 100px;
+        float: right;
+      }
+
+      .parent {
+        display: flex;
+      }
+      .div8 {
+        width: 100px;
+        background-color: aqua;
+      }
+      .div9 {
+        flex-grow: 1;
+        background-color: gray;
+      }
+      .div10 {
+        background-color: aquamarine;
+        width: 100px;
+      }
+
+      /* 圣杯布局 */
+      .parent1 {
+        padding-left: 100px;
+        padding-right: 100px;
+      }
+      .div11 {
+        float: left;
+        margin-left: -100%;
+        position: relative;
+        right: 100px;
+        width: 100px;
+        background-color: greenyellow;
+      }
+      .div12 {
+        float: left;
+        width: 100%;
+        background-color: green;
+      }
+      .div13 {
+        float: left;
+        background-color: hotpink;
+        margin-right: -100px;
+        width: 100px;
+      }
+      /* 双飞翼布局 */
+      .parent2 {
+        width: 100%;
+        height: 100px;
+        float: left;
+      }
+      .left, .right {
+        height: 100px;
+        float: left;
+      }
+      .center {
+        height: 100px;
+        margin-left: 100px;
+        margin-right: 100px;
+        background-color: indianred;
+      }
+      .left {
+        width: 100px;
+        background-color: khaki;
+        margin-left: -100%;
+      }
+      .right {
+        width: 100px;
+        background-color: lightblue;
+        margin-left: -100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="div3">div3</div>
+
+    <div class="div5">div5</div>
+    <div class="div7">div7</div>
+    <div class="div6">div6</div>
+
+    <div class="parent">
+      <div class="div8">div8</div>
+      <div class="div9">div9</div>
+      <div class="div10">div10</div>
+    </div>
+    <!-- 圣杯布局 -->
+    <div class="parent1">
+      <div class="div12">div12</div>
+      <div class="div11">div11</div>
+      <div class="div13">div13</div>
+    </div>
+    <!-- 双飞翼布局 -->
+    <div class="parent2">
+      <div class="center">center</div>
+    </div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </body>
+</html>

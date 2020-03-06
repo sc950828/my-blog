@@ -228,7 +228,7 @@ content 属性生成的对象称为“匿名替换元素”。
 
 （2）border-style 的默认值是 none，有一部分人可能会误以为是 solid。这也是单纯设置 border-width 或 border-color 没有边框显示的原因。
 
-（3）border-style:double 的表现规则：双线宽度永远相等，中间间隔 ±1份border-width。
+（3）border-style:double 的表现规则：双线宽度永远相等，中间间隔 ±1 份 border-width。
 
 （4）border-color 默认颜色就是 color 色值。
 
