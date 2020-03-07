@@ -33,28 +33,28 @@ module.exports = {
           ["/CSS/Postcss", "Postcss"],
           ["/CSS/ECharts", "ECharts"]
         ]
+      },
+      {
+        title: "JAVASCRIPT",
+        children: [
+          ["/JAVASCRIPT/JavaScript基础", "JavaScript基础"],
+          ["/JAVASCRIPT/JavaScript常见问题", "JavaScript常见问题"],
+          ["/JAVASCRIPT/JavaScript事件", "JavaScript事件"],
+          ["/JAVASCRIPT/ES6", "ES6"],
+          ["/JAVASCRIPT/TypeScript", "TypeScript"],
+          ["/JAVASCRIPT/闭包", "闭包"],
+          ["/JAVASCRIPT/this问题", "this问题"],
+          ["/JAVASCRIPT/继承", "继承"],
+          ["/JAVASCRIPT/防抖与节流", "防抖与节流"],
+          ["/JAVASCRIPT/模块化", "模块化"],
+          ["/JAVASCRIPT/排序", "排序"],
+          ["/JAVASCRIPT/设计模式", "设计模式"],
+          ["/JAVASCRIPT/深拷贝浅拷贝", "深拷贝浅拷贝"],
+          ["/JAVASCRIPT/同步异步事件循环", "同步异步事件循环"],
+          ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
+          ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"]
+        ]
       }
-      // {
-      //   title: "JAVASCRIPT",
-      //   children: [
-      //     ["/JAVASCRIPT/JavaScript基础", "JavaScript基础"],
-      //     ["/JAVASCRIPT/JavaScript常见问题", "JavaScript常见问题"],
-      //     ["/JAVASCRIPT/JavaScript事件", "JavaScript事件"],
-      //     ["/JAVASCRIPT/闭包", "闭包"],
-      //     ["/JAVASCRIPT/this问题", "this问题"],
-      //     ["/JAVASCRIPT/继承", "继承"],
-      //     ["/JAVASCRIPT/防抖与节流", "防抖与节流"],
-      //     ["/JAVASCRIPT/模块化", "模块化"],
-      //     ["/JAVASCRIPT/排序", "排序"],
-      //     ["/JAVASCRIPT/设计模式", "设计模式"],
-      //     ["/JAVASCRIPT/深拷贝与浅拷贝", "深拷贝与浅拷贝"],
-      //     ["/JAVASCRIPT/同步异步事件循环", "同步异步事件循环"],
-      //     ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
-      //     ["/JAVASCRIPT/Promise Async Await", "Promise Async Await"],
-      //     ["/JAVASCRIPT/ES6", "ES6"],
-      //     ["/JAVASCRIPT/TypeScript", "TypeScript"]
-      //   ]
-      // },
       // {
       //   title: "HTTP",
       //   children: [
