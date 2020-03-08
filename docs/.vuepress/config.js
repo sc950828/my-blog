@@ -43,6 +43,7 @@ module.exports = {
           ["/JAVASCRIPT/ES6", "ES6"],
           ["/JAVASCRIPT/TypeScript", "TypeScript"],
           ["/JAVASCRIPT/闭包", "闭包"],
+          ["/JAVASCRIPT/数据类型转换", "数据类型转换"],
           ["/JAVASCRIPT/this问题", "this问题"],
           ["/JAVASCRIPT/继承", "继承"],
           ["/JAVASCRIPT/防抖与节流", "防抖与节流"],
@@ -54,24 +55,24 @@ module.exports = {
           ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
           ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"]
         ]
-      }
-      // {
-      //   title: "HTTP",
-      //   children: [
-      //     ["/HTTP/HTTP", "HTTP"],
-      //     ["/HTTP/HTTP常见问题", "HTTP常见问题"],
-      //     ["/HTTP/缓存", "缓存"],
-      //     ["/HTTP/跨域", "跨域"],
-      //     ["/HTTP/权限", "权限"],
-      //     ["/HTTP/前端性能优化", "前端性能优化"],
-      //     ["/HTTP/Ajax", "Ajax"],
-      //     ["/HTTP/Axios", "Axios"],
-      //     ["/HTTP/Cookie Session Token JWT", "Cookie Session Token JWT"],
-      //     ["/HTTP/Fetch", "Fetch"],
-      //     ["/HTTP/JqueryAjax", "JqueryAjax"],
-      //     ["/HTTP/web安全", "web安全"]
-      //   ]
-      // },
+      },
+      {
+        title: "HTTP",
+        children: [
+          ["/HTTP/HTTP", "HTTP"],
+          ["/HTTP/HTTP常见问题", "HTTP常见问题"],
+          ["/HTTP/缓存", "缓存"],
+          ["/HTTP/跨域", "跨域"],
+          ["/HTTP/权限", "权限"],
+          ["/HTTP/前端性能优化", "前端性能优化"],
+          ["/HTTP/Ajax", "Ajax"],
+          ["/HTTP/Axios", "Axios"],
+          ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
+          ["/HTTP/Fetch", "Fetch"],
+          ["/HTTP/JqueryAjax", "JqueryAjax"],
+          ["/HTTP/web安全", "web安全"]
+        ]
+      },
       // {
       //   title: "VUE",
       //   children: [["/VUE/vue", "vue"]]

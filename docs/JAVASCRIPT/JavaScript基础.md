@@ -1,6 +1,6 @@
 ### 1、数据类型
-- 基本数据类型 字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。
-- 引用数据类型 对象(Object)、数组(Array)、函数(Function)。
+- 基本数据类型 字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。保存在栈中。
+- 引用数据类型 对象(Object)、数组(Array)、函数(Function)。保存在堆中。通过使用在栈中保存对应的指针来获取堆中的值。
 - 判断数据类型用typeof
   - 判断基本数据类型的时候除了typeof null 是object其他的都是正确的。
   - 判断基本数据类型的时候如果是通过构造函数创建的则是object。比如typeof new Number(1)则是object。
@@ -262,9 +262,10 @@
       test  检索字符串中指定的值。返回 true 或 false。
       toString  返回正则表达式的字符串。返回/ /这种格式的正则。
 
-### 11、全局方法
+### 11、全局属性和方法
     属性
       NaN 指示某个值不是数字值。
+      Infinity 无穷大。
     方法
       encodeURI()  把字符串编码为URI，类似get请求，会把中文转义
       decodeURI()  把encodeURI的字符串解码。

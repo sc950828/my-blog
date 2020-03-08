@@ -1,4 +1,4 @@
-# CSS 基础知识
+# JAVASCRIPT 基础知识
 
 ### 1、[JavaScript 基础](/JAVASCRIPT/JavaScript基础)
 

@@ -109,14 +109,15 @@ console.log(sum(1)(2)(3)); // 6
 
 ### 15、eval()函数
 
-- 用来执行一段字符脚本，如果参数不是字符串类型则直接返回该参数，在 eval 里面定义的变量不能变量提升，就是不能先使用后再 eval 里面定义。但是在严格模式下 eval 里面定义的变量和函数在外面访问不到。
+- 用来执行一段字符脚本，如果参数不是字符串类型则直接返回该参数，在 eval 里面定义的变量不能变量提升，就是不能先使用后再 eval 里面定义。而且在严格模式下 eval 里面定义的变量和函数在外面访问不到。
+- 应该避免使用 eval，不安全，非常耗性能（2 次，一次解析成 js 语句，一次执行）。
 
 ### 16、用 new 运算符创建对象时例如 new Fn()，具体的创建过程有那几步？
 
 - 创建一个新的空对象，该对象的`__proto__`指向该构造函数的 prototype。
-- 将指定的参数传递给构造函数，给该对象赋值新的属性和方法。
 - 将执行上下文 this 绑定到新创建的对象中。
-- 返回该对象的地址。
+- 将指定的参数传递给构造函数，给该对象赋值新的属性和方法。
+- 判断构造函数的返回值类型，如果是一个普通对象则返回该对象，否则返回刚新建的对象。
 
 ### 17、&&运算符能做什么 ||运算符能做什么
 
@@ -217,3 +218,269 @@ console.log(greetign); //输出{} 这个对象没被申明 默认到 window 上 
 - class 申明的类里面默认启用严格模式。
 - class 里面的所有方法都是不可枚举的。
 - class 创建的对象必须使用 new 创建 而 es5 通过方法创建的对象可以省略 new。
+
+### 31、 什么是堆？什么是栈？它们之间有什么区别和联系？
+
+- 堆和栈的概念存在于数据结构中和操作系统内存中。
+- 在数据结构中
+  - 栈中数据的存取方式为先进后出。
+  - 而堆是一个优先队列，是按优先级来进行排序的，优先级可以按照大小来规定。完全二叉树是堆的一种实现方式。
+- 在操作系统中，内存被分为栈区和堆区。
+  - 栈区内存由编译器自动分配释放，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。
+  - 堆区内存一般由程序员分配释放，若程序员不释放，程序结束时可能由垃圾回收机制回收。
+
+### 32、内部属性 `[[Class]]` 是什么？
+
+所有 typeof 返回值为 "object" 的对象（如数组）都包含一个内部属性 `[[Class]]`（我们可以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问，一般通过 Object.prototype.toString(..) 来查看。
+例如：
+
+```js
+Object.prototype.toString.call([1, 2, 3]);
+// "[object Array]"
+
+Object.prototype.toString.call(/regex-literal/i);
+// "[object RegExp]"
+```
+
+### 33、介绍 js 有哪些内置对象？
+
+- 全局属性 NaN Infinity null undefined
+- 全局方法 eval()、parseFloat()、parseInt()
+- 构造函数 String、Number、Object、Function、Boolean、Symbol、Error、RegExp、Array、Map、Set、WeakMap、WeakSet、Date
+- 结构化数据 JSON
+- 数据计算 Math
+
+### 34、 undefined 与 undeclared 的区别？
+
+- 已在作用域中声明但还没有赋值的变量，是 undefined 的。相反，还没有在作用域中声明过的变量，是 undeclared 的。
+- 对于 undeclared 变量的引用，浏览器会报引用错误，如 ReferenceError: b is not defined 。但是我们可以使用 typeof 的安全防范机制来避免报错，因为对于 undeclared（或者 not defined ）变量，typeof 会返回 "undefined"。
+
+### 35、在 js 中不同进制数字的表示方式
+
+- （1）以 0X、0x 开头的表示为十六进制。
+- （2）以 0、0O、0o 开头的表示为八进制。
+- （3）以 0B、0b 开头的表示为二进制格式。
+
+### 36、js 中整数的安全范围是多少？
+
+- 安全整数指的是，在这个范围内的整数转化为二进制存储的时候不会出现精度丢失，能够被“安全”呈现的最大整数是 2^53 - 1，
+  即 9007199254740991，在 ES6 中被定义为 Number.MAX_SAFE_INTEGER。最小整数是-9007199254740991，在 ES6 中被定义为 Number.MIN_SAFE_INTEGER。
+- 如果某次计算的结果得到了一个超过 JavaScript 数值范围的值，那么这个值会被自动转换为特殊的 Infinity 值。如果某次
+  计算返回了正或负的 Infinity 值，那么该值将无法参与下一次的计算。判断一个数是不是有穷的，可以使用 isFinite 函数
+  来判断。
+
+### 37、typeof NaN 的结果是什么？
+
+- NaN 意指“不是一个数字”（not a number），NaN 是一个“警戒值”（sentinel value，有特殊用途的常规值），用于指出
+  数字类型中的错误情况，即“执行数学运算没有成功，这是失败后返回的结果”。
+- typeof NaN; // "number"
+- NaN 是一个特殊值，它和自身不相等，是唯一一个自反（自反，reflexive，即 x === x 不成立）的值。而 NaN != NaN
+  为 true。
+
+### 38、全局函数 isNaN 和 Number.isNaN 函数的区别？
+
+- 全局函数 isNaN 接收参数后，会尝试将这个参数转换为数值，任何不能被转换为数值的的值都会返回 true，因此非数字值传入也会返回 true ，会影响 NaN 的判断。
+- 函数 Number.isNaN 会首先判断传入参数是否为数字，如果不是数字则返回 false，如果是数字再继续判断是否为 NaN ，这种方法对于 NaN 的判断更为准确。
+
+### 39、Array 构造函数只有一个参数值时的表现？
+
+- Array 构造函数只带一个数字参数的时候，该参数会被作为数组的预设长度（length），而非只充当数组中的一个元素。这样
+  创建出来的只是一个空数组，只不过它的 length 属性被设置成了指定的值。
+- 构造函数 Array(..) 不要求必须带 new 关键字。不带时，它会被自动补上。
+
+### 40、{} 和 [] 的 valueOf 和 toString 的结果是什么？
+
+- {} 的 valueOf 结果为 {} ，toString 的结果为 "[object Object]"
+- [] 的 valueOf 结果为 [] ，toString 的结果为 ""
+
+### 41、什么是假值对象？
+
+浏览器在某些特定情况下，在常规 JavaScript 语法基础上自己创建了一些外来值，这些就是“假值对象”。假值对象看起来和
+普通对象并无二致（都有属性，等等），但将它们强制类型转换为布尔值时结果为 false 最常见的例子是 document.all，它
+是一个类数组对象，包含了页面上的所有元素，由 DOM（而不是 JavaScript 引擎）提供给 JavaScript 程序使用。
+
+### 42、如何实现数组的随机排序？
+
+    （1）使用数组 sort 方法对数组元素随机排序，让 Math.random() 出来的数与 0.5 比较，如果大于就返回 1 交换位
+      置，如果小于就返回 -1，不交换位置。
+
+    function randomSort(a, b) {
+      return Math.random() > 0.5 ? -1 : 1;
+    }
+
+    缺点：每个元素被派到新数组的位置不是随机的，原因是 sort() 方法是依次比较的。
+
+    （2）随机从原数组抽取一个元素，加入到新数组
+
+    function randomSort(arr) {
+      var result = [];
+
+      while (arr.length > 0) {
+          var randomIndex = Math.floor(Math.random() * arr.length);
+          result.push(arr[randomIndex]);
+          arr.splice(randomIndex, 1);
+      }
+
+      return result;
+    }
+
+    （3）随机交换数组内的元素（洗牌算法类似）
+
+    function randomSort(arr) {
+      var index,
+        randomIndex,
+        temp,
+        len = arr.length;
+
+      for (index = 0; index < len; index++) {
+        randomIndex = Math.floor(Math.random() * (len - index)) + index;
+
+        temp = arr[index];
+        arr[index] = arr[randomIndex];
+        arr[randomIndex] = temp;
+      }
+
+      return arr;
+    }
+
+    // es6
+    function randomSort(array) {
+      let length = array.length;
+
+      if (!Array.isArray(array) || length <= 1) return;
+
+      for (let index = 0; index < length - 1; index++) {
+        let randomIndex = Math.floor(Math.random() * (length - index)) + index;
+
+        [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
+      }
+
+      return array;
+    }
+
+### 43、 javascript 创建对象的几种方式？
+
+- 我们一般使用字面量的形式直接创建对象，但是这种创建方式对于创建大量相似对象的时候，会产生大量的重复代码。但 js
+  和一般的面向对象的语言不同，在 ES6 之前它没有类的概念。但是我们可以使用函数来进行模拟，从而产生出可复用的对象
+  创建方式，我了解到的方式有这么几种：
+
+- （1）第一种是工厂模式，工厂模式的主要工作原理是用函数来封装创建对象的细节，从而通过调用函数来达到复用的目的。但
+  是它有一个很大的问题就是创建出来的对象无法和某个类型联系起来，它只是简单的封装了复用代码，而没有建立起对象
+  和类型间的关系。
+
+- （2）第二种是构造函数模式。js 中每一个函数都可以作为构造函数，只要一个函数是通过 new 来调用的，那么我们就可以
+  把它称为构造函数。执行构造函数首先会创建一个对象，然后将对象的原型指向构造函数的 prototype 属性，然后将执
+  行上下文中的 this 指向这个对象，最后再执行整个函数，如果返回值不是对象，则返回新建的对象。因为 this 的值
+  指向了新建的对象，因此我们可以使用 this 给对象赋值。构造函数模式相对于工厂模式的优点是，所创建的对象和构造
+  函数建立起了联系，因此我们可以通过原型来识别对象的类型。但是构造函数存在一个缺点就是，造成了不必要的函数对
+  象的创建，因为在 js 中函数也是一个对象，因此如果对象属性中如果包含函数的话，那么每次我们都会新建一个函数对
+  象，浪费了不必要的内存空间，因为函数是所有的实例都可以通用的。
+
+- （3）第三种模式是原型模式，因为每一个函数都有一个 prototype 属性，这个属性是一个对象，它包含了通过构造函数创
+  建的所有实例都能共享的属性和方法。因此我们可以使用原型对象来添加公用属性和方法，从而实现代码的复用。这种方
+  式相对于构造函数模式来说，解决了函数对象的复用问题。但是这种模式也存在一些问题，一个是没有办法通过传入参数
+  来初始化值，另一个是如果存在一个引用类型如 Array 这样的值，那么所有的实例将共享一个对象，一个实例对引用类
+  型值的改变会影响所有的实例。
+
+- （4）第四种模式是组合使用构造函数模式和原型模式，这是创建自定义类型的最常见方式。因为构造函数模式和原型模式分开
+  使用都存在一些问题，因此我们可以组合使用这两种模式，通过构造函数来初始化对象的属性，通过原型对象来实现函数
+  方法的复用。这种方法很好的解决了两种模式单独使用时的缺点，但是有一点不足的就是，因为使用了两种不同的模式，
+  所以对于代码的封装性不够好。
+
+- （5）第五种模式是动态原型模式，这一种模式将原型方法赋值的创建过程移动到了构造函数的内部，通过对属性是否存在的判
+  断，可以实现仅在第一次调用函数时对原型对象赋值一次的效果。这一种方式很好地对上面的混合模式进行了封装。
+
+- （6）第六种模式是寄生构造函数模式，这一种模式和工厂模式的实现基本相同，我对这个模式的理解是，它主要是基于一个已
+  有的类型，在实例化时对实例化的对象进行扩展。这样既不用修改原来的构造函数，也达到了扩展对象的目的。它的一个
+  缺点和工厂模式一样，无法实现对象的识别。
+
+### 44、什么是 DOM 和 BOM？
+
+- DOM 指的是文档对象模型，它指的是把文档当做一个对象来对待，这个对象主要定义了处理网页内容的方法和接口。
+
+- BOM 指的是浏览器对象模型，它指的是把浏览器当做一个对象来对待，这个对象主要定义了与浏览器进行交互的法和接口。BOM
+  的核心是 window，而 window 对象具有双重角色，它既是通过 js 访问浏览器窗口的一个接口，又是一个 Global（全局）
+  对象。这意味着在网页中定义的任何对象，变量和函数，都作为全局对象的一个属性或者方法存在。window 对象含有 locati
+  on 对象、navigator 对象、screen 对象等子对象，并且 DOM 的最根本的对象 document 对象也是 BOM 的 window 对
+  象的子对象。
+
+### 45、写一个通用的事件侦听器函数。
+
+```js
+const EventUtils = {
+  // 视能力分别使用dom0||dom2||IE方式 来绑定事件
+  // 添加事件
+  addEvent: function(element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = handler;
+    }
+  },
+
+  // 移除事件
+  removeEvent: function(element, type, handler) {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = null;
+    }
+  },
+
+  // 获取事件目标
+  getTarget: function(event) {
+    return event.target || event.srcElement;
+  },
+
+  // 获取 event 对象的引用，取到事件的所有信息，确保随时能使用 event
+  getEvent: function(event) {
+    return event || window.event;
+  },
+
+  // 阻止事件（主要是事件冒泡，因为 IE 不支持事件捕获）
+  stopPropagation: function(event) {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+  },
+
+  // 取消事件的默认行为
+  preventDefault: function(event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  }
+};
+```
+
+### 46、如何判断一个对象是否属于某个类？
+
+- 第一种方式是使用 instanceof 运算符来判断构造函数的 prototype 属性是否出现在对象的原型链中的任何位置。
+
+- 第二种方式可以通过对象的 constructor 属性来判断，对象的 constructor 属性指向该对象的构造函数，但是这种方式不
+  是很安全，因为 constructor 属性可以被改写。
+
+- 第三种方式，如果需要判断的是某个内置的引用类型的话，可以使用 Object.prototype.toString() 方法来打印对象的
+  `[[Class]]` 属性来进行判断。
+
+### 47、js 延迟加载的方式有哪些？
+
+- js 的加载、解析和执行会阻塞页面的渲染过程，因此我们希望 js 脚本能够尽可能的延迟加载，提高页面的渲染速度。
+
+  - 第一种方式是我们一般采用的是将 js 脚本放在文档的底部，来使 js 脚本尽可能的在最后来加载执行。
+
+  - 第二种方式是给 js 脚本添加 defer 属性，这个属性会让脚本的加载与文档的解析同步解析，然后在文档解析完成后再执行这个脚本文件，这样的话就能使页面的渲染不被阻塞。多个设置了 defer 属性的脚本按规范来说最后是顺序执行的，但是在一些浏览器中可能不是这样。
+
+  - 第三种方式是给 js 脚本添加 async 属性，这个属性会使脚本异步加载，不会阻塞页面的解析过程，但是当脚本加载完成后立即执行 js 脚本，这个时候如果文档没有解析完成的话同样会阻塞。多个 async 属性的脚本的执行顺序是不可预测的，一般不会按照代码的顺序依次执行。
+
+  - 第四种方式是动态创建 DOM 标签的方式，我们可以对文档的加载事件进行监听，当文档加载完成后再动态的创建 script 标签来引入 js 脚本。
+
+
