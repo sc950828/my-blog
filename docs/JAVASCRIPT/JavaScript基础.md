@@ -1,48 +1,60 @@
 ### 1、数据类型
+
 - 基本数据类型 字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。保存在栈中。
 - 引用数据类型 对象(Object)、数组(Array)、函数(Function)。保存在堆中。通过使用在栈中保存对应的指针来获取堆中的值。
-- 判断数据类型用typeof
-  - 判断基本数据类型的时候除了typeof null 是object其他的都是正确的。
-  - 判断基本数据类型的时候如果是通过构造函数创建的则是object。比如typeof new Number(1)则是object。
-  - typeof 引用数据类型除了typeof function 是 function其他的都是object。
+- 判断数据类型用 typeof
+  - 判断基本数据类型的时候除了 typeof null 是 object 其他的都是正确的。
+  - 判断基本数据类型的时候如果是通过构造函数创建的则是 object。比如 typeof new Number(1)则是 object。
+  - typeof 引用数据类型除了 typeof function 是 function 其他的都是 object。
 
-### 2、Object对象常用方法
-- Object.assign(target, source1, source2,...) 返回一个新对象 target会受到影响 返回的对象等于新的target对象。
-  - 该方法主要用于对象的合并，将源对象source的所有可枚举属性合并到目标对象target上,此方法只拷贝源对象的自身属性，不拷贝继承的属性。
-  - Object.assign方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
-  - 相同的key源对象会覆盖目标对象。
-  - Object.assign只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
-  - Object.assign可以用来处理数组，但是会把数组视为对象。 Object.assign([1, 2, 3], [4, 5]) 输出[4, 5, 3]
+### 2、Object 对象常用方法
 
-- Object.create(__proto__,`[properties]`)
-  - 创建一个新的对象，该方法将__proto__作为原型对象，并将`[properties]`作为新对象的属性。
-  - 该方法创建的对象 初始的属性value get set是undefined，enumerable writable configurable都是false。需要配置才能正常赋值。
+- Object.assign(target, source1, source2,...) 返回一个新对象 target 会受到影响 返回的对象等于新的 target 对象。
+
+  - 该方法主要用于对象的合并，将源对象 source 的所有可枚举属性合并到目标对象 target 上,此方法只拷贝源对象的自身属性，不拷贝继承的属性。
+  - Object.assign 方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
+  - 相同的 key 源对象会覆盖目标对象。
+  - Object.assign 只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
+  - Object.assign 可以用来处理数组，但是会把数组视为对象。 Object.assign([1, 2, 3], [4, 5]) 输出[4, 5, 3]
+
+- Object.create(**proto**,`[properties]`)
+
+  - 创建一个新的对象，该方法将**proto**作为原型对象，并将`[properties]`作为新对象的属性。
+  - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
 
 - Object.defineProperty(obj,prop,descriptor)
+
   - 在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
-  - 该方法创建的对象 初始的属性value get set是undefined，enumerable writable configurable都是false。需要配置才能正常赋值。
+  - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
 
 - Object.defineProperties(obj, props)
+
   - 在一个对象上定义多个新属性，或者修改一个对象的现有属性， 并返回这个对象。
-  - 该方法创建的对象 初始的属性value get set是undefined，enumerable writable configurable都是false。需要配置才能正常赋值。
+  - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
 
 - Object.getOwnPropertyDescriptor(obj,prop)
+
   - 返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）。
   - 如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回 undefined。
 
 - Object.getOwnPropertyDescriptors(obj)
+
   - 获取一个对象的所有自身属性的描述符。返回的是对象。
 
 - Object.entries()
+
   - 返回一个给定对象自身可枚举属性的键值对数组，([[key, value], [key, value]])其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环也枚举原型链中的属性）。
 
 - Object.keys(obj)
+
   - 返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致（两者的主要区别是 一个 for-in 循环还会枚举其原型链上的属性）。
 
 - Object.values()
-  - 方法返回一个给定对象自己的所有可枚举属性值的数组，值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
+
+  - 方法返回一个给定对象自己的所有可枚举属性值的数组，值的顺序与使用 for...in 循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
 
 - Object.is(val1, val2)
+
   - 判断两个值是否相同。
   - 如果下列任何一项成立，则两个值相同：
     - 两个值都是 undefined
@@ -57,19 +69,20 @@
       - 都是除零和 NaN 外的其它同一个数字
 
 - Object.getPrototypeOf(obj)
-  返回指定对象的原型（内部`[[Prototype]]`属性的值，即__proto__，而非对象的prototype）。
+  返回指定对象的原型（内部`[[Prototype]]`属性的值，即**proto**，而非对象的 prototype）。
 
 - Object.setPrototypeOf(obj, prototype)
-    设置对象的原型对象
+  设置对象的原型对象
 
 - obj.hasOwnProperty(prop)
-    判断对象自身属性中是否具有指定的属性。 不包括原型链上的属性
-    obj.hasOwnProperty('name')
+  判断对象自身属性中是否具有指定的属性。 不包括原型链上的属性
+  obj.hasOwnProperty('name')
 
 - obj1.isPrototypeOf(obj2)
-    判断obj1是否存在于obj2的原型链上。 原型.isPrototypeOf(对象)
+  判断 obj1 是否存在于 obj2 的原型链上。 原型.isPrototypeOf(对象)
 
 ### 3、String
+
     创建Number有两种种方法
       var str = "xxx";或者var str = 'xxx'
       var str = new String("xxx");
@@ -103,6 +116,7 @@
     toString() 返回一个字符串。
 
 ### 4、数组
+
     创建数组有三种方法
       var arr = [xx, xx];
       var arr = new Array(xx, xx, xx);
@@ -126,7 +140,7 @@
         不给initValue的时候defaultInitValue默认为数组的第一个值，currentValue为数组的第二个值，currentIndex为数组第二个值得下标， arr为数组本身
         给initValue的时候defaultInitValue为initValue的值，currentValue为数组的第一个值，currentIndex为数组第一个值得下标， arr为数组本身
       arr.reduceRight((defaultInitValue, currentValue, currentIndex, arr)=>{}, initValue)  将数组元素计算为一个值（从右到左）。
-      arr.fill(xx)  使用一个固定值来填充数组。会改变原数组。
+      arr.fill(xx, start, end)  使用一个固定值来填充数组。会改变原数组。start end可选。
       arr.find((item, index, arr)=>{})  返回符合传入测试（函数）条件的第一个数组元素。
       arr.findIndex((item, index, arr)=>{})  返回符合传入测试（函数）条件的数组第一个元素索引。
       arr.indexOf(xx)  搜索数组中的元素，并返回它所在的位置。没有返回-1
@@ -145,6 +159,7 @@
       arr.valueOf()  返回数组对象的原始值。
 
 ### 5、Number
+
     创建Number有两种方法
       var num = value;
       var num = new Number(value); 如果一个参数值不能转换为一个数字将返回 NaN (非数字值)。
@@ -161,6 +176,7 @@
     num.valueOf()  返回一个 Number 对象的基本数字值。
 
 ### 6、Boolean
+
     创建Boolean有两种种方法
       var bool = true;
       var bool = new Boolean(true)
@@ -169,6 +185,7 @@
       valueOf() 返回 Boolean 对象的原始值。
 
 ### 7、Math
+
     Math.abs(x)  返回 x 的绝对值。
     Math.ceil(x)  对数进行上舍入。取整数 没有小数部分
     Math.floor(x)  对 x 进行下舍入。取整数 没有小数部分
@@ -179,10 +196,9 @@
     Math.round(x)  截取整数部分，会四舍五入。
     Math.trunc(x) 截取整数部分，不会四舍五入。
     Math.sqrt(x)  返回数的平方根。
-    Math.max(x,y,z,...,n)  返回 x,y,z,...,n 中的最高值。
-    Math.min(x,y,z,...,n)  返回 x,y,z,...,n中的最低值。
 
 ### 8、date
+
     创建Date的方法
       var d = new Date();
       var d = new Date(milliseconds);
@@ -191,7 +207,7 @@
     方法
       Date.now()  返回 1970 年 1 月 1 日至今的毫秒数。
       Date.parse(date字符串)  把指定date类型时间字符串变为毫秒数。
-      Date.UTC(年,月,日,时,分,秒,毫秒)  把指定时间设为毫秒数。设置的UTC时间转成date时间小时数会加8。
+      Date.UTC(年,月,日,时,分,秒,毫秒)  把指定时间设为毫秒数。少8小时。
 
     date.getFullYear()  从 Date 对象以四位数字返回年份。
     date.getMonth()  从 Date 对象返回月份 (0 ~ 11)。小一个月。
@@ -221,12 +237,13 @@
     date.toISOString()  使用 ISO 标准返回字符串的日期格式。
     date.toJSON()  以 JSON 数据格式返回日期字符串。与ISO格式返回的一样
     注意
-      只有getUTCHours比getHours少8个小时其它的UTC时间与Date对象的时间是一样的。属于世界时间比东八区北京时间小8。
+      getUTCHours比getHours少8个小时其它的UTC时间与Date对象的时间是一样的。UTC属于世界时间比东八区北京时间小8。
       getMonth()会比现实小一个月，如果是自己通过setMonth()设置的则不会小。
 
 ### 9、Error
+
     抛出自定义异常 throw new Error(message)。
-    Error：普通异常。通常与 throw 语句和 try／catch 语句一起使用。 
+    Error：普通异常。通常与 throw 语句和 try／catch 语句一起使用。
     利用属性 name 可以声明或了解异常的类型，利用 message 属性可以设置和读取异常的详细信息。
     错误类型
       EvalError： 在不正确使用 eval（）方法时抛出。
@@ -237,6 +254,7 @@
       URLError：由 URL 的编码和解码方法抛出。
 
 ### 10、正则表达式
+
     创建有两种方法
       var patt=new RegExp("pattern", "modifiers"); 需要转义。比如\d要写成"\\d"
       或者更简单的方式:
@@ -263,6 +281,7 @@
       toString  返回正则表达式的字符串。返回/ /这种格式的正则。
 
 ### 11、全局属性和方法
+
     属性
       NaN 指示某个值不是数字值。
       Infinity 无穷大。
@@ -281,6 +300,7 @@
       parseInt()  解析一个字符串并返回一个整数。
 
 ### 12、浏览器对象 BOM
+
     window
       属性
         outerWidth 返回窗口的外部宽度，包含工具条与滚动条。
@@ -346,11 +366,12 @@
         appCodeName 返回浏览器的代码名
         appName 返回浏览器名称
         appVersion 返回浏览器版本
-        userAgent 返回由客户机发送服务器的user-agent 头部的值
+        userAgent 返回由客户机发送服务器的user-agent 头部的值。可以使用该字段检测是什么浏览器
         platform 返回运行浏览器的操作系统平台
         cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
 
 ### 13、DOM
+
     document
       属性
         document.documentElement 返回文档的根节点
@@ -400,8 +421,8 @@
         element.offsetHeight 返回元素的高度，包括边框和填充。元素占据空间的大小。(包括边框 不包括外边距)
         element.offsetLeft 返回元素在当前文档中距离文档左边的距离。固定不变。
         element.offsetTop 返回元素在当前文档中距离文档顶部的距离。固定不变。
-        element.screenLeft 返回元素自身在x轴上滚动的距离。前提是该元素有滚动条。
-        element.screenTop 返回元素自身在y轴上滚动的距离。前提是该元素有滚动条。
+        element.scrollLeft 返回元素自身在x轴上滚动的距离。前提是该元素有滚动条。
+        element.scrollTop 返回元素自身在y轴上滚动的距离。前提是该元素有滚动条。
       方法
         element.addEventListener(event, function, useCapture)添加事件监听。event不需要on前缀，useCapture默认是fasle冒泡事件。
         element.removeEventListener(function)	移除由 addEventListener() 方法添加的事件监听。function要是同一个方法。
@@ -467,6 +488,6 @@
         onsearch  用户向搜索域输入文本时触发 ( <input="search">)
         onselect  用户选取文本时触发 ( <input> 和 <textarea>)
       剪贴板事件
-        oncopy 该事件在用户拷贝元素内容时触发	 
-        oncut 该事件在用户剪切元素内容时触发	 
+        oncopy 该事件在用户拷贝元素内容时触发
+        oncut 该事件在用户剪切元素内容时触发
         onpaste 该事件在用户粘贴元素内容时触发

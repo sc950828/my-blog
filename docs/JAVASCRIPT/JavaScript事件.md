@@ -24,17 +24,20 @@
 
 ### 2、事件委托
 
-    事件委托就是利用冒泡的原理，把事件加到父元素或祖先元素上，触发执行效果。
-    <input type="button" value="click me" id="btn6">
-    var btn6 = document.getElementById("btn6");
-    document.onclick = function(event){
-      var event = event || window.event; 非标准event对象在window上而不是入参
-      var target = event.target || event.srcElement;
-      if(target == btn6){ //或者通过标签名target.nodeName.toUpperCase() == xxx
-        alert(btn5.value);
-      }
-    }
-    提高JavaScript性能。事件委托可以显著的提高事件的处理速度，减少内存的占用
+- 事件委托就是利用冒泡的原理，把事件加到父元素或祖先元素上，触发执行效果。
+
+        <input type="button" value="click me" id="btn6">
+        var btn6 = document.getElementById("btn6");
+        document.onclick = function(event){
+          var event = event || window.event; 非标准event对象在window上而不是入参
+          var target = event.target || event.srcElement;
+          if(target == btn6){ //或者通过标签名target.nodeName.toUpperCase() == xxx
+            alert(btn5.value);
+          }
+        }
+
+- 提高 JavaScript 性能。事件委托可以显著的提高事件的处理速度，减少内存的占用
+  使用事件委托我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实现事件的动态绑定，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理。
 
 ### 3、方法
 
@@ -83,13 +86,3 @@
 - 第三种是 DOM2 级事件模型，在该事件模型中，一次事件共有三个过程，第一个过程是事件捕获阶段。捕获指的是事件从 docu
   ment 一直向下传播到目标元素，依次检查经过的节点是否绑定了事件监听函数，如果有则执行。后面两个阶段和 IE 事件模型
   的两个阶段相同。这种事件模型，事件绑定的函数是 addEventListener，其中第三个参数可以指定事件是否在捕获阶段执行。
-
-### 10、事件委托是什么？
-
-- 事件委托本质上是利用了浏览器事件冒泡的机制。因为事件在冒泡过程中会上传到父节点，并且父节点可以通过事件对象获取到
-  目标节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件，这种方式称为事件
-  代理。
-
-- 使用事件代理我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实
-  现事件的动态绑定，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的
-  监听函数来处理。

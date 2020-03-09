@@ -30,6 +30,8 @@
 
 ### 15、[原型和原型链](/JAVASCRIPT/原型和原型链)
 
-### 16、[Promise与Async与Await](/JAVASCRIPT/Promise与Async与Await)
+### 16、[Promise 与 Async 与 Await](/JAVASCRIPT/Promise与Async与Await)
+
+### 17、[垃圾回收](/JAVASCRIPT/垃圾回收)
 
 #### 待更新...

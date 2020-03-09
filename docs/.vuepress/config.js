@@ -27,7 +27,6 @@ module.exports = {
           ["/CSS/重绘与回流", "重绘与回流"],
           ["/CSS/常见问题", "常见问题"],
           ["/CSS/常见兼容性问题", "常见兼容性问题"],
-          ["/CSS/移动端", "移动端"],
           ["/CSS/LESS", "LESS"],
           ["/CSS/SCSS", "SCSS"],
           ["/CSS/Postcss", "Postcss"],
@@ -53,7 +52,25 @@ module.exports = {
           ["/JAVASCRIPT/深拷贝浅拷贝", "深拷贝浅拷贝"],
           ["/JAVASCRIPT/同步异步事件循环", "同步异步事件循环"],
           ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
-          ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"]
+          ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"],
+          ["/JAVASCRIPT/垃圾回收", "垃圾回收"],
+          ["/JAVASCRIPT/call和apply和bind", "call和apply和bind"]
+        ]
+      },
+      {
+        title: "WEB移动端",
+        children: [
+          ["/WEB移动端/移动端", "移动端"],
+          ["/WEB移动端/移动端常见问题", "移动端常见问题"]
+        ]
+      },
+      {
+        title: "VUE",
+        children: [
+          ["/VUE/vue", "vue"],
+          ["/VUE/vue常见问题", "vue常见问题"],
+          ["/VUE/vuex", "vuex"],
+          ["/VUE/vue内部运行机制", "vue内部运行机制"],
         ]
       },
       {
@@ -73,18 +90,19 @@ module.exports = {
           ["/HTTP/web安全", "web安全"]
         ]
       },
-      // {
-      //   title: "VUE",
-      //   children: [["/VUE/vue", "vue"]]
-      // },
-      // {
-      //   title: "TOOL",
-      //   children: [["/TOOL/webpack", "webpack"]]
-      // },
-      // {
-      //   title: "NODE",
-      //   children: [["/NODE/node", "node"]]
-      // }
+      {
+        title: "计算机基础",
+        children: [
+          ["/计算机基础/计算机基础", "计算机基础"]
+        ]
+      },
+      {
+        title: "技术官网",
+        children: [
+          ["/技术官网/前端基础官网", "前端基础官网"],
+          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
+        ]
+      },
     ]
   }
 };
