@@ -1,4 +1,4 @@
-1.创建vue项目
+### 1、创建vue项目
   利用vue-cli创建vue应用，这里的vue-cli是vue2.0及以上版本，不适用vue3.0。需要安装mode.js，版本需要大于等于6.0，大于等于8.0的最好，npm需要大于等于3.0
   第一步： npm install -g vue-cli 全局安装vue-cli。
   第二步： vue init templateName projectName 使用vue初始化一个基于templateName的项目，项目名自定义。这里的template有很多，一般我们使用webpack。
@@ -10,7 +10,7 @@
     第一步：npm install @vue/cli -g 全局安装@vue/cli
     第二步：vue create paojectName 创建项目
 
-2.vue项目中怎么使用elementui和国际化
+### 1、vue项目中怎么使用elementui和国际化
   第一步： npm install element-ui --save 安装elementui。
   第二步： 在main.js中引入并使用。
     import ElementUi from 'element-ui'
@@ -67,14 +67,14 @@
       我们使用{{$t('key')}}调用就可以了。
 
 
-3.vue项目中怎么使用axios?
+### 1、vue项目中怎么使用axios?
   第一步： npm install axios
   第二步： 在main.js中引入并使用。axios并不是vue插件，所以不能 使用Vue.use(),为了解决这个问题，我们在引入 axios 之后，通过修改原型链，来更方便的使用。
     import 'axios' from 'axios'
     Vue.prototype.$http = axios
     在项目中就能使用this.$http调用axios的各种方法了。
 
-4.vue项目中怎么使用router？
+### 1、vue项目中怎么使用router？
   第一步： npm install vue-router --save-dev
   第二步： 在main.js中引入并使用
     import VueRouter from 'vue-router'
@@ -96,7 +96,7 @@
       this.$route.params.username
       this.$router.go(-1)
 
-5.vue项目中怎么使用less？
+### 1、vue项目中怎么使用less？
   第一步： 安装less less-loader 就是 npm install less less-loader --save-dev
   第二步： 配置loader，在webpack.base.conf.js中加上如下配置即可。
     {
@@ -104,7 +104,7 @@
       loader: "style-loader!css-loader!less-loader",
     }
 
- 6. vue项目怎么配置favicon？
+### 1、vue项目怎么配置favicon？
   第一步： 准备好favicon，放在项目的根目录
   第二步： 在index.html中加上 <link rel="shortcut icon" href="favicon.ico"  type="image/x-icon">
   第三步： 在webpack.dev.conf.js中加上favicon: 'favicon.ico'
@@ -115,7 +115,7 @@
       favicon: './favicon.ico'
     }),
 
-7. vue项目怎么使用vuex
+### 1、vue项目怎么使用vuex
   第一步： npm install vuex --save-dev 安装vuex
   第二步： 引入并使用
     import Vuex from 'vuex'
@@ -140,7 +140,7 @@
 
     通过this.$store访问store里面的东西
 
-8. 解决vue的跨域问题
+### 1、解决vue的跨域问题
   域名 协议 端口号三者有一个不同即为跨域
   假如我们前端项目在localhost:8080 后端项目在localhost:3000
 
@@ -180,19 +180,19 @@
         }
       }
 
-9. vue使用echarts
+### 1、vue使用echarts
     第一步: 安装 npm install echarts -D
     第二步: 引入使用 import echarts from 'echarts'  Vue.prototype.$echarts = echarts
     使用this.$echarts 就能绘图了
 
-10. vue-cli
+### 1、vue-cli
     static目录和assets目录
       src下面的assets目录存放的静态资源是会被webpack处理的
       static下面的静态资源是不会被webpack处理，会被直接复制过去。
         assetsSubDirectory: 'static' //这个是配置静态资源的目录
         assetsPublicPath: '/', //静态资源前缀 如果是/public 则引用静态资源的地方路径是/public/static
 
-11. vue3
+### 1、vue3
   新建项目
     npm install @vue/cli -g 全局安装vue3
     vue create peojectName 创建基于vue3的项目
@@ -208,11 +208,11 @@
       .env.[mode].local > .env.[mode] > .env.local > .env
       除了相同配置项权重大的覆盖小的，不同配置项它们会进行合并操作，类似于 Javascript 中的 Object.assign 的用法。
 
-12. vue中使用font-awesome
+### 1、vue中使用font-awesome
   第一步 npm install font-awesome
   第二步 在main.js引入 font-awesome/css/font-awesome.min.css
 
-13. vue中使用bootstrap-vue
+### 1、vue中使用bootstrap-vue
   安装
     npm install bootstrap-vue
   引用
@@ -221,13 +221,13 @@
     import 'bootstrap-vue/dist/bootstrap-vue.css'
     Vue.use(BootstrapVue)
 
-14. vue2和vue3的区别
+### 1、vue2和vue3的区别
   创建方式不同vue2是vue init webpack name, vue3是vue create name
   webpack配置文件不同
     vue2在build文件夹里面 包括webpack.base.conf.js webpack.dev.conf.js webpack.prod.conf.js
     vue3默认已经配置好 如需自定义新建vue.config.js文件配置即可
 
-15. vue.config.js
+### 1、vue.config.js
   baseurl 其改变的其实是 webpack 配置文件中 output 的 publicPath 项，就是将项目地址加一个二级目录
     比如你配置了baseUrl: 'vue',你的首页就需要通过http://localhost:8080/vue/打开
     在vue-cli.3.3版本后 baseUrl被废除了，要写成 publicPath
@@ -255,7 +255,7 @@
       }
     }
 
-16. h5调试vue
+### 1、h5调试vue
   npm install VConsole
   import Vconsole from 'VConsole'
   const vc = new VConsole()
