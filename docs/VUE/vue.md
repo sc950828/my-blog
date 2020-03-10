@@ -9,27 +9,26 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
 
 ### 2、生命周期
 
-什么是 vue 的生命周期
-
-- Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
-  vue 生命周期的作用是什么
-- 它的生命周期中有多个事件钩子，让我们更容易控制整个 Vue 实例的生命过程
-  vue 生命周期总共有几个阶段
-- beforeCreate 此时获取不到 prop 和 data 中的数据。在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。有生命周期函数和一些默认事件。
-- created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，\$el 属性目前不可见。
-- beforeMount 相关的 render 函数首次被调用 获取到了 VDOM
-- mounted VDOM 解析成了真实 DOM，能获取 dom，能进行 dom 操作
-- beforeUpdate 数据更新时调用，能获取到新数据，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
-- updated 当这个钩子被调用时，组件 DOM 已经更新
-- activated keep-alive 组件被激活时调用
-- deactivated keep-alive 组件停止时调用
-- beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。函数 data prop 都能用。
-- destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
-- errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
-  第一次页面加载会触发哪几个钩子
-- 第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这四个钩子
-  dom 渲染在哪个周期完成
-- mounted
+- 什么是 vue 的生命周期
+  - Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
+- vue 生命周期的作用是什么
+  - 它的生命周期中有多个事件钩子，让我们更容易控制整个 Vue 实例的生命过程
+- vue 生命周期总共有几个阶段
+  - beforeCreate 此时获取不到 prop 和 data 中的数据。在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。有生命周期函数和一些默认事件。
+  - created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，\$el 属性目前不可见。
+  - beforeMount 相关的 render 函数首次被调用 获取到了 VDOM
+  - mounted VDOM 解析成了真实 DOM，能获取 dom，能进行 dom 操作
+  - beforeUpdate 数据更新时调用，能获取到新数据，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
+  - updated 当这个钩子被调用时，组件 DOM 已经更新
+  - activated keep-alive 组件被激活时调用
+  - deactivated keep-alive 组件停止时调用
+  - beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。函数 data prop 都能用。
+  - destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+  - errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
+- 第一次页面加载会触发哪几个钩子
+  - 第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这四个钩子
+- dom 渲染在哪个周期完成
+  - mounted
 
 ### 3、插值绑定
 

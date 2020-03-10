@@ -608,3 +608,273 @@ const EventUtils = {
 - 当计算机计算 0.1+0.2 的时候，实际上计算的是这两个数字在计算机里所存储的二进制，0.1 和 0.2 在转换为二进制表示的时候会出现位数无限循环的情况。js 中是以 64 位双精度格式来存储数字的，只有 53 位的有效数字，超过这个长度的位数会被截取掉这样就造成了精度丢失的问题。这是第一个会造成精度丢失的地方。在对两个以 64 位双精度格式的数据进行计算的时候，首先会进行对阶的处理，对阶指的是将阶码对齐，也就是将小数点的位置对齐后，再进行计算，一般是小阶向大阶对齐，因此小阶的数在对齐的过程中，有效数字会向右移动，移动后超过有效位数的位会被截取掉，这是第二个可能会出现精度丢失的地方。当两个数据阶码对齐后，进行相加运算后，得到的结果可能会超过 53 位有效数字，因此超过的位数也会被截取掉，这是可能发生精度丢失的第三个地方。
 
 - 对于这样的情况，我们可以将其转换为整数后再进行运算，运算后再转换为对应的小数，以这种方式来解决这个问题。
+
+### 59、offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别？
+
+- clientWidth/clientHeight 返回的是元素的内部宽度，它的值只包含 content + padding，如果有滚动条，不包含滚动条。
+- clientTop 返回的是上边框的宽度。
+- clientLeft 返回的左边框的宽度。
+
+- offsetWidth/offsetHeight 返回的是元素的布局宽度，它的值包含 content + padding + border 包含了滚动条。
+- offsetTop 返回的是当前元素相对于其 offsetParent 元素的顶部的距离。
+- offsetLeft 返回的是当前元素相对于其 offsetParent 元素的左部的距离。
+
+- scrollWidth/scrollHeight 返回值包含 content + padding + 溢出内容的尺寸。
+- scrollTop 属性返回的是一个元素的内容垂直滚动的像素数。
+- scrollLeft 属性返回的是元素滚动条到元素左边的距离。
+
+### 60、Js 动画与 CSS 动画区别及相应实现
+
+CSS3 的动画的优点
+
+- 在性能上会稍微好一些，浏览器会对 CSS3 的动画做一些优化
+- 代码相对简单
+
+缺点
+
+- 在动画控制上不够灵活
+- 兼容性不好
+
+JavaScript 的动画正好弥补了这两个缺点，控制能力很强，可以单帧的控制、变换，同时写得好完全可以兼容 IE6，并且功能强
+大。对于一些复杂控制的动画，使用 javascript 会比较靠谱。而在实现一些小的交互动效的时候，就多考虑考虑 CSS 吧
+
+### 61、URL 和 URI 的区别？
+
+- URI: Uniform Resource Identifier 指的是统一资源标识符
+- URL: Uniform Resource Location 指的是统一资源定位符
+- URN: Universal Resource Name 指的是统一资源名称
+
+URI 指的是统一资源标识符，用唯一的标识来确定一个资源，它是一种抽象的定义，也就是说，不管使用什么方法来定义，只要能唯一的标识一个资源，就可以称为 URI。
+
+URL 指的是统一资源定位符，URN 指的是统一资源名称。URL 和 URN 是 URI 的子集，URL 可以理解为使用地址来标识资源，U
+RN 可以理解为使用名称来标识资源。
+
+### 62、js 拖拽功能的实现
+
+一个元素的拖拽过程，我们可以分为三个步骤，第一步是鼠标按下目标元素，第二步是鼠标保持按下的状态移动鼠标，第三步是鼠
+标抬起，拖拽过程结束。
+
+这三步分别对应了三个事件，mousedown 事件，mousemove 事件和 mouseup 事件。只有在鼠标按下的状态移动鼠标我们才会
+执行拖拽事件，因此我们需要在 mousedown 事件中设置一个状态来标识鼠标已经按下，然后在 mouseup 事件中再取消这个状
+态。在 mousedown 事件中我们首先应该判断，目标元素是否为拖拽元素，如果是拖拽元素，我们就设置状态并且保存这个时候鼠
+标的位置。然后在 mousemove 事件中，我们通过判断鼠标现在的位置和以前位置的相对移动，来确定拖拽元素在移动中的坐标。
+最后 mouseup 事件触发后，清除状态，结束拖拽事件。
+
+### 63、为什么使用 setTimeout 实现 setInterval？怎么模拟？
+
+setInterval 的作用是每隔一段指定时间执行一个函数，但是这个执行不是真的到了时间立即执行，它真正的作用是每隔一段时
+间将事件加入事件队列中去，只有当当前的执行栈为空的时候，才能去从事件队列中取出事件执行。所以可能会出现这样的情况，
+就是当前执行栈执行的时间很长，导致事件队列里边积累多个定时器加入的事件，当执行栈结束的时候，这些事件会依次执行，因
+此就不能到间隔一段时间执行的效果。
+
+针对 setInterval 的这个缺点，我们可以使用 setTimeout 递归调用来模拟 setInterval，这样我们就确保了只有一个事
+件结束了，我们才会触发下一个定时器事件，这样解决了 setInterval 的问题。
+
+```js
+function mySetInterval(fn, timeout) {
+  // 控制器，控制定时器是否继续执行
+  var timer = {
+    flag: true
+  };
+
+  // 设置递归函数，模拟定时器执行。
+  function interval() {
+    if (timer.flag) {
+      fn();
+      setTimeout(interval, timeout);
+    }
+  }
+
+  // 启动定时器
+  setTimeout(interval, timeout);
+
+  // 返回控制器
+  return timer;
+}
+```
+
+### 64、什么是尾调用，使用尾调用有什么好处？
+
+尾调用指的是函数的最后一步调用另一个函数。我们代码执行是基于执行栈的，所以当我们在一个函数里调用另一个函数时，我们
+会保留当前的执行上下文，然后再新建另外一个执行上下文加入栈中。使用尾调用的话，因为已经是函数的最后一步，所以这个时
+候我们可以不必再保留当前的执行上下文，从而节省了内存，这就是尾调用优化。但是 ES6 的尾调用优化只在严格模式下开启，
+正常模式是无效的。
+
+### 65、require 模块引入的查找方式？
+
+    当 Node 遇到 require(X) 时，按下面的顺序处理。
+
+    （1）如果 X 是内置模块（比如 require('http')）
+    　　a. 返回该模块。
+    　　b. 不再继续执行。
+
+    （2）如果 X 以 "./" 或者 "/" 或者 "../" 开头
+    　　a. 根据 X 所在的父模块，确定 X 的绝对路径。
+    　　b. 将 X 当成文件，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行。
+        X
+        X.js
+        X.json
+        X.node
+
+    　　c. 将 X 当成目录，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行。
+        X/package.json（main字段）
+        X/index.js
+        X/index.json
+        X/index.node
+
+    （3）如果 X 不带路径
+    　　a. 根据 X 所在的父模块，确定 X 可能的安装目录。
+    　　b. 依次在每个目录中，将 X 当成文件名或目录名加载。
+
+    （4）抛出 "not found"
+
+### 66、如何在 js 里面判断是否有网络？
+
+- navigator.onLine
+- window.addEventListener('online', updateOnlineStatus);
+- window.addEventListener('offline', updateOnlineStatus);
+
+### 67、如何在 js 里面判断网络类型？
+
+使用 navigator.connection||navigator.mozConnection||navigator.webkitConnection，该对象里面包含了网络类型。
+
+### 68、如何在 js 里面判断浏览器类型？如何判断版本？
+
+- navigator.userAgent 判断浏览器类型
+- navigator.appVersion 判断浏览器版本
+
+### 69、如何封装一个 javascript 的类型判断函数？
+
+```js
+function getType(value) {
+  // 判断数据是 null 的情况
+  if (value === null) {
+    return value + "";
+  }
+
+  // 判断数据是引用类型的情况
+  if (typeof value === "object") {
+    let valueClass = Object.prototype.toString.call(value),
+      type = valueClass.split(" ")[1].split("");
+
+    type.pop();
+
+    return type.join("").toLowerCase();
+  } else {
+    // 判断数据是基本数据类型的情况和函数的情况
+    return typeof value;
+  }
+}
+```
+
+### 70、如何判断一个对象是否为空对象？
+
+```js
+function checkNullObj(obj) {
+  return Object.keys(obj).length === 0;
+}
+```
+
+### 71、一道常被人轻视的前端 JS 面试题
+
+```js
+function Foo() {
+  getName = function() {
+    alert(1);
+  };
+  return this;
+}
+Foo.getName = function() {
+  alert(2);
+};
+Foo.prototype.getName = function() {
+  alert(3);
+};
+var getName = function() {
+  alert(4);
+};
+function getName() {
+  alert(5);
+}
+
+//请写出以下输出结果：
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 1
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
+```
+
+### 72、js for 循环注意点
+
+```js
+for (var i = 0, j = 0; i < 5, j < 9; i++, j++) {
+  console.log(i, j);
+}
+```
+
+- 当判断语句含有多个语句时，以最后一个判断语句的值为准，因此上面的代码会执行 10 次。
+- 当判断语句为空时，循环会一直进行。
+
+### 73、一个列表，假设有 100000 个数据，这个该怎么办？
+
+我们需要思考的问题：该处理是否必须同步完成？数据是否必须按顺序完成？
+
+解决办法：
+
+（1）将数据分页，利用分页的原理，每次服务器端只返回一定数目的数据，浏览器每次只对一部分进行加载。
+
+（2）使用懒加载的方法，每次加载一部分数据，其余数据当需要使用时再去加载。
+
+（3）使用数组分块技术，基本思路是为要处理的项目创建一个队列，然后设置定时器每过一段时间取出一部分数据，然后再使用定
+时器取出下一个要处理的项目进行处理，接着再设置另一个定时器。
+
+### 74、 js 中倒计时的纠偏实现？
+
+在前端实现中我们一般通过 setTimeout 和 setInterval 方法来实现一个倒计时效果。但是使用这些方法会存在时间偏差的问题，这是由于 js 的程序执行机制造成的，setTimeout 和 setInterval 的作用是隔一段时间将回调事件加入到事件队列中，因此事件并不是立即执行的，它会等到当前执行栈为空的时候再取出事件执行，因此事件等待执行的时间就是造成误差的原因。
+
+一般解决倒计时中的误差的有这样两种办法：
+
+（1）第一种是通过前端定时向服务器发送请求获取最新的时间差，以此来校准倒计时时间。
+
+（2）第二种方法是前端根据偏差时间来自动调整间隔时间的方式来实现的。这一种方式首先是以 setTimeout 递归的方式来实现倒
+计时，然后通过一个变量来记录已经倒计时的秒数。每一次函数调用的时候，首先将变量加一，然后根据这个变量和每次的间隔
+时间，我们就可以计算出此时无偏差时应该显示的时间。然后将当前的真实时间与这个时间相减，这样我们就可以得到时间的偏
+差大小，因此我们在设置下一个定时器的间隔大小的时候，我们就从间隔时间中减去这个偏差大小，以此来实现由于程序执行所
+造成的时间误差的纠正。
+
+### 75、如何查找一篇英文文章中出现频率最高的单词？
+
+```js
+function findMostWord(article) {
+  // 合法性判断
+  if (!article) return;
+
+  // 参数处理
+  article = article.trim().toLowerCase();
+
+  let wordList = article.match(/[a-z]+/g),
+    visited = [],
+    maxNum = 0,
+    maxWord = "";
+
+  article = " " + wordList.join("  ") + " ";
+
+  // 遍历判断单词出现次数
+  wordList.forEach(function(item) {
+    if (visited.indexOf(item) < 0) {
+      let word = new RegExp(" " + item + " ", "g"),
+        num = article.match(word).length;
+
+      if (num > maxNum) {
+        maxNum = num;
+        maxWord = item;
+      }
+    }
+  });
+
+  return maxWord + "  " + maxNum;
+}
+```
