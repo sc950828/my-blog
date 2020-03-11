@@ -91,7 +91,7 @@
       required 不能为空。
       step用于input类型为number，每次增加/减少多少。
     全局新属性
-      hidden（直接放上去就是隐藏相当于HTML 4 的display）。(全局属性)
+      hidden（直接放上去就是隐藏相当于display:none）。(全局属性)
       spellcheck="true"（语法纠错，主要用在文本输入框里面）。(全局属性)
       tabindex="1"（Tab跳转顺序，按Tab键优先级从小到大，越小越高，也是应用在文本输入框）。
       data-自定义属性名字。这样就是自定义属性。(全局属性)
@@ -220,5 +220,5 @@
   - localStorage 在所有同源窗口中都是共享的。
   - cookie 在所有同源窗口中都是共享的。
 - 获取方式
-  - sessionStorage localStorage通过getItem()方法获取
-  - cookie ajax请求可以用getResponseHeader获取，如果不是ajax，js无法获取响应头，只能用document.cookie获取设置的cookie，并且无法获取到服务器端设置了httponly的cookie。
+  - sessionStorage localStorage 通过 getItem()方法获取
+  - cookie ajax 请求可以用 getResponseHeader 获取，如果不是 ajax，js 无法获取响应头，只能用 document.cookie 获取设置的 cookie，并且无法获取到服务器端设置了 httponly 的 cookie。

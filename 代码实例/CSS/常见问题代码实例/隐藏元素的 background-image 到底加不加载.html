@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隐藏元素的 background-image 到底加不加载</title>
+    <style>
+      .div1 {
+        display: none;
+        /* visibility: hidden; */
+      }
+      /* .inner1 {
+        background-image: url(http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg);
+      } */
+
+      /* .inner2 {
+        display: none;
+        background-image: url(http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg);
+      } */
+
+      /* 样式没元素使用也不会加载 */
+      .inner3 {
+        background-image: url(http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg);
+      }
+
+      .div2 {
+        height: 200px;
+        width: 200px;
+      }
+      /* hover才会触发请求 */
+      .div2:hover {
+        background-image: url(http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 使用img不管显示影藏 都加载 -->
+    <!-- <img src="http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg" alt=""> -->
+    <!-- <img
+      style="visibility: hidden;"
+      src="http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg"
+      alt=""
+    /> -->
+    <img
+      hidden
+      src="http://xiaosu72.oss-cn-shanghai.aliyuncs.com/1580449280046avatar.jpg"
+      alt=""
+    />
+    <img
+      style="display:none;"
+      src="http://xiaosu72.oss-cn-shanghai.aliyuncs.com/1580451770005avatar.jpg"
+      alt=""
+    />
+
+    <!-- 背景图 需要父元素设置display none 并且不能是visibility属性-->
+    <div class="div1">
+      <div class="inner1"></div>
+    </div>
+
+    <div class="inner2"></div>
+
+    <div class="div2">div2</div>
+  </body>
+</html>

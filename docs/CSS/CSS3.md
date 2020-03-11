@@ -91,8 +91,7 @@ border-image border-radius background-image
 - 特点
   - 使用 flex 布局后容器内元素的 float、clear、vertical-align 属性将失效。
 - 启用 flex 布局
-  - 行内元素 display: inline-flex
-  - 块级元素 display: flex
+  - display: flex
 - 容器的属性
   - flex-direction
     控制主轴方向 row(默认) row-reverse column column-reverse
