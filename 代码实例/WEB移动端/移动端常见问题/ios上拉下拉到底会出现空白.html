@@ -11,6 +11,8 @@
       document.body.addEventListener(
         "touchmove",
         function(e) {
+          console.log(e);
+          // if (e._isScroller) return;这个不懂意思 也获取不到
           e.preventDefault();
         },
         {
