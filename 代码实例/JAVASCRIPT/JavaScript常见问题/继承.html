@@ -8,7 +8,7 @@
   <body>
     <script>
       // 原型继承
-      // 能继承父类原型上的方法和属性 一个实例修改所有实例都会发生变化 
+      // 能继承父类原型上的方法和属性 一个实例修改所有实例都会发生变化
       function Person(name, age) {
         // console.log(this);
         this.name = name;
@@ -58,65 +58,114 @@
       function Person1(name, age) {
         this.name = name;
         this.age = age;
-        this.colors = ["red"]; 
-        this.say = function () {
+        this.colors = ["red"];
+        this.say = function() {
           console.log(this.name);
-        }
+        };
       }
       Person1.prototype.hello = function() {
-        console.log('Person1 hello');
-      }
+        console.log("Person1 hello");
+      };
       function People1(name, age) {
         Person1.call(this, name, age);
-        this.say1 = function () {
+        this.say1 = function() {
           console.log(this.name);
-        }
+        };
       }
       People1.prototype.hello1 = function() {
-        console.log('People1 hello');
-      }
+        console.log("People1 hello");
+      };
       const pe1 = new People1("randy", 24);
       console.log("pe1: ", pe1);
       // 不是父类的实例
       console.log(pe1 instanceof Person1); // false
       console.log(pe1 instanceof People1);
-      pe1.say()
-      pe1.say1()
-      pe1.hello1()
+      pe1.say();
+      pe1.say1();
+      pe1.hello1();
       // pe1.hello() //父类的原型链上的方法获取不到
-      pe1.colors.push("black")
+      pe1.colors.push("black");
       console.log(pe1.colors);
-      let pe2 = new People1('demi', 25)
+      let pe2 = new People1("demi", 25);
       // 不会修改其他实例的属性
       console.log(pe2.colors);
 
       // 组合继承
-      function Person2 (name, age) {
+      function Person2(name, age) {
         this.name = name;
         this.age = age;
-        this.colors = ["red"]; 
-        this.say = function () {
+        this.colors = ["red"];
+        this.say = function() {
           console.log(this.name);
-        }
+        };
       }
       Person2.prototype.hello = function() {
-        console.log('Person2 hello');
-      }
+        console.log("Person2 hello");
+      };
       function People2(name, age) {
         Person2.call(this, name, age);
-        this.say1 = function () {
+        this.say1 = function() {
           console.log(this.name);
-        }
+        };
       }
       // 调用了两次父构造器
-      People2.prototype = new Person2()
-      People2.prototype.constructor = Person2
+      People2.prototype = new Person2();
+      People2.prototype.constructor = People2;
 
-      let peo1 = new People2('randy', 24)
+      let peo1 = new People2("randy", 24);
       console.log(peo1);
-      peo1.say()
-      peo1.say1()
-      peo1.hello()//能获取到父类原型链上的方法
+      peo1.say();
+      peo1.say1();
+      peo1.hello(); //能获取到父类原型链上的方法
+
+      // 寄生式继承
+      function createAnother(original) {
+        let clone = Object.create(original);
+        clone.say = function() {
+          console.log("say 寄生式继承");
+        };
+
+        return clone;
+      }
+      const Person3 = {
+        name: "randy",
+        age: 24
+      };
+      const people3 = createAnother(Person3);
+      const people4 = createAnother(Person3);
+      people3.say();
+      people3.say = function() {
+        console.log("say 我改了");
+      };
+      people3.say();
+      // 不受影响
+      people4.say();
+
+      // 寄生组合式继承
+      // 与组合继承的区别是 继承的是父类的原型 而不是父类的实例 大大减少了原型上不必要的属性。
+      function Person4(name) {
+        this.name = name;
+      }
+
+      Person4.prototype.sayName = function() {
+        console.log("My name is " + this.name + ".");
+      };
+
+      function Student4(name, grade) {
+        Person.call(this, name);
+        this.grade = grade;
+      }
+
+      Student4.prototype = Object.create(Person4.prototype);
+      Student4.prototype.constructor = Student4;
+
+      Student4.prototype.sayMyGrade = function() {
+        console.log("My grade is " + this.grade + ".");
+      };
+      const s1 = new Student4("randy", 24)
+      s1.sayMyGrade()
+      s1.sayName()
+
     </script>
   </body>
 </html>
