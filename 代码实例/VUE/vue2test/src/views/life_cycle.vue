@@ -39,6 +39,7 @@ export default {
       show: true
     };
   },
+  // 第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这几个钩子
   // 生命周期函数 创建前
   beforeCreate() {
     console.log("beforeCreate");

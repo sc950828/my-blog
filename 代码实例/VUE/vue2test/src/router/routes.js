@@ -38,5 +38,35 @@ export default [
     path: "/set",
     name: "Set",
     component: () => import("../views/set.vue")
+  },
+  {
+    path: "/filter",
+    name: "Filter",
+    component: () => import("../views/filter.vue")
+  },
+  {
+    path: "/directive",
+    name: "Directive",
+    component: () => import("../views/directive.vue")
+  },
+  {
+    path: "/mixin",
+    name: "Mixin",
+    component: () => import("../views/mixin.vue")
+  },
+  {
+    path: "/slot",
+    name: "Slot",
+    component: () => import("../views/slot.vue")
+  },
+  {
+    path: "/nexttick",
+    name: "NextTick",
+    component: () => import("../views/next_tick.vue")
+  },
+  {
+    path: "/model",
+    name: "Model",
+    component: () => import("../views/model.vue")
   }
 ];

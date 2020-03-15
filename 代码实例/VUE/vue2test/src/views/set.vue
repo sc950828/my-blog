@@ -69,6 +69,11 @@ export default {
       // 或者使用数组的变异方法 push unshift
       this.arr1.push(5);
       this.arr1.unshift(6);
+
+      // 数组的其他三个变异方法 sort reverse splice
+      // this.arr1.sort() // 排序
+      // this.arr1.reverse() // 反转
+      // this.arr1.splice(5, 1, 0) // 开始删除的元素 删除多少个 新增的元素
       console.log(this.arr1);
     },
     deleteArrValue() {

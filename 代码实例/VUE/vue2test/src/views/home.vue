@@ -13,6 +13,18 @@
     <router-link to="/methodscomputedwatch">methods computed watch</router-link>
     <br />
     <router-link to="/set">Vue.set this.$set</router-link>
+    <br />
+    <router-link to="/filter">filter</router-link>
+    <br />
+    <router-link to="/directive">directive</router-link>
+    <br />
+    <router-link to="/mixin">mixin</router-link>
+    <br />
+    <router-link to="/slot">slot</router-link>
+    <br />
+    <router-link to="/nexttick">nexttick</router-link>
+    <br />
+    <router-link to="/model">model</router-link>
   </div>
 </template>
 

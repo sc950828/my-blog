@@ -244,32 +244,18 @@ this.$set(vm.items, indexOfItem, newValue);
 - 定义公共的 mixin 对象，类似一个的 export default{}部分。混入对象可以包含任意组件选项。
 - 在需要的地方使用 mixins: `[mixin]`引入，然后就可以使用里面的属性方法等等。mixin 为文件
 - 合并时
-  - data 数据，值为对象的选项，例如 methods, computed, filters, components 和 directives，在 mixins 和组件的数据发生冲突时以组件数据优先。
-  - 钩子函数和 watch 全部调用 且先调用 mixins 里面的 watch 方法和钩子函数
+  - 数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先。例如 data, methods, computed, filters, components 和 directives，在 mixin 和组件的数据发生冲突时以组件数据优先。
+  - 生命周期函数和 watch 会全部调用。且先调用 mixin 里面的 watch 方法和生命周期函数。
   - 以上合并策略可以通过 Vue.config.optionMergeStrategies 修改
 
-### 22、mode
+### 22、model
 
-允许一个自定义组件在使用 v-model 时定制 prop 和 event。默认情况下，一个组件上的 v-model 会把 value 用作 prop 且把 input 用作 event，但是一些输入类型比如单选框和复选框按钮可能想使用 value prop 来达到不同的目的。使用 model 选项可以回避这些情况产生的冲突。
+允许一个自定义组件在使用 v-model 时定制 prop 和 event。所以当我们在一个自定义组件上使用 v-model 并不能实现双向绑定，因为自定的组件并没有默认的 value 和 input 事件，在使用时我们需要使用 model 显示的改变 v-model 绑定属性和方法。
 
-```js
-Vue.component("my-checkbox", {
-  model: {
-    prop: "checked",
-    event: "change"
-  },
-  props: {
-    // this allows using the `value` prop for a different purpose
-    value: String,
-    // use `checked` as the prop which take the place of `value`
-    checked: {
-      type: Number,
-      default: 0
-    }
-  }
-  // ...
-});
-```
+- 从官网上看到，v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
+  - text 和 textarea 元素使用 value 属性和 input 事件
+  - checkbox 和 radio 使用 checked 属性和 change 事件
+  - select 使用 value 和 change 事件
 
 ### 23、响应式增删
 
