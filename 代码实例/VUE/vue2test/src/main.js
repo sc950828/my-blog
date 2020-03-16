@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
+import store from './store';
 
 // 取消 Vue 所有的日志与警告 默认是false
 Vue.config.silent = false
@@ -56,6 +57,7 @@ Vue.directive("fixed", {
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
+  store,
   router,
   render: h => h(App)
 });

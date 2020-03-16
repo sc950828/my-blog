@@ -33,6 +33,8 @@
     <router-link to="/pre">v-pre指令</router-link>
     <br />
     <router-link to="/once">只渲染一次</router-link>
+    <br />
+    <router-link to="/store1">vuex store1</router-link>
   </div>
 </template>
 
