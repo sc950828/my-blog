@@ -1,0 +1,2 @@
+
+export const CHANGE_WEIGHT = "CHANGE_MY_WEIGHT"

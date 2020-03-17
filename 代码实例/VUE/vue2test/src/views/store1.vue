@@ -9,9 +9,9 @@
     <mark>通过这种赋值的方式不是响应式的</mark>
     <div>myName = this.$store.state.name得到 {{myName}}</div>
     <!-- mapState -->
-    <div>通过mapState获取{{name + " : " + age + "height:" + myHeight + "高度" + weight + isHandSome}}</div>
+    <div>通过mapState获取{{name + " : " + age + "height:" + myHeight + "体重" + weight + isHandSome}}</div>
     <div>
-      <button @click="changeName">改变state里面的name</button>
+      <button @click="changeName">改变state里面的name, 可以直接通过this.$store.state.name =xxx 更改</button>
     </div>
 
     <div>getters</div>
@@ -22,11 +22,26 @@
     <div>
       <button @click="changeAge">改变getters里面的getAge, 会报错，get里面的数据不能被修改</button>
     </div>
+
+    <div>mutations</div>
+    <div>
+      <button @click="commitHeightMutation">提交改变height的mutations</button>
+      <button @click="CHANGE_HANDSOME">提交改变handsome的mutations</button>
+      <button @click="changeWeight">提交改变weight的mutations</button>
+      <button @click="changeMyAge">提交改变age的mutations</button>
+    </div>
+
+    <div>actions</div>
+    <div>
+      <button @click="changeHandsomeAction">三秒后改变handsome</button>
+      <button @click="changeHeightAction">三秒后改变height</button>
+      <button @click="changeMyWeight">改变weight</button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   // 组件
@@ -77,7 +92,34 @@ export default {
     },
     changeAge() {
       this.$store.getters.getAge = 25;
-    }
+    },
+    commitHeightMutation() {
+      this.$store.commit("changeHeight", { name: "苏纯" });
+    },
+    ...mapMutations(["CHANGE_HANDSOME"]),
+    ...mapMutations({
+      changeWeight: "CHANGE_MY_WEIGHT"
+    }),
+    changeMyAge() {
+      this.$store.commit({
+        type: "changeAge",
+        step: 10
+      });
+    },
+
+    // actions
+    changeHandsomeAction() {
+      this.$store.dispatch("changeHandsome")
+    },
+    ...mapActions(
+      ["changeHeight"]
+    ),
+    changeHeightAction() {
+      this.changeHeight({name: 'demi'})
+    },
+    ...mapActions({
+      changeMyWeight: "changeWeight"
+    })
   },
   // 生命周期函数 已创建
   created() {

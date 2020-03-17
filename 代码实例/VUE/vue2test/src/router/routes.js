@@ -93,5 +93,10 @@ export default [
     path: "/store1",
     name: "Store1",
     component: () => import("../views/store1.vue")
+  },
+  {
+    path: "/store2",
+    name: "Store2",
+    component: () => import("../views/store2.vue")
   }
 ];

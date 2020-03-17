@@ -35,6 +35,8 @@
     <router-link to="/once">只渲染一次</router-link>
     <br />
     <router-link to="/store1">vuex store1</router-link>
+    <br />
+    <router-link to="/store2">vuex store2 模块化的store</router-link>
   </div>
 </template>
 
