@@ -11,5 +11,3 @@
 ### 5、[vue-cli](/VUE/vue-cli)
 
 ### 6、[vue-router](/VUE/vue-router)
-
-#### 待更新...

@@ -43,7 +43,7 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
 
 ### 5、编程式导航
 
-    this.$router.push()等同于<router-link to="...">这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
+    this.$router.push()等同于<router-link to="...">这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。传递对象的时候使用:to=""。
     this.$router.replace()等同于<router-link to="..." replace>它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
     this.$router.go()这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 window.history.go(n)。
     this.$router.back()
@@ -79,8 +79,8 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
         component: User
       }
     ]
-    我们可以使用<router-link to="{ name: 'user', params: { userId: 123 }}">User</router-link> 或者
-    this.$router.push({ name: 'user', params: { userId: 123 }})
+    我们可以使用<router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+    或者this.$router.push({ name: 'user', params: { userId: 123 }})
 
 ### 7、命名视图
 
@@ -125,11 +125,25 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
 ### 9、路由模式
 
     默认为hash模式，url比较丑会有#，如果想好看就使用history模式，创建router的时候加上mode: 'history'，不过后端也需要配置。
-    在nginx配置文件的location里面配置try_files $uri $uri/ /index.html;就是匹配不到的时候就去index.html.
     const router = new VueRouter({
       mode: 'history',
       routes: [...]
     })
+
+    Apache配置
+    <IfModule mod_rewrite.c>
+      RewriteEngine On
+      RewriteBase /
+      RewriteRule ^index\.html$ - [L]
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteCond %{REQUEST_FILENAME} !-d
+      RewriteRule . /index.html [L]
+    </IfModule>
+
+    nginx配置
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
 
 ### 10、导航守卫
 
@@ -142,6 +156,13 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
       router.afterEach((to, from) => {
         // ...这些钩子不会接受 next 函数也不会改变导航本身
       })
+    全局解析守卫
+      同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用
+      router.beforeResolve((to, from, next) => {
+        console.log("beforeResolve to", to);
+        console.log("beforeResolve from", from);
+        next();
+      });
     路由独享守卫
       进入该路由时会触发
       routes: [
@@ -238,7 +259,7 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
 ### 13、数据获取
 
     总共分两种，导航完成前获取，导航完成后获取
-    导航完成后获取就需要在组件的created方法内获取数据
+    导航完成后获取就需要在组件的created、beforeMount、mounted方法内获取数据
     导航完成前获取需要使用beforeRouteEnter组件内守卫 需要注意拿不到this 需要通过vm得到实例
       next(vm => {
         // 通过 `vm` 访问组件实例 类似this
@@ -273,3 +294,19 @@ Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度�
 
     $route 是“路由信息对象”，包括 path，params，hash，query，fullPath，matched，name 等路由信息参数。
     $router 是“路由实例”对象包括了路由的跳转方法，钩子函数等。
+
+### 20、路由滚动 scrollBehavior
+
+```js
+const router = new VueRouter({
+  routes: [...],
+  scrollBehavior (to, from, savedPosition) {
+    // return 期望滚动到哪个的位置
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+})
+```

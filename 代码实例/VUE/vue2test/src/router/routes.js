@@ -98,5 +98,16 @@ export default [
     path: "/store2",
     name: "Store2",
     component: () => import("../views/store2.vue")
+  },
+  {
+    path: "/router1/:id",
+    name: "Router1",
+    component: () => import("../views/router1.vue"),
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      console.log("beforeEnter to", to);
+      console.log("beforeEnter from", from);
+      next()
+    }
   }
 ];

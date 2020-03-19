@@ -37,6 +37,8 @@
     <router-link to="/store1">vuex store1</router-link>
     <br />
     <router-link to="/store2">vuex store2 模块化的store</router-link>
+    <br />
+    <router-link to="/router1/72">router1 动态路由参数 和路由生命周期</router-link>
   </div>
 </template>
 

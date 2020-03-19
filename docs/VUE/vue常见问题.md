@@ -179,3 +179,37 @@ vue 中 key 值的作用可以分为两种情况来考虑。
 mixin 用于全局混入，会影响到每个组件实例。
 
 mixins 应该是我们最常使用的扩展组件的方式了。如果多个组件中有相同的业务逻辑，就可以将这些逻辑剥离出来，通过 mixins 混入代码，比如上拉下拉加载数据这种逻辑等等。另外需要注意的是 mixins 混入的钩子函数会先于组件内的钩子函数执行，并且在遇到同名选项的时候也会有选择性的进行合并。只有生命周期函数和 watch 不会合并，并且 mixin 的生命周期函数和 watch 方法会先与组件运行。
+
+### 22、你对 vue 项目进行过哪些优化
+
+    代码层面的优化
+      v-if 和 v-show 区分使用场景
+      computed 和 watch 区分使用场景
+      v-for 遍历必须为 item 添加唯一的key，且避免同时使用 v-if
+      事件的销毁
+      图片资源懒加载
+      路由懒加载 () => import(xxx) 或者 (resolve) => require([xxx], resolve)
+      第三方插件的按需引入
+      重复功能模块抽离成组件
+      提取公共代码，公共代码用mixin或extend
+      使用css预处理器，css代码公共部分复用
+      css尽量不用calc函数和!important
+      图片根据实际情况选取jpg还是png图片
+    webpack层面
+    web技术层面
+      开启gzip压缩
+      开启浏览器缓存
+      使用cdn，CDN可以通过不同的域名来加载文件，从而使下载文件的并发连接数大大增加，且CDN具有更好的可用性，更低的网络延迟和丢包率
+      使用 Chrome Performance 查找性能瓶颈。
+
+### 23、vue 图片问题
+
+- 在 data 里面定义图片路径，然后在 img 里面通过:src 绑定图片地址，图片是显示不出来的。因为 webpack 在打包的时候回检测引用图片的地方，并把图片压缩成 base64 的形式放在引用的地方，如果我们通过后面的 vue 动态绑定，我们是拿不到图片的。如果需要在 data 里面通过:src 的方式使用图片，我们可以使用 import 或 require 先把图片引进来，然后在使用。
+
+- assets 和 static 两个文件都是静态的，但是它们是有区别的，static 文件夹下面的文件都是不能被 webpack 处理的，你必须使用绝对路径来引用这些文件，取决于在 config.js 里面加入的 build.assetsPublicPath 和 build.assetsSubDirectory 这两个属性设置的。其他地方的文件或图片都会被 webpack 解析成模块依赖，这时候就可以用 url-loader 和 css-loader 去处理。如果在 js 中引用图片，因为 js 是动态的所以没有办法去处理，但是我可以使用 require 或 import 将图片当成模块加载进来，就会被 webpack 当成静态文件解析，这时候就可以被 url-loader 处理。
+
+- url-loader 会将引入的图片编码，生成 dataURI。相当于把图片数据翻译成一串字符，再把这些字符打包到文件当中，最终只需要引入这个文件就可以访问这个图片。当然如果图片较大，编码会消耗性能，因此 url-loader 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy，一般会放在 static 文件夹下面。
+
+### 24、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
+
+箭头函数自己没有定义 this 上下文，而是绑定到其父函数的上下文中。当你在 Vue 程序中使用箭头函数（=>）时，this 关键字病不会绑定到 Vue 实例，因此会引发错误。所以强烈建议改用标准函数声明。

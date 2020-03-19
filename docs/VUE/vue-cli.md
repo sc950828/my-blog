@@ -38,26 +38,18 @@ vue3.0 的安装
 ```js
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import elementEnLocale from "element-ui/lib/locale/lang/en"; // element-ui lang
-import elementZhLocale from "element-ui/lib/locale/lang/zh-CN"; // element-ui lang
-import enLocale from "./en";
-import zhLocale from "./zh";
+import enLocale from "./en"; //自定义的中文
+import zhLocale from "./zh"; //自定义得到英文
 
 Vue.use(VueI18n);
 
 const messages = {
-  en: {
-    ...enLocale,
-    ...elementEnLocale
-  },
-  zh: {
-    ...zhLocale,
-    ...elementZhLocale
-  }
+  en: enLocale,
+  zh: zhLocale
 };
 
 const i18n = new VueI18n({
-  locale: Cookies.get("language") || "zh", // set locale  这里控制中英文显示，设置英文我们只需在前台页面选择英文的时候将变量locale变为‘en’即可
+  locale: Cookies.get("language") || "zh", // set locale 这里控制中英文显示，设置英文我们只需在前台页面选择英文的时候将变量locale变为‘en’即可
   messages // set locale messages
 });
 export default i18n;
@@ -67,11 +59,6 @@ export default i18n;
 
 ```js
 import i18n from "./lang";
-import Element from "element-ui";
-
-Vue.use(Element, {
-  i18n: (key, value) => i18n.t(key, value)
-});
 
 new Vue({
   el: "#app",
@@ -85,6 +72,7 @@ new Vue({
 
 ```js
     我们使用{{$t('key')}}调用就可以了。
+    修改语言我们使用this.$i18n.local="en"
 ```
 
 ### 4、vue 项目中怎么使用 axios?
