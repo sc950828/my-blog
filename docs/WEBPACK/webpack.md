@@ -4,36 +4,40 @@ webpack 是一个现代 JavaScript 应用程序的静态模块打包器。
 
 ### 2、使用
 
-    需要安装webpack和webpack-cli。
-    运行webpack会自动读取当前运行命令的目录下的webpack.config.js文件
-    指定用某配置文件webpack-dev-server --config=./config/webpack.config.js
-    自动认识js 不需要安装其他loader就可以打包js
-    本地安装的时候我们使用./node_modules/.bin/webpack来运行webpack。
-    或者在package.json里面配置script，"webpack": "webpack"他会自动去当前的node_modules/.bin里面查找webpack命令。
-    webpack --watch 开启监听模式 边改动边打包 不会自动刷新浏览器。
+- 需要安装 webpack 和 webpack-cli。
+- 运行 webpack 会自动读取当前运行命令的目录下的 webpack.config.js 文件。指定用某配置文件使用命令 webpack-dev-server --config=./config/webpack.config.js
+- 本地安装的时候我们使用./node_modules/.bin/webpack 来运行 webpack。或者在 package.json 里面配置 script，"webpack": "webpack"他会自动去当前的 node_modules/.bin 里面查找 webpack 命令。
+- webpack --watch 开启监听模式 边改动边打包 不会自动刷新浏览器。
 
 ### 3、创建本地服务器 webpack-dev-server 注意不会真正的打包
 
-    实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用webpack。自动刷新
-    第一步： 安装 npm install -g webpack-dev-server
-    第二步： 配置npm命令 "server": "webpack-dev-server --config=./config/webpack.config.js" 使用npm run server来开启
-    devServer: {
-      contentBase: "./dist",//本地服务器所加载的页面所在的目录
-      historyApiFallback: true,//不跳转  它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html 只适用于单页面应用。
-      port  设置默认监听端口，如果省略，默认为”8080“
-      host 配置服务器监听地址
-      inline: true //实时刷新，默认开启
-      open: true   自动打开浏览器,
-      overlay: true   错误在页面也出现,不仅仅是控制台
-      hot: false 热替换模式 默认未开启 开启后修改代码不实时刷新页面
-      headers: 可以在http响应头中注入一些响应信息
-      https； false 默认是http 设置为true则可以开启https服务
-      compress: false 是否启用Gzip压缩
-    }
+- 实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用 webpack。
+- 第一步： 安装 npm install webpack-dev-server
+- 第二步： 配置 npm 命令 "server": "./node_modules/.bin/webpack-dev-server" 使用 npm run server 来开启
 
-    热替换模式
-      webpack-dev-server启动后会实时刷新网页，如果不想实时刷新可以使用热替换模式 webpack-dev-server --hot
-      热替换模式启动后 修改文件不会自动实时刷新网页，下次以热模式启动后修改的都会自动刷新出来。
+```js
+devServer: {
+  contentBase: "./dist",// 本地服务器所加载的页面所在的目录
+  historyApiFallback: true,// 不跳转  它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html 只适用于单页面应用。
+  port: 9000,  // 设置默认监听端口，如果省略，默认为”8080“
+  host: '0.0.0.0', // 配置服务器监听地址
+  inline: true, // 实时刷新，默认开启 所以修改会实时刷新网页
+  open: true,   // 自动打开浏览器,
+  overlay: true,  // 错误在页面也出现,不仅仅是控制台
+  hot: true, // 热替换模式 默认未开启 开启后修改代码不用再去刷新页面
+  headers: {
+    "X-Custom-Foo": "bar"
+  },// 可以在http响应头中注入一些响应信息
+  https: false, // 默认是http 设置为true则可以开启https服务
+  compress: false, // 是否启用Gzip压缩
+
+}
+```
+
+- hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下，前者会自动刷新页面，后者不会刷新页面，而是在控制台输出热更新失败
+
+- 热替换模式
+  - webpack-dev-server 启动后会实时刷新网页，如果不想实时刷新可以使用热替换模式 webpack-dev-server --hot 热替换模式启动后 修改文件不会自动实时刷新网页，下次以热模式启动后修改的都会自动刷新出来。
 
 ### 4、入口 entry
 
@@ -66,6 +70,36 @@ webpack 是一个现代 JavaScript 应用程序的静态模块打包器。
 
 - 通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
 - 当设置为 development 会将 process.env.NODE_ENV 的值设为 development，production 同理。
+
+```js
+// webpack.development.config.js
+module.exports = {
+  mode: "development",
+  // 设置为development的时候会自动使用如下两个插件
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("development")
+    })
+  ]
+};
+```
+
+```js
+// webpack.production.config.js
+module.exports = {
+  mode: "production",
+  // 当使用production的时候会自动加上如下四个插件
+  plugins: [
+    new UglifyJsPlugin(/* ... */),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
+};
+```
 
 ### 7、加载器 loader 需要配置在 module 里面的 rules 数组里面
 
@@ -171,7 +205,7 @@ module.exports = {
 
     watch: false 默认是fasle 开启设置为true。在配置文件直接设置。
     也可以用命令行webpack --watch开启
-    使用webpack-dev-server启动的默认开启了watch模式
+    使用webpack-dev-server启动的默认开启了watch模式。所以会实时编译打包。
 
 ### 11、插件 plugins
 
@@ -183,19 +217,6 @@ module.exports = {
       const path = require('path');
 
     const config = {
-      entry: './path/to/my/entry/file.js',
-      output: {
-        filename: 'my-first-webpack.bundle.js',
-        path: path.resolve(__dirname, 'dist')
-      },
-      module: {
-        rules: [
-          {
-            test: /\.(js|jsx)$/,
-            use: 'babel-loader'
-          }
-        ]
-      },
       plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({template: './src/index.html'})

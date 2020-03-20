@@ -96,7 +96,8 @@ module.exports = {
         title: "WEBPACK",
         children: [
           ["/WEBPACK/webpack", "webpack"],
-          ["/WEBPACK/webpack常见问题", "webpack常见问题"]
+          ["/WEBPACK/webpack常见问题", "webpack常见问题"],
+          ["/WEBPACK/babel", "babel"]
         ]
       },
       {
@@ -145,8 +146,7 @@ module.exports = {
         children: [
           ["/编辑器/vscode", "vscode"],
           ["/编辑器/editorconfig", "editorconfig"],
-          ["/编辑器/eslint", "eslint"],
-          ["/编辑器/babel", "babel"]
+          ["/编辑器/eslint", "eslint"]
         ]
       },
       {

@@ -1,26 +1,29 @@
 const path = require("path");
-const htmlWebpackPlugin = require("html-webpack-plugin")
+const htmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
+  mode: "development",
   entry: "./main.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[ext]",
-    publicPath: "Randy"
+    filename: "boundle.js",
+    publicPath: "/Randy"
   },
   devServer: {
     // 端口
     port: "9000",
     // ip
     host: "0.0.0.0",
-    // 实时刷新，默认开启
-    // inline: true,
+    // 实时刷新，默认开启 默认是true
+    inline: true,
     // 自动打开浏览器
     open: false,
     // 出现编译器错误或警告时，在浏览器中显示全屏覆盖
     overlay: true,
     // 热替换模式 默认未开启 开启后修改代码不实时刷新页面
-    // hot: false,
+    hot: true,
+    hotOnly: true,
     // hotOnly: false,
     // 提供在服务器内部先于所有其他中间件执行自定义中间件的功能。这可以用于定义自定义处理程序
     before(app) {
@@ -51,8 +54,10 @@ module.exports = {
   plugins: [
     new htmlWebpackPlugin({
       filename: "index.html",
-      template: "index.html"
-    })
+      template: "./index.html"
+    }),
+    // 模块热替换 不用刷新浏览器就能页面更新
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
 

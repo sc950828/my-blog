@@ -1,4 +1,5 @@
 ### 1、常用插件
+
     1. open-in-browser
       能把html文件在浏览器中打开
     2. Chinese Language
@@ -38,6 +39,7 @@
       vscode的文件图标
 
 ### 2、常用快捷键
+
     打开用户设置
       mac     command + ,
       windows ctrl + ,
@@ -110,11 +112,44 @@
       windows ctrl + y
 
 ### 3、常用设置
-    "emmet.includeLanguages": {"javascript": "javascriptreact"} 设置react按tab补全标签
-    "editor.formatOnType": true, 
-    "editor.formatOnSave": true 设置代码自动格式化，变漂亮。
 
-### 4、Emmet插件的使用
+    "editor.fontSize": 16, //字体大小
+    "editor.tabSize": 2, //tab键空格数
+    "editor.renderWhitespace": "all", //空格显示成点
+    "editor.formatOnSave": true, //在保存的时候format
+    "editor.tabCompletion": "on", //tab键提示
+    "files.autoSave": "afterDelay", //自动保存
+    "files.insertFinalNewline": true, //文件末尾都加上新的一行
+    "workbench.iconTheme": "Monokai Pro Icons", //icon主题
+    "workbench.colorTheme": "Monokai Pro", //颜色主题
+    "eslint.format.enable": true, //开启eslint的代码格式化
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化html
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化css
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化json
+    },
+    "[less]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化less
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化scss
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化javascript
+    },
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "dbaeumer.vscode-eslint" //javascript使用eslint格式化
+    // },
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur" //vue使用vetur格式化
+    }
+
+### 4、Emmet 插件的使用
+
     使用tab进行生成
     默认生成div #aa 或 .aa  生成id或class为aa的div
     span.aa生成class为aa的span

@@ -97,17 +97,26 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 
 ### 10、占位符名称及含义
 
-ext 资源后缀名
-name 文件名称
-path 文件的相对路径
-folder 文件所在的文件夹
-contenthash 文件的内容 hash，默认是 md5 生成
-hash 文件内容的 hash，默认是 md5 生成
-emoji 一个随机的指代文件内容的 emoj
+- ext 资源后缀名
+- name 文件名称
+- path 文件的相对路径
+- folder 文件所在的文件夹
+- contenthash 文件的内容 hash，默认是 md5 生成
+- hash 文件内容的 hash，默认是 md5 生成
+- emoji 一个随机的指代文件内容的 emoj
 
 ### 11、在实际工程中，配置文件上百行乃是常事，如何保证各个 loader 按照预想方式工作？
 
-可以使用 enforce 强制执行 loader 的作用顺序，pre 代表在所有正常 loader 之前执行，post 是所有 loader 之后执行。(inline 官方不推荐使用)
+可以使用 enforce 强制执行 loader 的作用顺序，pre 代表在所有正常 loader 之前执行，post 是所有 loader 之后执行。(inline/行内 官方不推荐使用)
+
+    可能的值有："pre" | "post"
+    指定 loader 种类。没有值表示是普通 loader。
+    还有一个额外的种类"行内 loader"，loader 被应用在 import/require 行内。
+    所有 loader 通过 前置, 行内, 普通, 后置 排序，并按此顺序使用。
+    所有普通 loader 可以通过在请求中加上 ! 前缀来忽略（覆盖）。
+    所有普通和前置 loader 可以通过在请求中加上 -! 前缀来忽略（覆盖）。
+    所有普通，后置和前置 loader 可以通过在请求中加上 !! 前缀来忽略（覆盖）。
+    不应该使用行内 loader 和 ! 前缀，因为它们是非标准的。它们可在由 loader 生成的代码中使用。
 
 ### 12、如何优化 Webpack 的构建速度？
 
