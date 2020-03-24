@@ -138,6 +138,12 @@ module.exports = {
         ]
       },
       {
+        title: "数据结构和算法",
+        children: [
+          ["/数据结构和算法/队列和栈", "队列和栈"]
+        ]
+      },
+      {
         title: "浏览器",
         children: [
           ["/浏览器/Chrome调试技巧", "Chrome调试技巧"],
