@@ -30,7 +30,10 @@ module.exports = {
           ["/CSS/LESS", "LESS"],
           ["/CSS/SCSS", "SCSS"],
           ["/CSS/Postcss", "Postcss"],
-          ["/CSS/ECharts", "ECharts"]
+          ["/CSS/ECharts", "ECharts"],
+          ["/CSS/居中", "居中"],
+          ["/CSS/布局", "布局"],
+          ["/CSS/首屏和白屏", "首屏和白屏"],
         ]
       },
       {
