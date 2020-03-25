@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>全屏滚动</title>
     <style>
-      html, body {
+      /* 不使用js而使页面滚动 */
+      html,
+      body {
         height: 100%;
       }
       body {
@@ -16,7 +18,13 @@
         height: 100%;
       }
       .inner {
-        background-image: linear-gradient(to bottom, coral, yellow, green, blue);
+        background-image: linear-gradient(
+          to bottom,
+          coral,
+          yellow,
+          green,
+          blue
+        );
         transition: height 3s ease;
         height: 100%;
       }

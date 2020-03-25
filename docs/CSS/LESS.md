@@ -17,7 +17,8 @@
 ### 4、混合 mixin
 
     就是代码的复用
-    .card { //如果写成.card()则这个混合不会出现在css中，就是不会输出。只有带括号就不会出现在css中。
+    //如果写成.card()则这个混合不会出现在css中，就是不会输出。只有带括号就不会出现在css中。
+    .card {
       background: #f6f6f6;
       -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
       box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
@@ -68,9 +69,17 @@
 
 if(xxx, true 执行, false 执行)
 
+```less
+if(2>1, @color1, @color2);
+```
+
 ### 7、boolean
 
 boolean(xxx) 返回 true 或 false
+
+```less
+ boolean(1>2);
+```
 
 ### 8、range
 
@@ -83,7 +92,27 @@ boolean(xxx) 返回 true 或 false
     extract(index) 返回list某下标的元素，index从1开始
     each(@list, {xxx}) 循环list 在后面能通过@value获取到值。
 
-### 10、math 函数
+```less
+each(@list1, {
+  .cl-@{value} {
+    color: value;
+  }
+})
+```
+
+### 10、when
+
+```less
+.xunhuan(@count) when(@count>0) {
+  .item-@{count} {
+    color: red;
+  }
+  .xunhuan(@count - 1);
+}
+.xunhuan(@counter);
+```
+
+### 11、math 函数
 
     round(1.67); // returns `2`
     ceil(2.4);   // returns `3`
@@ -91,11 +120,11 @@ boolean(xxx) 返回 true 或 false
     如果你想将一个值转化为百分比，你可以使用percentage 函数:
     percentage(0.5); // returns `50%`
 
-### 11、避免编译
+### 12、避免编译
 
 ~"xxx" 或者 ~'xxx'
 
-### 12、注释
+### 13、注释
 
     /* 这是块注释 */ 这个会在编译后的css里面
     // 这是行注释 这个不会出现在编译后的css里面

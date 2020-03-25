@@ -127,7 +127,6 @@ document
 
 ### 2、es6 箭头函数中的 this 和普通函数中的 this
 
-- 普通函数的 this 对象是在运行时基于函数的执行环境绑定的：在全局函数中，this 指向的是 window；当函数被作为某个对象的方法调用时，this 就等于那个对象。
 - 箭头函数的 this 是在定义函数时绑定的，不是在执行过程中绑定的。简单的说，函数在定义时，this 就继承了定义函数的对象。
 - 箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this，箭头函数不能通过 apply call bind 改变 this。
 - 箭头函数不能使用 arguments 不能用于构造函数。
@@ -161,20 +160,7 @@ obj.c(); // 10 Object {...}
 ```
 
 ```js
-//箭头函数没有自己的this，而是使用箭头函数所在的作用域的this
-// 箭头函数作为对象的方法使用
-// 箭头函数作为对象的方法使用，指向全局window对象；而普通函数作为对象的方法使用，则指向调用的对象。
-var obj = {
-  i: 10,
-  b: () => console.log(this.i, this),
-  c: function() {
-    console.log(this.i, this);
-  }
-};
-obj.b(); // undefined window{...}
-obj.c(); // 10 Object {...}
-
-//箭头函数在函数内部，以非方法的方法使用
+//箭头函数在函数内部，以非对象的方法使用
 function Person1(age) {
   this.age = age;
   setInterval(() => {

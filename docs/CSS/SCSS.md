@@ -5,7 +5,7 @@ npm install sass -g
 ### 2、编译
 
     sass xx.scss xx.css
-    压缩编译 sass -s/--style compressed xx.scss xx.css  编译成一行
+    压缩编译 sass -s/--style compressed xx.scss xx.css 编译成一行
     sass xx.scss xx.css --no-source-map 不生成xx.css.map文件
     sass --watch xx.scss xx.css 监听实时编译
 
@@ -28,7 +28,7 @@ npm install sass -g
 
 ### 6、继承 @extend
 
-    scss中使用已定义好的类可以使用@extend xx, 这样这两个类就形成了群组选择器。
+    scss中使用已定义好的类可以使用@extend xx来继承, 这样这两个类就形成了群组选择器。
     如果我们希望在没有地方引入的时候不编译到css里，可以定义类的时候使用%xx{} @extend %xx;继承。
 
 ### 7、@include 和@extend 的区别
@@ -56,23 +56,55 @@ npm install sass -g
 
 ### 12、if
 
-    @if xx {}
-    @else if xx {}
-    @else {}
+```scss
+@if xx {
+} @else if xx {
+} @else {
+}
+// 例如
+@if $max == 1 {
+  color: red;
+} @else if $max == 2 {
+  color: blue;
+} @else {
+  color: yellow;
+}
+```
 
 ### 13、for
 
-    @for $i from 1 to 3 {} 不包括3
-    @for $i from 1 through 3 {} 包括3
+```scss
+// 不包括3
+@for $i from 1 to 3 {
+}
+// 包括3
+@for $i from 1 through 3 {
+}
+
+// 例如
+@for $j from 1 to 3 {
+  .items-#{$j} {
+    width: $j * 100px;
+  }
+}
+@for $i from 1 through 3 {
+  .item-#{$i} {
+    width: $i * 100px;
+  }
+}
+```
 
 ### 14、each
 
-    each用来循环数组
-    .box2 {
-      @each $i in width, height {
-      #{$i}: 100px
-      }
-    }
+each 用来循环
+
+```scss
+.box2 {
+  @each $i in width, height {
+    #{$i}: 100px;
+  }
+}
+```
 
 ### 15、注释
 
