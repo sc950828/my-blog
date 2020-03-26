@@ -837,3 +837,35 @@ function findMostWord(article) {
   return maxWord + "  " + maxNum;
 }
 ```
+
+### 76、js 中编码的三种方法
+
+1、encodeURI
+
+该方法不会对 ASCII 表中的字母和数字编码，同时也不会对 ASCII 中的标点符号编码 `-_.~*’()` 在 URI 中具有特殊含义的符号 `;/?:@&=+$,#`同样不会被编码。
+
+```js
+var url = "https://google.com/pathname?a=1&b=abcde&c=黄山#hash";
+encodeURI(url); // 返回 https://google.com/pathname?a=1&b=abcde&c=%E9%BB%84%E5%B1%B1#hash
+
+encodeURI("-_.~*'()"); // 返回 -_.~*'()
+
+encodeURI(";/?:@&=+$,#"); // 返回 ;/?:@&=+$,#
+```
+
+2、encodeURIComponent
+
+该方法相比 encodeURI 多编码 URI 中具有特殊含义的符号 `;/?:@&=+$,#`
+
+```js
+var url = "https://google.com/pathname?a=1&b=abcde&c=黄山#hash";
+encodeURIComponent(url); // 打印 "https%3A%2F%2Fgoogle.com%2Fpathname%3Fa%3D1%26b%3Dabcde%26c%3D%E9%BB%84%E5%B1%B1%23hash"
+
+encodeURIComponent("-_.~*'()"); // 返回 -_.~*'()
+
+encodeURIComponent(";/?:@&=+$,#"); // 返回 %3B%2F%3F%3A%40%26%3D%2B%24%2C%23
+```
+
+3、escape（不推荐使用，推荐使用上面两个方法代替）
+
+该方法会对 ASCII 中 字母、数字及符号`*@-_+./`之外的所有字符进行编码。

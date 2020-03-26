@@ -60,4 +60,4 @@
 
 - （4）在 URL 后面加上时间戳："nowtime=" + new Date().getTime();。
 
-- （5）如果是使用 jQuery，直接这样就可以了\$.ajaxSetup({cache:false})。这样页面的所有 ajax 都会执行这条语句就是不需要保存缓存记录。
+- （5）如果是使用 jQuery，直接这样就可以了`$.ajaxSetup({cache:false})`。这样页面的所有 ajax 都会执行这条语句就是不需要保存缓存记录。

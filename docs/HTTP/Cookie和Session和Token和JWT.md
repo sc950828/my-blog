@@ -8,7 +8,7 @@
 - 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 expires/max-age、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间。max-age 指定了 cookie 多久后失效，单位是秒，从浏览器收到报文开始计算。domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在确保安全的情况下传输，即只能通过 HTTPS 传输 cookie。HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。这也是预防 XSS 攻击的重要手段。相应的，对于 CSRF 攻击的预防，也有 SameSite 属性。
 - 在发生 xhr 的跨域请求的时候，即使是同源下的 cookie，也不会被自动添加到请求头部，除非显示地规定。
 - 获取 cookie document.cookie
-- 设置 cookie document.cookie='name=xiaoming;expires='+oDate
+- 设置 cookie document.cookie='name=xiaoming;expires=xx'
 
 ### 2、cookie 的缺点是什么？
 
@@ -41,8 +41,7 @@
 
 ### 6、jwt
 
-- JSON Web Token（简称 JWT）是目前最流行的跨域认证解决方案。是一种认证授权机制。
-  服务端无状态化(不必存储)、可扩展性好。jwt 包含用户基本信息,相比于 token jwt 更加无状态化，因为包含用户信息，所以不需要查询数据库。
+- JSON Web Token（简称 JWT）是目前最流行的跨域认证解决方案。是一种认证授权机制。服务端无状态化(不必存储)、可扩展性好。jwt 包含用户基本信息,相比于 token jwt 更加无状态化，因为包含用户信息，所以不需要查询数据库。
 - 每一次请求都需要携带 jwt，需要把 jwt 放到 HTTP 的 Header 里。Authoriation: Bearer + jwt
 
 ### 7、什么是 Cookie 隔离？（或者说：请求资源的时候不要让它带 cookie 怎么做）
