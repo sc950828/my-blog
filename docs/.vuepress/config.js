@@ -131,6 +131,10 @@ module.exports = {
         children: [["/NGINX/nginx", "nginx"]]
       },
       {
+        title: "微信",
+        children: [["/微信/服务器配置", "服务器配置"]]
+      },
+      {
         title: "计算机基础",
         children: [
           ["/计算机基础/计算机基础", "计算机基础"],
