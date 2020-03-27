@@ -78,6 +78,9 @@ function observer(data) {
 }
 
 function defineReactive(obj, key, value) {
+  if (typeof value === "obj") {
+    observer(value);
+  }
   //一个属性一个订阅者
   const dep = new Dep();
 
@@ -223,4 +226,51 @@ Dep.target = null;
 // 第三步 generate
 // 将整个 AST 传入后判断是否为空，为空则返回一个 div 标签，否则通过 generate 来处理。
 // 这样就转换成render function
+```
+
+### 7、diff 过程
+
+diff 算法是通过同层的树节点进行比较而非对树进行逐层搜索遍历的方式，所以时间复杂度只有 O(n)，是一种相当高效的算法
+
+```js
+// 入参是新老两个 VNode 以及父节点的 element
+function patch(oldVnode, vnode, parentElm) {
+  // 没有老节点直接添加新节点
+  if (!oldVnode) {
+    addVnodes(parentElm, null, vnode, 0, vnode.length - 1);
+    // 没有新节点 移除老节点
+  } else if (!vnode) {
+    removeVnodes(parentElm, oldVnode, 0, oldVnode.length - 1);
+  } else {
+    // 判断是否是相同节点 是相同层节点进行patch
+    if (sameVnode(oldVNode, vnode)) {
+      patchVnode(oldVNode, vnode);
+    } else {
+      // 否则删除老节点 新增新节点
+      removeVnodes(parentElm, oldVnode, 0, oldVnode.length - 1);
+      addVnodes(parentElm, null, vnode, 0, vnode.length - 1);
+    }
+  }
+}
+
+// sameVnode
+// sameVnode 其实很简单，只有当 key、 tag、 isComment（是否为注释节点）、 data同时定义（或不定义），
+// 同时满足当标签类型为 input 的时候 type 相同（某些浏览器不支持动态修改<input>类型，所以他们被视为不同类型）即可
+function sameVnode() {
+  return (
+    a.key === b.key &&
+    a.tag === b.tag &&
+    a.isComment === b.isComment &&
+    !!a.data === !!b.data &&
+    sameInputType(a, b)
+  );
+}
+
+function sameInputType(a, b) {
+  if (a.tag !== "input") return true;
+  let i;
+  const typeA = (i = a.data) && (i = i.attrs) && i.type;
+  const typeB = (i = b.data) && (i = i.attrs) && i.type;
+  return typeA === typeB;
+}
 ```

@@ -15,7 +15,7 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
   - 它的生命周期中有多个事件钩子，让我们更容易控制整个 Vue 实例的生命过程
 - vue 生命周期总共有几个阶段
   - beforeCreate 此时获取不到 prop 和 data 中的数据。在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。有生命周期函数和一些默认事件。
-  - created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，\$el 属性目前不可见。
+  - created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，`$el` 属性目前不可见。
   - beforeMount 相关的 render 函数首次被调用 获取到了 VDOM
   - mounted VDOM 解析成了真实 DOM，能获取 dom，能进行 dom 操作
   - beforeUpdate 数据更新时调用，能获取到新数据，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
