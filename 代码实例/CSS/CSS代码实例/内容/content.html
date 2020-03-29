@@ -41,6 +41,14 @@
         /* 复位 */
         counter-reset: myinc;
       }
+
+      /* empty依然会生效 */
+      .div1:empty {
+        color: cadetblue;
+      }
+      .div1::after {
+        content: "<span>randy</span>";
+      }
     </style>
   </head>
 
@@ -54,5 +62,14 @@
       <li>age</li>
       <li>sex</li>
     </ul>
+
+    <div class="div1"></div>
+    <script>
+      const div1 = document.querySelector(".div1");
+      console.log(div1);
+      // 获取不到content的元素
+      // 鼠标也无法选取
+      console.log(div1.firstChild);
+    </script>
   </body>
 </html>

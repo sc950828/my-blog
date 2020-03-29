@@ -38,6 +38,48 @@
       >padding span行内元素。行内元素设置上下外边距无效。</span
     >
     <div class="item3">测试</div>
+    <!-- 行内块级元素 可以设置上下外边距 -->
     <input type="text" />
+
+    <div
+      style="width: 200px;height: 200px;background-color: cadetblue;position: relative;"
+    >
+      <div style="position: absolute; margin: 10px;left: 10px;">child</div>
+      <span>我没有定位，不管块级元素还是行内元素 无视绝对定位的元素。</span>
+    </div>
+
+    <!-- 外边距合并 -->
+    <!-- 上下外边距合并 -->
+    <div style="margin-bottom: 20px;">div1</div>
+    <div style="margin-top: 20px;">div2</div>
+    <!-- 父子上外边距合并 -->
+    <!-- border-top: 1px solid red;
+        padding-top: 1px;
+        overflow: auto; 开启bfc也能解决
+    -->
+    <div style="margin-top: 20px;">
+      <div style="margin-top: 20px;">child</div>
+      parent
+    </div>
+    <!-- 父子下外边距合并 -->
+    <!-- border-top: 1px solid red;
+        padding-top: 1px;
+        overflow: auto; 开启bfc也能解决
+        height: 80px; 父元素设置高度也能解决
+    -->
+    <div style="margin-bottom: 20px;">
+      parent
+      <div style="margin-bottom: 20px;">child</div>
+    </div>
+
+    <!--没有内容的元素 自身上下外边距合并 -->
+    <!-- 
+      border-top: 1px solid red;
+      height: 1px;
+      padding-top: 1px;
+     -->
+    <span>randy</span>
+    <div style="margin: 30px;"></div>
+    <span>randy</span>
   </body>
 </html>

@@ -54,10 +54,10 @@
 
     E[att]选择具有att属性的E元素
     E[att="val"]选择具有att属性且属性值等于val的E元素
-    E[att~="val"]选择具有att属性且属性值其中一个等于val的E元素（包含只有一个值且该值等于val的情况）
-    E[att|="val"]选择具有att属性且属性值为val或以val开头的字符串的E元素
     E[att^="val"]选择具有att属性且属性值为以val开头的字符串的E元素
     E[att$="val"]选择具有att属性且属性值为以val结尾的字符串的E元素
+    E[att~="val"]选择具有att属性且属性值其中一个等于val的E元素（包含只有一个值且该值等于val的情况）
+    E[att|="val"]选择具有att属性且属性值为val或以val字符开头的E元素
     E[att*="val"]选择具有att属性且属性值为包含val的字符串的E元素
 
 ### 5、伪类选择器
