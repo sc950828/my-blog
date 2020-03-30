@@ -27,6 +27,7 @@
       );
 
       // 该方法创建的对象 初始的属性value get set是undefined，enumerable writable configurable都是false。需要配置才能正常赋值。
+      // 创建一个指定原型的对象 原型是obj1
       const obj3 = Object.create(obj1, { pwd: { value: "123" } });
       console.log(obj3);
       // for in 原型上的属性会被循环出来，前提是enumerable是true
@@ -37,6 +38,11 @@
       for (const key in obj3) {
         console.log("obj3", key, obj3[key]);
       }
+      console.log(Object.getOwnPropertyDescriptors(obj3));
+      // 不能赋值 writable为false
+      obj3.pwd = 12;
+      // 能获取到
+      console.log(obj3.pwd);
 
       // 显示配置为true 不然默认都是false
       const obj4 = Object.create(obj1, {
@@ -44,13 +50,19 @@
           value: "123",
           writable: true,
           enumerable: true,
-          configurable: true
+          configurable: false
         }
       });
       // pwd会循环出来 因为enumerable是true
       for (const key in obj4) {
         console.log("obj4", key, obj4[key]);
       }
+      // writable为true 可以重新赋值
+      obj4.pwd = "456";
+      console.log("obj4.pwd", obj4.pwd);
+      // configurable为false 不能删除
+      delete obj4.pwd;
+      console.log("obj4.pwd", obj4.pwd);
 
       // 该方法创建的对象 初始的属性value get set是undefined，enumerable writable configurable都是false。需要配置才能正常赋值。
       Object.defineProperty(obj4, "avatar", { value: "www" });
@@ -59,7 +71,7 @@
         value: "1234567",
         writable: true,
         enumerable: true,
-        configurable: true
+        configurable: true // 控制能否删除该属性
       });
 
       // 一次性定义多个属性
@@ -114,7 +126,15 @@
         "Object.setPrototypeOf(obj3, obj1)",
         Object.setPrototypeOf(obj3, obj1)
       );
-      console.log("Object.is(1, 1)", Object.is(1, 1));
+      // Object.is()
+      console.log("NaN === NaN", NaN === NaN);
+      // NaN与自身相等
+      console.log("Object.is(NaN, NaN)", Object.is(NaN, NaN));
+      console.log("+0 === -0", +0 === -0);
+      // +0 -0不再相等
+      console.log("Object.is(+0, -0)", Object.is(+0, -0));
+
+      // 由对象调用
       console.log("obj3.hasOwnProperty('pwd')", obj3.hasOwnProperty("pwd"));
       console.log("obj1.isPrototypeOf(obj3)", obj1.isPrototypeOf(obj3));
     </script>

@@ -20,7 +20,7 @@
 - Object.create(`__proto__`,`[properties]`)
 
   - 创建一个新的对象，该方法将`__proto__`作为原型对象，并将`[properties]`作为新对象的属性。
-  - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
+  - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable(是否能循环出来) writable(是否能赋值) configurable(是否能删除该属性) 都是 false。需要配置才能正常赋值。
 
 - Object.defineProperty(obj,prop,descriptor)
 
@@ -53,7 +53,7 @@
 
   - 方法返回一个给定对象自己的所有可枚举属性值的数组，值的顺序与使用 for...in 循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
 
-- Object.is(val1, val2)
+- Object.is(val1, val2) 与===类似，解决了 NaN 不相等 +0 -0 相等的问题
 
   - 判断两个值是否相同。
   - 如果下列任何一项成立，则两个值相同：
@@ -297,7 +297,7 @@
       String()  把对象的值转换为字符串。
       Boolean() 把对象转换成布尔类型。
       parseFloat()  解析一个字符串并返回一个浮点数。
-      parseInt()  解析一个字符串并返回一个整数。
+      parseInt()  解析一个字符串并返回一个整数。不会四舍五入
 
 ### 12、浏览器对象 BOM
 
