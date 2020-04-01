@@ -33,7 +33,7 @@ module.exports = {
           ["/CSS/ECharts", "ECharts"],
           ["/CSS/居中", "居中"],
           ["/CSS/布局", "布局"],
-          ["/CSS/首屏和白屏", "首屏和白屏"],
+          ["/CSS/首屏和白屏", "首屏和白屏"]
         ]
       },
       {
@@ -60,7 +60,7 @@ module.exports = {
           ["/JAVASCRIPT/call和apply和bind", "call和apply和bind"],
           ["/JAVASCRIPT/数组操作", "数组操作"],
           ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
-          ["/JAVASCRIPT/new操作符实现", "new操作符实现"],
+          ["/JAVASCRIPT/new操作符实现", "new操作符实现"]
         ]
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
           ["/VUE/vue内部运行机制", "vue内部运行机制"],
-          ["/VUE/vue源码分析", "vue源码分析"],
+          ["/VUE/vue源码分析", "vue源码分析"]
         ]
       },
       {
@@ -148,7 +148,9 @@ module.exports = {
       {
         title: "数据结构和算法",
         children: [
-          ["/数据结构和算法/队列和栈", "队列和栈"]
+          ["/数据结构和算法/基础", "基础"],
+          ["/数据结构和算法/队列和栈", "队列和栈"],
+          ["/数据结构和算法/二叉树", "二叉树"]
         ]
       },
       {
