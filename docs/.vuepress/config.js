@@ -84,7 +84,9 @@ module.exports = {
           ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
           ["/HTTP/Fetch", "Fetch"],
           ["/HTTP/JqueryAjax", "JqueryAjax"],
-          ["/HTTP/web安全", "web安全"]
+          ["/HTTP/web安全", "web安全"],
+          ["/HTTP/TCP", "TCP"],
+          ["/HTTP/UDP", "UDP"]
         ]
       },
       {
