@@ -2,7 +2,7 @@
 
 ### 1、[HTTP](/HTTP/HTTP)
 
-### 2、[JHTTP 常见问题](/HTTP/HTTP常见问题)
+### 2、[HTTP 常见问题](/HTTP/HTTP常见问题)
 
 ### 3、[缓存](/HTTP/缓存)
 
