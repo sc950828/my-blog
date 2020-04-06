@@ -6,16 +6,16 @@ module.exports = {
     nav: [
       { text: "首页", link: "/" },
       { text: "导航", link: "/GUIDE/" },
-      { text: "代码实例", link: "http://sc950828.top" },
-      { text: "GitHub地址", link: "https://github.com/sc950828" }
+      // { text: "代码实例", link: "http://sc950828.top" },
+      { text: "GitHub地址", link: "https://github.com/sc950828" },
     ],
     sidebar: [
       {
         title: "HTML",
         children: [
           ["/HTML/HTML", "HTML"],
-          ["/HTML/HTML5", "HTML5"]
-        ]
+          ["/HTML/HTML5", "HTML5"],
+        ],
       },
       {
         title: "CSS",
@@ -33,8 +33,8 @@ module.exports = {
           ["/CSS/ECharts", "ECharts"],
           ["/CSS/居中", "居中"],
           ["/CSS/布局", "布局"],
-          ["/CSS/首屏和白屏", "首屏和白屏"]
-        ]
+          ["/CSS/首屏和白屏", "首屏和白屏"],
+        ],
       },
       {
         title: "JAVASCRIPT",
@@ -60,15 +60,16 @@ module.exports = {
           ["/JAVASCRIPT/call和apply和bind", "call和apply和bind"],
           ["/JAVASCRIPT/数组操作", "数组操作"],
           ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
-          ["/JAVASCRIPT/new操作符实现", "new操作符实现"]
-        ]
+          ["/JAVASCRIPT/new操作符实现", "new操作符实现"],
+          ["/JAVASCRIPT/手写原理", "手写原理"],
+        ],
       },
       {
         title: "WEB移动端",
         children: [
           ["/WEB移动端/移动端", "移动端"],
-          ["/WEB移动端/移动端常见问题", "移动端常见问题"]
-        ]
+          ["/WEB移动端/移动端常见问题", "移动端常见问题"],
+        ],
       },
       {
         title: "HTTP",
@@ -86,8 +87,8 @@ module.exports = {
           ["/HTTP/JqueryAjax", "JqueryAjax"],
           ["/HTTP/web安全", "web安全"],
           ["/HTTP/TCP", "TCP"],
-          ["/HTTP/UDP", "UDP"]
-        ]
+          ["/HTTP/UDP", "UDP"],
+        ],
       },
       {
         title: "VUE",
@@ -98,16 +99,16 @@ module.exports = {
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
           ["/VUE/vue内部运行机制", "vue内部运行机制"],
-          ["/VUE/vue源码分析", "vue源码分析"]
-        ]
+          ["/VUE/vue源码分析", "vue源码分析"],
+        ],
       },
       {
         title: "WEBPACK",
         children: [
           ["/WEBPACK/webpack", "webpack"],
           ["/WEBPACK/webpack常见问题", "webpack常见问题"],
-          ["/WEBPACK/babel", "babel"]
-        ]
+          ["/WEBPACK/babel", "babel"],
+        ],
       },
       {
         title: "NODE",
@@ -115,27 +116,27 @@ module.exports = {
           ["/NODE/node", "node"],
           ["/NODE/npm", "npm"],
           ["/NODE/koa", "koa"],
-          ["/NODE/express", "express"]
-        ]
+          ["/NODE/express", "express"],
+        ],
       },
       {
         title: "GIT",
         children: [
           ["/GIT/git", "git"],
-          ["/GIT/gitreadme", "gitgitreadme"]
-        ]
+          ["/GIT/gitreadme", "gitgitreadme"],
+        ],
       },
       {
         title: "DOCKER",
-        children: [["/DOCKER/docker", "docker"]]
+        children: [["/DOCKER/docker", "docker"]],
       },
       {
         title: "NGINX",
-        children: [["/NGINX/nginx", "nginx"]]
+        children: [["/NGINX/nginx", "nginx"]],
       },
       {
         title: "微信",
-        children: [["/微信/服务器配置", "服务器配置"]]
+        children: [["/微信/服务器配置", "服务器配置"]],
       },
       {
         title: "计算机基础",
@@ -144,39 +145,39 @@ module.exports = {
           ["/计算机基础/linux常用命令", "linux常用命令"],
           ["/计算机基础/ubuntu", "ubuntu"],
           ["/计算机基础/windows", "windows"],
-          ["/计算机基础/mac", "mac"]
-        ]
+          ["/计算机基础/mac", "mac"],
+        ],
       },
       {
         title: "数据结构和算法",
         children: [
           ["/数据结构和算法/基础", "基础"],
           ["/数据结构和算法/队列和栈", "队列和栈"],
-          ["/数据结构和算法/二叉树", "二叉树"]
-        ]
+          ["/数据结构和算法/二叉树", "二叉树"],
+        ],
       },
       {
         title: "浏览器",
         children: [
           ["/浏览器/Chrome调试技巧", "Chrome调试技巧"],
-          ["/浏览器/浏览器内核", "浏览器内核"]
-        ]
+          ["/浏览器/浏览器内核", "浏览器内核"],
+        ],
       },
       {
         title: "编辑器",
         children: [
           ["/编辑器/vscode", "vscode"],
           ["/编辑器/editorconfig", "editorconfig"],
-          ["/编辑器/eslint", "eslint"]
-        ]
+          ["/编辑器/eslint", "eslint"],
+        ],
       },
       {
         title: "技术官网",
         children: [
           ["/技术官网/前端基础官网", "前端基础官网"],
-          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
-        ]
-      }
-    ]
-  }
+          ["/技术官网/前端常用工具官网", "前端常用工具官网"],
+        ],
+      },
+    ],
+  },
 };

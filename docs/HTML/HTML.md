@@ -21,16 +21,16 @@
   - viewport：主要用于移动设备，可以设置浏览器中的视口
     - width：控制 viewport 宽度的大小，可以指定的一个值，如 600，或者特殊的值，如 device-width 为设备的宽度。
     - height：和 width 相对应，指定高度。
-    - initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。
-    - maximum-scale：允许用户缩放到的最大比例。
-    - minimum-scale：允许用户缩放到的最小比例。
+    - initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。0-10 之间
+    - maximum-scale：允许用户缩放到的最大比例。0-10 之间
+    - minimum-scale：允许用户缩放到的最小比例。 0-10 之间
     - user-scalable：用户是否可以手动缩放。yes/no
 - http-equiv 提供了一些程序指令，用于模拟 http 首部。
 - http-equiv 有:
   - content-type：定义文档类型与字符编码。`<meta http-equiv="content-type" content="text/html;chartset=UTF-8" />`。
   - default-style：首选样式表。
   - refresh：执行重载或重定向。
-  - X-UA-Compatible：怎么渲染`<metah ttp-equiv="X-UA-Compatible" content="IE=edge"/>`以上代码告诉 IE 浏览器，IE8/9 及以后的版本都会以最高版本 IE 来渲染页面。
+  - X-UA-Compatible：怎么渲染`<metah http-equiv="X-UA-Compatible" content="IE=edge"/>`以上代码告诉 IE 浏览器，IE8/9 及以后的版本都会以最高版本 IE 来渲染页面。
 - HTML5 新增的设置网页编码的方式 `<meta chartset="UTF-8" />`。
 
 ### 5、DOCTYPE 的作用，标准模式与怪异模式的特点?
