@@ -115,7 +115,7 @@ border-image border-radius background-image
   - flex-shrink
     缩小，即空间不足时元素的缩小比例，默认是 1,空间不足时自动缩小。 其可能的值为整数，表示不同 item 的缩小比例
   - flex-basis
-    项目在主轴上占据的长度，默认是 auto
+    项目在主轴上占据的长度，默认是 auto，即项目本来的大小由宽高决定。
   - flex
     - flex-grow flex-shrink flex-basis 的缩写，默认是 0 1 auto。 即不放大 缩小长度自动
     - 当 flex 取值为 none，则计算值为 0 0 auto

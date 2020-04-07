@@ -4,6 +4,7 @@
 - bind 需要再次调用。
 
 ### 2、手写 call、apply 及 bind 函数
+
     call 函数的实现步骤：
 
     （1）判断调用对象是否为函数，即使我们是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
@@ -120,7 +121,6 @@
      fn = this;
 
    return function Fn() {
-
      // 根据调用方式，传入不同绑定值
      return fn.apply(this instanceof Fn ? this : context, args.concat(...arguments));
    }

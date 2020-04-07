@@ -79,8 +79,8 @@ function instance_of(L, R) {
 
 ```js
 function sum(a) {
-  return function(b) {
-    return function(c) {
+  return function (b) {
+    return function (c) {
       return a + b + c;
     };
   };
@@ -377,7 +377,7 @@ Object.prototype.toString.call(/regex-literal/i);
 const EventUtils = {
   // 视能力分别使用dom0||dom2||IE方式 来绑定事件
   // 添加事件
-  addEvent: function(element, type, handler) {
+  addEvent: function (element, type, handler) {
     if (element.addEventListener) {
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
@@ -388,7 +388,7 @@ const EventUtils = {
   },
 
   // 移除事件
-  removeEvent: function(element, type, handler) {
+  removeEvent: function (element, type, handler) {
     if (element.removeEventListener) {
       element.removeEventListener(type, handler, false);
     } else if (element.detachEvent) {
@@ -399,17 +399,17 @@ const EventUtils = {
   },
 
   // 获取事件目标
-  getTarget: function(event) {
+  getTarget: function (event) {
     return event.target || event.srcElement;
   },
 
   // 获取 event 对象的引用，取到事件的所有信息，确保随时能使用 event
-  getEvent: function(event) {
+  getEvent: function (event) {
     return event || window.event;
   },
 
   // 阻止事件（主要是事件冒泡，因为 IE 不支持事件捕获）
-  stopPropagation: function(event) {
+  stopPropagation: function (event) {
     if (event.stopPropagation) {
       event.stopPropagation();
     } else {
@@ -418,13 +418,13 @@ const EventUtils = {
   },
 
   // 取消事件的默认行为
-  preventDefault: function(event) {
+  preventDefault: function (event) {
     if (event.preventDefault) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
-  }
+  },
 };
 ```
 
@@ -629,7 +629,7 @@ setInterval 的作用是每隔一段指定时间执行一个函数，但是这�
 function mySetInterval(fn, timeout) {
   // 控制器，控制定时器是否继续执行
   var timer = {
-    flag: true
+    flag: true,
   };
 
   // 设置递归函数，模拟定时器执行。
@@ -732,18 +732,18 @@ function checkNullObj(obj) {
 
 ```js
 function Foo() {
-  getName = function() {
+  getName = function () {
     alert(1);
   };
   return this;
 }
-Foo.getName = function() {
+Foo.getName = function () {
   alert(2);
 };
-Foo.prototype.getName = function() {
+Foo.prototype.getName = function () {
   alert(3);
 };
-var getName = function() {
+var getName = function () {
   alert(4);
 };
 function getName() {
@@ -809,7 +809,7 @@ function findMostWord(article) {
   let maxWord = "";
   let tempArr = [];
   // 循环单词数组
-  aticleArr.forEach(word => {
+  aticleArr.forEach((word) => {
     if (!tempArr.includes(word)) {
       tempArr.push(word);
       // 单词在文章中出现的次数
@@ -863,4 +863,10 @@ let array = [,1,,2,,3];
 array = array.map((i) => ++i)
 // forEach，filter，every，some会跳过空位，map会跳过空位，但是会保留这个值。
 [,2,,3,,4]
+```
+
+### ### 78、统计网页中出现的标签数
+
+```js
+new Set([...document.querySelectorAll("*")].map((ele) => ele.tagName)).size;
 ```
