@@ -12,12 +12,20 @@ flow 常用的两种类型检查方式是：
 - 类型推断：通过变量的使用上下文来推断出变量类型，然后根据这些推断来检查类型。
 - 类型注释：事先注释好我们期待的类型，flow 会基于这些注释来判断。
 
+Flow 提出了一个 libdef 的概念，可以用来识别这些第三方库或者是自定义类型
+
 ### 2、源码目录分析
 
 compiler(编译相关)
 
 - compiler 目录包含 Vue.js 所有编译相关的代码。将 template 模板编译为 render 函数。在 Vue 中使用 render 函数来创建 VNode，而在开发的时候我们更多的是使用 template 来编写 HTML，所以需要将 template 编译为 render 函数。
 - 编译工作可以在构建项目的时候借助 webpack、vue-loader 等插件来完成，也可以在项目运行时使用 Vue 的构建功能来完成。相对应的构建输出有 runtime 和 runtime-with-compiler 两个版本。由于编译是一项消耗性能的工作，因此推荐使用第一种方式。
+
+compiler 编译相关的代码
+
+compiler 目录包含 Vue.js 所有编译相关的代码。它包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。
+
+编译的工作可以在构建时做（借助 webpack、vue-loader 等辅助插件）；也可以在运行时做，使用包含构建功能的 Vue.js。显然，编译是一项耗性能的工作，所以更推荐前者——离线编译。
 
 core(核心代码)
 
@@ -62,6 +70,46 @@ Rollup
 - Vue.js 源码使用 Rollup 构建。Rollup 和 Webpack 都是打包工具，但两者的应用场景不同。Webpack 功能相比 Rollup 更加强大，它可以将各种静态资源（包括 css，js，图片等）通通打包成一个或多个 bundle，并按需加载；同时正因为 Webpack 功能强大，打包出来的文件体积也较大。因此 Webpack 更适用于应用的开发。
 - 而 Rollup 相对于 Webpack 更加轻量，它只处理 js 文件而不处理其他静态资源文件，打包出来的文件体积也更小，因此 Rollup 更适用于像类库这种只有 js 代码的项目构建。所以大部分类库例如 Vue，React，Angular 等都采用 Rollup 来打包。
 
+Runtime Only VS Runtime + Compiler
+
+通常我们利用 vue-cli 去初始化我们的 Vue.js 项目的时候会询问我们用 Runtime Only 版本的还是 Runtime + Compiler 版本。下面我们来对比这两个版本。
+
+Runtime Only
+我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 JavaScript，因为是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。
+
+Runtime + Compiler
+我们如果没有对代码做预编译，但又使用了 Vue 的 template 属性并传入一个字符串，则需要在客户端编译模板。很显然，这个编译过程对性能会有一定损耗，所以通常我们更推荐使用 Runtime-Only 的 Vue.js
+
+### 5、new Vue 发生了什么？
+
+Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。
+
+### 6、挂载
+
+`$mount` 方法实际上会去调用 mountComponent 方法
+
+mountComponent 核心就是先实例化一个渲染 Watcher，在它的回调函数中会调用 updateComponent 方法，在此方法中调用 `vm._render` 方法先生成虚拟 Node，最终调用 `vm._update` 更新 DOM。
+
+Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数。
+
+函数最后判断为根节点的时候设置 `vm._isMounted` 为 true， 表示这个实例已经挂载了，同时执行 mounted 钩子函数。
+
+### 7、渲染 render
+
+`vm._render` 最终是通过执行 createElement 方法并返回的是 vnode，它是一个虚拟 Node。Vue 2.0 相比 Vue 1.0 最大的升级就是利用了 Virtual DOM
+
+### 8、虚拟 DOM
+
+VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。
+
+Virtual DOM 除了它的数据结构的定义，映射到真实的 DOM 实际上要经历 VNode 的 create、diff、patch 等过程。那么在 Vue.js 中，VNode 的 create 是通过之前提到的 createElement 方法创建的，我们接下来分析这部分的实现。
+
+Vue.js 利用 createElement 方法创建 VNode
+
+### 9、update
+
+实际上是遍历子虚拟节点，递归调用 createElm，调用原生 api 创建真实 DOM。
+
 ### 4、响应式系统
 
 ```js
@@ -72,7 +120,7 @@ function observer(data) {
     return;
   }
 
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     defineReactive(data, key, data[key]);
   });
 }
@@ -97,7 +145,7 @@ function defineReactive(obj, key, value) {
       if (newVal === value) return;
       // 通知依赖
       dep.notify();
-    }
+    },
   });
 }
 
@@ -124,8 +172,8 @@ class Vue {
 // 创建vue实例
 let o = new Vue({
   data: {
-    test: "I am test."
-  }
+    test: "I am test.",
+  },
 });
 
 // 更新数据 触发set方法 触发视图更新
@@ -148,7 +196,7 @@ class Dep {
   }
 
   notify() {
-    this.subs.forEach(sub => {
+    this.subs.forEach((sub) => {
       sub.update();
     });
   }

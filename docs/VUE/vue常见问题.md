@@ -147,13 +147,23 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
 
 Object.defineProperty() 只能对属性进行数据劫持，不能对整个对象进行劫持，同理无法对数组进行劫持。对对象采用遍历加递归的方式进行劫持。对数组采用遍历的方式进行劫持，同时 Vue 通过原型拦截的方式重写了数组的 7 个方法。unshift shift pop push splice reverse sort
 
-### 17、Vue 怎么用 `vm.$set()` 解决对象新增属性不能响应的问题 ？
+### 17、Vue 怎么用 `vm.$set()` 解决对象新增属性不能响应的问题 ？`vm.$delete()怎么删除`
 
-- 如果是数组则采用 splice 方法把该属性和值添加到数组里面
-- 如果是对象
+- `vm.$set()`
+
+  - 如果是是数组的话,先判断 key 是不是合法的下标,如果这两个条件都通过然后调用 splice 去修改数组。(如果是新增的话那就将 target.length 和传进来的 key 取一个最大值赋值给 target.length)
+  - 如果是对象
   - 判断该属性是否已经在对象上，如果在直接赋值
+  - 如果 target 是 vue 实例,或者 target 是 `this.$data`,那么直接 return
   - 判断对象是否是响应式，不是响应式直接赋值
-  - 如果对象是响应式并且该属性在对象上没有则使用封装的 defineProperty 方法进行响应式处理
+  - 如果对象是响应式并且该属性在对象上没有则使用封装的 defineReactive() 方法进行响应式处理，然后去通知 watcher
+
+- `vm.$delete()`
+
+  - 1.target 如果是数组的话并且 key 是合法的,那就通过 splice 去改变数组
+  - 2.target 如果是 vue 实例.或者是 `this.$data`,那就直接 return
+  - 3.target 如果不是双向绑定数据,那就直接 delete 就行不需要,通知 watcher
+  - 4.以上条件都不满足,那么 target 就是双向绑定数据,delete 之后通知 watcher
 
 ### 18、虚拟 DOM 实现原理？
 
@@ -168,11 +178,23 @@ Object.defineProperty() 只能对属性进行数据劫持，不能对整个对�
 
 ### 20、vue 中 key 值的作用？
 
-vue 中 key 值的作用可以分为两种情况来考虑。
+key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速
 
-第一种情况是 v-if 中使用 key。由于 Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。因此当我们使用 v-if 来实现元素切换的时候，如果切换前后含有相同类型的元素，那么这个元素就会被复用。如果是相同的 input 元素，那么切换前后用户的输入不会被清除掉，这样是不符合需求的。因此我们可以通过使用 key 来唯一的标识一个元素，这个情况下，使用 key 的元素不会被复用。这个时候 key 的作用是用来标识一个独立的元素。
+更准确：因为带 key 就不是就地复用了，在 sameNode 函数 a.key === b.key 对比中可以避免就地复用的情况。所以会更加准确。
 
-第二种情况是 v-for 中使用 key。用 v-for 更新已渲染过的元素列表时，它默认使用“就地复用”的策略。如果数据项的顺序发生了改变，Vue 不会移动 DOM 元素来匹配数据项的顺序，而是简单复用此处的每个元素。因此通过为每个列表项提供一个 key 值，来以便 Vue 跟踪元素的身份，从而高效的实现复用。这个时候 key 的作用是为了高效的更新渲染虚拟 DOM。
+更快速：利用 key 的唯一性生成 map 对象来获取对应节点，比遍历方式更快，源码如下：
+
+```js
+function createKeyToOldIdx(children, beginIdx, endIdx) {
+  let i, key;
+  const map = {};
+  for (i = beginIdx; i <= endIdx; ++i) {
+    key = children[i].key;
+    if (isDef(key)) map[key] = i;
+  }
+  return map;
+}
+```
 
 ### 21、vue 中 mixin 和 mixins 区别？
 

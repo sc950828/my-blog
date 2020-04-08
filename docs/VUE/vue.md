@@ -25,10 +25,10 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
   - beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。函数 data prop 都能用。
   - destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
   - errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
-- 第一次页面加载会触发哪几个钩子
-  - 第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这四个钩子
-- dom 渲染在哪个周期完成
-  - mounted
+
+生命周期经历了什么？
+
+当 new Vue()后，首先会初始化事件和生命周期，接着会执行 beforeCreate 生命周期钩子，在这个钩子里面还拿不到 this.$el和this.$data;接着往下走会初始化 inject 和将 data 的数据进行侦测也就是进行双向绑定；接着会执行 create 钩子函数，在这个钩子里面能够拿到 this.$data还拿不到this.$el;到这里初始化阶段就走完了。然后会进入一个模版编译阶段，在这个阶段首先会判断有没有 el 选项如果有的话就继续往下走，如果没有的话会调用 vm.$mount(el);接着继续判断有没有template选项，如果有的话，会将template提供的模版编译到render函数中；如果没有的话，会通过el选项选择模版；到这个编译阶段就结束了。（温馨提示：这个阶段只有完整版的Vue.js才会经历，也是就是通过cmd引入的方式；在单页面应用中，没有这个编译阶段，因为vue-loader已经提前帮编译好，因此，单页面使用的vue.js是运行时的版本）。模版编译完之后（这里说的是完整版，如果是运行时的版本会在初始化阶段结束后直接就到挂载阶段），然后进入挂载阶段，在挂在阶段首先或触发beforeMount钩子，在这个钩子里面只能拿到this.$data 还是拿不到 this.$el;接着会执行mounted钩子，在这个钩子里面就既能够拿到this.$el 也能拿到 this.$data；到这个挂载阶段就已经走完了，整个实例也已经挂载好了。当数据发生变更的时候，就会进入更新阶段，首先会触发beforeUpdate钩子，然后触发updated钩子，这个阶段会重新计算生成新的Vnode,然后通过patch函数里面的diff算法,将新生成的Vnode和缓存中的旧Vnode进行一个比对，最后将差异部分更新到视图中。当vm.$destory 被调用的时候，就会进入卸载阶段，在这个阶段，首先触发 beforeDestory 钩子接着触发 destoryed 钩子，在这个阶段 Vue 会将自身从父组件中删除，取消实例上的所有追踪并且移除所有的事件监听。到这里 Vue 整个生命周期就结束了。
 
 ### 3、插值绑定
 
@@ -124,8 +124,8 @@ Vue 包含一组观察数组的变异方法，所以它们也将会触发视图�
 ```js
 var vm = new Vue({
   data: {
-    items: ["a", "b", "c"]
-  }
+    items: ["a", "b", "c"],
+  },
 });
 vm.items[1] = "x"; // 不是响应性的
 vm.items.length = 2; // 不是响应性的
@@ -275,17 +275,17 @@ new Vue({
   // ...
   methods: {
     // ...
-    example: function() {
+    example: function () {
       // 修改数据，dom不会立马更新，因为更新是异步操作，同步任务执行完后再回执行异步任务。
       this.message = "changed";
       // DOM 还没有更新,使用this.$refs.span.innerHtml != 'changed'得到的还是以前的值。
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         // DOM 现在更新了、在nextTick的回调里面dom是百分百更新完成了的
         // `this` 绑定到当前实例
         this.doSomethingElse();
       });
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -346,7 +346,7 @@ watch: {
   };
 }
 或者使用这种方法;
-let unwatch = this.$watch("a", function(newValue, oldValue) {
+let unwatch = this.$watch("a", function (newValue, oldValue) {
   console.log(newValue);
   console.log(oldValue);
 });
