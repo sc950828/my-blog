@@ -26,10 +26,6 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
   - destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
   - errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
 
-生命周期经历了什么？
-
-当 new Vue()后，首先会初始化事件和生命周期，接着会执行 beforeCreate 生命周期钩子，在这个钩子里面还拿不到 this.$el和this.$data;接着往下走会初始化 inject 和将 data 的数据进行侦测也就是进行双向绑定；接着会执行 create 钩子函数，在这个钩子里面能够拿到 this.$data还拿不到this.$el;到这里初始化阶段就走完了。然后会进入一个模版编译阶段，在这个阶段首先会判断有没有 el 选项如果有的话就继续往下走，如果没有的话会调用 vm.$mount(el);接着继续判断有没有template选项，如果有的话，会将template提供的模版编译到render函数中；如果没有的话，会通过el选项选择模版；到这个编译阶段就结束了。（温馨提示：这个阶段只有完整版的Vue.js才会经历，也是就是通过cmd引入的方式；在单页面应用中，没有这个编译阶段，因为vue-loader已经提前帮编译好，因此，单页面使用的vue.js是运行时的版本）。模版编译完之后（这里说的是完整版，如果是运行时的版本会在初始化阶段结束后直接就到挂载阶段），然后进入挂载阶段，在挂在阶段首先或触发beforeMount钩子，在这个钩子里面只能拿到this.$data 还是拿不到 this.$el;接着会执行mounted钩子，在这个钩子里面就既能够拿到this.$el 也能拿到 this.$data；到这个挂载阶段就已经走完了，整个实例也已经挂载好了。当数据发生变更的时候，就会进入更新阶段，首先会触发beforeUpdate钩子，然后触发updated钩子，这个阶段会重新计算生成新的Vnode,然后通过patch函数里面的diff算法,将新生成的Vnode和缓存中的旧Vnode进行一个比对，最后将差异部分更新到视图中。当vm.$destory 被调用的时候，就会进入卸载阶段，在这个阶段，首先触发 beforeDestory 钩子接着触发 destoryed 钩子，在这个阶段 Vue 会将自身从父组件中删除，取消实例上的所有追踪并且移除所有的事件监听。到这里 Vue 整个生命周期就结束了。
-
 ### 3、插值绑定
 
 - v-text 全部当文本处理
@@ -42,8 +38,38 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
 
 ### 5、类名和样式的绑定
 
-    :class 有字符串 对象 数组方式
-    :style 有字符串 对象 数组方式
+```js
+  // :class 有字符串 对象 数组方式
+  // :style 有字符串 对象 数组方式
+  Class对象语法：
+    <div v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+    data: {
+      isActive: true,
+      hasError: false
+    }
+  Class数组语法：
+    <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+    data: {
+      activeClass: 'active',
+      errorClass: 'text-danger'
+    }
+  Style对象语法：
+    <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+    data: {
+      activeColor: 'red',
+      fontSize: 30
+    }
+  Style数组语法：
+    <div v-bind:style="[styleColor, styleSize]"></div>
+    data: {
+      styleColor: {
+        color: 'red'
+      },
+      styleSize:{
+        fontSize:'23px'
+      }
+    }
+```
 
 ### 6、事件的绑定
 
@@ -96,6 +122,20 @@ v-model
 - methods 方法， 不能用箭头函数定义方法
 - computed 只有相关的属性值变化才会重新计算， 必须有返回值。 不能用箭头函数定义方法。xx(){return xxxx} 具有缓存特性
 - watch 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。 xx(){xxxx} 或者 xx(newValue, oldValue) {xxxx}
+
+```js
+watch: {
+  a: (newValue, oldValue) => {
+    console.log(newValue);
+    console.log(oldValue);
+  };
+}
+或者使用这种方法;
+let unwatch = this.$watch("a", function (newValue, oldValue) {
+  console.log(newValue);
+  console.log(oldValue);
+});
+```
 
 ### 14、v-if v-show
 
@@ -293,23 +333,7 @@ new Vue({
 
 `<keep-alive>` 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。
 
-### 26、第一次页面加载会触发哪几个钩子？
-
-第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这几个钩子
-
-### 27、vue 生命周期的作用是什么？
-
-它的生命周期中有多个事件钩子，让我们在控制整个 Vue 实例的过程时更容易形成好的逻辑。
-
-### 28、vue-loader 是什么？使用它的用途有哪些？
-
-解析.vue 文件的一个加载器，跟 template/js/style 转换成 js 模块。
-
-### 29、请说出 vue.cli 项目中 src 目录每个文件夹和文件的用法？
-
-assets 文件夹是放静态资源 components 是放组件 router 是定义路由相关的配置 store 存放数据 view 视图 App.vue 是一个应用主组件 main.js 是入口文件
-
-### 30、transition 过渡
+### 26、transition 过渡
 
     使用<transition></transition>包裹
     v-enter 元素展示,开始过渡瞬间
@@ -323,36 +347,16 @@ assets 文件夹是放静态资源 components 是放组件 router 是定义路�
       out-in 当前元素先进行过渡，完成之后新元素过渡进入。
       in-out 新元素先进行过渡，完成之后当前元素过渡离开。
 
-### 31、为什么组件的 data 是方法?
+### 27、动态组件
 
-因为组件是不断复用的，同一个组件在不同的地方数据应该是相互独立的。组件中的 data 写成一个函数，数据以函数返回值形式定义，这样每复用一次组件，就会返回一份新的 data，类似于给每个组件实例创建一个私有的数据空间，让各个组件实例维护各自的数据。而单纯的写成对象形式，就使得所有组件实例共用了一份 data，就会造成一个变了全都会变的结果。
+`<component is="组件名">` 动态加载组件
 
-### 32、动态组件
-
-    <component is="组件名"> 动态加载组件
-
-### 33、插槽 slot
+### 28、插槽 slot
 
 在调用的地方写在组件中间 可以用 slot="xx"指定 slot 名字
 定义组件的地方使用`<slot name="xx"></slot>`来引用 slot
 
-### 34、watch 监听属性变化
-
-```js
-watch: {
-  a: (newValue, oldValue) => {
-    console.log(newValue);
-    console.log(oldValue);
-  };
-}
-或者使用这种方法;
-let unwatch = this.$watch("a", function (newValue, oldValue) {
-  console.log(newValue);
-  console.log(oldValue);
-});
-```
-
-### 35、extends
+### 29、extends
 
 允许声明扩展另一个组件(可以是一个简单的选项对象或构造函数)，而无需使用 Vue.extend。这主要是为了便于扩展单文件组件。这和 mixins 类似。
 
@@ -362,27 +366,15 @@ let unwatch = this.$watch("a", function (newValue, oldValue) {
   - mixins 可以混入多个 mixin，extends 只能继承一个
   - extends 的优先级高于 mixins 优先级 extend>extends>mixins
 
-### 36、name
+### 30、name
 
 - 允许组件模板递归地调用自身。
 - 指定 name 选项的另一个好处是便于调试。
 
-### 37、key
-
-key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速。避免就地复用。
-有相同父元素的子元素必须有独特的 key。重复的 key 会造成渲染错误。
-
-key 的特殊属性主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试就地修改/复用相同类型元素的算法。而使用 key 时，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
-
-它也可以用于强制替换元素/组件而不是重复使用它。当你遇到如下场景时它可能会很有用：
-
-- 完整地触发组件的生命周期钩子
-- 触发过渡
-
-### 38、`v-pre`
+### 31、`v-pre`
 
 跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
 
-### 39、`v-once`
+### 32、`v-once`
 
 只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。

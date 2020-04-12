@@ -98,7 +98,6 @@ module.exports = {
           ["/VUE/vuex", "vuex"],
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
-          ["/VUE/vue内部运行机制", "vue内部运行机制"],
           ["/VUE/vue源码分析", "vue源码分析"],
           ["/VUE/vue常用技巧", "vue常用技巧"],
         ],
@@ -124,7 +123,7 @@ module.exports = {
         title: "GIT",
         children: [
           ["/GIT/git", "git"],
-          ["/GIT/gitreadme", "gitgitreadme"],
+          ["/GIT/gitreadme", "gitreadme"],
         ],
       },
       {

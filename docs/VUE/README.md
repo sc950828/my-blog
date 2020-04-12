@@ -6,12 +6,10 @@
 
 ### 3、[vuex](/VUE/vuex)
 
-### 4、[vue 内部运行机制](/VUE/vue内部运行机制)
+### 4、[vue-cli](/VUE/vue-cli)
 
-### 5、[vue-cli](/VUE/vue-cli)
+### 5、[vue-router](/VUE/vue-router)
 
-### 6、[vue-router](/VUE/vue-router)
+### 6、[vue 常用技巧](/VUE/vue常用技巧)
 
-### 7、[vue常用技巧](/VUE/vue常用技巧)
-
-### 8、[源码分析](/VUE/源码分析)
+### 7、[源码分析](/VUE/源码分析)
