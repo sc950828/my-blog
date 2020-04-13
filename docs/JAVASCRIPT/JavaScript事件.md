@@ -4,22 +4,26 @@
 
 ```js
   //标准的事件监听 ie9及以上才支持
-    添加事件 element.addEventListener(event, function, useCapture)
-    移除事件用removeEventListener(event, function)
-      event : （必需）事件名，支持所有 DOM事件 。使用监听的时候需要去掉事件前缀on
-      function：（必需）指定要事件触发时执行的函数。
-      useCapture：（可选）指定事件是否在捕获或冒泡阶段执行。true，捕获。false，冒泡。默认false。
-  //非标准 ie8及以下使用这种
-    element.attachEvent("on" + event, function) 移除事件用detachEvent("on" + event, function)
-    event：（必需）事件类型。需加“on“，例如：onclick。
+  添加事件 element.addEventListener(event, function, EventListenerOptions)
+  移除事件用removeEventListener(event, function)
+    event : （必需）事件名，支持所有 DOM事件 。使用监听的时候需要去掉事件前缀on
     function：（必需）指定要事件触发时执行的函数。
+    EventListenerOptions { // 一般我们只设置一个布尔值 也就是capture的值，定义时冒泡还是捕获。
+      capture?: boolean // （可选）指定事件是否在捕获或冒泡阶段执行。true，捕获。false，冒泡。默认false。
+      once?: boolean // 表示 listener 在添加之后最多只调用一次。如果是 true， listener 会在其被调用之后自动移除
+      passive?: boolean // 设置为true时，表示 listener 永远不会调用 preventDefault()。如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告
+    }
+  //非标准 ie8及以下使用这种
+  element.attachEvent("on" + event, function) 移除事件用detachEvent("on" + event, function)
+  event：（必需）事件类型。需加“on“，例如：onclick。
+  function：（必需）指定要事件触发时执行的函数。
 
   //兼容方案 移除事件一个道理  需要注意 移除监听的时候传入的回调函数需要跟新增监听的回调函数一致
-    if(element.addEventListener){
-      element.addEventListener(type,fn);
-    }else{
-      element.attachEvent("on"+type,fn);
-    }
+  if(element.addEventListener){
+    element.addEventListener(type,fn);
+  }else{
+    element.attachEvent("on"+type,fn);
+  }
 ```
 
 ### 2、事件委托
@@ -36,8 +40,7 @@
           }
         }
 
-- 提高 JavaScript 性能。事件委托可以显著的提高事件的处理速度，减少内存的占用
-  使用事件委托我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实现事件的动态绑定，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理。
+- 提高 JavaScript 性能。事件委托可以显著的提高事件的处理速度，减少内存的占用使用事件委托我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实现事件的动态绑定，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理。
 
 ### 3、方法
 

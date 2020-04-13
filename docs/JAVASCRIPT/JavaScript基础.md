@@ -7,7 +7,7 @@
   - 判断基本数据类型的时候如果是通过构造函数创建的则是 object。比如 typeof new Number(1)则是 object。
   - typeof 引用数据类型除了 typeof function 是 function 其他的都是 object。
 
-### 2、Object 对象常用方法
+### 2、Object
 
 - Object.assign(target, source1, source2,...) 返回一个新对象 target 会受到影响 返回的对象等于新的 target 对象。
 
@@ -184,7 +184,24 @@
       toString() 把布尔值转换为字符串，并返回结果。
       valueOf() 返回 Boolean 对象的原始值。
 
-### 7、Math
+### 7、Symbol
+
+定义独一无二的值
+
+```js
+// 不能用 new
+let s = Symbol();
+
+// 可以接受一个字符串作为参数，表示对 Symbol 实例的描述，
+// 主要是为了在控制台显示，或者转为字符串时，比较容易区分。
+let s1 = Symbol("foo");
+let s2 = Symbol("bar");
+// 1.不会出现在for...in、for...of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。
+// 2.Object.getOwnPropertySymbols()方法，可以获取指定对象的所有 Symbol 属性名。该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。
+// 3.Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和 Symbol 键名。
+```
+
+### 8、Math
 
     Math.abs(x)  返回 x 的绝对值。
     Math.ceil(x)  对数进行上舍入。取整数 没有小数部分
@@ -197,7 +214,7 @@
     Math.trunc(x) 截取整数部分，不会四舍五入。
     Math.sqrt(x)  返回数的平方根。
 
-### 8、date
+### 9、date
 
     创建Date的方法
       var d = new Date();
@@ -240,7 +257,7 @@
       getUTCHours比getHours少8个小时其它的UTC时间与Date对象的时间是一样的。UTC属于世界时间比东八区北京时间小8。
       getMonth()会比现实小一个月，如果是自己通过setMonth()设置的则不会小。
 
-### 9、Error
+### 10、Error
 
     抛出自定义异常 throw new Error(message)。
     Error：普通异常。通常与 throw 语句和 try／catch 语句一起使用。
@@ -253,7 +270,7 @@
       TypeError：当一个值的类型错误时抛出该异常。
       URLError：由 URL 的编码和解码方法抛出。
 
-### 10、正则表达式
+### 11、正则表达式
 
     创建有两种方法
       var patt=new RegExp("pattern", "modifiers"); 需要转义。比如\d要写成"\\d"
@@ -280,7 +297,7 @@
       test  检索字符串中指定的值。返回 true 或 false。
       toString  返回正则表达式的字符串。返回/ /这种格式的正则。
 
-### 11、全局属性和方法
+### 12、全局属性和方法
 
     属性
       NaN 指示某个值不是数字值。
@@ -299,7 +316,7 @@
       parseFloat()  解析一个字符串并返回一个浮点数。
       parseInt()  解析一个字符串并返回一个整数。不会四舍五入
 
-### 12、浏览器对象 BOM
+### 13、浏览器对象 BOM
 
     window
       属性
@@ -370,7 +387,7 @@
         platform 返回运行浏览器的操作系统平台
         cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
 
-### 13、DOM
+### 14、DOM
 
     document
       属性
