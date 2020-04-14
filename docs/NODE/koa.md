@@ -20,7 +20,7 @@ koa 是一个新的 web 框架，由 express 幕后的原班人马打造.
 
 ### 5、context 对象
 
-koa 中每个\_请求都将创建一个 Context 对象，context 对象里面是 response request 等
+koa 中每一个请求都将创建一个 Context 对象，context 对象里面是 response request 等
 
 ### 6、request
 
@@ -147,3 +147,20 @@ koa 中每个\_请求都将创建一个 Context 对象，context 对象里面是
     ctx.request.query获取?=xx类query参数
     ctx.params获取路径参数
     安装koa-bodyparser并配置使用通过ctx.request.body获取参数 (post请求 put请求)
+
+### 洋葱模型
+
+```js
+const Koa = require("koa");
+const app = new Koa();
+app.use((ctx, next) => {
+  console.log(1);
+  next();
+  console.log(3);
+});
+app.use((ctx) => {
+  console.log(2);
+});
+app.listen(3001);
+// 执行结果是1=>2=>3
+```

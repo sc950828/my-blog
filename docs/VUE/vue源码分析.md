@@ -499,6 +499,8 @@ function updateChildren(parentElm, oldCh, newCh) {
       } else {
         elmToMove = oldCh[idxInOld];
         // 如果找到了节点，同时它符合 sameVnode，则将这两个节点进行 patchVnode
+        // 将该位置的老节点赋值 undefined
+        // 同时将 newStartVnode.elm 插入到 oldStartVnode.elm 的前面
         if (sameVnode(elmToMove, newStartVnode)) {
           patchVnode(elmToMove, newStartVnode);
           oldCh[idxInOld] = undefined;
@@ -794,6 +796,30 @@ export default class Watcher {
 
 computed 本质是一个惰性 computed watcher。其内部通过 this.dirty 属性标记计算属性是否需要重新求值。当 computed 的依赖状态发生改变时,就会通知这个惰性的 watcher,computed watcher 通过 this.dep.subs.length 判断有没有订阅者,有的话,会重新计算,然后对比新旧值,如果变化了,会重新渲染。 (Vue 想确保不仅仅是计算属性依赖的值发生变化，而是当计算属性最终计算的值发生变化时才会触发渲染 watcher 重新渲染，本质上是一种优化。)没有的话,仅仅把 this.dirty = true。 (当计算属性依赖于其他数据时，属性并不会立即重新计算，只有之后其他地方需要读取属性的时候，它才会真正计算，即具备 lazy（懒计算）特性。)
 
+computed 的依赖收集是借助 vue 的 watcher 来实现的，我们称之为 computed watcher，每一个计算属性会对应一个 computed watcher 对象，该 watcher 对象包含了 getter 属性和 get 方法，getter 属性就是计算属性对应的函数，get 方法是用来更新计算属性（通过调用 getter 属性），并会把该 computed watcher 添加到计算属性依赖的所有 data 属性的订阅器列表中，这样当任何计算属性依赖的 data 属性改变的时候，就会调用该 computed watcher 的 update 方法，把该 watcher 标记为 dirty，然后更新 dom 的 dom watcher 更新 dom 时，会触发 dirty 的 computed watcher 调用 evaluate 去计算最新的值，以便更新 dom。
+所以 computed 的实现是需要两个 watcher 来实现的，一个用来收集依赖，一个用来更新 dom，并且两种 watcher 是有关联的。后续我们把更新 DOM 的 watcher 称为 domWatcher，另一种叫 computedWatcher。
+
+```js
+// initComputed
+// 为每个计算属性生成一个computedWathcer，后续计算属性依赖的data属性会把这个computedWatcher添加到自己订阅器列表中，以此来实现依赖收集。
+// 挟持每个计算属性的get和set方法，set方法没有意义，主要是get方法，后面会提到。
+for (var key in computed) {
+  var userDef = computed[key];
+  // 每个计算属性对应的函数或者其get方法（computed属性可以设置get方法）
+  var getter = typeof userDef === "function" ? userDef : userDef.get;
+  // ....
+  if (!isSSR) {
+    // 为每个计算属性生成一个Wathcer
+    watchers[key] = new Watcher(
+      vm,
+      getter || noop,
+      noop,
+      computedWatcherOptions
+    );
+  }
+}
+```
+
 ### 13、watch 的实现原理
 
 所以本质上侦听属性也是基于 Watcher 实现的，它是一个 user watcher。跟 user watcher 配合的是 deep watcher 和 sync watcher 。deep watcher 是深度检测，sync watcher 是立即执行。
@@ -804,7 +830,7 @@ computed 本质是一个惰性 computed watcher。其内部通过 this.dirty 属
 
 它对于浏览器异步 API 的选用规则如下，Promise 存在取由 Promise.then，不存在 Promise 则取 MutationObserver，MutationObserver 不存在 setImmediate，setImmediate 不存在最后取 setTimeout 来实现。
 
-从上面的取用规则也可以看出来，nextTick 即有可能是微任务，也有可能是宏任务，从优先去 Promise 和 MutationObserver 可以看出 nextTick 优先微任务，其次是 setImmediate 和 setTimeout 宏任务。
+从上面的取用规则也可以看出来，nextTick 即有可能是微任务，也有可能是宏任务，先取 Promise 和 MutationObserver 可以看出 nextTick 优先微任务，其次是 setImmediate 和 setTimeout 宏任务。
 
 nextTick 主要是通过 js eventLoop 的执行机制原理，将回调通过（promise）添加到 microTask 上面，来实现,在下一次 DOM 周期后执行回调函数。
 
@@ -1059,6 +1085,13 @@ Vue.prototype.$emit = function (event, ...params) {
   color: red;
 }
 </style>
+
+样式穿透我们使用 /deep/或者>>>都可以。还有就是我们可以使用不带scoped的style标签，使用父元素类名唯一。
+.parent {
+  >>> .three {
+    xxx
+  }
+}
 ```
 
 ### 18、keep-alive 实现原理
@@ -1100,15 +1133,88 @@ mounted () {
   }
 ```
 
-### 22、能说下 vue-router 中常用的 hash 和 history 路由模式实现原理吗？
+### 22、插件原理
+
+我们知道安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。该方法需要在调用 new Vue() 之前被调用。当 install 方法被同一个插件多次调用，插件将只会被安装一次。
+
+### 23、能说下 vue-router 中常用的 hash 和 history 路由模式实现原理吗？
+
+通过 Vue.mixin()方法，全局注册一个混合，影响注册之后所有创建的每个 Vue 实例，该混合在 beforeCreate 钩子中通过 Vue.util.defineReactive()定义了响应式的\_route 属性。所谓响应式属性，即当\_route 值改变时，会自动调用 Vue 实例的 render()方法，更新视图。
 
 - 1. hash 模式的实现原理
   - URL 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送；
   - hash 值的改变，都会在浏览器的访问历史中增加一个记录。因此我们能通过浏览器的回退、前进按钮控制 hash 的切换；
-  - 可以通过  a  标签，并设置  href  属性，当用户点击这个标签后，URL  的 hash 值会发生改变；或者使用  JavaScript 来对  loaction.hash  进行赋值，改变 URL 的 hash 值；
-  - 我们可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）。
+  - 可以通过  a  标签，并设置  href  属性，当用户点击这个标签后，URL  的 hash 值会发生改变；或者使用 JavaScript 来对  loaction.hash  进行赋值，改变 URL 的 hash 值；然后触发渲染。
+  - 主动的我们可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）。
 - 2. history 模式的实现原理
   - history.pushState() 和 history.repalceState()。这两个 API 可以在不进行刷新的情况下，操作浏览器的历史纪录，但是不会被 popstate 事件监听。
   - 主动的我们可以通过 pushState 和 repalceState 两个 API 来操作实现 URL 的变化，然后手动触发页面跳转（渲染）。
   - 被动的我们可以通过 popstate 事件来监听 url 的变化，从而对页面进行跳转（渲染）
   - 该模式需要后端配置。
+
+调用 history.pushState()相比于直接修改 hash 主要有以下优势：
+
+- pushState 设置的新 url 可以是与当前 url 同源的任意 url,而 hash 只可修改#后面的部分，故只可设置与当前同文档的 url
+- pushState 设置的新 url 可以与当前 url 一模一样，这样也会把记录添加到栈中，而 hash 设置的新值必须与原来不一样才会触发记录添加到栈中
+- pushState 通过 stateObject 可以添加任意类型的数据记录中，而 hash 只可添加短字符串
+- pushState 可额外设置 title 属性供后续使用
+
+'abstract'模式，不涉及和浏览器地址的相关记录，流程跟'HashHistory'是一样的，其原理是通过数组模拟浏览器历史记录栈的功能
+
+### 24、vuex 原理
+
+核心原理。在 Vuex 的 install 方法中，可以获取到 Vue 实例。我们在每个 Vue 实例上添加 `$store` 属性，可以让每个 vue 实例访问到 Vuex 数据信息；我们在每个 Vue 实例的  data 属性上添加上 state，这样 state 就是响应式的；收集我们传入 new Vuex.Store(options) 即 options 中所有的 mutaions、actions、getters；接着当我们 dispatch 的时候去匹配到 Store 类中存放的 actions 方法，然后去执行；当我们 commit 的时候去匹配到 Store 类中存放的 mutations 方法，然后去执行；这其实就是一个发布订阅模式，先存起来，后边用到再取再执行。
+
+```js
+// 我们采用 Vue.mixin 方法将 vuexInit 方法混淆进 beforeCreate 钩子中，并用 Vue 保存 Vue 对象
+// 迷mixin中的生命周期函数与组件共存并且先于组件执行
+export default install (_Vue) {
+    Vue.mixin({ beforeCreate: vuexInit });
+    Vue = _Vue;
+}
+
+// 因为之前已经用Vue.mixin 方法将 vuexInit 方法混淆进 beforeCreate 钩子中，
+// 所以每一个 vm 实例都会调用 vuexInit 方法。
+// 如果是根节点（$options中存在 store 说明是根节点），则直接将 options.store 赋值给 this.$store。
+// 否则则说明不是根节点，从父节点的 $store 中获取。
+// 通过这步的操作，我们已经可以在任意一个 vm 中通过 this.$store 来访问 Store 的实例啦～
+function vuexInit () {
+    const options = this.$options;
+    if (options.store) {
+      // 根结点赋值
+        this.$store = options.store;
+    } else {
+      // 每个实例都会有父亲。故一层层给实例赋值
+        this.$store = options.parent.$store;
+    }
+}
+
+// 响应式核心就是新建一个Vue实例，将state挂载到实例 data 上，让 Vue 内部运用 Object.defineProperty 实现响应式。
+function resetStoreVM (store, state, hot) {
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed
+  })
+}
+
+// getter是借助vue的计算属性computed特性实现的
+var wrappedGetters = store._wrappedGetters;
+//拿到存储的所有getters
+var computed = {};
+//遍历getters
+forEachValue(wrappedGetters, function (fn, key) {
+    //存储到computed对象中
+    computed[key] = partial(fn, store);//partical的作用是将其变成()=>{fn(store)}
+    //设置getters的代理，访问getters就是访问computed
+    Object.defineProperty(store.getters, key, {
+        get: function () { return store._vm[key]; },
+        enumerable: true
+    });
+});
+
+// 当严格模式下当state被修改的时候，store._committing 必须为 true，否则在开发阶段会报警告。
+// store._committing 默认值是 false，只有在_withCommit()方法里面才会是true。这个方法只有commit才会调用。
+// 所以外部任何非通过 Vuex 提供的接口直接操作修改 state 的行为都会在开发阶段触发警告。
+```

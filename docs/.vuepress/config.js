@@ -117,6 +117,7 @@ module.exports = {
           ["/NODE/npm", "npm"],
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"],
+          ["/NODE/node常见问题", "node常见问题"],
         ],
       },
       {

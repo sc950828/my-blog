@@ -151,6 +151,16 @@ function createKeyToOldIdx(children, beginIdx, endIdx) {
 }
 ```
 
+```js
+// key不能使用index和随机数，会影响diff算法的准确性
+// 删除第一个
+0 -> a    0->b    1->b
+1 -> b    1->c    2->c
+2 -> c
+
+// 其实这里b和c完全是可以复用的，但是因为key变了 所以会触发响应式更新。随机数也是同样的道理。所以需要保证节点key唯一不变。
+```
+
 ### 18、vue 中 mixin 和 mixins 区别？
 
 mixin 用于全局混入，会影响到每个组件实例。
