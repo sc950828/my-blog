@@ -77,6 +77,64 @@ Module._load = function(request, parent, isMain) {
 
 每个 Tick 的过程就是查看是否有事件待处理。如果有就取出事件及其相关的回调函数。然后进入下一个循环，如果不再有事件处理，就退出进程。
 
+Node.js 的运行机制如下:
+
+- V8 引擎解析 JavaScript 脚本。
+- 解析后的代码，调用 Node API。
+- libuv 库负责 Node API 的执行。它将不同的任务分配给不同的线程，形成一个 Event Loop（事件循环），以异步的方式将任务的执行结果返回给 V8 引擎。
+- V8 引擎再将结果返回给用户。
+
+node 中事件循环的顺序
+
+- poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
+- check 阶段：执行 setImmediate() 的回调
+- close callbacks 阶段：执行 socket 的 close 事件回调
+- timers 阶段：这个阶段执行 timer（setTimeout、setInterval）的回调
+- I/O callbacks 阶段：处理一些上一轮循环中的少数未执行的 I/O 回调
+- idle, prepare 阶段：仅 node 内部使用
+
+外部输入数据-->轮询阶段(poll)-->检查阶段(check)-->关闭事件回调阶段(close callback)-->定时器检测阶段(timer)-->I/O 事件回调阶段(I/O callbacks)-->闲置阶段(idle, prepare)-->轮询阶段（按照该顺序反复运行）
+
+Node 端事件循环中的异步队列也是这两种：macro（宏任务）队列和 micro（微任务）队列。
+
+- 常见的 macro-task 比如：setTimeout、setInterval、 setImmediate、script（整体代码）、 I/O 操作等。
+- 常见的 micro-task 比如: process.nextTick、new Promise().then(回调)等。
+
+```js
+console.log("start");
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(function () {
+    console.log("promise1");
+  });
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+  Promise.resolve().then(function () {
+    console.log("promise2");
+  });
+}, 0);
+Promise.resolve().then(function () {
+  console.log("promise3");
+});
+console.log("end");
+
+// 一开始执行栈的同步任务（这属于宏任务）执行完毕后（依次打印出start end，并将2个timer依次放入timer队列）,
+// 会先去执行微任务（这点跟浏览器端的一样），所以打印出promise3
+
+// 然后进入timers阶段，执行timer1的回调函数，打印timer1，并将promise.then回调放入microtask队列，
+// 同样的步骤执行timer2，打印timer2；这点跟浏览器端相差比较大，
+// timers阶段有几个setTimeout/setInterval都会依次执行，并不像浏览器端，每执行一个宏任务后就去执行一个微任务
+
+// start
+// end
+// promise3
+// timer1
+// timer2
+// promise1
+// promise2
+```
+
 ### 5、如何查看 V8 的内存使用情况
 
 ```js

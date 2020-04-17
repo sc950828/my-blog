@@ -1,15 +1,19 @@
 ### 1、koa
 
-koa 是一个新的 web 框架，由 express 幕后的原班人马打造.
+koa 是一个新的 web 框架，由 express 幕后的原班人马打造。核心是中间件 Middleware 和上下文 context。
 
 ### 2、koa 特点
 
 路由方法里面的参数是 context 对象，里面包含 request 和 response
 
+Context 中有两部分，一部分是自身属性，主要是应用于框架内部使用，一部分是 Request 和 Response 委托的操作方法，主要为提供给用户更方便从 Request 获取想要的参数和更方便的设置 Response 内容。
+
 ### 3、创建 app
 
     const koa = require("koa")
     const app = new koa()
+
+    app.listen(1995); //在这里创建server
 
 ### 4、路由
 
@@ -148,7 +152,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     ctx.params获取路径参数
     安装koa-bodyparser并配置使用通过ctx.request.body获取参数 (post请求 put请求)
 
-### 洋葱模型
+### 12、洋葱模型
 
 ```js
 const Koa = require("koa");
@@ -164,3 +168,13 @@ app.use((ctx) => {
 app.listen(3001);
 // 执行结果是1=>2=>3
 ```
+
+### 13、koa 和 express 区别
+
+Express 功能丰富，随取随用，并且框架自身封装了大量便利的功能，比如路由、视图处理等等。koa 更轻量，框架自身并没集成太多功能，大部分功能需要用户自行 require 中间件去解决。路由都需要额外的中间件。
+
+回调函数不同 express 是同步的回调函数，包含 req res next 三个参数。koa 是异步函数，包含 context next 两个参数。
+
+中间件实现不同 Express 中间件实现是基于 Callback 回调函数同步的，它不会去等待异步（Promise）完成。koa 中间件使用 koa-compse 实现的，更简洁支持异步。
+
+响应机制不同 在 Express 中我们使用 res.send() 之后就立即响应了。koa 中没有立即响应，而是在所有的中间件结束之后做了响应。
