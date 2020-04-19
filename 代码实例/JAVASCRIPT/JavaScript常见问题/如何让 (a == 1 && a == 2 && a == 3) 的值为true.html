@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>如何让 (a == 1 && a == 2 && a == 3) 的值为true</title>
+  </head>
+  <body>
+    <script>
+      // 利用闭包
+      const a = {
+        [Symbol.toPrimitive]: (function () {
+          let i = 1;
+          return function () {
+            return i++;
+          };
+        })(),
+      };
+      console.log(a == 1 && a == 2 && a == 3);
+
+      // 利用代理
+      const b = new Proxy(
+        {},
+        {
+          i: 1,
+          get: function() {
+            return () => this.i++
+          },
+        }
+      );
+      console.log(b == 1 && b == 2 && b == 3);
+
+      // 利用类型转换
+      const c = [1, 2, 3]
+      c.toString = function() {
+        console.log("toString");
+      }
+      c.valueOf= function() {
+        console.log("valueOf");
+      }
+
+      c.valueOf = c.shift
+      // 这里其实还可以重写toString方法。
+      console.log(c == 1 && c == 2 && c == 3);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>视差滚动效果</title>
+    <style>
+      body {
+        margin: 0;
+        text-align: center;
+        color: white;
+      }
+      section {
+        height: 100vh;
+      }
+
+      .g-word {
+        background-color: gray;
+      }
+
+      .g-img1 {
+        background-image: url("../../images/test.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center center;
+      }
+
+      .g-img2 {
+        background-image: url("../../images/user.png");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center center;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="g-word">Header</section>
+    <section class="g-img1">IMG1</section>
+    <section class="g-word">Content1</section>
+    <section class="g-img2">IMG2</section>
+    <section class="g-word">Content2</section>
+    <section class="g-img1">IMG3</section>
+    <section class="g-word">Footer</section>
+  </body>
+</html>

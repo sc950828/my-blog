@@ -446,7 +446,7 @@ const EventUtils = {
 
   - 第三种方式是给 js 脚本添加 async 属性，这个属性会使脚本异步加载，不会阻塞页面的解析过程，但是当脚本加载完成后立即执行 js 脚本，这个时候如果文档没有解析完成的话同样会阻塞。多个 async 属性的脚本的执行顺序是不可预测的，一般不会按照代码的顺序依次执行。
 
-  - 第四种方式是动态创建 DOM 标签的方式，我们可以对文档的加载事件进行监听，当文档加载完成后再动态的创建 script 标签来引入 js 脚本。
+  - 第四种方式是动态创建 DOM 标签的方式，我们可以对文档的加载事件进行监听，当文档加载完成后再动态的创建 script 标签来引入 js 脚本。document.createElement("script")
 
 ### 48、DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？
 
@@ -865,8 +865,58 @@ array = array.map((i) => ++i)
 [,2,,3,,4]
 ```
 
-### ### 78、统计网页中出现的标签数
+### 78、统计网页中出现的标签数
 
 ```js
 new Set([...document.querySelectorAll("*")].map((ele) => ele.tagName)).size;
+```
+
+### 79、获取页面是否是否可见
+
+当页面被最小化或者被切换成后台标签页时，页面为不可见，浏览器会触发一个 visibilitychange 事件,并设置 document.hidden 属性为 true；切换到显示状态时，页面为可见，也同样触发一个 visibilitychange 事件，设置 document.hidden 属性为 false。
+
+```js
+window.addEventListener("visibilitychange", function () {
+  alert(document.hidden);
+});
+```
+
+### 80、如何让 (a == 1 && a == 2 && a == 3) 的值为 true？
+
+```js
+// 利用闭包 重写[Symbol.toPrimitive]方法
+const a = {
+  [Symbol.toPrimitive]: (function () {
+    let i = 1;
+    return function () {
+      return i++;
+    };
+  })(),
+};
+console.log(a == 1 && a == 2 && a == 3);
+
+// 利用代理
+const b = new Proxy(
+  {},
+  {
+    i: 1,
+    get: function () {
+      return () => this.i++;
+    },
+  }
+);
+console.log(b == 1 && b == 2 && b == 3);
+
+// 利用类型转换
+const c = [1, 2, 3];
+c.toString = function () {
+  console.log("toString");
+};
+c.valueOf = function () {
+  console.log("valueOf");
+};
+
+c.valueOf = c.shift;
+// 这里其实还可以重写toString方法。
+console.log(c == 1 && c == 2 && c == 3);
 ```

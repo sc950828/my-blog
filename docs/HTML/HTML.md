@@ -147,8 +147,6 @@ w3c 中定义的事件发生的过程的 3 个阶段： 捕获阶段（capturing
 
 - （3）可以调用 localStorage 本地存储方式，localStorge 另一个浏览上下文里被添加、修改或删除时，它都会触发一个 storage 事件，我们通过监听 storage 事件，控制它的值来进行页面信息通信；
 
-- （4）如果我们能够获得对应标签页的引用，通过 postMessage 方法也是可以实现多个标签页通信的。
-
 ### 19、如何在页面上实现一个圆形的可点击区域？
 
 - 纯 css 实现，使用 border-radius ，当 border-radius 的长度等于宽高相等的元素值的一半时，即可实现一个圆形的点击区域。
@@ -191,3 +189,18 @@ title 属性没有明确意义只表示是个标题，h1 则表示层次明确�
     outerHTML：外部 HTML，<div>content<br/></div>
     innerText：内部文本，content
     outerText：外部文本，content
+
+### 27、获取自定义属性 data-xxx
+
+```js
+// <div id="div1" data-user="randy" data-user-age="24"></div>;
+
+// 第一种方法
+const div1 = document.getElementById("div1");
+console.log(div1.dataset.user);
+console.log(div1.dataset.userAge); // 会变成驼峰式
+
+// 第二种方法
+console.log(div1.getAttribute("data-user"));
+console.log(div1.getAttribute("data-user-age"));
+```

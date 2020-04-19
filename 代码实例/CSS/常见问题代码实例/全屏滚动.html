@@ -16,6 +16,7 @@
       }
       .outer {
         height: 100%;
+        overflow: hidden;
       }
       .inner {
         background-image: linear-gradient(
@@ -25,11 +26,11 @@
           green,
           blue
         );
-        transition: height 3s ease;
-        height: 100%;
+        transition: all 10s ease;
+        height: 500%;
       }
       .inner:hover {
-        height: 500%;
+        transform: translateY(-80%);
       }
     </style>
   </head>

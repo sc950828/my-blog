@@ -60,6 +60,9 @@ console.log(o.b.g()); // 42
 // 显示绑定 显示的改变this
 // 通过这三个方法来改变this apply(this, [args]) call(this, args) bind(this, args)()
 // 区别是apply传参数是一个数组，bind需要再次调用
+// 如果 call,apply 或者 bind 传入的第一个参数值是 undefined 或者 null，
+// 严格模式下 this 的值为传入的值 null /undefined。
+// 非严格模式下，实际应用的默认绑定规则，this 指向全局对象(node环境为global，浏览器环境为window)
 ```
 
 ```js

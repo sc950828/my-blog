@@ -16,9 +16,11 @@ CSS 是层叠样式表。
 - import 只在 IE5 以上才能识别，而 link 是 HTML 标签，无兼容问题。
 - link 方式的样式的权重高于@import 的权重。
 
-### 4、CSS 哪些属性可以继承？
+### 4、CSS 哪些属性可以继承？哪些属性不能继承？
 
 - 与元素外观相关的属性能被继承(如颜色 字体 背景 对齐方式等)。比如 font-size、font-family、color、background-color、visibility、opacity、text-align、text-shadow、line-height、word-spacing、letter-spacing、cursor
+
+- 不能继承的属性 border, padding, margin, width, height
 
 - 当一个属性不是继承属性时，可以使用 inherit 关键字指定一个属性应从父元素继承它的值，inherit 关键字用于显式地指定继承性，可用于任何继承性/非继承性属性。
 
@@ -55,9 +57,8 @@ CSS 是层叠样式表。
 
 ### 8、CSS 为什么是从右往左解析的？
 
-因为我们写样式的时候是范围由大到小比如 div .box1 先从右边就能过滤掉一大部分不符合条件的元素。
-CSS 中更多的选择器是不会匹配的，所以在考虑性能问题时，需要考虑的是如何在选择器不匹配时提升效率。
-从右向左匹配就是为了达成这一目的的，通过这一策略能够使得 CSS 选择器在不匹配的时候效率更高。
+因为我们写样式的时候是范围由大到小比如 div .box1 先从右边就能过滤掉一大部分不符合条件的元素。CSS 中更多的选择器是不会匹配的，所以在考虑性能问题时，需要考虑的是如何在选择器不匹配时提升效率。从右向左匹配就是为了达成这一目的的，通过这一策略能够使得 CSS 选择器在不匹配的时候效率更高。
+
 比如选择器 #markdown .content h3 先找到 DOM 中的所有 h3 元素，再过滤掉祖先元素不是.content 的，最后过滤掉.content 的祖先不是#markdown 的。
 
 ### 9、CSS 隐藏元素的几种方式及区别是什么？

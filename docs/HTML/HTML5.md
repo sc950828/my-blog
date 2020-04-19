@@ -110,6 +110,37 @@
   - 设置需要接收拖动元素的 ondragover 事件。在该事件里面阻止默认事件即可。e.preventDefault()。
   - 设置需要接收拖动元素的 ondrop 事件，在该事件里面使用 e.dataTransfer.getData(key)获取 id，然后使用 appendChild(id)方法添加 dom。
 
+```js
+// <div id="div1" ondragover="dragOver(event)" ondrop="drop(event)">
+//   <img
+//     id="img1"
+//     src="../images/avatar.jpg"
+//     alt=""
+//     width="100"
+//     height="100"
+//     draggable="true"
+//     ondragstart="dragStart(event)"
+//   />
+// </div>
+// <div id="div2" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+
+// draggable="true"设置元素可以被拖动。
+// 被拖动元素设置，ondragstart事件，开始被拖动发生什么。把元素id存到transfer里面
+function dragStart(e) {
+  e.dataTransfer.setData("MyImg", e.target.id);
+}
+// 接收拖动元素设置 ondragover事件，在里面阻止默认事件。
+function dragOver(e) {
+  e.preventDefault();
+}
+// 接收滚动元素设置 ondrop，停止拖动。阻止默认事件，获取拖动元素id。添加子元素。
+function drop(e) {
+  e.preventDefault();
+  var id = e.dataTransfer.getData("MyImg");
+  e.target.appendChild(document.getElementById(id));
+}
+```
+
 ### 6、地理定位
 
 通过 navigator.geolocation.getCurrentPosition(showPosition, showError)获取地理信息，传两个函数作为参数。
@@ -137,7 +168,7 @@
 - sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口。
 - localStorage 会永久存在除非手动清除。
 - sessionStorage 在关闭页面或浏览器的时候就会清除。
-- localStorage 和 sessionStorage key 必须是字符串类型。存储的数据都是字符串类型的数据，取出来的数据也是字符串类型，因此如果存储的对象不是字符串，则要转换成字符串数据类型
+- localStorage 和 sessionStorage key 必须是字符串类型。**存储的数据都是字符串类型的数据，取出来的数据也是字符串类型，因此如果存储的对象不是字符串，则要转换成字符串数据类型。**
 - 检测是否支持 web 存储，typeof(Storage) !== "undefined"
 - 常用方法：
   - localStorage/sessionStorage.setItem('key', 'val') // 存储数据
@@ -155,23 +186,46 @@
   - 调用页面创建 worker 对象，var w = new Worker("worker 文件路径").然后通过实例对象调用 onmessage 事件进行监听，并获取 worker 文件里返回的数据
   - 终止 web worker，当我们的 web worker 创建后会持续的监听它，需要中止的时候则使用实例上的方法 w.terminate()。
 
+```js
+let w;
+function startWorker() {
+  // 判断是否支持webWorker
+  if (typeof Worker != "undefined") {
+    // 创建worker对象
+    w = new Worker("WebWorker.js");
+    // 通过onmessage监听worker.js发来的数据
+    w.onmessage = function (event) {
+      document.getElementById("countText").innerText = event.data;
+    };
+  } else {
+    document.getElementById("countText").innerText = "不支持webworker";
+  }
+}
+function stopWorker() {
+  // 关闭worker
+  w.terminate();
+}
+```
+
 ### 10、SSE
 
 HTML5 服务器发送事件（server-sent event）允许网页获得来自服务器的更新。 Server-Sent 事件 - 单向消息传递 Server-Sent 事件指的是网页自动获取来自服务器的更新。
+
+SSE 是单向通道，只能服务器向客户端发送消息，如果客户端需要向服务器发送消息，则需要一个新的 HTTP 请求。
 
 ```js
 // 服务器端把 "Content-Type" 报头设置为 "text/event-stream"。现在，您可以开始发送事件流了
 // 客户端
 if (typeof EventSource !== "undefined") {
   var source = new EventSource("demo_sse.php");
-  source.onmessage = function(event) {
+  source.onmessage = function (event) {
     document.getElementById("result").innerHTML += event.data + "<br>";
   };
 } else {
   document.getElementById("result").innerHTML =
     "抱歉，你的浏览器不支持 server-sent 事件...";
 }
-// 三个方法 onopen当接收到消息、onmessage当接收到消息、onerror当发生错误
+// 三个方法 onopen当通往服务器的连接被打开、onmessage当接收到消息、onerror当发生错误
 ```
 
 ### 11、WebSocket
@@ -186,6 +240,45 @@ if (typeof EventSource !== "undefined") {
   - Socket.onmessage 客户端接收服务端数据时触发。
   - Socket.onerror 通信发生错误时触发。
   - Socket.onclose 连接关闭时触发。
+
+```js
+let ws;
+let div1 = document.getElementById("div1");
+function startWebSocket() {
+  // 打开一个 web socket 这个链接是网上的测试链接，目前可用。ws是http链接 wss是https的链接
+  ws = new WebSocket("ws://121.40.165.18:8800");
+  // 建立连接时调用
+  ws.onopen = function () {
+    // Web Socket 已连接上，使用 send() 方法发送数据
+    ws.send("测试WebSocket，发送数据给服务端");
+    alert("数据发送中...");
+  };
+  // 客户端接收服务端数据时触发
+  ws.onmessage = function (evt) {
+    var received_msg = evt.data;
+    console.log(received_msg);
+    div1.innerHTML += received_msg;
+    alert("数据已接收...");
+  };
+  // 关闭时调用
+  ws.onclose = function () {
+    alert("连接已关闭");
+  };
+  // 发生错误是调用
+  ws.onerror = function (err) {
+    alert("发生错误啦", err);
+  };
+}
+// 关闭连接
+function stopWebSocket() {
+  // 使用close方法关闭连接。
+  ws.close();
+}
+// 再次发送数据
+function reSendData() {
+  ws.send("再次发送数据");
+}
+```
 
 ### 12、什么是 SVG？其他图像格式相比优势有哪些？
 
@@ -204,7 +297,7 @@ if (typeof EventSource !== "undefined") {
 - Canvas 通过 JavaScript 来绘制 2D 图形，依赖分辨率， 适合游戏。
 - SVG 基于 XML，这意味着 SVG DOM 中的每个元素都是可用的。您可以为某个元素附加 JavaScript 事件处理器。
 - 在 SVG 中，每个被绘制的图形均被视为对象。如果 SVG 对象的属性发生变化，那么浏览器能够自动重现图形。
-- Canvas 是逐像素进行渲染的。在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。
+- Canvas 是逐像素进行渲染的。在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。是一个整体。
 
 ### 15、语义化标签的好处？
 
