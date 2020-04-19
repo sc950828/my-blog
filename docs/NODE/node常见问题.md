@@ -135,6 +135,89 @@ console.log("end");
 // promise2
 ```
 
+setTimeout 和 setImmediate
+
+这两个函数分别对应 timer 阶段和 check 阶段，但是在普通定义时两者的执行顺序不确定。setTimeout 可能执行在前，也可能执行在后。
+
+```js
+setTimeout(function timeout() {
+  console.log("timeout");
+}, 0);
+setImmediate(function immediate() {
+  console.log("immediate");
+});
+```
+
+但当二者在异步 i/o callback 内部调用时，总是先执行 setImmediate，再执行 setTimeout。
+setImmediate 永远先执行。因为两个代码写在 IO 回调中，IO 回调是在 poll 阶段执行，当回调执行完毕后队列为空，发现存在 setImmediate 回调，所以就直接跳转到 check 阶段去执行回调了。
+
+```js
+const fs = require("fs");
+fs.readFile(__filename, () => {
+  setTimeout(() => {
+    console.log("timeout");
+  }, 0);
+  setImmediate(() => {
+    console.log("immediate");
+  });
+});
+// immediate
+// timeout
+```
+
+process.nextTick
+
+这个函数其实是独立于 Event Loop 之外的，它有一个自己的队列，当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行。
+
+```js
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(function () {
+    console.log("promise1");
+  });
+}, 0);
+process.nextTick(() => {
+  console.log("nextTick");
+  process.nextTick(() => {
+    console.log("nextTick");
+    process.nextTick(() => {
+      console.log("nextTick");
+      process.nextTick(() => {
+        console.log("nextTick");
+      });
+    });
+  });
+});
+// nextTick=>nextTick=>nextTick=>nextTick=>timer1=>promise1
+```
+
+Node 与浏览器的 Event Loop 差异
+
+浏览器环境下，microtask 的任务队列是每个 macrotask 执行完之后执行。而在 Node.js 中，microtask 会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行 microtask 队列的任务。
+
+```js
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(function () {
+    console.log("promise1");
+  });
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+  Promise.resolve().then(function () {
+    console.log("promise2");
+  });
+}, 0);
+// 浏览器端运行结果：timer1=>promise1=>timer2=>promise2
+
+// 如果是node11版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval和setImmediate)
+// 就立刻执行微任务队列，这就跟浏览器端运行一致，最后的结果为timer1=>promise1=>timer2=>promise2
+
+// 如果是node10及其之前版本：要看第一个定时器执行完，第二个定时器是否在完成队列中。
+// 如果是第二个定时器还未在完成队列中，最后的结果为timer1=>promise1=>timer2=>promise2
+// 如果是第二个定时器已经在完成队列中，则最后的结果为timer1=>timer2=>promise1=>promise2
+```
+
 ### 5、如何查看 V8 的内存使用情况
 
 ```js

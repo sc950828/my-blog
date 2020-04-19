@@ -1,20 +1,20 @@
-console.log("start");
-setTimeout(() => {
-  console.log("timer1");
-  Promise.resolve().then(function () {
-    console.log("promise1");
-  });
-}, 0);
-setTimeout(() => {
-  console.log("timer2");
-  Promise.resolve().then(function () {
-    console.log("promise2");
-  });
-}, 0);
-Promise.resolve().then(function () {
-  console.log("promise3");
-});
-console.log("end");
+// console.log("start");
+// setTimeout(() => {
+//   console.log("timer1");
+//   Promise.resolve().then(function () {
+//     console.log("promise1");
+//   });
+// }, 0);
+// setTimeout(() => {
+//   console.log("timer2");
+//   Promise.resolve().then(function () {
+//     console.log("promise2");
+//   });
+// }, 0);
+// Promise.resolve().then(function () {
+//   console.log("promise3");
+// });
+// console.log("end");
 
 // 一开始执行栈的同步任务（这属于宏任务）执行完毕后（依次打印出start end，并将2个timer依次放入timer队列）,
 // 会先去执行微任务（这点跟浏览器端的一样），所以打印出promise3
@@ -30,3 +30,23 @@ console.log("end");
 // timer2
 // promise1
 // promise2
+
+// setTimeout(function timeout() {
+//   console.log("timeout");
+// }, 0);
+// setImmediate(function immediate() {
+//   console.log("immediate");
+// });
+
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(function () {
+    console.log("promise1");
+  });
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+  Promise.resolve().then(function () {
+    console.log("promise2");
+  });
+}, 0);
