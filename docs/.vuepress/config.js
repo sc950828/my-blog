@@ -104,7 +104,11 @@ module.exports = {
       },
       {
         title: "REACT",
-        children: [["/REACT/react", "react"]]
+        children: [
+          ["/REACT/react", "react"],
+          ["/REACT/react-router", "react-router"],
+          ["/REACT/react-redux", "react-redux"]
+        ]
       },
       {
         title: "WEBPACK",

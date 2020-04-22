@@ -209,3 +209,64 @@ handleClick = () => {
 元素的 key 只有放在就近的数组上下文中才有意义。
 
 key 会传递信息给 React ，但不会传递给你的组件。如果你的组件中需要使用 key 属性的值，请用其他属性名显式传递这个值
+
+### 10、状态提升
+
+在 React 中，将多个组件中需要共享的 state 向上移动到它们的最近共同父组件中，便可实现共享 state。这就是所谓的“状态提升”。
+
+父组件把值和方法传递到子组件中，相当于在子组件里面调用父组件的方法。
+
+### 11、组合和继承
+
+React 有十分强大的组合模式。我们推荐使用组合而非继承来实现组件间的代码重用。
+
+### 12、生命周期函数
+
+一、组件在初始化时会触发 5 个钩子函数：
+
+getDefaultProps()
+
+设置默认的 props，es6 中用 static dufaultProps={} 设置组件的默认属性。在整个生命周期只执行一次。
+
+getInitialState()
+
+在使用 es6 的 class 语法时是没有这个钩子函数的，可以直接在 constructor 中定义 this.state。此时可以访问 this.props。
+
+componentWillMount() ajax 数据的拉取操作，定时器的启动。
+
+组件初始化时调用，以后组件更新不调用，整个生命周期只调用一次，此时可以修改 state。
+
+render()
+
+React 最重要的步骤，创建虚拟 dom，进行 diff 算法，更新 dom 树都在此进行。此时就不能更改 state 了。
+
+componentDidMount() 动画的启动，输入框自动聚焦
+
+组件渲染之后调用，可以通过 this.getDOMNode()获取和操作 dom 节点，只调用一次。
+
+二、在更新时也会触发 5 个钩子函数：
+
+componentWillReceivePorps(nextProps)
+
+组件初始化时不调用，组件接受新的 props 时调用。不管父组件传递给子组件的 props 有没有改变，都会触发。
+
+shouldComponentUpdate(nextProps, nextState)
+
+React 性能优化非常重要的一环。组件接受新的 state 或者 props 时调用，我们可以设置在此对比前后两个 props 和 state 是否相同，如果相同则返回 false 阻止更新，因为相同的属性状态一定会生成相同的 dom 树，这样就不需要创造新的 dom 树和旧的 dom 树进行 diff 算法对比，节省大量性能，尤其是在 dom 结构复杂的时候。不过调用 this.forceUpdate 会跳过此步骤。
+
+componentWillUpdate(nextProps, nextState)
+
+组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改 state
+
+render()
+
+不多说
+
+componentDidUpdate()
+
+组件初始化时不调用，组件更新完成后调用，此时可以获取 dom 节点。
+
+三、卸载钩子函数
+
+componentWillUnmount() 定时器的清除
+组件将要卸载时调用，一些事件监听和定时器需要在此时清除。
