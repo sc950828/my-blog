@@ -9,11 +9,13 @@
 
 ### 2、promise 方法
 
-- then() 获取的是成功的数据
+- then(onFulfilled[, onRejected])
+  - onFulfilled 当 Promise 变成已完成状态(fulfilled)时调用的回调函数
+  - onRejected 当 Promise 变成接受状态或拒绝状态(rejected)时调用的回调函数。当前的 err 不会进入，会进入下一个 then 方法里面的 onRejected 方法里面。不常用，我们一般使用 catch。
 - catch() 获取的是出错的异常
 - finally() 不管成功失败都会执行
 - all() 接收一个 Promise 对象数组作为参数,参数所有回调成功才是成功，返回值数组与参数顺序一致,参数数组其中一个失败，则触发失败状态，第一个触发失败的 Promise 错误信息作为 Promise.all 的错误信息。
-- race() 接收一个 Promise 对象数组作为参数,参数里的任意一个子 promise 被成功或失败后，父 promise 马上也会用子 promise 的成功返回值或失败详情作为结果
+- race() 接收一个 Promise 对象数组作为参数,参数里的任意一个子 promise 被成功或失败后，父 promise 马上也会用子 promise 的成功返回值或失败详情作为结果。
 - allSettled() 接收一个 Promise 对象数组作为参数,不管子 promise 成功失败都返回。
 
 ### 3、async await
@@ -24,11 +26,28 @@
 
 - 第一种最常见的是使用回调函数的方式，使用回调函数的方式有一个缺点是，多个回调函数嵌套的时候会造成回调函数地狱，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
 
-- 第二种是 Promise 的方式，使用 Promise 的方式可以将嵌套的回调函数作为链式调用。但是使用这种方法，有时会造成多个 then 的链式调用，可能会造成代码的语义不够明确。
+- 第二种使用事件监听，比如 JQuery 的 trigger 和 on，trigger 暴露事件 on 监听事件。每次使用还得注册事件监听再进行触发挺麻烦的，代码也不太优雅。
 
-- 第三种是使用 generator 的方式，它可以在函数的执行过程中，将函数的执行权转移出去，在函数外部我们还可以将执行权转移回来。当我们遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕的时候我们再将执行权给转移回来。因此我们在 generator 内部对于异步操作的方式，可以以同步的顺序来书写。使用这种方式我们需要考虑的问题是何时将函数的控制权转移回来，因此我们需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行。
+- 第三种是 Promise 的方式，使用 Promise 的方式可以将嵌套的回调函数作为链式调用。但是使用这种方法，有时会造成多个 then 的链式调用，可能会造成代码的语义不够明确。Promise 对象一旦新建就会立即执行，无法中途取消。
 
-- 第四种是使用 async 函数的形式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
+- 第四种是使用 generator 的方式，它可以在函数的执行过程中，将函数的执行权转移出去，在函数外部我们还可以将执行权转移回来。当我们遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕的时候我们再将执行权给转移回来。因此我们在 generator 内部对于异步操作的方式，可以以同步的顺序来书写。使用这种方式我们需要考虑的问题是何时将函数的控制权转移回来，因此我们需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行。
+
+```js
+function* generatorFn() {
+  console.log(1);
+  yield console.log(2);
+  console.log(3);
+  yield console.log(4);
+  console.log(5);
+}
+
+let ge = generatorFn();
+ge.next();
+ge.next();
+ge.next();
+```
+
+- 第五种是使用 async 函数的形式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
 
 ### 5、什么是 Promise 对象，什么是 Promises/A+ 规范？
 
@@ -112,19 +131,19 @@ function MyPromise(fn) {
   }
 }
 
-MyPromise.prototype.then = function(onResolved, onRejected) {
+MyPromise.prototype.then = function (onResolved, onRejected) {
   // 首先判断两个参数是否为函数类型，因为这两个参数是可选参数
   onResolved =
     typeof onResolved === "function"
       ? onResolved
-      : function(value) {
+      : function (value) {
           return value;
         };
 
   onRejected =
     typeof onRejected === "function"
       ? onRejected
-      : function(error) {
+      : function (error) {
           throw error;
         };
 

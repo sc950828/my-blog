@@ -57,10 +57,8 @@ module.exports = {
           ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
           ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"],
           ["/JAVASCRIPT/垃圾回收", "垃圾回收"],
-          ["/JAVASCRIPT/call和apply和bind", "call和apply和bind"],
           ["/JAVASCRIPT/数组操作", "数组操作"],
           ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
-          ["/JAVASCRIPT/new操作符实现", "new操作符实现"],
           ["/JAVASCRIPT/手写原理", "手写原理"]
         ]
       },
@@ -87,7 +85,8 @@ module.exports = {
           ["/HTTP/JqueryAjax", "JqueryAjax"],
           ["/HTTP/web安全", "web安全"],
           ["/HTTP/TCP", "TCP"],
-          ["/HTTP/UDP", "UDP"]
+          ["/HTTP/UDP", "UDP"],
+          ["/HTTP/DNS", "DNS"]
         ]
       },
       {

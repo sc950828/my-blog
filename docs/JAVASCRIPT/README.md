@@ -36,10 +36,6 @@
 
 ### 18、[数据类型转换](/JAVASCRIPT/数据类型转换)
 
-### 19、[call 和 apply 和 bind](/JAVASCRIPT/call和apply和bind)
+### 19、[数组操作](/JAVASCRIPT/数组操作)
 
-### 20、[数组操作](/JAVASCRIPT/数组操作)
-
-### 21、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)
-
-### 22、[new 操作符实现](/JAVASCRIPT/new操作符实现)
+### 20、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)

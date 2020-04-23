@@ -23,6 +23,8 @@
       // 只能判断基本类型 能区分null Array等。 引用类型还是判断不出来
       console.log(Object.prototype.toString.call(new People("randy", 24)));
       console.log(new People("randy", 24) instanceof People);
+      const p1 = new People("randy1", 25)
+      console.log(p1.constructor.name);
 
       console.log(Object.prototype.toString.call(null));
       console.log(Object.prototype.toString.call(undefined));

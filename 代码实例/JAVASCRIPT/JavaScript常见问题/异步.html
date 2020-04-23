@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // resolve
+      Promise.resolve("randy")
+        .then(res => {
+          console.log(res);
+          throw new TypeError("type error");
+        })
+        .then(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+
+      // reject
+      Promise.reject("randy").then(
+        res => {
+          console.log("success" + res);
+        },
+        err => {
+          console.log("error" + err);
+        }
+      );
+
+      // new Promise
+      new Promise(function (resolve, reject) {
+        resolve("demi");
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .finally(function () {
+          console.log("resolve le");
+        });
+
+      new Promise(function (resolve, reject) {
+        reject("demi");
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(function () {
+          console.log("reject le");
+        });
+
+      // all
+      // 所有的成功才会返回 否则会返回第一个错误
+      const p1 = Promise.resolve(1);
+      // const p2 = Promise.reject(2);
+      const p2 = Promise.resolve(2);
+      const p3 = Promise.resolve(3);
+      Promise.all([p1, p2, p3])
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      // race
+      // 不管成功失败 永远发挥第一个
+      const p4 = Promise.reject(4);
+      // const p4 = Promise.resolve(4);
+      const p5 = Promise.resolve(5);
+      const p6 = Promise.resolve(6);
+      Promise.race([p4, p5, p6])
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      // allSettled
+      const p7 = Promise.resolve(7)
+      const p8 = Promise.reject(8)
+      const p9 = Promise.resolve(9)
+      Promise.allSettled([p7, p8, p9]).then(res => {
+        console.log(res);
+      })
+
+      // generator
+      function *generatorFn() {
+        console.log(1);
+        yield console.log(2);
+        console.log(3);
+        yield console.log(4);
+        console.log(5);
+      }
+
+      let ge = generatorFn()
+      ge.next()
+      ge.next()
+      ge.next()
+    </script>
+  </body>
+</html>
