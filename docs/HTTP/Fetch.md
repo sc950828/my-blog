@@ -20,7 +20,7 @@ const options = {
     'user-agent': 'Mozilla/4.0 MDN Example',
     'content-type': 'application/json'
   },
-  body: JSON.stringify({  // 请求的 body 信息，Blob, FormData 等 可以不使用stringify处理
+  body: JSON.stringify({  // 请求的 body 信息，Blob, FormData 等
     data: 1
   }),
   mode: 'cors',             // 请求的模式，cors、 no-cors 或 same-origin

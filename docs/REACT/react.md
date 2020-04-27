@@ -224,13 +224,13 @@ React 有十分强大的组合模式。我们推荐使用组合而非继承来�
 
 一、组件在初始化时会触发 5 个钩子函数：
 
-getDefaultProps()
+dufaultProps{}
 
 设置默认的 props，es6 中用 static dufaultProps={} 设置组件的默认属性。在整个生命周期只执行一次。
 
-getInitialState()
+constructor(props)
 
-在使用 es6 的 class 语法时是没有这个钩子函数的，可以直接在 constructor 中定义 this.state。此时可以访问 this.props。
+可以直接在 constructor 中定义 this.state。此时可以访问 this.props。
 
 componentWillMount() ajax 数据的拉取操作，定时器的启动。
 
@@ -262,7 +262,7 @@ render()
 
 不多说
 
-componentDidUpdate()
+componentDidUpdate(preProps, preState)
 
 组件初始化时不调用，组件更新完成后调用，此时可以获取 dom 节点。
 
@@ -270,3 +270,90 @@ componentDidUpdate()
 
 componentWillUnmount() 定时器的清除
 组件将要卸载时调用，一些事件监听和定时器需要在此时清除。
+
+新的生命周期方法
+
+static getDerivedStateFromProps(nextProps,prevState)：接收父组件传递过来的 props 和组件之前的状态，返回一个对象来更新 state 或者返回 null 来表示接收到的 props 没有变化，不需要更新 state
+
+getSnapshotBeforeUpdate
+
+getSnapshotBeforeUpdate(prevProps, prevState)：接收父组件传递过来的 props 和组件之前的状态，此生命周期钩子必须有返回值，返回值将作为第三个参数传递给 componentDidUpdate。必须和 componentDidUpdate 一起使用，否则会报错
+该生命周期钩子触发的时机 ：被调用于 render 之后、更新 DOM 和 refs 之前
+
+### 13、react 中使用 prop-types 检测 props 数据类型
+
+安装使用
+
+    //安装
+    npm install prop-types --save
+    //引入
+    import PropTypes from 'prop-types';
+
+它可以检测的类型
+
+    optionalArray: PropTypes.array,
+    optionalBool: PropTypes.bool,
+    optionalFunc: PropTypes.func,
+    optionalNumber: PropTypes.number,
+    optionalObject: PropTypes.object,
+    optionalString: PropTypes.string,
+    optionalSymbol: PropTypes.symbol,
+
+```js
+import PropTypes from "prop-types";
+
+// class定义中使用方法
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+
+  //如果没有传递该属性时的默认值
+  static defaultProps = {
+    name: "stranger"
+  };
+  //如果传递该属性，该属性值必须为字符串
+  static propTypes = {
+    name: PropTypes.string
+    // name:PropTypes.string.isRequired 使用isRequired设置属性为必须传递的值
+  };
+}
+
+// Renders "Hello, Stranger":
+ReactDOM.render(<Greeting />, document.getElementById("example"));
+```
+
+```js
+import PropTypes from "prop-types";
+//示例
+class Greeting extends React.Component {
+  // arrOf和objectOf多重嵌套类型检测
+  // An array of a certain type
+  // optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+
+  // An object with property values of a certain type
+  // optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+  static propTypes = {
+    todoList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        text: PropTypes.string
+      })
+    )
+  };
+
+  // shape检测不同对象的不同属性的不同数据类型
+  // An object taking on a particular shape
+  // optionalObjectWithShape: PropTypes.shape({
+  //   optionalProperty: PropTypes.string,
+  //   requiredProperty: PropTypes.number.isRequired
+  // }),
+  //示例
+  static propTypes = {
+    object: PropTypes.shape({
+      name: PropTypes.string,
+      age: PropTypes.number
+    })
+  };
+}
+```

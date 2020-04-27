@@ -53,6 +53,7 @@ to属性
       state: { fromDashboard: true } // 自定义属性存在location中
   }}/>
 replace，设置为true，会取代当前历史记录
+innerRef 访问Link标签的dom
 
 NavLink
 NavLink和Link一样最终都是渲染成a标签，NavLink可以给这个a标签添加额外的属性
@@ -119,8 +120,8 @@ Route的作用就是用来渲染路由匹配的组件
   path，字符串，匹配的路径
   exact，布尔值，路径完全匹配的时候跳转 "/a/"和"/a"是一样的
   strict，布尔值，单独使用和没有使用这个属性没有任何区別，如果和exact一起使用可以构建更为精确的匹配模式。"/a/"和"/a"是不同的。
-  location，传递route对象，和当前的route对象对比，如果匹配则跳转，如果不匹配则不跳转。另外，如果route包含在swicth组件中，如果route的location和switch的location匹配，那么route的location会被switch的location替代
   sensitive 是否区分path的大小写
+  location，传递route对象，和当前的route对象对比，如果匹配则跳转，如果不匹配则不跳转。另外，如果route包含在swicth组件中，如果route的location和switch的location匹配，那么route的location会被switch的location替代
 ```
 
 ### 5、history
@@ -179,7 +180,7 @@ History {
 
 ```js
 // 当一个非路由组件也想访问到当前路由的match,location,history对象，那么withRouter将是一个非常好的选择
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 const MyComponent = props => {
   const { match, location, history } = this.props;
   return <div>{props.location.pathname}</div>;

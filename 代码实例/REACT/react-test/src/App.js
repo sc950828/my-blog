@@ -13,8 +13,9 @@ import Params from "./pages/Params";
 import ParentRoute from "./pages/Parent";
 import CustomLink from "./pages/CustomLink";
 import GuoDu from "./pages/GuoDu";
+import LifeCycle from "./pages/LifeCycle";
 import All from "./pages/All";
-import Container from './redux/Container'
+import Container from "./redux/Container";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Link to="/guodu">to guodu,</Link>
         <Link to="/redirecttest">to redirecttest但是会redirect到hello</Link>
         <Link to="/container">redux test</Link>
+        <Link to="/lifecycle">react生命周期</Link>
         <Switch>
           <Route path="/" exact component={Home}></Route>
           <Route path="/hello" component={Hello}></Route>
@@ -47,6 +49,7 @@ function App() {
           <Route path="/parent" component={ParentRoute}></Route>
           <Route path="/guodu" component={GuoDu}></Route>
           <Route path="/container" component={Container}></Route>
+          <Route path="/lifecycle" component={LifeCycle}></Route>
           <Route to="/redirecttest">
             <Redirect to="/hello"></Redirect>
           </Route>
