@@ -46,9 +46,28 @@
 
 ### 8、什么叫变量提升？
 
-- JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量或函数，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句或申明的函数，都会被提升到代码的头部，这就叫做变量提升。因为变量提升所以可以先使用变量然后在定义变量。
+- JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量或函数，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句或申明的函数，都会被提升到代码的头部，这就叫做变量提升。因为变量提升所以可以先使用变量然后在定义变量。且函数的优先级比 var 声明的变量高。
 - 但是后面变量只能定义，不能定义然后赋值。
 - 变量提升只适用于 var 申明的变量或者函数，使用 let const 申明的变量或者箭头函数不存在变量提升这一说。
+
+```js
+// 1
+console.log(foo); // undefined
+console.log(foo); // undefined
+foo = 1;
+console.log(foo); // 1
+
+var foo;
+
+// 2
+console.log(foo); // foo() {}
+console.log(foo); // foo() {}
+foo = 1;
+console.log(foo); // 1
+
+var foo;
+function foo() {}
+```
 
 ### 9、null undefined 的区别是什么？
 
@@ -356,4 +375,32 @@ encodeURIComponent(";/?:@&=+$,#"); // 返回 %3B%2F%3F%3A%40%26%3D%2B%24%2C%23
 window.addEventListener("visibilitychange", function () {
   alert(document.hidden);
 });
+```
+
+### 48、requestAnimationFrame
+
+在 requestAnimationFrame 还未出来之前，大多数使用定时器完成 js 动画，但是由于定时器不准确，而且每次更新动画的时候不能保证与浏览器渲染同步，这样将会导致画面的不流畅
+
+由于目前主流屏幕的固定刷新频率一般为 60HZ 即一秒 60 帧，每次刷新间隔为 1000/60 = 16.7，为了使浏览器得到最好的渲染效果，浏览器每次渲染应该与屏幕刷新率保持一致，那么对于 js 动画而言，最好的更新时机应该与浏览器尽量保持一致
+
+当每次浏览器将要重绘之前，把要执行更新的动画更新完成，那么当浏览器渲染的时候将会保持最新的动画，这就是 requestAnimationFrame 所做的事情
+
+requestAnimationFrame(callback) 的参数就是每次渲染前需要执行的动画更新函数，当浏览器将要重绘画面时就会执行这个回调函数，这个回调函数接受一个参数，即从当前页面加载之后到现在所经过的毫秒数。time
+
+此 api 将会与浏览器渲染同步，即浏览器渲染几次这个 api 将会执行几次，那么就达到了不掉帧的效果，画面效果就更加流程
+requestAnimationFrame 执行时机在事件循环机制中处于微任务队列之后，浏览器渲染之前，浏览器渲染之后就会进入下一次的事件循环(宏任务开始，浏览器渲染结束)
+
+如果使用定时器进行 js 动画操作，那么首先将会导致动画更新与浏览器每次重绘时机不匹配，造成卡顿，其次过于频繁的更新动画还会导致不必要的性能开销，且并非能够达到更好的效果
+
+简单说使用 requestAnimationFrame 更新的动画与浏览器保持同步，不会掉帧，除非浏览器掉帧或者，js 主线程阻塞导致浏览器无法正常渲染，使用定时器更新动画，如果频率高了会影响性能，且达不到更好的效果，如果频率低了将会有不连贯的感觉
+
+```js
+// requestAnimationFrame的调用和浏览器的刷新保持一致
+let t = 0;
+function fn(time) {
+  console.log(time - t); //16.7 60HZ
+  t = time;
+  requestAnimationFrame(fn);
+}
+requestAnimationFrame(fn);
 ```

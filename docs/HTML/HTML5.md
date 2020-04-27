@@ -180,6 +180,7 @@ function drop(e) {
 ### 9、WebWorker
 
 - web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能
+- webworker 线程与 js 主线程最大的区别就在于 webworker 线程无法操作 window 与 document 对象
 - 检测浏览器是否支持 Web Worker。 typeof(Worker)!=="undefined"
 - 使用:
   - 创建 web worker 文件，worker 文件是一个单独的 js 文件，写好逻辑后，通过 postMessage()方法吧数据发送出去
@@ -234,12 +235,26 @@ if (typeof EventSource !== "undefined") {
 - 在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
 - Websocket 使用 ws 或 wss 的统一资源标志符，类似于 HTTPS，其中 wss 表示在 TLS 之上的 Websocket。端口 80 或者 443。
 - 常用 api:
-  - Socket.send() 发送数据
+  - Socket.send() 发送数据 发送的数据必须是纯文本（ArrayBuffer，Blob 等）
   - Socket.close() 关闭连接
   - Socket.onopen 连接建立时触发 用 send 发送数据。
   - Socket.onmessage 客户端接收服务端数据时触发。
   - Socket.onerror 通信发生错误时触发。
   - Socket.onclose 连接关闭时触发。
+- 10 个属性
+  - binaryType 返回 websocket 连接所传输二进制数据的类型（blob, arraybuffer）
+  - bufferedAmount 只读 返回已经被 send()方法放入队列中但还没有被发送到网络中的数据的字节数。一旦队列中的所有数据被发送至网络，则该属性值将被重置为 0。但是，若在发送过程中连接被关闭，则属性值不会重置为 0。
+  - extensions 只读 返回服务器选择的扩展名。这当前只是空字符串或连接协商的扩展列表
+  - onclose 用于指定连接失败后的回调函数
+  - onmessage 用于指定当从服务器接受到信息时的回调函数
+  - onopen 用于指定连接成功后的回调函数
+  - protocol 只读 服务器选择的下属协议
+  - readyState 只读 当前的链接状态，共 4 个
+    - 0 建立连接
+    - 1 已经连接
+    - 2 正在关闭
+    - 3 连接已经关闭或者没有连接成功
+  - url 只读 WebSocket 的绝对路径
 
 ```js
 let ws;

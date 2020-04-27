@@ -5,10 +5,20 @@
 - cookie 是不可跨域的。每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）。
 - cookie 容量小，一般只能存储 4k 大小的数据。同一域名下的请求都会带上 cookie
 - Cookie 又分为了会话 Cookie 与持久 Cookie，要区分这两种类型，非常的简单，持久 Cookie 就是我们设置了它的过期时间，而没设置过期时间的，都属于会话 Cookie。
-- 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 expires/max-age、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间。max-age 指定了 cookie 多久后失效，单位是秒，从浏览器收到报文开始计算。domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在确保安全的情况下传输，即只能通过 HTTPS 传输 cookie。HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。这也是预防 XSS 攻击的重要手段。相应的，对于 CSRF 攻击的预防，也有 SameSite 属性。
+- 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。
 - 在发生 xhr 的跨域请求的时候，即使是同源下的 cookie，也不会被自动添加到请求头部，除非显示地规定。
 - 获取 cookie document.cookie
 - 设置 cookie document.cookie='name=xiaoming;expires=xx'
+- 10 个属性
+  name 表示设置的 cookie 名也就是 key，不能重复，不可更改
+  value 表示设置 cookie 的值
+  expires 指定了 cookie 失效的时间。
+  max-age 指定了 cookie 多久后失效，单位是秒，从浏览器收到报文开始计算。正数为失效时间，负数表示当前 cookie 在浏览器关闭时失效，0 表示删除 cookie。
+  domain 是域名。多级域名不可交换 cookie，如果设置以点开头的域名，则所有子域名可以访问，如设置.baidu.com，则 a.baidu.com 可访问其上级域名的 cookie
+  path 是路径，表示 cookie 所能使用的路径，默认'/'路径，只要满足当前匹配路径以及子路径都可以共享 cookie。domain 和 path 一起限制了 cookie 能够被哪些 url 访问。
+  secure 规定了 cookie 只能在确保安全的情况下传输，即只能通过 HTTPS 传输 cookie。
+  HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。这也是预防 XSS 攻击的重要手段。
+  same-site 规定浏览器不能在跨域请求中携带 Cookie，减少 CSRF 攻击
 
 ### 2、cookie 的缺点是什么？
 

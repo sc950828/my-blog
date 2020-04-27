@@ -45,6 +45,26 @@ let ge = generatorFn();
 ge.next();
 ge.next();
 ge.next();
+
+yield命令后面如果不加星号，返回的是整个数组，加了星号就表示返回的是数组的遍历器
+function* gen1(){
+  yield ["a", "b", "c"]
+}
+for(let val of gen1()){
+  console.log(a)
+}
+// ["a", "b", "c"]
+
+// ------------------- 上下分割
+
+function* gen2(){
+  yield* ["a", "b", "c"]
+}
+for(let val of gen2()){
+  console.log(a)
+}
+// a b c
+
 ```
 
 - 第五种是使用 async 函数的形式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。

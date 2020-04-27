@@ -85,15 +85,15 @@
         });
 
       // allSettled
-      const p7 = Promise.resolve(7)
-      const p8 = Promise.reject(8)
-      const p9 = Promise.resolve(9)
+      const p7 = Promise.resolve(7);
+      const p8 = Promise.reject(8);
+      const p9 = Promise.resolve(9);
       Promise.allSettled([p7, p8, p9]).then(res => {
         console.log(res);
-      })
+      });
 
       // generator
-      function *generatorFn() {
+      function* generatorFn() {
         console.log(1);
         yield console.log(2);
         console.log(3);
@@ -101,10 +101,26 @@
         console.log(5);
       }
 
-      let ge = generatorFn()
-      ge.next()
-      ge.next()
-      ge.next()
+      let ge = generatorFn();
+      ge.next();
+      ge.next();
+      ge.next();
+
+      function* generatorFn2() {
+        yield* ["a", "b", "c"];
+      }
+
+      for (let i of generatorFn2()) {
+        console.log(i);
+      }
+
+      function* generatorFn3() {
+        yield ["a", "b", "c"];
+      }
+
+      for (let i of generatorFn3()) {
+        console.log(i);
+      }
     </script>
   </body>
 </html>
