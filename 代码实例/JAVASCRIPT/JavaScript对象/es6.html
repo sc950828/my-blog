@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>es6</title>
+  </head>
+  <body>
+    <script>
+      const s1 = new Set([1, 2, 3, 4, 5, 6, 1, 2, 3]);
+      console.log(s1);
+      s1.add(7);
+      console.log(s1);
+      console.log(s1.has(6));
+      s1.delete(7);
+      console.log(s1);
+      console.log(s1.size);
+      s1.clear();
+      console.log(s1);
+
+      let obj1 = { name: "randy" };
+      let obj2 = { age: 24 };
+      const ws1 = new WeakSet([obj1, obj2]);
+      console.log(ws1);
+      obj1 = null;
+      console.log(ws1);
+
+      const m1 = new Map();
+      m1.set("name", "randy");
+      console.log(m1);
+      m1.set(obj2, 28);
+      console.log(m1);
+      console.log(m1.has(obj2));
+      console.log(m1.get(obj2));
+      m1.delete(obj2);
+      console.log(m1);
+      m1.clear();
+      console.log(m1);
+    </script>
+  </body>
+</html>
