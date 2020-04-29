@@ -106,7 +106,9 @@ module.exports = {
         children: [
           ["/REACT/react", "react"],
           ["/REACT/react-router", "react-router"],
-          ["/REACT/react-redux", "react-redux"]
+          ["/REACT/react-redux", "react-redux"],
+          ["/REACT/dva", "dva"],
+          ["/REACT/状态管理", "状态管理"]
         ]
       },
       {

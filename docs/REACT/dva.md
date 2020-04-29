@@ -12,7 +12,7 @@ State 表示 Model 的状态数据，通常表现为一个 javascript 对象。
 
 操作的时候每次都要当作不可变数据（immutable data）来对待，保证每次都是全新对象，没有引用关系，这样才能保证 State 的独立性，便于测试和追踪变化。
 
-在 dva 中你可以通过 dva 的实例属性 \_store 看到顶部的 state 数据，但是通常你很少会用到:
+在 dva 中你可以通过 dva 的实例属性 `_store` 看到顶部的 state 数据，但是通常你很少会用到:
 
 ```js
 const app = dva();

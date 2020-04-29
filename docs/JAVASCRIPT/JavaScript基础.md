@@ -270,6 +270,10 @@ let s2 = Symbol("bar");
       TypeError：当一个值的类型错误时抛出该异常。
       URLError：由 URL 的编码和解码方法抛出。
 
+    能被 try catch 捕捉到的异常，必须是在报错的时候，线程执行已经进入 try catch 代码块，
+    且处在 try catch 里面，这个时候才能被捕捉到。所以说异步方法无法捕捉到异常。
+    try catch 无法捕捉 Promise 的异常，是因为 Promise 的异常没有往上抛。在内部用try catch包裹住了。
+
 ### 11、正则表达式
 
     创建有两种方法
