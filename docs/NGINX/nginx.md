@@ -1,344 +1,394 @@
-### 1、使用 nginx 构建一个下载文件的服务器
+### 1、Nginx 介绍
 
-    需要在nginx config文件中配置如下
-    location /ctrs-download {
-      alias /home/upload/ctrs/; //别名 请求/ctrs-download的时候去/home/upload/ctrs/这个路径
-      autoindex on; //形成文件服务器
-    }
+Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且支持热部署，几乎可以做到 7 `*` 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 Nginx 最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是，Nginx 是免费的并可以商业化，配置使用也比较简单。
 
-### 2、配置跨域 proxy_pass
+### 2、平时开发主要关注的文件夹有两个
 
-    location /api {
-      proxy_pass http://192.168.10.66:11999;
-    }
+/etc/nginx/conf.d/ 文件夹，是我们进行子配置的配置项存放处，/etc/nginx/nginx.conf 主配置文件会默认把这个文件夹中所有子配置项都引入；
 
-### 3、单页面应用配置 始终定向为 index.html 文件
+/usr/share/nginx/html/ 文件夹，通常静态文件都放在这个文件夹(打包好的文件)，也可以根据你自己的习惯放其他地方；
 
-    location / {
-      try_files $uri $uri/ /index.html;
-    }
+### 3、Nginx 的常用命令
+
+    nginx -h 查看所有命令
+    nginx -s reload  # 向主进程发送信号，重新加载配置文件，热重启
+    nginx -s reopen	 # 重启 Nginx
+    nginx -s stop    # 快速关闭
+    nginx -s quit    # 等待工作进程处理完成后关闭
+    nginx -T         # 查看当前 Nginx 最终的配置
+    nginx -t -c <配置路径>    # 检查配置文件是否有问题，如果已经在配置目录，则不需要-c
 
 ### 4、nginx 文件解构
 
-    ...              #全局块
+    main        # 全局配置，对全局生效
+    ├── events  # 配置影响 Nginx 服务器或与用户的网络连接
+    ├── http    # 配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置
+    │   ├── upstream # 配置后端服务器具体地址，负载均衡配置不可或缺的部分
+    │   ├── server   # 配置虚拟主机的相关参数，一个 http 块中可以有多个 server 块
+    │   ├── server
+    │   │   ├── location  # server 块可以包含多个 location 块，location 指令用于匹配 uri
+    │   │   ├── location
+    │   │   └── ...
+    │   └── ...
+    └── ...
 
-    events {         #events块
-      ...
-    }
-
-    http      #http块
-    {
-        ...   #http全局块
-        server        #server块
-        {
-            ...       #server全局块
-            location [PATTERN]   #location块
-            {
-                ...
-            }
-            location [PATTERN]   #location块
-            {
-                ...
-            }
-        }
-        server       #server块
-        {
-          ...
-        }
-        ...     #http全局块
-    }
-
-- 1、全局块：配置影响 nginx 全局的指令。一般有运行 nginx 服务器的用户组，nginx 进程 pid 存放路径，日志存放路径，配置文件引入，允许生成 worker process 数等。
+- 1、main 全局块：配置影响 nginx 全局的指令。一般有运行 nginx 服务器的用户组，nginx 进程 pid 存放路径，日志存放路径，配置文件引入，允许生成 worker process 数等。
 - 2、events 块：配置影响 nginx 服务器或与用户的网络连接。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。
 - 3、http 块：可以嵌套多个 server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。如文件引入，mime-type 定义，日志自定义，是否使用 sendfile 传输文件，连接超时时间，单连接请求数等。
 - 4、server 块：配置虚拟主机的相关参数，一个 http 中可以有多个 server。
 - 5、location 块：配置请求的路由，以及各种页面的处理情况。
 
-### 5、常用操作
+### 5、典型的例子
 
-    //强制停止nginx服务器，如果有未处理的数据，丢弃
-    nginx -s stop
-
-    //停止nginx服务器，如果有未处理的数据，等待处理完成之后停止
-    nginx -s quit
-
-    //重启nginx服务器
-    nginx -s reload
-
-### 6、全局配置
-
-    #user  nobody;
-    worker_processes  1;
-
-    #error_log  logs/error.log;
-    #error_log  logs/error.log  notice;
-    #error_log  logs/error.log  info;
-
-    #pid        logs/nginx.pid;
-
-
-    述配置都是存放在main全局配置模块中的配置项
-
-    user用来指定nginx worker进程运行用户以及用户组，默认nobody账号运行
-
-    worker_processes指定nginx要开启的子进程数量，
-    运行过程中监控每个进程消耗内存(一般几M~几十M不等)根据实际情况进行调整，
-    通常数量是CPU内核数量的整数倍
-
-    error_log定义错误日志文件的位置及输出级别
-    【debug / info / notice / warn / error / crit】
-
-    pid用来指定进程id的存储文件的位置
-
-    worker_rlimit_nofile用于指定一个进程可以打开最多文件数量的描述
-
-### 7、events 用于 nginx 工作模式的配置
+    user  nginx;                        # 运行用户，默认即是nginx，可以不进行设置
+    worker_processes  1;                # Nginx 进程数，一般设置为和 CPU 核数一样
+    error_log  /var/log/nginx/error.log warn;   # Nginx 的错误日志存放目录
+    pid        /var/run/nginx.pid;      # Nginx 服务启动时的 pid 存放位置
 
     events {
-      worker_connections  1024;
-      multi_accept on;
-      use epoll;
+        use epoll; # 使用epoll的I/O模型(如果你不知道Nginx该使用哪种轮询方法，会自动选择一个最适合你操作系统的)
+        worker_connections 1024;   # 每个进程允许最大并发数
+        multi_accept 配置指定nginx在收到一个新连接通知后尽可能多的接受更多的连接
     }
 
-    上述配置是针对nginx服务器的工作模式的一些操作配置
+    # 配置使用最频繁的部分，代理、缓存、日志定义等绝大多数功能和第三方模块的配置都在这里设置
+    http {
 
-    worker_connections 指定最大可以同时接收的连接数量，
-    这里一定要注意，最大连接数量是和worker_processes共同决定的。
+        log_format  main  # 设置日志模式
+        access_log  /var/log/nginx/access.log  main;   # Nginx访问日志存放位置
 
-    multi_accept 配置指定nginx在收到一个新连接通知后尽可能多的接受更多的连接
+        sendfile            on;   # 开启高效传输模式
+        tcp_nopush          on;   # 减少网络报文段的数量
+        tcp_nodelay         on;
+        keepalive_timeout   65;   # 保持连接的时间，也叫超时时间，单位秒
+        client_header_timeout 10：# 设置请求头的超时时间
+        client_body_timeout 10:   # 设置请求体的超时时间
+        types_hash_max_size 2048;
 
-    use epoll 配置指定了线程轮询的方法，如果是linux2.6+，使用epoll，
-    如果是BSD如Mac请使用Kqueue
+        include             /etc/nginx/mime.types;      # 文件扩展名与类型映射表
+        default_type        application/octet-stream;   # 默认文件类型
 
-### 8、http：用于进行 http 协议信息的一些配置
+        include /etc/nginx/conf.d/*.conf;   # 加载子配置项
 
-    作为web服务器，http模块是nginx最核心的一个模块，配置项也是比较多的，
-    项目中会设置到很多的实际业务场景，需要根据硬件信息进行适当的配置，
-    常规情况下，使用默认配置即可
+        server {
+          listen       80;       # 配置监听的端口
+          server_name  localhost;    # 配置的域名或ip 多个配置之间用空格分隔
+          root：表示整个server虚拟主机内的根目录，所有当前主机中web项目的根目录
+          index：用户访问web网站时的全局首页
+          charset：用于设置www/路径中配置的网页的默认编码格式
+          access_log：用于指定该虚拟主机服务器中的访问记录日志存放路径
+          error_log：用于指定该虚拟主机服务器中访问错误日志的存放路径
+
+          location / {
+            root   /usr/share/nginx/html;  # 网站根目录
+            index  index.html index.htm;   # 默认首页文件
+            proxy_pass http://192.168.10.66:11999; #配置反向代理
+            try_files $uri $uri/ /index.html; 单页面应用配置 始终定向为 index.html 文件
+            proxy_cookie_domain be.sherlocked93.club fe.sherlocked93.club; # 两个域名之间cookie的传递与回写
+            proxy_set_header：在将客户端请求发送给后端服务器之前，更改来自客户端的请求头信息。
+            proxy_connect_timeout：配置Nginx与后端代理服务器尝试建立连接的超时时间。
+            proxy_read_timeout：配置Nginx向后端服务器组发出read请求后，等待相应的超时时间。
+            proxy_send_timeout：配置Nginx向后端服务器组发出write请求后，等待相应的超时时间。
+            proxy_redirect：用于修改后端服务器返回的响应头中的Location和Refresh。
+            proxy_redirect     off;
+            client_max_body_size       10m; #允许客户端请求的最大单文件字节数
+            client_body_buffer_size    128k; #缓冲区代理缓冲用户端请求的最大字节数
+            proxy_buffer_size          4k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+            proxy_buffers              4 32k; #proxy_buffers缓冲区，网页平均在32k以下就设置
+            proxy_busy_buffers_size    64k; #高负荷下缓冲大小（proxy_buffers*2）
+            proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+            deny 172.168.22.11;   # 禁止访问的ip地址，可以为all
+            allow 172.168.33.44； # 允许访问的ip地址，可以为all
+          }
+
+          error_page 500 502 503 504 /50x.html;  # 默认50x对应的访问页面
+          error_page 400 404 error.html;   # 同上
+        }
+    }
+
+### 6、常用全局变量
+
+    $host 请求信息中的 Host，如果请求中没有 Host 行，则等于设置的服务器名，不包含端口
+    $request_method 客户端请求类型，如 GET、POST
+    $remote_addr 客户端的 IP 地址
+    $args 请求中的参数
+    $arg_PARAMETER GET 请求中变量名 PARAMETER 参数的值，例如：$http_user_agent(Uaer-Agent 值),
+    $content_length 请求头中的 Content-length 字段
+    $http_user_agent 客户端 agent 信息
+    $http_cookie 客户端cookie信息
+    $remote_addr 客户端的 IP 地址
+    $remote_port 客户端的端口
+    $server_protocol 请求使用的协议，如 HTTP/1.0、HTTP/1.1
+    $server_addr 服务器地址
+    $server_name 服务器名称
+    $server_port 服务器的端口号
+    $scheme HTTP 方法（如 http，https）
+
+### 7、location 的匹配配置
+
+`=` 精确匹配路径，用于不含正则表达式的 uri 前，如果匹配成功，不再进行后续的查找；
+
+`^~` 用于不含正则表达式的 uri； 前，表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找；
+
+`~` 表示用该符号后面的正则去匹配路径，区分大小写；
+
+`~*` 表示用该符号后面的正则去匹配路径，不区分大小写。跟 ~ 优先级都比较低，如有多个 location 的正则能匹配的话，则使用正则表达式最长的那个；
+
+    如果 uri 包含正则表达式，则必须要有 ~ 或 ~* 标志。
+    location [ = | ~ | ~* | ^~] uri {
+      ...
+    }
+
+### 8、upstream 配置负载均衡
+
+负载均衡主要思想就是把负载均匀合理地分发到多个服务器上，实现压力分流的目的。
 
     http {
-      ##
-      # 基础配置
-      ##
-      sendfile on;
-      tcp_nopush on;
-      tcp_nodelay on;
-      keepalive_timeout 65;
-      types_hash_max_size 2048;
-      # server_tokens off;
-      # server_names_hash_bucket_size 64;
-      # server_name_in_redirect off;
-      include /etc/nginx/mime.types;
-      default_type application/octet-stream;
-      ##
-      # SSL证书配置
-      ##
-      ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
-      ssl_prefer_server_ciphers on;
-      ##
-      # 日志配置
-      ##
-      access_log /var/log/nginx/access.log;
-      error_log /var/log/nginx/error.log;
-      ##
-      # Gzip 压缩配置
-      ##
-      gzip on;
-      gzip_disable "msie6";
-      # gzip_vary on;
-      # gzip_proxied any;
-      # gzip_comp_level 6;
-      # gzip_buffers 16 8k;
-      # gzip_http_version 1.1;
-      # gzip_types text/plain text/css application/json application/javascript
-      text/xml application/xml application/xml+rss text/javascript;
-      ##
-      # 虚拟主机配置
-      ##
-      include /etc/nginx/conf.d/_.conf;
-      include /etc/nginx/sites-enabled/_;
+      upstream myserver {
+        # ip_hash;  # ip_hash 方式
+        # fair;   # fair 方式
+        server 127.0.0.1:8081;  # 负载均衡目的服务地址
+        server 127.0.0.1:8080;
+        server 127.0.0.1:8082 weight=10;  # weight 方式，不写默认为 1
+        server 192.168.1.100:8001 down; # 表示该主机暂停服务
+        server 192.168.1.100:8002 max_fails=3; # 表示失败最大次数，超过失败最大次数暂停服务
+        server 192.168.1.100:8003 fail_timeout=20s; # 表示如果请求受理失败，暂停指定的时间之后重新发起请求
+      }
+
+      server {
+        location / {
+          proxy_pass http://myserver;
+          proxy_connect_timeout 10;
+        }
+      }
     }
-    sendfile on：配置 on 让 sendfile 发挥作用，将文件的回写过程交给数据缓冲去去完成，
-    而不是放在应用中完成，这样的话在性能提升有有好处
 
-    tc_nopush on：让nginx在一个数据包中发送所有的头文件，而不是一个一个单独发
+Nginx 提供了好几种分配方式，默认为轮询，就是轮流来。有以下几种分配方式：
 
-    tcp_nodelay on：让nginx不要缓存数据，而是一段一段发送，如果数据的传输有实时
-    性的要求的话可以配置它，发送完一小段数据就立刻能得到返回值，但是不要滥用哦
+轮询，默认方式，每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务挂了，能自动剔除；
 
-    keepalive_timeout 10：给客户端分配连接超时时间，服务器会在这个时间过后关闭连接。
-    一般设置时间较短，可以让nginx工作持续性更好
+weight，权重分配，指定轮询几率，权重越高，在被访问的概率越大，用于后端服务器性能不均的情况；
 
-    client_header_timeout 10：设置请求头的超时时间
+ip_hash，每个请求按访问 IP 的 hash 结果分配，这样每个访客固定访问一个后端服务器，可以解决动态网页 session 共享问题。负载均衡每次请求都会重新定位到服务器集群中的某一个，那么已经登录某一个服务器的用户再重新定位到另一个服务器，其登录信息将会丢失，这样显然是不妥的；
 
-    client_body_timeout 10:设置请求体的超时时间
+fair（第三方），按后端服务器的响应时间分配，响应时间短的优先分配，依赖第三方插件 nginx-upstream-fair，需要先安装；
 
-    send_timeout 10：指定客户端响应超时时间，如果客户端两次操作间隔超过这个时间，
-    服务器就会关闭这个链接
+### 9、Nginx 配置 gzip
 
-    limit_conn_zone $binary_remote_addr zone=addr:5m ：设置用于保存各种key的共享
-    内存的参数.
+使用 gzip 不仅需要 Nginx 配置，浏览器端也需要配合，需要在请求消息头中包含 Accept-Encoding: gzip（IE5 之后所有的浏览器都支持了，是现代浏览器的默认设置）。一般在请求 html 和 css 等静态资源的时候，支持的浏览器在 request 请求静态资源的时候，会加上 Accept-Encoding: gzip 这个 header，表示自己支持 gzip 的压缩方式，Nginx 在拿到这个请求的时候，如果有相应配置，就会返回经过 gzip 压缩过的文件给浏览器，并在 response 相应的时候加上 content-encoding: gzip 来告诉浏览器自己采用的压缩方式（因为浏览器在传给服务器的时候一般还告诉服务器自己支持好几种压缩方式），浏览器拿到压缩的文件后，根据自己的解压方式进行解析。
 
-    limit_conn addr 100: 给定的key设置最大连接数
+    # /etc/nginx/conf.d/gzip.conf 该配置会被注入到主配置文件的http模块里面
 
-    server_tokens：虽然不会让nginx执行速度更快，但是可以在错误页面关闭nginx版本
-    提示，对于网站安全性的提升有好处哦
+    gzip on; # 默认off，是否开启gzip
+    gzip_types text/plain text/css application/json application/x-javascript text/xml
+                application/xml application/xml+rss text/javascript;
+                要采用 gzip 压缩的 MIME 文件类型，其中 text/html 被系统强制启用；
 
-    include /etc/nginx/mime.types：指定在当前文件中包含另一个文件的指令
+    # 上面两个开启基本就能跑起了，下面的愿意折腾就了解一下
+    gzip_static on; 默认 off，该模块启用后，Nginx 首先检查是否存在请求静态文件的 gz 结尾的文件，如果有则直接返回该 .gz 文件内容；
+    gzip_proxied any; 默认 off，nginx做为反向代理时启用，用于设置启用或禁用从代理服务器上收到相应内容 gzip 压缩；
+    gzip_vary on; 用于在响应消息头中添加 Vary：Accept-Encoding，使代理服务器根据请求头中的 Accept-Encoding 识别是否启用 gzip 压缩；
+    gzip_comp_level 6; gzip 压缩比，压缩级别是 1-9，1 压缩级别最低，9 最高，级别越高压缩率越大，压缩时间越长，建议 4-6；
+    gzip_buffers 16 8k; 获取多少内存用于缓存压缩结果，16 8k 表示以 8k*16 为单位获得；
+    # gzip_min_length 1k; 允许压缩的页面最小字节数，页面字节数从header头中的 Content-Length 中进行获取。
+                          默认值是 0，不管页面多大都压缩。建议设置成大于 1k 的字节数，小于 1k 可能会越压越大；
+    gzip_http_version 1.1; 默认 1.1，启用 gzip 所需的 HTTP 最低版本；
 
-    default_type application/octet-stream：指定默认处理的文件类型可以是二进制
+这个配置可以插入到 http 模块整个服务器的配置里，也可以插入到需要使用的虚拟主机的 server 或者下面的 location 模块中，当然像上面我们这样写的话就是被 include 到 http 模块中了。
 
-    type_hash_max_size 2048：混淆数据，影响三列冲突率，值越大消耗内存越多，
-    散列key冲突率会降低，检索速度更快；值越小key，占用内存较少，冲突率越高，
-    检索速度变慢
+### 10、Webpack 的 gzip 配置
 
-    2) 日志配置
-    access_log logs/access.log：设置存储访问记录的日志
-    error_log logs/error.log：设置存储记录错误发生的日志
+打包之后的文件下面有一个对应的 .gz 文件，这个是经过 gzip 压缩后的文件
 
-    3) SSL证书加密
-    ssl_protocols：指令用于启动特定的加密协议，nginx在1.1.13和1.0.12版本后默认
-    是ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2，TLSv1.1与TLSv1.2要确保
-    OpenSSL >= 1.0.1 ，SSLv3 现在还有很多地方在用但有不少被攻击的漏洞。
+那么为啥这里 Nginx 已经有了 gzip 压缩，Webpack 这里又整了个 gzip 呢，因为如果全都是使用 Nginx 来压缩文件，会耗费服务器的计算资源，如果服务器的 gzip_comp_level 配置的比较高，就更增加服务器的开销，相应增加客户端的请求时间，得不偿失。
 
-    ssl prefer server ciphers：设置协商加密算法时，优先使用我们服务端的加密套件，
-    而不是客户端浏览器的加密套件
-    4) 压缩配置
-    gzip 是告诉nginx采用gzip压缩的形式发送数据。这将会减少我们发送的数据量。
+如果压缩的动作在前端打包的时候就做了，把打包之后的高压缩等级文件作为静态资源放在服务器上，Nginx 会优先查找这些压缩之后的文件返回给客户端，相当于把压缩文件的动作从 Nginx 提前给 Webpack 打包的时候完成，节约了服务器资源，所以一般推介在生产环境应用 Webpack 配置 gzip 压缩。在 nginx 配置文件中 gzip_static 配置设置为 on 就可以。
 
-    gzip_disable 为指定的客户端禁用gzip功能。我们设置成IE6或者更低版本以使我
-    们的方案能够广泛兼容。
+```js
+// vue-cli3 的 vue.config.js 文件
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
-    gzip_static 告诉nginx在压缩资源之前，先查找是否有预先gzip处理过的资源。这
-    要求你预先压缩你的文件（在这个例子中被注释掉了），从而允许你使用最高压
-    缩比，这样nginx就不用再压缩这些文件了（想要更详尽的gzip_static的信息，请
-    点击这里）。
+module.exports = {
+  // gzip 配置
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // 生产环境
+      return {
+        plugins: [new CompressionWebpackPlugin({
+          test: /\.js$|\.html$|\.css/,    // 匹配文件名
+          threshold: 10240,               // 文件压缩阈值，对超过10k的进行压缩
+          deleteOriginalAssets: false     // 是否删除源文件
+        })]
+      }
+    }
+  },
+  ...
+}
+```
 
-    gzip_proxied 允许或者禁止压缩基于请求和响应的响应流。我们设置为any，意味
-    着将会压缩所有的请求。
+### 11、配置动静分离
 
-    gzip_min_length 设置对数据启用压缩的最少字节数。如果一个请求小于1000字节，
-    我们最好不要压缩它，因为压缩这些小的数据会降低处理此请求的所有进程的速度。
+动静分离就是把动态和静态的请求分开。方式主要有两种，一种 是纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案(cdn)。另外一种方法就是动态跟静态文件混合在一起发布， 通过 Nginx 配置来分开。
 
-    gzip_comp_level 设置数据的压缩等级。这个等级可以是1-9之间的任意数值，9是
-    最慢但是压缩比最大的。我们设置为4，这是一个比较折中的设置。
-
-    gzip_type 设置需要压缩的数据格式。上面例子中已经有一些了，你也可以再添加
-    更多的格式。
-
-    5) 文件缓存配置
-    open_file_cache 打开缓存的同时也指定了缓存最大数目，以及缓存的时间。我们
-    可以设置一个相对高的最大时间，这样我们可以在它们不活动超过20秒后清除掉。
-
-    open_file_cache_valid 在open_file_cache中指定检测正确信息的间隔时间。
-
-    open_file_cache_min_uses 定义了open_file_cache中指令参数不活动时间期间里
-    最小的文件数。
-
-    open_file_cache_errors 指定了当搜索一个文件时是否缓存错误信息，也包括再次
-    给配置中添加文件。我们也包括了服务器模块，这些是在不同文件中定义的。如果
-    你的服务器模块不在这些位置，你就得修改这一行来指定正确的位置。
-
-### 9、server：用于进行服务器访问信息的配置
-
-    srever模块配置是http模块中的一个子模块，用来定义一个虚拟访问主机，
-    也就是一个虚拟服务器的配置信息
+通过 location 指定不同的后缀名实现不同的请求转发。
 
     server {
-      listen        80;
-      server_name localhost    192.168.1.100;
-      root        /nginx/www;
-      index        index.php index.html index.html;
-      charset        utf-8;
-      access_log    logs/access.log;
-      error_log    logs/error.log;
-      ......
+      # 动态
+      location /www/ {
+        root /data/;
+        index index.html index.htm;
+      }
+
+      # 静态 这也是文件服务器的配置
+      location /image/ {
+        root /data/;
+        alias /usr/share/nginx/html/static;  # 静态资源目录
+        autoindex on;
+        autoindex_exact_size off; # on(默认)显示文件的确切大小，单位是byte；off显示文件大概大小，单位KB、MB、GB
+        autoindex_localtime off; # off(默认)时显示的文件时间为GMT时间；on显示的文件时间为服务器时间
+      }
     }
 
-    server：一个虚拟主机的配置，一个http中可以配置多个server
+### 12、根据用户设备不同返回不同样式的站点
 
-    server_name：用力啊指定ip地址或者域名，多个配置之间用空格分隔
+根据用户设备不同返回不同样式的站点，以前经常使用的是纯前端的自适应布局，但无论是复杂性和易用性上面还是不如分开编写的好，比如我们常见的淘宝、京东......这些大型网站就都没有采用自适应，而是用分开制作的方式，根据用户请求的 user-agent 来判断是返回 PC 还是 H5 站点。
 
-    root：表示整个server虚拟主机内的根目录，所有当前主机中web项目的根目录
+    server {
+      listen 80;
+      server_name fe.sherlocked93.club;
 
-    index：用户访问web网站时的全局首页
+      location / {
+        root  /usr/share/nginx/html/pc;
+        # 判断是否是手机端 定位到不同的目录
+        if ($http_user_agent ~* '(Android|webOS|iPhone|iPod|BlackBerry)') {
+          root /usr/share/nginx/html/mobile;
+        }
+        index index.html;
+      }
+    }
 
-    charset：用于设置www/路径中配置的网页的默认编码格式
+### 13、配置 HTTPS
 
-    access_log：用于指定该虚拟主机服务器中的访问记录日志存放路径
+我购买的腾讯云提供的亚洲诚信机构颁发的免费证书只能一个域名使用，二级域名什么的需要另外申请，但是申请审批比较快，一般几分钟就能成功，然后下载证书的压缩文件，里面有个 nginx 文件夹，把 xxx.crt 和 xxx.key 文件拷贝到服务器目录，再配置下：
 
-    error_log：用于指定该虚拟主机服务器中访问错误日志的存放路径
+    server {
+      listen 443 ssl http2 default_server; # SSL 访问端口号为 443
+      server_name sherlocked93.club; # 填写绑定证书的域名
 
-### 10、location：用于进行访问路由的配置
+      ssl_certificate /etc/nginx/https/1_sherlocked93.club_bundle.crt;   # 证书文件地址
+      ssl_certificate_key /etc/nginx/https/2_sherlocked93.club.key;      # 私钥文件地址
+      ssl_session_timeout 10m;
 
-    location模块是nginx配置中出现最多的一个配置，主要用于配置路由访问信息
-    在路由访问信息配置中关联到反向代理、负载均衡等等各项功能，所以location
-    模块也是一个非常重要的配置模块
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;      #请按照以下协议配置
+      ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+      ssl_prefer_server_ciphers on;
+
+      location / {
+        root         /usr/share/nginx/html;
+        index        index.html index.htm;
+      }
+    }
+
+    一般还可以加上几个增强安全性的命令：
+    add_header X-Frame-Options DENY;           # 减少点击劫持
+    add_header X-Content-Type-Options nosniff; # 禁止服务器自动解析资源类型
+    add_header X-Xss-Protection 1;             # 防XSS攻击
+
+### 14、图片防盗链
+
+    server {
+      listen       80;
+      server_name  *.sherlocked93.club;
+
+      # 图片防盗链
+      location ~* \.(gif|jpg|jpeg|png|bmp|swf)$ {
+        valid_referers none blocked 192.168.0.2;  # 只允许本机 IP 外链引用
+        if ($invalid_referer){
+          return 403;
+        }
+      }
+    }
+
+### 15、请求过滤
+
+    # 非指定请求全返回 403
+    if ( $request_method !~ ^(GET|POST|HEAD)$ ) {
+      return 403;
+    }
 
     location / {
-      root    /nginx/www;
-      index    index.php index.html index.htm;
-    }
-    location /：表示匹配访问根目录
+      # IP访问限制（只允许IP是 192.168.0.2 机器访问）
+      allow 192.168.0.2;
+      deny all;
 
-    root：用于指定访问根目录时，访问虚拟主机的web目录
-
-    index：在不指定访问具体资源时，默认展示的资源文件列表
-
-    location /api {
-      proxy_pass http://www.baidu.com;
-
-      #以下是一些反向代理的配置可删除
-
-      proxy_redirect     off;
-
-      #后端的Web服务器可以通过X-Forwarded-For获取用户真实IP
-
-      proxy_set_header   Host $host;
-
-      proxy_set_header   X-Real-IP $remote_addr;
-
-      proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-
-      client_max_body_size       10m; #允许客户端请求的最大单文件字节数
-
-      client_body_buffer_size    128k; #缓冲区代理缓冲用户端请求的最大字节数
-
-      proxy_connect_timeout      300; #nginx跟后端服务器连接超时时间(代理连接超时)
-
-      proxy_send_timeout         300; #后端服务器数据回传时间(代理发送超时)
-
-      proxy_read_timeout         300; #连接成功后，后端服务器响应时间(代理接收超时)
-
-      proxy_buffer_size          4k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小
-
-      proxy_buffers              4 32k; #proxy_buffers缓冲区，网页平均在32k以下就设置
-
-      proxy_busy_buffers_size    64k; #高负荷下缓冲大小（proxy_buffers*2）
-
-      proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+      root   html;
+      index  index.html index.htm;
     }
 
-### 11、upstream 模块主要负责负载均衡的配置
+### 16、配置图片、字体等静态文件缓存
 
-    upstream模块主要负责负载均衡的配置，
-    通过默认的轮询调度方式来分发请求到后端服务器
-
-    upstream name {
-      ip_hash;
-      server 192.168.1.100:8000;
-      server 192.168.1.100:8001 down;
-      server 192.168.1.100:8002 max_fails=3;
-      server 192.168.1.100:8003 fail_timeout=20s;
-      server 192.168.1.100:8004 max_fails=3 fail_timeout=20s;
+    location ~ .\*\.(css|js|jpg|png|gif|swf|woff|woff2|eot|svg|ttf|otf|mp3|m4a|aac|txt)\$ {
+        expires 10d; # 10天
     }
 
-    ip_hash：指定请求调度算法，默认是weight权重轮询调度，可以指定
+    # 如果不希望缓存
+    expires -1;
 
-    server host:port：分发服务器的列表配置
+### 17、HTTP 请求转发到 HTTPS
 
-    -- down：表示该主机暂停服务
+配置完 HTTPS 后，浏览器还是可以访问 HTTP 的地址 http://sherlocked93.club/ 的，可以做一个 301 跳转，把对应域名的 HTTP 请求重定向到 HTTPS 上
 
-    -- max_fails：表示失败最大次数，超过失败最大次数暂停服务
+    server {
+      listen      80;
+      server_name www.sherlocked93.club;
 
-    -- fail_timeout：表示如果请求受理失败，暂停指定的时间之后重新发起请求
+      # 单域名重定向
+      if ($host = 'www.sherlocked93.club'){
+          return 301 https://www.sherlocked93.club$request_uri;
+      }
+      # 全局非 https 协议时重定向
+      if ($scheme != 'https') {
+          return 301 https://$server_name$request_uri;
+      }
+
+      # 或者全部重定向
+      return 301 https://$server_name$request_uri;
+
+      # 以上配置选择自己需要的即可，不用全部加
+    }
+
+### 18、泛域名路径分离
+
+这是一个非常实用的技能，经常有时候我们可能需要配置一些二级或者三级域名，希望通过 Nginx 自动指向对应目录，比如：
+
+test1.doc.sherlocked93.club 自动指向 /usr/share/nginx/html/doc/test1 服务器地址；
+
+test2.doc.sherlocked93.club 自动指向 /usr/share/nginx/html/doc/test2 服务器地址；
+
+    server {
+      listen       80;
+      server_name  ~^([\w-]+)\.doc\.sherlocked93\.club$;
+
+      root /usr/share/nginx/html/doc/$1;
+    }
+
+### 19、泛域名转发
+
+和之前的功能类似，有时候我们希望把二级或者三级域名链接重写到我们希望的路径，让后端就可以根据路由解析不同的规则：
+
+test1.serv.sherlocked93.club/api?name=a 自动转发到 127.0.0.1:8080/test1/api?name=a；
+
+test2.serv.sherlocked93.club/api?name=a 自动转发到 127.0.0.1:8080/test2/api?name=a ；
+
+    server {
+      listen       80;
+      server_name ~^([\w-]+)\.serv\.sherlocked93\.club$;
+
+      location / {
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        Host $http_host;
+        proxy_set_header        X-NginX-Proxy true;
+        proxy_pass              http://127.0.0.1:8080/$1$request_uri;
+    }
+    }

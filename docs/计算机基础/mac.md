@@ -52,3 +52,34 @@
 - 使用 DHCP(手动设置地址)
 - 填入你想要设置的 ip
 - 点击保存 然后点击应用即可
+
+### 5、常用软件
+
+iTerm2
+
+可以在官网(https://www.iterm2.com/)直接下载 iTerm2，也可以通过 Homebrew 直接下载 brew cask install iterm2
+
+    几个我常用的快捷键：
+
+    command + d ：垂直分屏；
+    command + shift + d ：水平分屏；
+    command + enter ：切换全屏；
+    command + t ：新建标签；
+    command + shift + 左右方向键 或 command + 1/2/3 ：切换标签；
+    command + ; ：查看历史命令；
+    control + u ：清除当前行；
+    control + a/e ：跳转到行首/行尾；
+    command + 左右方向键 ：按单词前移/后移；
+    control + k ：删除到文本末尾；
+
+滴答清单 事件管理 类似 todolist
+
+Tencent Lemon Lite 清除电脑垃圾
+
+XMind Zen 轻量版的思维导图工具
+
+IINA 视频播放器
+
+Xnip 截图 支持滚动截图
+
+GIF Brewery 3 制作 gif 图
