@@ -50,7 +50,6 @@ module.exports = {
           ["/JAVASCRIPT/继承", "继承"],
           ["/JAVASCRIPT/防抖与节流", "防抖与节流"],
           ["/JAVASCRIPT/模块化", "模块化"],
-          ["/JAVASCRIPT/排序", "排序"],
           ["/JAVASCRIPT/设计模式", "设计模式"],
           ["/JAVASCRIPT/深拷贝浅拷贝", "深拷贝浅拷贝"],
           ["/JAVASCRIPT/同步异步事件循环", "同步异步事件循环"],
@@ -164,7 +163,8 @@ module.exports = {
           ["/数据结构和算法/基础", "基础"],
           ["/数据结构和算法/数组和链表", "数组和链表"],
           ["/数据结构和算法/队列和栈", "队列和栈"],
-          ["/数据结构和算法/树", "树"]
+          ["/数据结构和算法/树", "树"],
+          ["/数据结构和算法/排序", "排序"]
         ]
       },
       {
@@ -179,7 +179,8 @@ module.exports = {
         children: [
           ["/编辑器/vscode", "vscode"],
           ["/编辑器/editorconfig", "editorconfig"],
-          ["/编辑器/eslint", "eslint"]
+          ["/编辑器/eslint", "eslint"],
+          ["/编辑器/代码规范", "代码规范"]
         ]
       },
       {

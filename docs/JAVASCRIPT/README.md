@@ -20,22 +20,20 @@
 
 ### 10、[模块化](/JAVASCRIPT/模块化)
 
-### 11、[排序](/JAVASCRIPT/排序)
+### 11、[设计模式](/JAVASCRIPT/设计模式)
 
-### 12、[设计模式](/JAVASCRIPT/设计模式)
+### 12、[深拷贝浅拷贝](/JAVASCRIPT/深拷贝浅拷贝)
 
-### 13、[深拷贝浅拷贝](/JAVASCRIPT/深拷贝浅拷贝)
+### 13、[同步异步事件循环](/JAVASCRIPT/同步异步事件循环)
 
-### 14、[同步异步事件循环](/JAVASCRIPT/同步异步事件循环)
+### 14、[原型和原型链](/JAVASCRIPT/原型和原型链)
 
-### 15、[原型和原型链](/JAVASCRIPT/原型和原型链)
+### 15、[Promise 与 Async 与 Await](/JAVASCRIPT/Promise与Async与Await)
 
-### 16、[Promise 与 Async 与 Await](/JAVASCRIPT/Promise与Async与Await)
+### 16、[垃圾回收](/JAVASCRIPT/垃圾回收)
 
-### 17、[垃圾回收](/JAVASCRIPT/垃圾回收)
+### 17、[数据类型转换](/JAVASCRIPT/数据类型转换)
 
-### 18、[数据类型转换](/JAVASCRIPT/数据类型转换)
+### 18、[数组操作](/JAVASCRIPT/数组操作)
 
-### 19、[数组操作](/JAVASCRIPT/数组操作)
-
-### 20、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)
+### 19、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)

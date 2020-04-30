@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类</title>
+  </head>
+  <body>
+    <script>
+      class People1 {
+        constructor(name) {
+          this.name = name;
+          // 方法在实例上
+          this.hello = function () {
+            console.log("hello");
+          };
+        }
+        // 方法在原型上
+        say() {
+          console.log(say);
+        }
+      }
+
+      const p1 = new People1("demi");
+      console.log(p1);
+
+      function People2(name) {
+        this.name = name;
+        // 看不到
+        function say() {
+          console.log(say);
+        }
+        // 方法在实实例上
+        this.hello = function () {
+          console.log("hello");
+        };
+      }
+
+      // 方法在原型上
+      People2.prototype.hi = function () {
+        console.log("hi");
+      };
+
+      const p2 = new People2("randy");
+      console.log(p2);
+    </script>
+  </body>
+</html>
