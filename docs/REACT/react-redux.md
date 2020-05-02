@@ -7,6 +7,9 @@ state 是数据集合
 action 就是改变 state 的指令，有多少操作 state 的动作就会有多少 action。action 本质上是一个 JavaScript 对象，其中必须包含一个 type 字段来表示将要执行的动作，其他的字段都可以根据需求来自定义。
 
 reducer 加工函数。 action 发出命令后将 state 放入 reucer 加工函数中，返回新的 state。必须是纯函数。
+
+一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数。纯函数很严格，也就是说你几乎除了计算数据以外什么都不能干，计算的时候还不能依赖除了函数参数以外的数据。
+
 reducer(previousState, action)。当有多个 reducer 的时候我们使用 combineReducers()来合并 reducer，类似 vuex 里面的 module。
 
 store 通过 createStore(reducers)来创建 store
@@ -19,10 +22,10 @@ store 通过 createStore(reducers)来创建 store
 
 ```js
 let unsubscribe = store.subscribe(() => {
-  console.log(store.getState()); //监控这手下的一举一动
+  console.log(store.getState());
 });
-store.dispatch(toggleTodo({ items: todoDemoList, id: 1 })); //老大在watching，小心翼翼。
-unsubscribe(); //放了你们，出去浪吧
+store.dispatch(toggleTodo({ items: todoDemoList, id: 1 }));
+unsubscribe();
 ```
 
 ### 2、三大原则

@@ -1,6 +1,7 @@
 import React from "react";
 
-function Hello() {
+function Hello(props) {
+  console.log(props);
   return <div>hello</div>;
 }
 

@@ -1,7 +1,8 @@
 import React from "react";
-import {useParams} from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
-function Params() {
+function Params(props) {
+  console.log(props);
   let { name } = useParams();
 
   return <div>params {name}</div>;

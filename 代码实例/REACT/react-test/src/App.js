@@ -34,7 +34,7 @@ function App() {
         <Parent></Parent>
       </main>
       <main className="App-router">
-        <Link to="/hello">to hello, </Link>
+        <Link to="/hello?name=randy">to hello, </Link>
         <Link to="/params/randy">to params name = randy, </Link>
         <Link to="/parent">to parent, </Link>
         <CustomLink to="/hello" label="to customlink,"></CustomLink>
