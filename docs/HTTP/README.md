@@ -8,24 +8,22 @@
 
 ### 4、[跨域](/HTTP/跨域)
 
-### 5、[前端性能优化](/HTTP/前端性能优化)
+### 5、[Cookie 和 Session 和 Token 和 JWT](/HTTP/Cookie和Session和Token和JWT)
 
-### 6、[Cookie 和 Session 和 Token 和 JWT](/HTTP/Cookie和Session和Token和JWT)
+### 6、[Ajax](/HTTP/Ajax)
 
-### 7、[Ajax](/HTTP/Ajax)
+### 7、[JqueryAjax](/HTTP/JqueryAjax)
 
-### 8、[JqueryAjax](/HTTP/JqueryAjax)
+### 8、[Fetch](/HTTP/Fetch)
 
-### 9、[Fetch](/HTTP/Fetch)
+### 9、[Axios](/HTTP/Axios)
 
-### 10、[Axios](/HTTP/Axios)
+### 10、[权限](/HTTP/权限)
 
-### 11、[权限](/HTTP/权限)
+### 11、[web 安全](/HTTP/web安全)
 
-### 12、[web 安全](/HTTP/web安全)
+### 12、[TCP](/HTTP/TCP)
 
-### 13、[TCP](/HTTP/TCP)
+### 13、[UDP](/HTTP/UDP)
 
-### 14、[UDP](/HTTP/UDP)
-
-### 15、[DNS](/HTTP/DNS)
+### 14、[DNS](/HTTP/DNS)

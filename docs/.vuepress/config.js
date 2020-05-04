@@ -33,6 +33,7 @@ module.exports = {
           ["/CSS/ECharts", "ECharts"],
           ["/CSS/居中", "居中"],
           ["/CSS/布局", "布局"],
+          ["/HTTP/前端性能优化", "前端性能优化"],
           ["/CSS/首屏和白屏", "首屏和白屏"]
         ]
       },
@@ -75,7 +76,6 @@ module.exports = {
           ["/HTTP/缓存", "缓存"],
           ["/HTTP/跨域", "跨域"],
           ["/HTTP/权限", "权限"],
-          ["/HTTP/前端性能优化", "前端性能优化"],
           ["/HTTP/Ajax", "Ajax"],
           ["/HTTP/Axios", "Axios"],
           ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
