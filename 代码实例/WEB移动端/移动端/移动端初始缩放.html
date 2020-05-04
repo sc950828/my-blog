@@ -7,22 +7,32 @@
     <style>
       body {
         margin: 0;
-        font-size: .5rem;
+        font-size: 0.5rem;
         word-wrap: break-word;
       }
     </style>
   </head>
   <body>
-    <div>初始缩放比变化 相应的布局视口也会发生变化 所以响应的根元素字体大小就会变化</div>
+    <div>
+      初始缩放比变化 相应的布局视口和可视视口会发生变化
+      所以相应的根元素字体大小就会变化。理想视口永远不变
+    </div>
     <div class="div1">window.devicePixelRatio：</div>
-    <div class="div2">document.documentElement.clientWidth：</div>
+    <div class="div2">布局视口document.documentElement.clientWidth：</div>
+    <div class="div3">可视视口window.innerWidth：</div>
+    <div class="div4">理想视口screen.width：</div>
     <script>
       const div1 = document.getElementsByClassName("div1")[0];
-      div1.innerText += window.devicePixelRatio
+      div1.innerText += window.devicePixelRatio;
       const div2 = document.getElementsByClassName("div2")[0];
       div2.innerText += document.documentElement.clientWidth;
+      const div3 = document.getElementsByClassName("div3")[0];
+      div3.innerText += window.innerWidth;
+      const div4 = document.getElementsByClassName("div4")[0];
+      div4.innerText += screen.width;
 
-      document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px'
+      document.documentElement.style.fontSize =
+        document.documentElement.clientWidth / 10 + "px";
     </script>
   </body>
 </html>
