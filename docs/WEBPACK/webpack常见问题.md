@@ -134,7 +134,7 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 - 项目中没有使用到的代码，我们开启 tree-shaking 去除没有用到的 js 代码，生产环境默认开启。
 - css 我们使用 purgecss-webpack-plugin 和 glob 配合可以去除没有用到的 css。
 
-- 4.提取页面公共资源：
+- 4.提取页面公共资源
 
 - 使用 html-webpack-externals-plugin，将基础包通过 CDN 引入，不打入 bundle 中
 - 使用 CommonsChunkPlugin(webpack4 以前)或者 SplitChunksPlugin 进行(公共脚本、基础包、页面公共文件)抽取和分离。
@@ -154,3 +154,9 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 使用 html-webpack-externals-plugin 配置第三方包采用 cdn 的方式引入，减小打包体积。
 
 - 8.合理配置 devtool 生成与环境最匹配的 sourceMap
+
+- 9.合理配置 resolve 别名 后缀 模块查找 入口文件查找
+
+- 10.合理使用 noParse
+
+- 如果一些第三方模块没有 AMD/CommonJS 规范版本，可以使用 noParse 来标识这个模块，这样 Webpack 会引入这些模块，但是不进行转化和解析，从而提升 Webpack 的构建性能 ，例如：jquery 、lodash。

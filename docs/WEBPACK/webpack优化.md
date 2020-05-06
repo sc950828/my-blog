@@ -1,4 +1,39 @@
-### 1、去除没有用到的样式
+### 1、speed-measure-webpack-plugin 测量各个插件和 loader 所花费的时间
+
+```js
+//webpack.config.js
+// 使用speed-measure-webpack-plugin包裹配置就可以了。
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+
+const config = {
+  //...webpack配置
+};
+
+module.exports = smp.wrap(config);
+```
+
+### 2、使用 include exclude
+
+我们可以通过 exclude、include 配置来确保转译尽可能少的文件。 exclude 的优先级高于 include
+
+```js
+const path = require("path");
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js[x]?$/,
+        use: ["babel-loader"],
+        include: [path.resolve(__dirname, "src")]
+      }
+    ]
+  }
+};
+```
+
+### 3、去除没有用到的样式
 
 ```js
 const PurgecssWebpackPlugin = require("purgecss-webpack-plugin");
@@ -13,7 +48,7 @@ new PurgecssWebpackPlugin({
 }),
 ```
 
-### 2、Tree-shaking 去除引入但是没有用到的 js
+### 4、Tree-shaking 去除引入但是没有用到的 js
 
 在生产环境下，Tree-shaking 会自动开启，会进行自动删除的操作。如果通过 ES6 的 import 引用的方式引用的模块没有使用就会把该模块代码给删除掉。
 
@@ -45,7 +80,7 @@ if (condition) {
 
 只能处理 JS 相关冗余代码，不能处理 CSS 冗余代码。
 
-### 3、scope hoisting
+### 5、scope hoisting
 
 Scope Hoisting 可以让 Webpack 打包出来的代码文件更小、运行的更快，它又译作 "作用域提升"。
 
@@ -71,7 +106,7 @@ const devConfig = {
 module.exports = devConfig;
 ```
 
-### 4、动态添加 CDN
+### 6、动态添加 CDN
 
 ```js
 const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
@@ -92,9 +127,9 @@ new HtmlWebpackExternalsPlugin({
 });
 ```
 
-### 5、多进程打包 happypack thread-loader
+### 7、多进程打包 happypack thread-loader
 
--每次 webapck 解析一个模块，HappyPack 会将它及它的依赖分配给 worker 线程中。处理完成之后，再将处理好的资源返回给 HappyPack 的主进程，从而加快打包速度。
+每次 webapck 解析一个模块，HappyPack 会将它及它的依赖分配给 worker 线程中。处理完成之后，再将处理好的资源返回给 HappyPack 的主进程，从而加快打包速度。
 
 thread-loader 原理和 HappyPack 类似，也是每次 webpack 解析一个模块，thread- loader 会将它及它的依赖分配给 worker 线程中，从而达到多进程打包的目的。
 
@@ -165,7 +200,7 @@ const commonConfig = {
 commonConfig.plugins = makePlugins(commonConfig);
 ```
 
-### 6、多进程压缩
+### 8、多进程压缩
 
 使用 webpack-parallel-uglify-plugin 插件来帮我们完成，我们可以传递一些参数进去，然后完成多进程压缩代码。
 
@@ -230,7 +265,7 @@ const commonConfig = {
 };
 ```
 
-### 7、充分利用缓存提升二次构建速度。
+### 9、充分利用缓存提升二次构建速度。
 
 ```js
 // babel-loader 开启缓存
@@ -262,6 +297,7 @@ optimization: {
   ],
 },
 // 使用hard-source-webpack-plugin 这个插件其实就是用于给模块提供一个中间的缓存
+// 首次构建时间没有太大变化，但是第二次开始，构建时间大约可以节约 80%。
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 plugins: [
   new HardSourceWebpackPlugin(),
@@ -269,7 +305,7 @@ plugins: [
 
 ```
 
-### 8、 压缩图片
+### 10、 压缩图片
 
 借助 image-webpack-loader 帮助我们来实现。它是基于 imagemin 这个 Node 库来实现图片压缩的。
 
@@ -314,4 +350,73 @@ module: {
     }
   ];
 }
+```
+
+### 11、resolve 配置
+
+```js
+module.exports = {
+  //....
+  resolve: {
+    // 这样配置之后，我们 import Dialog from 'dialog'，会去寻找 ./src/components/dialog，
+    // 不再需要使用相对路径导入。如果在 ./src/components 下找不到的话，就会到 node_modules 下寻找。
+    modules: ["./src/components", "node_modules"], //从左到右依次查找
+    // 路径别名
+    alias: {
+      "@": "src/components" // @代表这个路径
+    },
+    // 配置 extensions，我们就可以缺省文件后缀，在导入语句没带文件后缀时，
+    // 会自动带上extensions 中配置的后缀后，去尝试访问文件是否存在
+    extensions: ["web.js", ".js"], //当然，你还可以配置 .json, .css
+    // 如果配置了 resolve.enforceExtension 为 true，那么导入语句不能缺省文件后缀。
+    enforceExtension: true,
+    // 配置查找的入口文件
+    mainFields: ["style", "main"]
+  }
+};
+```
+
+### 12、noParse
+
+如果一些第三方模块没有 AMD/CommonJS 规范版本，可以使用 noParse 来标识这个模块，这样 Webpack 会引入这些模块，但是不进行转化和解析，从而提升 Webpack 的构建性能 ，例如：jquery 、lodash。
+
+```js
+module.exports = {
+  //...
+  module: {
+    noParse: /jquery|lodash/
+  }
+};
+```
+
+### 13、抽离公共代码
+
+```js
+//webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      //分割代码块
+      cacheGroups: {
+        vendor: {
+          //第三方依赖
+          priority: 1, //设置优先级，首先抽离第三方模块
+          name: "vendor",
+          test: /node_modules/,
+          chunks: "initial",
+          minSize: 0,
+          minChunks: 1 //最少引入了1次
+        },
+        //缓存组
+        common: {
+          //公共模块
+          chunks: "initial",
+          name: "common",
+          minSize: 100, //大小超过100个字节
+          minChunks: 3 //最少引入了3次
+        }
+      }
+    }
+  }
+};
 ```

@@ -266,6 +266,7 @@ webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默�
 - copy-webpack-plugin：将文件或者文件夹拷贝到构建的输出目录
 - webpack.DefinePlugin：创建一个在 编译 时可以配置的全局常量，比如设置 process.env.NODE_ENV，可以在 js 业务代码中使用。
 - webpack-merge：提取公共配置，减少重复配置代码
+- webpack.ProvidePlugin 配置全局变量，不用 import require 就可以使用。
 
 - webpack.DllPlugin：抽取第三方 js，使用 dll 打包。
 - webpack-parallel-uglify-plugin: 多进程执行代码压缩，提升构建速度
