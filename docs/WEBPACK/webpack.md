@@ -114,7 +114,9 @@ devServer: {
 // webpack.development.config.js
 module.exports = {
   mode: "development",
-  // 设置为development的时候会自动使用如下两个插件
+  // 设置为development的时候
+  // 会将 process.env.NODE_ENV 的值设为 development。
+  // 启用 NamedChunksPlugin 和 NamedModulesPlugin。
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
@@ -128,7 +130,11 @@ module.exports = {
 // webpack.production.config.js
 module.exports = {
   mode: "production",
-  // 当使用production的时候会自动加上如下四个插件
+  // 当使用production的时候
+  // 会将 process.env.NODE_ENV 的值设为 production。
+  // 启用 FlagDependencyUsagePlugin, FlagIncludedChunksPlugin,
+  // ModuleConcatenationPlugin, NoEmitOnErrorsPlugin,
+  // OccurrenceOrderPlugin, SideEffectsFlagPlugin 和 UglifyJsPlugin.
   plugins: [
     new UglifyJsPlugin(/* ... */),
     new webpack.DefinePlugin({
@@ -173,6 +179,14 @@ devtool 中的一些设置，可以帮助我们将编译后的代码映射回原
 
 会多生成每个原文件的 map 文件，在开发模式下我们在控制台 source tab 下的 webpack 里面你那个找到这些文件
 
+线上环境一般有三种处理方案：
+
+- hidden-source-map：借助第三方错误监控平台 Sentry 使用
+- source-map：通过 nginx 设置将 .map 文件只对白名单开放(公司内网)
+- nosources-source-map：只会显示具体行数以及查看源代码的错误栈。安全性比 sourcemap 高
+
+注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
+
 ```js
 //webpack.config.js 在开发模式下
 module.exports = {
@@ -187,16 +201,16 @@ module.exports = {
 // 默认 false，也就是不不开启
 // 某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 assregateTimeout 时间到了，在统一去执行。
 // 使用webpack-dev-server启动的默认开启了watch模式。所以会实时编译打包。
-  watch: true,
-  //只有开启监听模式时，watchOptions才有意义
-  wathcOptions: {
-    //默认为空，不监听的文件或者文件夹，支持正则匹配
-    ignored: /node_modules/,
-    //监听到变化发生后会等300ms再去执行，默认300ms
-    aggregateTimeout: 300,
-    //判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-    poll: 1000
-  }
+watch: true,
+// 只有开启监听模式时，watchOptions才有意义
+wathcOptions: {
+  // 默认为空，不监听的文件或者文件夹，支持正则匹配
+  ignored: /node_modules/,
+  // 监听到变化发生后会等300ms再去执行，默认300ms
+  aggregateTimeout: 300,
+  // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
+  poll: 1000
+}
 ```
 
 ### 11、插件 plugins
@@ -223,10 +237,10 @@ webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默�
 - babel-loader 用 babel 处理 js。(须同时安装 @babel/core @babel/preset-env)(@babel/preset-react 处理 react 代码)
 - style-loader 将 css 内联到 html 头部
 - css-loader 处理 css。
+- postcss-loader 处理 css。(需安装 postcss 还有使用到的插件 autoprefixer)
 - mini-css-extract-plugin.loader 将 css 抽离成单独的 css 文件
 - sass-loader 处理 scss。(需同时安装 node-sass)
 - less-loader 处理 less。(需同时安装 less)
-- postcss-loader 处理 css。(需安装 postcss 还有使用到的插件 autoprefixer)
 - px2rem-loader px 转 rem
 - url-loader 与 file-loader 类似，区别是用户可以设置一个阈值，大于阈值时返回其 publicPath，小于阈值时返回文件 base64 形式编码 (处理图片和字体)
 - file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件 (处理图片和字体)
@@ -238,17 +252,24 @@ webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默�
 
 ### 14、常用插件
 
+- uglifyjs-webpack-plugin：压缩 js 不支持 ES6 压缩 (Webpack4 以前)
+- terser-webpack-plugin: 压缩 js 支持压缩 ES6 (Webpack4)
+
 - extract-text-webpack-plugin 把 css 从 js 中分离出来，打包成单独的 css 文件。webpack4 需要安装 extract-text-webpack-plugin@next 才行。
 - mini-css-extract-plugin 把 css 从 js 中纹理出来，打包成单独的 css 文件。webpack4 推荐使用该插件。
+- optimize-css-assets-webpack-plugin 压缩 css
+- purgecss-webpack-plugin 和 glob 配合可以去除没有用到的 css。
+
 - html-webpack-plugin 自动创建 html 文件然后将生成的 js 和 css 自动引入 html 页面。
 - clean-webpakc-plugin 目录清理。使用了 hash 所以文件改动就会生成新的 js css，这个是用来清除这些 js css 的。
-- optimize-css-assets-webpack-plugin 压缩 css
-- terser-webpack-plugin: 支持压缩 ES6 (Webpack4)
-- uglifyjs-webpack-plugin：不支持 ES6 压缩 (Webpack4 以前)
 - zip-webpack-plugin：将打包出的资源生成一个 zip 包
 - copy-webpack-plugin：将文件或者文件夹拷贝到构建的输出目录
 - webpack.DefinePlugin：创建一个在 编译 时可以配置的全局常量，比如设置 process.env.NODE_ENV，可以在 js 业务代码中使用。
-- webpack.DllPlugin：抽取第三方 js，使用 dll 打包，笔者会在之后 Webpack 性能优化将到。
+- webpack-merge：提取公共配置，减少重复配置代码
+
+- webpack.DllPlugin：抽取第三方 js，使用 dll 打包。
 - webpack-parallel-uglify-plugin: 多进程执行代码压缩，提升构建速度
 - webpack-bundle-analyzer: 可视化 Webpack 输出文件的体积 (业务组件、依赖第三方模块)
 - webpack.HotModuleReplacementPlugin() 热更新
+- html-webpack-externals-plugin，此插件可以将一些公用包提取出来使用 cdn 引入，不打入 bundle 中。
+- friendly-errors-webpack-plugin 能给我们带来更好的日志提示体验

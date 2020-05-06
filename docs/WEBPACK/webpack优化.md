@@ -45,7 +45,7 @@ if (condition) {
 
 只能处理 JS 相关冗余代码，不能处理 CSS 冗余代码。
 
-### 4、scope hoisting
+### 3、scope hoisting
 
 Scope Hoisting 可以让 Webpack 打包出来的代码文件更小、运行的更快，它又译作 "作用域提升"。
 
@@ -71,7 +71,7 @@ const devConfig = {
 module.exports = devConfig;
 ```
 
-### 3、动态添加 CDN
+### 4、动态添加 CDN
 
 ```js
 const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
@@ -90,4 +90,228 @@ new HtmlWebpackExternalsPlugin({
     }
   ]
 });
+```
+
+### 5、多进程打包 happypack thread-loader
+
+-每次 webapck 解析一个模块，HappyPack 会将它及它的依赖分配给 worker 线程中。处理完成之后，再将处理好的资源返回给 HappyPack 的主进程，从而加快打包速度。
+
+thread-loader 原理和 HappyPack 类似，也是每次 webpack 解析一个模块，thread- loader 会将它及它的依赖分配给 worker 线程中，从而达到多进程打包的目的。
+
+```js
+// happypack的使用
+const makePlugins = (configs) => {
+  const plugins = [
+    ...
+    new HappyPack({
+      loaders: [ 'babel-loader' ]
+    }),
+  ];
+  ...
+  return plugins;
+}
+
+const commonConfig = {
+  entry: {
+    main: "./src/index.js",
+    entry2: "./src/entry2.js",
+    entry3: "./src/entry3.js",
+    entry4: "./src/entry4.js",
+    entry5: "./src/entry5.js",
+    entry6: "./src/entry6.js",
+  },
+  ...
+  module: {
+    rules: [{
+      test: /\.jsx?$/,
+      // exclude: /node_modules/,
+      // include: path.resolve(__dirname, '../src'),
+      use: [
+        'happypack/loader'
+        // 'babel-loader'
+      ]
+    }]
+  },
+  ...
+}
+
+commonConfig.plugins = makePlugins(commonConfig);
+```
+
+```js
+// thread-loader
+
+const commonConfig = {
+  ...
+  module: {
+    rules: [{
+      test: /\.jsx?$/,
+      // exclude: /node_modules/,
+      // include: path.resolve(__dirname, '../src'),
+      use: [
+        {
+          loader: 'thread-loader',
+          options: {
+            workers: 3, // 开启几个 worker 进程来处理打包，默认是 os.cpus().length - 1
+          }
+        },
+        'babel-loader'
+      ]
+    }]
+  },
+  ...
+}
+
+commonConfig.plugins = makePlugins(commonConfig);
+```
+
+### 6、多进程压缩
+
+使用 webpack-parallel-uglify-plugin 插件来帮我们完成，我们可以传递一些参数进去，然后完成多进程压缩代码。
+
+```js
+import ParallelUglifyPlugin from "webpack-parallel-uglify-plugin";
+
+module.exports = {
+  plugins: [
+    new ParallelUglifyPlugin({
+      uglifyJS: {
+        output: {
+          beautify: false,
+          comments: false
+        },
+        compress: {
+          warnings: false,
+          drop_console: true,
+          collapse_vars: true,
+          reduce_vars: true
+        }
+      }
+    })
+  ]
+};
+```
+
+使用 uglifyjs-webpack-plugin，并开启 parallel 参数，之前的 webpack 版本推荐使用这个插件来对代码进行压缩，现在 webpack4.0 之后默认使用是 terser-webpack-plugin。两者的区别是前者不支持 es6 代码的压缩，后者是支持的。
+
+```js
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const plugins = [
+  new UglifyJsPlugin({
+    uglifyOptions: {
+      warnings: false,
+      parse: {},
+      compress: {},
+      mangle: true, // Note `mangle.properties` is `false` by default.
+      output: null,
+      toplevel: false,
+      nameCache: null,
+      ie8: false,
+      keep_fnames: false
+    },
+    parallel: true
+  })
+];
+```
+
+使用 terser-webpack-plugin，并开启 parallel 参数。
+
+```js
+const TerserPlugin = require("terser-webpack-plugin");
+const commonConfig = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4 // 开启几个进程来处理压缩，默认是 os.cpus().length - 1
+      })
+    ]
+  }
+};
+```
+
+### 7、充分利用缓存提升二次构建速度。
+
+```js
+// babel-loader 开启缓存
+module: {
+  rules: [
+    {
+      test: /\.jsx?$/,
+      // exclude: /node_modules/,
+      // include: path.resolve(__dirname, '../src'),
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          }
+        },
+      ]
+    },
+  ]
+}
+// terser-webpack-plugin 开启缓存
+optimization: {
+  minimize: true,
+  minimizer: [
+    new TerserPlugin({
+      parallel: 4, // 开启几个进程来处理压缩，默认是 os.cpus().length - 1
+      cache: true,
+    }),
+  ],
+},
+// 使用hard-source-webpack-plugin 这个插件其实就是用于给模块提供一个中间的缓存
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+plugins: [
+  new HardSourceWebpackPlugin(),
+];
+
+```
+
+### 8、 压缩图片
+
+借助 image-webpack-loader 帮助我们来实现。它是基于 imagemin 这个 Node 库来实现图片压缩的。
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: "file-loader",
+          options: {
+            name: "[name]_[hash].[ext]",
+            outputPath: "images/"
+          }
+        },
+        {
+          loader: "image-webpack-loader",
+          options: {
+            mozjpeg: {
+              progressive: true,
+              quality: 65
+            },
+            // optipng.enabled: false will disable optipng
+            optipng: {
+              enabled: false
+            },
+            pngquant: {
+              quality: "65-90",
+              speed: 4
+            },
+            gifsicle: {
+              interlaced: false
+            },
+            // the webp option will enable WEBP
+            webp: {
+              quality: 75
+            }
+          }
+        }
+      ]
+    }
+  ];
+}
 ```
