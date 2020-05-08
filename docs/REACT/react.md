@@ -603,3 +603,38 @@ function MyComponent() {
   );
 }
 ```
+
+### 22、Hook
+
+Hook 使你在非 class 的情况下可以使用更多的 React 特性
+
+使用规则
+
+只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。
+
+只能在 React 的函数组件中调用 Hook。不要在其他 JavaScript 函数中调用。（还有一个地方可以调用 Hook —— 就是自定义的 Hook 中）
+
+```js
+// 1、 useState
+import React, { useState, useEffect } from "react";
+
+function Example() {
+  // 声明一个叫 “count” 的 state 变量。初始值为0，变量名为count 修改count的方法是setCount
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+
+  // 相当于 componentDidMount 和 componentDidUpdate:
+  // React 会在每次渲染后调用副作用函数 —— 包括第一次渲染的时候。
+  // 副作用函数还可以通过返回一个函数来指定如何“清除”副作用。
+  useEffect(() => {
+    // 使用浏览器的 API 更新页面标题
+    document.title = `You clicked ${count} times`;
+  });
+}
+```

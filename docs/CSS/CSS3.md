@@ -45,6 +45,9 @@
       - ease-out: 慢速结束
       - ease-in-out: 规定以慢速开始和结束的过渡效果
       - cubic-bezier(n,n,n,n): 在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。
+      - 逐帧动画使用 steps(number_of_steps, direction)函数
+        - step-start 等同于 steps(1, start)：动画执行时以开始端点为开始。
+        - step-end 等同于 steps(1, end)：动画执行时以结尾端点为开始
     - animation-delay: 动画延迟时间
     - animation-iteration-count: 动画播放次数 默认是 1
       - 数字指定次数, infinite 无限次数
