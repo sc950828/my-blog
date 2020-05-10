@@ -1,11 +1,11 @@
-const path = require("path")
+const path = require("path");
 const webpack = require("webpack");
 // 分离css webpack4 推荐使用mini-css-extract-plugin 而不是extract-text-webpack-plugin
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 自动创建html文件然后自动引入打包好的js css
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 // 使用了hash所以文件改动就会生成新的js css，这个是用来清除这些js css的
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   // 模式 有production 和 development， webpack内置的优化。
@@ -81,7 +81,7 @@ module.exports = {
       //   // 只匹配src/css文件夹里面的css
       //   include: /src\/css/
       // },
-      // 增加了分离css的插件 ExtractTextPlugin 
+      // 增加了分离css的插件 ExtractTextPlugin
       {
         test: /\.css$/,
         // 因为css单独抽离出去不用再插入html的head里面，所以可以不用style-loader。还使用了postcss
@@ -111,6 +111,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               name: "images/[name].[ext]",
+              // 1kb 1024字节 一字节 8bit
               limit: 33 * 1024 //超过33k的图片直接复制过去。不然就使用base64处理。
             }
           }
@@ -119,7 +120,7 @@ module.exports = {
     ]
   },
   // 插件
-  plugins:[
+  plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html", // 新建的html文件名
       template: "./src/public/index.html" // 基于哪个模板创建html
@@ -130,4 +131,4 @@ module.exports = {
     }),
     new CleanWebpackPlugin()
   ]
-}
+};

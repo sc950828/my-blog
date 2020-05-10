@@ -43,7 +43,7 @@ map 文件只要不打开开发者工具，浏览器是不会加载的。
 线上环境一般有三种处理方案：
 
 - hidden-source-map：借助第三方错误监控平台 Sentry 使用
-- sourcemap：通过 nginx 设置将 .map 文件只对白名单开放(公司内网)
+- source-map：通过 nginx 设置将 .map 文件只对白名单开放(公司内网)
 - nosources-source-map：只会显示具体行数以及查看源代码的错误栈。安全性比 sourcemap 高
 
 注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
@@ -102,7 +102,7 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 - path 文件的相对路径
 - folder 文件所在的文件夹
 - contenthash 文件的内容 hash，默认是 md5 生成
-- hash 文件内容的 hash，默认是 md5 生成
+- hash 项目的 hash，默认是 md5 生成
 - emoji 一个随机的指代文件内容的 emoj
 
 ### 11、在实际工程中，配置文件上百行乃是常事，如何保证各个 loader 按照预想方式工作？
@@ -168,7 +168,7 @@ Contenthash：根据文件内容来定义 hash，文件内容不变，则 conten
 
   - 打包过程中检测工程中没有引用过的模块并进行标记，在资源压缩时将它们从最终的 bundle 中去掉(只能对 ES6 Modlue 生效) 开发中尽可能使用 ES6 Module 的模块，提高 tree shaking 效率
   - 禁用 babel-loader 的模块依赖解析，否则 Webpack 接收到的就都是转换过的 CommonJS 形式的模块，无法进行 tree-shaking
-  - 使用 purgecss-webpack-plugin 去除无用的css
+  - 使用 purgecss-webpack-plugin 去除无用的 css
 
 - Scope hoisting
 

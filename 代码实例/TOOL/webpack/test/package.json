@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "./node_modules/.bin/webpack"
+    "webpack": "./node_modules/.bin/webpack",
+    "webpack2": "./node_modules/.bin/webpack --config=webpack2.js"
   },
   "author": "randy",
   "license": "ISC",
@@ -13,9 +14,12 @@
     "autoprefixer": "^9.7.4",
     "jquery": "^3.4.1",
     "postcss-loader": "^3.0.0",
+    "px2rem-loader": "^0.1.9",
     "webpack": "^4.41.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
