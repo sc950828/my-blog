@@ -1,22 +1,35 @@
-### 1、什么是 webpack
+### 1、什么是 webpack?
 
-webpack 是一个现代 JavaScript 应用程序的静态模块打包器。
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器，当 webpack 处理应用程序时，会递归构建一个依赖关系图，其中包含应用程序需要的每个模块，然后将这些模块打包成一个或多个 bundle。
 
-### 2、使用
+### 2、核心概念
 
-- 需要安装 webpack 和 webpack-cli。
-- webpack-cli 的作用，它的作用就是让我们能够在命令行里面正确的使用 webpack 这个命令
-- 运行 webpack 会自动读取当前运行命令的目录下的 webpack.config.js 文件。
-- 指定用某配置文件使用命令 webpack --config=./config/webpack.config.js
-- 本地安装的时候我们使用./node_modules/.bin/webpack 来运行 webpack。或者在 package.json 里面配置 script，"webpack": "webpack"他会自动去当前的 node_modules/.bin 里面查找 webpack 命令。
-- webpack --watch 开启监听模式 边改动边打包 不会自动刷新浏览器。
+entry: 入口
+
+output: 输出
+
+loader(在 module 的 rules 的数组里面配置): 模块转换器，用于把模块原内容按照需求转换成新内容
+
+插件(plugins): 扩展插件，在 webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要做的事情
+
+### 3、使用
+
+需要安装 webpack 和 webpack-cli。webpack-cli 它的作用就是让我们能够在命令行里面正确的使用 webpack 这个命令。
+
+我们可以在 package.json 文件里面的 scripts 里面配置打包命令，"webpack": "webpack"。或者在命令行直接运行./node_modules/bin/webpack。或者使用在命令行直接运行 npx webpack。
+
+webpack 有默认的配置，如默认的入口文件是 ./src，默认打包到 dist/main.js。默认的配置文件是 webpack.config.js。更多的默认配置可以查看: node_modules/webpack/lib/WebpackOptionsDefaulter.js。
+
+指定用某配置文件使用命令 webpack --config=./config/webpack.config.js
+
+webpack --watch 开启监听模式 边改动边打包 不会自动刷新浏览器。
 
 ```js
 // webpack4 为了我们开发方便，已经给我们内置了一个默认的配置文件，规定了默认的 入口文件和输出文件
 const path = require("path");
 
 module.exports = {
-  entry: "./index.js", // 打包的入口文件
+  entry: "./src/index.js", // 打包的入口文件
   output: "./dist/main.js" // output 文件路径与名称
 };
 ```
@@ -38,45 +51,6 @@ module.exports = {
 //     | ./src/content.js 196 bytes [built]
 ```
 
-### 3、创建本地服务器 webpack-dev-server 注意不会真正的打包
-
-- 实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用 webpack。
-- 第一步： 安装 npm install webpack-dev-server
-- 第二步： 配置 npm 命令 "server": "./node_modules/.bin/webpack-dev-server" 使用 npm run server 来开启
-
-```js
-devServer: {
-  contentBase: "./dist",// 本地服务器所加载的页面所在的目录
-  historyApiFallback: true,// 不跳转  它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html 只适用于单页面应用。
-  port: 9000,  // 设置默认监听端口，如果省略，默认为”8080“
-  host: '0.0.0.0', // 配置服务器监听地址
-  // 配置代理 它的原理是使用 http-proxy-middleware 去把请求代理到一个外部的服务器。
-  proxy: {
-    '/api': {
-      target: 'https://other-server.example.com',
-      pathRewrite: {'^/api' : ''}, // 如果你不想始终传递 /api ，则需要重写路径
-      secure: false, //只要设置 secure: false 就行 能使用https
-      changeOrigin: true, // 是一个布尔值, 设置为 true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求
-    }
-  },
-  inline: true, // 实时刷新，默认开启 所以修改会实时刷新网页
-  open: true,   // 自动打开浏览器,
-  overlay: true,  // 错误在页面也出现,不仅仅是控制台
-  hot: true, // 热替换模式 默认未开启 开启后修改代码不用再去刷新页面 需要new webpack.HotModuleReplacementPlugin()配合使用
-  headers: {
-    "X-Custom-Foo": "bar"
-  },// 可以在http响应头中注入一些响应信息
-  https: false, // 默认是http 设置为true则可以开启https服务
-  compress: false, // 是否启用Gzip压缩
-
-}
-```
-
-- hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下，前者会自动刷新页面，后者不会刷新页面，而是在控制台输出热更新失败
-
-- 热替换模式
-  - webpack-dev-server 启动后会实时刷新网页，如果不想实时刷新可以使用热替换模式 webpack-dev-server --hot 热替换模式启动后 修改文件不会自动实时刷新网页，下次以热模式启动后修改的都会自动刷新出来。
-
 ### 4、入口 entry
 
     入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。
@@ -84,7 +58,7 @@ devServer: {
     三种类型的入口文件写法
       字符串 'xx' 可以是相对路径 只会生成一个chunk chunk的名字是main
       数组 ['xx', 'xx']可以是相对路径 只会生成一个chunk chunk的名字是main
-      对象 {a: 'xx', b: 'xx'} 可以是相对路径 每个入口生成一个chunk 每个chunk的名字就是对象的键名
+      对象 {a: 'xx', b: 'xx'} 可以是相对路径 每个入口生成一个chunk 每个chunk的名字就是对象的键名，默认是main。
 
     context
       启动webpack的时候会以context为根目录，context的默认值是执行webpack命令的当前目录，如果想要改变可以通过两种方式改变
@@ -97,18 +71,22 @@ devServer: {
     注意，即使可以存在多个入口起点，但只指定一个输出配置。
 
     output是一个对象，主要设置path和filename两属性。
-      publicPath
       path 输出文件的路径 必须是string类型的绝对路径。
       filename 输出文件的名字 当有多个输出文件的时候需要使用到占位符。
-        [name] 文件的名字
+        [name] 文件的chunk名字
         [id] chunk的唯一标识 从0开始
         [hash] chunk的唯一hash值
         [chunkhash] chunk内容的hash值
+        [contenthash] 文件内容的hash
+      publicPath //通常是CDN地址 不常用
 
 ### 6、模式 mode
 
-- 通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
-- 当设置为 development 会将 process.env.NODE_ENV 的值设为 development，production 同理。
+通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
+
+我们也可以在命令行--mode=production 来指定 mode 的值。
+
+当设置为 development 会将 process.env.NODE_ENV 的值设为 development，production 同理。
 
 ```js
 // webpack.development.config.js
@@ -146,7 +124,93 @@ module.exports = {
 };
 ```
 
-### 7、加载器 loader 需要配置在 module 里面的 rules 数组里面
+### 7、创建本地服务器 webpack-dev-server 注意不会真正的打包
+
+实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用 webpack。
+
+- 第一步： 安装 npm install webpack-dev-server
+- 第二步： 配置 npm 命令 "dev": "webpack-dev-server" 使用 npm run dev 来开启
+
+```js
+devServer: {
+  contentBase: "./dist",// 本地服务器所加载的页面所在的目录
+  historyApiFallback: true,// 不跳转  它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html 只适用于单页面应用。
+  host: '0.0.0.0', // 配置服务器监听地址
+  port: 9000,  // 设置默认监听端口，如果省略，默认为”8080“
+  // 配置代理 它的原理是使用 http-proxy-middleware 去把请求代理到一个外部的服务器。
+  proxy: {
+    '/api': {
+      target: 'https://other-server.example.com',
+      pathRewrite: {'^/api' : ''}, // 如果你不想始终传递 /api ，则需要重写路径
+      secure: false, //只要设置 secure: false 就行 能使用https
+      changeOrigin: true, // 是一个布尔值, 设置为 true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求
+    }
+  },
+  inline: true, // 实时刷新，默认开启 所以修改会实时刷新网页
+  open: true,   // 自动打开浏览器,
+  overlay: true,  // 错误在页面也出现,不仅仅是控制台 默认是关闭的
+  hot: true, // 热替换模式 默认未开启 开启后修改代码不用再去刷新页面 需要new webpack.HotModuleReplacementPlugin()配合使用
+  headers: {
+    "X-Custom-Foo": "bar"
+  },// 可以在http响应头中注入一些响应信息
+  https: false, // 默认是http 设置为true则可以开启https服务
+  compress: false, // 是否启用Gzip压缩
+  quiet: false, // 默认不启用。除了初始启动信息之外的任何内容都不会被打印到控制台。这也意味着来自 webpack 的错误或警告在控制台不可见
+  stats: "errors-only", // 终端中仅打印出 error，注意当启用了 quiet 或者是 noInfo 时，此属性不起作用。
+  clientLogLevel: "silent", // 当使用内联模式时，在浏览器的控制台将显示消息，如：在重新加载之前，在一个错误之前，或者模块热替换启用时。如果你不喜欢看这些信息，可以将其设置为 silent (none 即将被移除)。
+}
+```
+
+webpack-dev-server 启动后会实时刷新网页，如果不想实时刷新可以使用热替换模式，配置 hot 或者时 hotOnly 或者命令行配置 webpack-dev-server --hot。热替换模式启动后 修改文件不会刷新网页而自动显示出来。
+
+hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下，hot 会自动刷新页面，hotOnly 不会刷新页面，而是在控制台输出热更新失败。
+
+### 8、devtool
+
+devtool 中的一些设置，可以帮助我们将编译后的代码映射回原始源代码。不同的值会明显影响到构建和重新构建的速度。
+
+会多生成每个原文件的 map 文件，在开发模式下我们在控制台 source tab 下的 webpack 文件夹里面能找到这些文件
+
+生产环境可以使用 none 或者是 source-map，使用 source-map 最终会单独打包出一个 .map 文件，我们可以根据报错信息和此 map 文件，进行错误解析，定位到源代码。
+
+source-map 和 hidden-source-map 都会打包生成单独的 .map 文件，区别在于，source-map 会在打包出的 js 文件中增加一个引用注释，以便开发工具知道在哪里可以找到它。hidden-source-map 则不会在打包的 js 中增加引用注释。
+
+注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
+
+```js
+//webpack.config.js 在开发模式下
+module.exports = {
+  devtool: "cheap-module-eval-source-map", // 开发环境下使用
+  devtool: "none" / "source-map" // 生产环境可以使用
+};
+```
+
+### 9、resolve 配置 webpack 如何寻找模块所对应的的文件
+
+- alias 取别名 注意需要是绝对路径
+- extensions 文件没后缀名时默认加 ['.js', '.json']等等
+- modules 设置查找 module 的目录 注意如果配置了就只会在该数组里面查找
+- mainFields 设置模块入口文件 默认配置是 ['browser', 'main']
+
+### 10、watch
+
+```js
+// 默认 false，也就是不不开启
+// 某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 assregateTimeout 时间到了，在统一去执行。
+// 使用webpack-dev-server启动的默认开启了watch模式。所以会实时编译打包。
+watch: true,
+// 只有开启监听模式时，watchOptions才有意义
+wathcOptions: {
+  // 默认为空，不监听的文件或者文件夹，支持正则匹配
+  ignored: /node_modules/,
+  // 监听到变化发生后会等300ms再去执行，默认300ms
+  aggregateTimeout: 300,
+  // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
+  poll: 1000
+}
+```
+
+### 11、加载器 loader 需要配置在 module 里面的 rules 数组里面
 
     loader从后往前解析。所以顺序不能错
     webpack只认识js和json，如果需要打包其他文件就需要用到loader。
@@ -168,52 +232,7 @@ module.exports = {
           options loader的相关配置
           enforce 强制loader的加载顺序 post强制最后执行 pre强制最先执行
 
-### 8、resolve 配置 webpack 如何寻找模块所对应的的文件
-
-- alias 取别名
-- extensions 文件没后缀名时默认加 ['.js', '.json']等等
-
-### 9、devtool
-
-devtool 中的一些设置，可以帮助我们将编译后的代码映射回原始源代码。不同的值会明显影响到构建和重新构建的速度。
-
-会多生成每个原文件的 map 文件，在开发模式下我们在控制台 source tab 下的 webpack 里面你那个找到这些文件
-
-线上环境一般有三种处理方案：
-
-- hidden-source-map：借助第三方错误监控平台 Sentry 使用
-- source-map：通过 nginx 设置将 .map 文件只对白名单开放(公司内网)
-- nosources-source-map：只会显示具体行数以及查看源代码的错误栈。安全性比 sourcemap 高
-
-注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
-
-```js
-//webpack.config.js 在开发模式下
-module.exports = {
-  devtool: "cheap-module-eval-source-map", // 开发环境下使用
-  devtool: "none" / "source-map" // 生产环境可以使用
-};
-```
-
-### 10、watch
-
-```js
-// 默认 false，也就是不不开启
-// 某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 assregateTimeout 时间到了，在统一去执行。
-// 使用webpack-dev-server启动的默认开启了watch模式。所以会实时编译打包。
-watch: true,
-// 只有开启监听模式时，watchOptions才有意义
-wathcOptions: {
-  // 默认为空，不监听的文件或者文件夹，支持正则匹配
-  ignored: /node_modules/,
-  // 监听到变化发生后会等300ms再去执行，默认300ms
-  aggregateTimeout: 300,
-  // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-  poll: 1000
-}
-```
-
-### 11、插件 plugins
+### 12、插件 plugins
 
     插件目的在于解决 loader 无法实现的其他事。
     模块代码转换的工作由 loader 来处理，除此之外的其他任何工作都可以交由 plugin 来完成。plugin 提供额外的能力，类似 vue/react 中的生命周期函数。它作用于整个构建过程，用于增强 webpack。
@@ -227,10 +246,6 @@ wathcOptions: {
         new HtmlWebpackPlugin({filename: "index.html", template: './src/index.html'})
       ]
     };
-
-### 12、命名
-
-webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默认读取，名字要换需要指定 webpack --config=config/webpack.dev.js
 
 ### 13、常用的 loader
 
@@ -264,9 +279,9 @@ webpack.config.js 这个文件是 webpack 的配置文件，名字唯一。默�
 - clean-webpakc-plugin 目录清理。使用了 hash 所以文件改动就会生成新的 js css，这个是用来清除这些 js css 的。
 - zip-webpack-plugin：将打包出的资源生成一个 zip 包
 - copy-webpack-plugin：将文件或者文件夹拷贝到构建的输出目录
-- webpack.DefinePlugin：创建一个在 编译 时可以配置的全局常量，比如设置 process.env.NODE_ENV，可以在 js 业务代码中使用。
-- webpack-merge：提取公共配置，减少重复配置代码
+- webpack.DefinePlugin：创建一个在 编译 时可以配置的全局常量，可以在 js 业务代码中使用。
 - webpack.ProvidePlugin 配置全局变量，不用 import require 就可以使用。
+- webpack-merge：提取公共配置，减少重复配置代码
 
 - webpack.DllPlugin：抽取第三方 js，使用 dll 打包。
 - webpack-parallel-uglify-plugin: 多进程执行代码压缩，提升构建速度

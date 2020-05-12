@@ -15,7 +15,9 @@ module.exports = smp.wrap(config);
 
 ### 2、使用 include exclude
 
-我们可以通过 exclude、include 配置来确保转译尽可能少的文件。 exclude 的优先级高于 include
+我们可以通过 exclude、include 配置来确保转译尽可能少的文件。 exclude 的优先级高于 include。
+
+exclude 和 include 需要是绝对路径
 
 ```js
 const path = require("path");
@@ -133,71 +135,57 @@ new HtmlWebpackExternalsPlugin({
 
 thread-loader 原理和 HappyPack 类似，也是每次 webpack 解析一个模块，thread- loader 会将它及它的依赖分配给 worker 线程中，从而达到多进程打包的目的。
 
+thread-loader 和 Happypack 我对比了一下，构建时间基本没什么差别。不过 thread-loader 配置起来为简单。
+
 ```js
 // happypack的使用
-const makePlugins = (configs) => {
-  const plugins = [
-    ...
-    new HappyPack({
-      loaders: [ 'babel-loader' ]
-    }),
-  ];
-  ...
-  return plugins;
-}
-
-const commonConfig = {
-  entry: {
-    main: "./src/index.js",
-    entry2: "./src/entry2.js",
-    entry3: "./src/entry3.js",
-    entry4: "./src/entry4.js",
-    entry5: "./src/entry5.js",
-    entry6: "./src/entry6.js",
-  },
-  ...
+const Happypack = require("happypack");
+module.exports = {
+  //...
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      // exclude: /node_modules/,
-      // include: path.resolve(__dirname, '../src'),
-      use: [
-        'happypack/loader'
-        // 'babel-loader'
-      ]
-    }]
+    rules: [
+      {
+        test: /\.js[x]?$/,
+        use: "Happypack/loader?id=js",
+        include: [path.resolve(__dirname, "src")]
+      },
+      {
+        test: /\.css$/,
+        use: "Happypack/loader?id=css",
+        include: [
+          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, "node_modules", "bootstrap", "dist")
+        ]
+      }
+    ]
   },
-  ...
-}
-
-commonConfig.plugins = makePlugins(commonConfig);
+  plugins: [
+    new Happypack({
+      id: "js", //和rule中的id=js对应
+      //将之前 rule 中的 loader 在此配置
+      use: ["babel-loader"] //必须是数组
+    }),
+    new Happypack({
+      id: "css", //和rule中的id=css对应
+      use: ["style-loader", "css-loader", "postcss-loader"]
+    })
+  ]
+};
 ```
 
 ```js
 // thread-loader
-
-const commonConfig = {
-  ...
+module.exports = {
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      // exclude: /node_modules/,
-      // include: path.resolve(__dirname, '../src'),
-      use: [
-        {
-          loader: 'thread-loader',
-          options: {
-            workers: 3, // 开启几个 worker 进程来处理打包，默认是 os.cpus().length - 1
-          }
-        },
-        'babel-loader'
-      ]
-    }]
-  },
-  ...
-}
-
-commonConfig.plugins = makePlugins(commonConfig);
+    //我的项目中,babel-loader耗时比较长，所以我给它配置 thread-loader
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: ["thread-loader", "cache-loader", "babel-loader"]
+      }
+    ]
+  }
+};
 ```
 
 ### 8、多进程压缩
@@ -268,6 +256,8 @@ const commonConfig = {
 ### 9、充分利用缓存提升二次构建速度。
 
 ```js
+// 可以单独安装cache-loader进行缓存
+
 // babel-loader 开启缓存
 module: {
   rules: [
@@ -389,7 +379,7 @@ module.exports = {
 };
 ```
 
-### 13、抽离公共代码
+### 13、抽离公共代码 splitChunks
 
 ```js
 //webpack.config.js
@@ -418,5 +408,54 @@ module.exports = {
       }
     }
   }
+};
+```
+
+### 14、DllPlugin DllReferencePlugin 处理第三方包
+
+```js
+// webpack.config.dll.js 单独配置
+// 使用 "build:dll": "webpack --config webpack.config.dll.js" 构建出单独的dlljs
+const webpack = require("webpack");
+const path = require("path");
+
+module.exports = {
+  entry: {
+    react: ["react", "react-dom"]
+  },
+  mode: "production",
+  output: {
+    filename: "[name].dll.[hash:6].js",
+    path: path.resolve(__dirname, "dist", "dll"),
+    library: "[name]_dll" //暴露给外部使用
+    //libraryTarget 指定如何暴露内容，缺省时就是 var
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      //name和library一致
+      name: "[name]_dll",
+      path: path.resolve(__dirname, "dist", "dll", "manifest.json") //manifest.json的生成路径
+    })
+  ]
+};
+
+// webpack.config.js
+// 使用DllReferencePlugin联系起来
+const webpack = require("webpack");
+const path = require("path");
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist")
+  },
+  plugins: [
+    new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, "dist", "dll", "manifest.json")
+    }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ["**/*", "!dll", "!dll/**"] //不删除dll目录
+    })
+    //...
+  ]
 };
 ```

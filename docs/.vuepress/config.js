@@ -114,6 +114,7 @@ module.exports = {
         children: [
           ["/WEBPACK/webpack", "webpack"],
           ["/WEBPACK/webpack常见问题", "webpack常见问题"],
+          ["/WEBPACK/webpack优化", "webpack优化"],
           ["/WEBPACK/babel", "babel"]
         ]
       },
