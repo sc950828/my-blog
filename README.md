@@ -11,4 +11,4 @@
 - 2、本地编译
   - vuepress dev docs
 - 3、打包
-  - vuepress bbuild docs
+  - vuepress build docs

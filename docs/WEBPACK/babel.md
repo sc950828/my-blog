@@ -4,17 +4,147 @@ Babel 是一个 JavaScript 编译器。将 ECMAScript 2015+ 版本的代码转�
 
 ### 2、使用
 
-- 需要安装@babel/core @babel/cli @babel/preset-env 三个 npm 包。和 webpack 使用的时候需要 babel-loader
-- 如果使用到了 Promise,Set,Symbol,Array.from,async 等等的一些 API。还需要额外配置。有以下两种方法。
-  - 1.安装 @babel/plugin-transform-runtime 包。 一般用于第三方类库的开发
-  - 2.配置"useBuiltIns": "usage"或者"useBuiltIns": "entry"或者直接引入 @babel-polyfill。
+安装@babel/core @babel/cli
 
-### 3、运行
+使用 babel 源目录 --out-dir 目标目录 进行编译
 
-- 配置.babelrc 文件。或者 babel.config.json 文件或者.babelrc.json 文件。
-- ./node_modules/.bin/babel src --out-dir dist 把 src 下的打包到 dist 下。
+因为 Babel 虽然开箱即用，但是什么动作也不做，如果想要 Babel 做一些实际的工作，就需要为其添加插件(plugin)或者预设。
 
-### 4、配置文件
+需要配置在.babelrc 文件或者 babel.config.json 文件或者.babelrc.json 文件中配置插件或者预设。
 
-- presets 是预设 是一系列插件的集合。一般使用@babel/env。预设是一个数组，从后往前读取。
-- plugins 是插件 完成某项功能。插件是一个数组，从前往后读取。
+### 3、插件
+
+Babel 构建在插件之上，使用现有的或者自己编写的插件可以组成一个转换通道，Babel 的插件分为两种: 语法插件和转换插件。
+
+插件是一个数组，从前往后读取。插件在 Presets 前运行。
+
+使用
+
+```js
+{
+    "plugins": ["@babel/plugin-transform-arrow-functions"]
+}
+
+// 也可以指定插件的相对/绝对路径
+
+{
+    "plugins": ["./node_modules/@babel/plugin-transform-arrow-functions"]
+}
+
+```
+
+插件和 preset 都可以接受参数，参数由插件名和参数对象组成一个数组。preset 设置参数也是这种格式。
+
+```js
+{
+    "plugins": [
+        [
+            "@babel/plugin-proposal-class-properties",
+            { "loose": true }
+        ]
+    ]
+}
+```
+
+如果插件名称为 @babel/plugin-XXX，可以使用短名称@babel/XXX 。如果插件名称为 babel-plugin-XXX，可以使用短名称 XXX，该规则同样适用于带有 scope 的插件
+
+```js
+{    
+  "plugins": [       
+    "@babel/transform-arrow-functions", //同 "@babel/plugin-transform-arrow-functions" 
+    "newPlugin", // 同 "babel-plugin-newPlugin"        
+    "@scp/myPlugin" // 同 "@scp/babel-plugin-myPlugin"  
+  ]
+}
+```
+
+### 4、预设 preset
+
+通过使用或创建一个 preset 即可轻松使用一组插件。预设是一个数组，从后往前读取。
+
+```js
+// 官方 Preset
+
+// @babel/preset-env
+// @babel/preset-flow
+// @babel/preset-react
+// @babel/preset-typescript
+```
+
+@babel/preset-env 主要作用是对我们所使用的并且目标浏览器中缺失的功能进行代码转换和加载 polyfill，在不进行任何配置的情况下，@babel/preset-env 所包含的插件将支持所有最新的 JS 特性(ES2015,ES2016 等，不包含 stage 阶段)，将其转换成 ES5 代码。
+
+对于基于浏览器或 Electron 的项目，官方推荐使用 .browserslistrc 文件来指定目标环境。默认情况下，如果你没有在 Babel 配置文件中(如 .babelrc)设置 targets 或 ignoreBrowserslistConfig，@babel/preset-env 会使用 browserslist 配置源。如果你不是要兼容所有的浏览器和环境，推荐你指定目标环境，这样你的编译代码能够保持最小。
+
+创建 Preset
+
+```js
+// 可以简单的返回一个插件数组;
+
+module.exports = function () {
+  return { plugins: ["A", "B", "C"] };
+};
+
+// preset 中也可以包含其他的 preset，以及带有参数的插件。
+module.exports = function () {
+  return {
+    presets: [require("@babel/preset-env")],
+    plugins: [
+      [require("@babel/plugin-proposal-class-properties"), { loose: true }],
+      require("@babel/plugin-proposal-object-rest-spread")
+    ]
+  };
+};
+```
+
+### 5、polyfill
+
+如果使用到了 Promise,Set,Symbol,Array.from,async 等等的一些 API。在低版本浏览器中没有相应的 api，所以就需要用到 polyfill。让新的内置函数、实例方法等在低版本浏览器中也可以使用。
+
+- 1.安装 @babel/plugin-transform-runtime 包。 一般用于第三方类库的开发
+- 2.配置"useBuiltIns": "usage"或者"useBuiltIns": "entry"或者直接引入 @babel-polyfill。
+
+### 6、配置文件
+
+Babel 支持多种格式的配置文件
+
+```js
+// babel.config.js 可以使用JS编写。
+// 在项目根目录下创建一个名为 babel.config.js 的文件。
+module.exports = function(api) {    
+  api.cache(true);    
+  const presets = [...];    
+  const plugins = [...];    
+  return {        
+    presets,        
+    plugins    
+    };
+} 
+```
+
+```js
+// .babelrc 简单
+// 在项目根目录下创建一个名为 .babelrc 的文件：
+
+{
+    "presets": [],
+    "plugins": []
+}
+```
+
+```js
+// .babelrc.js
+// 与 .babelrc 配置相同，但是可以使用JS编写。
+//可以在其中调用 Node.js 的API
+const presets = [];
+const plugins = [];
+module.exports = { presets, plugins };
+```
+
+```json
+// package.json
+// 可以将 .babelrc 中的配置信息作为 babel 键(key) 添加到 package.json 文件中:
+{
+  "name": "my-package",
+  "babel": { "presets": [], "plugins": [] }
+}
+```
