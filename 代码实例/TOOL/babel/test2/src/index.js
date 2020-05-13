@@ -1,3 +1,5 @@
+import "@babel/polyfill";
+
 const fn = () => {
   console.log("a");
 };
