@@ -58,7 +58,7 @@ w3c 中定义的事件发生的过程的 3 个阶段： 捕获阶段（capturing
 ### 9、天生的 inline-block 元素有哪些？
 
 ```html
-<input /> 、<img /> 、<button> 、<textarea>
+<input /> 、<img /> 、<button></button> 、<textarea></textarea>
 ```
 
 ### 10、常用的格式文本标签有哪些？
@@ -145,25 +145,15 @@ w3c 中定义的事件发生的过程的 3 个阶段： 捕获阶段（capturing
 
 - （2）使用 SharedWorker （只在 chrome 浏览器实现了），两个页面共享同一个线程，通过向线程发送数据和接收数据来实现标签页之间的双向通行。
 
-- （3）可以调用 localStorage 本地存储方式，localStorge 另一个浏览上下文里被添加、修改或删除时，它都会触发一个 storage 事件，我们通过监听 storage 事件，控制它的值来进行页面信息通信；
+- （3）可以调用 localStorage 本地存储方式，localStorge 另一个浏览上下文里被添加、修改或删除时，它都会触发一个 storage 事件，我们通过监听 storage 事件，控制它的值来进行页面信息通信。
 
-### 19、如何在页面上实现一个圆形的可点击区域？
+### 19、title 与 h1 与 img 的 alt 的区别？
 
-- 纯 css 实现，使用 border-radius ，当 border-radius 的长度等于宽高相等的元素值的一半时，即可实现一个圆形的点击区域。
-
-- 纯 js 实现，判断一个点在不在圆上的简单算法，通过监听文档的点击事件，获取每次点击时鼠标的位置，判断该位置是否在我们规定的圆形区域内。
-
-### 20、title 与 h1 的区别？
-
-title 属性没有明确意义只表示是个标题，h1 则表示层次明确的标题，对页面信息的抓取也有很大的影响。
-
-### 22、img 的 title 和 alt 有什么区别？
-
-- title 通常当鼠标滑动到元素上的时候显示
-
+- title 通常当鼠标滑动到元素上的时候显示，title 属性没有明确意义只表示是个标题。
+- h1 则表示层次明确的标题，对页面信息的抓取也有很大的影响。对 seo 有很大帮助。
 - alt 是 `<img>` 的特有属性，是图片内容的等价描述，用于图片无法加载时显示、读屏器阅读图片。可提图片高可访问性，除了纯装饰图片外都必须设置有意义的值，搜索引擎会重点分析。
 
-### 23、对 web 标准的可用性、可访问性的、可维护性的理解
+### 20、对 web 标准的可用性、可访问性的、可维护性的理解
 
 - 可用性（Usability）：产品是否容易上手，用户能否完成任务，效率如何，以及这过程中用户的主观感受可好，是从用户的角度来看产品的质量。可用性好意味着产品质量高，是企业的核心竞争力。
 
@@ -171,36 +161,21 @@ title 属性没有明确意义只表示是个标题，h1 则表示层次明确�
 
 - 可维护性（Maintainability）：一般包含两个层次，一是当系统出现问题时，快速定位并解决问题的成本，成本低则可维护性好。二是代码是否容易被人理解，是否容易修改和增强功能。
 
-### 24、disabled 和 readonly 的区别？
+### 21、disabled 和 readonly 的区别？
 
 - disabled 指当 input 元素加载时禁用此元素。input 内容不会随着表单提交。
 - readonly 规定输入字段为只读。input 内容会随着表单提交。
 - 无论设置 readonly 还是 disabled，通过 js 脚本都能更改 input 的 value
 
-### 25、documen.write 和 innerHTML 的区别？
+### 22、documen.write 和 innerHTML 的区别？
 
 - document.write 的内容会代替整个文档内容，会重写整个页面。
 - innerHTML 的内容只是替代指定元素的内容，只会重写页面中的部分内容。
 
-### 26、innerHTML 与 outerHTML 的区别？
+### 23、innerHTML 与 outerHTML 的区别？
 
     对于这样一个 HTML 元素：<div>content<br/></div>
     innerHTML：内部 HTML，content<br/>
     outerHTML：外部 HTML，<div>content<br/></div>
     innerText：内部文本，content
     outerText：外部文本，content
-
-### 27、获取自定义属性 data-xxx
-
-```js
-// <div id="div1" data-user="randy" data-user-age="24"></div>;
-
-// 第一种方法
-const div1 = document.getElementById("div1");
-console.log(div1.dataset.user);
-console.log(div1.dataset.userAge); // 会变成驼峰式
-
-// 第二种方法
-console.log(div1.getAttribute("data-user"));
-console.log(div1.getAttribute("data-user-age"));
-```

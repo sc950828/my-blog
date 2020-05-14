@@ -1,10 +1,12 @@
-### 1、postcss 一种对 css 编译的工具，类似 babel 对 js 的处理。css 的后置处理器。
+### 1、postcss
+
+postcss 是一种对 css 编译的工具，类似 babel 对 js 的处理。css 的后置处理器。
 
 - 常见的功能如：
-  - 使用下一代css语法
+  - 使用下一代 css 语法
   - 自动补全浏览器前缀
-  - 自动把px代为转换成rem
-  - css代码压缩等等
+  - 自动把 px 代为转换成 rem
+  - css 代码压缩等等
 
 ### 2、常用的 postcss 插件
 
@@ -25,7 +27,7 @@
 
 ### 3、使用
 
-- 安装 webpack 的 loader 和 postcss
+- 安装 webpack 需要用到的的 postcss-loader 和 postcss
   - npm install postcss-loader postcss –save-dev
-- 在 webpack.config.js 中的 css 模块配置使用该插件
+- 在 webpack.config.js 的模块中配置使用该插件
 - 在 postcss.config.js 中配置 postcss 的插件

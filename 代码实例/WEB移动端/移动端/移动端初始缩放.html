@@ -2,13 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>移动端初始缩放</title>
     <style>
       body {
         margin: 0;
         font-size: 0.5rem;
         word-wrap: break-word;
+      }
+      .test1 {
+        width: 1rem;
+        height: 1rem;
+        background-color: antiquewhite;
+        font-size: 37.5px;
+        /* font-size: 0.5rem; */
       }
     </style>
   </head>
@@ -21,6 +28,7 @@
     <div class="div2">布局视口document.documentElement.clientWidth：</div>
     <div class="div3">可视视口window.innerWidth：</div>
     <div class="div4">理想视口screen.width：</div>
+    <div class="test1">测试</div>
     <script>
       const div1 = document.getElementsByClassName("div1")[0];
       div1.innerText += window.devicePixelRatio;
@@ -30,6 +38,10 @@
       div3.innerText += window.innerWidth;
       const div4 = document.getElementsByClassName("div4")[0];
       div4.innerText += screen.width;
+
+      const meta = document.querySelector("meta[name='viewport']");
+      const scale = 1 / (window.devicePixelRatio ? window.devicePixelRatio : 1);
+      meta.content = `width=device-width, initial-scale=${scale},minimum-scale=${scale},maximum-scale=${scale},user-scalable=no`;
 
       document.documentElement.style.fontSize =
         document.documentElement.clientWidth / 10 + "px";

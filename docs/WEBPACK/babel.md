@@ -100,8 +100,33 @@ module.exports = function () {
 
 如果使用到了 Promise,Set,Symbol,Array.from,async 等等的一些 API。在低版本浏览器中没有相应的 api，所以就需要用到 polyfill。让新的内置函数、实例方法等在低版本浏览器中也可以使用。
 
-- 1.安装 @babel/plugin-transform-runtime 包。 一般用于第三方类库的开发
-- 2.配置"useBuiltIns": "usage"或者"useBuiltIns": "entry"或者直接引入 @babel-polyfill。
+@babel/polyfill 模块包括 core-js(版本 2) 和一个自定义的 regenerator runtime 模块，可以模拟完整的 ES2015+ 环境（不包含第 4 阶段前的提议）。
+
+babel V7.4.0 版本开始，@babel/polyfill 已经被废弃(前端发展日新月异)，需单独安装 core-js 和 regenerator-runtime 模块。
+
+@babel/polyfill 自带 core-js@2， 但是 core-js@2 分支中已经不会再添加新特性，新特性都会添加到 core-js@3。例如你使用了 Array.prototype.flat()，如果你使用的是 core-js@2，那么其不包含此新特性。为了可以使用更多的新特性，建议大家使用 core-js@3。
+
+使用
+
+1.安装@babel/polyfill 或者单独安装 core-js 和 regenerator runtime 模块。
+
+2.在需要使用的地方通过 import 引入就可以了，会引入所有的 polyfill，如果不希望引入所有的可以配置 useBuiltIns 参数。需要安装 core-js@3。
+
+```js
+"presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ]
+  ]
+```
+
+@babel/plugin-transform-runtime 是一个可以重复使用 Babel 注入的帮助程序，以节省代码大小的插件。
+
+@babel/plugin-transform-runtime 需要和 @babel/runtime 配合使用。首先安装依赖，@babel/plugin-transform-runtime 通常仅在开发时使用，但是运行时最终代码需要依赖 @babel/runtime，所以 @babel/runtime 必须要作为生产依赖被安装
 
 ### 6、配置文件
 

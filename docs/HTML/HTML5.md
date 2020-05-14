@@ -1,6 +1,6 @@
 ### 1、HTML 和 HTML5 有何区别？
 
-- 文档申明不同，HTML5 不基于 SGML，HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
+- 文档申明不同，HTML5 不基于 SGML，不在需要引入 DTD。HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
 - HTML 基于 SGML ，所以需要对 DTD 进行引用。
 - HTML5 新增了语义化标签，语义更明确。
 - HTML 没有绘图功能，HTML5 新增 canvas 画布功能，能绘制图像。
@@ -92,7 +92,7 @@
       step用于input类型为number，每次增加/减少多少。
     全局新属性
       hidden（直接放上去就是隐藏相当于display:none）。(全局属性)
-      spellcheck="true"（语法纠错，主要用在文本输入框里面）。(全局属性)
+      spellcheck（语法纠错，主要用在文本输入框里面）。(全局属性)
       tabindex="1"（Tab跳转顺序，按Tab键优先级从小到大，越小越高，也是应用在文本输入框）。
       data-自定义属性名字。这样就是自定义属性。(全局属性)
       contenteditable="true"(可编辑状态，单击内容，可修改，p标签 table等等都能用)。
@@ -168,7 +168,7 @@ function drop(e) {
 - sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口。
 - localStorage 会永久存在除非手动清除。
 - sessionStorage 在关闭页面或浏览器的时候就会清除。
-- localStorage 和 sessionStorage key 必须是字符串类型。**存储的数据都是字符串类型的数据，取出来的数据也是字符串类型，因此如果存储的对象不是字符串，则要转换成字符串数据类型。**
+- localStorage 和 sessionStorage key 必须是字符串类型。**存储的数据值都是字符串类型的数据，取出来的数据也是字符串类型，因此如果存储的对象不是字符串，则要转换成字符串数据类型。**
 - 检测是否支持 web 存储，typeof(Storage) !== "undefined"
 - 常用方法：
   - localStorage/sessionStorage.setItem('key', 'val') // 存储数据
@@ -179,11 +179,11 @@ function drop(e) {
 
 ### 9、WebWorker
 
-- web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能
-- webworker 线程与 js 主线程最大的区别就在于 webworker 线程无法操作 window 与 document 对象
+- web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。
+- webworker 线程与 js 主线程最大的区别就在于 webworker 线程无法操作 window 与 document 对象。
 - 检测浏览器是否支持 Web Worker。 typeof(Worker)!=="undefined"
 - 使用:
-  - 创建 web worker 文件，worker 文件是一个单独的 js 文件，写好逻辑后，通过 postMessage()方法吧数据发送出去
+  - 创建 web worker 文件，worker 文件是一个单独的 js 文件，写好逻辑后，直接通过 postMessage()方法吧数据发送出去
   - 调用页面创建 worker 对象，var w = new Worker("worker 文件路径").然后通过实例对象调用 onmessage 事件进行监听，并获取 worker 文件里返回的数据
   - 终止 web worker，当我们的 web worker 创建后会持续的监听它，需要中止的时候则使用实例上的方法 w.terminate()。
 

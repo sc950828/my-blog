@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网格布局</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(3, 33%);
+        grid-template-rows: repeat(2, 50%);
+      "
+    >
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 2fr;">
+      <div style="background-color: chartreuse;">1</div>
+      <div style="background-color: cornflowerblue;">3</div>
+    </div>
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: 100px auto 200px;
+        place-items: center;
+      "
+    >
+      <div style="background-color: cornflowerblue;">1</div>
+      <div style="background-color: chartreuse;">auto</div>
+      <div style="background-color: chocolate;">3</div>
+    </div>
+  </body>
+</html>

@@ -450,3 +450,26 @@ requestAnimationFrame(fn);
   - if(a.xxx > b.xxx){return 1} //1 升序。降序的话返回-1
   - if(a.xxx < b.xxx>){return -1}
   - else return 0
+
+### 46、获取自定义属性 data-xxx
+
+```js
+// <div id="div1" data-user="randy" data-user-age="24"></div>;
+
+// 第一种方法
+const div1 = document.getElementById("div1");
+console.log(div1.dataset.user);
+console.log(div1.dataset.userAge); // 会变成驼峰式
+
+// 第二种方法
+console.log(div1.getAttribute("data-user"));
+console.log(div1.getAttribute("data-user-age"));
+```
+
+### 5、JS 如何获取盒模型对应的宽和高？
+
+```js
+dom.style.width / height; //获取的是内联样式的宽高
+dom.getCurrentStyle.width / height; //只有IE支持
+window.getComputedStyle(dom).width / height; //兼容性好
+```

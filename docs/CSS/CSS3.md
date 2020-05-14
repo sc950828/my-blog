@@ -89,45 +89,7 @@ border-image border-radius background-image
   - 颜色可以使用 rgba()设置透明度。
 - 径向渐变 radial-gradient (方向，形状， 大小， 颜色 1， 颜色 2 ....)
 
-### 7、flex 布局
-
-- 特点
-  - 使用 flex 布局后容器内元素的 float、clear、vertical-align 属性将失效。
-- 启用 flex 布局
-  - display: flex
-- 容器的属性
-  - flex-direction
-    控制主轴方向 row(默认) row-reverse column column-reverse
-  - flex-wrap
-    排列放不下时，如何换行 nowrap(默认) wrap wrap-reverse 默认不换行 缩小
-  - flex-flow
-    是 flex-direction 和 flex-wrap 的简写 row nowrap(默认)
-  - justify-content
-    主轴上的对齐方式 flex-start(默认值 左对齐) flex-end center space-between space-around
-  - align-items
-    垂直轴上的对齐方式 flex-start flex-end center baseline(第一行文字的基线对齐) stretch(默认，元素没设置高或者设置为 auto，则元素的高为父容器的高度)
-  - align-content
-    当垂直轴不止一根时，设置垂直轴上的对齐方式 flex-start flex-end center space-between space-around stretch
-- item 的属性
-  - order
-    默认为 0，必须是整数，越小越靠前 可以为负值
-  - align-self
-    设置自身在垂直轴上的对齐方式，会覆盖容器的设置
-  - flex-grow
-    放大，即有多余的空间时元素放大比例，默认是 0,即使剩余空间也不不放大。可能的值为整数，表示不同 item 的放大比例
-  - flex-shrink
-    缩小，即空间不足时元素的缩小比例，默认是 1,空间不足时自动缩小。 其可能的值为整数，表示不同 item 的缩小比例
-  - flex-basis
-    项目在主轴上占据的长度，默认是 auto，即项目本来的大小由宽高决定。
-  - flex
-    - flex-grow flex-shrink flex-basis 的缩写，默认是 0 1 auto。 即不放大 缩小长度自动
-    - 当 flex 取值为 none，则计算值为 0 0 auto
-    - 当 flex 取值为 auto，则计算值为 1 1 auto
-    - 当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%
-    - 当 flex 取值为一个长度或百分比，则视为 flex-basis 值，flex-grow 取 1，flex-shrink 取 1
-    - 当 flex 取值为两个非负数字，则分别视为 flex-grow 和 flex-shrink 的值，flex-basis 取 0%
-
-### 8、媒体查询 @media
+### 7、媒体查询 @media
 
 ```css
 @media not|only mediatype and (media feature) {
@@ -135,20 +97,14 @@ border-image border-radius background-image
 }
 ```
 
-### 9、盒模型 content-box
+### 8、盒模型 content-box
 
 - 控制盒子模型的属性是 box-sizing，默认值是 content-box。
-- 属性值为 content-box 的时候是标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin
-- 属性值为 border-box 的时候是 IE 盒子模型：宽度=内容宽度（content+border+padding）+ margin
+- 属性值为 content-box 的时候是标准盒子模型：元素宽度=设置的宽度（content）+ border + padding + margin
+- 属性值为 border-box 的时候是 IE 盒子模型：元素宽度=设置的宽度（content+border+padding）+ margin
 
-### 10、过渡和动画的区别是什么？
+### 9、过渡和动画的区别是什么？
 
 - 过渡只能指定元素的初始状态和结束状态，而动画可以控制多个阶段。
 - 过渡需要有触发条件，而动画不需要触发条件。
 - 动画的子属性更多可以控制循环次数 方向等等。
-
-### 11、流式布局与响应式布局的区别是什么？
-
-- 流式布局也就是百分比布局，通过盒子的宽度设置成百分比来根据屏幕的宽度来进行伸缩，不受固定像素的限制，内容向两侧填充。
-- 响应式布局是利用 Media Query(媒体查询)。
-- 响应式设计就是可根据不同设备的可视区域改变网页布局，展现不同设计风格，力求在当前设备中达到最完美的效果减少用户浏览网页的额外操作。
