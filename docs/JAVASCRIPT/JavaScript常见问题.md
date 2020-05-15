@@ -34,7 +34,7 @@
 - for of 得到的是数组的值，不能遍历对象，支持 break。
 - for in 得到的是数组的下标，遍历对象的时候得到的是 key，支持 break。能获取对象原型上的属性，属性描述需要是 enumerable。
 - forEach 只能遍历数组，不支持 break，要 break 需要 throw error 然后 try catch 住。
-- map 只能遍历数组，不支持 break。对数组元素统一操作并会返回一个新的数组。
+- map 只能遍历数组，不支持 break。对数组元素统一操作并会返回一个新的数组。空元素也会被保留。比如`[1,,2]`会保留重中间的元素。
 
 ### 7、什么叫变量提升？
 
@@ -68,8 +68,7 @@ function foo() {}
 - typeof undefined 是 undefined typeof null 是 object
 - Number(undefined)是 NaN Number(null)是 0
 - null == undefined
-- 已在作用域中声明但还没有赋值的变量，是 undefined 的。相反，还没有在作用域中声明过的变量，是 undeclared 的。
-- 对于 undeclared 变量的引用，浏览器会报引用错误，如 ReferenceError: b is not defined 。但是我们可以使用 typeof 的安全防范机制来避免报错，因为对于 undeclared（或者 not defined ）变量，typeof 会返回 "undefined"。
+- 已在作用域中声明但还没有赋值的变量，是 undefined 的，不会报错。相反，还没有在作用域中声明过的变量，是 undeclared 的。对于 undeclared 变量的引用，浏览器会报引用错误，如 ReferenceError: a is not defined 。但是我们可以使用 typeof 的安全防范机制来避免报错，因为对于 undeclared（或者 not defined ）变量，typeof 会返回 "undefined"。
 
 ### 9、在不借助第三个变量的情况下将两个数字对调有什么方法？
 
@@ -137,7 +136,6 @@ const falsyValues = ["", 0, null, undefined, NaN, false];
 ### 17、全局变量缺点有什么？
 
 - 全局变量保存在静态存贮区，程序开始运行时为其分配内存，程序结束释放该内存。与局部变量的动态分配、动态释放相比，生存期比较长，因此过多的全局变量会占用较多的内存单元。
-- 全局变量破坏了函数的封装性能。函数象一个黑匣子，一般是通过函数参数和返回值进行输入输出，函数内部实现相对独立。但函数中如果使用了全局变量，那么函数体内的语句就可以绕过函数参数和返回值进行存取，这种情况破坏了函数的独立性，使函数对全局变量产生依赖。同时，也降低了该函数的可移植性。
 - 全局变量使函数的代码可读性降低。由于多个函数都可能使用全局变量，函数执行时全局变量的值可能随时发生变化，对于程序的查错和调试都非常不利。
 
 ### 18、setTimeout、Promise、Async/Await 的区别
