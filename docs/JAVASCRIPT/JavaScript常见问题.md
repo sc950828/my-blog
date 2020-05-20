@@ -28,6 +28,22 @@
 - typeof 能判断基本数据类型，除了 null 以外(null 会被判断成 object 类型)，但是判断引用类型的时候除了 function 被判断成 function 其他的都会判断成 object
 - instanceof 不能判断基本数据类型，只能判断引用数据类型。原理利用的是原型链。`A.__proto__` 是不是等于类型的 protorype。
 
+```js
+function myInstanceof(l, r) {
+  let L = l.__proto__;
+  let R = r.prototype;
+  while (true) {
+    if (L === R) {
+      return true;
+    }
+    if (L === null || L === "undefined") {
+      return false;
+    }
+    L = L.__proto__;
+  }
+}
+```
+
 ### 6、for in for of forEach map 区别？
 
 - 普通 for 循环支持 break

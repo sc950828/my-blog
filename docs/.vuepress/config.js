@@ -56,7 +56,7 @@ module.exports = {
           ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"],
           ["/JAVASCRIPT/垃圾回收", "垃圾回收"],
           ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
-          ["/JAVASCRIPT/手写题", "手写题"]
+          ["/JAVASCRIPT/手写", "手写"]
         ]
       },
       {
@@ -164,6 +164,7 @@ module.exports = {
         title: "数据结构和算法",
         children: [
           ["/数据结构和算法/基础", "基础"],
+          ["/数据结构和算法/字符串", "字符串"],
           ["/数据结构和算法/数组和链表", "数组和链表"],
           ["/数据结构和算法/队列和栈", "队列和栈"],
           ["/数据结构和算法/树", "树"],

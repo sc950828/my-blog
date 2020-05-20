@@ -122,3 +122,113 @@ setTimeout(function () {
   }
 }, 3000);
 ```
+
+### 11、写一个通用的事件侦听器函数。
+
+```js
+const EventUtils = {
+  // 视能力分别使用dom0||dom2||IE方式 来绑定事件
+  // 添加事件
+  addEvent: function (element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = handler;
+    }
+  },
+
+  // 移除事件
+  removeEvent: function (element, type, handler) {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = null;
+    }
+  },
+
+  // 获取事件目标
+  getTarget: function (event) {
+    return event.target || event.srcElement;
+  },
+
+  // 获取 event 对象的引用，取到事件的所有信息，确保随时能使用 event
+  getEvent: function (event) {
+    return event || window.event;
+  },
+
+  // 阻止事件（主要是事件冒泡，因为 IE 不支持事件捕获）
+  stopPropagation: function (event) {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+  },
+
+  // 取消事件的默认行为
+  preventDefault: function (event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  }
+};
+```
+
+### 12、实现 EventEmitter
+
+```js
+class EventEmitter {
+  constructor() {
+    // handlers是一个map，用于存储事件与回调之间的对应关系
+    this.handlers = {};
+  }
+
+  // on方法用于安装事件监听器，它接受目标事件名和回调函数作为参数
+  on(eventName, cb) {
+    // 先检查一下目标事件名有没有对应的监听函数队列
+    if (!this.handlers[eventName]) {
+      // 如果没有，那么首先初始化一个监听函数队列
+      this.handlers[eventName] = [];
+    }
+
+    // 把回调函数推入目标事件的监听函数队列里去
+    this.handlers[eventName].push(cb);
+  }
+
+  // emit方法用于触发目标事件，它接受事件名和监听函数入参作为参数
+  emit(eventName, ...args) {
+    // 检查目标事件是否有监听函数队列
+    if (this.handlers[eventName]) {
+      // 如果有，则逐个调用队列里的回调函数
+      this.handlers[eventName].forEach(callback => {
+        callback(...args);
+      });
+    }
+  }
+
+  // 移除某个事件回调队列里的指定回调函数
+  off(eventName, cb) {
+    const callbacks = this.handlers[eventName];
+    const index = callbacks.indexOf(cb);
+    if (index !== -1) {
+      callbacks.splice(index, 1);
+    }
+  }
+
+  // 为事件注册单次监听器
+  once(eventName, cb) {
+    // 对回调函数进行包装，使其执行完毕自动被移除
+    const wrapper = (...args) => {
+      cb.apply(...args);
+      this.off(eventName, wrapper);
+    };
+    this.on(eventName, wrapper);
+  }
+}
+```

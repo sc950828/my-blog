@@ -36,4 +36,4 @@
 
 ### 18、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)
 
-### 19、[手写题](/JAVASCRIPT/手写题)
+### 19、[手写](/JAVASCRIPT/手写)
