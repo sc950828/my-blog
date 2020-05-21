@@ -421,7 +421,8 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    react: ["react", "react-dom"]
+    react: ["react", "react-dom"],
+    vendor: ["vue", "vuex", "vue-router", "element-ui", "axios"]
   },
   mode: "production",
   output: {
@@ -459,3 +460,16 @@ module.exports = {
   ]
 };
 ```
+
+### 15、结合 vue-cli 的 webpack 打包优化
+
+按需加载，打包到不同的 bundle 里面。
+
+```js
+// webpack 支持三种代码分割方式分别是：
+AMD: require([url], resolve')
+CommonJS: r => require.ensure([], () => r(require('@/components/RequireEnsure'), 'ensure'))
+ES6: () => import(url)
+```
+
+使用 DllPlugin DllReferencePlugin 处理第三方包

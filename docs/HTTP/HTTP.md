@@ -292,3 +292,22 @@ ARQ 协议就是超时重传机制。通过确认和超时机制保证数据的�
 （5）没有同源限制，客户端可以与任意服务器通信。
 
 （6）协议标识符是 ws（如果加密，则为 wss），服务器网址就是 URL。
+
+WebSocket 连接必须由浏览器发起
+
+```
+请求
+GET ws://localhost:3000/ws/chat HTTP/1.1
+Host: localhost
+Upgrade: websocket 表示这个连接将要被转换为WebSocket连接；
+Connection: Upgrade 表示这个连接将要被转换为WebSocket连接；
+Origin: http://localhost:3000
+Sec-WebSocket-Key: client-random-string 标识这个连接
+Sec-WebSocket-Version: 13 指定了WebSocket的协议版本
+
+响应
+HTTP/1.1 101 Switching Protocols  响应是101 表示本次连接的HTTP协议被更改为webSocket
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: server-random-string
+```

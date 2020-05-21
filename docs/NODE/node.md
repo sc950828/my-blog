@@ -6,7 +6,7 @@
 
 - node 基础架构可以大致分为下面三层
   - 上层是 Node 标准库，就是 nodejs 的 api
-  - 中层是 Node bindings（由 c++ 实现
+  - 中层是 Node bindings（由 c++ 实现）
   - 下层是 Node.js 运行时的关键， 里面有 v8 引擎 libuv 等
 
 事件循环、观察者、请求对象、I/O 线程池共同构成了 Node 的事件驱动 异步 I/O 模型。
@@ -71,7 +71,7 @@ const AudioDevice = {
   },
   stop: function () {
     console.log("stop");
-  },
+  }
 };
 
 class MusicPlayer extends EventEmitter {

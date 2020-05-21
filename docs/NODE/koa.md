@@ -150,7 +150,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
 
     ctx.request.query获取?=xx类query参数
     ctx.params获取路径参数
-    安装koa-bodyparser并配置使用通过ctx.request.body获取参数 (post请求 put请求)
+    安装koa-body并配置使用通过ctx.request.body获取参数 (post请求 put请求)
 
 ### 12、洋葱模型
 
@@ -162,19 +162,31 @@ app.use((ctx, next) => {
   next();
   console.log(3);
 });
-app.use((ctx) => {
+app.use(ctx => {
   console.log(2);
 });
 app.listen(3001);
 // 执行结果是1=>2=>3
 ```
 
-### 13、koa 和 express 区别
+### 13、常用中间件
+
+koa-router 处理路由
+
+koa-static 处理静态资源
+
+koa-pramater 参数验证
+
+koa-body 处理请求体参数
+
+koa-json-error 处理 error
+
+koa-jwt token 验证
+
+### 14、koa 和 express 区别
 
 Express 功能丰富，随取随用，并且框架自身封装了大量便利的功能，比如路由、视图处理等等。koa 更轻量，框架自身并没集成太多功能，大部分功能需要用户自行 require 中间件去解决。路由都需要额外的中间件。
 
 回调函数不同 express 是同步的回调函数，包含 req res next 三个参数。koa 是异步函数，包含 context next 两个参数。
 
-中间件实现不同 Express 中间件实现是基于 Callback 回调函数同步的，它不会去等待异步（Promise）完成。koa 中间件使用 koa-compse 实现的，更简洁支持异步。
-
-响应机制不同 在 Express 中我们使用 res.send() 之后就立即响应了。koa 中没有立即响应，而是在所有的中间件结束之后做了响应。
+express 异步基于回调函数，koa 基于 async await。

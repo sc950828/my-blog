@@ -11,26 +11,7 @@ fs.readFile(filePath, function (err, data) {
 });
 ```
 
-### 2、node 里的模块是什么
-
-Node 中，每个文件模块都是一个对象,所有的模块都是 Module 的实例。
-
-```js
-function Module(id, parent) {
-  this.id = id;
-  this.exports = {};
-  this.parent = parent;
-  this.filename = null;
-  this.loaded = false;
-  this.children = [];
-}
-
-module.exports = Module;
-
-var module = new Module(filename, parent);
-```
-
-### 3、require 的模块加载机制
+### 2、require 的模块加载机制
 
 ```js
 // require 其实内部调用 Module._load 方法
@@ -71,7 +52,7 @@ Module._load = function(request, parent, isMain) {
 };
 ```
 
-### 4、Node 事件循环的流程
+### 3、Node 事件循环的流程
 
 在进程启动时，Node 便会创建一个类似于 while(true)的循环，每执行一次循环体的过程我们成为 Tick。
 
@@ -218,7 +199,7 @@ setTimeout(() => {
 // 如果是第二个定时器已经在完成队列中，则最后的结果为timer1=>timer2=>promise1=>promise2
 ```
 
-### 5、如何查看 V8 的内存使用情况
+### 4、如何查看 V8 的内存使用情况
 
 ```js
 // 使用process.memoryUsage()
@@ -230,7 +211,7 @@ setTimeout(() => {
 }
 ```
 
-### 6、v8 引擎的垃圾回收
+### 5、v8 引擎的垃圾回收
 
 - v8 引擎将内存分为了新生代和老生代。
 
@@ -256,60 +237,7 @@ setTimeout(() => {
 
 - 由于在进行垃圾回收的时候会暂停应用的逻辑，对于新生代方法由于内存小，每次停顿的时间不会太长，但对于老生代来说每次垃圾回收的时间长，停顿会造成很大的影响。 为了解决这个问题 V8 引入了增量标记的方法，将一次停顿进行的过程分为了多步，每次执行完一小步就让运行逻辑执行一会，就这样交替运行。
 
-### 7、Buffer 会占用 V8 分配的内存吗
-
-不会，Buffer 属于堆外内存，不是 V8 分配的。
-
-### 8、Buffer.alloc 和 Buffer.allocUnsafe 的区别
-
-Buffer.allocUnsafe 创建的 Buffer 实例的底层内存是未初始化的。 新创建的 Buffer 的内容是未知的，可能包含敏感数据。 使用 Buffer.alloc() 可以创建以零初始化的 Buffer 实例。
-
-### 9、Buffer 的内存分配机制
-
-为了高效的使用申请来的内存，Node 采用了 slab 分配机制。slab 是一种动态的内存管理机制。 Node 以 8kb 为界限来区分 Buffer 为大对象还是小对象，如果是小于 8kb 就是小 Buffer，大于 8kb 就是大 Buffer。
-
-例如第一次分配一个 1024 字节的 Buffer，Buffer.alloc(1024),那么这次分配就会用到一个 slab，接着如果继续 Buffer.alloc(1024),那么上一次用的 slab 的空间还没有用完，因为总共是 8kb，1024+1024 = 2048 个字节，没有 8kb，所以就继续用这个 slab 给 Buffer 分配空间。
-
-如果超过 8kb，那么直接用 C++底层地宫的 SlowBuffer 来给 Buffer 对象提供空间。
-
-### 10、webSocket 协议
-
-WebSocket 连接必须由浏览器发起
-
-```
-请求
-GET ws://localhost:3000/ws/chat HTTP/1.1
-Host: localhost
-Upgrade: websocket 表示这个连接将要被转换为WebSocket连接；
-Connection: Upgrade 表示这个连接将要被转换为WebSocket连接；
-Origin: http://localhost:3000
-Sec-WebSocket-Key: client-random-string 标识这个连接
-Sec-WebSocket-Version: 13 指定了WebSocket的协议版本
-
-响应
-HTTP/1.1 101 Switching Protocols  响应是101 表示本次连接的HTTP协议被更改为webSocket
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: server-random-string
-```
-
-### 11、webSocket 与传统的 http 有什么优势
-
-- 客户端与服务器只需要一个 TCP 连接，比 http 长轮询使用更少的连接
-- webSocket 服务端可以推送数据到客户端
-- 更轻量的协议头，减少数据传输量
-
-### 12、 身份验证过程中会涉及到密钥， 对称加密，非对称加密，摘要的概念，请解释一下
-
-密钥：密钥是一种参数，它是在明文转换为密文或将密文转换为明文的算法中输入的参数。密钥分为对称密钥与非对称密钥，分别应用在对称加密和非对称加密上。
-
-对称加密：对称加密又叫做私钥加密，即信息的发送方和接收方使用同一个密钥去加密和解密数据。对称加密的特点是算法公开、加密和解密速度快，适合于对大数据量进行加密，常见的对称加密算法有 DES、3DES、TDEA、Blowfish、RC5 和 IDEA。
-
-非对称加密：非对称加密也叫做公钥加密。非对称加密与对称加密相比，其安全性更好。对称加密的通信双方使用相同的密钥，如果一方的密钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对密钥，即公钥和私钥，且二者成对出现。私钥被自己保存，不能对外泄露。公钥指的是公共的密钥，任何人都可以获得该密钥。用公钥或私钥中的任何一个进行加密，用另一个进行解密。
-
-摘要： 摘要算法又称哈希/散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用 16 进制的字符串表示）。算法不可逆。
-
-### 13、请简述一下 node 的多进程架构
+### 6、请简述一下 node 的多进程架构
 
 Node 是个单进程单线程模型，他线程安全。
 
@@ -325,7 +253,7 @@ for (var i = 0; i < cpus.length; i++) {
 }
 ```
 
-### 14、node 创建子进程的方法大致有：
+### 7、node 创建子进程的方法大致有：
 
 - spawn()： 启动一个子进程来执行命令
 - exec(): 启动一个子进程来执行命令，与 spawn()不同的是其接口不同，它有一个回调函数获知子进程的状况
