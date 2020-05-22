@@ -182,4 +182,4 @@ new webpack.DefinePlugin({
 
   - 如果一些第三方模块没有 AMD/CommonJS 规范版本，可以使用 noParse 来标识这个模块，这样 Webpack 会引入这些模块，但是不进行转化和解析，从而提升 Webpack 的构建性能 ，例如：jquery 、lodash。
 
-- 11.懒加载 使用`()=>mport("xxx")`懒加载模块。
+- 11.懒加载 使用`()=>mport("xxx")`懒加载模块。webpack 打包的时候会单独打包，使用到的时候才会加载。
