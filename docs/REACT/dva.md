@@ -101,6 +101,7 @@ app.model({
   // dva 提供多个 effect 函数内部的处理函数，比较常用的是 call 和 put。
   // call：执行异步函数
   // put：发出一个 Action，类似于 dispatch
+  // take: 发出一个异步action
   effects: {
     *addAfter1Second(action, { call, put }) {
       yield call(delay, 1000);
