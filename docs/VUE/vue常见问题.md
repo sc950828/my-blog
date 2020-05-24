@@ -126,9 +126,30 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
 
 ### 16、vue3.0 特性
 
-- 源码采用 typescript 编写
+- Performance 性能好
+
+  - 编译模板的优化 编译时会生成 number（大于 0）值的 PatchFlag，用作标记。仅带有 PatchFlag 标记的节点会被真正追踪，且无论层级嵌套多深，它的动态节点都直接与 Block 根节点绑定，无需再去遍历静态节点
+  - 事件监听缓存：cacheHandlers
+
+- Tree shaking support 可以将框架无用模块“剪辑”，仅打包需要的
+
+- Composition API
+
+  - reactive 接收一个普通对象然后返回该普通对象的响应式代理。等同于 2.x 的 Vue.observable()
+  - 接受一个参数值并返回一个响应式且可改变的 ref 对象。ref 对象拥有一个指向内部值的单一属性 .value。
+  - computed
+  - readonly
+  - readonly 传入一个对象（响应式或普通）或 ref，返回一个原始对象的只读代理。一个只读的代理是“深层的”，对象内部任何嵌套的属性也都是只读的。
+  - watchEffect 立即执行传入的一个函数，并响应式追踪其依赖，并在其依赖变更时重新运行该函数。
+  - watch watch API 完全等效于 2.x this.\$watch
+
+- fragment
+
+- 源码采用 typescript 编写，更好的 typescript 支持。使用 typescript 做类型检查
+
+- Custom Renderer API：自定义渲染器 API
+
 - 数据劫持由 Object.defineProperty 改为 proxy
-- 不再使用 flow 做代码类型检查 使用 typescript 做类型检查
 
 ### 17、vue 中 key 值的作用？
 
@@ -208,3 +229,36 @@ mixins 应该是我们最常使用的扩展组件的方式了。如果多个组�
 ### 21、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
 
 箭头函数自己没有定义 this 上下文，而是绑定到其父函数的上下文中。当你在 Vue 程序中使用箭头函数（=>）时，this 关键字病不会绑定到 Vue 实例，因此会引发错误。所以强烈建议改用标准函数声明。
+
+### 22、Vue3.x 响应式数据原理？
+
+因为 Proxy 可以直接监听对象和数组的变化，并且有多达 13 种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
+
+Proxy 只会代理对象的第一层，Vue3 是怎样处理这个问题的呢？
+
+- 判断当前 Reflect.get 的返回值是否为 Object，如果是则再通过 reactive 方法做代理， 这样就实现了深度观测。
+
+监测数组的时候可能触发多次 get/set，那么如何防止触发多次呢？
+
+- key 是否为当前被代理对象 target 自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行 trigger。
+
+### 23、Proxy 与 Object.defineProperty 优劣对比
+
+Proxy 的优势如下:
+
+Proxy 可以直接监听对象而非属性；
+Proxy 可以直接监听数组的变化；
+
+Proxy 有多达 13 种拦截方法,不限于 apply、ownKeys、deleteProperty、has 等等是 Object.defineProperty 不具备的；
+
+Proxy 返回的是一个新对象,我们可以只操作新的对象达到目的,而 Object.defineProperty 只能遍历对象属性直接修改；
+
+Proxy 作为新标准将受到浏览器厂商重点持续的性能优化，也就是传说中的新标准的性能红利；
+
+Object.defineProperty 的优势如下:
+
+兼容性好，支持 IE9，而 Proxy 的存在浏览器兼容性问题,而且无法用 polyfill 磨平，因此 Vue 的作者才声明需要等到下个大版本( 3.0 )才能用 Proxy 重写。
+
+### 24、Vue 事件绑定原理是什么？
+
+原生事件绑定是通过 addEventListener 绑定给真实元素的，组件事件绑定是通过 Vue 自定义的`$on` 实现的。

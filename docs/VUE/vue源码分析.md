@@ -110,7 +110,7 @@ if (vm.$options.el) {
 
 mountComponent 核心就是先实例化一个渲染 Watcher，在它的回调函数中会调用 updateComponent 方法，在此方法中调用 `vm._render` 方法把渲染函数生成虚拟 Node，最终调用 `vm._update` 把虚拟 DOM 变成真实 DOM。
 
-Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数。个 Vue 组件都有一个对应的 Watcher。
+Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数。每个 Vue 组件都有一个对应的 Watcher。
 
 函数最后判断为根节点的时候设置 `vm._isMounted` 为 true， 表示这个实例已经挂载了，同时执行 mounted 钩子函数。
 
@@ -183,7 +183,7 @@ export function mountComponent(
         if (vm._isMounted) {
           callHook(vm, "beforeUpdate");
         }
-      },
+      }
     },
     true /* isRenderWatcher */
   );
@@ -358,8 +358,7 @@ return function patch(
       // 对oldVnode和vnode进行diff，并对oldVnode打patch
       patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly);
     }
-    // 如果oldVnode是真实DOM节点，则先把真实DOM节点转为Vnode，再调用createElm创建新的DOM节点，
-    // 并插入到真实的父节点中，同时调用removeVnodes将旧的节点从父节点中移除。
+    // 如果不相等就删除老节点，增加新节点。
   }
   //最后返回新vnode的节点内容
   return vnode.elm;

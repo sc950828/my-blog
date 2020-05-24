@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="name">我的名字是</div>
+
+    <script>
+      function sayName(name) {
+        const dom = document.getElementById("name");
+        const oldName = dom.innerText;
+        dom.innerText += name;
+      }
+
+      sayName("randy");
+    </script>
+  </body>
+</html>

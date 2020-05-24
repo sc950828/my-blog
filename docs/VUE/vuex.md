@@ -271,3 +271,13 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== "production"
 });
 ```
+
+### 9、为什么 Vuex 的 mutation 中不能做异步操作？
+
+Vuex 中所有的状态更新的唯一途径都是 mutation，异步操作通过 Action 来提交 mutation 实现，这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。
+
+### 10、vuex 的 action 有返回值吗？返回的是什么？
+
+store.dispatch 可以处理被触发的 action 的处理函数返回的 Promise，并且 store.dispatch 仍旧返回 Promise
+
+Action 通常是异步的，要知道 action 什么时候结束或者组合多个 action 以处理更加复杂的异步流程，可以通过定义 action 时返回一个 promise 对象，就可以在派发 action 的时候就可以通过处理返回的 Promise 处理异步流程
