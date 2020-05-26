@@ -2,9 +2,9 @@
 
 ### 1、[react](/REACT/react)
 
-### 2、[react](/REACT/react-redux)
+### 2、[react-redux](/REACT/react-redux)
 
-### 3、[react](/REACT/react-router)
+### 3、[react-router](/REACT/react-router)
 
 ### 4、[dva](/REACT/dva)
 
