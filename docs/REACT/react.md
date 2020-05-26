@@ -45,7 +45,7 @@ jsx 经过 babel 编译和 react.js 构造会生成 React.createElement(js 对�
 
 ### 5、 props
 
-组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props。
+组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props。react 数据是单向流动。
 
 React 是单向数据流，数据通过 props 从父节点传递到子节点。如果顶层的某个 props 改变了， React 会重新渲染所有的子节点。注意：props 是只读的（即不可以使用 this.props 直接修改 props），它是用于在整个组件树中传递数据和配置。
 
@@ -78,7 +78,6 @@ this.setState({
 
 ```js
 constructor(props) {
-  console.log("NameClass props: ", props);
   // Class 组件应该始终使用 props 参数来调用父类的构造函数。
   super(props);
   this.state = { date: new Date() };
@@ -126,7 +125,16 @@ componentDidMount() {
 //  但是完全替换了 this.state.comments。
 ```
 
-数据是向下流动的
+setState 只在合成事件和钩子函数中是“异步”的，在原生事件和 setTimeout 中都是同步的。
+
+setState()方法被处理成异步的时候需要使用到第二个参数，在第二个回调函数里面我们就能拿到更新后的 state 值。
+
+```js
+// 比如说分页查询 我们获取分页数据的时候需要用到新data 就需要用到第二个回调函数
+this.setState({ pageNo: this.state.pageNo + 1 }, () => {
+  initData({ pageNo: this.state.pageNo });
+});
+```
 
 ### 7、state vs props
 
@@ -274,7 +282,9 @@ render()
 
 React 最重要的步骤，创建虚拟 dom，进行 diff 算法，更新 dom 树都在此进行。此时就不能更改 state 了。
 
-componentDidMount() 目前官方推荐的异步请求是在 componentDidMount 中进行.
+componentDidMount()
+
+目前官方推荐的异步请求是在 componentDidMount 中进行.因为 render 或者 componentWillMount 可能重复多次执行。
 
 组件渲染之后调用，可以通过 this.getDOMNode()获取和操作 dom 节点，只调用一次。
 
@@ -284,7 +294,7 @@ componentWillReceivePorps(nextProps)
 
 组件初始化时不调用，组件接受新的 props 时调用。不管父组件传递给子组件的 props 有没有改变，都会触发。
 
-shouldComponentUpdate(nextProps, nextState)
+shouldComponentUpdate(nextProps, nextState) 必须返回 true 或 false 返回 false 不往下走
 
 React 性能优化非常重要的一环。组件接受新的 state 或者 props 时调用，我们可以设置在此对比前后两个 props 和 state 是否相同，如果相同则返回 false 阻止更新，因为相同的属性状态一定会生成相同的 dom 树，这样就不需要创造新的 dom 树和旧的 dom 树进行 diff 算法对比，节省大量性能，尤其是在 dom 结构复杂的时候。不过调用 this.forceUpdate 会跳过此步骤。
 
@@ -314,7 +324,7 @@ static getDerivedStateFromProps(nextProps,prevState)：接收父组件传递过�
 getSnapshotBeforeUpdate(prevProps, prevState)：接收父组件传递过来的 props 和组件之前的状态，此生命周期钩子必须有返回值，返回值将作为第三个参数传递给 componentDidUpdate。必须和 componentDidUpdate 一起使用，否则会报错
 该生命周期钩子触发的时机 ：被调用于 render 之后、componentDidUpdate 之前
 
-### 14、react 中使用 prop-types 检测 props 数据类型
+### 14、react 中使用 prop-types 检测 props 数据类型 使用 defaultProps 设置默认值
 
 安装使用
 
@@ -346,12 +356,13 @@ class Greeting extends React.Component {
   static defaultProps = {
     name: "stranger"
   };
-  //如果传递该属性，该属性值必须为字符串
-  static propTypes = {
-    name: PropTypes.string
-    // name:PropTypes.string.isRequired 使用isRequired设置属性为必须传递的值
-  };
 }
+
+// 第二种定义方法 不使用static定义在类里面
+Greeting.propTypes = {
+  name: PropTypes.string
+  // name:PropTypes.string.isRequired 使用isRequired设置属性为必须传递的值
+};
 
 // Renders "Hello, Stranger":
 ReactDOM.render(<Greeting />, document.getElementById("example"));
@@ -447,6 +458,8 @@ class AutoFocusInput extends React.Component {
     return <input ref={this.inputRef} />;
   }
 }
+
+// 第三种方法 在函数式组件中我们使用useRef创建ref
 ```
 
 ### 17、动态 html
@@ -458,7 +471,8 @@ render () {
     return (
       <div
         className='editor-wrapper'
-        dangerouslySetInnerHTML={{__html: this.state.content}} />
+        dangerouslySetInnerHTML={{__html: this.state.content}}>
+      </div>
     )
   }
 ```
@@ -660,10 +674,6 @@ let double = useMemo(() => {
   }, [count]);
 ```
 
-### setState 到底是异步还是同步?
-
-setState 只在合成事件和钩子函数中是“异步”的，在原生事件和 setTimeout 中都是同步的。
-
 ### React 和 Vue 的区别总结
 
 React 是由 Facebook 创建的 JavaScript UI 框架，并且创造了新的语法 - JSX，JSX 允许在 JavaScript 中写 html 代码。Vue 是由尤大大开发的一个 MVVM 框架，它采用的是模板系统而不是 JSX。
@@ -698,3 +708,20 @@ vue 中有 watch 监听数据变化，react 使用 getDerivedStateFromProps + co
 vue 中 ref 使用方便，react 中不像 vue 中直接给 ref 传字符串类型值，class 组件通过 React.createRef 绑定 ref 属性（React v16.0 版本之后），函数组件通过 useRef 绑定 ref 属性
 
 vue 中有插槽 react 中通过 this.props.children 和 Render props 实现类似 vue 中的插槽功能。
+
+### 注释
+
+```js
+{
+  /* react中的第一种注释方法 可以不换行*/
+}
+{
+  // react中的第二种注释方法 必须换行 不换行就会报错
+}
+```
+
+### vscode 配套插件
+
+Simple React Snippets
+
+ES7 React/Redux/GraphQL/React-Native snippets

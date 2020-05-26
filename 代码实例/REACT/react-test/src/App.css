@@ -21,3 +21,39 @@
 .App-router {
   background-color: white;
 }
+
+.show {
+  animation: show 2s linear;
+}
+
+.hide {
+  animation: hide 2s linear forwards;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
