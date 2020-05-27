@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { getDataByThunk } from "./actions";
 
 class Container extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class Container extends React.Component {
       age,
       name1,
       updateAge,
-      updateName
+      updateName,
+      getDataByThunk,
+      getDataBySaga
     } = this.props;
     return (
       <div>
@@ -23,6 +26,8 @@ class Container extends React.Component {
         <button onClick={updateName}> updateName</button>
         <span>{age}</span>
         <button onClick={updateAge}> updateAge</button>
+        <button onClick={getDataByThunk}>使用redux-thunk获取数据</button>
+        <button onClick={getDataBySaga}>使用redux-saga获取数据</button>
       </div>
     );
   }
@@ -30,7 +35,7 @@ class Container extends React.Component {
 
 //  将state映射到Container组件的props
 function mapStateToProps(state) {
-  // 这里是store里面的state
+  // 这里是store里面的state 获取的是所有reducer里面的state {Reducer1: {…}, Reducer2: {…}}
   console.log(state);
   return {
     value: state.Reducer1.count,
@@ -50,7 +55,12 @@ function mapDispatchToProps(dispatch, ownprops) {
   return {
     onIncreaseClick: () => dispatch({ type: "increase", qq: "randy" }),
     updateName: () => dispatch({ type: "updatename" }),
-    updateAge: () => dispatch({ type: "updateage" })
+    updateAge: () => dispatch({ type: "updateage" }),
+    //提交action方法  方法是异步请求 请求成功然后dispatch更改state的action 这是redux-thunk的用法
+    getDataByThunk: () => dispatch(getDataByThunk({ id: 10 })),
+    // 使用saga获取数据
+    getDataBySaga: () =>
+      dispatch({ type: "GET_DATA_BY_SAGA", payload: { id: 10 } })
   };
 }
 

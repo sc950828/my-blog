@@ -8,7 +8,7 @@ action 就是改变 state 的指令，有多少操作 state 的动作就会有�
 
 reducer 加工函数。 action 发出命令后将 state 放入 reucer 加工函数中，返回新的 state。必须是纯函数。
 
-一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数。纯函数很严格，也就是说你几乎除了计算数据以外什么都不能干，计算的时候还不能依赖除了函数参数以外的数据。
+一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数。纯函数很严格，也就是说你几乎除了计算数据以外什么都不能干，计算的时候还不能依赖除了函数参数以外的数据。如果函数调用的参数相同则永远返会相同的结果。
 
 reducer(previousState, action)。当有多个 reducer 的时候我们使用 combineReducers()来合并 reducer，类似 vuex 里面的 module。
 
@@ -21,10 +21,27 @@ store 通过 createStore(reducers)来创建 store
 - 通过 subscribe(listener) 返回的函数注销监听器。
 
 ```js
+import { createStore } from "redux";
+
+// 通过createStore方法传递reducer来创建store
+const store = createStore(
+  reducers,
+  // 如果使用了redux devtools需要添加这行代码
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+// 通过getState方法来获取state
+const state = store.getState();
+
+// 通过dispatch触发action
+store.dispatch({ type: xx, payload: xx });
+
+// 监听state的改变进行相应处理
 let unsubscribe = store.subscribe(() => {
   console.log(store.getState());
+  this.setState(store.getState());
 });
-store.dispatch(toggleTodo({ items: todoDemoList, id: 1 }));
+
 unsubscribe();
 ```
 
@@ -60,10 +77,11 @@ mapStateToProps();
 // 它是一个函数，建立一个从（外部的）state对象到（UI 组件的）props对象的映射关系。
 // mapStateToProps执行后应该返回一个对象，里面的每一个键值对就是一个映射。
 
+// mapStateToProps是一个函数，它接受state作为参数，返回一个对象。
+// 返回的todos在组件中通过this.props.todos访问
 // 注意如果使用了 combineReducers()来创建reducer这里的state需要通过reducer区分，类似vuex里的module
-
-// mapStateToProps是一个函数，它接受state作为参数，返回一个对象。这个对象有一个todos属性，
-// 代表 UI 组件的同名参数，值是state的todos
+// state是所有的reducer里面的state
+// 当一个触发一个action的时候会触发所有的reducer 然后在里面判断类型 所以reducer里面的type不能相同
 const mapStateToProps = state => {
   return {
     todos: state.todos
@@ -105,6 +123,12 @@ render(
   </Provider>,
   document.getElementById("root")
 );
+
+// 一般开发我们分为四个部分
+// reducer 纯函数
+// actionTypes 定义action的types
+// actionCreators 创建action 就是方法返会action对象 {type: xx, payload: xx}
+// index 创建store 通过createStore方法
 ```
 
 ### 4、例子
@@ -204,7 +228,7 @@ class Container extends React.Component {
 
 //  将state映射到Container组件的props
 function mapStateToProps(state) {
-  // 这里是store里面的state
+  // 这里是store里面的state 所有的reducer里面的state都能获取到
   console.log(state);
   return {
     value: state.Reducer1.count,
@@ -222,6 +246,7 @@ function mapDispatchToProps(dispatch, ownprops) {
   // match: {path: "/container", url: "/container", isExact: true, params: {…}}
   // staticContext: undefined
   return {
+    // 触发一个action 所有的reducer都被调用 所type不能相同
     onIncreaseClick: () => dispatch({ type: "increase", qq: "randy" }),
     updateName: () => dispatch({ type: "updatename" }),
     updateAge: () => dispatch({ type: "updateage" })
@@ -230,4 +255,136 @@ function mapDispatchToProps(dispatch, ownprops) {
 
 // 传入上面两个函数参数，将Container组件变为容器组件
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
+```
+
+### 5、中间件
+
+比如在 Dispatch 一个 Action 之后，到达 reducer 之前，进行一些额外的操作，就需要用到 middleware（中间件）。
+
+在实际工作中你可以使用中间件来进行日志记录、创建崩溃报告，调用异步接口或者路由。
+
+异步请求中间件
+
+redux-thunk
+
+```js
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+
+// 使用中间件 使用applyMiddleware方法
+const store = createStore(reducer, applyMiddleware(thunk));
+
+// 但是我们的Redux Dev Tools插件就不能使用了，如果想两个同时使用，需要使用增强函数。使用增加函数前需要先引入compose。
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  : compose;
+
+const enhancer = composeEnhancers(applyMiddleware(thunk));
+
+const store = createStore(reducer, enhancer); // 创建数据存储仓库
+```
+
+以前 actionCreators.js 都是定义好的 action，根本没办法写业务逻辑，有了 Redux-thunk 之后，可以把 TodoList.js 中的 componentDidMount 业务逻辑放到这里来编写。也就是把向后台请求数据的代码放到 actionCreators.js 文件里。那我们需要引入 axios,并写一个新的函数方法。（以前的 action 是对象，现在的 action 可以是函数了，这就是 redux-thunk 带来的好处）
+
+```js
+// actionCreators.js
+import axios from 'axios'
+// action可以是函数 可以后台请求数据 这就是redux-thunk的好处
+export const getTodoList = () =>{
+    return (dispatch)=>{
+        axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
+            // 真实获取数据再提交action
+            dispatch({type: 'getData', data: res.data})
+        })
+    }
+}
+
+// index.js
+import {getTodoList} from './actionCreators'
+
+componentDidMount() {
+  // 这里的action是函数 获取异步数据
+  const action = getTodoList()
+  store.dispatch(action)
+}
+```
+
+redux-saga
+
+```js
+// 安装redux-saga npm install redux-saga
+
+// 引入saga
+import createSagaMiddleware from "redux-saga";
+// 引入所有的异步generator方法
+import mySaga from "mySaga";
+
+// 创建saga中间件
+const sagaMiddleware = createSagaMiddleware();
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  : compose;
+
+// 使用中间件
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
+
+const store = createStore(reducer, enhancer); // 创建数据存储仓库
+
+// 启动saga 通过传入的saga函数
+sagaMiddleware.run(mySaga);
+```
+
+使用
+
+```js
+// sagas.js
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import Api from "...";
+
+// worker Saga: will be fired on USER_FETCH_REQUESTED actions
+// 副作用方法获取后台数 通过call接口调用api
+// 获取到数据然后使用put方法提交action 把stat存储到store
+function* fetchUser(action) {
+  try {
+    // call调用异步api
+    const user = yield call(Api.fetchUser, action.payload.userId);
+    // put触发action 真正存储数据
+    yield put({ type: "USER_FETCH_SUCCEEDED", user: user });
+  } catch (e) {
+    yield put({ type: "USER_FETCH_FAILED", message: e.message });
+  }
+}
+
+/*
+  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
+  Allows concurrent fetches of user.
+*/
+// 导出的方法是用来监听的 监听到外部有dispatch相同的action就触发副作用异步请求方法
+function* mySaga() {
+  yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+}
+
+/*
+  Alternatively you may use takeLatest.
+
+  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
+  dispatched while a fetch is already pending, that pending fetch is cancelled
+  and only the latest one will be run.
+*/
+// 导出的方法是用来监听的 监听到外部有dispatch相同的action就触发副作用异步请求方法
+function* mySaga() {
+  yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
+}
+
+export default mySaga;
+
+// 自定义类使用 当触发某个action的时候 会被sagas里面的takeEvery或者takeLatest捕获调取相应的异步方法
+class UserComponent extends React.Component {
+  onSomeButtonClicked() {
+    const { userId, dispatch } = this.props;
+    dispatch({ type: "USER_FETCH_REQUESTED", payload: { userId: xx } });
+  }
+}
 ```

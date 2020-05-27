@@ -2,6 +2,7 @@
 export default function addAge(state = { age: 24, name1: "randy" }, action) {
   const age = state.age;
   const name1 = state.name1;
+  console.log(action)
   switch (action.type) {
     case "updateage":
       return { ...state, age: age + 1 };

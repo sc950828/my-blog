@@ -16,6 +16,8 @@ import GuoDu from "./pages/GuoDu";
 import LifeCycle from "./pages/LifeCycle";
 import All from "./pages/All";
 import AnimationTest from "./pages/Animation";
+import ContextTest from "./pages/ContextTest";
+import ErrorHandler from "./pages/ErrorHandler";
 import Container from "./redux/Container";
 
 function App() {
@@ -35,15 +37,17 @@ function App() {
         <Parent></Parent>
       </main>
       <main className="App-router">
-        <Link to="/hello?name=randy">to hello, </Link>
-        <Link to="/params/randy">to params name = randy, </Link>
-        <Link to="/parent">to parent, </Link>
-        <CustomLink to="/hello" label="to customlink,"></CustomLink>
-        <Link to="/guodu">to guodu,</Link>
-        <Link to="/redirecttest">to redirecttest但是会redirect到hello</Link>
-        <Link to="/container">redux test</Link>
-        <Link to="/lifecycle">react生命周期</Link>
-        <Link to="/animation">动画</Link>
+        <Link to="/hello?name=randy">to hello, </Link><br/>
+        <Link to="/params/randy">to params name = randy, </Link><br/>
+        <Link to="/parent">to parent, </Link><br/>
+        <CustomLink to="/hello" label="to customlink,"></CustomLink><br/>
+        <Link to="/guodu">to guodu,</Link><br/>
+        <Link to="/redirecttest">to redirecttest但是会redirect到hello</Link><br/>
+        <Link to="/container">redux test</Link><br/>
+        <Link to="/lifecycle">react生命周期</Link><br/>
+        <Link to="/animation">动画</Link><br/>
+        <Link to="/contexttest">context 测试</Link><br/>
+        <Link to="/errorhandler">错误边界</Link><br/>
         <Switch>
           <Route path="/" exact component={Home}></Route>
           <Route path="/hello" component={Hello}></Route>
@@ -53,6 +57,8 @@ function App() {
           <Route path="/container" component={Container}></Route>
           <Route path="/lifecycle" component={LifeCycle}></Route>
           <Route path="/animation" component={AnimationTest}></Route>
+          <Route path="/contexttest" component={ContextTest}></Route>
+          <Route path="/errorhandler" component={ErrorHandler}></Route>
           <Route to="/redirecttest">
             <Redirect to="/hello"></Redirect>
           </Route>

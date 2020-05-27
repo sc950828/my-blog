@@ -157,7 +157,7 @@ History {
 // 对象表示当前的路由地址是怎么跳转过来的，包含的属性如下
 {
   isExact: true, // 表示匹配到当前路径是否是完全匹配
-  params: {}, // 表示路径的动态参数值
+  params: {}, // 表示路径的动态参数值 this.props.match.params.xx
   path: '/c', // 匹配到的原始路径
   url: '/c' // 匹配到的实际路径
 }
