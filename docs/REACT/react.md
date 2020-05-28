@@ -317,6 +317,8 @@ shouldComponentUpdate(nextProps, nextState) 必须返回 true 或 false 返回 f
 
 React 性能优化非常重要的一环。组件接受新的 state 或者 props 时调用，我们可以设置在此对比前后两个 props 和 state 是否相同，如果相同则返回 false 阻止更新，因为相同的属性状态一定会生成相同的 dom 树，这样就不需要创造新的 dom 树和旧的 dom 树进行 diff 算法对比，节省大量性能，尤其是在 dom 结构复杂的时候。不过调用 this.forceUpdate 会跳过此步骤。
 
+我们还可以在创建组件的时候继承 PureComponent，因为它用当前与之前 props 和 state 的浅比较覆写了 shouldComponentUpdate() 的实现。也能达到性能优化。
+
 componentWillUpdate(nextProps, nextState)
 
 组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改 state
@@ -564,6 +566,7 @@ class ThemedButton extends React.Component {
   // React 会往上找到最近的 theme Provider，然后使用它的值。
   // 在这个例子中，当前的 theme 值为 “dark”。
   static contextType = ThemeContext;
+  // 在函数式组件中使用useContext(ThemeContext)获取
   render() {
     return <Button theme={this.context} />;
   }
@@ -686,7 +689,77 @@ const ref = React.createRef();
 
 第二个参数 ref 只在使用 React.forwardRef 定义组件时存在。常规函数和 class 组件不接收 ref 参数，且 props 中也不存在 ref。
 
-### 22、Hook
+### 24、portals
+
+Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。
+
+ReactDOM.createPortal(child, container)
+
+第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。
+
+### 25、class 和 createReactClass
+
+当我们不使用 es6 的时候我们可以使用 createReactClass 模块，ES6 中的 class 与 createReactClass() 方法十分相似，但有以下几个区别值得注意。
+
+在 class 组件中我们使用 static defaultProps 定义默认属性，但是在 createReactClass 中我们使用 getDefaultProps()定义默认属性
+
+在 class 组件中我们使用 constructor()定义初始 state，但是在 createReactClass 中我们使用 getInitialState()方法定义初始 state
+
+在 class 组件中方法需要我们手动绑定 this，但是在 createReactClass 中我们不需要手动绑定 this
+
+### 26、严格模式
+
+StrictMode 是一个用来突出显示应用程序中潜在问题的工具。与 Fragment 一样，StrictMode 不会渲染任何可见的 UI。它为其后代元素触发额外的检查和警告。
+
+严格模式检查仅在开发模式下运行；它们不会影响生产构建。
+
+```js
+<React.StrictMode>
+  <div>
+    <ComponentOne />
+    <ComponentTwo />
+  </div>
+</React.StrictMode>
+```
+
+StrictMode 有助于识别不安全的生命周期 关于使用过时字符串 ref API 的警告 关于使用废弃的 findDOMNode 方法的警告 检测意外的副作用 检测过时的 context API
+
+### 27、非受控组件
+
+在大多数情况下，我们推荐使用 受控组件 来处理表单数据。在一个受控组件中，表单数据是由 React 组件来管理的。另一种替代方案是使用非受控组件，这时表单数据将交由 DOM 节点来处理。
+
+```js
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();
+  }
+
+  handleSubmit(event) {
+    alert("A name was submitted: " + this.input.current.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" ref={this.input} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+```
+
+在 React 渲染生命周期时，表单元素上的 value 将会覆盖 DOM 节点中的值，在非受控组件中，你经常希望 React 能赋予组件一个初始值，但是不去控制后续的更新。 在这种情况下, 你可以指定一个 defaultValue 属性，而不是 value。
+
+同样，`<input type="checkbox">` 和 `<input type="radio">` 支持 defaultChecked，`<select>` 和 `<textarea>` 支持 defaultValue。
+
+### 28、Hooks
 
 Hook 使你在非 class 的情况下可以使用更多的 React 特性
 
@@ -721,25 +794,123 @@ function Example() {
   });
   // 模拟Vue的$watch方法 useEffect(fn,[user]) // 对user做监控
 
-  useRef;
+  // 进入该组件会输出useEffect 相当于componentDidMount
+  // 修改count会输出useEffect、effect unmount 相当于componentDidUpdate
+  // 修改其他state的不会输出 相当于只监听了count
+  // 离开该组件的时候输出effect unmount 相当于componentWillUnmount
+  useEffect(() => {
+    console.log("useEffect执行了");
+    // 相当于componentWillUnmount
+    return () => {
+      console.log("effect unmount");
+    };
+  }, [count]);
+
+  // 第二个参数的意思是当状态值发生变化时，我们才进行解绑。但是当传空数组[]时，就是当组件将被销毁时才进行解绑，
+  // 这也就实现了componentWillUnmount的生命周期函数。
+
+  // useEffect中定义的函数的执行不会阻碍浏览器更新视图，也就是说这些函数时异步执行的，
+  // 而componentDidMonut和componentDidUpdate中的代码都是同步执行的
 }
 ```
+
+createContext 和 useContext
+
+解决函数组件使用 Context 传值问题
+
+```js
+import React, { useState, createContext, useContext } from "react";
+
+const CountContext = createContext(0);
+
+function Top() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <div>context count是{count}</div>
+      <button onClick={() => setCount(count + 1)}>add</button>
+      <CountContext.Provider value={count}>
+        <Middle></Middle>
+      </CountContext.Provider>
+    </div>
+  );
+}
+
+function Middle() {
+  return <Bottom></Bottom>;
+}
+
+function Bottom(props) {
+  // 这里的CountContext是由createContext创建的 如果不在同一个文件需要手动引入
+  const count = useContext(CountContext);
+  return <div>我的count是{count}</div>;
+}
+
+export default Top;
+```
+
+useReducer
+
+主要是模拟纯函数 reducer
+
+```js
+import React, { useReducer } from "react";
+
+function ReducerTest() {
+  const [score, dispatch] = useReducer((state, action) => {
+    switch (action) {
+      case "inc":
+        return state + 1;
+      case "dec":
+        return state - 1;
+      default:
+        return state;
+    }
+  }, 0);
+
+  return (
+    <div>
+      <div>分数是{score}</div>
+      <button onClick={() => dispatch("inc")}>increment</button>
+      <button onClick={() => dispatch("dec")}>decrement</button>
+    </div>
+  );
+}
+
+export default ReducerTest;
+```
+
+useRef
 
 ```js
 import React, { useRef } from "react";
 
-const App=()=>{  
-  const inputRef = useRef(null);  console.log(inputRef) // 没有访问到 此时dom还未挂载  
-  useEffect(() => {    console.log(inputRef) // dom挂载完毕  }, [])
-  return <div>    <input type="text" ref={inputRef} />  </div>
-}
+const App = () => {
+  const inputRef = useRef(null);
+  console.log(inputRef); // 没有访问到 此时dom还未挂载
+  useEffect(() => {
+    console.log(inputRef); // dom挂载完毕
+  }, []);
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+    </div>
+  );
+};
 
 // 还有useCallback useMemo
+// useCallback(fn, deps) 相当于 useMemo(() => fn, deps)。
+// 只有当依赖发生变化的时候才会执行回调函数
 // useMemo 模拟computed
-//double依赖于count，当count改变时，double自动改变
-let double = useMemo(() => {
-    return count * 2
-  }, [count]);
+//double依赖于count，当count改变时，才会执行回调方法double才会发生改变
+// useMemo主要是模拟shouldComponentUpdate 用于性能优化
+let double = useMemo(
+  () => () => {
+    return count * 2;
+  },
+  [count]
+);
 ```
 
 ### React 和 Vue 的区别总结
