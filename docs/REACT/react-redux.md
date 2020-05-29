@@ -310,6 +310,17 @@ componentDidMount() {
 }
 ```
 
+redux-thunk 优点:
+
+- 体积小: redux-thunk 的实现方式很简单,只有不到 20 行代码
+- 使用简单: redux-thunk 没有引入像 redux-saga 或者 redux-observable 额外的范式,上手简单
+
+redux-thunk 缺陷:
+
+- 样板代码过多: 与 redux 本身一样,通常一个请求需要大量的代码,而且很多都是重复性质的
+- 耦合严重: 异步操作与 redux 的 action 偶合在一起,不方便管理
+- 功能孱弱: 有一些实际开发中常用的功能需要自己进行封装
+
 redux-saga
 
 ```js
@@ -388,3 +399,19 @@ class UserComponent extends React.Component {
   }
 }
 ```
+
+redux-saga 优点:
+
+- 异步解耦: 异步操作被被转移到单独 saga.js 中，不再是掺杂在 action.js 或 component.js 中
+- action 摆脱 thunk function: dispatch 的参数依然是一个纯粹的 action (FSA)，而不是充满 “黑魔法” thunk function
+- 异常处理: 受益于 generator function 的 saga 实现，代码异常/请求失败 都可以直接通过 try/catch 语法直接捕获处理
+- 功能强大: redux-saga 提供了大量的 Saga 辅助函数和 Effect 创建器供开发者使用,开发者无须封装或者简单封装即可使用
+- 灵活: redux-saga 可以将多个 Saga 可以串行/并行组合起来,形成一个非常实用的异步 flow
+- 易测试，提供了各种 case 的测试方案，包括 mock task，分支覆盖等等
+
+redux-saga 缺陷:
+
+- 额外的学习成本: redux-saga 不仅在使用难以理解的 generator function,而且有数十个 API,学习成本远超 redux-thunk,最重要的是你的额外学习成本是只服务于这个库的,与 redux-observable 不同,redux-observable 虽然也有额外学习成本但是背后是 rxjs 和一整套思想
+- 体积庞大: 体积略大,代码近 2000 行，min 版 25KB 左右
+- 功能过剩: 实际上并发控制等功能很难用到,但是我们依然需要引入这些代码
+- ts 支持不友好: yield 无法返回 TS 类型

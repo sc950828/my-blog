@@ -9,3 +9,5 @@
 ### 4、[dva](/REACT/dva)
 
 ### 5、[状态管理](/REACT/状态管理)
+
+### 6、[react 常见问题](/REACT/react常见问题)

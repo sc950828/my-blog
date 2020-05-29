@@ -110,7 +110,7 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
       渲染更快
     缺点
       加大了服务器压力
-      开发有限制，比如只有beforeCreate和created生命后期函数
+      开发有限制，比如只有beforeCreate和created生命周期函数
 
 ### 14、vue-router 路由模式有几种？
 
