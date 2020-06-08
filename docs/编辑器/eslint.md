@@ -22,7 +22,7 @@ module.exports = {
   root: true,
   // 环境
   env: {
-    node: true,
+    node: true
   },
   //继承
   extends: ["plugin:vue/essential", "@vue/standard"],
@@ -34,12 +34,12 @@ module.exports = {
     quotes: "off", // 强制使用一致的反勾号、双引号或单引号
     semi: "off", // 要求或禁止使用分号代替 ASI
     "space-before-function-paren": "off", //强制在 function的左括号之前使用一致的空格
-    eqeqeq: "off", //要求使用 === 和 !==
+    eqeqeq: "off" //要求使用 === 和 !==
   },
   // 解析器
   parserOptions: {
-    parser: "babel-eslint",
-  },
+    parser: "babel-eslint"
+  }
   // 处理器 processor
 };
 ```
@@ -47,3 +47,36 @@ module.exports = {
 ### 4、vue 关闭控制台 eslint 提示
 
 lintOnSave: false
+
+### 5、禁止 eslint 检查注释
+
+单行注释
+
+```js
+let map = new BMap.Map("map"); // eslint-disable-line
+// eslint-disable-next-line
+let map = new BMap.Map("map");
+```
+
+多行注释
+
+```js
+/* eslint-disable */
+export function getAddressByLngLat(lng, lat) {
+  return new Promise(resolve => {
+    let myGeo = new BMap.Geocoder();
+    myGeo.getLocation(new BMap.Point(lng, lat), function (result) {
+      if (result) {
+        resolve(result);
+      }
+    });
+  });
+}
+/* eslint-enable */
+```
+
+文件注释
+
+```
+整个文件范围内禁止规则出现警告,将 /* eslint-disable */块注释放在文件顶部。
+```
