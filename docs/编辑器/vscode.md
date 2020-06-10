@@ -8,8 +8,8 @@
       vue的支持
     4. Vue 2 Snippets
       vue高亮代码提示
-    5. gitlens
-      提示代码谁提交的
+    5. GitLens
+      了解 git 的提交历史。精确到行
     6. ES7 React/Redux/React-Native/JS snippets
       react代码提示
     7. javascript console utils
@@ -19,8 +19,8 @@
       缩进通过不同的颜色区分
     9. Bracket Pair Colorizer
       用不同的颜色标识括号，让你一眼就能看出括号范围
-    10. GitLens
-      了解 git 的提交历史。精确到行
+    10. Simple React Snippets
+      react简单提示
     11. Bootstrap4Snippets
       bootstrap4支持
     12. Element UI Snippets
@@ -37,6 +37,8 @@
       代码格式化 可以使用快捷键 alt + shift + f，也可以配置成保存的时候自动格式化
     18. vscode-icons
       vscode的文件图标
+    19. REST Client
+      测试接口
 
 ### 2、常用快捷键
 
