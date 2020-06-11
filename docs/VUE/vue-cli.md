@@ -238,7 +238,7 @@ new Vue({
       import 'bootstrap-vue/dist/bootstrap-vue.css'
       Vue.use(BootstrapVue)
 
-### 14、vue2 和 vue3 的区别
+### 14、vue cli2 和 vue cli3 的区别
 
 - 创建方式不同 vue2 是 vue init webpack name, vue3 是 vue create name
 - webpack 配置文件不同
