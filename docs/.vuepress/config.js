@@ -94,7 +94,8 @@ module.exports = {
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
           ["/VUE/vue源码分析", "vue源码分析"],
-          ["/VUE/vue常用技巧", "vue常用技巧"]
+          ["/VUE/vue常用技巧", "vue常用技巧"],
+          ["/VUE/vue服务端渲染", "vue服务端渲染"]
         ]
       },
       {
