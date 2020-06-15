@@ -136,6 +136,7 @@ module.exports = {
         title: "GIT",
         children: [
           ["/GIT/git", "git"],
+          ["/GIT/git规范", "git规范"],
           ["/GIT/gitreadme", "gitreadme"]
         ]
       },
