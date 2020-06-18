@@ -27,6 +27,6 @@ Server.get("/server", (req, res) => {
     });
 });
 
-Server.listen(8080, () => {
+Server.listen(8000, () => {
   console.log("server is running");
 });
