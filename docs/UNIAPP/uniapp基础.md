@@ -89,6 +89,8 @@ uni-app 完整支持 Vue 实例的生命周期，同时还新增 应用生命周
 - onNavigationBarSearchInputConfirmed 监听原生标题栏搜索输入框搜索事件，用户点击软键盘上的“搜索”按钮时触发。
 - onNavigationBarSearchInputClicked 监听原生标题栏搜索输入框点击事件
 
+生命周期执行顺序 先是应用的生命周期 再是页面的生命周期和 vue 生命周期 onLoad、onShow、created、onReady、mounted
+
 ### 5、路由
 
 uni-app 页面路由为框架统一管理，开发者需要在 pages.json 里配置每个路由页面的路径及页面样式。类似小程序在 app.json 中配置页面路由一样。所以 uni-app 的路由用法与 Vue Router 不同
