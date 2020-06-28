@@ -37,8 +37,10 @@ watch:{
 ### 3、组件通讯
 
 ```js
-props和$emit;
+props和$emit
+
 vuex
+
 $attrs和$listeners
 // 父组件
 <home @change="change" title="这是标题" width="80" height="80" imgUrl="imgUrl"/>
@@ -58,13 +60,31 @@ mounted() {
 }
 
 provide和inject
+// 父组件通过provide将当前color传递到所有后代组件中
+provide() {
+  return {
+    color: this.color
+  }
+}
+// 子组件通过inject 将color添加进来
+inject: ['color']
+// inject还可以是一个对象。且可以指定默认值
+inject: {
+  color: () => {
+    return 'red'
+  }
+}
+
 $parent和$children
 console.log(this.$parent) //可以拿到 parent 的属性和方法
 console.log(this.$children) //可以拿到 一级子组件的属性和方法
+
 $refs
-  console.log(this.$refs.home) //即可拿到子组件的实例,就可以直接操作 data 和 methods
+console.log(this.$refs.home) //即可拿到子组件的实例,就可以直接操作 data 和 methods
+
 $root
 console.log(this.$root) //获取根实例,最后所有组件都是挂载到根实例上
+
 .sync
  // 父组件
 <home :title.sync="title" />
@@ -130,6 +150,7 @@ context 属性有:
 8.injections: (2.3.0+) 如果使用了 inject 选项，则该对象包含了应当被注入的属性
 
 ```html
+<!-- 在Vue2.5之前，使用函数式组件只能通过JSX的方式，在之后，可以通过模板语法和关键字functional来申明函数式组件 -->
 <template functional>
   <div v-for="(item,index) in props.arr">{{item}}</div>
 </template>
@@ -325,4 +346,39 @@ export default{
   }
 }
 </script>
+```
+
+### 17、使用 hook 监听生命周期函数
+
+在 Vue 组件中，可以用过$on,$once 去监听所有的生命周期钩子函数，如监听组件的 updated 钩子函数可以写成 `this.$on('hook:updated', () => {})`
+
+```js
+export default {
+  mounted() {
+    this.chart = echarts.init(this.$el);
+    // 请求数据，赋值数据 等等一系列操作...
+
+    // 监听窗口发生变化，resize组件
+    window.addEventListener("resize", this.$_handleResizeChart);
+    // 通过hook监听组件销毁钩子函数，并取消监听事件
+    this.$once("hook:beforeDestroy", () => {
+      window.removeEventListener("resize", this.$_handleResizeChart);
+    });
+  },
+  updated() {},
+  created() {},
+  methods: {
+    $_handleResizeChart() {
+      this.chart.resize();
+    }
+  }
+};
+```
+
+在外部监听组件内部的生命周期方法使用@hook:xxx
+
+```html
+<!--通过@hook:updated监听组件的updated生命钩子函数-->
+<!--组件的所有生命周期钩子都可以通过@hook:钩子函数名 来监听触发-->
+<custom-select @hook:updated="$_handleSelectUpdated" />
 ```

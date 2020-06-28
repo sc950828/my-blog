@@ -164,8 +164,8 @@ Vue 包含一组观察数组的变异方法，所以它们也将会触发视图�
 ```js
 var vm = new Vue({
   data: {
-    items: ["a", "b", "c"],
-  },
+    items: ["a", "b", "c"]
+  }
 });
 vm.items[1] = "x"; // 不是响应性的
 vm.items.length = 2; // 不是响应性的
@@ -324,8 +324,8 @@ new Vue({
         // `this` 绑定到当前实例
         this.doSomethingElse();
       });
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -353,8 +353,30 @@ new Vue({
 
 ### 28、插槽 slot
 
+默认插槽不需要定义名字 直接使用 slot 标签就能接收全部。
+
+具名插槽
 在调用的地方写在组件中间 可以用 slot="xx"指定 slot 名字
+或者使用 2.6 新增的 v-slot:xxx 也可以简写为 #xxx，但是 v-slot 只能添加在 `<template>标签` 上。
+
 定义组件的地方使用`<slot name="xx"></slot>`来引用 slot
+
+作用域插槽 使用 v-bind 把数据传送出去，使用 v-slot="scope"就收
+
+```html
+<!-- 组件内部 -->
+<div>
+  <!--通过v-bind 可以向外传递参数-->
+  <slot name="toilet" v-bind="{ washer: true }"></slot>
+</div>
+
+<!-- 外部调用组件的时候 -->
+<!--卫生间插槽，通过v-slot="scope"可以获取组件内部通过v-bind传的值-->
+<template v-slot:toilet="scope">
+  <!--判断是否可以放洗衣机-->
+  <span v-if="scope.washer">这里放洗衣机</span>
+</template>
+```
 
 ### 29、extends
 
