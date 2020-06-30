@@ -140,7 +140,7 @@ nvue 页面暂不支持全局样式
 
 以 #ifdef(仅在某平台) 或 #ifndef(仅不在某平台) 加 %PLATFORM%(平台名) 开头，以 #endif 结尾。
 
-%PLATFORM%的值
+PLATFORM 的值
 
 - APP-PLUS App
 - APP-PLUS-NVUE App nvue
