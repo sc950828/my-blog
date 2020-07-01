@@ -209,7 +209,7 @@ pre-commit 就是在代码提交之前做些东西，比如代码打包，代码
 
 npm install pre-commit --save-dev
 
-在 package.json 里面配置
+在 package.json 里面配置 commit 之前会执行 npm run lint
 
 ```json
 "pre-commit": [

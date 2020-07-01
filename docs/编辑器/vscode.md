@@ -115,39 +115,104 @@
 
 ### 3、常用设置
 
-    "editor.fontSize": 16, //字体大小
-    "editor.tabSize": 2, //tab键空格数
-    "editor.renderWhitespace": "all", //空格显示成点
-    "editor.formatOnSave": true, //在保存的时候format
-    "editor.tabCompletion": "on", //tab键提示
-    "files.autoSave": "afterDelay", //自动保存
-    "files.insertFinalNewline": true, //文件末尾都加上新的一行
-    "workbench.iconTheme": "Monokai Pro Icons", //icon主题
-    "workbench.colorTheme": "Monokai Pro", //颜色主题
-    "eslint.format.enable": true, //开启eslint的代码格式化
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化html
-    },
-    "[css]": {
+    {
+      //icon主题
+      "workbench.iconTheme": "Monokai Pro Icons",
+      //颜色主题
+      "workbench.colorTheme": "Monokai Pro",
+      //字体大小
+      "editor.fontSize": 16,
+      //tab键空格数
+      "editor.tabSize": 2,
+      //空格显示成点
+      "editor.renderWhitespace": "all",
+      //在保存的时候format
+      "editor.formatOnSave": true,
+      //tab键提示
+      "editor.tabCompletion": "on",
+      //自动保存
+      "files.autoSave": "off",
+      //文件末尾都加上新的一行
+      "files.insertFinalNewline": true,
+      //自动更新引入文件名
+      "javascript.updateImportsOnFileMove.enabled": "always",
+      // 自动同步修改标签名 默认html,xml,php 配置成*代表所有语言都支持
+      "auto-rename-tag.activationOnLanguage": ["*"],
+      // eslint插件设置
+      "eslint.alwaysShowStatus": true,
+      "eslint.format.enable": true,
+      // 括号插件Bracket Pair Colorizer 2 设置
+      "bracket-pair-colorizer-2.colors": ["Gold", "Orchid", "LightSkyBlue"],
+      "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
+      "bracket-pair-colorizer-2.highlightActiveScope": true,
+      // css插件设置
+      "css.lint.compatibleVendorPrefixes": "warning",
+      "css.lint.duplicateProperties": "warning",
+      // less插件设置
+      "less.lint.compatibleVendorPrefixes": "warning",
+      "less.lint.duplicateProperties": "warning",
+      // scss插件设置
+      "scss.lint.compatibleVendorPrefixes": "warning",
+      "scss.lint.duplicateProperties": "warning",
+      // css less scss markdown因为没安装格式化插件所以默认使用prettier 保险起见我们也设置为使用prettier格式化
+      "[css]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化css
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化json
-    },
-    "[less]": {
+      },
+      "[less]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化less
-    },
-    "[scss]": {
+      },
+      "[scss]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化scss
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化javascript
-    },
-    // "[javascript]": {
-    //     "editor.defaultFormatter": "dbaeumer.vscode-eslint" //javascript使用eslint格式化
-    // },
-    "[vue]": {
-        "editor.defaultFormatter": "octref.vetur" //vue使用vetur格式化
+      },
+      "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" //使用prettier格式化markdown
+      },
+      // 禁掉默认的json格式化
+      "json.format.enable": false,
+      // 使用prettier格式化json
+      "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      // 禁掉默认的html格式化
+      "html.format.enable": false,
+      //使用prettier格式化html
+      "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      // 使用eslint格式化javascript
+      "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+      },
+      // typescript 没在项目用到 暂时先使用prettier格式化
+      "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      // 使用vetur格式化vue
+      "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+      }
+      /*  prettier的配置 详情查看 https://prettier.io/docs/en/options.html*/
+      // "prettier.printWidth": 80, // 超过最大值换行
+      // "prettier.tabWidth": 2, // 缩进字节数
+      // "prettier.useTabs": false, // 缩进不使用tab，使用空格
+      // "prettier.semi": true, // 句尾添加分号
+      // "prettier.singleQuote": false, // 使用单引号代替双引号
+      // "prettier.jsxSingleQuote": false, // 在JSX中使用单引号而不是双引号
+      // "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
+      // "prettier.arrowParens": "always", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
+      // "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
+      // "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
+      // "prettier.endOfLine": "lf", // 结尾是 \n \r \n\r auto
+      // "prettier.eslintIntegration": false, //不让prettier使用eslint的代码格式进行校验
+      // "prettier.htmlWhitespaceSensitivity": "ignore",
+      // "prettier.ignorePath": ".prettierignore", // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
+      // "prettier.jsxBracketSameLine": false, // 在jsx中把'>' 是否单独放一行
+      // "prettier.jsxSingleQuote": false, // 在jsx中使用单引号代替双引号
+      // "prettier.parser": "babylon", // 格式化的解析器，默认是babylon
+      // "prettier.requireConfig": false, // Require a 'prettierconfig' to format prettier
+      // "prettier.stylelintIntegration": false, //不让prettier使用stylelint的代码格式进行校验
+      // "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（默认在ES5中加尾逗号，可以设置为none）
+      // "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
     }
 
 ### 4、Emmet 插件的使用

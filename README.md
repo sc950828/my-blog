@@ -6,9 +6,14 @@
 
 ### 搭建流程
 
-- 1、全局安装 vuepress
-  - npm install -g vuepress
-- 2、本地编译
-  - vuepress dev docs
-- 3、打包
-  - vuepress build docs
+1、全局安装 vuepress
+
+npm install -g vuepress
+
+2、本地编译
+
+vuepress dev docs
+
+3、打包
+
+vuepress build docs

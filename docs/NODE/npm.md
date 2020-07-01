@@ -194,3 +194,234 @@ engines 字段指明了该模块运行的平台，比如 Node 的某个版本或
 ```js
 { "engines" : { "npm" : "~1.0.20" } }
 ```
+
+### 初始化 package.json 文件
+
+npm init 执行该命令会问几个基本问题，如包名称、版本号、作者信息、入口文件、仓库地址、许可协议等，多数问题已经提供了默认值，你可以在问题后敲回车接受默认值
+
+也可以使用 npm init -f（意指 --force，或者使用 --yes）告诉 npm 直接跳过参数问答环节，快速生成 package.json。
+
+初始化 package.json 时的字段默认值是可以自己配置的，将默认配置和 -f 参数结合使用，能让你用最短的时间创建 package.json
+
+```
+npm config set init.author.email "1287530097@qq.com"
+npm config set init.author.name "randy"
+npm config set init.author.url "https://github.com/sc950828"
+npm config set init.license "ISC"
+npm config set init.version "1.0.0"
+```
+
+### npm run
+
+作为 npm 内置的核心功能之一，npm run 实际上是 npm run-script 命令的简写。当我们运行 npm run xxx 时，基本步骤如下：
+
+- 从 package.json 文件中读取 scripts 对象里面的全部配置；
+- 以传给 npm run 的第一个参数作为键，本例中为 xxx，在 scripts 对象里面获取对应的值作为接下来要执行的命令，如果没找到直接报错；
+- 在系统默认的 shell 中执行上述命令，系统默认 shell 通常是 bash，windows 环境下可能略有不同。
+
+npm 在执行指定 script 之前会把 node_modules/.bin 加到环境变量 `$PATH` 的前面，这意味着任何内含可执行文件的 npm 依赖都可以在 npm script 中直接调用，换句话说，你不需要在 npm script 中加上可执行文件的完整路径，比如 `./node_modules/.bin/eslint **.js`。
+
+### 运行多个 npm script
+
+让多个 npm script 串行我们使用 && 符号连接多个 script
+
+```js
+// 需要注意的是，串行执行的时候如果前序命令失败（通常进程退出码非0），后续全部命令都会终止
+"test": "npm run lint:js && npm run lint:css && npm run lint:json"
+```
+
+让多个 npm script 并行我们使用 & 符号连接多个 script
+
+```js
+"test": "npm run lint:js & npm run lint:css & npm run lint:json"
+
+// 并行的缺点是结果在最后输出 我们可以加上 & wait，而且可以使用 ctrl + c 来结束那些wait的进程 比如启用了 mocha 的 --watch 配置。 但是wait这条命令适合在 linux 下面
+"test": "npm run lint:js & npm run lint:css & npm run lint:json & wait"
+```
+
+我们也还可以利用 npm 包 npm-run-all 来使 script 串行或并行
+
+```js
+// 安装
+npm i npm-run-all -D
+
+// 串行
+"test": "npm-run-all lint:js lint:css lint:json"
+// 或者通配符写法
+"test": "npm-run-all lint:*"
+// 并行 我们并不需要在后面增加 & wait，因为 npm-run-all 已经帮我们做了
+"test": "npm-run-all --parallel lint:*"
+
+// npm-run-all 还提供了很多配置项支持更复杂的命令编排，比如多个命令并行之后接串行的命令，感兴趣的请阅读文档
+// https://github.com/mysticatea/npm-run-all/blob/HEAD/docs/npm-run-all.md
+```
+
+### 给 npm script 传递参数和添加注释和日志级别控制
+
+传递参数我们使用 -- 符号
+
+```js
+"lint:js": "eslint *.js",
+"lint:js:fix": "eslint *.js --fix"
+// 我们可以使用如下命令 达到 npm run lint:js:fix相同的效果
+npm run lint:js -- --fix
+```
+
+添加注释我们使用# 因为命令的本质是 shell 命令（适用于 linux 平台）
+
+```js
+"test": "# 运行所有代码检查 \n    npm-run-all --parallel lint:*"
+```
+
+日志级别控制
+
+默认日志输出级别 即不加任何日志控制参数得到的输出，可能是你最常用的，能看到执行的命令、命令执行的结果。
+
+显示尽可能少的有用信息 需要使用 --loglevel silent，或者 --silent，或者更简单的 -s 来控制，这个日志级别的输出只有命令本身的输出，读起来非常的简洁
+
+```js
+// 注意如果执行各种 lint script 的时候启用了 -s 配置，代码都符合规范的话，你不会看到任何输出
+npm run lint:js -s
+```
+
+显示尽可能多的运行时状态 排查脚本问题的时候比较有用，需要使用 --loglevel verbose，或者 --verbose，或者更简单的 -d 来控制，这个日志级别的输出详细打印出了每个步骤的参数、返回值
+
+```js
+npm run lint:js -d
+```
+
+### 使用 npm script 的钩子
+
+npm script 的设计者为命令的执行增加了类似生命周期的机制，具体来说就是 pre 和 post 钩子脚本。这种特性在某些操作前需要做检查、某些操作后需要做清理的情况下非常有用。
+
+举例来说，运行 npm run test 的时候，分 3 个阶段：
+
+- 检查 scripts 对象中是否存在 pretest 命令，如果有，先执行该命令；
+- 检查是否有 test 命令，有的话运行 test 命令，没有的话报错；
+- 检查是否存在 posttest 命令，如果有，执行 posttest 命令；
+
+### 在 npm script 中使用变量
+
+使用预定义变量，通过运行 npm run env 就能拿到完整的变量列表
+
+变量的使用方法遵循 shell 里面的语法，直接在 npm script 给想要引用的变量前面加上 `$` 符号即可。在 windows 下使用%
+
+```js
+// linux mac
+"dummy": "echo $npm_package_name"
+// windows
+"dummy": "echo %npm_package_name%"
+```
+
+除了预定义变量外，我们还可以在 package.json 中添加自定义变量，并且在 npm script 中使用这些变量。
+
+在 package.json 文件里面使用 config 字段配置自定义变量
+
+```js
+"config": {
+  "port": 3000
+}
+```
+
+linux 和 mac 环境下我们使用`$npm_package_config_port`来获取到我们自定义的变量。windows 下使用%npm_package_config_port%来获取到我们自定义的变量。
+
+注意我们在 config 字段里面不能使用 npm run env 输出来的预定义变量。
+
+windows 环境下建议使用 git bash 来运行 npm script，使用 windows 自带的 cmd 可能会遇到比较多的问题
+
+### 实现 npm script 跨平台兼容
+
+Linux、Mac 平台做开发，所有的 npm script 都会顺利运行，但是 Windows 下面可能就比较痛苦了，因为不是所有的 shell 命令都是跨平台兼容的，甚至各种常见的文件系统操作也是不兼容的。
+
+文件系统操作的跨平台兼容
+
+- 使用 rimraf 或 del-cli，用来删除文件和目录，实现类似于 rm -rf 的功能；
+- 使用 cpr，用于拷贝、复制文件和目录，实现类似于 cp -r 的功能；
+- 使用 make-dir-cli，用于创建目录，实现类似于 mkdir -p 的功能；
+
+用 cross-var 引用变量
+
+Linux 和 Windows 下引用变量的方式是不同的，Linux 下直接可以用 `$npm_package_name`，而 Windows 下必须使用 `%npm_package_name%`，我们可以使用 cross-var 实现跨平台的变量引用
+
+```js
+// 安装
+npm i cross-var -D
+// 使用
+"cover:open": "cross-var opn http://localhost:$npm_package_config_port",
+
+// 可能发现引入 cross-var 之后，它竟然给我们安装了 babel，如果想保持依赖更轻量的话，可以考虑使用 cross-var-no-babel
+```
+
+用 cross-env 设置环境变量
+
+```js
+// 安装
+npm i cross-env -D
+// 使用
+"test": "cross-env NODE_ENV=test mocha tests/",
+```
+
+### 用 node.js 脚本替代复杂的 npm script
+
+Node.js 丰富的生态能赋予我们更强的能力，对于前端工程师来说，使用 Node.js 来编写复杂的 npm script 具有明显的 2 个优势：首先，编写简单的工具脚本对前端工程师来说额外的学习成本很低甚至可以忽略不计，其次，因为 Node.js 本身是跨平台的，用它编写的脚本出现跨平台兼容问题的概率很小。
+
+```js
+// 安装
+npm i shelljs -D
+npm i chalk -D // 使用 chalk 来给输出加点颜色，让脚本变的更有趣 不是必须的
+
+// 创建脚本文件
+touch scripts/cover.js
+
+// 编写脚本
+const { rm, cp, mkdir, exec, echo, env } = require('shelljs');
+const chalk = require('chalk');
+const npm_package_version = env['npm_package_version'];
+
+console.log(chalk.green('1. remove old coverage reports...'));
+rm('-rf', 'coverage');
+rm('-rf', '.nyc_output');
+
+console.log(chalk.green('2. run test and collect new coverage...'));
+exec('nyc --reporter=html npm run test');
+
+console.log(chalk.green('3. archive coverage report by version...'));
+mkdir('-p', 'coverage_archive/' + npm_package_version);
+cp('-r', 'coverage/*', 'coverage_archive/' + npm_package_version);
+
+console.log(chalk.green('4. open coverage report for preview...'));
+exec('npm-run-all --parallel cover:serve cover:open');
+
+// 在package.json里面配置script
+"cover": "node scripts/cover.js",
+```
+
+### 在 Git Hooks 中执行 npm script
+
+有 pre-commit、pre-push、 husky，相比较而言 husky 更好用，它支持更多的 Git Hooks 种类，再结合 lint-staged 使用就更溜。
+
+```js
+// 安装
+npm i husky lint-staged -D
+
+// 在scripts 对象中增加 husky 能识别的 Git Hooks 脚本
+"precommit": "npm run lint",
+"prepush": "npm run test"
+
+// 但是在大型项目、遗留项目中接入过 lint 工作流的同学可能深有体会，每次提交代码会检查所有的代码，
+// 可能比较慢就不说了，接入初期 lint 工具可能会报告几百上千个错误，这时候估计大多数人内心是崩溃的，
+// 尤其是当你是新规范的推进者，遇到的阻力会增大好几倍，毕竟大多数人不愿意背别人的锅，坏笑。
+// 我们有 lint-staged 来缓解这个问题，每个团队成员提交的时候，只检查当次改动的文件
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepush": "npm run test",
+    "lint": "npm-run-all --parallel lint:*",
+  },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*.less": "stylelint",
+    "*.css": "stylelint",
+    "*.json": "jsonlint --quiet",
+    "*.md": "markdownlint --config .markdownlint.json"
+  }
+```
