@@ -78,6 +78,7 @@ module.exports = {
           ["/HTTP/权限", "权限"],
           ["/HTTP/Ajax", "Ajax"],
           ["/HTTP/Axios", "Axios"],
+          ["/HTTP/Fly", "Fly"],
           ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
           ["/HTTP/Fetch", "Fetch"],
           ["/HTTP/JqueryAjax", "JqueryAjax"],
