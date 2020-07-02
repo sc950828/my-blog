@@ -222,3 +222,41 @@ npm install pre-commit --save-dev
 git commit --no-verify
 
 git commit -n
+
+### 23、tag（下面的 v1.0 代表 tagName）
+
+列出已有 tag
+
+git tag
+
+新建 tag
+
+git tag v1.0
+
+新建带有备注信息的 tag
+
+git tag -a v1.0 -m 'comment'
+
+查看 tag 详情 可以利用 tag 的 commitId 进行代码的回滚
+
+git show v1.0
+
+给指定的某个 commit 号加 tag
+
+git tag -a v1.0 -m commitId 'comment'
+
+把 tag 推送到远端
+
+git push origin v1.0
+
+本地删除某个 tag
+
+git tag -d v1.0
+
+本地删除 tag 后 push 到远端
+
+git push origin :refs/tags/v1.0
+
+切换到某个 tag 跟分支一样，可以直接切换到某个 tag 去。这个时候不位于任何分支，处于游离状态，可以考虑基于这个 tag 创建一个分支。
+
+git checkout v1.0
