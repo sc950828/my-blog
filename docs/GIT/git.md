@@ -129,6 +129,10 @@ git 中 D 向下翻一行 F 向下翻页 B 向上翻页 Q 退出 上箭头向上
 
 git config --list
 
+查看某个配置
+
+git config --get xxx(user.name)
+
 查看用户配置
 
 cat ~/.gitconfig
@@ -260,3 +264,13 @@ git push origin :refs/tags/v1.0
 切换到某个 tag 跟分支一样，可以直接切换到某个 tag 去。这个时候不位于任何分支，处于游离状态，可以考虑基于这个 tag 创建一个分支。
 
 git checkout v1.0
+
+### 24、大小写
+
+默认情况下 git 是忽略区分大小写的，多人合作的情况下不规范很容易造成问题，所以开启区分大小写。可以使用 git config --list 查看 git 配置
+
+开启不忽略大小写
+
+```
+git config core.ignorecase false
+```
