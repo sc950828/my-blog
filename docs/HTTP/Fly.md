@@ -108,6 +108,7 @@ function getUserProjects() {
   return fly.get('/user/133/projects');
 }
 
+// 发起多个并发请求，参数是一个promise 数组；当所有请求都成功后才会调用then，只要有一个失败，就会调catch。
 fly.all([getUserRecords(), getUserProjects()])
   .then(fly.spread(function (records, projects) {
     //两个请求都完成
@@ -123,6 +124,11 @@ fly.request("/test",{hh:5},{
  })
 .then(d=>{ console.log("request result:",d)})
 .catch((e) => console.log("error", e))
+
+// 其他的别名方法
+fly.put(url, data, options)
+fly.delete(url,data,options)
+fly.patch(url,data,options)
 ```
 
 ### 5、拦截器
@@ -189,4 +195,102 @@ fly.interceptors.response.use(null,null)
   response:{}, //响应信息
   engine:{}//请求使用的http engine(见下面文档),浏览器中为本次请求的XMLHttpRequest对象
 }
+```
+
+### 7、config 配置
+
+可配置选项
+
+```js
+{
+  method:"", //请求方法， GET 、POST ...
+  headers:{}, //http请求头，
+  baseURL:"", //请求基地址
+  timeout:0,//超时时间，为0时则无超时限制
+  //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
+  parseJson:true,
+  withCredentials:false //跨域时是否发送cookie
+}
+```
+
+请求配置 若单次配置和实例配置冲突，则会优先使用单次请求配置
+
+```js
+// 单次请求配置 需要对单次请求配置时，配置只对当次请求有效。
+fly.request(
+  "/test",
+  { hh: 5 },
+  {
+    method: "post",
+    timeout: 5000, //超时设置为5s
+  }
+);
+
+// 实例级配置可用于当前 Fly 实例发起的所有请求
+//定义公共headers
+fly.config.headers = { xx: 5, bb: 6, dd: 7 };
+//设置超时
+fly.config.timeout = 10000;
+//设置请求基地址
+fly.config.baseURL = "https://wendux.github.io/";
+```
+
+### 8、与 axios 对比
+
+共同点
+
+- 都支持 Promise API
+- 都同时支持 Node 和 Browser 环境
+- 都支持请求／响应拦截器
+- 都支持自动转换 JSON
+
+不同点
+
+浏览器环境下 axios 支持请求取消和全局配置，而 fly 不支持请求取消，fly 的配置支持实例级别和单次请求级别，其余功能基本不分伯仲，在体积上，fly.min.js 只有 4K 左右，而 axios.min.js 12K 左右。Fly 更轻量，集成成本更低。
+
+node 环境下下 Fly 的功能要明显强于 axios，Fly 在 node 下不仅提供了文件下载、上传的 API，而且还可以通过 `fly.$http` 直接调用 request 库 的所有功能。
+
+请求转发 Fly 最大的特点就是在混合 APP 中支持请求转发，而 axios 不支持。
+
+Http Engine Fly 中提出了 Http Engine 的概念，Fly 可以通过更换 Http Engine 的方式实现很多有趣的功能，比如全局 Ajax 拦截。
+
+### 8、与 Fetch 对比
+
+fetch 必须手动设置 header 的 content-type，Fetch 不会自动设置。
+
+fetch 必须手动设置 credentials，Fetch 默认不带 cookie。
+
+像 40X、50X 这种 http 状态错误是不会触发 catch，需要在 then 中处理。
+
+不支持请求／响应拦截器，这在设置一些全局的参数、请求头时很有用。
+
+不支持 Node。
+
+浏览器支持程度不同。
+
+结果必须手动转换为 json，通过 res.json()方法。
+
+```js
+fetch("doAct.action", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  credentials: "include",
+  body: "key=value",
+})
+  .then(function (res) {
+    if (res.ok) {
+      // To do with res
+    } else if (res.status == 401) {
+      // To do with res
+    } else if (res.status == 404) {
+      //
+    } else if (res.status == 500) {
+      //
+    }
+  })
+  .catch(function (e) {
+    // Handling errors
+  });
 ```
