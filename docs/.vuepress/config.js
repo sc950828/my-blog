@@ -58,7 +58,8 @@ module.exports = {
           ["/JAVASCRIPT/垃圾回收", "垃圾回收"],
           ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
           ["/JAVASCRIPT/手写", "手写"],
-          ["/JAVASCRIPT/常用正则", "常用正则"]
+          ["/JAVASCRIPT/常用正则", "常用正则"],
+          ["/JAVASCRIPT/前端二进制", "前端二进制"]
         ]
       },
       {
