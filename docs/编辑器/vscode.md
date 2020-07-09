@@ -39,6 +39,8 @@
       vscode的文件图标
     19. REST Client
       测试接口
+    20. EditorConfig for VS Code
+      使.editorconfig配置文件生效
 
 ### 2、常用快捷键
 

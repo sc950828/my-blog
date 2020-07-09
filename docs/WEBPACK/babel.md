@@ -4,9 +4,32 @@ Babel 是一个 JavaScript 编译器。将 ECMAScript 2015+ 版本的代码转�
 
 ### 2、使用
 
-安装@babel/core @babel/cli
+安装@babel/core @babel/cli 或者直接安装 babel-cli
 
-使用 babel 源目录 --out-dir 目标目录 进行编译
+使用
+
+```
+# 工具安装
+$ npm i babel-cli -g
+
+# 转码结果输出到标准输出
+$ babel example.js
+
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ babel example.js --out-file compiled.js
+# 或者
+$ babel example.js -o compiled.js
+
+# 整个目录转码
+# --out-dir 或 -d 参数指定输出目录
+$ babel src --out-dir lib
+# 或者
+$ babel src -d lib
+
+# -s 参数生成source map文件
+$ babel src -d lib -s
+```
 
 因为 Babel 虽然开箱即用，但是什么动作也不做，如果想要 Babel 做一些实际的工作，就需要为其添加插件(plugin)或者预设。
 
@@ -90,8 +113,8 @@ module.exports = function () {
     presets: [require("@babel/preset-env")],
     plugins: [
       [require("@babel/plugin-proposal-class-properties"), { loose: true }],
-      require("@babel/plugin-proposal-object-rest-spread")
-    ]
+      require("@babel/plugin-proposal-object-rest-spread"),
+    ],
   };
 };
 ```
@@ -146,13 +169,13 @@ module.exports = function(api) {    
 } 
 ```
 
-```js
+```json
 // .babelrc 简单
 // 在项目根目录下创建一个名为 .babelrc 的文件：
 
 {
-    "presets": [],
-    "plugins": []
+  "presets": [],
+  "plugins": []
 }
 ```
 
@@ -172,4 +195,30 @@ module.exports = { presets, plugins };
   "name": "my-package",
   "babel": { "presets": [], "plugins": [] }
 }
+```
+
+### 7、环境变量
+
+在特定环境的时候，您可以用 env 选项来设置特定的配置, 如下在生产环境中指定插件
+
+```json
+{
+  "env": {
+    "production": {
+      "plugins": ["transform-react-constant-elements"]
+    }
+  }
+}
+```
+
+env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 development 。
+
+您可以通过下面的方法设置环境变量, 也可以使用跨平台命令 cross-env
+
+```shell
+# 指定Babel环境
+$ BABEL_ENV=production <commond>
+
+# 跨平台使用
+$ cross-env BABEL_ENV=production <commond>
 ```

@@ -1,6 +1,8 @@
 ### 1、 .editorconfig 文件
 
-这里配置的代码规范规则优先级高于编辑器默认的代码格式化规则。
+这里配置的代码规范规则优先级高于编辑器默认的代码格式化规则。如果需要使用 editorconfig 生效只有配置文件是不够的，还需要对应编辑器的插件，比如 vscode 需要下载 EditorConfig for VS Code 插件，配置才会生效
+
+官网 http://editorconfig.org
 
 ### 2、常用属性配置
 
@@ -50,3 +52,29 @@
 
     7、[num1..num2]
       匹配num1到mun2直接的整数
+
+### 4、基本配置
+
+    #控制 .editorconfig 是否生效的字段
+    root = true
+    #对所有文件生效
+    [*]
+    #缩进风格：空格
+    indent_style = space
+    #缩进大小2
+    indent_size = 2
+    #换行符lf
+    end_of_line = lf
+    #字符集utf-8
+    charset = utf-8
+    #是否删除行尾的空格
+    trim_trailing_whitespace = true
+    #是否在文件的最后插入一个空行
+    insert_final_newline = true
+
+    #支队.md文件生效
+    [*.md]
+    trim_trailing_whitespace = false
+
+    [Makefile]
+    indent_style = tab
