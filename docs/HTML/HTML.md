@@ -30,7 +30,7 @@
   - content-type：定义文档类型与字符编码。`<meta http-equiv="content-type" content="text/html;chartset=UTF-8" />`。
   - default-style：首选样式表。
   - refresh：执行重载或重定向。
-  - X-UA-Compatible：怎么渲染`<metah http-equiv="X-UA-Compatible" content="IE=edge"/>`以上代码告诉 IE 浏览器，IE8/9 及以后的版本都会以最高版本 IE 来渲染页面。
+  - X-UA-Compatible：`<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />`优先使用 IE 最新版本和 Chrome
 - HTML5 新增的设置网页编码的方式 `<meta chartset="UTF-8" />`。
 
 ### 5、DOCTYPE 的作用，标准模式与怪异模式的特点?
