@@ -227,6 +227,39 @@ git commit --no-verify
 
 git commit -n
 
+### 23、husky 和 lint-staged
+
+husky 和 pre-commit 类似，在 commit 前进行代码的验证，验证通过后才会提交代码。
+
+lint-staged 是一个只在已经修改过的文件进行校验的工具
+
+```js
+// 安装
+npm i husky lint-staged -D
+
+// 在scripts 对象中增加 husky 能识别的 Git Hooks 脚本 在commit或push之前会自动执行对应的前置脚本
+"scripts": {
+  "precommit": "npm run lint",
+  "prepush": "npm run test"
+}
+
+// 但是在大型项目、遗留项目中接入过 lint 工作流的同学可能深有体会，每次提交代码会检查所有的代码，
+// 可能比较慢就不说了，接入初期 lint 工具可能会报告几百上千个错误，这时候估计大多数人内心是崩溃的，
+// 尤其是当你是新规范的推进者，遇到的阻力会增大好几倍，毕竟大多数人不愿意背别人的锅，坏笑。
+// 我们有 lint-staged 来缓解这个问题，每个团队成员提交的时候，只检查当次改动的文件
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepush": "npm run test"
+  },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*.less": "stylelint",
+    "*.css": "stylelint",
+    "*.json": "jsonlint --quiet",
+    "*.md": "markdownlint --config .markdownlint.json"
+  }
+```
+
 ### 23、tag（下面的 v1.0 代表 tagName）
 
 列出已有 tag

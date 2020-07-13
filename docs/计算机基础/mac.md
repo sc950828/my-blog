@@ -16,32 +16,75 @@
 
 ### 3、homebrew
 
-    Homebrew是一款Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。
-    安装homebrew
-      首先需要安装xcode-select
-      然后执行 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Homebrew 是一款 Mac OS 平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。
+
+安装 homebrew
+
+自动安装
+
+```shell
+# 下边的命令行时两个命令，首先下载install文件，然后用系统的ruby工具安装。
+# 首先需要安装xcode-select 这个待验证
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# 安装完成后输入brew -v 即可显示是否安装成功
+```
+
+手动安装
+
+```shell
+# 目录内包含空格
+# 不要安装在/sw或者/opt/local目录下
+mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+```
+
+卸载
+
+```shell
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+```
+
+常用命令
+
     更新homebrew
       brew update
-    卸载homebrew
-      cd `brew --prefix`
-      rm -rf Cellar
-      brew prune
-      rm `git ls-files`
-      rm -r Library/Homebrew Library/Aliases Library/Formula Library/Contributions
-      rm -rf .git
-      rm -rf ~/Library/Caches/Homebrew
     使用homebrew安装包
       brew install <packageName>
     使用homebrew卸载包
       brew uninstall <packageName>
     使用homebrew查看已安装的包
       brew list
+    查找包
+      brew search <packageName> 搜索本地和远程仓库的软件，已安装会显示绿色的勾
     使用homebrew查看任意包信息
       brew info <packageName>
     查看homebrew的版本信息
       brew -v
     查看brew的帮助信息
       brew -h
+    检测已经过时的软件
+      brew outdated
+    升级所有已过时的软件，即列出的以过时软件
+      brew upgrade
+    升级指定的软件
+      brew upgrade <formula>
+    禁止指定软件升级
+      brew pin <formula>
+    解锁禁止升级
+      brew unpin <formula>
+    升级所有的软件包，包括未清理干净的旧版本的包
+      brew upgrade --all
+    列出需要清理的内容
+      brew cleanup -n
+    清理指定的软件过时包
+      brew cleanup <formula>
+    清理所有的过时软件
+      brew cleanup
+    卸载指定软件
+      brew unistall <formula>
+    彻底卸载指定软件，包括旧版本
+      brew unistall <fromula> --force
+    查看缓存目录
+      brew --cache
 
 ### 4、mac 设置静态 ip
 
