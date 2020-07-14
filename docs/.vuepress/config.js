@@ -132,6 +132,7 @@ module.exports = {
         children: [
           ["/NODE/node", "node"],
           ["/NODE/npm", "npm"],
+          ["/NODE/yarn", "yarn"],
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"],
           ["/NODE/node常见问题", "node常见问题"]

@@ -27,13 +27,36 @@ npm 是 node 的包管理工具 node package manage
 
 使用 npm install --only=dev
 
-### 7、怎么获取全局安装的模块的路径？
+### 7、查看配置
+
+通过 npm config get registry 查看镜像源
 
 通过 npm config get prefix 可以获取全局安装的模块的路径。
 
-### 8、npm start
+### 8、常用命令
 
-npm start = npm run start
+```shell
+npm install 安装模块
+npm uninstall 卸载模块
+npm update 更新模块
+npm outdated 检查模块是否已经过时
+npm ls 查看安装的模块
+npm init 在项目中引导创建一个package.json文件
+npm help 查看某条命令的详细帮助
+npm root 查看包的安装路径
+npm config 管理npm的配置路径
+npm cache 管理模块的缓存
+npm start 启动模块
+npm stop 停止模块
+npm restart 重新启动模块
+npm test 测试模块
+npm version 查看模块版本
+npm view 查看模块的注册信息
+npm adduser  用户登录
+npm publish 发布模块
+npm access 在发布的包上设置访问级别
+npm package.json的语法
+```
 
 ### 9、查看安装的包
 
@@ -87,21 +110,110 @@ npm start = npm run start
     npm update moduleName 本地更新包
     npm update moduleName -g 全局更新包
 
-### 14、npx
+### 14、nvm 和 n 和 npx
 
-    npm 从5.2版开始，增加了 npx 命令.
-    当在执行npx <command>的时候，npx会做什么事情？
-      帮你在本地（可以是项目中的也可以是本机全局安装的）寻找这个 command
-        找到了： 就用本地的版本
-        没找到： 下载到本地
-      使用完之后不会在你的本机或者项目留下任何东西，会自动删除掉。
-    意思就是npx可以本地安装模块，然后使用起来像全局安装的模块一样方便，可以到处使用，使用完后自动删除。
+nvm
+
+nvm 就是为解决这个问题而产生的，他可以方便的在同一台设备上进行多个 node 版本之间切换
+
+```shell
+npm  install   -g   nvm  #安装
+nvm install ## 安装指定版本，可模糊安装，如：安装v6.2.0，既可nvm install v6.2.0，又可nvm install 6.2
+nvm uninstall ## 删除已安装的指定版本，语法与install类似
+nvm use ## 切换使用指定的版本node
+nvm ls ## 列出所有安装的版本
+nvm ls-remote ## 列出所以远程服务器的版本（官方node version list）
+nvm current ## 显示当前的版本
+nvm alias ## 给不同的版本号添加别名
+nvm unalias ## 删除已定义的别名
+nvm reinstall-packages ## 在当前版本node环境下，重新全局安装指定版本号的npm包
+```
+
+n
+
+n 是 node 一个模块，可以用来管理和切换 node 版本。n 不支持 windows。
+
+```shell
+npm install -g n
+n #查看已安装版本
+n latest  #安装最新版本并使用
+n latest -d   #下载最新版但不使用，-d参数表示为仅下载
+n stable  #安装最新稳定版本并使用
+n <version>  #安装某个版本并使用，如$n 6.2.2
+n rm <version ...> #删除某些版本
+n ls    #查看可用版本
+n --latest    #查看最新版本
+n --stable    #查看最新稳定版
+n -h    #查看帮助信息，更多命令在这里查看
+```
+
+nrm
+
+nrm(npm registry manager )是 npm 资源管理器，允许你快速切换 npm 源
+
+```shell
+npm install -g nrm  #nrm 安装
+nrm ls  #列出可用的源
+nrm use taobao #选择国内淘宝的源
+nrm test npm #测试速度
+nrm add taobao http://192.168.10.127:8081/repository/npm-public/  #添加源
+nrm del  taobao #删除对应的源
+
+```
+
+npx
+
+npm 从 5.2 版开始，增加了 npx 命令。npx 会帮你执行依赖包里的二进制文件，也就是说 npx 会自动查找当前依赖包中的可执行文件，如果找不到，就会去 PATH 里找。如果依然找不到，就会帮你安装！使用完之后不会在你的本机或者项目留下任何东西，会自动删除掉。意思就是 npx 可以本地安装模块，然后使用起来像全局安装的模块一样方便，可以到处使用，使用完后自动删除。
+
+```shell
+# 以前的写法
+npm i -D webpack
+./node_modules/.bin/webpack -v
+# 使用npx
+npx webpack -v
+```
+
+在一些场景下使用 npx 切换 Node 版本，比用像 nvm 、 nave 、 n 这样的 Node 版本管理工具会方便很多。
+
+```shell
+$ npx node@0.12.8 -v
+v0.12.8
+```
+
+npx 常用参数
+
+```shell
+#定义要安装的软件包，并添加到正在运行的$PATH ，
+-p or --package <package>
+
+#让 npx 强制使用本地模块，不下载远程模块，如果本地没有该模块则会出错。
+--no-install
+
+#与 --no-install 相反，让 npx 强制使用远程模块。
+--ignore-existing
+
+#设置 npm 缓存的位置，否则为 npm 默认缓存位置。
+--cache
+
+#在npm run-script类似外壳程序的环境中执行，并提供所有常用的环境变量。如果 NPX 安装了多个模块，只有 <string> 参数的第一个项会被当作命令执行，其他的就须要加上 -p 选项。
+-c
+
+#禁止npx本身的任何输出（进度条，错误消息，安装报告），子命令输出本身不会被禁止。
+-q, --quiet
+
+#当二进制是node脚本时，提供给node的额外参数。
+-n, --node-arg
+
+#查看 npx 版本
+-v, --version
+```
 
 ### 15、npm 发布自己的 package
 
     先创建自己的项目
     npm login 输入用户名 密码 邮箱
     npm publish 发布(每次发布需要更新版本号 npm version 版本，版本号不能是之前的)
+    npm unpublish 包名 撤销发布
 
 ### 16、node_modules
 
@@ -131,11 +243,23 @@ npm start = npm run start
 
 latest：安装最新版本。
 
-### 19、peerDependencies
+### 19、依赖类型
 
-peerDependencies 字段，就是用来供插件指定其所需要的主工具的版本。
+dependences 代码运行时所需要的依赖，比如 vue，vue-router。
 
-比如 A 模块是 B 模块的插件。用户安装的 B 模块是 1.0 版本，但是 A 插件只能和 2.0 版本的 B 模块一起使用。这时，用户要是将 1.0 版本的 B 的实例传给 A，就会出现问题。因此，需要一种机制，在模板安装的时候提醒用户，如果 A 和 B 一起安装，那么 B 必须是 2.0 模块。
+devDependences 开发依赖，就是那些只在开发过程中需要，而运行时不需要的依赖，比如 babel，webpack。
+
+peerDependences 同伴依赖，它用来告知宿主环境需要什么依赖以及依赖的版本范围。如果宿主环境没有对应版本的依赖，在安装依赖时会报出警告。比如包 eslint-plugin-import 中有依赖 2.x-5.x 的 eslint。
+
+```json
+ "peerDependencies": {
+    "eslint": "2.x - 5.x"
+  },
+```
+
+optionalDependencies 可选依赖，这种依赖即便安装失败，npm 也会认为整个依赖安装过程是成功的。
+
+bundledDependencies 打包依赖，在发布包时，这个数组里的包都会被打包打包到最终的发布包里，需要注意 bundledDependencies 中的包必须是在 devDependencies 或 dependencies 声明过的。
 
 ### 20、bin 字段
 
