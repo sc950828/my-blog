@@ -30,7 +30,7 @@ const path = require("path");
 
 module.exports = {
   entry: "./src/index.js", // 打包的入口文件
-  output: "./dist/main.js" // output 文件路径与名称
+  output: "./dist/main.js", // output 文件路径与名称
 };
 ```
 
@@ -98,9 +98,9 @@ module.exports = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development")
-    })
-  ]
+      "process.env.NODE_ENV": JSON.stringify("development"),
+    }),
+  ],
 };
 ```
 
@@ -116,11 +116,11 @@ module.exports = {
   plugins: [
     new UglifyJsPlugin(/* ... */),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production")
+      "process.env.NODE_ENV": JSON.stringify("production"),
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
 };
 ```
 
@@ -181,7 +181,7 @@ source-map 和 hidden-source-map 都会打包生成单独的 .map 文件，区�
 //webpack.config.js 在开发模式下
 module.exports = {
   devtool: "cheap-module-eval-source-map", // 开发环境下使用
-  devtool: "none" / "source-map" // 生产环境可以使用
+  devtool: "none" / "source-map", // 生产环境可以使用
 };
 ```
 
@@ -210,7 +210,11 @@ wathcOptions: {
 }
 ```
 
-### 11、加载器 loader 需要配置在 module 里面的 rules 数组里面
+### 11、externals
+
+打包排除模块，防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖
+
+### 12、加载器 loader 需要配置在 module 里面的 rules 数组里面
 
     loader从后往前解析。所以顺序不能错
     webpack只认识js和json，如果需要打包其他文件就需要用到loader。
@@ -232,7 +236,7 @@ wathcOptions: {
           options loader的相关配置
           enforce 强制loader的加载顺序 post强制最后执行 pre强制最先执行
 
-### 12、插件 plugins
+### 13、插件 plugins
 
     插件目的在于解决 loader 无法实现的其他事。
     模块代码转换的工作由 loader 来处理，除此之外的其他任何工作都可以交由 plugin 来完成。plugin 提供额外的能力，类似 vue/react 中的生命周期函数。它作用于整个构建过程，用于增强 webpack。
@@ -247,7 +251,7 @@ wathcOptions: {
       ]
     };
 
-### 13、常用的 loader
+### 14、常用的 loader
 
 - babel-loader 用 babel 处理 js。(须同时安装 @babel/core @babel/preset-env)(@babel/preset-react 处理 react 代码)
 - style-loader 将 css 内联到 html 头部
@@ -265,7 +269,7 @@ wathcOptions: {
 - tslint-loader：通过 TSLint 检查 TypeScript 代码
 - vue-loader：加载 Vue.js 单文件组件
 
-### 14、常用插件
+### 15、常用插件
 
 - uglifyjs-webpack-plugin：压缩 js 不支持 ES6 压缩 (Webpack4 以前)
 - terser-webpack-plugin: 压缩 js 支持压缩 ES6 (Webpack4)
