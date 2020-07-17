@@ -14,9 +14,6 @@ yarn --version
 ### 3、命令对比
 
 ```js
-// 安装
-npm install
-yarn
 
 // 安装到生产依赖
 npm install react --save
@@ -33,6 +30,10 @@ yarn add react --dev
 // 更新
 npm update --save
 yarn upgrade
+
+// 全局安装
+npm install -g xx
+yarn global add xx
 ```
 
 ### 4、其他常用命令
