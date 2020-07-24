@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宏任务微任务</title>
+  </head>
+  <body>
+    <script>
+      // 同步任务1
+      console.log("我是同步任务1");
+
+      setTimeout(function () {
+        console.log("我是异步任务定时器");
+      }, 0);
+
+      new Promise(function (resolve, reject) {
+        console.log("new promise");
+        resolve("success");
+      }).then((res) => {
+        console.log(res);
+      });
+
+      // 同步任务2
+      console.log("我是同步任务2");
+    </script>
+  </body>
+</html>

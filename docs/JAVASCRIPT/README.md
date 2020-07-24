@@ -34,7 +34,7 @@
 
 ### 17、[数据类型转换](/JAVASCRIPT/数据类型转换)
 
-### 18、[js 代码是如何执行的](/JAVASCRIPT/js代码是如何执行的)
+### 18、[js 运行机制](/JAVASCRIPT/js运行机制)
 
 ### 19、[手写](/JAVASCRIPT/手写)
 
