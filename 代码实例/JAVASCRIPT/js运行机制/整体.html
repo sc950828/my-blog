@@ -20,24 +20,27 @@
       setTimeout(function () {
         // timer2
         console.log(3);
+        Promise.resolve(4).then((res) => {
+          console.log(res);
+        });
       }, 0);
 
       new Promise(function (resolve) {
-        console.log(4);
+        console.log(5);
         setTimeout(function () {
           // timer3
-          console.log(5);
+          console.log(6);
         }, 100);
         resolve();
       }).then(function () {
         setTimeout(function () {
           // timer4
-          console.log(6);
+          console.log(7);
         }, 0);
-        console.log(7);
+        console.log(8);
       });
 
-      console.log(8);
+      console.log(9);
     </script>
   </body>
 </html>

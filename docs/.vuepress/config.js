@@ -56,7 +56,7 @@ module.exports = {
           ["/JAVASCRIPT/原型和原型链", "原型和原型链"],
           ["/JAVASCRIPT/Promise与Async与Await", "Promise与Async与Await"],
           ["/JAVASCRIPT/垃圾回收", "垃圾回收"],
-          ["/JAVASCRIPT/js代码是如何执行的", "js代码是如何执行的"],
+          ["/JAVASCRIPT/js运行机制", "js运行机制"],
           ["/JAVASCRIPT/手写", "手写"],
           ["/JAVASCRIPT/常用正则", "常用正则"],
           ["/JAVASCRIPT/前端二进制", "前端二进制"]
