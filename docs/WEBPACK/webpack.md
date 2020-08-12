@@ -71,7 +71,7 @@ module.exports = {
     注意，即使可以存在多个入口起点，但只指定一个输出配置。
 
     output是一个对象，主要设置path和filename两属性。
-      path 输出文件的路径 必须是string类型的绝对路径。
+      path 输出文件的路径 必须是string类型的绝对路径。否则会抛错。
       filename 输出文件的名字 当有多个输出文件的时候需要使用到占位符。
         [name] 文件的chunk名字
         [id] chunk的唯一标识 从0开始

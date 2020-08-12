@@ -1,10 +1,27 @@
-### 1、babel 是什么？
+### babel 是什么？
 
 Babel 是一个 JavaScript 编译器。将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。
 
-### 2、使用
+### 版本
 
-安装@babel/core @babel/cli 或者直接安装 babel-cli
+babel5 是一个全家桶 一次安装包括了各种包 plugin。
+
+babel 6 是 2015 年 10 月 30 号发布
+
+- 拆分成几个核心包，babel-core,babel-node,babel-cli...
+- 没有了默认的转换，现在你需要手动的添加 plugin。也就是插件化
+- 添加了 preset，也就是预置条件。
+- 增加了 .babelrc 文件，方便自定义的配置。
+
+### 包
+
+1. babel-core
+
+可以看做 babel 的编译器。babel 的核心 api 都在这里面，比如 transform，主要都是处理转码的。它会把我们的 js 代码，抽象成 ast，即 abstract syntax tree 的缩写，是源代码的抽象语法结构的树状表现形式。我们可以理解为，它定义的一种分析 js 语法的树状结构。也就是说 es6 的新语法，跟老语法是不一样的，那我们怎么去定义这个语法呢。所以必须要先转成 ast，去发现这个语法的 kind，分别做对应的处理，才能转化成 es5.
+
+2. babel-cli
+
+提供命令行运行 babel。也就是你可以 babel filename 去对文件转码。
 
 使用
 
@@ -35,7 +52,42 @@ $ babel src -d lib -s
 
 需要配置在.babelrc 文件或者 babel.config.json 文件或者.babelrc.json 文件中配置插件或者预设。
 
-### 3、插件
+3. babel-external-helpers
+
+是 babel-cli 中的一个 command，用来生成一段代码，包含 babel 所有的 helper 函数。babel 有很多辅助函数，例如 toArray 函数， jsx 转化函数。这些函数是 babel transform 的时候用的，都放在 babel-helpers 这个包中。如果 babe 编译的时候检测到某个文件需要这些 helpers，在编译成模块的时候，会放到模块的顶部。
+
+4. babel-node
+
+也是 babel-cli 下面的一个 command，主要是实现了 node 执行脚本和命令行写代码的能力。比如我们的代码里面写了 jsx，直接使用`node test.js`就会报错，因为 node 不支持 jsx 语法，所以我们安装 babel-node 然后使用`node_modules/.bin/babel-node --presets react test.js`就能正确运行
+
+5. babel-register
+
+它的特点就是实时编译，不需要输出文件，执行的时候再去编译。所以它很适用于开发。在需要编译的地方引入它，在运行的时候实时编译，不用提前编译。
+
+注意你引入 `require('babel-register')`的文件代码，是不会被编译的。只有通过 require 引入的其他代码才会
+
+6. babel-runtime
+
+这个包很简单，就是引用了 core-js 和 regenerator，然后生产环境把它们编译到 dist 目录下，做了映射，供使用。那么什么是 core-js 和 regenerator 呢。
+首先我们要知道上面提到的 babel-core 是对语法进行 transform 的，但是它不支持 build-ints（Eg: promise，Set，Map），prototype function（Eg: array.reduce,string.trim），class static function （Eg：Array.form，Object.assgin），regenerator （Eg：generator，async）等等拓展的编译。所以才要用到 core-js 和 regenerator。
+
+core-js 是用于 JavaScript 的组合式标准化库，它包含 es5 （e.g: object.freeze）, es6 的 promise，symbols, collections, iterators, typed arrays， es7+提案等等的 polyfills 实现。也就是说，它几乎包含了所有 JavaScript 最新标准的垫片。
+
+regenerator 主要就是实现了 generator/yeild， async/await。
+
+7. babel-polyfill
+
+babel-runtime 已经是一堆 polyfill 了，为什么这里还有一个类似的包，它同样是引用了 core-js 和 regenerator，垫片支持是一样的。官网是这么说的，babel-polyfill 是为了模拟一个完整的 ES2015 +环境，旨在用于应用程序而不是库/工具。并且使用 babel-node 时，这个 polyfill 会自动加载
+
+也就是说，它会让我们程序的执行环境，模拟成完美支持 es6+ 的环境，毕竟无论是浏览器环境还是 node 环境对 es6+ 的支持都不一样。它是以重载全局变量 （E.g: Promise）,还有原型和类上的静态方法（E.g：Array.prototype.reduce/Array.form），从而达到对 es6+ 的支持。不同于 babel-runtime 的是，babel-polyfill 是一次性引入你的项目中的，就像是 React 包一样，同项目代码一起编译到生产环境。
+
+### transform-runtime 对比 babel-polyfill
+
+babel-polyfill 是当前环境注入这些 es6+ 标准的垫片，好处是引用一次，不再担心兼容，而且它就是全局下的包，代码的任何地方都可以使用。缺点也很明显，它可能会污染原生的一些方法而把原生的方法重写。如果当前项目已经有一个 polyfill 的包了，那你只能保留其一。而且一次性引入这么一个包，会大大增加体积。如果你只是用几个特性，就没必要了，如果你是开发较大的应用，而且会频繁使用新特性并考虑兼容，那就直接引入吧。
+
+transform-runtime 是利用 plugin 自动识别并替换代码中的新特性，你不需要再引入，只需要装好 babel-runtime 和 配好 plugin 就可以了。好处是按需替换，检测到你需要哪个，就引入哪个 polyfill，如果只用了一部分，打包完的文件体积对比 babel-polyfill 会小很多。而且 transform-runtime 不会污染原生的对象，方法，也不会对其他 polyfill 产生影响。所以 transform-runtime 的方式更适合开发工具包，库，一方面是体积够小，另一方面是用户（开发者）不会因为引用了我们的工具，包而污染了全局的原生方法，产生副作用，还是应该留给用户自己去选择。缺点是随着应用的增大，相同的 polyfill 每个模块都要做重复的工作（检测，替换），虽然 polyfill 只是引用，编译效率不够高效。
+
+### 插件
 
 Babel 构建在插件之上，使用现有的或者自己编写的插件可以组成一个转换通道，Babel 的插件分为两种: 语法插件和转换插件。
 
@@ -81,7 +133,7 @@ Babel 构建在插件之上，使用现有的或者自己编写的插件可以�
 }
 ```
 
-### 4、预设 preset
+### 预设 preset
 
 通过使用或创建一个 preset 即可轻松使用一组插件。预设是一个数组，从后往前读取。
 
@@ -151,7 +203,7 @@ babel V7.4.0 版本开始，@babel/polyfill 已经被废弃(前端发展日新�
 
 @babel/plugin-transform-runtime 需要和 @babel/runtime 配合使用。首先安装依赖，@babel/plugin-transform-runtime 通常仅在开发时使用，但是运行时最终代码需要依赖 @babel/runtime，所以 @babel/runtime 必须要作为生产依赖被安装
 
-### 6、配置文件
+### 配置文件
 
 Babel 支持多种格式的配置文件
 
@@ -197,7 +249,7 @@ module.exports = { presets, plugins };
 }
 ```
 
-### 7、环境变量
+### 环境变量
 
 在特定环境的时候，您可以用 env 选项来设置特定的配置, 如下在生产环境中指定插件
 
