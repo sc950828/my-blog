@@ -20,6 +20,11 @@ Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且
     nginx -V 查看nginx版本及安装的本地位置
     ngxin -v 查看nginx版本
 
+    使用brew安装的nginx使用如下命令
+    brew services start nginx
+    brew services restart nginx
+    brew services stop nginx
+
 ### 4、nginx 文件解构
 
     main        # 全局配置，对全局生效
