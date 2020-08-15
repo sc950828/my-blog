@@ -135,7 +135,8 @@ module.exports = {
           ["/NODE/yarn", "yarn"],
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"],
-          ["/NODE/node常见问题", "node常见问题"]
+          ["/NODE/node常见问题", "node常见问题"],
+          ["/NODE/数据库安装", "数据库安装"]
         ]
       },
       {

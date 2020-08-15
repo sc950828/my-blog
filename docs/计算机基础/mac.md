@@ -1,20 +1,4 @@
-### 1、mac 安装 mongodb
-
-    1.把解压好的mongodb文件夹放到/usr/local下面
-    2.在根目录/下创建data/db文件夹 权限最大 chmod -R 777 data/
-    3.在当前用户目录下创建.bash_profile文件
-    4.在.bash_profile文件里新增 export PATH=${PATH}:/usr/local/mongodb/bin
-    5.source .bash_profile 使配置生效
-    6.mongod  mongo两个命令有用 就代表能使用mongodb数据库了(mongod开启服务，mongo使用客户端)
-
-### 2、mac 安装 redis
-
-    1.解压官网下载的redis包 tar -zxvf 包名
-    2.移动到/usr/local下面
-    3.sudo make 安装
-    4.redis-server开启服务端 redis-cli开启客户端
-
-### 3、homebrew
+### homebrew
 
 Homebrew 是一款 Mac OS 平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。
 
@@ -86,7 +70,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
     查看缓存目录
       brew --cache
 
-### 4、mac 设置静态 ip
+### mac 设置静态 ip
 
 - 打开设置
 - 选择网络
@@ -96,7 +80,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 - 填入你想要设置的 ip
 - 点击保存 然后点击应用即可
 
-### 5、常用软件
+### 常用软件
 
 iTerm2
 
