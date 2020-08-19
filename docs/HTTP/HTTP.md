@@ -117,6 +117,8 @@ MAC 地址一般来讲是不会变的，设备在生产时就被“烙”上了 
     Host 请求服务器的域名及端口号(服务端)
     Origin: 请求的来源域名和端口号 （跨域请求时，浏览器会自动带上这个头信息）
     Referer: 当前发送请求的域名及端口号及参数，请求资源的完整URI(客户端)https:/localhost:8081/link?query=xxxxx
+    Remote Address 服务器ip和端口
+    Referrer-Policy（来源协议）用来规定什么情况下显示Referer字段及refer字段内显示多少信息。
     Cookie cookie信息
     User-Agent 浏览器的一些信息
     Date 客户机通过这个头告诉服务器，客户机当前请求时间

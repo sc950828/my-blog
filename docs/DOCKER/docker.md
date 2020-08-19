@@ -39,7 +39,7 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
         stars: 类似 Github 里面的 star，表示点赞、喜欢的意思。
         AUTOMATED: 自动构建。
 
-    4.删除镜像 参数是镜像id或者时镜像名
+    4.删除镜像 参数是镜像id或者时镜像名 镜像名由仓库:tag组成
       docker rmi xxx
 
     5.创建镜像
@@ -124,3 +124,105 @@ Bind Mount 能够直接将宿主操作系统中的目录和文件挂载到容器
 Volume 也是从宿主操作系统中挂载目录到容器内，只不过这个挂载的目录由 Docker 进行管理，我们只需要指定容器内的目录，不需要关心具体挂载到了宿主操作系统中的哪里。
 
 Tmpfs Mount 支持挂载系统内存中的一部分到容器的文件系统里，不过由于内存和容器的特征，它的存储并不是持久的，其中的内容会随着容器的停止而消失。
+
+挂载文件到容器
+
+要将宿主操作系统中的目录挂载到容器之后，我们可以在容器创建的时候通过传递 -v 或 --volume 选项来指定内外挂载的对应目录或文件。
+
+```shell
+# 我们能够指定目录进行挂载，也能够指定具体的文件来挂载
+# 定义目录时必须使用绝对路径，不能使用相对路径。
+# -v <host-path>:<container-path>
+$ sudo docker run -d --name nginx -v /webapp/html:/usr/share/nginx/html nginx:1.12
+
+# 通过只读方式挂载的目录和文件，只能被容器中的程序读取，但不接受容器中程序修改它们的请求。
+# 在挂载选项 -v 后再接上 :ro 就可以只读挂载了
+$ sudo docker run -d --name nginx -v /webapp/html:/usr/share/nginx/html:ro nginx:1.12
+```
+
+挂载临时文件目录
+
+与挂载宿主操作系统目录或文件不同，挂载临时文件目录要通过 --tmpfs 这个选项来完成。由于内存的具体位置不需要我们来指定，这个选项里我们只需要传递挂载到容器内的目录即可。
+
+```shell
+$ sudo docker run -d --name webapp --tmpfs /webapp/cache webapp:latest
+```
+
+使用数据卷
+
+除了与其他虚拟机工具近似的宿主操作系统目录挂载的功能外，Docker 还创造了数据卷 ( Volume ) 这个概念。数据卷的本质其实依然是宿主操作系统上的一个目录，只不过这个目录存放在 Docker 内部，接受 Docker 的管理。
+
+在使用数据卷进行挂载时，我们不需要知道数据具体存储在了宿主操作系统的何处，只需要给定容器中的哪个目录会被挂载即可。
+
+```shell
+$ sudo docker run -d --name webapp -v /webapp/storage webapp:latest
+```
+
+删除数据卷
+
+```shell
+$ sudo docker volume rm name
+```
+
+### 保存和共享镜像
+
+将容器修改的内容保存为镜像的命令是 docker commit 容器名，我们还可以像通过 Git 等代码仓库软件提交代码一样，我们还能在提交容器更改的时候给出一个提交信息，方便以后查询。
+
+```shell
+docker commit webapp
+docker commit -m 'tetst' webapp
+```
+
+通过上面创建出来的镜像是没有名字和仓库的，给镜像命名使用 docker tag
+
+```shell
+# 镜像id 仓库:tag 注意仓库名必须全小写
+$ sudo docker tag 0bc42f7ff218 mynginx:1.0
+```
+
+### 镜像的迁移
+
+导出镜像
+
+docker save 命令可以将镜像输出，提供了一种让我们保存镜像到 Docker 外部的方式。
+
+```shell
+$ sudo docker save webapp:1.0 > webapp-1.0.tar
+
+# docker save 命令还为我们提供了 -o 选项，用来指定输出文件，使用这个选项可以让命令更具有统一性。
+$ sudo docker save -o ./webapp-1.0.tar webapp:1.0
+```
+
+导入镜像
+
+导入镜像的方式也很简单，使用与 docker save 相对的 docker load 命令即可。
+
+```shell
+$ sudo docker load < webapp-1.0.tar
+```
+
+相对的，docker load 命令是从输入流中读取镜像的数据，所以我们这里也要使用管道来传输内容。当然，我们也能够使用 -i 选项指定输入文件。
+
+```shell
+$ sudo docker load -i webapp-1.0.tar
+```
+
+批量迁移
+
+通过 docker save 和 docker load 命令我们还能够批量迁移镜像，只要我们在 docker save 中传入多个镜像名作为参数，它就能够将这些镜像都打成一个包，便于我们一次性迁移多个镜像。
+
+```shell
+$ sudo docker save -o ./images.tar webapp:1.0 nginx:1.12 mysql:5.7
+```
+
+装有多个镜像的包可以直接被 docker load 识别和读取，我们将这个包导入后，所有其中装载的镜像都会被导入到 Docker 之中。
+
+导出和导入容器
+
+使用 docker export 命令我们可以直接导出容器，我们可以把它简单的理解为 docker commit 与 docker save 的结合体。
+
+```shell
+$ sudo docker export -o ./webapp.tar webapp
+```
+
+相对的，使用 docker export 导出的容器包，我们可以使用 docker import 导入。这里需要注意的是，使用 docker import 并非直接将容器导入，而是将容器运行时的内容以镜像的形式导入。所以导入的结果其实是一个镜像，而不是容器。

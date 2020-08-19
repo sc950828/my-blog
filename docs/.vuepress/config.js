@@ -149,7 +149,10 @@ module.exports = {
       },
       {
         title: "DOCKER",
-        children: [["/DOCKER/docker", "docker"]]
+        children: [
+          ["/DOCKER/docker", "docker"],
+          ["/DOCKER/docker file", "docker file"]
+        ]
       },
       {
         title: "NGINX",
