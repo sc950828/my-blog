@@ -151,7 +151,8 @@ module.exports = {
         title: "DOCKER",
         children: [
           ["/DOCKER/docker", "docker"],
-          ["/DOCKER/docker file", "docker file"]
+          ["/DOCKER/docker file", "docker file"],
+          ["/DOCKER/docker compose", "docker compose"]
         ]
       },
       {
