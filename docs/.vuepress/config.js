@@ -119,6 +119,10 @@ module.exports = {
         children: [["/UNIAPP/uniapp基础", "uniapp基础"]]
       },
       {
+        title: "FLUTTER",
+        children: [["/FLUTTER/flutter", "flutter"]]
+      },
+      {
         title: "WEBPACK",
         children: [
           ["/WEBPACK/webpack", "webpack"],
