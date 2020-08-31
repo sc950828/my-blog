@@ -120,7 +120,11 @@ module.exports = {
       },
       {
         title: "FLUTTER",
-        children: [["/FLUTTER/flutter", "flutter"]]
+        children: [
+          ["/FLUTTER/flutter", "flutter"],
+          ["/FLUTTER/dart", "dart"],
+          ["/FLUTTER/widget", "widget"]
+        ]
       },
       {
         title: "WEBPACK",

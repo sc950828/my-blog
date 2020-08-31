@@ -11,7 +11,7 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 ```
 
-保存文件后，在运行 使配置生效
+保存文件后，在运行使配置生效
 
 ```shell
 $ source ~/.bash_profile
@@ -34,7 +34,7 @@ $ source ~/.bash_profile
 
 ### 搭建 android 环境
 
-下载安装 android 创建模拟器
+下载安装 android studio 并创建模拟器
 
 在 ~/.bash_profile 上添加：
 
