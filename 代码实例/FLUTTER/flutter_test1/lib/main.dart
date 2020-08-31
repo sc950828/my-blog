@@ -50,7 +50,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   int _counter = 0;
+  String _userGender;
+  String _userName;
+  String _userPassword;
 
   void _incrementCounter() {
     setState(() {
@@ -97,6 +101,102 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset("images/randy.jpg", height: 200.0),
+            Image.network(
+                "https://cdn.jsdelivr.net/gh/flutterchina/website@1.0/images/flutter-mark-square-100.png",
+                fit: BoxFit.cover),
+            Text(
+              "randy",
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 20.0,
+                background: new Paint()..color = Colors.yellow,
+              ),
+            ),
+            RichText(
+              text: TextSpan(children: [
+                TextSpan(text: "Hello", style: TextStyle(color: Colors.blue)),
+                TextSpan(text: "Flutter", style: TextStyle(color: Colors.red))
+              ]),
+            ),
+            Icon(
+              Icons.android,
+              size: 50.0,
+              color: Colors.green,
+            ),
+            TextField(
+                onChanged: (String data) {
+                  // 实时获取
+                  print(data);
+                },
+                textInputAction: TextInputAction.search),
+            Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    // DropdownButtonFormField<String>(
+                    //   value: _userGender,
+                    //   items: ['男', '女']
+                    //       .map((label) => DropdownMenuItem(
+                    //             child: Text(label),
+                    //             value: label,
+                    //           ))
+                    //       .toList(),
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       _userGender = value;
+                    //     });
+                    //   },
+                    //   onSaved: (value) {
+                    //     _userGender = value;
+                    //   },
+                    // ),
+                    TextFormField(
+                      decoration: InputDecoration(hintText: '用户名'),
+                      validator: (value) {
+                        // 校验
+                        if (value?.length <= 5) {
+                          return '用户名必须大于 5 个字符';
+                        }
+                      },
+                      onSaved: (value) {
+                        _userName = value;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(hintText: '密码'),
+                      obscureText: true,
+                      validator: (value) {
+                        if (value?.length <= 8) {
+                          // 校验
+                          return '密码必须大于 8 个字符';
+                        }
+                      },
+                      onSaved: (value) {
+                        _userPassword = value;
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text('注册'),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          print(_userGender);
+                          print(_userName);
+                          print(_userPassword);
+                        }
+                      },
+                    )
+                  ],
+                )),
+            Builder(
+                builder: (context) => RaisedButton(
+                    child: Text('Show SnackBar'),
+                    onPressed: () {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('SnackBar'),
+                          duration: Duration(seconds: 5)));
+                    })),
             Text(
               'You have pushed the button this many times:',
             ),
