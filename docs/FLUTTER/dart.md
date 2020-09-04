@@ -33,6 +33,8 @@ Runes 表示采用 UTF-32 的字符串，用于显示 Unicode，因为 Dart 字�
 
 ### 申明变量
 
+申明的变量未赋值的时候是 null。
+
 使用 var 来声明变量，不需要特别指定变量的数据类型，因为 Dart 会自动推断其数据类型，所以可以使用 var 来定义任何的变量。
 
 ```dart
@@ -91,9 +93,65 @@ class MyApp extends StatelessWidget {
 
 const 是编译时常量，在编译的时候就初始化了，但是 final 变量是当类创建的时候才初始化。
 
+### num
+
+num1 ~/ num2 是取整除法
+
+??= 赋值是该元素为 null 的时候再赋值，否则不赋值。
+
+### String
+
+插值使用"${name}" 或者 "$name"
+
+### 条件表达式
+
+param = params1 ?? param2 表示参数 1 为 null 就用第二个参数 否则就使用第一个参数
+
 ### 可选参数
 
 1. 可选命名参数：使用 {} 包起来的参数是可选命名参数
 2. 可选位置参数：使用 [] 包起来的参数是可选位置参数
 
 注意 必选参数必须在可选参数的前面
+
+### 类的构造方法
+
+如果一个类要有多个构造方法的话需要使用类名.方法名(参数列表)定义。
+
+```dart
+<!-- 构造方法1 -->
+Person(this.name, this.age);
+new Person('randy', 24);
+<!-- 构造方法2 这里的withName是随便定的 -->
+Person.withName(this.name);
+new Person.withName('demi');
+```
+
+私有构造方法 使用`类名._方法名(参数列表)`定义。
+
+```dart
+<!-- 这里的_intrenal是随便定义的名字 只要是私有的方法就行 就是私有构造方法 -->
+Person._internal(this.name);
+new Person._internal('randy');
+```
+
+工厂构造方法
+
+工厂构造方法返回的是一个对象 可以进行特殊化处理
+
+```dart
+class Person {
+    factory Person(String name) {
+        return 对象;
+    }
+}
+```
+
+### 对象操作符
+
+? 表示如果该对象不为空才会进行后续操作
+
+```dart
+Person p;
+p?.name // 因为p是null 所已加了?后不会报错。
+```
