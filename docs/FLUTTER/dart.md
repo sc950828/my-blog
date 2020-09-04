@@ -23,11 +23,11 @@ String 字符串
 
 bool 布尔值
 
-List List<E>E 表示 List 里的数据类型用中括号来赋值
+List `List<E>`E 表示 List 里的数据类型用中括号来赋值
 
-Set Set<E>E 表示 Set 里的数据类型用大括号来赋值
+Set `Set<E>`E 表示 Set 里的数据类型用大括号来赋值
 
-Map Map<K, V>K 是 Key 的数据类型,V 是 Value 的数据类型
+Map `Map<K, V>`K 是 Key 的数据类型,V 是 Value 的数据类型
 
 Runes 表示采用 UTF-32 的字符串，用于显示 Unicode，因为 Dart 字符串是 UTF-16，因此在 Dart 中表示 32 位的 Unicode 值需要 Runes 这个特殊语法。
 
