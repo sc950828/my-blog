@@ -155,3 +155,50 @@ class Person {
 Person p;
 p?.name // 因为p是null 所已加了?后不会报错。
 ```
+
+### 接口
+
+dart 中的接口和类是统一的 类就是接口。
+
+每个类都隐式的定义了一个包含所有实例成员的接口。
+
+实现接口必须重写所有的属性和方法 如果是复用已有类的实现则使用继承
+
+### Mixins
+
+dart 中的 mixins 就是用来解决 dart 不能多继承的问题
+
+dart 中使用 with 关键字使用 mixins
+
+必须先继承 再使用 with 关键字启用 mixins
+
+作为 mixins 的类不能有显示的构造方法
+
+作为 mixins 的类只能继承 Object
+
+```dart
+class D extends A with B, C {}
+```
+
+### 枚举
+
+使用关键字 enum 定义枚举
+
+枚举的 index 从 0 开始
+
+```dart
+<!-- 定义 -->
+enum Season {
+    spring,
+    summer,
+    autumn,
+    winter
+}
+
+<!-- 使用 -->
+Season.spring
+
+<!-- index等于0 -->
+var currentSeason = Season.spring
+print(currentSeason.index);
+```
