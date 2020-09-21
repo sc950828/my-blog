@@ -121,6 +121,7 @@ module.exports = {
       {
         title: "FLUTTER",
         children: [
+          ["/FLUTTER/移动开发简介", "移动开发简介"],
           ["/FLUTTER/flutter", "flutter"],
           ["/FLUTTER/dart", "dart"],
           ["/FLUTTER/widget", "widget"]
