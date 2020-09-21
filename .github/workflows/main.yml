@@ -17,3 +17,4 @@ jobs:
           BRANCH: master
           FOLDER: docs/.vuepress/dist
           BUILD_SCRIPT: npm install && npm run build
+          REPOSITORY_NAME: sc950828/sc950828.github.io
