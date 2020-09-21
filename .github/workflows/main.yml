@@ -10,12 +10,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.1
-        env:
+        with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: master
           FOLDER: docs/.vuepress/dist
-          BUILD_SCRIPT: npm install && npm run build
           TARGET_FOLDER: blog
           REPOSITORY_NAME: sc950828/sc950828.github.io
