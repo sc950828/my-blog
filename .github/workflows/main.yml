@@ -19,7 +19,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: master
+          BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
-          TARGET_FOLDER: blog
-          REPOSITORY_NAME: sc950828/sc950828.github.io
+          CLEAN: true
+          # TARGET_FOLDER: blog
+          # REPOSITORY_NAME: sc950828/sc950828.github.io
