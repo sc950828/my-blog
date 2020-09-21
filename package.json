@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "randy blog",
   "main": "index.js",
+  "homepage": "https://sc950828.github.io/blog",
   "scripts": {
     "serve": "vuepress dev docs",
     "build": "vuepress build docs",
