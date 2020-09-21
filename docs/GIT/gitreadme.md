@@ -21,7 +21,15 @@
 
 ### 链接
 
+使用`[链接说明](链接地址)`
+
 [点击这里你可以链接到百度](https://www.baidu.com)
+
+### 图片
+
+使用`![image](图片绝对路径)`
+
+![image](http://xiaosu72.oss-cn-shanghai.aliyuncs.com/randy.jpg)
 
 ### 文字被些字符包围
 
