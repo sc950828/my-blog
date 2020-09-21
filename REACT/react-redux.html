@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1、redux 核心 | 苏纯的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/randy.jpg">
+    <meta name="description" content="前端路上的点点滴滴">
+    <link rel="preload" href="/assets/css/0.styles.ccac5a78.css" as="style"><link rel="preload" href="/assets/js/app.60976509.js" as="script"><link rel="preload" href="/assets/js/2.e17d958a.js" as="script"><link rel="preload" href="/assets/js/87.66f042aa.js" as="script"><link rel="prefetch" href="/assets/js/10.0c4d80b2.js"><link rel="prefetch" href="/assets/js/100.be4ddaaf.js"><link rel="prefetch" href="/assets/js/101.b92133ff.js"><link rel="prefetch" href="/assets/js/102.8ae20acb.js"><link rel="prefetch" href="/assets/js/103.4827f23f.js"><link rel="prefetch" href="/assets/js/104.90e956b1.js"><link rel="prefetch" href="/assets/js/105.79f52554.js"><link rel="prefetch" href="/assets/js/106.b09e1694.js"><link rel="prefetch" href="/assets/js/107.d4015b49.js"><link rel="prefetch" href="/assets/js/108.5d4383e2.js"><link rel="prefetch" href="/assets/js/109.cbc749da.js"><link rel="prefetch" href="/assets/js/11.8c70f272.js"><link rel="prefetch" href="/assets/js/110.273d71af.js"><link rel="prefetch" href="/assets/js/111.39beaec5.js"><link rel="prefetch" href="/assets/js/112.53581b49.js"><link rel="prefetch" href="/assets/js/113.9ba66e35.js"><link rel="prefetch" href="/assets/js/114.00519544.js"><link rel="prefetch" href="/assets/js/115.7a495809.js"><link rel="prefetch" href="/assets/js/116.11daf8d3.js"><link rel="prefetch" href="/assets/js/117.04391c64.js"><link rel="prefetch" href="/assets/js/118.999f458d.js"><link rel="prefetch" href="/assets/js/119.f8d3f10e.js"><link rel="prefetch" href="/assets/js/12.e1261109.js"><link rel="prefetch" href="/assets/js/120.b6e82713.js"><link rel="prefetch" href="/assets/js/121.f5546726.js"><link rel="prefetch" href="/assets/js/122.8eec7fe1.js"><link rel="prefetch" href="/assets/js/123.4df04a08.js"><link rel="prefetch" href="/assets/js/124.3ca8a4b7.js"><link rel="prefetch" href="/assets/js/125.64ace1b3.js"><link rel="prefetch" href="/assets/js/126.61a8fca8.js"><link rel="prefetch" href="/assets/js/127.0560bf3a.js"><link rel="prefetch" href="/assets/js/128.f1dac923.js"><link rel="prefetch" href="/assets/js/129.1fe19cdc.js"><link rel="prefetch" href="/assets/js/13.4be6231f.js"><link rel="prefetch" href="/assets/js/130.be8526a3.js"><link rel="prefetch" href="/assets/js/131.6aeec17e.js"><link rel="prefetch" href="/assets/js/132.e521901d.js"><link rel="prefetch" href="/assets/js/133.875aacdd.js"><link rel="prefetch" href="/assets/js/134.8ebf1d08.js"><link rel="prefetch" href="/assets/js/135.8855d8c4.js"><link rel="prefetch" href="/assets/js/136.03195db9.js"><link rel="prefetch" href="/assets/js/137.0f3ee7e5.js"><link rel="prefetch" href="/assets/js/138.91096e22.js"><link rel="prefetch" href="/assets/js/139.7b27e88d.js"><link rel="prefetch" href="/assets/js/14.595a5182.js"><link rel="prefetch" href="/assets/js/140.f753091b.js"><link rel="prefetch" href="/assets/js/141.15d75c43.js"><link rel="prefetch" href="/assets/js/142.375be563.js"><link rel="prefetch" href="/assets/js/143.328b0617.js"><link rel="prefetch" href="/assets/js/15.89b8584a.js"><link rel="prefetch" href="/assets/js/16.f001c269.js"><link rel="prefetch" href="/assets/js/17.33a658b9.js"><link rel="prefetch" href="/assets/js/18.4855abbd.js"><link rel="prefetch" href="/assets/js/19.f0eb4492.js"><link rel="prefetch" href="/assets/js/20.f73f0a76.js"><link rel="prefetch" href="/assets/js/21.394e5b78.js"><link rel="prefetch" href="/assets/js/22.d909c244.js"><link rel="prefetch" href="/assets/js/23.26dce1b9.js"><link rel="prefetch" href="/assets/js/24.e8c4dbf5.js"><link rel="prefetch" href="/assets/js/25.e0431824.js"><link rel="prefetch" href="/assets/js/26.76fefc45.js"><link rel="prefetch" href="/assets/js/27.f302cbd1.js"><link rel="prefetch" href="/assets/js/28.45e40879.js"><link rel="prefetch" href="/assets/js/29.0153af43.js"><link rel="prefetch" href="/assets/js/3.83eaea71.js"><link rel="prefetch" href="/assets/js/30.01894167.js"><link rel="prefetch" href="/assets/js/31.1be01152.js"><link rel="prefetch" href="/assets/js/32.58482c41.js"><link rel="prefetch" href="/assets/js/33.b109ebd1.js"><link rel="prefetch" href="/assets/js/34.e907d632.js"><link rel="prefetch" href="/assets/js/35.5f40497c.js"><link rel="prefetch" href="/assets/js/36.5e1eeec0.js"><link rel="prefetch" href="/assets/js/37.0ef138bb.js"><link rel="prefetch" href="/assets/js/38.f7e27cf4.js"><link rel="prefetch" href="/assets/js/39.6faf7aac.js"><link rel="prefetch" href="/assets/js/4.5ed19beb.js"><link rel="prefetch" href="/assets/js/40.db0f3c34.js"><link rel="prefetch" href="/assets/js/41.e36475e2.js"><link rel="prefetch" href="/assets/js/42.8987d9c3.js"><link rel="prefetch" href="/assets/js/43.c7b2298e.js"><link rel="prefetch" href="/assets/js/44.75cc8668.js"><link rel="prefetch" href="/assets/js/45.752e5dc3.js"><link rel="prefetch" href="/assets/js/46.6196a24c.js"><link rel="prefetch" href="/assets/js/47.481d1bf9.js"><link rel="prefetch" href="/assets/js/48.81d8b352.js"><link rel="prefetch" href="/assets/js/49.1f257117.js"><link rel="prefetch" href="/assets/js/5.c6a76e4e.js"><link rel="prefetch" href="/assets/js/50.74fab7d8.js"><link rel="prefetch" href="/assets/js/51.7a38f9df.js"><link rel="prefetch" href="/assets/js/52.15d6e9af.js"><link rel="prefetch" href="/assets/js/53.0ec76d05.js"><link rel="prefetch" href="/assets/js/54.ca6ce1e8.js"><link rel="prefetch" href="/assets/js/55.041516bf.js"><link rel="prefetch" href="/assets/js/56.f1ccb54a.js"><link rel="prefetch" href="/assets/js/57.7adc0861.js"><link rel="prefetch" href="/assets/js/58.92aa852f.js"><link rel="prefetch" href="/assets/js/59.5a333992.js"><link rel="prefetch" href="/assets/js/6.942df10b.js"><link rel="prefetch" href="/assets/js/60.043d57a2.js"><link rel="prefetch" href="/assets/js/61.b8808947.js"><link rel="prefetch" href="/assets/js/62.915a226c.js"><link rel="prefetch" href="/assets/js/63.8cdafa09.js"><link rel="prefetch" href="/assets/js/64.c71c8f50.js"><link rel="prefetch" href="/assets/js/65.3d056820.js"><link rel="prefetch" href="/assets/js/66.a4c9ec73.js"><link rel="prefetch" href="/assets/js/67.1e710187.js"><link rel="prefetch" href="/assets/js/68.bdc9610b.js"><link rel="prefetch" href="/assets/js/69.c44b224e.js"><link rel="prefetch" href="/assets/js/7.1f55d473.js"><link rel="prefetch" href="/assets/js/70.6fc49652.js"><link rel="prefetch" href="/assets/js/71.0760df38.js"><link rel="prefetch" href="/assets/js/72.dbb4e4b7.js"><link rel="prefetch" href="/assets/js/73.df2a761a.js"><link rel="prefetch" href="/assets/js/74.c990e22a.js"><link rel="prefetch" href="/assets/js/75.17e785d4.js"><link rel="prefetch" href="/assets/js/76.654f96d7.js"><link rel="prefetch" href="/assets/js/77.639fabd5.js"><link rel="prefetch" href="/assets/js/78.af173138.js"><link rel="prefetch" href="/assets/js/79.39b4c614.js"><link rel="prefetch" href="/assets/js/8.067b247c.js"><link rel="prefetch" href="/assets/js/80.8e05479c.js"><link rel="prefetch" href="/assets/js/81.4e18a75d.js"><link rel="prefetch" href="/assets/js/82.9c83ab7e.js"><link rel="prefetch" href="/assets/js/83.7cd5abf6.js"><link rel="prefetch" href="/assets/js/84.553efd77.js"><link rel="prefetch" href="/assets/js/85.0b1b0c63.js"><link rel="prefetch" href="/assets/js/86.10720a56.js"><link rel="prefetch" href="/assets/js/88.ccc215ef.js"><link rel="prefetch" href="/assets/js/89.85e5506d.js"><link rel="prefetch" href="/assets/js/9.be178e25.js"><link rel="prefetch" href="/assets/js/90.df53f385.js"><link rel="prefetch" href="/assets/js/91.a8b0cbd7.js"><link rel="prefetch" href="/assets/js/92.43fa7136.js"><link rel="prefetch" href="/assets/js/93.f4c095bf.js"><link rel="prefetch" href="/assets/js/94.bb65ab86.js"><link rel="prefetch" href="/assets/js/95.dd201632.js"><link rel="prefetch" href="/assets/js/96.927c7d16.js"><link rel="prefetch" href="/assets/js/97.5f28997b.js"><link rel="prefetch" href="/assets/js/98.51e0e544.js"><link rel="prefetch" href="/assets/js/99.541cee63.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ccac5a78.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">苏纯的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTML</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>CSS</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JAVASCRIPT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEB移动端</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTTP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>VUE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>REACT</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/REACT/react.html" class="sidebar-link">react</a></li><li><a href="/REACT/react-router.html" class="sidebar-link">react-router</a></li><li><a href="/REACT/react-redux.html" aria-current="page" class="active sidebar-link">react-redux</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/REACT/dva.html" class="sidebar-link">dva</a></li><li><a href="/REACT/状态管理.html" class="sidebar-link">状态管理</a></li><li><a href="/REACT/react常见问题.html" class="sidebar-link">react常见问题</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>UNIAPP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>FLUTTER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEBPACK</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NODE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>GIT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>DOCKER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NGINX</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微信</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>计算机基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>浏览器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>编辑器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术官网</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="_1、redux-核心"><a href="#_1、redux-核心" class="header-anchor">#</a> 1、redux 核心</h3> <p>Redux 是 JavaScript 状态容器，提供可预测化的状态管理。</p> <p>state 是数据集合</p> <p>action 就是改变 state 的指令，有多少操作 state 的动作就会有多少 action。action 本质上是一个 JavaScript 对象，其中必须包含一个 type 字段来表示将要执行的动作，其他的字段都可以根据需求来自定义。</p> <p>reducer 加工函数。 action 发出命令后将 state 放入 reucer 加工函数中，返回新的 state。必须是纯函数。</p> <p>一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数。纯函数很严格，也就是说你几乎除了计算数据以外什么都不能干，计算的时候还不能依赖除了函数参数以外的数据。如果函数调用的参数相同则永远返会相同的结果。</p> <p>reducer(previousState, action)。当有多个 reducer 的时候我们使用 combineReducers()来合并 reducer，类似 vuex 里面的 module。</p> <p>store 通过 createStore(reducers)来创建 store</p> <ul><li>维持应用的 state；</li> <li>提供 getState() 方法获取 state；</li> <li>提供 dispatch(action) 方法更新 state；</li> <li>通过 subscribe(listener) 注册监听器;</li> <li>通过 subscribe(listener) 返回的函数注销监听器。</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 通过createStore方法传递reducer来创建store</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>
+  reducers<span class="token punctuation">,</span>
+  <span class="token comment">// 如果使用了redux devtools需要添加这行代码</span>
+  window<span class="token punctuation">.</span>__REDUX_DEVTOOLS_EXTENSION__ <span class="token operator">&amp;&amp;</span> window<span class="token punctuation">.</span><span class="token function">__REDUX_DEVTOOLS_EXTENSION__</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 通过getState方法来获取state</span>
+<span class="token keyword">const</span> state <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 通过dispatch触发action</span>
+store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> xx<span class="token punctuation">,</span> payload<span class="token operator">:</span> xx <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 监听state的改变进行相应处理</span>
+<span class="token keyword">let</span> unsubscribe <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="_2、三大原则"><a href="#_2、三大原则" class="header-anchor">#</a> 2、三大原则</h3> <p>单一数据源。整个应用的 state 被储存在一棵 object tree 中，并且这个 object tree 只存在于唯一一个 store 中。只能通过 store.getState()获取到 state。</p> <p>State 是只读的。唯一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。使用 store.dispatch()来提交 action。</p> <p>使用纯函数来执行修改。Reducer 只是一些纯函数，它接收先前的 state 和 action，并返回新的 state。</p> <h3 id="_3、react-redux"><a href="#_3、react-redux" class="header-anchor">#</a> 3、react-redux</h3> <p>react-redux 官方提供的 React 绑定库。 具有高效且灵活的特性。
+Redux 本身和 React 没有关系，只是数据处理中心，是 React-Redux 让他们联系在一起。</p> <p>核心</p> <ul><li>connect</li> <li>provider</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// connect</span>
+<span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">[</span>mapStateToProps<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>mapDispatchToProps<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>mergeProps<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// TodoList是 UI 组件，VisibleTodoList就是由 react-redux 通过connect方法自动生成的容器组件</span>
+<span class="token keyword">const</span> VisibleTodoList <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">,</span> mapDispatchToProps<span class="token punctuation">)</span><span class="token punctuation">(</span>TodoList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// mapStateToProps：从Redux状态树中提取需要的部分作为props传递给当前的组件。</span>
+<span class="token comment">// mapDispatchToProps：将需要绑定的响应事件（action）作为props传递到组件上。</span>
+
+<span class="token function">mapStateToProps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 它是一个函数，建立一个从（外部的）state对象到（UI 组件的）props对象的映射关系。</span>
+<span class="token comment">// mapStateToProps执行后应该返回一个对象，里面的每一个键值对就是一个映射。</span>
+
+<span class="token comment">// mapStateToProps是一个函数，它接受state作为参数，返回一个对象。</span>
+<span class="token comment">// 返回的todos在组件中通过this.props.todos访问</span>
+<span class="token comment">// 注意如果使用了 combineReducers()来创建reducer这里的state需要通过reducer区分，类似vuex里的module</span>
+<span class="token comment">// state是所有的reducer里面的state</span>
+<span class="token comment">// 当一个触发一个action的时候会触发所有的reducer 然后在里面判断类型 所以reducer里面的type不能相同</span>
+<span class="token keyword">const</span> <span class="token function-variable function">mapStateToProps</span> <span class="token operator">=</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    todos<span class="token operator">:</span> state<span class="token punctuation">.</span>todos
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">mapDispatchToProps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// mapDispatchToProps是connect函数的第二个参数，用来建立 UI 组件的参数到store.dispatch方法的映射。</span>
+<span class="token comment">// 它定义了哪些用户的操作应该当作 Action，传给 Store。它可以是一个函数，也可以是一个对象。</span>
+
+<span class="token comment">// 是函数则会得到dispatch和ownProps（容器组件的props对象）两个参数。</span>
+<span class="token keyword">const</span> <span class="token function-variable function">mapDispatchToProps</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">dispatch<span class="token punctuation">,</span> ownProps</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">onClick</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        type<span class="token operator">:</span> <span class="token string">&quot;SET_VISIBILITY_FILTER&quot;</span><span class="token punctuation">,</span>
+        filter<span class="token operator">:</span> ownProps<span class="token punctuation">.</span>filter
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// 从上面代码可以看到，mapDispatchToProps作为函数，应该返回一个对象，该对象的每个键值对都是一个映射，</span>
+<span class="token comment">// 定义了 UI 组件的参数怎样发出 Action。</span>
+
+<span class="token comment">// Provider</span>
+<span class="token comment">// Provider实现store的全局访问，将store传给每个组件。</span>
+<span class="token comment">// 原理：使用React的context，context可以实现跨组件之间的传递。</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Provider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> todoApp <span class="token keyword">from</span> <span class="token string">&quot;./reducers&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">&quot;./components/App&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>todoApp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>Provider store<span class="token operator">=</span><span class="token punctuation">{</span>store<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>Provider<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;root&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 一般开发我们分为四个部分</span>
+<span class="token comment">// reducer 纯函数</span>
+<span class="token comment">// actionTypes 定义action的types</span>
+<span class="token comment">// actionCreators 创建action 就是方法返会action对象 {type: xx, payload: xx}</span>
+<span class="token comment">// index 创建store 通过createStore方法</span>
+</code></pre></div><h3 id="_4、例子"><a href="#_4、例子" class="header-anchor">#</a> 4、例子</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Reducer1.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">counter</span><span class="token punctuation">(</span><span class="token parameter">state <span class="token operator">=</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> action</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 只能访问到自身的状态 不能访问到别的reducer里面的state</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 获取action对象 {type: &quot;increase&quot;, qq: &quot;randy&quot;}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> count <span class="token operator">=</span> state<span class="token punctuation">.</span>count<span class="token punctuation">;</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;increase&quot;</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token operator">:</span> count <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Reducer2.js</span>
+<span class="token comment">// Reducer 基于原有state根据action得到新的state</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">addAge</span><span class="token punctuation">(</span>state <span class="token operator">=</span> <span class="token punctuation">{</span> age<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span> name1<span class="token operator">:</span> <span class="token string">&quot;randy&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> age <span class="token operator">=</span> state<span class="token punctuation">.</span>age<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> name1 <span class="token operator">=</span> state<span class="token punctuation">.</span>name1<span class="token punctuation">;</span>
+  <span class="token comment">// 这里的state第一次是我们给的初始值 后面再提交的时候就是老值 然后我们需要更新 返回新的state</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;updateage&quot;</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> age<span class="token operator">:</span> age <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;updatename&quot;</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> name1<span class="token operator">:</span> name1 <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Reduces.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> combineReducers <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Reducer1 <span class="token keyword">from</span> <span class="token string">&quot;./Reducer1&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Reducer2 <span class="token keyword">from</span> <span class="token string">&quot;./Reducer2&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 合并成一个reducer</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  Reducer1<span class="token punctuation">,</span>
+  Reducer2
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// index.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Provider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Reducers <span class="token keyword">from</span> <span class="token string">&quot;./redux/Reducers&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 根据reducer函数通过createStore()创建store</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>Reducers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>Provider store<span class="token operator">=</span><span class="token punctuation">{</span>store<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>React<span class="token punctuation">.</span>StrictMode<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Router<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Router<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>React<span class="token punctuation">.</span>StrictMode<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>Provider<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;root&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> connect <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-redux&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Container.js</span>
+<span class="token keyword">class</span> <span class="token class-name">Container</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>
+      value<span class="token punctuation">,</span>
+      onIncreaseClick<span class="token punctuation">,</span>
+      age<span class="token punctuation">,</span>
+      name1<span class="token punctuation">,</span>
+      updateAge<span class="token punctuation">,</span>
+      updateName
+    <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>span<span class="token operator">&gt;</span><span class="token punctuation">{</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>onIncreaseClick<span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">+</span><span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>span<span class="token operator">&gt;</span><span class="token punctuation">{</span>name1<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>updateName<span class="token punctuation">}</span><span class="token operator">&gt;</span> updateName<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>span<span class="token operator">&gt;</span><span class="token punctuation">{</span>age<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>updateAge<span class="token punctuation">}</span><span class="token operator">&gt;</span> updateAge<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//  将state映射到Container组件的props</span>
+<span class="token keyword">function</span> <span class="token function">mapStateToProps</span><span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 这里是store里面的state 所有的reducer里面的state都能获取到</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    value<span class="token operator">:</span> state<span class="token punctuation">.</span>Reducer1<span class="token punctuation">.</span>count<span class="token punctuation">,</span>
+    name1<span class="token operator">:</span> state<span class="token punctuation">.</span>Reducer2<span class="token punctuation">.</span>name1<span class="token punctuation">,</span>
+    age<span class="token operator">:</span> state<span class="token punctuation">.</span>Reducer2<span class="token punctuation">.</span>age
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//  将action映射到Container组件的props</span>
+<span class="token keyword">function</span> <span class="token function">mapDispatchToProps</span><span class="token punctuation">(</span><span class="token parameter">dispatch<span class="token punctuation">,</span> ownprops</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 组件自身的props 有history location match staticContext</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ownprops<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// history: {length: 50, action: &quot;PUSH&quot;, location: {…}, createHref: ƒ, push: ƒ, …}</span>
+  <span class="token comment">// location: {pathname: &quot;/container&quot;, search: &quot;&quot;, hash: &quot;&quot;, state: undefined, key: &quot;j3yu28&quot;}</span>
+  <span class="token comment">// match: {path: &quot;/container&quot;, url: &quot;/container&quot;, isExact: true, params: {…}}</span>
+  <span class="token comment">// staticContext: undefined</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 触发一个action 所有的reducer都被调用 所type不能相同</span>
+    <span class="token function-variable function">onIncreaseClick</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;increase&quot;</span><span class="token punctuation">,</span> qq<span class="token operator">:</span> <span class="token string">&quot;randy&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">updateName</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;updatename&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">updateAge</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;updateage&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 传入上面两个函数参数，将Container组件变为容器组件</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">connect</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">,</span> mapDispatchToProps<span class="token punctuation">)</span><span class="token punctuation">(</span>Container<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="_5、中间件"><a href="#_5、中间件" class="header-anchor">#</a> 5、中间件</h3> <p>比如在 Dispatch 一个 Action 之后，到达 reducer 之前，进行一些额外的操作，就需要用到 middleware（中间件）。</p> <p>在实际工作中你可以使用中间件来进行日志记录、创建崩溃报告，调用异步接口或者路由。</p> <p>异步请求中间件</p> <p>redux-thunk</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createStore<span class="token punctuation">,</span> applyMiddleware<span class="token punctuation">,</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> thunk <span class="token keyword">from</span> <span class="token string">&quot;redux-thunk&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 使用中间件 使用applyMiddleware方法</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span>thunk<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 但是我们的Redux Dev Tools插件就不能使用了，如果想两个同时使用，需要使用增强函数。使用增加函数前需要先引入compose。</span>
+
+<span class="token keyword">const</span> composeEnhancers <span class="token operator">=</span> window<span class="token punctuation">.</span>__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  <span class="token operator">?</span> window<span class="token punctuation">.</span><span class="token function">__REDUX_DEVTOOLS_EXTENSION_COMPOSE__</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token operator">:</span> compose<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> enhancer <span class="token operator">=</span> <span class="token function">composeEnhancers</span><span class="token punctuation">(</span><span class="token function">applyMiddleware</span><span class="token punctuation">(</span>thunk<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> enhancer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建数据存储仓库</span>
+</code></pre></div><p>以前 actionCreators.js 都是定义好的 action，根本没办法写业务逻辑，有了 Redux-thunk 之后，可以把 TodoList.js 中的 componentDidMount 业务逻辑放到这里来编写。也就是把向后台请求数据的代码放到 actionCreators.js 文件里。那我们需要引入 axios,并写一个新的函数方法。（以前的 action 是对象，现在的 action 可以是函数了，这就是 redux-thunk 带来的好处）</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// actionCreators.js</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<span class="token comment">// action可以是函数 可以后台请求数据 这就是redux-thunk的好处</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getTodoList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">dispatch</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token comment">// 真实获取数据再提交action</span>
+            <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>type<span class="token operator">:</span> <span class="token string">'getData'</span><span class="token punctuation">,</span> data<span class="token operator">:</span> res<span class="token punctuation">.</span>data<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// index.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>getTodoList<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./actionCreators'</span>
+
+<span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 这里的action是函数 获取异步数据</span>
+  <span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">getTodoList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>redux-thunk 优点:</p> <ul><li>体积小: redux-thunk 的实现方式很简单,只有不到 20 行代码</li> <li>使用简单: redux-thunk 没有引入像 redux-saga 或者 redux-observable 额外的范式,上手简单</li></ul> <p>redux-thunk 缺陷:</p> <ul><li>样板代码过多: 与 redux 本身一样,通常一个请求需要大量的代码,而且很多都是重复性质的</li> <li>耦合严重: 异步操作与 redux 的 action 偶合在一起,不方便管理</li> <li>功能孱弱: 有一些实际开发中常用的功能需要自己进行封装</li></ul> <p>redux-saga</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 安装redux-saga npm install redux-saga</span>
+
+<span class="token comment">// 引入saga</span>
+<span class="token keyword">import</span> createSagaMiddleware <span class="token keyword">from</span> <span class="token string">&quot;redux-saga&quot;</span><span class="token punctuation">;</span>
+<span class="token comment">// 引入所有的异步generator方法</span>
+<span class="token keyword">import</span> mySaga <span class="token keyword">from</span> <span class="token string">&quot;mySaga&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 创建saga中间件</span>
+<span class="token keyword">const</span> sagaMiddleware <span class="token operator">=</span> <span class="token function">createSagaMiddleware</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> composeEnhancers <span class="token operator">=</span> window<span class="token punctuation">.</span>__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  <span class="token operator">?</span> window<span class="token punctuation">.</span><span class="token function">__REDUX_DEVTOOLS_EXTENSION_COMPOSE__</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token operator">:</span> compose<span class="token punctuation">;</span>
+
+<span class="token comment">// 使用中间件</span>
+<span class="token keyword">const</span> enhancer <span class="token operator">=</span> <span class="token function">composeEnhancers</span><span class="token punctuation">(</span><span class="token function">applyMiddleware</span><span class="token punctuation">(</span>sagaMiddleware<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> enhancer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建数据存储仓库</span>
+
+<span class="token comment">// 启动saga 通过传入的saga函数</span>
+sagaMiddleware<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>mySaga<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>使用</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// sagas.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> call<span class="token punctuation">,</span> put<span class="token punctuation">,</span> takeEvery<span class="token punctuation">,</span> takeLatest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;redux-saga/effects&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Api <span class="token keyword">from</span> <span class="token string">&quot;...&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// worker Saga: will be fired on USER_FETCH_REQUESTED actions</span>
+<span class="token comment">// 副作用方法获取后台数 通过call接口调用api</span>
+<span class="token comment">// 获取到数据然后使用put方法提交action 把stat存储到store</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">fetchUser</span><span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// call调用异步api</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">call</span><span class="token punctuation">(</span>Api<span class="token punctuation">.</span>fetchUser<span class="token punctuation">,</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// put触发action 真正存储数据</span>
+    <span class="token keyword">yield</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;USER_FETCH_SUCCEEDED&quot;</span><span class="token punctuation">,</span> user<span class="token operator">:</span> user <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">yield</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;USER_FETCH_FAILED&quot;</span><span class="token punctuation">,</span> message<span class="token operator">:</span> e<span class="token punctuation">.</span>message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
+  Allows concurrent fetches of user.
+*/</span>
+<span class="token comment">// 导出的方法是用来监听的 监听到外部有dispatch相同的action就触发副作用异步请求方法</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">mySaga</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token function">takeEvery</span><span class="token punctuation">(</span><span class="token string">&quot;USER_FETCH_REQUESTED&quot;</span><span class="token punctuation">,</span> fetchUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+  Alternatively you may use takeLatest.
+
+  Does not allow concurrent fetches of user. If &quot;USER_FETCH_REQUESTED&quot; gets
+  dispatched while a fetch is already pending, that pending fetch is cancelled
+  and only the latest one will be run.
+*/</span>
+<span class="token comment">// 导出的方法是用来监听的 监听到外部有dispatch相同的action就触发副作用异步请求方法</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">mySaga</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token function">takeLatest</span><span class="token punctuation">(</span><span class="token string">&quot;USER_FETCH_REQUESTED&quot;</span><span class="token punctuation">,</span> fetchUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> mySaga<span class="token punctuation">;</span>
+
+<span class="token comment">// 自定义类使用 当触发某个action的时候 会被sagas里面的takeEvery或者takeLatest捕获调取相应的异步方法</span>
+<span class="token keyword">class</span> <span class="token class-name">UserComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">onSomeButtonClicked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> userId<span class="token punctuation">,</span> dispatch <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;USER_FETCH_REQUESTED&quot;</span><span class="token punctuation">,</span> payload<span class="token operator">:</span> <span class="token punctuation">{</span> userId<span class="token operator">:</span> xx <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>redux-saga 优点:</p> <ul><li>异步解耦: 异步操作被被转移到单独 saga.js 中，不再是掺杂在 action.js 或 component.js 中</li> <li>action 摆脱 thunk function: dispatch 的参数依然是一个纯粹的 action (FSA)，而不是充满 “黑魔法” thunk function</li> <li>异常处理: 受益于 generator function 的 saga 实现，代码异常/请求失败 都可以直接通过 try/catch 语法直接捕获处理</li> <li>功能强大: redux-saga 提供了大量的 Saga 辅助函数和 Effect 创建器供开发者使用,开发者无须封装或者简单封装即可使用</li> <li>灵活: redux-saga 可以将多个 Saga 可以串行/并行组合起来,形成一个非常实用的异步 flow</li> <li>易测试，提供了各种 case 的测试方案，包括 mock task，分支覆盖等等</li></ul> <p>redux-saga 缺陷:</p> <ul><li>额外的学习成本: redux-saga 不仅在使用难以理解的 generator function,而且有数十个 API,学习成本远超 redux-thunk,最重要的是你的额外学习成本是只服务于这个库的,与 redux-observable 不同,redux-observable 虽然也有额外学习成本但是背后是 rxjs 和一整套思想</li> <li>体积庞大: 体积略大,代码近 2000 行，min 版 25KB 左右</li> <li>功能过剩: 实际上并发控制等功能很难用到,但是我们依然需要引入这些代码</li> <li>ts 支持不友好: yield 无法返回 TS 类型</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/REACT/react-router.html" class="prev">
+        react-router
+      </a></span> <span class="next"><a href="/REACT/dva.html">
+        dva
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.60976509.js" defer></script><script src="/assets/js/2.e17d958a.js" defer></script><script src="/assets/js/87.66f042aa.js" defer></script>
+  </body>
+</html>

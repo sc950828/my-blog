@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1、ubuntu安装mongodb | 苏纯的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/randy.jpg">
+    <meta name="description" content="前端路上的点点滴滴">
+    <link rel="preload" href="/assets/css/0.styles.ccac5a78.css" as="style"><link rel="preload" href="/assets/js/app.60976509.js" as="script"><link rel="preload" href="/assets/js/2.e17d958a.js" as="script"><link rel="preload" href="/assets/js/141.15d75c43.js" as="script"><link rel="prefetch" href="/assets/js/10.0c4d80b2.js"><link rel="prefetch" href="/assets/js/100.be4ddaaf.js"><link rel="prefetch" href="/assets/js/101.b92133ff.js"><link rel="prefetch" href="/assets/js/102.8ae20acb.js"><link rel="prefetch" href="/assets/js/103.4827f23f.js"><link rel="prefetch" href="/assets/js/104.90e956b1.js"><link rel="prefetch" href="/assets/js/105.79f52554.js"><link rel="prefetch" href="/assets/js/106.b09e1694.js"><link rel="prefetch" href="/assets/js/107.d4015b49.js"><link rel="prefetch" href="/assets/js/108.5d4383e2.js"><link rel="prefetch" href="/assets/js/109.cbc749da.js"><link rel="prefetch" href="/assets/js/11.8c70f272.js"><link rel="prefetch" href="/assets/js/110.273d71af.js"><link rel="prefetch" href="/assets/js/111.39beaec5.js"><link rel="prefetch" href="/assets/js/112.53581b49.js"><link rel="prefetch" href="/assets/js/113.9ba66e35.js"><link rel="prefetch" href="/assets/js/114.00519544.js"><link rel="prefetch" href="/assets/js/115.7a495809.js"><link rel="prefetch" href="/assets/js/116.11daf8d3.js"><link rel="prefetch" href="/assets/js/117.04391c64.js"><link rel="prefetch" href="/assets/js/118.999f458d.js"><link rel="prefetch" href="/assets/js/119.f8d3f10e.js"><link rel="prefetch" href="/assets/js/12.e1261109.js"><link rel="prefetch" href="/assets/js/120.b6e82713.js"><link rel="prefetch" href="/assets/js/121.f5546726.js"><link rel="prefetch" href="/assets/js/122.8eec7fe1.js"><link rel="prefetch" href="/assets/js/123.4df04a08.js"><link rel="prefetch" href="/assets/js/124.3ca8a4b7.js"><link rel="prefetch" href="/assets/js/125.64ace1b3.js"><link rel="prefetch" href="/assets/js/126.61a8fca8.js"><link rel="prefetch" href="/assets/js/127.0560bf3a.js"><link rel="prefetch" href="/assets/js/128.f1dac923.js"><link rel="prefetch" href="/assets/js/129.1fe19cdc.js"><link rel="prefetch" href="/assets/js/13.4be6231f.js"><link rel="prefetch" href="/assets/js/130.be8526a3.js"><link rel="prefetch" href="/assets/js/131.6aeec17e.js"><link rel="prefetch" href="/assets/js/132.e521901d.js"><link rel="prefetch" href="/assets/js/133.875aacdd.js"><link rel="prefetch" href="/assets/js/134.8ebf1d08.js"><link rel="prefetch" href="/assets/js/135.8855d8c4.js"><link rel="prefetch" href="/assets/js/136.03195db9.js"><link rel="prefetch" href="/assets/js/137.0f3ee7e5.js"><link rel="prefetch" href="/assets/js/138.91096e22.js"><link rel="prefetch" href="/assets/js/139.7b27e88d.js"><link rel="prefetch" href="/assets/js/14.595a5182.js"><link rel="prefetch" href="/assets/js/140.f753091b.js"><link rel="prefetch" href="/assets/js/142.375be563.js"><link rel="prefetch" href="/assets/js/143.328b0617.js"><link rel="prefetch" href="/assets/js/15.89b8584a.js"><link rel="prefetch" href="/assets/js/16.f001c269.js"><link rel="prefetch" href="/assets/js/17.33a658b9.js"><link rel="prefetch" href="/assets/js/18.4855abbd.js"><link rel="prefetch" href="/assets/js/19.f0eb4492.js"><link rel="prefetch" href="/assets/js/20.f73f0a76.js"><link rel="prefetch" href="/assets/js/21.394e5b78.js"><link rel="prefetch" href="/assets/js/22.d909c244.js"><link rel="prefetch" href="/assets/js/23.26dce1b9.js"><link rel="prefetch" href="/assets/js/24.e8c4dbf5.js"><link rel="prefetch" href="/assets/js/25.e0431824.js"><link rel="prefetch" href="/assets/js/26.76fefc45.js"><link rel="prefetch" href="/assets/js/27.f302cbd1.js"><link rel="prefetch" href="/assets/js/28.45e40879.js"><link rel="prefetch" href="/assets/js/29.0153af43.js"><link rel="prefetch" href="/assets/js/3.83eaea71.js"><link rel="prefetch" href="/assets/js/30.01894167.js"><link rel="prefetch" href="/assets/js/31.1be01152.js"><link rel="prefetch" href="/assets/js/32.58482c41.js"><link rel="prefetch" href="/assets/js/33.b109ebd1.js"><link rel="prefetch" href="/assets/js/34.e907d632.js"><link rel="prefetch" href="/assets/js/35.5f40497c.js"><link rel="prefetch" href="/assets/js/36.5e1eeec0.js"><link rel="prefetch" href="/assets/js/37.0ef138bb.js"><link rel="prefetch" href="/assets/js/38.f7e27cf4.js"><link rel="prefetch" href="/assets/js/39.6faf7aac.js"><link rel="prefetch" href="/assets/js/4.5ed19beb.js"><link rel="prefetch" href="/assets/js/40.db0f3c34.js"><link rel="prefetch" href="/assets/js/41.e36475e2.js"><link rel="prefetch" href="/assets/js/42.8987d9c3.js"><link rel="prefetch" href="/assets/js/43.c7b2298e.js"><link rel="prefetch" href="/assets/js/44.75cc8668.js"><link rel="prefetch" href="/assets/js/45.752e5dc3.js"><link rel="prefetch" href="/assets/js/46.6196a24c.js"><link rel="prefetch" href="/assets/js/47.481d1bf9.js"><link rel="prefetch" href="/assets/js/48.81d8b352.js"><link rel="prefetch" href="/assets/js/49.1f257117.js"><link rel="prefetch" href="/assets/js/5.c6a76e4e.js"><link rel="prefetch" href="/assets/js/50.74fab7d8.js"><link rel="prefetch" href="/assets/js/51.7a38f9df.js"><link rel="prefetch" href="/assets/js/52.15d6e9af.js"><link rel="prefetch" href="/assets/js/53.0ec76d05.js"><link rel="prefetch" href="/assets/js/54.ca6ce1e8.js"><link rel="prefetch" href="/assets/js/55.041516bf.js"><link rel="prefetch" href="/assets/js/56.f1ccb54a.js"><link rel="prefetch" href="/assets/js/57.7adc0861.js"><link rel="prefetch" href="/assets/js/58.92aa852f.js"><link rel="prefetch" href="/assets/js/59.5a333992.js"><link rel="prefetch" href="/assets/js/6.942df10b.js"><link rel="prefetch" href="/assets/js/60.043d57a2.js"><link rel="prefetch" href="/assets/js/61.b8808947.js"><link rel="prefetch" href="/assets/js/62.915a226c.js"><link rel="prefetch" href="/assets/js/63.8cdafa09.js"><link rel="prefetch" href="/assets/js/64.c71c8f50.js"><link rel="prefetch" href="/assets/js/65.3d056820.js"><link rel="prefetch" href="/assets/js/66.a4c9ec73.js"><link rel="prefetch" href="/assets/js/67.1e710187.js"><link rel="prefetch" href="/assets/js/68.bdc9610b.js"><link rel="prefetch" href="/assets/js/69.c44b224e.js"><link rel="prefetch" href="/assets/js/7.1f55d473.js"><link rel="prefetch" href="/assets/js/70.6fc49652.js"><link rel="prefetch" href="/assets/js/71.0760df38.js"><link rel="prefetch" href="/assets/js/72.dbb4e4b7.js"><link rel="prefetch" href="/assets/js/73.df2a761a.js"><link rel="prefetch" href="/assets/js/74.c990e22a.js"><link rel="prefetch" href="/assets/js/75.17e785d4.js"><link rel="prefetch" href="/assets/js/76.654f96d7.js"><link rel="prefetch" href="/assets/js/77.639fabd5.js"><link rel="prefetch" href="/assets/js/78.af173138.js"><link rel="prefetch" href="/assets/js/79.39b4c614.js"><link rel="prefetch" href="/assets/js/8.067b247c.js"><link rel="prefetch" href="/assets/js/80.8e05479c.js"><link rel="prefetch" href="/assets/js/81.4e18a75d.js"><link rel="prefetch" href="/assets/js/82.9c83ab7e.js"><link rel="prefetch" href="/assets/js/83.7cd5abf6.js"><link rel="prefetch" href="/assets/js/84.553efd77.js"><link rel="prefetch" href="/assets/js/85.0b1b0c63.js"><link rel="prefetch" href="/assets/js/86.10720a56.js"><link rel="prefetch" href="/assets/js/87.66f042aa.js"><link rel="prefetch" href="/assets/js/88.ccc215ef.js"><link rel="prefetch" href="/assets/js/89.85e5506d.js"><link rel="prefetch" href="/assets/js/9.be178e25.js"><link rel="prefetch" href="/assets/js/90.df53f385.js"><link rel="prefetch" href="/assets/js/91.a8b0cbd7.js"><link rel="prefetch" href="/assets/js/92.43fa7136.js"><link rel="prefetch" href="/assets/js/93.f4c095bf.js"><link rel="prefetch" href="/assets/js/94.bb65ab86.js"><link rel="prefetch" href="/assets/js/95.dd201632.js"><link rel="prefetch" href="/assets/js/96.927c7d16.js"><link rel="prefetch" href="/assets/js/97.5f28997b.js"><link rel="prefetch" href="/assets/js/98.51e0e544.js"><link rel="prefetch" href="/assets/js/99.541cee63.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ccac5a78.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">苏纯的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTML</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>CSS</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JAVASCRIPT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEB移动端</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTTP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>VUE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>REACT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>UNIAPP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>FLUTTER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEBPACK</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NODE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>GIT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>DOCKER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NGINX</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微信</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>计算机基础</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/计算机基础/计算机基础.html" class="sidebar-link">计算机基础</a></li><li><a href="/计算机基础/linux常用命令.html" class="sidebar-link">linux常用命令</a></li><li><a href="/计算机基础/ubuntu.html" class="active sidebar-link">ubuntu</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/计算机基础/windows.html" class="sidebar-link">windows</a></li><li><a href="/计算机基础/mac.html" class="sidebar-link">mac</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>浏览器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>编辑器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术官网</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="_1、ubuntu安装mongodb"><a href="#_1、ubuntu安装mongodb" class="header-anchor">#</a> 1、ubuntu安装mongodb</h3> <div class="language- extra-class"><pre><code>#setp 1. Import the public key used by the package management system.
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+
+#step 2. Create a list file for MongoDB
+echo &quot;deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse&quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+
+#step 3. Reload local package database
+sudo apt-get update
+
+#step 4. Install the latest stable version of MongoDB
+sudo apt-get install -y mongodb-org
+
+安装完成后可开启服务
+  sudo service mongod stop　　#停止服务
+  sudo service mongod start　　#启动服务
+  sudo service mongod restart #重新启动服务
+  sudo service mongod status #查看状态
+
+设置mongodb为开机自己启动
+  sudo systemctl enable mongod
+
+连接mongodb
+  mongo
+
+mongodb配置文件
+  less /etc/mongod.conf
+
+mongo安装完成后，默认是只能在本机连接，在服务器外部是不能连接mongo的
+  #切换至root用户
+    sudo -i
+  #修改mongo配置文件
+    vim /etc/mongod.conf
+  #把net下的127.0.0.1改为0.0.0.0
+  #重启服务
+    sudo service mongod restart
+
+如果有需要删除文件
+  #停止mongodb服务
+    sudo service mongod stop
+  #删除包
+    sudo apt-get purge mongodb-org*
+  #删除数据文件及日志文件
+    sudo rm -r /var/log/mongodb
+    sudo rm -r /var/lib/mongodb
+</code></pre></div><h3 id="_2、ubuntu安装nodejs和npm"><a href="#_2、ubuntu安装nodejs和npm" class="header-anchor">#</a> 2、ubuntu安装nodejs和npm</h3> <div class="language- extra-class"><pre><code>sudo apt-get install nodejs
+sudo apt install nodejs-legacy
+sudo apt install npm
+
+使用node -v 查看node版本
+使用npm -v查看npm版本
+
+如果版本过低全局安装n，然后使用n来更新node，n只能在linux上用，不支持windows。
+sudo npm install n -g
+sudo n stable
+</code></pre></div><h3 id="_3、ubuntu安装ngnix"><a href="#_3、ubuntu安装ngnix" class="header-anchor">#</a> 3、ubuntu安装ngnix</h3> <div class="language- extra-class"><pre><code>sudo apt-get install nginx
+命令
+  ngnix -s stop
+  ngnix -s reopen
+  ngnix -s reload
+  ngnix -t 配置文件是否正确
+
+出现错误nginx: [error] open() &quot;/run/nginx.pid&quot; failed (2: No such file or directory)使用如下命令
+  sudo nginx -c /etc/nginx/nginx.conf
+  
+这种版本的nginx配置文件除了nginx.conf还有sites-enable文件夹里的default文件，默认的配置都在里面。
+
+跨域加上如下配置，就是前端请求路径中有/api会替换成http:localhost:5000/api
+  location /api {
+    proxy_pass http:localhost:5000/api;
+  }
+
+刷新会出现404问题
+  这是因为我们只配置了/,所以我们需要在location中加上 try_files $uri $uri/ /index.html;就是匹配不到的时候就去index.html.
+  https://router.vuejs.org/zh/guide/essentials/history-mode.html
+
+匹配规则
+  = 表示精确匹配。只有请求的url路径与后面的字符串完全相等时，才会命中（优先级最高）。
+  ^~ 表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找。
+  ~ 表示该规则是使用正则定义的，区分大小写。
+  ~* 表示该规则是使用正则定义的，不区分大小写。
+</code></pre></div><h3 id="_4、ubuntu安装图形化界面"><a href="#_4、ubuntu安装图形化界面" class="header-anchor">#</a> 4、ubuntu安装图形化界面</h3> <div class="language- extra-class"><pre><code>sudo apt-get install ubuntu-desktop #安装桌面软件
+reboot #重启
+图形化界面和命令行界面的切换
+ctrl + alt + F1到F6 图形界面到命令行界面
+ctrl + alt + F7 命令行到图形化界面
+</code></pre></div><h3 id="_5、安装git"><a href="#_5、安装git" class="header-anchor">#</a> 5、安装git</h3> <p>sudo apt-get install git</p> <h3 id="_6、ubuntu安装docker"><a href="#_6、ubuntu安装docker" class="header-anchor">#</a> 6、ubuntu安装docker</h3> <div class="language- extra-class"><pre><code>由于apt官方库里的docker版本可能比较旧，所以先卸载可能存在的旧版本
+  sudo apt-get remove docker docker-engine docker.io containerd runc
+更新apt
+  sudo apt-get update
+安装以下包以使apt可以通过HTTPS使用存储库（repository）
+  sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+添加Docker官方的GPG密钥
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+使用下面的命令来设置stable存储库
+  sudo add-apt-repository \
+    &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable&quot;
+再更新一下apt包索引
+  sudo apt-get update
+安装
+  sudo apt-get install docker-ce docker-ce-cli containerd.io
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/计算机基础/linux常用命令.html" class="prev">
+        linux常用命令
+      </a></span> <span class="next"><a href="/计算机基础/windows.html">
+        windows
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.60976509.js" defer></script><script src="/assets/js/2.e17d958a.js" defer></script><script src="/assets/js/141.15d75c43.js" defer></script>
+  </body>
+</html>

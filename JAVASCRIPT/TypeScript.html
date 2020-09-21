@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1、typescript | 苏纯的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/randy.jpg">
+    <meta name="description" content="前端路上的点点滴滴">
+    <link rel="preload" href="/assets/css/0.styles.ccac5a78.css" as="style"><link rel="preload" href="/assets/js/app.60976509.js" as="script"><link rel="preload" href="/assets/js/2.e17d958a.js" as="script"><link rel="preload" href="/assets/js/59.5a333992.js" as="script"><link rel="prefetch" href="/assets/js/10.0c4d80b2.js"><link rel="prefetch" href="/assets/js/100.be4ddaaf.js"><link rel="prefetch" href="/assets/js/101.b92133ff.js"><link rel="prefetch" href="/assets/js/102.8ae20acb.js"><link rel="prefetch" href="/assets/js/103.4827f23f.js"><link rel="prefetch" href="/assets/js/104.90e956b1.js"><link rel="prefetch" href="/assets/js/105.79f52554.js"><link rel="prefetch" href="/assets/js/106.b09e1694.js"><link rel="prefetch" href="/assets/js/107.d4015b49.js"><link rel="prefetch" href="/assets/js/108.5d4383e2.js"><link rel="prefetch" href="/assets/js/109.cbc749da.js"><link rel="prefetch" href="/assets/js/11.8c70f272.js"><link rel="prefetch" href="/assets/js/110.273d71af.js"><link rel="prefetch" href="/assets/js/111.39beaec5.js"><link rel="prefetch" href="/assets/js/112.53581b49.js"><link rel="prefetch" href="/assets/js/113.9ba66e35.js"><link rel="prefetch" href="/assets/js/114.00519544.js"><link rel="prefetch" href="/assets/js/115.7a495809.js"><link rel="prefetch" href="/assets/js/116.11daf8d3.js"><link rel="prefetch" href="/assets/js/117.04391c64.js"><link rel="prefetch" href="/assets/js/118.999f458d.js"><link rel="prefetch" href="/assets/js/119.f8d3f10e.js"><link rel="prefetch" href="/assets/js/12.e1261109.js"><link rel="prefetch" href="/assets/js/120.b6e82713.js"><link rel="prefetch" href="/assets/js/121.f5546726.js"><link rel="prefetch" href="/assets/js/122.8eec7fe1.js"><link rel="prefetch" href="/assets/js/123.4df04a08.js"><link rel="prefetch" href="/assets/js/124.3ca8a4b7.js"><link rel="prefetch" href="/assets/js/125.64ace1b3.js"><link rel="prefetch" href="/assets/js/126.61a8fca8.js"><link rel="prefetch" href="/assets/js/127.0560bf3a.js"><link rel="prefetch" href="/assets/js/128.f1dac923.js"><link rel="prefetch" href="/assets/js/129.1fe19cdc.js"><link rel="prefetch" href="/assets/js/13.4be6231f.js"><link rel="prefetch" href="/assets/js/130.be8526a3.js"><link rel="prefetch" href="/assets/js/131.6aeec17e.js"><link rel="prefetch" href="/assets/js/132.e521901d.js"><link rel="prefetch" href="/assets/js/133.875aacdd.js"><link rel="prefetch" href="/assets/js/134.8ebf1d08.js"><link rel="prefetch" href="/assets/js/135.8855d8c4.js"><link rel="prefetch" href="/assets/js/136.03195db9.js"><link rel="prefetch" href="/assets/js/137.0f3ee7e5.js"><link rel="prefetch" href="/assets/js/138.91096e22.js"><link rel="prefetch" href="/assets/js/139.7b27e88d.js"><link rel="prefetch" href="/assets/js/14.595a5182.js"><link rel="prefetch" href="/assets/js/140.f753091b.js"><link rel="prefetch" href="/assets/js/141.15d75c43.js"><link rel="prefetch" href="/assets/js/142.375be563.js"><link rel="prefetch" href="/assets/js/143.328b0617.js"><link rel="prefetch" href="/assets/js/15.89b8584a.js"><link rel="prefetch" href="/assets/js/16.f001c269.js"><link rel="prefetch" href="/assets/js/17.33a658b9.js"><link rel="prefetch" href="/assets/js/18.4855abbd.js"><link rel="prefetch" href="/assets/js/19.f0eb4492.js"><link rel="prefetch" href="/assets/js/20.f73f0a76.js"><link rel="prefetch" href="/assets/js/21.394e5b78.js"><link rel="prefetch" href="/assets/js/22.d909c244.js"><link rel="prefetch" href="/assets/js/23.26dce1b9.js"><link rel="prefetch" href="/assets/js/24.e8c4dbf5.js"><link rel="prefetch" href="/assets/js/25.e0431824.js"><link rel="prefetch" href="/assets/js/26.76fefc45.js"><link rel="prefetch" href="/assets/js/27.f302cbd1.js"><link rel="prefetch" href="/assets/js/28.45e40879.js"><link rel="prefetch" href="/assets/js/29.0153af43.js"><link rel="prefetch" href="/assets/js/3.83eaea71.js"><link rel="prefetch" href="/assets/js/30.01894167.js"><link rel="prefetch" href="/assets/js/31.1be01152.js"><link rel="prefetch" href="/assets/js/32.58482c41.js"><link rel="prefetch" href="/assets/js/33.b109ebd1.js"><link rel="prefetch" href="/assets/js/34.e907d632.js"><link rel="prefetch" href="/assets/js/35.5f40497c.js"><link rel="prefetch" href="/assets/js/36.5e1eeec0.js"><link rel="prefetch" href="/assets/js/37.0ef138bb.js"><link rel="prefetch" href="/assets/js/38.f7e27cf4.js"><link rel="prefetch" href="/assets/js/39.6faf7aac.js"><link rel="prefetch" href="/assets/js/4.5ed19beb.js"><link rel="prefetch" href="/assets/js/40.db0f3c34.js"><link rel="prefetch" href="/assets/js/41.e36475e2.js"><link rel="prefetch" href="/assets/js/42.8987d9c3.js"><link rel="prefetch" href="/assets/js/43.c7b2298e.js"><link rel="prefetch" href="/assets/js/44.75cc8668.js"><link rel="prefetch" href="/assets/js/45.752e5dc3.js"><link rel="prefetch" href="/assets/js/46.6196a24c.js"><link rel="prefetch" href="/assets/js/47.481d1bf9.js"><link rel="prefetch" href="/assets/js/48.81d8b352.js"><link rel="prefetch" href="/assets/js/49.1f257117.js"><link rel="prefetch" href="/assets/js/5.c6a76e4e.js"><link rel="prefetch" href="/assets/js/50.74fab7d8.js"><link rel="prefetch" href="/assets/js/51.7a38f9df.js"><link rel="prefetch" href="/assets/js/52.15d6e9af.js"><link rel="prefetch" href="/assets/js/53.0ec76d05.js"><link rel="prefetch" href="/assets/js/54.ca6ce1e8.js"><link rel="prefetch" href="/assets/js/55.041516bf.js"><link rel="prefetch" href="/assets/js/56.f1ccb54a.js"><link rel="prefetch" href="/assets/js/57.7adc0861.js"><link rel="prefetch" href="/assets/js/58.92aa852f.js"><link rel="prefetch" href="/assets/js/6.942df10b.js"><link rel="prefetch" href="/assets/js/60.043d57a2.js"><link rel="prefetch" href="/assets/js/61.b8808947.js"><link rel="prefetch" href="/assets/js/62.915a226c.js"><link rel="prefetch" href="/assets/js/63.8cdafa09.js"><link rel="prefetch" href="/assets/js/64.c71c8f50.js"><link rel="prefetch" href="/assets/js/65.3d056820.js"><link rel="prefetch" href="/assets/js/66.a4c9ec73.js"><link rel="prefetch" href="/assets/js/67.1e710187.js"><link rel="prefetch" href="/assets/js/68.bdc9610b.js"><link rel="prefetch" href="/assets/js/69.c44b224e.js"><link rel="prefetch" href="/assets/js/7.1f55d473.js"><link rel="prefetch" href="/assets/js/70.6fc49652.js"><link rel="prefetch" href="/assets/js/71.0760df38.js"><link rel="prefetch" href="/assets/js/72.dbb4e4b7.js"><link rel="prefetch" href="/assets/js/73.df2a761a.js"><link rel="prefetch" href="/assets/js/74.c990e22a.js"><link rel="prefetch" href="/assets/js/75.17e785d4.js"><link rel="prefetch" href="/assets/js/76.654f96d7.js"><link rel="prefetch" href="/assets/js/77.639fabd5.js"><link rel="prefetch" href="/assets/js/78.af173138.js"><link rel="prefetch" href="/assets/js/79.39b4c614.js"><link rel="prefetch" href="/assets/js/8.067b247c.js"><link rel="prefetch" href="/assets/js/80.8e05479c.js"><link rel="prefetch" href="/assets/js/81.4e18a75d.js"><link rel="prefetch" href="/assets/js/82.9c83ab7e.js"><link rel="prefetch" href="/assets/js/83.7cd5abf6.js"><link rel="prefetch" href="/assets/js/84.553efd77.js"><link rel="prefetch" href="/assets/js/85.0b1b0c63.js"><link rel="prefetch" href="/assets/js/86.10720a56.js"><link rel="prefetch" href="/assets/js/87.66f042aa.js"><link rel="prefetch" href="/assets/js/88.ccc215ef.js"><link rel="prefetch" href="/assets/js/89.85e5506d.js"><link rel="prefetch" href="/assets/js/9.be178e25.js"><link rel="prefetch" href="/assets/js/90.df53f385.js"><link rel="prefetch" href="/assets/js/91.a8b0cbd7.js"><link rel="prefetch" href="/assets/js/92.43fa7136.js"><link rel="prefetch" href="/assets/js/93.f4c095bf.js"><link rel="prefetch" href="/assets/js/94.bb65ab86.js"><link rel="prefetch" href="/assets/js/95.dd201632.js"><link rel="prefetch" href="/assets/js/96.927c7d16.js"><link rel="prefetch" href="/assets/js/97.5f28997b.js"><link rel="prefetch" href="/assets/js/98.51e0e544.js"><link rel="prefetch" href="/assets/js/99.541cee63.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ccac5a78.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">苏纯的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTML</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>CSS</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JAVASCRIPT</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/JAVASCRIPT/JavaScript基础.html" class="sidebar-link">JavaScript基础</a></li><li><a href="/JAVASCRIPT/JavaScript常见问题.html" class="sidebar-link">JavaScript常见问题</a></li><li><a href="/JAVASCRIPT/JavaScript事件.html" class="sidebar-link">JavaScript事件</a></li><li><a href="/JAVASCRIPT/ES6.html" class="sidebar-link">ES6</a></li><li><a href="/JAVASCRIPT/TypeScript.html" aria-current="page" class="active sidebar-link">TypeScript</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/JAVASCRIPT/闭包.html" class="sidebar-link">闭包</a></li><li><a href="/JAVASCRIPT/数据类型转换.html" class="sidebar-link">数据类型转换</a></li><li><a href="/JAVASCRIPT/this问题.html" class="sidebar-link">this问题</a></li><li><a href="/JAVASCRIPT/继承.html" class="sidebar-link">继承</a></li><li><a href="/JAVASCRIPT/防抖与节流.html" class="sidebar-link">防抖与节流</a></li><li><a href="/JAVASCRIPT/模块化.html" class="sidebar-link">模块化</a></li><li><a href="/JAVASCRIPT/设计模式.html" class="sidebar-link">设计模式</a></li><li><a href="/JAVASCRIPT/深拷贝浅拷贝.html" class="sidebar-link">深拷贝浅拷贝</a></li><li><a href="/JAVASCRIPT/同步异步事件循环.html" class="sidebar-link">同步异步事件循环</a></li><li><a href="/JAVASCRIPT/原型和原型链.html" class="sidebar-link">原型和原型链</a></li><li><a href="/JAVASCRIPT/Promise与Async与Await.html" class="sidebar-link">Promise与Async与Await</a></li><li><a href="/JAVASCRIPT/垃圾回收.html" class="sidebar-link">垃圾回收</a></li><li><a href="/JAVASCRIPT/js运行机制.html" class="sidebar-link">js运行机制</a></li><li><a href="/JAVASCRIPT/手写.html" class="sidebar-link">手写</a></li><li><a href="/JAVASCRIPT/常用正则.html" class="sidebar-link">常用正则</a></li><li><a href="/JAVASCRIPT/前端二进制.html" class="sidebar-link">前端二进制</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEB移动端</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTTP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>VUE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>REACT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>UNIAPP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>FLUTTER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>WEBPACK</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NODE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>GIT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>DOCKER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NGINX</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微信</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>计算机基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>浏览器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>编辑器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术官网</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="_1、typescript"><a href="#_1、typescript" class="header-anchor">#</a> 1、typescript</h3> <ul><li>TypeScript是JavaScript的一个超集，主要提供了类型系统和对 ES6 的支持。</li> <li>优点
+<ul><li>TypeScript 增加了代码的可读性和可维护性</li> <li>类型系统实际上是最好的文档，大部分的函数看看类型的定义就可以知道如何使用了</li> <li>可以在编译阶段就发现大部分错误，这总比在运行时候出错好</li> <li>增强了编辑器和 IDE 的功能，包括代码补全、接口提示、跳转到定义、重构等</li> <li>即使 TypeScript 编译报错，也可以生成 JavaScript 文件</li></ul></li></ul> <h3 id="_2、使用"><a href="#_2、使用" class="header-anchor">#</a> 2、使用</h3> <ul><li>安装 npm install -g typescript</li> <li>编译 tsc xxx.ts</li> <li>监听并编译 tsc -w xxx.ts</li></ul> <h3 id="_3、数据类型-定义变量的时候指定变量的数据类型"><a href="#_3、数据类型-定义变量的时候指定变量的数据类型" class="header-anchor">#</a> 3、数据类型 定义变量的时候指定变量的数据类型</h3> <div class="language- extra-class"><pre><code>布尔类型 boolean
+数字 number
+字符串 string
+数组 number[] 或者 Array&lt;number&gt; 这里的number只是举个例子，可以有其他类型比如string any等
+  let arr: number[]/Array&lt;number&gt; = [1, 2]
+object object表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。
+null undefined 用处不大
+  let u: undefined = undefined;
+  let n: null = null;
+元组 元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同
+  let x: [string, number];
+  x = ['hello', 10];
+联合类型 |
+  let myFavoriteNumber: string | number
+  当TypeScript不确定一个变量类型的时候可以使用联合类型。但是我们只能访问此联合类型的所有类型里共有的属性或方法
+枚举 enum类型是对JavaScript标准数据类型的一个补充
+  enum Color {Red, Green, Blue}
+  let c: Color = Color.Green; //返回的是下标 类似数组下标从0开始
+any 我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。 那么我们可以使用 any类型来标记这些变量。变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型。
+void 申明变量或函数。当一个函数没有返回值时，你可以申明类型为void。当变量申明为void的时候只能为它赋予undefined和null
+never never类型表示的是那些永不存在的值的类型。用得少(死循环或者抛出异常)
+类型断言 你会比TypeScript更了解某个值的详细信息。告诉编译器是什么类型. 通常这会发生在你清楚地知道一个实体具有比它现有类型更确切的类型。TypeScript会假设你，程序员，已经进行了必须的检查。
+  两种表示法 尖括号&lt;&gt;或者as。当你在TypeScript里使用JSX时，只有 as语法断言是被允许的。
+    let someValue: any = &quot;this is a string&quot;;
+    let strLength: number = (&lt;string&gt;someValue).length; //&lt;&gt;
+    let strLength: number = (someValue as string).length; //as
+</code></pre></div><h3 id="_4、变量申明"><a href="#_4、变量申明" class="header-anchor">#</a> 4、变量申明</h3> <div class="language- extra-class"><pre><code>let
+  当用let声明一个变量，它使用的是词法作用域或块作用域。块作用域变量在包含它们的块或for循环之外是不能访问的
+  拥有块级作用域的变量的另一个特点是，它们不能在被声明之前读或写
+  同一作用域内不能重复申明同一变量
+const
+  与let类似，但是定义基本变量值不能改变，定义引用变量地址不能改变
+解构数组
+  let input = [1, 2];
+  //变量未定义好 需要使用let
+  let [first, second] = input;
+  //变量已定义
+  [first, second] = input
+对象解构
+  const user = {name: 'randy', age: 24}
+  //变量未定义
+  let {name, age} = user
+  //变量已定义
+  let name, age
+  ({name, age} = user) 注意这里需要加上(),不然会当做语句块
+对象多层解构
+  const book = {bookname: 'javascript', body: {price: 200, count: 100}}
+  let {bookname, body, body: {price, count}} = book
+  console.log(bookname, body, count) // 输出javascript {price: 200, count: 100} 100
+对象解构重命名
+  const book = {bookname: 'es6', price: 50}
+  let {bookname: bookname1, price: price1} = book
+  console.log(bookname1, price1)
+默认值
+  function say(name: string = 'randy', age: number = 24){
+    console.log(`${name}的年龄是${age}`)
+  }
+  say() //randy的年龄是24  不传都是用默认
+  say('demi') //demi的年龄是24  只传第一个默认使用第二个
+  say(undefined, 20) //randy的年龄是20 只传第二个 第一个用默认参数需要制定其值为undefined
+  say(null, 25) //null的年龄是25 只传第二个 第一个不使用默认参数 需要指定其值为null
+可选参数 用?
+  const add(a: number, b: number, c?: number): number =&gt; a+b
+不确定参数
+  const add(initDate: number, ...nums: number[]): number = xxx
+</code></pre></div><h3 id="_5、接口-interface-使用implements实现接口。-使用extends继承接口-可以多继承。"><a href="#_5、接口-interface-使用implements实现接口。-使用extends继承接口-可以多继承。" class="header-anchor">#</a> 5、接口 interface 使用implements实现接口。 使用extends继承接口，可以多继承。</h3> <div class="language- extra-class"><pre><code>接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。主要用于约束对象、函数、类的结构。
+interface LabelledValue {
+  label: string;
+  color?: string; //可选属性
+  readyonly x: string; //只读属性
+  [propName:string]: any //任意属性。使用 [propName: string] 定义了任意属性取 string 类型的值,值类型是任何值。
+}
+接口可以限制哪些属性？
+  可选属性 只读属性
+接口类型有哪些?
+  对象接口类型 函数接口类型 索引类型 混合类型
+类实现接口必须实现接口里面的所有方法
+接口可以继承接口并且可以多继承，类实现接口可以多实现
+</code></pre></div><h3 id="_6、类-class-使用extends实现继承-使用implements实现接口。可以实现多个接口"><a href="#_6、类-class-使用extends实现继承-使用implements实现接口。可以实现多个接口" class="header-anchor">#</a> 6、类 class 使用extends实现继承，使用implements实现接口。可以实现多个接口</h3> <div class="language- extra-class"><pre><code>class Greeter {
+  public greeting: string;
+  constructor(message: string) {
+      this.greeting = message;
+  }
+  private greet() {
+      return &quot;Hello, &quot; + this.greeting;
+  }
+}
+
+let greeter = new Greeter(&quot;world&quot;);
+</code></pre></div><h3 id="_7、泛型"><a href="#_7、泛型" class="header-anchor">#</a> 7、泛型</h3> <div class="language- extra-class"><pre><code>泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性
+function createArray&lt;T&gt;(length: number, value: T): Array&lt;T&gt; { //T就是泛型
+  let result: T[] = [];
+  for (let i = 0; i &lt; length; i++) {
+      result[i] = value;
+  }
+  return result;
+}
+
+createArray&lt;string&gt;(3, 'x'); // ['x', 'x', 'x'] //在使用的时候使用&lt;string&gt;指定具体的类型
+泛型不能用于类的静态成员 
+</code></pre></div><h3 id="_8、访问修饰符"><a href="#_8、访问修饰符" class="header-anchor">#</a> 8、访问修饰符</h3> <ul><li>public 默认</li> <li>protected 子类访问</li> <li>private 私有 private的变量在外面如果需要访问 就需要提供get set方法。</li></ul> <h3 id="_9、类型别名-type"><a href="#_9、类型别名-type" class="header-anchor">#</a> 9、类型别名 type</h3> <div class="language- extra-class"><pre><code>type name = string 给string类型定义别名
+type user = {name: string, age: number}; const me: user = {name: 'randy', age: 24}
+</code></pre></div><h3 id="_10、非空检查"><a href="#_10、非空检查" class="header-anchor">#</a> 10、非空检查 !</h3> <div class="language- extra-class"><pre><code>我们可以通过!来进行非空的检查
+let str: string = `yayxs`;
+str!.substring(0, 1)
+</code></pre></div><h3 id="_11、ts中的函数与普通函数的区别"><a href="#_11、ts中的函数与普通函数的区别" class="header-anchor">#</a> 11、ts中的函数与普通函数的区别</h3> <ul><li>支持约束参数类型</li> <li>支持可选参数</li> <li>支持重载</li> <li>支持函数返回值类型定义</li></ul> <h3 id="_12、抽象类与多态"><a href="#_12、抽象类与多态" class="header-anchor">#</a> 12、抽象类与多态</h3> <div class="language- extra-class"><pre><code>什么是抽象类？
+  抽象类通常作为基类，将多个事物中的共性抽离，方便其他派生类继承。
+抽象类有什么特点？
+  只能被继承，不能被实例化。 只能单继承
+如何创建抽象类？
+  抽象类使用abstract关键字定义抽象类与抽象方法。
+什么是多态？
+  在父类中定义，在子类中可以有不同的实现，此为多态。
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/JAVASCRIPT/ES6.html" class="prev">
+        ES6
+      </a></span> <span class="next"><a href="/JAVASCRIPT/闭包.html">
+        闭包
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.60976509.js" defer></script><script src="/assets/js/2.e17d958a.js" defer></script><script src="/assets/js/59.5a333992.js" defer></script>
+  </body>
+</html>
