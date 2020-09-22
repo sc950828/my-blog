@@ -154,7 +154,8 @@ module.exports = {
         children: [
           ["/GIT/git", "git"],
           ["/GIT/git规范", "git规范"],
-          ["/GIT/gitreadme", "gitreadme"]
+          ["/GIT/gitreadme", "gitreadme"],
+          ["/GIT/gitaction", "gitaction"]
         ]
       },
       {
