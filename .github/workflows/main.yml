@@ -22,5 +22,5 @@ jobs:
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
           CLEAN: true
-          # TARGET_FOLDER: blog
-          # REPOSITORY_NAME: sc950828/sc950828.github.io
+          TARGET_FOLDER: my-blog
+          REPOSITORY_NAME: sc950828/sc950828.github.io
