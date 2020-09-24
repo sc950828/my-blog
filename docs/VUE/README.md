@@ -17,3 +17,5 @@
 ### 8、[vue 服务端渲染](/VUE/vue服务端渲染)
 
 ### 9、[jsx](/VUE/jsx)
+
+### 10、[nuxt](/VUE/nuxt)

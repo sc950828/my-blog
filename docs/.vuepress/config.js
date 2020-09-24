@@ -101,7 +101,8 @@ module.exports = {
           ["/VUE/vue源码分析", "vue源码分析"],
           ["/VUE/vue常用技巧", "vue常用技巧"],
           ["/VUE/vue服务端渲染", "vue服务端渲染"],
-          ["/VUE/jsx", "jsx"]
+          ["/VUE/jsx", "jsx"],
+          ["/VUE/nuxt", "nuxt"]
         ]
       },
       {
