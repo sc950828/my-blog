@@ -74,8 +74,9 @@
 
 ### 14、时间计时器
 
-- console.time() — 开启一个计时器
-- console.timeEnd() — 结束计时并且将结果在 console 中打印出来
+- console.time('key') — 开启一个计时器
+- console.timeEnd('key') — 结束计时并且将结果在 console 中打印出来
+- 结果就是 key: xxx ms
 
 ### 15、 通过 'h' 来隐藏元素
 
