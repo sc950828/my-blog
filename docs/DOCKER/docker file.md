@@ -122,3 +122,36 @@ $ sudo docker build -t webapp:latest -f ./webapp/a.Dockerfile ./webapp
 ```shell
 $ sudo docker build -t webapp:latest ./webapp
 ```
+
+### 构建时使用变量或环境变量
+
+在 Dockerfile 里，我们可以用 ARG 指令来建立一个参数变量，使用 ENV 建立环境变量我们可以在构建时通过构建指令传入这个参数变量，并且在 Dockerfile 里使用它。
+
+环境变量的值是直接定义的 如果需要更该可以在构建时通过构建指令传入
+
+```dockerfile
+FROM debian:stretch-slim
+
+## ......
+
+ARG TOMCAT_MAJOR
+ARG TOMCAT_VERSION
+
+ENV TOMCAT_MAJOR 8
+ENV TOMCAT_VERSION 8.0.53
+
+## ......
+
+RUN wget -O tomcat.tar.gz "https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz"
+
+## ......
+```
+
+如果我们需要通过这个 Dockerfile 文件构建 Tomcat 镜像，我们可以在构建时通过 docker build 的 --build-arg 选项来设置参数变量。通过-e 或者--env 修改环境变量
+
+```shell
+# 传递变量
+docker build --build-arg TOMCAT_MAJOR=8 --build-arg TOMCAT_VERSION=8.0.53 -t tomcat:8.0 ./tomcat
+# 修改环境变量
+sudo docker run -e TOMCAT_MAJOR=9 -d mysql:5.7
+```
