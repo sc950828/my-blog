@@ -23,6 +23,13 @@ Dockerfile 的内容很简单，主要以两种形式呈现，一种是注释行
 4. 执行指令：能够为基于镜像所创建的容器，指定在启动时需要执行的脚本或命令。
 5. 配置指令：对镜像以及基于镜像所创建的容器，可以通过配置指令对其网络、用户等内容进行配置。
 
+### Dockerfile 的组成部分
+
+1. 基础镜像信息 FROM
+2. 维护者信息 MAINTAINER
+3. 镜像操作指令 RUN、COPY、ADD、EXPOSE、WORKDIR、ONBUILD、USER、VOLUME 等
+4. 容器启动时执行指令 CMD、ENTRYPOINT
+
 #### FROM
 
 在 Dockerfile 里，我们可以通过 FROM 指令指定一个基础镜像，接下来所有的指令都是基于这个镜像所展开的。在镜像构建的过程中，Docker 也会先获取到这个给出的基础镜像，再从这个镜像上进行构建操作。
@@ -39,9 +46,15 @@ FROM <image>[@<digest>] [AS <name>]
 
 在 RUN 指令之后，我们直接拼接上需要执行的命令，在构建时，Docker 就会执行这些命令，并将它们对文件系统的修改记录下来，形成镜像的变化。
 
-```
+Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。所以我们使用\换行符和&& 符号连接命令，这样执行后，只会创建 1 层镜像。
+
+RUN 是在 docker build 时运行
+
+```shell
+# <命令行命令> 等同于，在终端操作的 shell 命令。
 RUN <command>
-RUN ["executable", "param1", "param2"]
+# exec 格式
+RUN ["可执行文件", "参数1", "参数2"]
 ```
 
 RUN 指令是支持 \ 换行的，如果单行的长度过长，建议对内容进行切割，方便阅读。而事实上，我们会经常看到 \ 分割的命令，例如在上面我们贴出的 Redis 镜像的 Dockerfile 里。
@@ -54,14 +67,38 @@ RUN 指令是支持 \ 换行的，如果单行的长度过长，建议对内容�
 ENTRYPOINT ["executable", "param1", "param2"]
 ENTRYPOINT command param1 param2
 
+# exec 格式
 CMD ["executable","param1","param2"]
 CMD ["param1","param2"]
+# <命令行命令> 等同于，在终端操作的 shell 命令。
 CMD command param1 param2
 ```
+
+CMD 是在 docker run 时运行，为启动的容器指定默认要运行的程序
+
+RUN 是在构建的时候执行，并生成一个新的镜像，CMD 在构建时不进行任何操作，在容器运行的时候执行。
 
 ENTRYPOINT 指令和 CMD 指令的用法近似，都是给出需要执行的命令，并且它们都可以为空，或者说是不在 Dockerfile 里指出。
 
 当 ENTRYPOINT 与 CMD 同时给出时，CMD 中的内容会作为 ENTRYPOINT 定义命令的参数，最终执行容器启动的还是 ENTRYPOINT 中给出的命令。
+
+### LABEL
+
+给构建的镜像打标签。
+
+```dockerfile
+LABEL <key>=<value> <key>=<value> <key>=<value> ...
+
+LABEL "com.example.vendor"="ACME Incorporated"
+LABEL com.example.label-with-value="foo"
+LABEL version="1.0"
+LABEL description="This text illustrates \
+that label-values can span multiple lines."
+```
+
+### WORKDIR
+
+为接下来的 Dockerfile 指令指定当前工作目录，可多次使用，如果使用的是相对路径，则相对的是上一个工作目录，类似 shell 中的 cd 命令。
 
 #### EXPOSE
 
