@@ -170,7 +170,7 @@ class People1 {
   constructor(name) {
     this.name = name;
     // 方法在实例上
-    this.hello = function () {
+    this.hello = function() {
       console.log("hello");
     };
   }
@@ -190,13 +190,13 @@ function People2(name) {
     console.log(say);
   }
   // 方法在实实例上
-  this.hello = function () {
+  this.hello = function() {
     console.log("hello");
   };
 }
 
 // 方法在原型上
-People2.prototype.hi = function () {
+People2.prototype.hi = function() {
   console.log("hi");
 };
 
@@ -418,7 +418,7 @@ encodeURIComponent(";/?:@&=+$,#"); // 返回 %3B%2F%3F%3A%40%26%3D%2B%24%2C%23
 当页面被最小化或者被切换成后台标签页时，页面为不可见，浏览器会触发一个 visibilitychange 事件,并设置 document.hidden 属性为 true；切换到显示状态时，页面为可见，也同样触发一个 visibilitychange 事件，设置 document.hidden 属性为 false。
 
 ```js
-window.addEventListener("visibilitychange", function () {
+window.addEventListener("visibilitychange", function() {
   alert(document.hidden);
 });
 ```

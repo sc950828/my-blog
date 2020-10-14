@@ -56,8 +56,9 @@ const router = express.router()
 
 ### 6、设置静态文件夹
 
-    app.use(express.static("./public")) 这样public文件夹下的文件可以直接使用。
-    <link rel="stylesheet" href="assets/reset.min.css">
+    // 静态文件
+    app.use("/public", express.static(__dirname + "/public"));
+    这样就能随意访问/public下的文件了
 
 ### 7、路由
 
@@ -66,46 +67,102 @@ var express = require("express");
 var app = express();
 
 // 路由：字符串类型
-app.get("/book", function (req, res, next) {
+app.get("/book", function(req, res, next) {
   res.send("book");
 });
 
 // 路由：字符串模式
-app.get("/user/*man", function (req, res, next) {
+app.get("/user/*man", function(req, res, next) {
   res.send("user"); // 比如： /user/man, /user/woman
 });
 
 // 路由：正则表达式
-app.get(/animals?$/, function (req, res, next) {
+app.get(/animals?$/, function(req, res, next) {
   res.send("animal"); // 比如： /animal, /animals
 });
 
 // 路由：命名参数
-app.get("/employee/:uid/:age", function (req, res, next) {
+app.get("/employee/:uid/:age", function(req, res, next) {
   res.json(req.params); // 比如：/111/30，返回 {"uid": 111, "age": 30}
 });
 
 app.listen(3000);
+```
 
-// 路由拆分 类似使用koa2
+### 8、路由拆分出来
+
+```js
 var express = require("express");
 var app = express();
 
 var user = express.Router();
 
-user.get("/list", function (req, res, next) {
+user.get("/list", function(req, res, next) {
   res.send("/list");
 });
 
-user.get("/detail", function (req, res, next) {
+user.get("/detail", function(req, res, next) {
   res.send("/detail");
 });
 
+// 当中间件使用 路由前批量会有/user
 app.use("/user", user); // mini app，通常做应用拆分
 
 app.listen(3000);
 ```
 
-### 8、中间件
+### 9、运行顺序
 
-常用的中间件 body-parser 获取请求体中的参数
+```js
+// 都会执行 传递数组函数
+var cb0 = function(req, res, next) {
+  console.log("cb0 start");
+  next();
+  console.log("cb0 end");
+};
+
+var cb1 = function(req, res, next) {
+  console.log("cb1 start");
+  next();
+  console.log("cb1 end");
+};
+
+var cb2 = function(req, res) {
+  res.send("cb2");
+};
+
+// 执行的顺序是 cb0start cb1start cb1end cb0end
+app.get("/index", [cb0, cb1, cb2]);
+```
+
+### 10、获取参数
+
+1. query 通过 req.query 获取
+2. params 通过 req.params 获取
+3. 请求 body 里面的参数需要安装 body-parser 中间件 通过 req.body 获取
+
+### 11、中间件
+
+express 通过 use 来调用中间件 app.use(中间件函数)
+
+常用的中间件 body-parser 获取请求体中的参数 app.use(bodyParser.json())或者 bodyParser.urlencoded({ extended: false })
+
+### 12、异步
+
+express 是洋葱模型 支持 async await 异步
+
+```js
+// 模拟sleep
+const sleep = (delay) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
+
+app.get("/sleep", async (req, res) => {
+  console.time("time");
+  await sleep(2000);
+  console.timeEnd("time");
+  res.end("hello");
+});
+```
