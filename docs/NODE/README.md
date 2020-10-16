@@ -13,3 +13,7 @@
 ### 6、[node 常见问题](/NODE/node常见问题)
 
 ### 7、[数据库安装](/NODE/数据库安装)
+
+### 8、[GraphQL](/NODE/GraphQL)
+
+### 9、[egg](/NODE/egg)

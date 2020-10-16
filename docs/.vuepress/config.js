@@ -1,22 +1,22 @@
 module.exports = {
   title: "苏纯的博客",
   description: "前端路上的点点滴滴",
-  base: '/my-blog/',
+  base: "/my-blog/",
   head: [["link", { rel: "icon", href: "/randy.jpg" }]],
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
       { text: "导航", link: "/GUIDE/" },
       // { text: "代码实例", link: "http://sc950828.top" },
-      { text: "GitHub地址", link: "https://github.com/sc950828" }
+      { text: "GitHub地址", link: "https://github.com/sc950828" },
     ],
     sidebar: [
       {
         title: "HTML",
         children: [
           ["/HTML/HTML", "HTML"],
-          ["/HTML/HTML5", "HTML5"]
-        ]
+          ["/HTML/HTML5", "HTML5"],
+        ],
       },
       {
         title: "CSS",
@@ -34,8 +34,8 @@ module.exports = {
           ["/CSS/重绘与回流", "重绘与回流"],
           ["/CSS/浏览器渲染流程", "浏览器渲染流程"],
           ["/CSS/前端性能优化", "前端性能优化"],
-          ["/CSS/图片处理", "图片处理"]
-        ]
+          ["/CSS/图片处理", "图片处理"],
+        ],
       },
       {
         title: "JAVASCRIPT",
@@ -60,15 +60,15 @@ module.exports = {
           ["/JAVASCRIPT/js运行机制", "js运行机制"],
           ["/JAVASCRIPT/手写", "手写"],
           ["/JAVASCRIPT/常用正则", "常用正则"],
-          ["/JAVASCRIPT/前端二进制", "前端二进制"]
-        ]
+          ["/JAVASCRIPT/前端二进制", "前端二进制"],
+        ],
       },
       {
         title: "WEB移动端",
         children: [
           ["/WEB移动端/移动端", "移动端"],
-          ["/WEB移动端/移动端常见问题", "移动端常见问题"]
-        ]
+          ["/WEB移动端/移动端常见问题", "移动端常见问题"],
+        ],
       },
       {
         title: "HTTP",
@@ -87,8 +87,8 @@ module.exports = {
           ["/HTTP/web安全", "web安全"],
           ["/HTTP/TCP", "TCP"],
           ["/HTTP/UDP", "UDP"],
-          ["/HTTP/DNS", "DNS"]
-        ]
+          ["/HTTP/DNS", "DNS"],
+        ],
       },
       {
         title: "VUE",
@@ -102,8 +102,8 @@ module.exports = {
           ["/VUE/vue常用技巧", "vue常用技巧"],
           ["/VUE/vue服务端渲染", "vue服务端渲染"],
           ["/VUE/jsx", "jsx"],
-          ["/VUE/nuxt", "nuxt"]
-        ]
+          ["/VUE/nuxt", "nuxt"],
+        ],
       },
       {
         title: "REACT",
@@ -113,12 +113,12 @@ module.exports = {
           ["/REACT/react-redux", "react-redux"],
           ["/REACT/dva", "dva"],
           ["/REACT/状态管理", "状态管理"],
-          ["/REACT/react常见问题", "react常见问题"]
-        ]
+          ["/REACT/react常见问题", "react常见问题"],
+        ],
       },
       {
         title: "UNIAPP",
-        children: [["/UNIAPP/uniapp基础", "uniapp基础"]]
+        children: [["/UNIAPP/uniapp基础", "uniapp基础"]],
       },
       {
         title: "FLUTTER",
@@ -126,8 +126,8 @@ module.exports = {
           ["/FLUTTER/移动开发简介", "移动开发简介"],
           ["/FLUTTER/flutter", "flutter"],
           ["/FLUTTER/dart", "dart"],
-          ["/FLUTTER/widget", "widget"]
-        ]
+          ["/FLUTTER/widget", "widget"],
+        ],
       },
       {
         title: "WEBPACK",
@@ -135,8 +135,8 @@ module.exports = {
           ["/WEBPACK/webpack", "webpack"],
           ["/WEBPACK/webpack常见问题", "webpack常见问题"],
           ["/WEBPACK/webpack优化", "webpack优化"],
-          ["/WEBPACK/babel", "babel"]
-        ]
+          ["/WEBPACK/babel", "babel"],
+        ],
       },
       {
         title: "NODE",
@@ -147,8 +147,10 @@ module.exports = {
           ["/NODE/koa", "koa"],
           ["/NODE/express", "express"],
           ["/NODE/node常见问题", "node常见问题"],
-          ["/NODE/数据库安装", "数据库安装"]
-        ]
+          ["/NODE/数据库安装", "数据库安装"],
+          ["/NODE/GraphQL", "GraphQL"],
+          ["/NODE/egg", "egg"],
+        ],
       },
       {
         title: "GIT",
@@ -156,20 +158,20 @@ module.exports = {
           ["/GIT/git", "git"],
           ["/GIT/git规范", "git规范"],
           ["/GIT/gitreadme", "gitreadme"],
-          ["/GIT/gitaction", "gitaction"]
-        ]
+          ["/GIT/gitaction", "gitaction"],
+        ],
       },
       {
         title: "DOCKER",
         children: [
           ["/DOCKER/docker", "docker"],
           ["/DOCKER/docker file", "docker file"],
-          ["/DOCKER/docker compose", "docker compose"]
-        ]
+          ["/DOCKER/docker compose", "docker compose"],
+        ],
       },
       {
         title: "NGINX",
-        children: [["/NGINX/nginx", "nginx"]]
+        children: [["/NGINX/nginx", "nginx"]],
       },
       {
         title: "微信",
@@ -179,8 +181,8 @@ module.exports = {
           ["/微信/小程序与H5的区别", "小程序与H5的区别"],
           ["/微信/微信小程序优化", "微信小程序优化"],
           ["/微信/微信小程序", "微信小程序"],
-          ["/微信/mpvue", "mpvue"]
-        ]
+          ["/微信/mpvue", "mpvue"],
+        ],
       },
       {
         title: "计算机基础",
@@ -189,8 +191,8 @@ module.exports = {
           ["/计算机基础/linux常用命令", "linux常用命令"],
           ["/计算机基础/ubuntu", "ubuntu"],
           ["/计算机基础/windows", "windows"],
-          ["/计算机基础/mac", "mac"]
-        ]
+          ["/计算机基础/mac", "mac"],
+        ],
       },
       {
         title: "数据结构和算法",
@@ -200,15 +202,15 @@ module.exports = {
           ["/数据结构和算法/数组和链表", "数组和链表"],
           ["/数据结构和算法/队列和栈", "队列和栈"],
           ["/数据结构和算法/树", "树"],
-          ["/数据结构和算法/排序", "排序"]
-        ]
+          ["/数据结构和算法/排序", "排序"],
+        ],
       },
       {
         title: "浏览器",
         children: [
           ["/浏览器/Chrome调试技巧", "Chrome调试技巧"],
-          ["/浏览器/浏览器内核", "浏览器内核"]
-        ]
+          ["/浏览器/浏览器内核", "浏览器内核"],
+        ],
       },
       {
         title: "编辑器",
@@ -216,16 +218,16 @@ module.exports = {
           ["/编辑器/vscode", "vscode"],
           ["/编辑器/editorconfig", "editorconfig"],
           ["/编辑器/eslint", "eslint"],
-          ["/编辑器/代码规范", "代码规范"]
-        ]
+          ["/编辑器/代码规范", "代码规范"],
+        ],
       },
       {
         title: "技术官网",
         children: [
           ["/技术官网/前端基础官网", "前端基础官网"],
-          ["/技术官网/前端常用工具官网", "前端常用工具官网"]
-        ]
-      }
-    ]
-  }
+          ["/技术官网/前端常用工具官网", "前端常用工具官网"],
+        ],
+      },
+    ],
+  },
 };
