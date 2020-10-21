@@ -86,18 +86,30 @@
 
 - 第三种是 DOM2 级事件模型，在该事件模型中，一次事件共有三个过程，第一个过程是事件捕获阶段。捕获指的是事件从 document 一直向下传播到目标元素，依次检查经过的节点是否绑定了事件监听函数，如果有则执行。后面两个阶段和 IE 事件模型的两个阶段相同。这种事件模型，事件绑定的函数是 addEventListener，其中第三个参数可以指定事件是否在捕获阶段执行。
 
+### 事件冒泡和事件捕获
+
+事件捕获（event capturing）： 当鼠标点击或者触发 dom 事件时（被触发 dom 事件的这个元素被叫作事件源），浏览器会从根节点 =>事件源（由外到内）进行事件传播。
+
+事件冒泡（dubbed bubbling）： 事件源 =>根节点（由内到外）进行事件传播。
+
+dom 标准事件流的触发的先后顺序为：先捕获再冒泡。即当触发 dom 事件时，会先进行事件捕获，捕获到事件源之后通过事件传播进行事件冒泡。但是默认是冒泡事件，所以冒泡的时候才会进行事件的触发，就是由内到外。
+
+在 vue 里面我们使用`@click.capture` 把事件变为捕获阶段执行，事件的执行顺序就是由外到里了，本质上还会进行冒泡，但是冒泡不会再执行事件了。先捕获再冒泡是一直会执行的。
+
+我们使用`e.stopPropagation()`阻止冒泡事件，在 vue 里面我们使用`@click.stop`阻止事件冒泡
+
 ### 10、自定义事件
 
 ```js
 // 监听自定义事件
-document.addEventListener("test", function () {
+document.addEventListener("test", function() {
   console.log("自定义事件触发了");
 });
 
 // 创建自定义事件 不能传递参数
 const myEvevt = new Event("test");
 
-setTimeout(function () {
+setTimeout(function() {
   // 触发自定义事件
   if (document.dispatchEvent) {
     document.dispatchEvent(myEvent2);
@@ -107,14 +119,14 @@ setTimeout(function () {
   }
 }, 2000);
 
-document.addEventListener("test2", function (e) {
+document.addEventListener("test2", function(e) {
   console.log("自定义事件触发了参数是", e.detail.name);
 });
 
 // 创建自定义事件 能传递参数
 const myEvent2 = new CustomEvent("test2", { detail: { name: "randy" } });
 
-setTimeout(function () {
+setTimeout(function() {
   if (document.dispatchEvent) {
     document.dispatchEvent(myEvent2);
   } else {
@@ -129,7 +141,7 @@ setTimeout(function () {
 const EventUtils = {
   // 视能力分别使用dom0||dom2||IE方式 来绑定事件
   // 添加事件
-  addEvent: function (element, type, handler) {
+  addEvent: function(element, type, handler) {
     if (element.addEventListener) {
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
@@ -140,7 +152,7 @@ const EventUtils = {
   },
 
   // 移除事件
-  removeEvent: function (element, type, handler) {
+  removeEvent: function(element, type, handler) {
     if (element.removeEventListener) {
       element.removeEventListener(type, handler, false);
     } else if (element.detachEvent) {
@@ -151,17 +163,17 @@ const EventUtils = {
   },
 
   // 获取事件目标
-  getTarget: function (event) {
+  getTarget: function(event) {
     return event.target || event.srcElement;
   },
 
   // 获取 event 对象的引用，取到事件的所有信息，确保随时能使用 event
-  getEvent: function (event) {
+  getEvent: function(event) {
     return event || window.event;
   },
 
   // 阻止事件（主要是事件冒泡，因为 IE 不支持事件捕获）
-  stopPropagation: function (event) {
+  stopPropagation: function(event) {
     if (event.stopPropagation) {
       event.stopPropagation();
     } else {
@@ -170,13 +182,13 @@ const EventUtils = {
   },
 
   // 取消事件的默认行为
-  preventDefault: function (event) {
+  preventDefault: function(event) {
     if (event.preventDefault) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
-  }
+  },
 };
 ```
 
@@ -206,7 +218,7 @@ class EventEmitter {
     // 检查目标事件是否有监听函数队列
     if (this.handlers[eventName]) {
       // 如果有，则逐个调用队列里的回调函数
-      this.handlers[eventName].forEach(callback => {
+      this.handlers[eventName].forEach((callback) => {
         callback(...args);
       });
     }
