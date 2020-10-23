@@ -89,7 +89,7 @@ State 与 props 类似，但是 state 是私有的，并且完全受控于当前
 this.state.comment = "Hello";
 // right
 this.setState({
-  comment: "Hello"
+  comment: "Hello",
 });
 ```
 
@@ -108,9 +108,9 @@ State 的更新可能是异步的。出于性能考虑，React 可能会把多�
 ```js
 // 可以让 setState() 接收一个函数而不是一个对象。这个函数用上一个 state 作为第一个参数，
 // 将此次更新被应用时的 props 做为第二个参数
-this.setState(function (state, props) {
+this.setState(function(state, props) {
   return {
-    counter: state.counter + props.increment
+    counter: state.counter + props.increment,
   };
 });
 ```
@@ -213,9 +213,9 @@ constructor(props) {
 
 ```js
 handleClick = () => {
-  this.setState(function (state) {
+  this.setState(function(state) {
     return {
-      isToggleOn: !state.isToggleOn
+      isToggleOn: !state.isToggleOn,
     };
   });
 };
@@ -377,13 +377,13 @@ class Greeting extends React.Component {
 
   //如果没有传递该属性时的默认值
   static defaultProps = {
-    name: "stranger"
+    name: "stranger",
   };
 }
 
 // 第二种定义方法 不使用static定义在类里面
 Greeting.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
   // name:PropTypes.string.isRequired 使用isRequired设置属性为必须传递的值
 };
 
@@ -405,9 +405,9 @@ class Greeting extends React.Component {
     todoList: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string,
       })
-    )
+    ),
   };
 
   // shape检测不同对象的不同属性的不同数据类型
@@ -420,8 +420,8 @@ class Greeting extends React.Component {
   static propTypes = {
     object: PropTypes.shape({
       name: PropTypes.string,
-      age: PropTypes.number
-    })
+      age: PropTypes.number,
+    }),
   };
 }
 ```
@@ -462,7 +462,7 @@ class AutoFocusInput extends Component {
   }
 
   render() {
-    return <input ref={input => (this.input = input)} />;
+    return <input ref={(input) => (this.input = input)} />;
   }
 }
 
@@ -510,7 +510,7 @@ render () {
 <h1 style={{fontSize: '12px', color: 'red'}}>React.js 小书</h1>
 ```
 
-### 19、高阶组件
+### 19、高阶组件 HOC
 
 高阶组件是一个函数（而不是组件），它接受一个组件作为参数，返回一个新的组件。这个新的组件会使用你传给它的组件作为子组件。
 
@@ -521,7 +521,7 @@ render () {
 ```js
 import React, { Component } from "react";
 
-export default WrappedComponent => {
+export default (WrappedComponent) => {
   class NewComponent extends Component {
     // 可以做很多自定义逻辑
     render() {
