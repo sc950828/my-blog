@@ -112,6 +112,7 @@ module.exports = {
           ["/REACT/react-router", "react-router"],
           ["/REACT/react-redux", "react-redux"],
           ["/REACT/dva", "dva"],
+          ["/REACT/umijs", "umijs"],
           ["/REACT/状态管理", "状态管理"],
           ["/REACT/react常见问题", "react常见问题"],
         ],
