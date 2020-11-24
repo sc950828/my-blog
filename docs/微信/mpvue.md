@@ -12,6 +12,8 @@ ide 支持不够友好 只能使用微信开发者工具
 
 mpvue 继承自 Vue.js，其技术规范和语法特点与 Vue.js 保持一致。
 
+可以一套代码可以直接跑在多端：WEB、小程序（微信和支付宝）、Native（借助 weex）。
+
 ### 2、框架原理
 
 - mpvue 保留了 vue.runtime 核心方法，无缝继承了 Vue.js 的基础能力
@@ -257,11 +259,9 @@ npm i -D sass-loader node-sass
 
 ```scss
 // 直接使用
-<style lang="scss" scoped>
-  .img {
-    width: 100%;
-  }
-</style>
+.img {
+  width: 100%;
+}
 ```
 
 ### 10、使用 flyio 处理请求
@@ -288,11 +288,11 @@ export function get(url, params = {}) {
     return new Promise((resolve, reject) => {
       fly
         .get(url, params)
-        .then(response => {
+        .then((response) => {
           console.log(response);
           resolve(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           handleError(err);
           reject(err);
@@ -308,11 +308,11 @@ export function post(url, params = {}) {
     return new Promise((resolve, reject) => {
       fly
         .post(url, params)
-        .then(response => {
+        .then((response) => {
           console.log(response);
           resolve(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           handleError(err);
           reject(err);
