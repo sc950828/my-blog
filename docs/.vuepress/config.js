@@ -103,6 +103,7 @@ module.exports = {
           ["/VUE/vue服务端渲染", "vue服务端渲染"],
           ["/VUE/jsx", "jsx"],
           ["/VUE/nuxt", "nuxt"],
+          ["/VUE/vue项目总结", "vue项目总结"],
         ],
       },
       {
