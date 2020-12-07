@@ -1,4 +1,4 @@
-### 1、uniapp
+## 1、uniapp
 
 uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到 iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉/淘宝）、快应用等多个平台。
 
@@ -6,7 +6,7 @@ uni-app 使用 vue 的语法+小程序的标签和 API。
 
 uni-app 在开发者数量、案例、跨端抹平度、扩展灵活性、性能体验、周边生态、学习成本、开发成本等 8 大关键指标上拥有更强的优势。
 
-### 2、uni-app 基本结构
+## 2、uni-app 基本结构
 
 ```
 ┌─components            uni-app组件目录
@@ -27,7 +27,7 @@ uni-app 在开发者数量、案例、跨端抹平度、扩展灵活性、性能
 └─uni.scss              uni.scss文件的用途是为了方便整体控制应用的风格。比如按钮颜色、边框风格，uni.scss文件里预置了一批scss变量预置。
 ```
 
-### 3、资源引入
+## 3、资源引入
 
 ```html
 <!-- html静态资源引入 -->
@@ -58,7 +58,7 @@ import add from "@/common/add.js";
 import add from "../../common/add.js";
 ```
 
-### 4、生命周期
+## 4、生命周期
 
 uni-app 完整支持 Vue 实例的生命周期，同时还新增 应用生命周期 及 页面生命周期。
 
@@ -91,7 +91,7 @@ uni-app 完整支持 Vue 实例的生命周期，同时还新增 应用生命周
 
 生命周期执行顺序 先是应用的生命周期 再是页面的生命周期和 vue 生命周期 onLoad、onShow、created、onReady、mounted
 
-### 5、路由
+## 5、路由
 
 uni-app 页面路由为框架统一管理，开发者需要在 pages.json 里配置每个路由页面的路径及页面样式。类似小程序在 app.json 中配置页面路由一样。所以 uni-app 的路由用法与 Vue Router 不同
 
@@ -106,7 +106,7 @@ Tab 切换 页面全部出栈，只留下新的 Tab 页面 调用 API uni.switch
 重加载 页面全部出栈，只留下新的页面 调用 API uni.reLaunch 、使用组件 <navigator open-type="reLaunch"/>
 ```
 
-### 6、页面样式与布局
+## 6、页面样式与布局
 
 uni-app 支持的通用 css 单位包括 px、rpx
 
@@ -136,7 +136,7 @@ App.vue 中通过 @import 语句可以导入外联样式，一样作用于每一
 
 nvue 页面暂不支持全局样式
 
-### 7、条件编译
+## 7、条件编译
 
 以 #ifdef(仅在某平台) 或 #ifndef(仅不在某平台) 加 %PLATFORM%(平台名) 开头，以 #endif 结尾。
 
@@ -158,3 +158,20 @@ PLATFORM 的值
 `条件编译是利用注释实现的，在不同语法里注释写法不一样，js 使用 // 注释、css 使用 /* 注释 */、vue/nvue 模板里使用 <!-- 注释 -->`
 
 `样式的条件编译，无论是 css 还是 sass/scss/less/stylus 等预编译语言中，必须使用 /*注释*/ 的写法。`
+
+## 8、使用 cli 创建项目和使用 HBuilderX 可视化界面创建项目有什么区别
+
+编译器的区别
+
+1. cli 创建的项目，编译器安装在项目下。并且不会跟随 HBuilderX 升级。如需升级编译器，执行 npm update。
+2. HBuilderX 可视化界面创建的项目，编译器在 HBuilderX 的安装目录下的 plugin 目录，随着 HBuilderX 的升级会自动升级编译器。
+3. 已经使用 cli 创建的项目，如果想继续在 HBuilderX 里使用，可以把工程拖到 HBuilderX 中。注意如果是把整个项目拖入 HBuilderX，则编译时走的是项目下的编译器。如果是把 src 目录拖入到 HBuilderX 中，则走的是 HBuilderX 安装目录下 plugin 目录下的编译器。
+4. cli 版如果想安装 less、scss、ts 等编译器，需自己手动 npm 安装。在 HBuilderX 的插件管理界面安装无效，那个只作用于 HBuilderX 创建的项目。
+
+开发工具的区别
+
+1. cli 创建的项目，内置了 d.ts，同其他常规 npm 库一样，可在 vscode、webstorm 等支持 d.ts 的开发工具里正常开发并有语法提示。
+2. 使用 HBuilderX 创建的项目不带 d.ts，HBuilderX 内置了 uni-app 语法提示库。如需把 HBuilderX 创建的项目在其他编辑器打开并且补充 d.ts，可以在项目下先执行 npm init，然后 npm i @types/uni-app -D，来补充 d.ts。
+3. 但 vscode 等其他开发工具，在 vue 或 uni-app 领域，开发效率比不过 HBuilderX。详见：https://ask.dcloud.net.cn/article/35451
+4. 发布 App 时，仍然需要使用 HBuilderX。其他开发工具无法发布 App，但可以发布 H5、各种小程序。如需开发 App，可以先在 HBuilderX 里运行起来，然后在其他编辑器里修改保存代码，代码修改后会自动同步到手机基座。
+5. 如果使用 cli 创建项目，那下载 HBuilderX 时只需下载 10M 的标准版即可。因为编译器已经安装到项目下了。
