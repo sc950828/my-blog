@@ -155,6 +155,7 @@ module.exports = {
           ["/NODE/数据库安装", "数据库安装"],
           ["/NODE/GraphQL", "GraphQL"],
           ["/NODE/egg", "egg"],
+          ["/NODE/mongodb", "mongodb"],
         ],
       },
       {
