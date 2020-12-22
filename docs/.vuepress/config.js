@@ -219,12 +219,13 @@ module.exports = {
         ],
       },
       {
-        title: "编辑器",
+        title: "工具",
         children: [
-          ["/编辑器/vscode", "vscode"],
-          ["/编辑器/editorconfig", "editorconfig"],
-          ["/编辑器/eslint", "eslint"],
-          ["/编辑器/代码规范", "代码规范"],
+          ["/工具/vscode", "vscode"],
+          ["/工具/editorconfig", "editorconfig"],
+          ["/工具/eslint", "eslint"],
+          ["/工具/charles", "charles抓包"],
+          ["/工具/代码规范", "代码规范"],
         ],
       },
       {
