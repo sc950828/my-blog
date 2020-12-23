@@ -117,7 +117,6 @@ nvm
 nvm 就是为解决这个问题而产生的，他可以方便的在同一台设备上进行多个 node 版本之间切换
 
 ```shell
-npm  install   -g   nvm  #安装
 nvm install ## 安装指定版本，可模糊安装，如：安装v6.2.0，既可nvm install v6.2.0，又可nvm install 6.2
 nvm uninstall ## 删除已安装的指定版本，语法与install类似
 nvm use ## 切换使用指定的版本node
@@ -141,7 +140,8 @@ n latest -d   #下载最新版但不使用，-d参数表示为仅下载
 n stable  #安装最新稳定版本并使用
 n <version>  #安装某个版本并使用，如$n 6.2.2
 n rm <version ...> #删除某些版本
-n ls    #查看可用版本
+n ls    #查看已安装的版本
+n ls-remote [version] 查看可用版本
 n --latest    #查看最新版本
 n --stable    #查看最新稳定版
 n -h    #查看帮助信息，更多命令在这里查看
