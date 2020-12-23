@@ -12,7 +12,7 @@
 
 #### 截取浏览器的请求
 
-postman 的代理不向 charles 和 fiddler 一样自动设置浏览器的代理，我们需要打开浏览器 找到代理设置 配置到我们刚刚开启的代理上，这样浏览器的请求就都会在 postman 上出现。
+postman 的代理不向 charles 和 fiddler 一样自动设置浏览器的代理，我们需要找到我们电脑代理设置 配置到我们刚刚开启的代理上，这样浏览器的请求就都会在 postman 上出现。
 
 但是 https 请求我们还是获取不到结果我们需要设置 postman，打开 setting 找到 SSL certificate verification 把它关闭即可
 
