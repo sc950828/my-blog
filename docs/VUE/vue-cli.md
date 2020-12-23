@@ -45,12 +45,12 @@ Vue.use(VueI18n);
 
 const messages = {
   en: enLocale,
-  zh: zhLocale
+  zh: zhLocale,
 };
 
 const i18n = new VueI18n({
   locale: Cookies.get("language") || "zh", // set locale 这里控制中英文显示，设置英文我们只需在前台页面选择英文的时候将变量locale变为‘en’即可
-  messages // set locale messages
+  messages, // set locale messages
 });
 export default i18n;
 ```
@@ -64,7 +64,7 @@ new Vue({
   el: "#app",
   i18n,
   components: { App },
-  template: "<App/>"
+  template: "<App/>",
 });
 ```
 
@@ -164,6 +164,7 @@ new Vue({
         '/api': {
             target:'http://localhost:3000',
             changeOrigin: true,
+            secure: false, //设置为false就可代理https
             pathRewrite: {
               '^/api': ''
             }
