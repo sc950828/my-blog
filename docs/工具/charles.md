@@ -4,6 +4,8 @@ Charles 是目前最主流的网络调试工具（Charles、Fiddler、Wireshark.
 
 由于这款软件只有 30 天的免费使用期限，除非你付费。但是如果想免费使用的话也是可以的，只是每次使用不能超过 30 分钟，且启动会有 10 秒的延时，谁让不想花钱呢，就忍忍吧。
 
+但是我们可以破解 注意破解包和我们安装的 charles 版本需要一致[破解地址](https://www.zzzmode.com/mytools/charles/)
+
 ### 使用
 
 #### 如何捕获浏览器的请求
@@ -26,7 +28,7 @@ Charles 是目前最主流的网络调试工具（Charles、Fiddler、Wireshark.
 
 在 keychain 处将新安装的证书设置为永久信任
 
-即使安装了 CA 证书，Charles 默认是不捕获 HTTPS 协议的网络请求，所以我们需要对某个主机下的网络请求抓包分析的话，选中该网络请求右击选中 “SSL Proxying Enabled”。这样就可以看到我们感兴趣的 HTTPS 网络请求了。 如果不想一个个点击 Enabled 可以在"proxy -> SSL Proxying Settings"里面添加`*`通配符就可以了。
+即使安装了 CA 证书，Charles 默认是不捕获 HTTPS 协议的网络请求，所以我们需要对某个主机下的网络请求抓包分析的话，选中该网络请求右击选中 “SSL Proxying Enabled”。这样就可以看到我们感兴趣的 HTTPS 网络请求了。 如果不想一个个点击 Enabled 可以在"proxy -> SSL Proxying Settings"里面添加`*`通配符就可以了。这个只需要设置一次就可以了。
 
 #### 如果你需要捕获移动设备的 HTTPS 网络请求，则需要在移动设备上安装证书并作简单的设置
 

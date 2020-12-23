@@ -225,7 +225,8 @@ module.exports = {
           ["/工具/editorconfig", "editorconfig"],
           ["/工具/eslint", "eslint"],
           ["/工具/charles", "charles抓包"],
-          ["/工具/代码规范", "代码规范"],
+          ["/工具/postman", "postman"],
+          ["/工具/代码规范", "代码规范"]
         ],
       },
       {
