@@ -164,7 +164,7 @@ new Vue({
         '/api': {
             target:'http://localhost:3000',
             changeOrigin: true,
-            secure: false, //设置为false就可代理https
+            secure: false, //使用的是http协议则设置为false，https协议则设置为true
             pathRewrite: {
               '^/api': ''
             }
