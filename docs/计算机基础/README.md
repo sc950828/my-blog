@@ -9,3 +9,5 @@
 ### 4、[windows](/计算机基础/windows)
 
 ### 5、[mac](/计算机基础/mac)
+
+### 6、[shell](/计算机基础/shell)

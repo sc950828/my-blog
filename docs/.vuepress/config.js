@@ -198,6 +198,7 @@ module.exports = {
           ["/计算机基础/ubuntu", "ubuntu"],
           ["/计算机基础/windows", "windows"],
           ["/计算机基础/mac", "mac"],
+          ["/计算机基础/shell", "shell"]
         ],
       },
       {
