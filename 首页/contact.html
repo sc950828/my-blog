@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>苏纯-关于</title>
+    <title>苏纯-联系</title>
     <!-- Meta Data -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -22,6 +22,11 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/demo/style-demo.css" />
+    <!-- baidu map api -->
+    <script
+      type="text/javascript"
+      src="https://api.map.baidu.com/api?v=2.0&ak=x1qziKFNAATK9eIqDp1glW2jHiOF4K7R"
+    ></script>
   </head>
   <body>
     <!-- Preloader -->
@@ -82,9 +87,7 @@
             <div class="sidebar box sticky-column">
               <ul class="nav">
                 <li class="nav__item">
-                  <a href="index.html" class="active"
-                    ><i class="icon-user"></i>关于</a
-                  >
+                  <a href="index.html"><i class="icon-user"></i>关于</a>
                 </li>
                 <li class="nav__item">
                   <a href="resume.html"><i class="icon-file-text"></i>简历</a>
@@ -96,7 +99,9 @@
                   <a href="blog.html"><i class="icon-book-open"></i>博客</a>
                 </li>
                 <li class="nav__item">
-                  <a href="contact.html"><i class="icon-book"></i>联系</a>
+                  <a class="active" href="contact.html"
+                    ><i class="icon-book"></i>联系</a
+                  >
                 </li>
               </ul>
             </div>
@@ -104,39 +109,27 @@
           <!-- Content -->
           <div class="col-12 col-md-12 col-lg-10">
             <div class="box box-content">
-              <!-- About -->
-              <div class="pb-0 pb-sm-2">
+              <div class="pb-2">
                 <h1 class="title title--h1 first-title title__separate">
-                  关于我
+                  联系我
                 </h1>
-                <p>
-                  我叫苏纯
-                  来自湖南省岳阳市汨罗市。1995年8月出生，2017年毕业于湖南文理学院电气与信息工程学院。
-                </p>
-                <p>
-                  2017年7月-2019年2月在武汉群硕软件从事前端开发工作，项目组的业务是做SCRM社会化客户关系管理系统，主要涉及到后台管理系统、微信公众号、微信小程序。
-                </p>
-                <p>
-                  2019年3月-至今在上海医疗质量研究中心从事前端开发组长，公司的业务主要是做医疗项目，主要涉及到后台管理系统、官网、微信公众号、微信小程序。
-                </p>
               </div>
-
-              <!-- What -->
+              <!-- Contact -->
               <div class="mt-1">
-                <h2 class="title title--h3">我正在做</h2>
+                <h2 class="title title--h3">联系方式</h2>
                 <div class="row">
                   <!-- Case Item -->
                   <div class="col-12 col-lg-6">
                     <div class="case-item">
                       <img
                         class="case-item__icon"
-                        src="assets/icons/icon-design.svg"
+                        src="assets/icons/wechat.svg"
                         alt=""
                       />
                       <div>
-                        <h3 class="title title--h4">前端架构</h3>
+                        <h3 class="title title--h4">微信</h3>
                         <p class="case-item__caption">
-                          后台管理系统 手机端h5 微信小程序框架的搭建
+                          sc950828
                         </p>
                       </div>
                     </div>
@@ -146,13 +139,13 @@
                     <div class="case-item">
                       <img
                         class="case-item__icon"
-                        src="assets/icons/icon-dev.svg"
+                        src="assets/icons/qq.svg"
                         alt=""
                       />
                       <div>
-                        <h3 class="title title--h4">前端开发</h3>
+                        <h3 class="title title--h4">QQ</h3>
                         <p class="case-item__caption">
-                          项目公共模块、工具模块的编写
+                          1287530097
                         </p>
                       </div>
                     </div>
@@ -162,13 +155,13 @@
                     <div class="case-item">
                       <img
                         class="case-item__icon"
-                        src="assets/icons/icon-app.svg"
+                        src="assets/icons/mobile.svg"
                         alt=""
                       />
                       <div>
-                        <h3 class="title title--h4">移动app</h3>
+                        <h3 class="title title--h4">手机</h3>
                         <p class="case-item__caption">
-                          正在学习app开发方面的知识
+                          17673485272
                         </p>
                       </div>
                     </div>
@@ -178,79 +171,85 @@
                     <div class="case-item">
                       <img
                         class="case-item__icon"
-                        src="assets/icons/icon-photo.svg"
+                        src="assets/icons/email.svg"
                         alt=""
                       />
                       <div>
-                        <h3 class="title title--h4">拍照</h3>
+                        <h3 class="title title--h4">邮箱</h3>
                         <p class="case-item__caption">
-                          正在学习摄影相关知识
+                          1287530097@qq.com
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- Testimonials -->
-              <div class="mt-2">
-                <h2 class="title title--h3">心灵小馆</h2>
-                <div class="swiper-container js-carousel-review">
-                  <div class="swiper-wrapper">
-                    <!-- Item review -->
-                    <div class="swiper-slide review-item">
-                      <!-- <svg class="avatar avatar--80" viewBox="0 0 84 84">
-                        <g class="avatar__hexagon">
-                          <image
-                            xlink:href="assets/img/avatar-2.jpg"
-                            height="100%"
-                            width="100%"
-                          />
-                        </g>
-                      </svg> -->
-                      <div class="review-item__textbox">
-                        <h4 class="title title--h5">诗意告白</h4>
-                        <p class="review-item__caption">
-                          秋千水，竹马道，一眼见你，万物不及。
-                          春水初生，春林初盛，春风十里不如你。
-                        </p>
-                      </div>
-                    </div>
-                    <!-- Item review -->
-                    <div class="swiper-slide review-item">
-                      <!-- <svg class="avatar avatar--80" viewBox="0 0 84 84">
-                        <g class="avatar__hexagon">
-                          <image
-                            xlink:href="assets/img/avatar-3.jpg"
-                            height="100%"
-                            width="100%"
-                          />
-                        </g>
-                      </svg> -->
-                      <div class="review-item__textbox">
-                        <h4 class="title title--h5">韩愈</h4>
-                        <p class="review-item__caption">
-                          书山有路勤为径，学海无涯苦作舟
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-pagination"></div>
-                </div>
+              <div class="mt-1">
+                <h2 class="title title--h3">联系地址</h2>
+                <div class="map" id="map"></div>
               </div>
-              <!-- Clients -->
-              <!-- <div class="mt-4">
-                <h2 class="title title--h3">Clients</h2>
-                <div class="swiper-container js-carousel-clients">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <a href="#"
-                        ><img src="assets/img/logo-1.svg" alt="Logo"
-                      /></a>
-                    </div>
+              <h2 class="title title--h3">给我发送邮件</h2>
+              <form
+                id="contact-form"
+                class="contact-form"
+                data-toggle="validator"
+              >
+                <div class="row">
+                  <div class="form-group col-12 col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nameContact"
+                      name="nameContact"
+                      placeholder="你的名字"
+                      required="required"
+                      autocomplete="on"
+                      oninvalid="setCustomValidity('请输入你的名字')"
+                      onkeyup="setCustomValidity('')"
+                    />
+                    <div class="help-block with-errors"></div>
                   </div>
-                  <div class="swiper-pagination"></div>
+                  <div class="form-group col-12 col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="emailContact"
+                      name="emailContact"
+                      placeholder="你的邮箱"
+                      required="required"
+                      autocomplete="on"
+                      oninvalid="setCustomValidity('请输入正确的邮箱地址')"
+                      onkeyup="setCustomValidity('')"
+                    />
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group col-12 col-md-12">
+                    <textarea
+                      class="textarea form-control"
+                      id="messageContact"
+                      name="messageContact"
+                      placeholder="邮件内容"
+                      rows="4"
+                      required="required"
+                      oninvalid="setCustomValidity('请输入邮件内容')"
+                      onkeyup="setCustomValidity('')"
+                    ></textarea>
+                    <div class="help-block with-errors"></div>
+                  </div>
                 </div>
-              </div> -->
+                <div class="row">
+                  <div
+                    class="col-12 col-md-6 order-2 order-md-1 text-center text-md-left"
+                  >
+                    <div id="validator-contact" class="hidden"></div>
+                  </div>
+                  <div class="col-12 col-md-6 order-1 order-md-2 text-right">
+                    <button type="submit" class="btn">
+                      <i class="font-icon icon-send"></i>发送邮件
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
             <!-- Footer -->
             <footer class="footer">© 2020 苏纯</footer>
@@ -258,6 +257,7 @@
         </div>
       </div>
     </main>
+    <div class="back-to-top"></div>
     <!-- SVG masks --><svg class="svg-defs">
       <clipPath id="avatar-box">
         <path
@@ -270,11 +270,12 @@
         />
       </clipPath>
     </svg>
-    <div class="back-to-top"></div>
     <!-- JavaScripts -->
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/plugins.min.js"></script>
     <script src="assets/js/common.js"></script>
     <script src="assets/demo/plugins-demo.js"></script>
+    <!-- baidu map -->
+    <script src="assets/js/baidu-map.js"></script>
   </body>
 </html>
