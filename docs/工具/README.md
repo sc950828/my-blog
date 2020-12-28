@@ -1,13 +1,15 @@
 # 工具
 
-### 1、[vscode](/工具/vscode)
+### 1、[vscode](./vscode)
 
-### 2、[editorconfig](/工具/editorconfig)
+### 2、[editorconfig](./editorconfig)
 
-### 3、[eslint](/工具/eslint)
+### 3、[eslint](./eslint)
 
-### 4、[charles 抓包](/工具/charles)
+### 4、[charles 抓包](./charles)
 
-### 5、[postman](/工具/postman)
+### 5、[postman](./postman)
 
-### 6、[代码规范](/工具/代码规范)
+### 6、[代码规范](./代码规范)
+
+### 7、[gitreadme](./gitreadme)

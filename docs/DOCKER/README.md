@@ -1,7 +1,7 @@
 # DOCKER
 
-### [docker](/DOCKER/docker)
+### [docker](./docker)
 
-### [docker file](/DOCKER/docker file)
+### [docker file](./dockerfile)
 
-### [docker compose](/DOCKER/docker compose)
+### [docker compose](./dockercompose)

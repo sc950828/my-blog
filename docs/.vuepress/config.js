@@ -163,7 +163,6 @@ module.exports = {
         children: [
           ["/GIT/git", "git"],
           ["/GIT/git规范", "git规范"],
-          ["/GIT/gitreadme", "gitreadme"],
           ["/GIT/gitaction", "gitaction"],
         ],
       },
@@ -171,8 +170,8 @@ module.exports = {
         title: "DOCKER",
         children: [
           ["/DOCKER/docker", "docker"],
-          ["/DOCKER/docker file", "docker file"],
-          ["/DOCKER/docker compose", "docker compose"],
+          ["/DOCKER/dockerfile", "docker file"],
+          ["/DOCKER/dockercompose", "docker compose"],
         ],
       },
       {
@@ -227,16 +226,16 @@ module.exports = {
           ["/工具/eslint", "eslint"],
           ["/工具/charles", "charles抓包"],
           ["/工具/postman", "postman"],
-          ["/工具/代码规范", "代码规范"]
+          ["/工具/代码规范", "代码规范"],
+          ["/工具/gitreadme", "gitreadme"]
         ],
       },
       {
         title: "技术官网",
         children: [
-          ["/技术官网/前端基础官网", "前端基础官网"],
           ["/技术官网/前端常用工具官网", "前端常用工具官网"],
           ["/技术官网/常用npm包", "常用npm包"],
-          ["/技术官网/前端实用标签", "前端实用标签"]
+          ["/技术官网/前端好文章", "前端好文章"]
         ],
       },
     ],

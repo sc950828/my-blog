@@ -1,5 +1,5 @@
 # VUE
 
-### 1、[uniapp 基础](/UNIAPP/uniapp基础)
+### 1、[uniapp 基础](./uniapp基础)
 
-### 2、[跨端开发](/UNIAPP/跨端开发)
+### 2、[跨端开发](./跨端开发)

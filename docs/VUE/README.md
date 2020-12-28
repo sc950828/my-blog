@@ -1,23 +1,23 @@
 # VUE
 
-### 1、[vue](/VUE/vue)
+### 1、[vue](./vue)
 
-### 2、[vue 常见问题](/VUE/vue常见问题)
+### 2、[vue 常见问题](./vue常见问题)
 
-### 3、[vuex](/VUE/vuex)
+### 3、[vuex](./vuex)
 
-### 4、[vue-cli](/VUE/vue-cli)
+### 4、[vue-cli](./vue-cli)
 
-### 5、[vue-router](/VUE/vue-router)
+### 5、[vue-router](./vue-router)
 
-### 6、[vue 常用技巧](/VUE/vue常用技巧)
+### 6、[vue 常用技巧](./vue常用技巧)
 
-### 7、[源码分析](/VUE/vue源码分析)
+### 7、[源码分析](./vue源码分析)
 
-### 8、[vue 服务端渲染](/VUE/vue服务端渲染)
+### 8、[vue 服务端渲染](./vue服务端渲染)
 
-### 9、[jsx](/VUE/jsx)
+### 9、[jsx](./jsx)
 
-### 10、[nuxt](/VUE/nuxt)
+### 10、[nuxt](./nuxt)
 
-### 11、[vue 项目总结](/VUE/vue项目总结)
+### 11、[vue 项目总结](./vue项目总结)

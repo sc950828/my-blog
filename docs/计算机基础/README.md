@@ -1,13 +1,13 @@
 # 计算机基础
 
-### 1、[计算机基础](/计算机基础/计算机基础)
+### 1、[计算机基础](./计算机基础)
 
-### 2、[linux 常用命令](/计算机基础/linux常用命令)
+### 2、[linux 常用命令](./linux常用命令)
 
-### 3、[ubuntu](/计算机基础/ubuntu)
+### 3、[ubuntu](./ubuntu)
 
-### 4、[windows](/计算机基础/windows)
+### 4、[windows](./windows)
 
-### 5、[mac](/计算机基础/mac)
+### 5、[mac](./mac)
 
-### 6、[shell](/计算机基础/shell)
+### 6、[shell](./shell)
