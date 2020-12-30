@@ -87,7 +87,7 @@
             <div class="sidebar box sticky-column">
               <ul class="nav">
                 <li class="nav__item">
-                  <a href="index.html"><i class="icon-user"></i>关于</a>
+                  <a href="index.html"><i class="icon-user"></i>首页</a>
                 </li>
                 <li class="nav__item">
                   <a href="resume.html"><i class="icon-file-text"></i>简历</a>
@@ -111,25 +111,27 @@
             <div class="box box-content">
               <div class="pb-2">
                 <h1 class="title title--h1 first-title title__separate">
-                  Portfolio
+                  作品集
                 </h1>
               </div>
               <!-- Filter -->
               <div class="select">
-                <span class="placeholder">Select category</span>
+                <span class="placeholder">选择类别</span>
                 <ul class="filter">
-                  <li class="filter__item">Category</li>
+                  <li class="filter__item">类别</li>
                   <li class="filter__item active" data-filter="*">
-                    <a class="filter__link active" href="#filter">All</a>
+                    <a class="filter__link active" href="#filter">全部</a>
                   </li>
-                  <li class="filter__item" data-filter=".category-concept">
-                    <a class="filter__link" href="#filter">Concept</a>
+                  <li class="filter__item" data-filter=".category-qunshuo">
+                    <a class="filter__link" href="#filter">武汉群硕</a>
                   </li>
-                  <li class="filter__item" data-filter=".category-design">
-                    <a class="filter__link" href="#filter">Design</a>
+                  <li class="filter__item" data-filter=".category-simq">
+                    <a class="filter__link" href="#filter"
+                      >上海医疗质量研究中心</a
+                    >
                   </li>
-                  <li class="filter__item" data-filter=".category-life">
-                    <a class="filter__link" href="#filter">Life</a>
+                  <li class="filter__item" data-filter=".category-me">
+                    <a class="filter__link" href="#filter">个人项目</a>
                   </li>
                 </ul>
                 <input type="hidden" name="changemetoo" />
@@ -137,155 +139,129 @@
               <!-- Gallery -->
               <div class="gallery-grid js-grid-row js-filter-container">
                 <div class="gutter-sizer"></div>
-                <!-- Item 1 -->
-                <figure class="gallery-grid__item category-concept">
+                <!-- Item 1 qunshuo -->
+                <figure class="gallery-grid__item category-qunshuo">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_01.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a
+                      href="https://sc950828.github.io/my-blog/HTML/"
+                      target="_blank"
+                    >
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/wanda.jpg"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Half Avocado
+                      万达宝贝王
                     </h4>
-                    <span class="gallery-grid__category">Concept</span>
+                    <span class="gallery-grid__category"
+                      >万达宝贝王集团，隶属于万达集团，以儿童全程成长专家为定位，涵盖乐园、早教、IP
+                      三大板块。
+                      本项目的开发主要是促进乐园模块的推广和发展。</span
+                    >
                   </figcaption>
                 </figure>
-                <!-- Item 2 -->
-                <figure class="gallery-grid__item category-concept">
+                <!-- Item 2 qunshuo -->
+                <figure class="gallery-grid__item category-qunshuo">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_02.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a
+                      href="https://portal.maiscrm.com/site/login"
+                      target="_blank"
+                    >
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/bubugao.jpg"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Pink Flamingo
+                      步步高
                     </h4>
-                    <span class="gallery-grid__category">Concept</span>
+                    <span class="gallery-grid__category"
+                      >步步高致力于电子产品的研发、生产、销售和服务。本项目开发主要是为了提升电子产品(步步高学
+                      习机和小天才手表)的销售量和步步高导购的服务质量。</span
+                    >
                   </figcaption>
                 </figure>
-                <!-- Item 3 -->
-                <figure class="gallery-grid__item category-design">
+                <!-- Item 3 simq-->
+                <figure class="gallery-grid__item category-simq">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_03.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a href="https://www.smidf.org.cn/" target="_blank">
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/jijinhui.jpg"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Abstract
+                      上海医学创新发展基金会
                     </h4>
-                    <span class="gallery-grid__category">Design</span>
+                    <span class="gallery-grid__category"
+                      >上海医学创新发展基金会，也是上海医疗质量研究中心的股东。上海医学创新发展基金会官网是公司的门面。</span
+                    >
                   </figcaption>
                 </figure>
-                <!-- Item 4 -->
-                <figure class="gallery-grid__item category-design">
+                <!-- Item 4 simq -->
+                <figure class="gallery-grid__item category-simq">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_04.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a
+                      href="https://www.ntppc.org.cn/user/login"
+                      target="_blank"
+                    >
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/erke.jpg"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Abstract #2
+                      国家基层儿科医护人员培训系统
                     </h4>
-                    <span class="gallery-grid__category">Design</span>
+                    <span class="gallery-grid__category"
+                      >为配合国家发展战略和地方医疗卫生发展要求，完善医疗卫生服务体系，提升基层儿科医疗服务水
+                      平，所以才开发此系统。本系统主要是给基层医生护士进行在线学习和考核拿证。</span
+                    >
                   </figcaption>
                 </figure>
-                <!-- Item 5 -->
-                <figure class="gallery-grid__item category-design">
+                <!-- Item 5 me -->
+                <figure class="gallery-grid__item category-me">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_05.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a
+                      href="https://sc950828.github.io/index.html"
+                      target="_blank"
+                    >
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/home.png"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Abstract #3
+                      个人首页
                     </h4>
-                    <span class="gallery-grid__category">Design</span>
+                    <span class="gallery-grid__category"
+                      >主要是关于个人信息 教育 工作 项目 联系等方面的介绍</span
+                    >
                   </figcaption>
                 </figure>
-                <!-- Item 6 -->
-                <figure class="gallery-grid__item category-life">
+                <!-- Item 6 me -->
+                <figure class="gallery-grid__item category-me">
                   <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_06.jpg"
-                      data-zoom
-                      alt=""
-                    />
+                    <a
+                      href="https://sc950828.github.io/my-blog/"
+                      target="_blank"
+                    >
+                      <img
+                        class="gallery-grid__image cover lazyload"
+                        src="assets/img/works/bolg.png"
+                    /></a>
                   </div>
                   <figcaption class="gallery-grid__caption">
                     <h4 class="title title--h6 gallery-grid__title">
-                      Golden Gate
+                      个人博客
                     </h4>
-                    <span class="gallery-grid__category">Life</span>
-                  </figcaption>
-                </figure>
-                <!-- Item 7 -->
-                <figure class="gallery-grid__item category-concept">
-                  <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_07.jpg"
-                      data-zoom
-                      alt=""
-                    />
-                  </div>
-                  <figcaption class="gallery-grid__caption">
-                    <h4 class="title title--h6 gallery-grid__title">Peach</h4>
-                    <span class="gallery-grid__category">Concept</span>
-                  </figcaption>
-                </figure>
-                <!-- Item 8 -->
-                <figure class="gallery-grid__item category-design">
-                  <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_08.jpg"
-                      data-zoom
-                      alt=""
-                    />
-                  </div>
-                  <figcaption class="gallery-grid__caption">
-                    <h4 class="title title--h6 gallery-grid__title">
-                      Abstract #4
-                    </h4>
-                    <span class="gallery-grid__category">Design</span>
-                  </figcaption>
-                </figure>
-                <!-- Item 9 -->
-                <figure class="gallery-grid__item category-life">
-                  <div class="gallery-grid__image-wrap">
-                    <img
-                      class="gallery-grid__image cover lazyload"
-                      src="assets/img/image_09.jpg"
-                      data-zoom
-                      alt=""
-                    />
-                  </div>
-                  <figcaption class="gallery-grid__caption">
-                    <h4 class="title title--h6 gallery-grid__title">
-                      Hedgehog
-                    </h4>
-                    <span class="gallery-grid__category">Life</span>
+                    <span class="gallery-grid__category">前端个人技术博客</span>
                   </figcaption>
                 </figure>
               </div>
