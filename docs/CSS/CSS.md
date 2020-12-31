@@ -263,7 +263,7 @@ content 属性生成的对象称为“匿名替换元素”。
 
 ### 34、white-space word-break word-wrap 的区别是什么？
 
-```css
+```
 white-space 顾名思义 这个属性是用来控制空白字符的显示的 normal | nowrap | pre | pre-wrap | pre-line。默认是normal
   normal：默认处理方式。不保留文字最前面的空格，其它空格做一个空格处理。会换行
   pre：保留文字的格式但是不会换行
@@ -278,3 +278,7 @@ word-wrap 这个属性也是控制单词如何被拆分换行的 作为word-brea
   normal 默认 一个汉字(一个单词)如果长了不会换行 会溢出。
   break-word 一个汉字(一个单词)如果长了会换行。
 ```
+
+### css 变量
+
+CSS 变量类似于我们在 SCSS、LESS 中定义的变量，但前者支持通过 JS 来控制变量的值，以--开头，(e.g. --main-color: #b4a078)，通过 var(--main-color)来引用。var()函数接受两个参数（e.g. var(--main-color, gray)），第一个参数为自定义属性名，第二个参数用作缺省值。
