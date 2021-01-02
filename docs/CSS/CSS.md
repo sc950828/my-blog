@@ -96,6 +96,13 @@ CSS 是层叠样式表。
 
 - calc(这里面可以进行`+-*/`运算)。
 - attr()获取某个属性的值
+
+```css
+a:after {
+  content: attr(href);
+}
+```
+
 - min(x, y, z) 取最小值
 - max(x, y, z) 取最大值
 
@@ -280,5 +287,17 @@ word-wrap 这个属性也是控制单词如何被拆分换行的 作为word-brea
 ```
 
 ### css 变量
+
+```css
+/* 全局变量 */
+:root {
+  --main-bg-color: coral;
+}
+
+.a {
+  /* 写在类里面的是局部变量 */
+  --color: red;
+}
+```
 
 CSS 变量类似于我们在 SCSS、LESS 中定义的变量，但前者支持通过 JS 来控制变量的值，以--开头，(e.g. --main-color: #b4a078)，通过 var(--main-color)来引用。var()函数接受两个参数（e.g. var(--main-color, gray)），第一个参数为自定义属性名，第二个参数用作缺省值。

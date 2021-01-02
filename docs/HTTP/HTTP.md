@@ -313,3 +313,37 @@ Upgrade: websocket
 Connection: Upgrade
 Sec-WebSocket-Accept: server-random-string
 ```
+
+### 常见的 http 请求方法
+
+`GET`方法
+
+- 发送一个请求来取得服务器上的某一资源
+
+`POST`方法
+
+- 向`URL`指定的资源提交数据或附加新的数据
+
+`PUT`方法
+
+- 跟`POST`方法很像，也是想服务器提交数据。但是，它们之间有不同。`PUT`指定了资源在服务器上的位置，而`POST`没有
+
+`HEAD`方法
+
+- 只请求页面的首部
+
+`DELETE`方法
+
+- 删除服务器上的某资源
+
+`OPTIONS`方法
+
+- 它用于获取当前`URL`所支持的方法。如果请求成功，会有一个`Allow`的头包含类似`“GET,POST”`这样的信息
+
+`TRACE`方法
+
+- `TRACE`方法被用于激发一个远程的，应用层的请求消息回路
+
+`CONNECT`方法
+
+- 把请求连接转换到透明的`TCP/IP`通道

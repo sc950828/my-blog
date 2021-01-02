@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>伪类选择器</title>
     <style>
+      :root {
+        text-decoration: none;
+      }
+
+      ::selection {
+        color: red;
+      }
       /*
         a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。
         a:active 必须被置于 a:hover 之后，才是有效的。
