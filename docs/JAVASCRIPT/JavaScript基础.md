@@ -96,7 +96,7 @@
     str.concat(str2)  连接两个或更多字符串，并返回新的字符串。不会改变原始字符串。
     str.indexOf(str2)  返回某个指定的字符串值或字符在字符串中首次出现的位置。
     str.lastIndexOf(str2)  从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。
-    str.includes(str2)  查找字符串中是否包含指定的子字符串或字符。
+    str.includes(str2)  查找字符串中是否包含指定的子字符串或字符。返回true或者false
     str.match(reg)  查找找到一个或多个正则表达式的匹配。返回一个对象，没有匹配则返回null
     str.search(reg)  返回查找与正则表达式相匹配的值的第一个下标。
     str.replace(reg, newStr)  在字符串中查找匹配的子串， 并替换与正则表达式匹配的子串。返回新的字符串，不会改变原字符串。
@@ -104,9 +104,9 @@
     str.split(str2)  把字符串按指定字符串或者字符分割为字符串数组。
     str.startsWith(str2)  查看字符串是否以指定的子字符串或者字符开头。
     str.endsWith(str2)  查看字符串是否以指定的子字符串或者字符结尾。
-    str.slice(start, end)  提取字符串的片断，不改变原字符串。不包括结束。
-    str.substr(startIndex, length)  从起始索引号提取字符串中指定数目的字符。不会改变原字符串
-    str.substring(startIndex, endIndex)  提取字符串中两个指定的索引号之间的字符。不会改变原字符串
+    str.substr(startIndex, length)  从起始索引号提取字符串中指定数目的字符，索引为负代表从末尾开始。不会改变原字符串
+    str.slice(start, end)  提取字符串的片断，不改变原字符串。不包括结束。下标可以是负数，负数代表从末尾开始。
+    str.substring(startIndex, endIndex)  提取字符串中两个指定的索引号之间的字符。不会改变原字符串。下标必须非负数
     str.toLowerCase()  把字符串转换为小写。
     str.toUpperCase()  把字符串转换为大写。
     str.trim()  去除字符串两边的空白
@@ -114,6 +114,8 @@
     str.trimRight()  去除右边空格
     valueOf()  返回某个字符串对象的原始值。
     toString() 返回一个字符串。
+    str.padStrat(字符串总长度n, 补充内容) 在指定字符串前添加指定内容 使字符串总长度达到n
+    str.padEnd(字符串总长度n, 补充内容) 在指定字符串后添加指定内容 使字符串总长度达到n
 
 ### 4、数组
 
