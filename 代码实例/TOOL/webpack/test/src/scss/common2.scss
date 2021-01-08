@@ -1,9 +1,0 @@
-$backgroundColor: green;
-
-@mixin bg{
-  background-color: $backgroundColor;
-}
-
-body {
-  @include bg;
-}

@@ -1,8 +1,0 @@
-# 接口1
-GET http://jsonplaceholder.typicode.com/posts/1
-
-###
-# 接口2
-GET http://jsonplaceholder.typicode.com/posts/1/comments
-
-
