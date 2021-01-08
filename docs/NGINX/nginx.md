@@ -19,6 +19,7 @@ Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且
     nginx -t -c <配置路径>    # 检查配置文件是否有问题，如果已经在配置目录，则不需要-c
     nginx -V 查看nginx版本及安装的本地位置
     ngxin -v 查看nginx版本
+    ngxin -h 查看nginx帮助命令
 
     使用brew安装的nginx使用如下命令
     brew services start nginx
