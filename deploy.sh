@@ -11,7 +11,7 @@ cd 首页
 
 # 初始化项目仓库并提交
 git init
-git add -A
+git add .
 git commit -m 'deploy'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
