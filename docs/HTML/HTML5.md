@@ -1,3 +1,5 @@
+## HTML5 知识点
+
 ### 1、HTML 和 HTML5 有何区别？
 
 - 文档申明不同，HTML5 不基于 SGML，不在需要引入 DTD。HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
@@ -195,7 +197,7 @@ function startWorker() {
     // 创建worker对象
     w = new Worker("WebWorker.js");
     // 通过onmessage监听worker.js发来的数据
-    w.onmessage = function (event) {
+    w.onmessage = function(event) {
       document.getElementById("countText").innerText = event.data;
     };
   } else {
@@ -219,7 +221,7 @@ SSE 是单向通道，只能服务器向客户端发送消息，如果客户端�
 // 客户端
 if (typeof EventSource !== "undefined") {
   var source = new EventSource("demo_sse.php");
-  source.onmessage = function (event) {
+  source.onmessage = function(event) {
     document.getElementById("result").innerHTML += event.data + "<br>";
   };
 } else {
@@ -263,24 +265,24 @@ function startWebSocket() {
   // 打开一个 web socket 这个链接是网上的测试链接，目前可用。ws是http链接 wss是https的链接
   ws = new WebSocket("ws://121.40.165.18:8800");
   // 建立连接时调用
-  ws.onopen = function () {
+  ws.onopen = function() {
     // Web Socket 已连接上，使用 send() 方法发送数据
     ws.send("测试WebSocket，发送数据给服务端");
     alert("数据发送中...");
   };
   // 客户端接收服务端数据时触发
-  ws.onmessage = function (evt) {
+  ws.onmessage = function(evt) {
     var received_msg = evt.data;
     console.log(received_msg);
     div1.innerHTML += received_msg;
     alert("数据已接收...");
   };
   // 关闭时调用
-  ws.onclose = function () {
+  ws.onclose = function() {
     alert("连接已关闭");
   };
   // 发生错误是调用
-  ws.onerror = function (err) {
+  ws.onerror = function(err) {
     alert("发生错误啦", err);
   };
 }
