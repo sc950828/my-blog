@@ -227,7 +227,7 @@ module.exports = {
           ["/工具/charles", "charles抓包"],
           ["/工具/postman", "postman"],
           ["/工具/代码规范", "代码规范"],
-          ["/工具/gitreadme", "gitreadme"]
+          ["/工具/markdown", "markdown"]
         ],
       },
       {
