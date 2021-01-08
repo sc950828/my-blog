@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>innerHtml innerText</title>
+  </head>
+  <body>
+    <h3>innerHTML 与 outerHTML innerText 与 outerText 的区别？</h3>
+    div1代码如下
+    <xmp>
+    <div id="div1">
+      <span>content1</span>
+      <span>content2</span>
+    </div>
+    </xmp>
+
+    <div id="div1">
+      <span>content1</span>
+      <span>content2</span>
+    </div>
+
+    <br />
+
+    <span>div1.innerText:</span>
+    <div id="div2">content1 content2</div>
+    <br />
+
+    <span>div1.innerHTML</span>
+    <xmp
+>
+      <span>content1</span>
+      <span>content2</span>
+    </xmp>
+
+    <span>div1.outerText:</span>
+    <div id="div4">content1 content2</div>
+    <br />
+
+    <span>div1.outerHTML</span>
+    <xmp>
+    <div id="div1">
+      <span>content1</span>
+      <span>content2</span>
+    </div>
+    </xmp>
+
+    <script>
+      const div1 = document.getElementById("div1");
+      const div2 = document.getElementById("div2");
+      const div3 = document.getElementById("div3");
+      const div4 = document.getElementById("div4");
+      const div5 = document.getElementById("div5");
+
+      console.log(div1.innerText);
+      console.log(div1.innerHTML);
+      console.log(div1.outerText);
+      console.log(div1.outerHTML);
+    </script>
+  </body>
+</html>

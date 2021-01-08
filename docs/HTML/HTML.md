@@ -1,5 +1,7 @@
 ## HTML 知识点
 
+[菜鸟教程 html 文档](https://www.runoob.com/html/html-tutorial.html)
+
 ### HTML 是什么？
 
 超文本标记语言（英语：HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。
@@ -188,12 +190,24 @@ src 用于替换当前元素，href 用于在当前文档和引用资源之间�
 - document.write 的内容会代替整个文档内容，会重写整个页面。
 - innerHTML 的内容只是替代指定元素的内容，只会重写页面中的部分内容。
 
-### innerHTML 与 outerHTML 的区别？
+### innerHTML 与 outerHTML innerText 与 outerText 的区别？
 
-```
-对于这样一个 HTML 元素：<div>content<br/></div>
-innerHTML：内部 HTML，content<br/>
-outerHTML：外部 HTML，<div>content<br/></div>
-innerText：内部文本，content
-outerText：外部文本，content
+```html
+<!-- 对于这样一个 HTML -->
+<div id="div1">
+  <span>content1</span>
+  <span>content2</span>
+</div>
+
+innerHTML：内部 HTML
+<span>content1</span>
+<span>content2</span>
+
+outerHTML：外部 HTML
+<div id="div1">
+  <span>content1</span>
+  <span>content2</span>
+</div>
+
+innerText：内部文本是 content1 content2 outerText：外部文本是 content1 content2
 ```

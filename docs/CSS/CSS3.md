@@ -1,4 +1,10 @@
-### 1、过渡 transition。
+## CSS3 知识点
+
+[菜鸟教程 css3 文档](https://www.runoob.com/css/css-tutorial.html)
+
+[ css3 文档](https://www.xp.cn/css3/)
+
+### 过渡 transition。
 
 - transition： 过渡属性，花费时间，效果曲线(默认 ease)，延迟时间(默认 0)
   - transition-property: 过渡属性
@@ -16,7 +22,7 @@
   - 媒体查询 窗口改变的时候触发
   - js 改变元素样式触发
 
-### 2、2D 3D 转换 transform。
+### 2D 3D 转换 transform。
 
 - 注意必须是块级元素。
 - transform: 2d
@@ -30,7 +36,7 @@
   - skewX(值) skewY(值)没有 skewZ
   - scaleX(值) scaleY(值) scaleZ(值) 或者写成 scale3d(x, y, z)
 
-### 3、动画 animation。
+### 动画 animation。
 
 - 定义动画
   - @keyframes 动画名称
@@ -65,7 +71,7 @@
       - running：运动
       - paused：暂停
 
-### 4、阴影 box-shoadow。
+### 阴影 box-shoadow。
 
 - 阴影不会占据空间。
 - box-shadow: 水平阴影的位置 垂直阴影的位置 模糊距离 阴影的大小 阴影的颜色 阴影开始方向(默认是从里往外，设置 inset 就是从外往里)。
@@ -76,11 +82,11 @@
   - 阴影的颜色就是颜色 自定义。
   - 阴影的开始方向默认是从里往外，设置 inset 就是从外到里。阴影不占据大小，两元素阴影可能会重叠。
 
-### 5、边框图片 边框圆角 背景图片
+### 边框图片 边框圆角 背景图片
 
 border-image border-radius background-image
 
-### 6、渐变
+### 渐变
 
 - 必须和 background-image 配合使用
 - 线性渐变 linear-gradient (方向，颜色 1，颜色 2，颜色 3......)
@@ -89,21 +95,21 @@ border-image border-radius background-image
   - 颜色可以使用 rgba()设置透明度。
 - 径向渐变 radial-gradient (方向，形状， 大小， 颜色 1， 颜色 2 ....)
 
-### 7、媒体查询 @media
+### 媒体查询 @media
 
 ```css
 @media not|only mediatype and (media feature) {
-    css code;
+  /* css code; */
 }
 ```
 
-### 8、盒模型 content-box
+### 盒模型 content-box
 
 - 控制盒子模型的属性是 box-sizing，默认值是 content-box。
 - 属性值为 content-box 的时候是标准盒子模型：元素宽度=设置的宽度（content）+ border + padding + margin
 - 属性值为 border-box 的时候是 IE 盒子模型：元素宽度=设置的宽度（content+border+padding）+ margin
 
-### 9、过渡和动画的区别是什么？
+### 过渡和动画的区别是什么？
 
 - 过渡只能指定元素的初始状态和结束状态，而动画可以控制多个阶段。
 - 过渡需要有触发条件，而动画不需要触发条件。

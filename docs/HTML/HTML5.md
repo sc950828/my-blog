@@ -1,58 +1,64 @@
 ## HTML5 知识点
 
-### 1、HTML 和 HTML5 有何区别？
+[菜鸟教程 html5 文档](https://www.runoob.com/html/html-tutorial.html)
+
+### HTML 和 HTML5 有何区别？
 
 - 文档申明不同，HTML5 不基于 SGML，不在需要引入 DTD。HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
 - HTML 基于 SGML ，所以需要对 DTD 进行引用。
 - HTML5 新增了语义化标签，语义更明确。
 - HTML 没有绘图功能，HTML5 新增 canvas 画布功能，能绘制图像。
 
-### 2、HTML5 新元素有哪些？
+### HTML5 新元素有哪些？
 
-    新的绘图标签
-      <canvas> 定义图形容器。该标签基于 JavaScript 的绘图 API。
-    新多媒体元素
-      <audio> 定义音频内容
-      <video> 定义视频（video 或者 movie）
-      <source> 定义多媒体资源 <video> 和 <audio>
-      <embed> 定义嵌入的内容，比如插件。
-    新表单元素
-      <datalist> 定义选项列表。请与 input 元素配合使用该元素，来定义 input 可能的值。
-      <output> 定义不同类型的输出，比如脚本的输出。
-    新的语义化标签
-      <header></header>  头部区域标签，块级标签
-      <footer></footer>  底部区域标签，块级标签
-      <nav></nav> 导航区域标签，块级标签
-      <section></section> 类似div，块级标签
-      <article></article> 文章段落标签，块级标签
-      <aside></aside> 侧边栏区域标签，块级标签
-      <figcaption> 定义figure的标题
-      <figure> 表示一段独立的流内容，一般表示文档主题内容中的一个独立单元(视频，音频，图片)。会有外边距。
-      <dialog> 定义对话框，比如提示框。需要加上open属性，默认会居中并加上边框
-    新的其它标签
-      <time></time> 时间区域标签，内联标签
-      <progress> 定义任何类型的任务的进度。
-      <mark></mark> 标记记号标签，内联标签
-      <summary></summary> 含 details 元素的标题
-      <details></details> 用于描述文档或文档某个部分的细节
-      <wbr> 规定在文本中的何处适合添加换行符。
+```
+新的绘图标签
+  <canvas> 定义图形容器。该标签基于 JavaScript 的绘图 API。
+新多媒体元素
+  <audio> 定义音频内容
+  <video> 定义视频（video 或者 movie）
+  <source> 定义多媒体资源 <video> 和 <audio>
+  <embed> 定义嵌入的内容，比如插件。
+新表单元素
+  <datalist> 定义选项列表。请与 input 元素配合使用该元素，来定义 input 可能的值。
+  <output> 定义不同类型的输出，比如脚本的输出。
+新的语义化标签
+  <header></header>  头部区域标签，块级标签
+  <footer></footer>  底部区域标签，块级标签
+  <nav></nav> 导航区域标签，块级标签
+  <section></section> 类似div，块级标签
+  <article></article> 文章段落标签，块级标签
+  <aside></aside> 侧边栏区域标签，块级标签
+  <figcaption> 定义figure的标题
+  <figure> 表示一段独立的流内容，一般表示文档主题内容中的一个独立单元(视频，音频，图片)。会有外边距。
+  <dialog> 定义对话框，比如提示框。需要加上open属性，默认会居中并加上边框
+新的其它标签
+  <time></time> 时间区域标签，内联标签
+  <progress> 定义任何类型的任务的进度。
+  <mark></mark> 标记记号标签，内联标签
+  <summary></summary> 含 details 元素的标题
+  <details></details> 用于描述文档或文档某个部分的细节
+  <wbr> 规定在文本中的何处适合添加换行符。
+```
 
-### 3、 HTML5 移除的元素有哪些？
+### HTML5 移除的元素有哪些？
 
-    <big> 大字体
-    <center> 居中
-    <font> 字体
-    <basefont>
-    <acronym>
-    <applet>
-    <dir>
-    <frame>
-    <frameset>
-    <noframes>
-    <strike>
-    <tt>
+```
+<big> 大字体
+<center> 居中
+<font> 字体
+<basefont>
+<acronym>
+<applet>
+<dir>
+<frame>
+<frameset>
+<noframes>
+<strike>
+<tt>
+```
 
-### 3、HTML5 新 input 类型有哪些？
+### HTML5 新 input 类型有哪些？
 
 ```html
 <input type="color" />
@@ -70,40 +76,41 @@
 <input type="datetime-local" />
 ```
 
-### 4、HTML5 新属性有哪些？
+### HTML5 新属性有哪些？
 
-    <form>新属性：
-      autocomplete 默认on，自动填写表单数据,关闭设置值为off。
-      novalidate 表单不验证。
-    <input>新属性：
-      autocomplete默认on，自动填写表单数据,关闭设置值为off。
-      autofocus 是一个 boolean属性。规定在页面加载时，能自动地获得焦点。
-      form指明属于哪个form表单，可以不写在form里面。
-      formaction覆盖form的action属性，常与submit按钮一起使用。
-      formenctype覆盖form的enctype属性，常与submit按钮一起使用。
-      formmethod覆盖form的method属性，常与submit按钮一起使用。
-      formnovalidate覆盖form的novalidate属性，常与submit按钮一起使用。
-      formtarget覆盖form的target属性，常与submit按钮一起使用。
-      height 与 width 用于 image类型的 <input /> 标签，设置图像高度和宽度。
-      list 用于input与datalist的配合标签。
-      min 与 max 用于input类型为number或者range。
-      multiple用于input类型为file，可以上传多个文件。
-      pattern (regexp) 一个正则表达式用于验证<input /> 元素的值。
-      placeholder 提示语。
-      required 不能为空。
-      step用于input类型为number，每次增加/减少多少。
-    全局新属性
-      hidden（直接放上去就是隐藏相当于display:none）。(全局属性)
-      spellcheck（语法纠错，主要用在文本输入框里面）。(全局属性)
-      tabindex="1"（Tab跳转顺序，按Tab键优先级从小到大，越小越高，也是应用在文本输入框）。
-      data-自定义属性名字。这样就是自定义属性。(全局属性)
-      contenteditable="true"(可编辑状态，单击内容，可修改，p标签 table等等都能用)。
-      为style标签添加了scoped属性。
-      为script标签添加了defer async的异步属性。
-      为html标签添加了manifest属性 定义离线缓存。
-    </form>
+```
+<form>新属性：
+  autocomplete 默认on，自动填写表单数据,关闭设置值为off。
+  novalidate 表单不验证。
+<input>新属性：
+  autocomplete默认on，自动填写表单数据,关闭设置值为off。
+  autofocus 是一个 boolean属性。规定在页面加载时，能自动地获得焦点。
+  form指明属于哪个form表单，可以不写在form里面。
+  formaction覆盖form的action属性，常与submit按钮一起使用。
+  formenctype覆盖form的enctype属性，常与submit按钮一起使用。
+  formmethod覆盖form的method属性，常与submit按钮一起使用。
+  formnovalidate覆盖form的novalidate属性，常与submit按钮一起使用。
+  formtarget覆盖form的target属性，常与submit按钮一起使用。
+  height 与 width 用于 image类型的 <input /> 标签，设置图像高度和宽度。
+  list 用于input与datalist的配合标签。
+  min 与 max 用于input类型为number或者range。
+  multiple用于input类型为file，可以上传多个文件。
+  pattern (regexp) 一个正则表达式用于验证<input /> 元素的值。
+  placeholder 提示语。
+  required 不能为空。
+  step用于input类型为number，每次增加/减少多少。
+全局新属性
+  hidden（直接放上去就是隐藏相当于display:none）。(全局属性)
+  spellcheck（语法纠错，主要用在文本输入框里面）。(全局属性)
+  tabindex="1"（Tab跳转顺序，按Tab键优先级从小到大，越小越高，也是应用在文本输入框）。
+  data-自定义属性名字。这样就是自定义属性。(全局属性)
+  contenteditable="true"(可编辑状态，单击内容，可修改，p标签 table等等都能用)。
+  为style标签添加了scoped属性。
+  为script标签添加了defer async的异步属性。
+  为html标签添加了manifest属性 定义离线缓存。
+```
 
-### 5、拖放
+### 拖放
 
 - 拖放是 html5 提供一个新的特性，这个特性增加了拖拽事件的 api,和定义可以拖拽的属性。
 - 使用:
@@ -143,11 +150,11 @@ function drop(e) {
 }
 ```
 
-### 6、地理定位
+### 地理定位
 
 通过 navigator.geolocation.getCurrentPosition(showPosition, showError)获取地理信息，传两个函数作为参数。
 
-### 7、离线缓存
+### 离线缓存
 
 - manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置。
 - manifest 文件可分为三个部分：
@@ -164,7 +171,7 @@ function drop(e) {
   - FALLBACK 中的资源必须和 manifest 文件同源。
   - 站点中的其他页面即使没有设置 manifest 属性，请求的资源如果在缓存中也从缓存中访问。
 
-### 8、web 存储
+### web 存储
 
 - localStorage 只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份 localStorage 数据。
 - sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口。
@@ -179,7 +186,7 @@ function drop(e) {
   - localStorage/sessionStorage.clear() // 删除所有数据
   - localstorage/sessionStorage.key(index) //获取某个索引位置的 key，index 从下标 0 开始。
 
-### 9、WebWorker
+### WebWorker
 
 - web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。
 - webworker 线程与 js 主线程最大的区别就在于 webworker 线程无法操作 window 与 document 对象。
@@ -210,7 +217,7 @@ function stopWorker() {
 }
 ```
 
-### 10、SSE
+### SSE
 
 HTML5 服务器发送事件（server-sent event）允许网页获得来自服务器的更新。 Server-Sent 事件 - 单向消息传递 Server-Sent 事件指的是网页自动获取来自服务器的更新。
 
@@ -231,7 +238,7 @@ if (typeof EventSource !== "undefined") {
 // 三个方法 onopen当通往服务器的连接被打开、onmessage当接收到消息、onerror当发生错误
 ```
 
-### 11、WebSocket
+### WebSocket
 
 - WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。
 - 在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
@@ -297,18 +304,18 @@ function reSendData() {
 }
 ```
 
-### 12、什么是 SVG？其他图像格式相比优势有哪些？
+### 什么是 SVG？其他图像格式相比优势有哪些？
 
 - SVG 指可伸缩矢量图形 (Scalable Vector Graphics)
 - 优势:
   - SVG 是可伸缩的，SVG 可在图像质量不下降的情况下被放大。
   - SVG 图像可通过文本编辑器来创建和修改。
 
-### 13、什么是 canvas?
+### 什么是 canvas?
 
 用于图形的绘制的容器，您必须使用 javascript 来绘制图形。
 
-### 14、canvas 和 svg 区别是什么？
+### canvas 和 svg 区别是什么？
 
 - SVG 是一种使用 XML 描述 2D 图形的语言，不依赖分辨率，不适合游戏。
 - Canvas 通过 JavaScript 来绘制 2D 图形，依赖分辨率， 适合游戏。
@@ -316,27 +323,27 @@ function reSendData() {
 - 在 SVG 中，每个被绘制的图形均被视为对象。如果 SVG 对象的属性发生变化，那么浏览器能够自动重现图形。
 - Canvas 是逐像素进行渲染的。在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。是一个整体。
 
-### 15、语义化标签的好处？
+### 语义化标签的好处？
 
 - 利于 SEO，方便搜索引擎识别页面结构。
 - 让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
 - 有利于开发者的维护和理解。
 
-### 16、如何处理 HTML5 新标签的浏览器兼容问题？
+### 如何处理 HTML5 新标签的浏览器兼容问题？
 
 通过 document.createElement 方法创建 html5 的标签。
 
-### 17、浏览器是怎么对 HTML5 的离线储存资源进行管理和加载的呢？
+### 浏览器是怎么对 HTML5 的离线储存资源进行管理和加载的呢？
 
 - 在线的情况下，浏览器发现 html 头部有 manifest 属性，它会请求 manifest 文件，如果是第一次访问 app ，那么浏览器就会根据 manifest 文件的内容下载相应的资源并且进行离线存储。如果已经访问过 app 并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的 manifest 文件与旧的 manifest 文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
 
 - 离线的情况下，浏览器就直接使用离线存储的资源。
 
-### 18、请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+### 请描述一下 cookies，sessionStorage 和 localStorage 的区别？
 
 - cookie 数据始终在同源（协议、主机、端口相同）的 http 请求中携带（即使不需要），会在浏览器和服务器间来回传递。
 - 存储大小：
-  - cookie 数据大小不能超过 4 k 。
+  - cookie 数据大小不能超过 4 k。
   - sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大。
 - 有期时间：
   - localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据。
