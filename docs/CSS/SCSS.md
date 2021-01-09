@@ -1,4 +1,4 @@
-### SCSS 知识点
+## SCSS 知识点
 
 [scss 文档](https://www.sass.hk/docs/)
 

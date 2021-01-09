@@ -1,4 +1,4 @@
-### 1、promise
+### promise
 
 - promise 解决层层回调函数，代码不清晰问题，使异步代码能链式调用 流程更加清晰，代码更加优雅
 - 一个 Promise 对象值是未知的，状态是可变的，但是无论怎么变化，它的状态永远处于以下三种之间：
@@ -7,7 +7,7 @@
   - rejected：意味着操作失败。
 - Promise 的状态会发生变化，成功时会从 pending -> fulfilled，失败时会从 pending -> rejected，但是此过程是不可逆的，也就是不能从另外两个状态变成 pending。fulfilled/rejected 这两个状态也被称为 settled 状态。
 
-### 2、promise 方法
+### promise 方法
 
 - then(onFulfilled[, onRejected])
   - onFulfilled 当 Promise 变成已完成状态(fulfilled)时调用的回调函数
@@ -18,11 +18,11 @@
 - race() 接收一个 Promise 对象数组作为参数,参数里的任意一个子 promise 被成功或失败后，父 promise 马上也会用子 promise 的成功返回值或失败详情作为结果。
 - allSettled() 接收一个 Promise 对象数组作为参数,不管子 promise 成功失败都返回。
 
-### 3、async await
+### async await
 
 没有了链式调用，用完全同步的方法写异步代码 缺点是没有 promise.all()这种并发的方法
 
-### 4、js 中的异步机制可以分为以下几种
+### js 中的异步机制可以分为以下几种
 
 - 第一种最常见的是使用回调函数的方式，使用回调函数的方式有一个缺点是，多个回调函数嵌套的时候会造成回调函数地狱，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
 
@@ -69,7 +69,7 @@ for(let val of gen2()){
 
 - 第五种是使用 async 函数的形式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
 
-### 5、什么是 Promise 对象，什么是 Promises/A+ 规范？
+### 什么是 Promise 对象，什么是 Promises/A+ 规范？
 
 Promise 对象是异步编程的一种解决方案，最早由社区提出。Promises/A+ 规范是 JavaScript Promise 的标准，规定了一个 Promise 所必须具有的特性。
 
@@ -115,7 +115,7 @@ function MyPromise(fn) {
         self.value = value;
 
         // 执行回调函数
-        self.resolvedCallbacks.forEach(callback => {
+        self.resolvedCallbacks.forEach((callback) => {
           callback(value);
         });
       }
@@ -135,7 +135,7 @@ function MyPromise(fn) {
         self.value = value;
 
         // 执行回调函数
-        self.rejectedCallbacks.forEach(callback => {
+        self.rejectedCallbacks.forEach((callback) => {
           callback(value);
         });
       }
@@ -151,19 +151,19 @@ function MyPromise(fn) {
   }
 }
 
-MyPromise.prototype.then = function (onResolved, onRejected) {
+MyPromise.prototype.then = function(onResolved, onRejected) {
   // 首先判断两个参数是否为函数类型，因为这两个参数是可选参数
   onResolved =
     typeof onResolved === "function"
       ? onResolved
-      : function (value) {
+      : function(value) {
           return value;
         };
 
   onRejected =
     typeof onRejected === "function"
       ? onRejected
-      : function (error) {
+      : function(error) {
           throw error;
         };
 

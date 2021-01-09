@@ -1,4 +1,4 @@
-### 1、this
+### this
 
 this 的值是在执行的时候才能确认，定义的时候不能确认！ 为什么呢 因为 this 是执行上下文环境的一部分，而执行上下文需要在代码执行之前确定，而不是定义的时候。
 
@@ -36,9 +36,9 @@ console.log(f2() === undefined); // true
 //方式1
 var o = {
   prop: 37,
-  f: function () {
+  f: function() {
     return this.prop;
-  }
+  },
 };
 //当 o.f()被调用时，函数内的this将绑定到o对象。
 console.log(o.f()); // logs 37
@@ -92,11 +92,11 @@ console.log(o.a); // logs 38
 // setTimeOut setInterval this
 // 对于延时函数内部的回调函数的this指向全局对象window；
 // 可以通过bind()方法改变内部函数this指向。
-setTimeout(function () {
+setTimeout(function() {
   console.log("setTimeout this=", this);
 }, 1000);
 setTimeout(
-  function () {
+  function() {
     console.log("setTimeout bind {name: 'randy'} this=", this);
   }.bind({ name: "randy" }),
   1000
@@ -107,7 +107,7 @@ setTimeout(
 // 在DOM事件中 this总是与currentTarget相等
 document
   .getElementsByClassName("father")[0]
-  .addEventListener("click", function (e) {
+  .addEventListener("click", function(e) {
     // currentTarget是绑定事件的元素
     // target是触发事件的元素
     console.log(e.target === this);
@@ -131,7 +131,7 @@ document
 </button>
 ```
 
-### 2、es6 箭头函数中的 this 和普通函数中的 this
+### es6 箭头函数中的 this 和普通函数中的 this
 
 - 箭头函数的 this 是在定义函数时绑定的，不是在执行过程中绑定的。简单的说，函数在定义时，this 就继承了定义函数的对象。
 - 箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this，否则 this 的值则被设置为全局对象。
@@ -159,9 +159,9 @@ console.log(foo2() === globalObject); // true
 var obj = {
   i: 10,
   b: () => console.log(this.i, this),
-  c: function () {
+  c: function() {
     console.log(this.i, this);
-  }
+  },
 };
 obj.b(); // undefined window{...}
 obj.c(); // 10 Object {...}
@@ -178,7 +178,7 @@ function Person1(age) {
 //普通函数作为内部函数
 function Person2() {
   this.age = 0;
-  setInterval(function () {
+  setInterval(function() {
     console.log(this); // 指向window
   }, 1000);
 }
@@ -194,7 +194,7 @@ setTimeout(() => {
 }, 100);
 
 // 事件对象
-document.getElementsByClassName("father")[0].addEventListener("click", e => {
+document.getElementsByClassName("father")[0].addEventListener("click", (e) => {
   // 始终指向window
   console.log(this);
 });
@@ -209,13 +209,13 @@ say(); // window
 say.call({ name: "randy" }); // 无效 还是window
 
 // 箭头函数不能用作构造函数
-var Father = name => {
+var Father = (name) => {
   this.name = name;
 };
 // console.log(new Father("randy")); //报错 箭头函数不能作为构造函数
 
 // 箭头函数没有arguments对象 如果需要 需要使用...args
-var hello = function (name, age) {
+var hello = function(name, age) {
   console.log(arguments);
   console.log("arguments[0]", arguments[0]);
   console.log("arguments[1]", arguments[1]);

@@ -59,6 +59,7 @@ module.exports = {
           ["/JAVASCRIPT/手写", "手写"],
           ["/JAVASCRIPT/常用正则", "常用正则"],
           ["/JAVASCRIPT/前端二进制", "前端二进制"],
+          ["/JAVASCRIPT/JQuery", "JQuery"]
         ],
       },
       {

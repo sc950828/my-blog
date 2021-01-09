@@ -1,4 +1,4 @@
-# JAVASCRIPT 基础知识
+## JAVASCRIPT 基础知识
 
 ### 1、[JavaScript 基础](./JavaScript基础)
 
@@ -41,3 +41,5 @@
 ### 20、[常用正则](./常用正则)
 
 ### 21、[前端二进制](./前端二进制)
+
+### 22、[JQuery](./JQuery)
