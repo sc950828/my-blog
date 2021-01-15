@@ -1,8 +1,10 @@
-## LESS 知识点
+## LESS 文档
 
 [less 文档 1](https://less.bootcss.com/#%E6%A6%82%E8%A7%88)
 
 [less 文档 2](http://lesscss.cn/functions/)
+
+## LESS 知识点
 
 ### 安装和编译
 
@@ -301,7 +303,7 @@ each(@list1, {
 ### 注释
 
 ```less
-/* 这是块注释 */ 这个会在编译后的css里面
+/* 这是块注释 这个会在编译后的css里面*/
 // 这是行注释 这个不会出现在编译后的css里面
 ```
 

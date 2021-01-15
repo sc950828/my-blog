@@ -1,8 +1,10 @@
-## JavaScript 知识点
+## JavaScript 文档
 
 [菜鸟教程 JavaScript 文档](https://www.runoob.com/js/js-tutorial.html)
 
 [现代 JavaScript 文档](https://zh.javascript.info/)
+
+## JavaScript 知识点
 
 ### 数据类型
 
@@ -13,7 +15,7 @@
   - 判断基本数据类型的时候如果是通过构造函数创建的则是 object。比如 typeof new Number(1)则是 object。
   - typeof 引用数据类型除了 typeof function 是 function 其他的都是 object。
 
-### Object
+## Object
 
 - Object.assign(target, source1, source2,...) 返回一个新对象 target 会受到影响 返回的对象等于新的 target 对象。
 
@@ -87,7 +89,7 @@
 - obj1.isPrototypeOf(obj2)
   判断 obj1 是否存在于 obj2 的原型链上。 原型.isPrototypeOf(对象)
 
-### String
+## String
 
 ```
 创建Number有两种种方法
@@ -124,7 +126,7 @@
   str.padEnd(字符串总长度n, 补充内容) 在指定字符串后添加指定内容 使字符串总长度达到n
 ```
 
-### 数组
+## 数组
 
 ```
 创建数组有三种方法
@@ -169,7 +171,7 @@
   arr.valueOf()  返回数组对象的原始值。
 ```
 
-### Number
+## Number
 
 ```
 创建Number有两种方法
@@ -188,7 +190,7 @@ num.toString()  把数字转换为字符串，使用指定的基数。
 num.valueOf()  返回一个 Number 对象的基本数字值。
 ```
 
-### Boolean
+## Boolean
 
 ```
 创建Boolean有两种种方法
@@ -199,7 +201,7 @@ num.valueOf()  返回一个 Number 对象的基本数字值。
   valueOf() 返回 Boolean 对象的原始值。
 ```
 
-### Symbol
+## Symbol
 
 定义独一无二的值
 
@@ -216,7 +218,7 @@ let s2 = Symbol("bar");
 // 3.Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和 Symbol 键名。
 ```
 
-### Math
+## Math
 
 ```
 Math.abs(x)  返回 x 的绝对值。
@@ -231,7 +233,7 @@ Math.trunc(x) 截取整数部分，不会四舍五入。
 Math.sqrt(x)  返回数的平方根。
 ```
 
-### date
+## date
 
 ```
 创建Date的方法
@@ -276,7 +278,7 @@ date.toJSON()  以 JSON 数据格式返回日期字符串。与ISO格式返回�
   getMonth()会比现实小一个月，如果是自己通过setMonth()设置的则不会小。
 ```
 
-### Error
+## Error
 
 ```
 抛出自定义异常 throw new Error(message)。
@@ -295,7 +297,7 @@ Error：普通异常。通常与 throw 语句和 try／catch 语句一起使用�
 try catch 无法捕捉 Promise 的异常，是因为 Promise 的异常没有往上抛。在内部用try catch包裹住了。
 ```
 
-### 正则表达式
+## 正则表达式
 
 ```
 创建有两种方法
@@ -324,7 +326,7 @@ try catch 无法捕捉 Promise 的异常，是因为 Promise 的异常没有往�
   toString  返回正则表达式的字符串。返回/ /这种格式的正则。
 ```
 
-### 全局属性和方法
+## 全局属性和方法
 
 ```
 属性
@@ -345,7 +347,7 @@ try catch 无法捕捉 Promise 的异常，是因为 Promise 的异常没有往�
   parseInt()  解析一个字符串并返回一个整数。不会四舍五入
 ```
 
-### 浏览器对象 BOM
+## 浏览器对象 BOM
 
 ```
 window
@@ -418,7 +420,7 @@ navigator
     cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
 ```
 
-### DOM
+## DOM
 
 ```
 document

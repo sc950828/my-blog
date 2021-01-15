@@ -1,8 +1,10 @@
-## CSS 知识点
+## CSS 文档
 
 [菜鸟教程 css 文档](https://www.runoob.com/css/css-tutorial.html)
 
 [css 文档](https://www.xp.cn/css3/)
+
+## CSS 知识点
 
 ### CSS 是什么？
 
@@ -303,6 +305,11 @@ word-wrap 这个属性也是控制单词如何被拆分换行的 作为word-brea
 .a {
   /* 写在类里面的是局部变量 */
   --color: red;
+}
+
+.b {
+  /* 使用 第一个参数为自定义属性名，第二个参数用作缺省值*/
+  color: var(--main-bg-color, "red");
 }
 ```
 

@@ -1,4 +1,4 @@
-### 1、给 dom 绑定事件的方式有哪些？
+### 给 dom 绑定事件的方式有哪些？
 
 - 主要有三种：在 dom 元素上直接绑定，在 js 中获取 dom 元素再进行绑定 ，利用事件监听。
 - 利用事件监听的优点是可以给同一 dom 对象绑定多个事件。
@@ -27,7 +27,7 @@
   }
 ```
 
-### 2、事件委托
+### 事件委托
 
 - 事件委托就是利用冒泡的原理，把事件加到父元素或祖先元素上，触发执行效果。
 
@@ -43,18 +43,18 @@
 
 - 提高 JavaScript 性能。事件委托可以显著的提高事件的处理速度，减少内存的占用使用事件委托我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实现事件的动态绑定，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理。
 
-### 3、方法
+### 方法
 
 - preventDefault() 阻止默认行为 ie 下的方法 window.event.returnValue = false
 - stopPropagation() 阻止事件的冒泡。ie 下的方法 event.cancelBubble = true;
 - stopImmediatePropagation() 阻止剩下的事件处理程序被执行。如果一个元素上绑定了三个事件，在其中一个事件上调用了这个方法，那其他 的两个事件将不会被执行。
 
-### 4、load 和 DOMContentLoaded
+### load 和 DOMContentLoaded
 
 - 当 onload 事件触发时，页面上所有的 DOM，样式表，脚本，图片，flash 都已经加载完成了。
 - 当 DOMContentLoaded 事件触发时，仅当 DOM 加载完成，不包括样式表，图片，flash。如果页面中同时存在 css 和 js，并且存在 js 在 css 后面，则 DOMContentLoaded 事件会在 css 加载完后才执行。其他情况下，DOMContentLoaded 都不会等待 css 加载，并且 DOMContentLoaded 事件也不会等待图片、视频等其他资源加载。
 
-### 5、什么是事件传播 事件传播的三个阶段是什么？
+### 什么是事件传播 事件传播的三个阶段是什么？
 
 当事件发生在 DOM 元素上时，该事件并不完全发生在那个元素上。 在“冒泡阶段”中，事件冒泡或向上传播至父级，祖父母，祖父母或父级，直到到达 window 为止。在捕获阶段事件从 window 开始向下触发，直到到达目标元素。IE 只支持事件冒泡。
 
@@ -62,21 +62,21 @@
 - 目标阶段 事件已达到目标元素。
 - 冒泡阶段 事件从目标元素冒泡，然后上升到每个元素，直到到达 window。
 
-### 6、如何知道是否在元素中使用了`event.preventDefault()`方法？
+### 如何知道是否在元素中使用了`event.preventDefault()`方法？
 
 我们可以在事件对象中使用 event.defaultPrevented 属性。 它返回一个布尔值用来表明是否在特定元素中调用了 event.preventDefault()
 
-### 7、target currentTarget 区别
+### target currentTarget 区别
 
 - target 是触发事件的元素
 - currentTarget 是挂载事件的元素
 
-### 8、mouseover mouseout 和 mouseenter mouseleave 的区别是什么？
+### mouseover mouseout 和 mouseenter mouseleave 的区别是什么？
 
 - mouseover：当鼠标移入元素或其子元素都会触发事件，所以有一个重复触发，有冒泡的过程。对应的移除事件是 mouseout
 - mouseenter：当鼠标移入元素本身（不包含元素的子元素）会触发事件，也就是不会冒泡，对应的移除事件是 mouseleave
 
-### 9、三种事件模型是什么？
+### 三种事件模型是什么？
 
 - 事件是用户操作网页时发生的交互动作或者网页本身的一些操作，现代浏览器一共有三种事件模型。
 
@@ -98,7 +98,7 @@ dom 标准事件流的触发的先后顺序为：先捕获再冒泡。即当触�
 
 我们使用`e.stopPropagation()`阻止冒泡事件，在 vue 里面我们使用`@click.stop`阻止事件冒泡
 
-### 10、自定义事件
+### 自定义事件
 
 ```js
 // 监听自定义事件
@@ -135,7 +135,7 @@ setTimeout(function() {
 }, 3000);
 ```
 
-### 11、写一个通用的事件侦听器函数。
+### 写一个通用的事件侦听器函数。
 
 ```js
 const EventUtils = {
@@ -192,7 +192,7 @@ const EventUtils = {
 };
 ```
 
-### 12、实现 EventEmitter
+### 实现 EventEmitter
 
 ```js
 class EventEmitter {

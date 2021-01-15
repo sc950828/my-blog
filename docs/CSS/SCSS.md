@@ -1,6 +1,8 @@
-## SCSS 知识点
+## SCSS 文档
 
 [scss 文档](https://www.sass.hk/docs/)
+
+## SCSS 知识点
 
 ### 全局安装 sass 用来编译 scss 文件
 
@@ -157,6 +159,8 @@ each 用来循环
 /* 这是块注释 这个会在编译后的css里面 */
 // 这是行注释 这个不会出现在编译后的css里面
 ```
+
+## 常见问题
 
 ### sass scss 的区别是什么？
 

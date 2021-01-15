@@ -1,13 +1,8 @@
-## HTML5 知识点
+## HTML5 文档
 
 [菜鸟教程 html5 文档](https://www.runoob.com/html/html-tutorial.html)
 
-### HTML 和 HTML5 有何区别？
-
-- 文档申明不同，HTML5 不基于 SGML，不在需要引入 DTD。HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
-- HTML 基于 SGML ，所以需要对 DTD 进行引用。
-- HTML5 新增了语义化标签，语义更明确。
-- HTML 没有绘图功能，HTML5 新增 canvas 画布功能，能绘制图像。
+## HTML5 知识点
 
 ### HTML5 新元素有哪些？
 
@@ -110,7 +105,7 @@
   为html标签添加了manifest属性 定义离线缓存。
 ```
 
-### 拖放
+## 拖放
 
 - 拖放是 html5 提供一个新的特性，这个特性增加了拖拽事件的 api,和定义可以拖拽的属性。
 - 使用:
@@ -150,11 +145,11 @@ function drop(e) {
 }
 ```
 
-### 地理定位
+## 地理定位
 
 通过 navigator.geolocation.getCurrentPosition(showPosition, showError)获取地理信息，传两个函数作为参数。
 
-### 离线缓存
+## 离线缓存
 
 - manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置。
 - manifest 文件可分为三个部分：
@@ -171,7 +166,7 @@ function drop(e) {
   - FALLBACK 中的资源必须和 manifest 文件同源。
   - 站点中的其他页面即使没有设置 manifest 属性，请求的资源如果在缓存中也从缓存中访问。
 
-### web 存储
+## web 存储
 
 - localStorage 只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份 localStorage 数据。
 - sessionStorage 比 localStorage 更严苛一点，除了协议、主机名、端口外，还要求在同一窗口。
@@ -186,7 +181,7 @@ function drop(e) {
   - localStorage/sessionStorage.clear() // 删除所有数据
   - localstorage/sessionStorage.key(index) //获取某个索引位置的 key，index 从下标 0 开始。
 
-### WebWorker
+## WebWorker
 
 - web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。
 - webworker 线程与 js 主线程最大的区别就在于 webworker 线程无法操作 window 与 document 对象。
@@ -217,7 +212,7 @@ function stopWorker() {
 }
 ```
 
-### SSE
+## SSE
 
 HTML5 服务器发送事件（server-sent event）允许网页获得来自服务器的更新。 Server-Sent 事件 - 单向消息传递 Server-Sent 事件指的是网页自动获取来自服务器的更新。
 
@@ -238,7 +233,7 @@ if (typeof EventSource !== "undefined") {
 // 三个方法 onopen当通往服务器的连接被打开、onmessage当接收到消息、onerror当发生错误
 ```
 
-### WebSocket
+## WebSocket
 
 - WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。
 - 在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
@@ -311,6 +306,8 @@ function reSendData() {
   - SVG 是可伸缩的，SVG 可在图像质量不下降的情况下被放大。
   - SVG 图像可通过文本编辑器来创建和修改。
 
+## canvas
+
 ### 什么是 canvas?
 
 用于图形的绘制的容器，您必须使用 javascript 来绘制图形。
@@ -322,6 +319,15 @@ function reSendData() {
 - SVG 基于 XML，这意味着 SVG DOM 中的每个元素都是可用的。您可以为某个元素附加 JavaScript 事件处理器。
 - 在 SVG 中，每个被绘制的图形均被视为对象。如果 SVG 对象的属性发生变化，那么浏览器能够自动重现图形。
 - Canvas 是逐像素进行渲染的。在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。是一个整体。
+
+## 常见问题
+
+### HTML 和 HTML5 有何区别？
+
+- 文档申明不同，HTML5 不基于 SGML，不在需要引入 DTD。HTML5 使用<!DOCTYPE html>申明文档，更简洁明了。
+- HTML 基于 SGML ，所以需要对 DTD 进行引用。
+- HTML5 新增了语义化标签，语义更明确。
+- HTML 没有绘图功能，HTML5 新增 canvas 画布功能，能绘制图像。
 
 ### 语义化标签的好处？
 

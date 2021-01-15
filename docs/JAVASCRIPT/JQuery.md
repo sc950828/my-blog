@@ -1,4 +1,4 @@
-## JQuery 知识点
+## JQuery 文档
 
 [JQuery 文档](https://jquery.cuishifeng.cn/)
 
