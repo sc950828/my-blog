@@ -16,6 +16,11 @@ Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为�
 
 每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。
 
+### 查看 git 安装目录
+
+- Mac： 在命令行中输入 which git，就会显示 git 的安装位置了
+- Windows： 打开 cmd，输入 where git，就会显示 git 的安装路径了
+
 ### 生成 ssh
 
 1. ssh-keygen -t rsa -C '1287530097@qq.com'

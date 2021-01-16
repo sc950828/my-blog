@@ -193,6 +193,7 @@ module.exports = {
         children: [
           ["/计算机基础/计算机基础", "计算机基础"],
           ["/计算机基础/linux常用命令", "linux常用命令"],
+          ["/计算机基础/linux文件权限", "linux文件权限"],
           ["/计算机基础/ubuntu", "ubuntu"],
           ["/计算机基础/windows", "windows"],
           ["/计算机基础/mac", "mac"],

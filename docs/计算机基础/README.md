@@ -4,10 +4,12 @@
 
 ### 2、[linux 常用命令](./linux常用命令)
 
-### 3、[ubuntu](./ubuntu)
+### 3、[linux 文件权限](./linux文件权限)
 
-### 4、[windows](./windows)
+### 4、[ubuntu](./ubuntu)
 
-### 5、[mac](./mac)
+### 5、[windows](./windows)
 
-### 6、[shell](./shell)
+### 6、[mac](./mac)
+
+### 7、[shell](./shell)
