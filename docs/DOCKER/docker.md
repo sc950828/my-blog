@@ -1,3 +1,7 @@
+## docker 知识点
+
+[docker 菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
+
 ### 什么是 docker
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。
@@ -45,6 +49,9 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
     4.删除镜像 参数是镜像id或者时镜像名 镜像名由仓库:tag组成
       docker rmi xxx
 
+    5.查看镜像详情
+      docker inspect 我们可以看到关于镜像相当完备的信息
+
 ### 构建镜像
 
 当我们从 docker 镜像仓库中下载的镜像不能满足我们的需求时，我们可以通过以下两种方式对镜像进行更改。
@@ -56,6 +63,8 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 使用 docker commit -m 'desc' -a 'author' 容器 id/names 新镜像 RESPORTY:新镜像 TAG
 
 如果提交的时候没指定新的镜像 RESPORTY:TAG 我们也可以使用 tag 命令进行命名
+
+docker tag 还可以用来修改镜像名
 
 ```shell
 docker tag 容器 id/names 新镜像 RESPORTY:新镜像 TAG
@@ -119,11 +128,11 @@ docker tag 容器 id/names 新镜像 RESPORTY:新镜像 TAG
 
 常用命令
 
+通过 docker network ls 或是 docker network list 可以查看 Docker 中已经存在的网络。
+
 sudo docker network create -d bridge networkName
 
 通过 -d 选项我们可以为新的网络指定驱动的类型，其值可以是刚才我们所提及的 bridge、host、overlay、maclan、none，也可以是其他网络驱动插件所定义的类型。这里我们使用的是 Bridge Driver ( 当我们不指定网络驱动时，Docker 也会默认采用 Bridge Driver 作为网络驱动 )。
-
-通过 docker network ls 或是 docker network list 可以查看 Docker 中已经存在的网络。
 
 之后在我们创建容器时，可以通过 --network 来指定容器所加入的网络，一旦这个参数被指定，容器便不会默认加入到 bridge 这个网络中了 ( 但是仍然可以通过 --network bridge 让其加入 )。
 
@@ -216,26 +225,16 @@ $ sudo docker run -d --name webapp --tmpfs /webapp/cache webapp:latest
 $ sudo docker run -d --name webapp -v /webapp/storage webapp:latest
 ```
 
+为了方便识别数据卷，我们可以像命名容器一样为数据卷命名，这里的 Name 就是数据卷的命名。在我们未给出数据卷命名的时候，Docker 会采用数据卷的 ID 命名数据卷。我们也可以通过 -v `<name>:<container-path>` 这种形式来命名数据卷。
+
+```shell
+sudo docker run -d --name webapp -v appdata:/webapp/storage webapp:latest
+```
+
 删除数据卷
 
 ```shell
 $ sudo docker volume rm name
-```
-
-### 保存和共享镜像
-
-将容器修改的内容保存为镜像的命令是 docker commit 容器名，我们还可以像通过 Git 等代码仓库软件提交代码一样，我们还能在提交容器更改的时候给出一个提交信息，方便以后查询。
-
-```shell
-docker commit webapp
-docker commit -m 'tetst' webapp
-```
-
-通过上面创建出来的镜像是没有名字和仓库的，给镜像命名使用 docker tag
-
-```shell
-# 镜像id 仓库:tag 注意仓库名必须全小写
-$ sudo docker tag 0bc42f7ff218 mynginx:1.0
 ```
 
 ### 镜像的迁移

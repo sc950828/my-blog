@@ -169,7 +169,7 @@ module.exports = {
         title: "DOCKER",
         children: [
           ["/DOCKER/docker", "docker"],
-          ["/DOCKER/dockerfile", "docker file"],
+          ["/DOCKER/dockerfile文件", "docker file文件"],
           ["/DOCKER/dockercompose", "docker compose"],
         ],
       },
