@@ -1,10 +1,10 @@
-### 1、 .editorconfig 文件
+### .editorconfig 文件
 
 这里配置的代码规范规则优先级高于编辑器默认的代码格式化规则。如果需要使用 editorconfig 生效只有配置文件是不够的，还需要对应编辑器的插件，比如 vscode 需要下载 EditorConfig for VS Code 插件，配置才会生效
 
 官网 http://editorconfig.org
 
-### 2、常用属性配置
+### 常用属性配置
 
     1、root<boolean>
       是否是顶级配置文件，设置为true的时候才会停止搜索.editorconfig文件
@@ -30,7 +30,7 @@
     8、max_line_length<number>
       最大行宽。
 
-### 3、常用文件名匹配
+### 常用文件名匹配
 
     1、*
       匹配除/之外的任意字符
@@ -53,7 +53,7 @@
     7、[num1..num2]
       匹配num1到mun2直接的整数
 
-### 4、基本配置
+### 基本配置
 
     #控制 .editorconfig 是否生效的字段
     root = true

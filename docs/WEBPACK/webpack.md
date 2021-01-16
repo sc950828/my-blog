@@ -1,8 +1,8 @@
-### 1、什么是 webpack?
+### 什么是 webpack?
 
 webpack 是一个现代 JavaScript 应用程序的静态模块打包器，当 webpack 处理应用程序时，会递归构建一个依赖关系图，其中包含应用程序需要的每个模块，然后将这些模块打包成一个或多个 bundle。
 
-### 2、核心概念
+### 核心概念
 
 entry: 入口
 
@@ -12,7 +12,7 @@ loader(在 module 的 rules 的数组里面配置): 模块转换器，用于把�
 
 插件(plugins): 扩展插件，在 webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要做的事情
 
-### 3、使用
+### 使用
 
 需要安装 webpack 和 webpack-cli。webpack-cli 它的作用就是让我们能够在命令行里面正确的使用 webpack 这个命令。
 
@@ -51,7 +51,7 @@ module.exports = {
 //     | ./src/content.js 196 bytes [built]
 ```
 
-### 4、入口 entry
+### 入口 entry
 
     入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。
     可以通过在 webpack 配置中配置 entry 属性，来指定一个入口起点（或多个入口起点）。默认值为 ./src/index.js。
@@ -65,7 +65,7 @@ module.exports = {
         配置 context: path.resolve(__dirname, 'src') 必须是绝对路径
         命令行 webpack --context=xxx 必须是绝对路径
 
-### 5、出口 output
+### 出口 output
 
     output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件，默认值为 ./dist/main.js
     注意，即使可以存在多个入口起点，但只指定一个输出配置。
@@ -80,7 +80,7 @@ module.exports = {
         [contenthash] 文件内容的hash
       publicPath //通常是CDN地址 不常用
 
-### 6、模式 mode
+### 模式 mode
 
 通过选择 development 或 production 之中的一个，来设置 mode 参数，进行对 webpack 内置的优化。
 
@@ -124,7 +124,7 @@ module.exports = {
 };
 ```
 
-### 7、创建本地服务器 webpack-dev-server 注意不会真正的打包
+### 创建本地服务器 webpack-dev-server 注意不会真正的打包
 
 实现改变代码实时打包更新。以缓存的模式，不会真正的打包。真正的打包需要使用 webpack。
 
@@ -165,7 +165,7 @@ webpack-dev-server 启动后会实时刷新网页，如果不想实时刷新可�
 
 hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下，hot 会自动刷新页面，hotOnly 不会刷新页面，而是在控制台输出热更新失败。
 
-### 8、devtool
+### devtool
 
 devtool 中的一些设置，可以帮助我们将编译后的代码映射回原始源代码。不同的值会明显影响到构建和重新构建的速度。
 
@@ -185,14 +185,14 @@ module.exports = {
 };
 ```
 
-### 9、resolve 配置 webpack 如何寻找模块所对应的的文件
+### resolve 配置 webpack 如何寻找模块所对应的的文件
 
 - alias 取别名 注意需要是绝对路径
 - extensions 文件没后缀名时默认加 ['.js', '.json']等等
 - modules 设置查找 module 的目录 注意如果配置了就只会在该数组里面查找
 - mainFields 设置模块入口文件 默认配置是 ['browser', 'main']
 
-### 10、watch
+### watch
 
 ```js
 // 默认 false，也就是不不开启
@@ -210,11 +210,11 @@ wathcOptions: {
 }
 ```
 
-### 11、externals
+### externals
 
 打包排除模块，防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖
 
-### 12、加载器 loader 需要配置在 module 里面的 rules 数组里面
+### 加载器 loader 需要配置在 module 里面的 rules 数组里面
 
     loader从后往前解析。所以顺序不能错
     webpack只认识js和json，如果需要打包其他文件就需要用到loader。
@@ -236,7 +236,7 @@ wathcOptions: {
           options loader的相关配置
           enforce 强制loader的加载顺序 post强制最后执行 pre强制最先执行
 
-### 13、插件 plugins
+### 插件 plugins
 
     插件目的在于解决 loader 无法实现的其他事。
     模块代码转换的工作由 loader 来处理，除此之外的其他任何工作都可以交由 plugin 来完成。plugin 提供额外的能力，类似 vue/react 中的生命周期函数。它作用于整个构建过程，用于增强 webpack。
@@ -251,7 +251,7 @@ wathcOptions: {
       ]
     };
 
-### 14、常用的 loader
+### 常用的 loader
 
 - babel-loader 用 babel 处理 js。(须同时安装 @babel/core @babel/preset-env)(@babel/preset-react 处理 react 代码)
 - style-loader 将 css 内联到 html 头部
@@ -269,7 +269,7 @@ wathcOptions: {
 - tslint-loader：通过 TSLint 检查 TypeScript 代码
 - vue-loader：加载 Vue.js 单文件组件
 
-### 15、常用插件
+### 常用插件
 
 - uglifyjs-webpack-plugin：压缩 js 不支持 ES6 压缩 (Webpack4 以前)
 - terser-webpack-plugin: 压缩 js 支持压缩 ES6 (Webpack4)

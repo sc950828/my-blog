@@ -1,8 +1,8 @@
-### 1、jsx 简介
+### jsx 简介
 
 JSX 是一种 Javascript 的语法扩展，JSX = Javascript + XML，即在 Javascript 里面写 XML，因为 JSX 的这个特性，所以他即具备了 Javascript 的灵活性，同时又兼具 html 的语义化和直观性。
 
-### 2、函数式组件
+### 函数式组件
 
 第一种通过配置 通过 functional 配置为 ture 就是函数式组件
 
@@ -31,7 +31,7 @@ export default {
 <template functional> </template>
 ```
 
-### 3、createElement 方法
+### createElement 方法
 
 createElement 函数返回的值称之为虚拟节点，即 VNode，而由 VNode 扎堆组成的树便是大名鼎鼎的虚拟 DOM。
 
@@ -134,7 +134,7 @@ createElement(
 }
 ```
 
-### 4、jsx 语法
+### jsx 语法
 
 当你选择使用 JSX 的时候，你就要做好和指令说拜拜的时候了，在 JSX 中， 你唯一可以使用的指令是 v-show（vShow）,除此之外，其他指令都是不可以使用的。经测试(Vue2.6.11),Vue 在 JSX 中已对 v-model 进行了支持，大家可以直接使用`<input v-model={this.value}>`
 
@@ -160,7 +160,7 @@ render(){
 }
 ```
 
-### 5、v-model
+### v-model
 
 通过事件和 value 重写语法糖
 
@@ -192,7 +192,7 @@ render(){
 </script>
 ```
 
-### 6、v-for
+### v-for
 
 我们使用 map 代替 v-for
 
@@ -214,7 +214,7 @@ render(){
 }
 ```
 
-### 7、v-if
+### v-if
 
 v-if 可以使用三元运算符等代替
 
@@ -223,7 +223,7 @@ const isGirl = false;
 return isGirl ? <span>小妹，哥哥教你写Vue</span> : <span>鸟你干啥</span>;
 ```
 
-### 8、v-bind
+### v-bind
 
 ```js
 render() {
@@ -232,7 +232,7 @@ render() {
 
 ```
 
-### 9、v-html 与 v-text
+### v-html 与 v-text
 
 ```js
 // v-html
@@ -262,7 +262,7 @@ export default {
 };
 ```
 
-### 10、使用自定义组件
+### 使用自定义组件
 
 很简单，只需要导入进来，不用再在 components 属性声明了，直接写在 jsx 中
 
@@ -280,7 +280,7 @@ export default {
 </script>
 ```
 
-### 11、事件，class,style,ref 等等怎么绑定？
+### 事件，class,style,ref 等等怎么绑定？
 
 普通事件通过 on + 事件名称的大驼峰写法来监听，原生事件通过 nativeOn + 事件名称的大驼峰写法来监听
 

@@ -1,4 +1,4 @@
-### 1、react 介绍和创建 react 应用
+### react 介绍和创建 react 应用
 
 如果你熟悉 MVC 概念的话，那么 React 的组件就相当于 MVC 里面的 View。
 
@@ -33,7 +33,7 @@ Simple React Snippets
 
 ES7 React/Redux/GraphQL/React-Native snippets
 
-### 2、 jsx
+### jsx
 
 JSX，是一个 JavaScript 的语法扩展。让 JavaScript 语言能够支持这种直接在 JavaScript 代码里面编写类似 HTML 标签结构的语法，这样写起来就方便很多了。编译的过程会把类似 HTML 的 JSX 结构转换成 JavaScript 的对象结构。
 
@@ -49,12 +49,12 @@ jsx 经过 babel 编译和 react.js 构造会生成 React.createElement(js 对�
 
 实际上，JSX 仅仅只是 React.createElement(component, props, ...children) 函数的语法糖。
 
-### 3、渲染
+### 渲染
 
     const element = <h1>Hello, world</h1>;
     ReactDOM.render(element, document.getElementById('root'));
 
-### 4、组件
+### 组件
 
 组件分为函数组件与 class 组件。函数组件就是无状态组件(没有 state，只有 props)，class 组件就是有状态组件。
 
@@ -62,7 +62,7 @@ jsx 经过 babel 编译和 react.js 构造会生成 React.createElement(js 对�
 
 组件包裹的元素在子组件中通过 this.props.children 获取。this.props.children 是一个数组。
 
-### 5、 props
+### props
 
 组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props。react 数据是单向流动。
 
@@ -76,7 +76,7 @@ static defaultProps = {
 }
 ```
 
-### 6、state
+### state
 
 State 与 props 类似，但是 state 是私有的，并且完全受控于当前组件。除了拥有并设置了它的组件，其他组件都无法访问。
 
@@ -157,7 +157,7 @@ this.setState({ pageNo: this.state.pageNo + 1 }, () => {
 });
 ```
 
-### 7、state vs props
+### state vs props
 
 state 的主要作用是用于组件保存、控制、修改自己的可变状态。state 在组件内部初始化，可以被组件自身修改，而外部不能访问也不能修改。你可以认为 state 是一个局部的、只能被组件自身控制的数据源。state 中状态可以通过 this.setState 方法进行更新，setState 会导致组件的重新渲染。
 
@@ -165,7 +165,7 @@ props 的主要作用是让使用该组件的父组件可以传入参数来配�
 
 state 和 props 有着千丝万缕的关系。它们都可以决定组件的行为和显示形态。一个组件的 state 中的数据可以通过 props 传给子组件，一个组件可以使用外部传入的 props 来初始化自己的 state。但是它们的职责其实非常明晰分明：state 是让组件控制自己的状态，props 是让外部对组件自己进行配置。
 
-### 8、事件处理
+### 事件处理
 
 React 事件的命名采用小驼峰式（camelCase），而不是纯小写。
 
@@ -257,7 +257,7 @@ handleClick = () => {
 </button>
 ```
 
-### 9、条件渲染
+### 条件渲染
 
 条件渲染我们可以使用 if 和 && 和三目运算符
 
@@ -265,7 +265,7 @@ handleClick = () => {
 
 在极少数情况下，你可能希望能隐藏组件，即使它已经被其他组件渲染。若要完成此操作，你可以让 render 方法直接返回 null，而不进行任何渲染。在组件的 render 方法中返回 null 并不会影响组件的生命周期。
 
-### 10、循环
+### 循环
 
 我们可以使用 map 或者 for 循环。
 
@@ -273,17 +273,17 @@ handleClick = () => {
 
 key 会传递信息给 React ，但不会传递给你的组件。如果你的组件中需要使用 key 属性的值，请用其他属性名显式传递这个值
 
-### 11、状态提升
+### 状态提升
 
 在 React 中，将多个组件中需要共享的 state 向上移动到它们的最近共同父组件中，便可实现共享 state。这就是所谓的“状态提升”。
 
 父组件把值和方法传递到子组件中，相当于在子组件里面调用父组件的方法。
 
-### 12、组合和继承
+### 组合和继承
 
 React 有十分强大的组合模式。我们推荐使用组合而非继承来实现组件间的代码重用。
 
-### 13、生命周期函数
+### 生命周期函数
 
 一、组件在初始化时会触发 5 个钩子函数：
 
@@ -347,7 +347,7 @@ static getDerivedStateFromProps(nextProps,prevState)：接收父组件传递过�
 getSnapshotBeforeUpdate(prevProps, prevState)：接收父组件传递过来的 props 和组件之前的状态，此生命周期钩子必须有返回值，返回值将作为第三个参数传递给 componentDidUpdate。必须和 componentDidUpdate 一起使用，否则会报错
 该生命周期钩子触发的时机 ：被调用于 render 之后、componentDidUpdate 之前
 
-### 14、react 中使用 prop-types 检测 props 数据类型 使用 defaultProps 设置默认值
+### react 中使用 prop-types 检测 props 数据类型 使用 defaultProps 设置默认值
 
 安装使用
 
@@ -426,7 +426,7 @@ class Greeting extends React.Component {
 }
 ```
 
-### 15、使用 Fragments 类似 vue 里面的 template
+### 使用 Fragments 类似 vue 里面的 template
 
 我们可以将 Fragment 视为不可见的 div。它在子组件将元素包装在标签中，将其带到父组件并消失。 你也可以使用较短的语法，但是它不支持 key 和属性。
 
@@ -452,7 +452,7 @@ const Columns = () => {
 export default Columns;
 ```
 
-### 16、ref
+### ref
 
 ```js
 // 第一种方法
@@ -485,7 +485,7 @@ class AutoFocusInput extends React.Component {
 // 第三种方法 在函数式组件中我们使用useRef创建ref
 ```
 
-### 17、动态 html
+### 动态 html
 
 使用 dangerouslySetInnerHTML
 
@@ -500,7 +500,7 @@ render () {
   }
 ```
 
-### 18、class style
+### class style
 
 在 react.js 中 class 使用 className 定义。
 
@@ -510,7 +510,7 @@ render () {
 <h1 style={{fontSize: '12px', color: 'red'}}>React.js 小书</h1>
 ```
 
-### 19、高阶组件 HOC
+### 高阶组件 HOC
 
 高阶组件是一个函数（而不是组件），它接受一个组件作为参数，返回一个新的组件。这个新的组件会使用你传给它的组件作为子组件。
 
@@ -532,7 +532,7 @@ export default (WrappedComponent) => {
 };
 ```
 
-### 20、context
+### context
 
 React.js 的 context 就是这么一个东西，某个组件只要往自己的 context 里面放了某些状态，这个组件之下的所有子组件都直接访问这个状态而不需要通过中间组件的传递。一个组件的 context 只有它的子组件能够访问，它的父组件是不能访问到的，你可以理解每个组件的 context 就是瀑布的源头，只能往下流不能往上飞。
 
@@ -620,7 +620,7 @@ context 打破了组件和组件之间通过 props 传递数据的规范，极�
 
 但是这种机制对于前端应用状态管理来说是很有帮助的，因为毕竟很多状态都会在组件之间进行共享，context 会给我们带来很大的方便。一些第三方的前端应用状态管理的库（例如 Redux）就是充分地利用了这种机制给我们提供便利的状态管理服务。但我们一般不需要手动写 context，也不要用它，只需要用好这些第三方的应用状态管理库就行了。
 
-### 21、React.lazy 懒加载 就是代码分割
+### React.lazy 懒加载 就是代码分割
 
 React.lazy 接受一个函数，这个函数需要动态调用 import()。它必须返回一个 Promise，该 Promise 需要 resolve 一个 defalut export 的 React 组件。
 
@@ -659,7 +659,7 @@ import React, { lazy } from 'react';
 const MyComponent = lazy(() => import("./MyComponent.js"));
 ```
 
-### 22、错误边界
+### 错误边界
 
 错误边界是一种 React 组件，这种组件可以捕获并打印发生在其子组件树任何位置的 JavaScript 错误，并且，它会渲染出备用 UI，而不是渲染那些崩溃了的子组件树。错误边界在渲染期间、生命周期方法和整个组件树的构造函数中捕获错误。
 
@@ -669,7 +669,7 @@ const MyComponent = lazy(() => import("./MyComponent.js"));
 
 错误边界的粒度由你来决定，可以将其包装在最顶层的路由组件并为用户展示一个 “Something went wrong” 的错误信息，就像服务端框架经常处理崩溃一样。你也可以将单独的部件包装在错误边界以保护应用其他部分不崩溃。
 
-### 23、ref 转发
+### ref 转发
 
 Ref 转发是一个可选特性，其允许某些组件接收 ref，并将其向下传递（换句话说，“转发”它）给子组件。
 
@@ -691,7 +691,7 @@ const ref = React.createRef();
 
 第二个参数 ref 只在使用 React.forwardRef 定义组件时存在。常规函数和 class 组件不接收 ref 参数，且 props 中也不存在 ref。
 
-### 24、portals
+### portals
 
 Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。
 
@@ -699,7 +699,7 @@ ReactDOM.createPortal(child, container)
 
 第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。
 
-### 25、class 和 createReactClass
+### class 和 createReactClass
 
 当我们不使用 es6 的时候我们可以使用 createReactClass 模块，ES6 中的 class 与 createReactClass() 方法十分相似，但有以下几个区别值得注意。
 
@@ -709,7 +709,7 @@ ReactDOM.createPortal(child, container)
 
 在 class 组件中方法需要我们手动绑定 this，但是在 createReactClass 中我们不需要手动绑定 this
 
-### 26、严格模式
+### 严格模式
 
 StrictMode 是一个用来突出显示应用程序中潜在问题的工具。与 Fragment 一样，StrictMode 不会渲染任何可见的 UI。它为其后代元素触发额外的检查和警告。
 
@@ -726,7 +726,7 @@ StrictMode 是一个用来突出显示应用程序中潜在问题的工具。与
 
 StrictMode 有助于识别不安全的生命周期 关于使用过时字符串 ref API 的警告 关于使用废弃的 findDOMNode 方法的警告 检测意外的副作用 检测过时的 context API
 
-### 27、非受控组件
+### 非受控组件
 
 在大多数情况下，我们推荐使用 受控组件 来处理表单数据。在一个受控组件中，表单数据是由 React 组件来管理的。另一种替代方案是使用非受控组件，这时表单数据将交由 DOM 节点来处理。
 
@@ -761,7 +761,7 @@ class NameForm extends React.Component {
 
 同样，`<input type="checkbox">` 和 `<input type="radio">` 支持 defaultChecked，`<select>` 和 `<textarea>` 支持 defaultValue。
 
-### 28、Hooks
+### Hooks
 
 Hook 使你在非 class 的情况下可以使用更多的 React 特性
 

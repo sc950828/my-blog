@@ -1,32 +1,32 @@
-### 1、koa
+### koa
 
 koa 是一个新的 web 框架，由 express 幕后的原班人马打造。核心是中间件 Middleware 和上下文 context。
 
-### 2、koa 特点
+### koa 特点
 
 路由方法里面的参数是 context 对象，里面包含 request 和 response
 
 Context 中有两部分，一部分是自身属性，主要是应用于框架内部使用，一部分是 Request 和 Response 委托的操作方法，主要为提供给用户更方便从 Request 获取想要的参数和更方便的设置 Response 内容。
 
-### 3、创建 app
+### 创建 app
 
     const koa = require("koa")
     const app = new koa()
 
     app.listen(1995); //在这里创建server
 
-### 4、路由
+### 路由
 
     const KoaRouter = require('koa-router')
     const router = new KoaRouter()
     app.use(router.routes()).use(router.allowedMethods()) //启用路由
     路由文件使用module.exports = router.routes()导出模块
 
-### 5、context 对象
+### context 对象
 
 koa 中每一个请求都将创建一个 Context 对象，context 对象里面是 response request 等
 
-### 6、request
+### request
 
     request.header 查看请求头对象
     request.header= 设置请求头
@@ -54,7 +54,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     request.query= 将查询字符串设置为给定对象。不支持嵌套对象
     ...等等
 
-### 7、response
+### response
 
     response.header 响应标头对象。
     response.headers 响应标头对象。别名是 response.header。
@@ -77,7 +77,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     response.redirect(url, [alt])重定向
     ...等等
 
-### 8、request 别名 不想 ctx.request.xxx,我们提供了别名。ctx 就代表 ctx.request
+### request 别名 不想 ctx.request.xxx,我们提供了别名。ctx 就代表 ctx.request
 
     ctx.header
     ctx.headers
@@ -111,7 +111,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     ctx.acceptsLanguages()
     ctx.get()
 
-### 9、response 别名 不想 ctx.response.xxx,我们提供了别名。ctx 就代表 ctx.response
+### response 别名 不想 ctx.response.xxx,我们提供了别名。ctx 就代表 ctx.response
 
     ctx.body
     ctx.body=
@@ -132,7 +132,7 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     ctx.lastModified=
     ctx.etag=
 
-### 10、处理静态资源 比如静态目录为 static
+### 处理静态资源 比如静态目录为 static
 
     npm i koa-static
     // 静态资源配置
@@ -146,13 +146,13 @@ koa 中每一个请求都将创建一个 Context 对象，context 对象里面�
     使用
     <img src="/image/account.eb695dc.png"/>
 
-### 11、获取参数
+### 获取参数
 
     ctx.request.query获取?=xx类query参数
     ctx.params获取路径参数
     安装koa-body并配置使用通过ctx.request.body获取参数 (post请求 put请求)
 
-### 12、洋葱模型
+### 洋葱模型
 
 ```js
 const Koa = require("koa");
@@ -162,14 +162,14 @@ app.use((ctx, next) => {
   next();
   console.log(3);
 });
-app.use(ctx => {
+app.use((ctx) => {
   console.log(2);
 });
 app.listen(3001);
 // 执行结果是1=>2=>3
 ```
 
-### 13、常用中间件
+### 常用中间件
 
 koa-router 处理路由
 
@@ -183,7 +183,7 @@ koa-json-error 处理 error
 
 koa-jwt token 验证
 
-### 14、koa 和 express 区别
+### koa 和 express 区别
 
 Express 功能丰富，随取随用，并且框架自身封装了大量便利的功能，比如路由、视图处理等等。koa 更轻量，框架自身并没集成太多功能，大部分功能需要用户自行 require 中间件去解决。路由都需要额外的中间件。
 

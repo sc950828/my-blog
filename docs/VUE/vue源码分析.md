@@ -1,4 +1,4 @@
-### 1、vue 类型检查
+### vue 类型检查
 
 Vue.js 的源码利用了 flow 来做静态类型检查
 
@@ -14,7 +14,7 @@ flow 常用的两种类型检查方式是：
 
 Flow 提出了一个 libdef 的概念，可以用来识别这些第三方库或者是自定义类型
 
-### 2、源码目录分析
+### 源码目录分析
 
 compiler(编译相关)
 
@@ -62,7 +62,7 @@ shared
 
 shared 目录中定义了常量和工具函数，供其他文件引用。
 
-### 3、源码构建
+### 源码构建
 
 Rollup
 
@@ -79,7 +79,7 @@ Runtime Only
 Runtime + Compiler
 我们如果没有对代码做预编译，但又使用了 Vue 的 template 属性并传入一个字符串，则需要在客户端编译模板。很显然，这个编译过程对性能会有一定损耗，所以通常我们更推荐使用 Runtime-Only 的 Vue.js
 
-### 5、new Vue 发生了什么？
+### new Vue 发生了什么？
 
 Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。
 
@@ -102,7 +102,7 @@ if (vm.$options.el) {
 }
 ```
 
-### 6、挂载
+### 挂载
 
 如果没有定义 render 方法，则会把 el 或者 template 字符串转换成 render 方法。这里我们要牢记，在 Vue 2.0 版本中，所有 Vue 的组件的渲染最终都需要 render 方法，无论我们是用单文件 .vue 方式开发组件，还是写了 el 或者 template 属性，最终都会转换成 render 方法，那么这个过程是 Vue 的一个“在线编译”的过程，它是调用 compileToFunctions 方法实现的。最后，调用原先原型上的 `$mount` 方法挂载。如果我们用的是 Runtime Only 版本则没有在线编译这一步，因为编译在我们打包的时候使用 webpack 的 vue-loader 就已经编译好了，已经编译成渲染函数了。
 
@@ -199,7 +199,7 @@ export function mountComponent(
 }
 ```
 
-### 7、渲染 render
+### 渲染 render
 
 `vm._render` 最终是通过执行 createElement 方法并返回的是 vnode，它是一个虚拟 Node。Vue 2.0 相比 Vue 1.0 最大的升级就是利用了 Virtual DOM。
 
@@ -236,7 +236,7 @@ if (typeof tag === "string") {
 }
 ```
 
-### 8、虚拟 DOM
+### 虚拟 DOM
 
 VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。性能好可以跨平台。
 
@@ -317,7 +317,7 @@ export default class VNode {
 }
 ```
 
-### 9、update
+### update
 
 主要是 patch 方法。
 
@@ -527,7 +527,7 @@ function updateChildren(parentElm, oldCh, newCh) {
 }
 ```
 
-### 10、响应式系统
+### 响应式系统
 
 vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。主要分为以下几个步骤：
 
@@ -702,7 +702,7 @@ export default class Watcher {
     } else {
       this.getter = parsePath(expOrFn);
       if (!this.getter) {
-        this.getter = function () {};
+        this.getter = function() {};
         process.env.NODE_ENV !== "production" &&
           warn(
             `Failed watching path: "${expOrFn}" ` +
@@ -786,7 +786,7 @@ export default class Watcher {
 }
 ```
 
-### 11、Vue 怎么用 `vm.$set() vm.$delete()` 解决对象新增/删除属性不能响应的问题?
+### Vue 怎么用 `vm.$set() vm.$delete()` 解决对象新增/删除属性不能响应的问题?
 
 - `vm.$set()`
 
@@ -804,7 +804,7 @@ export default class Watcher {
   - 3.target 如果不是双向绑定数据,那就直接 delete 就行不需要,通知 watcher
   - 4.以上条件都不满足,那么 target 就是双向绑定数据,delete 之后通知 watcher
 
-### 12、computed 的实现原理
+### computed 的实现原理
 
 computed 本质是一个惰性 computed watcher。其内部通过 this.dirty 属性标记计算属性是否需要重新求值。当 computed 的依赖状态发生改变时,就会通知这个惰性的 watcher,computed watcher 通过 this.dep.subs.length 判断有没有订阅者,有的话,会重新计算,然后对比新旧值,如果变化了,会重新渲染。 (Vue 想确保不仅仅是计算属性依赖的值发生变化，而是当计算属性最终计算的值发生变化时才会触发渲染 watcher 重新渲染，本质上是一种优化。)没有的话,仅仅把 this.dirty = true。 (当计算属性依赖于其他数据时，属性并不会立即重新计算，只有之后其他地方需要读取属性的时候，它才会真正计算，即具备 lazy（懒计算）特性。)
 
@@ -832,11 +832,11 @@ for (var key in computed) {
 }
 ```
 
-### 13、watch 的实现原理
+### watch 的实现原理
 
 所以本质上侦听属性也是基于 Watcher 实现的，它是一个 user watcher。跟 user watcher 配合的是 deep watcher 和 sync watcher 。deep watcher 是深度检测，sync watcher 是立即执行。
 
-### 14、`vm.$nextTick`
+### `vm.$nextTick`
 
 首先 nextTick 并不是浏览器本身提供的一个异步 API，而是 Vue 中，用过由浏览器本身提供的原生异步 API 封装而成的一个异步封装方法
 
@@ -898,7 +898,7 @@ function nextTick(cb,ctx){
 }
 ```
 
-### 15、编译
+### 编译
 
 compile 编译可以分成 parse、optimize 与 generate 三个阶段，最终得到需要的 render function。
 首先会先将模版通过解析器(正则匹配)，解析成 AST（抽象语法树），然后再通过优化器，遍历 AST 树，将里面的所有静态节点找出来，并打上标志，这样可以避免 diff 算法对比时进行一些无用的对比。因为静态节点这辈子是什么样就是什么样的了，不会变化。接着，代码生成器会将这颗 AST 编译成代码字符串，这段字符串会被 Vdom 里面的 createElement 函数调用，最后生成 Vnode。
@@ -966,11 +966,11 @@ compile 编译可以分成 parse、optimize 与 generate 三个阶段，最终�
 // 这样就转换成render function，这个代码就是运行时的代码
 ```
 
-### 16、vm.$on，vm.$off,vm.$once,vm.$emit
+### vm.$on，vm.$off,vm.$once,vm.$emit
 
 ```js
 // 手写vm.$on
-Vue.prototype.$on = function (event, fn) {
+Vue.prototype.$on = function(event, fn) {
   const vm = this;
 
   if (Array.isArray(event)) {
@@ -983,7 +983,7 @@ Vue.prototype.$on = function (event, fn) {
 };
 
 // 手写$off
-Vue.prototype.$off = function (event, fn) {
+Vue.prototype.$off = function(event, fn) {
   const vm = this;
 
   if (!arguments.length) {
@@ -1028,7 +1028,7 @@ Vue.prototype.$off = function (event, fn) {
 };
 
 // 手写$once
-Vue.prototype.$once = function (event, fn) {
+Vue.prototype.$once = function(event, fn) {
   const vm = this;
 
   function on() {
@@ -1045,7 +1045,7 @@ Vue.prototype.$once = function (event, fn) {
 };
 
 //手写$emit
-Vue.prototype.$emit = function (event, ...params) {
+Vue.prototype.$emit = function(event, ...params) {
   const vm = this;
 
   let cbs = vm._events[event];
@@ -1060,7 +1060,7 @@ Vue.prototype.$emit = function (event, ...params) {
 };
 ```
 
-### 17、css scope 原理
+### css scope 原理
 
 其实就是加了给 data-xxx 属性，然后样式使用的时候都加上了该属性选择器。
 
@@ -1106,7 +1106,7 @@ Vue.prototype.$emit = function (event, ...params) {
 }
 ```
 
-### 18、keep-alive 实现原理
+### keep-alive 实现原理
 
 - 获取 keep-alive 包裹着的第一个子组件对象及其组件名
 - 根据设定的 include/exclude（如果有）进行条件匹配,决定是否缓存。不匹配,直接返回组件实例
@@ -1114,11 +1114,11 @@ Vue.prototype.$emit = function (event, ...params) {
 - 在 this.cache 对象中存储该组件实例并保存 key 值,之后检查缓存的实例数量是否超过 max 的设置值,超过则根据 LRU 置换策略删除最近最久未使用的实例（即是下标为 0 的那个 key）
 - 最后组件实例的 keepAlive 属性设置为 true,这个在渲染和执行被包裹组件的钩子函数会用到。
 
-### 19、指令的执行原理
+### 指令的执行原理
 
 在模版阶段，会将节点上的指令解析处理并添加到 AST 的 directives 属性中。随后 directives 数据会传到 Vnode 中，接着就可以通过 vnode.data.directives 获取一个节点所绑定的指令。最后，当 VDom 进行修补时，会根据节点的对比结果触发一些钩子函数。更新指令的程序会监听 create,update,destory 钩子函数，并在这三个钩子函数触发时对 VNode 和 oldVNode 进行对比，最终根据对比触发指令的钩子函数。
 
-### 20、Vue 中如何实现异步渲染？
+### Vue 中如何实现异步渲染？
 
 在 Vue 中异步渲染实际在数据每次变化时，将其所要引起页面变化的部分都放到一个异步 API 的回调函数里，直到同步代码执行完之后，异步回调开始执行，最终将同步代码里所有的需要渲染变化的部分合并起来，最终执行一次渲染操作。
 
@@ -1126,7 +1126,7 @@ Vue.prototype.$emit = function (event, ...params) {
 
 异步队列执行后，存储页面变化的全局数组得到遍历执行，执行的时候会进行一些筛查操作，将重复操作过的数据进行处理，实际就是先赋值的丢弃不渲染，最终按照优先级最终组合成一套数据渲染。这里触发渲染的异步 API 优先考虑 Promise，其次 MutationObserver，如果没有 MutationObserver 的话，会考虑 setImmediate，没有 setImmediate 的话最后考虑是 setTimeout。
 
-### 21、Vue 能不能同步渲染？
+### Vue 能不能同步渲染？
 
 当然是可以的。有两种方法
 
@@ -1145,11 +1145,11 @@ mounted () {
   }
 ```
 
-### 22、插件原理
+### 插件原理
 
 我们知道安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。该方法需要在调用 new Vue() 之前被调用。当 install 方法被同一个插件多次调用，插件将只会被安装一次。
 
-### 23、能说下 vue-router 中常用的 hash 和 history 路由模式实现原理吗？
+### 能说下 vue-router 中常用的 hash 和 history 路由模式实现原理吗？
 
 通过 Vue.mixin()方法，全局注册一个混合，影响注册之后所有创建的每个 Vue 实例，该混合在 beforeCreate 钩子中通过 Vue.util.defineReactive()定义了响应式的\_route 属性。所谓响应式属性，即当\_route 值改变时，会自动调用 Vue 实例的 render()方法，更新视图。
 
@@ -1173,7 +1173,7 @@ mounted () {
 
 'abstract'模式，不涉及和浏览器地址的相关记录，流程跟'HashHistory'是一样的，其原理是通过数组模拟浏览器历史记录栈的功能
 
-### 24、vuex 原理
+### vuex 原理
 
 核心原理。在 Vuex 的 install 方法中，可以获取到 Vue 实例。我们在每个 Vue 实例上添加 `$store` 属性，可以让每个 vue 实例访问到 Vuex 数据信息；我们在每个 Vue 实例的  data 属性上添加上 state，这样 state 就是响应式的；收集我们传入 new Vuex.Store(options) 即 options 中所有的 mutaions、actions、getters；接着当我们 dispatch 的时候去匹配到 Store 类中存放的 actions 方法，然后去执行；当我们 commit 的时候去匹配到 Store 类中存放的 mutations 方法，然后去执行；这其实就是一个发布订阅模式，先存起来，后边用到再取再执行。
 

@@ -1,4 +1,4 @@
-## 1、uniapp
+## uniapp
 
 uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到 iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉/淘宝）、快应用等多个平台。
 
@@ -6,7 +6,7 @@ uni-app 使用 vue 的语法+小程序的标签和 API。
 
 uni-app 在开发者数量、案例、跨端抹平度、扩展灵活性、性能体验、周边生态、学习成本、开发成本等 8 大关键指标上拥有更强的优势。
 
-## 2、uni-app 基本结构
+## uni-app 基本结构
 
 ```
 ┌─components            uni-app组件目录
@@ -27,7 +27,7 @@ uni-app 在开发者数量、案例、跨端抹平度、扩展灵活性、性能
 └─uni.scss              uni.scss文件的用途是为了方便整体控制应用的风格。比如按钮颜色、边框风格，uni.scss文件里预置了一批scss变量预置。
 ```
 
-## 3、资源引入
+## 资源引入
 
 ```html
 <!-- html静态资源引入 -->
@@ -58,7 +58,7 @@ import add from "@/common/add.js";
 import add from "../../common/add.js";
 ```
 
-## 4、生命周期
+## 生命周期
 
 uni-app 完整支持 Vue 实例的生命周期，同时还新增 应用生命周期 及 页面生命周期。
 
@@ -91,7 +91,7 @@ uni-app 完整支持 Vue 实例的生命周期，同时还新增 应用生命周
 
 生命周期执行顺序 先是应用的生命周期 再是页面的生命周期和 vue 生命周期 onLoad、onShow、created、onReady、mounted
 
-## 5、路由
+## 路由
 
 uni-app 页面路由为框架统一管理，开发者需要在 pages.json 里配置每个路由页面的路径及页面样式。类似小程序在 app.json 中配置页面路由一样。所以 uni-app 的路由用法与 Vue Router 不同
 
@@ -106,7 +106,7 @@ Tab 切换 页面全部出栈，只留下新的 Tab 页面 调用 API uni.switch
 重加载 页面全部出栈，只留下新的页面 调用 API uni.reLaunch 、使用组件 <navigator open-type="reLaunch"/>
 ```
 
-## 6、页面样式与布局
+## 页面样式与布局
 
 uni-app 支持的通用 css 单位包括 px、rpx
 
@@ -136,7 +136,7 @@ App.vue 中通过 @import 语句可以导入外联样式，一样作用于每一
 
 nvue 页面暂不支持全局样式
 
-## 7、条件编译
+## 条件编译
 
 以 #ifdef(仅在某平台) 或 #ifndef(仅不在某平台) 加 %PLATFORM%(平台名) 开头，以 #endif 结尾。
 
@@ -159,7 +159,7 @@ PLATFORM 的值
 
 `样式的条件编译，无论是 css 还是 sass/scss/less/stylus 等预编译语言中，必须使用 /*注释*/ 的写法。`
 
-## 8、使用 cli 创建项目和使用 HBuilderX 可视化界面创建项目有什么区别
+## 使用 cli 创建项目和使用 HBuilderX 可视化界面创建项目有什么区别
 
 编译器的区别
 

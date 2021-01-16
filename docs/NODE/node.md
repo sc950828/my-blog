@@ -1,4 +1,4 @@
-### 1、node.js 是什么
+### node.js 是什么
 
 - node 是一个基于 chrome v8 引擎的 javascript 运行环境
 - node 使用了一个事件驱动，非阻塞式 I/O 的模型，使其轻量又高效
@@ -11,12 +11,12 @@
 
 事件循环、观察者、请求对象、I/O 线程池共同构成了 Node 的事件驱动 异步 I/O 模型。
 
-### 2、v8 引擎
+### v8 引擎
 
 - javascript 引擎起到的作用是让电脑识别 javascript 代码。
 - v8 引擎是使用 c++写的
 
-### 3、全局变量
+### 全局变量
 
     global
       在node中全局变量不在是window而是global
@@ -44,12 +44,12 @@
     Buffer
       缓冲
 
-### 4、模块的使用
+### 模块的使用
 
 - module.exports/exports 导出模块。exports 使用的时候不能 exports=xxx，应该是 exports.xxx = xxx
 - require 引入模块,支持解构赋值。
 
-### 5、事件 events
+### 事件 events
 
     大多数node.js核心api都是采用异步事件驱动架构(fs http)
     所有能触发事件的对象都是EventEmitter类的实例
@@ -66,12 +66,12 @@
 const EventEmitter = require("events").EventEmitter;
 
 const AudioDevice = {
-  play: function (track) {
+  play: function(track) {
     console.log("play", track);
   },
-  stop: function () {
+  stop: function() {
     console.log("stop");
-  }
+  },
 };
 
 class MusicPlayer extends EventEmitter {
@@ -82,29 +82,29 @@ class MusicPlayer extends EventEmitter {
 }
 
 const musicPlayer = new MusicPlayer();
-musicPlayer.on("play", function (track) {
+musicPlayer.on("play", function(track) {
   this.playing = true;
   AudioDevice.play(track);
 });
-musicPlayer.on("stop", function () {
+musicPlayer.on("stop", function() {
   this.playing = false;
   AudioDevice.stop();
 });
 
 musicPlayer.emit("play", "The Roots - The Fire");
-setTimeout(function () {
+setTimeout(function() {
   musicPlayer.emit("stop");
 }, 1000);
 
 // 处理异常
 // EventEmitter 实例发生错误会发出一个 error 事件
 // 如果没有监听器，默认动作是打印一个堆栈并退出程序
-musicPlayer.on("error", function (err) {
+musicPlayer.on("error", function(err) {
   console.err("Error:", err);
 });
 ```
 
-### 6、文件系统 fs
+### 文件系统 fs
 
     同步读文件 fs.readFileSync(path)
     异步读文件 fs.readFile(path, function(err, data){})
@@ -124,7 +124,7 @@ musicPlayer.on("error", function (err) {
     异步复制文件 fs.copyFile(src, dest, function(err){})
     判断文件是否存在，以及权限 fs.access(path, 权限, function(err){})
 
-### 7、http
+### http
 
     //引入http模块
     const http = require('http')
@@ -138,7 +138,7 @@ musicPlayer.on("error", function (err) {
     //服务器监听端口ip
     server.listen(7000, "127.0.0.1")
 
-### 8、缓冲 buffer 流 stream
+### 缓冲 buffer 流 stream
 
     创建可读流 const myReadStream = fs.createReadStream(path, 编码格式)
     创建可写流 const myWriteStream = fs.createWriteStream(path)
@@ -147,7 +147,7 @@ musicPlayer.on("error", function (err) {
     第二种写入方式
       myReadStream.pipe(myWriteStream)
 
-### 9、path
+### path
 
     path.basename(path[, ext]) 返回路径的最后文件名
     path.dirname(path) 返回文件的目录名，不包括最后的文件名
@@ -156,7 +156,7 @@ musicPlayer.on("error", function (err) {
     path.relative(from, to) 方法根据当前工作目录返回 from 到 to 的相对路径
     path.resolve(xx, xx, xx) 从右往左处理直到是一个绝对路径，否则加上当前路径
 
-### 10、 Libuv
+### Libuv
 
 Libuv 是一个高性能的，事件驱动的异步 I/O 库，它本身是由 C 语言编写的，具有很高的可移植性。libuv 封装了不同平台底层对于异步 IO 模型的实现，libuv 的 API 包含有时间，非阻塞的网络，异步文件操作，子进程等等，所以它还本身具备着 Windows, Linux 都可使用的跨平台能力。
 

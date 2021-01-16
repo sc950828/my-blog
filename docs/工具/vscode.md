@@ -1,4 +1,4 @@
-### 1、常用插件
+### 常用插件
 
     1. open-in-browser
       能把html文件在浏览器中打开
@@ -42,7 +42,7 @@
     20. EditorConfig for VS Code
       使.editorconfig配置文件生效
 
-### 2、常用快捷键
+### 常用快捷键
 
     打开用户设置
       mac     command + ,
@@ -115,7 +115,7 @@
       mac     command + shift + z
       windows ctrl + y
 
-### 3、常用设置
+### 常用设置
 
     {
       //icon主题
@@ -217,7 +217,7 @@
       // "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
     }
 
-### 4、Emmet 插件的使用
+### Emmet 插件的使用
 
     使用tab进行生成
     默认生成div #aa 或 .aa  生成id或class为aa的div

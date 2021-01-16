@@ -1,13 +1,11 @@
-### 安装
-
-#### 安装 mongoose
+### 安装 mongoose
 
 ```js
 npm i mongoose
 const mongoose = require("mongoose");
 ```
 
-#### 连接
+### 连接
 
 ```js
 const uri = "mongodb://localhost/myapp";
@@ -19,11 +17,11 @@ mongoose
 // 调用 mongoose.connect() 时，Mongoose 会自动创建默认连接。 你可以使用 mongoose.connection 访问默认连接。
 ```
 
-#### model
+### model
 
 ```js
 var schema = new mongoose.Schema({ name: "string", size: "string" });
 var Tank = mongoose.model("Tank", schema);
 ```
 
-#### document
+### document

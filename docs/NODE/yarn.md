@@ -1,8 +1,8 @@
-### 1、什么是 yarn？
+### 什么是 yarn？
 
 “Yarn 是由 Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，正如官方文档中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。
 
-### 2、安装
+### 安装
 
 ```shell
 # 安装 是一个npm包
@@ -11,7 +11,7 @@ npm install -g yarn
 yarn --version
 ```
 
-### 3、命令对比
+### 命令对比
 
 ```js
 
@@ -36,7 +36,7 @@ npm install -g xx
 yarn global add xx
 ```
 
-### 4、其他常用命令
+### 其他常用命令
 
 ```shell
 # 查询当前工作文件夹所有的依赖
@@ -45,7 +45,7 @@ yarn list
 yarn info <package> [<field>]
 ```
 
-### 4、Yarn 的优点？
+### Yarn 的优点？
 
 速度快 。速度快主要来自以下两个方面：
 

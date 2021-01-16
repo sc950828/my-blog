@@ -1,4 +1,4 @@
-### 1、redux 核心
+### redux 核心
 
 Redux 是 JavaScript 状态容器，提供可预测化的状态管理。
 
@@ -45,7 +45,7 @@ let unsubscribe = store.subscribe(() => {
 unsubscribe();
 ```
 
-### 2、三大原则
+### 三大原则
 
 单一数据源。整个应用的 state 被储存在一棵 object tree 中，并且这个 object tree 只存在于唯一一个 store 中。只能通过 store.getState()获取到 state。
 
@@ -53,7 +53,7 @@ State 是只读的。唯一改变 state 的方法就是触发 action，action �
 
 使用纯函数来执行修改。Reducer 只是一些纯函数，它接收先前的 state 和 action，并返回新的 state。
 
-### 3、react-redux
+### react-redux
 
 react-redux 官方提供的 React 绑定库。 具有高效且灵活的特性。
 Redux 本身和 React 没有关系，只是数据处理中心，是 React-Redux 让他们联系在一起。
@@ -82,9 +82,9 @@ mapStateToProps();
 // 注意如果使用了 combineReducers()来创建reducer这里的state需要通过reducer区分，类似vuex里的module
 // state是所有的reducer里面的state
 // 当一个触发一个action的时候会触发所有的reducer 然后在里面判断类型 所以reducer里面的type不能相同
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: state.todos,
   };
 };
 
@@ -98,9 +98,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onClick: () => {
       dispatch({
         type: "SET_VISIBILITY_FILTER",
-        filter: ownProps.filter
+        filter: ownProps.filter,
       });
-    }
+    },
   };
 };
 // 从上面代码可以看到，mapDispatchToProps作为函数，应该返回一个对象，该对象的每个键值对都是一个映射，
@@ -131,7 +131,7 @@ render(
 // index 创建store 通过createStore方法
 ```
 
-### 4、例子
+### 例子
 
 ```js
 // Reducer1.js
@@ -173,7 +173,7 @@ import Reducer2 from "./Reducer2";
 // 合并成一个reducer
 export default combineReducers({
   Reducer1,
-  Reducer2
+  Reducer2,
 });
 
 // index.js
@@ -211,7 +211,7 @@ class Container extends React.Component {
       age,
       name1,
       updateAge,
-      updateName
+      updateName,
     } = this.props;
     return (
       <div>
@@ -233,7 +233,7 @@ function mapStateToProps(state) {
   return {
     value: state.Reducer1.count,
     name1: state.Reducer2.name1,
-    age: state.Reducer2.age
+    age: state.Reducer2.age,
   };
 }
 
@@ -249,7 +249,7 @@ function mapDispatchToProps(dispatch, ownprops) {
     // 触发一个action 所有的reducer都被调用 所type不能相同
     onIncreaseClick: () => dispatch({ type: "increase", qq: "randy" }),
     updateName: () => dispatch({ type: "updatename" }),
-    updateAge: () => dispatch({ type: "updateage" })
+    updateAge: () => dispatch({ type: "updateage" }),
   };
 }
 
@@ -257,7 +257,7 @@ function mapDispatchToProps(dispatch, ownprops) {
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
 ```
 
-### 5、中间件
+### 中间件
 
 比如在 Dispatch 一个 Action 之后，到达 reducer 之前，进行一些额外的操作，就需要用到 middleware（中间件）。
 

@@ -8,19 +8,19 @@ ide 支持不够友好 只能使用微信开发者工具
 
 无法与现有的流行的框架相结合
 
-### 1、mpvue
+### mpvue
 
 mpvue 继承自 Vue.js，其技术规范和语法特点与 Vue.js 保持一致。
 
 可以一套代码可以直接跑在多端：WEB、小程序（微信和支付宝）、Native（借助 weex）。
 
-### 2、框架原理
+### 框架原理
 
 - mpvue 保留了 vue.runtime 核心方法，无缝继承了 Vue.js 的基础能力
 - mpvue-template-compiler 提供了将 vue 的模板语法转换到小程序的 wxml 语法的能力
 - 修改了 vue 的构建配置，使之构建出符合小程序项目结构的代码格式： json/wxml/wxss/js 文件
 
-### 3、生命周期
+### 生命周期
 
 我们会在小程序 onReady 后，再去触发 vue mounted 生命周期。
 
@@ -68,7 +68,7 @@ onLaunch onShow beforeCredte created onLoad onShow onReady beforeMount mounted
 
 页面切换只触发 onShow 和 onHide
 
-### 4、语法支持
+### 语法支持
 
 几乎全支持 官方文档：模板语法，下面讲下不支持的情况。
 
@@ -114,7 +114,7 @@ vue 组件
 
 mpvue 可以支持小程序的原生组件，比如： picker,map 等，需要注意的是原生组件上的事件绑定，需要以 vue 的事件绑定语法来绑定，如 bindchange="eventName" 事件，需要写成 @change="eventName"
 
-### 5、事件
+### 事件
 
 几乎全支持啦 官方文档：事件处理器
 
@@ -153,7 +153,7 @@ mpvue 可以支持小程序的原生组件，比如： picker,map 等，需要�
 - .once 也不能做，因为小程序没有 removeEventListener, 虽然可以直接在 handleProxy 中处理，但非常的不优雅，违背了原意，暂不考虑
 - 其他 键值修饰符 等在小程序中压根没键盘，所以。。。
 
-### 6、最佳实践
+### 最佳实践
 
 1. 精简 data 数据
 
@@ -171,7 +171,7 @@ mpvue 可以支持小程序的原生组件，比如： picker,map 等，需要�
 
 4. 谨慎选择直接使用小程序的 API 如果你有小程序和 H5 复用代码的需要，业务代码需要保持对 WEB Vue.js 的兼容性。此时我们不建议在代码中直接调用小程序 API，更好的选择是通过桥接适配层屏蔽两端差异。
 
-### 7、常见问题
+### 常见问题
 
 1. 如何获取小程序在 page onLoad 时候传递的 options
 
@@ -185,7 +185,7 @@ mpvue 可以支持小程序的原生组件，比如： picker,map 等，需要�
 
 由于 onError 并不是完整意义的生命周期，所以只提供一个捕获错误的方法，在 app 的根组件上添加名为 onError 的回调函数即可。
 
-### 8、使用路由
+### 使用路由
 
 使用 mpvue-router-patch 插件就可以使用路由了，类似 vue 的 vue-router
 
@@ -251,7 +251,7 @@ $router.back();
 
 `$route.name` 当前路由的名称，由 path 转化而来
 
-### 9、使用 scss
+### 使用 scss
 
 安装
 
@@ -264,7 +264,7 @@ npm i -D sass-loader node-sass
 }
 ```
 
-### 10、使用 flyio 处理请求
+### 使用 flyio 处理请求
 
 安装
 

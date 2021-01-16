@@ -1,10 +1,10 @@
-### 1、什么是服务器端渲染 (SSR)？
+### 什么是服务器端渲染 (SSR)？
 
 将一个组件渲染为服务器端的 HTML 字符串，将它们直接发送到浏览器，最后将这些静态标记"激活"为客户端上完全可交互的应用程序。
 
 服务器渲染的 Vue.js 应用程序也可以被认为是"同构"或"通用"，因为应用程序的大部分代码都可以在服务器和客户端上运行。
 
-### 2、为什么使用服务器端渲染 (SSR)？
+### 为什么使用服务器端渲染 (SSR)？
 
 服务端渲染优点
 
@@ -20,13 +20,13 @@
 
 更多的服务器端负载。在 Node.js 中渲染完整的应用程序，显然会比仅仅提供静态文件的 server 更加大量占用 CPU 资源 (CPU-intensive - CPU 密集)，因此如果你预料在高流量环境 (high traffic) 下使用，请准备相应的服务器负载，并明智地采用缓存策略。
 
-### 3、预渲染
+### 预渲染
 
 如果你调研服务器端渲染 (SSR) 只是用来改善少数营销页面（例如 /, /about, /contact 等）的 SEO，那么你可能需要预渲染。无需使用 web 服务器实时动态编译 HTML，而是使用预渲染方式，在构建时 (build time) 简单地生成针对特定路由的静态 HTML 文件。优点是设置预渲染更简单，并可以将你的前端作为一个完全静态的站点。
 
 如果你使用 webpack，你可以使用 prerender-spa-plugin 轻松地添加预渲染。它已经被 Vue 应用程序广泛测试
 
-### 4、基本用法
+### 基本用法
 
 安装 vue 和 vue-server-renderer，并保持两者版本一致
 
@@ -35,27 +35,27 @@ const Vue = require("vue");
 const Server = require("express")();
 // 读取模板
 const Renderer = require("vue-server-renderer").createRenderer({
-  template: require("fs").readFileSync("./index.template.html", "utf-8")
+  template: require("fs").readFileSync("./index.template.html", "utf-8"),
 });
 
 Server.get("/server", (req, res) => {
   const app = new Vue({
     data: {
-      url: req.url
+      url: req.url,
     },
-    template: `<div>您访问的url是{{url}}</div>`
+    template: `<div>您访问的url是{{url}}</div>`,
   });
 
   const options = {
     title: "vue server render",
-    meta: "<meta charset='utf-8'/>"
+    meta: "<meta charset='utf-8'/>",
   };
 
   Renderer.renderToString(app, options)
-    .then(html => {
+    .then((html) => {
       res.end(html);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).end("server error");
     });
@@ -82,7 +82,7 @@ Server.listen(8080, () => {
 </html>
 ```
 
-### 5、注意
+### 注意
 
 因为实际的渲染过程需要确定性，所以我们也将在服务器上“预取”数据 ("pre-fetching" data) - 这意味着在我们开始渲染时，我们的应用程序就已经解析完成其状态。也就是说，将数据进行响应式的过程在服务器上是多余的，所以默认情况下禁用。禁用响应式数据，还可以避免将「数据」转换为「响应式对象」的性能开销。
 
@@ -92,7 +92,7 @@ Server.listen(8080, () => {
 
 通用代码不可接受特定平台的 API，因此如果你的代码中，直接使用了像 window 或 document，这种仅浏览器可用的全局变量，则会在 Node.js 中执行时抛出错误，反之也是如此。
 
-### 6、开发源码结构
+### 开发源码结构
 
 当编写纯客户端 (client-only) 代码时，我们习惯于每次在新的上下文中对代码进行取值。但是，Node.js 服务器是一个长期运行的进程。当我们的代码进入该进程时，它将进行一次取值并留存在内存中。这意味着如果创建一个单例对象，它将在每个传入的请求之间共享。如果我们在多个请求之间使用一个共享的实例，很容易导致交叉请求状态污染。
 
@@ -105,9 +105,9 @@ const Vue = require("vue");
 module.exports = function createApp(context) {
   return new Vue({
     data: {
-      url: context.url
+      url: context.url,
     },
-    template: `<div>访问的 URL 是： {{ url }}</div>`
+    template: `<div>访问的 URL 是： {{ url }}</div>`,
   });
 };
 ```
@@ -156,7 +156,7 @@ import App from "./App.vue";
 export function createApp() {
   const app = new Vue({
     // 根实例简单的渲染应用程序组件。
-    render: h => h(App)
+    render: (h) => h(App),
   });
   return { app };
 }
@@ -178,13 +178,13 @@ app.$mount("#app");
 // entry-server.js
 import { createApp } from "./app";
 
-export default context => {
+export default (context) => {
   const { app } = createApp();
   return app;
 };
 ```
 
-### 7、路由和代码分割
+### 路由和代码分割
 
 ```js
 // router.js 我们也需要给每个请求一个新的 router 实例 所以文件导出一个 createRouter 函数
@@ -198,8 +198,8 @@ export function createRouter() {
     mode: "history",
     routes: [
       { path: "/", component: () => import("./components/Home.vue") },
-      { path: "/item/:id", component: () => import("./components/Item.vue") }
-    ]
+      { path: "/item/:id", component: () => import("./components/Item.vue") },
+    ],
   });
 }
 ```
@@ -218,7 +218,7 @@ export function createApp() {
   const app = new Vue({
     // 注入 router 到根 Vue 实例
     router,
-    render: h => h(App)
+    render: (h) => h(App),
   });
 
   // 返回 app 和 router
@@ -241,7 +241,7 @@ router.onReady(() => {
 // entry-server.js
 import { createApp } from "./app";
 
-export default context => {
+export default (context) => {
   // 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
   // 以便服务器能够等待所有的内容在渲染前，
   // 就已经准备就绪。
@@ -274,7 +274,7 @@ const createApp = require("/path/to/built-server-bundle.js");
 server.get("*", (req, res) => {
   const context = { url: req.url };
 
-  createApp(context).then(app => {
+  createApp(context).then((app) => {
     renderer.renderToString(app, (err, html) => {
       if (err) {
         if (err.code === 404) {
@@ -294,7 +294,7 @@ server.get("*", (req, res) => {
 
 将组件引用的方式改为 `const Foo = () => import('./Foo.vue')`
 
-### 8、数据预取和状态
+### 数据预取和状态
 
 如果应用程序依赖于一些异步数据，那么在开始渲染过程之前，需要先预取和解析好这些数据。我们使用 vuex 管理数据。
 
@@ -312,22 +312,22 @@ import { fetchItem } from "./api";
 export function createStore() {
   return new Vuex.Store({
     state: {
-      items: {}
+      items: {},
     },
     actions: {
       fetchItem({ commit }, id) {
         // `store.dispatch()` 会返回 Promise，
         // 以便我们能够知道数据在何时更新
-        return fetchItem(id).then(item => {
+        return fetchItem(id).then((item) => {
           commit("setItem", { id, item });
         });
-      }
+      },
     },
     mutations: {
       setItem(state, { id, item }) {
         Vue.set(state.items, id, item);
-      }
-    }
+      },
+    },
   });
 }
 ```
@@ -352,7 +352,7 @@ export function createApp() {
   const app = new Vue({
     router,
     store,
-    render: h => h(App)
+    render: (h) => h(App),
   });
 
   // 暴露 app, router 和 store。
@@ -386,7 +386,7 @@ export default {
 // entry-server.js
 import { createApp } from "./app";
 
-export default context => {
+export default (context) => {
   return new Promise((resolve, reject) => {
     const { app, router, store } = createApp();
 
@@ -400,11 +400,11 @@ export default context => {
 
       // 对所有匹配的路由组件调用 `asyncData()`
       Promise.all(
-        matchedComponents.map(Component => {
+        matchedComponents.map((Component) => {
           if (Component.asyncData) {
             return Component.asyncData({
               store,
-              route: router.currentRoute
+              route: router.currentRoute,
             });
           }
         })

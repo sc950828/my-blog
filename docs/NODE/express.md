@@ -1,20 +1,20 @@
-### 1.、express 是什么
+### express 是什么
 
 - express 是一个简洁而灵活的 node.js Web 应用框架
 - 可以设置中间件来响应 HTTP 请求。
 - 定义了路由表用于执行不同的 HTTP 请求动作。
 - 可以通过向模板传递参数来动态渲染 HTML 页面。
 
-### 2、创建 app
+### 创建 app
 
     const express = require('express')
     const app = express()
 
-### 3、路由
+### 路由
 
 const router = express.Router()
 
-### 4、request
+### request
 
     req.app：当callback为外部文件时，用req.app访问express的实例
     req.baseUrl：获取路由当前安装的URL路径
@@ -30,7 +30,7 @@ const router = express.Router()
     req.subdomains：获取子域名
     req.acceptsCharsets / req.acceptsEncodings / req.acceptsLanguages：返回指定字符集的第一个可接受字符编码
 
-### 5、response
+### response
 
     res.app：同req.app一样
     res.append()：追加指定HTTP头
@@ -52,13 +52,13 @@ const router = express.Router()
     res.status()：设置HTTP状态码 res.status(403)
     res.type()：设置Content-Type的MIME类型
 
-### 6、设置静态文件夹
+### 设置静态文件夹
 
     // 静态文件
     app.use("/public", express.static(__dirname + "/public"));
     这样就能随意访问/public下的文件了
 
-### 7、路由
+### 路由
 
 ```js
 var express = require("express");
@@ -87,7 +87,7 @@ app.get("/employee/:uid/:age", function(req, res, next) {
 app.listen(3000);
 ```
 
-### 8、路由拆分出来
+### 路由拆分出来
 
 ```js
 var express = require("express");
@@ -109,7 +109,7 @@ app.use("/user", user); // mini app，通常做应用拆分
 app.listen(3000);
 ```
 
-### 9、运行顺序
+### 运行顺序
 
 ```js
 // 都会执行 传递数组函数
@@ -133,19 +133,19 @@ var cb2 = function(req, res) {
 app.get("/index", [cb0, cb1, cb2]);
 ```
 
-### 10、获取参数
+### 获取参数
 
 1. query 通过 req.query 获取
 2. params 通过 req.params 获取
 3. 请求 body 里面的参数需要安装 body-parser 中间件 通过 req.body 获取
 
-### 11、中间件
+### 中间件
 
 express 通过 use 来调用中间件 app.use(中间件函数)
 
 常用的中间件 body-parser 获取请求体中的参数 app.use(bodyParser.json())或者 bodyParser.urlencoded({ extended: false })
 
-### 12、异步
+### 异步
 
 express 是洋葱模型 支持 async await 异步
 

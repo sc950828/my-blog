@@ -1,6 +1,6 @@
-### 样式
+## 样式
 
-#### 局部样式与全局样式
+### 局部样式与全局样式
 
 局部样式 一般都是使用 scoped 方案：
 
@@ -34,9 +34,9 @@ module.exports = {
 };
 ```
 
-### 体验优化
+## 体验优化
 
-#### 页面载入进度条
+### 页面载入进度条
 
 使用 nprogress 对路由跳转时做一个伪进度条，这样做在网络不好的情况下可以让用户知道页面已经在加载了：
 
@@ -52,7 +52,7 @@ router.afterEach(() => {
 });
 ```
 
-#### 美化滚动条
+### 美化滚动条
 
 一直用 Mac 做前端，突然发现同事的 Windows 上出现了十分丑陋的滚动条，为了保持一致：
 
@@ -85,7 +85,7 @@ router.afterEach(() => {
 
 ```
 
-#### 静态资源加载页面
+### 静态资源加载页面
 
 首次加载页面时，会产生大量的白屏时间，这时做一个 loading 效果看起来会很友好，其实很简单，直接在 public/index.html 里写一些静态的样式即可。
 
@@ -112,9 +112,9 @@ vhCheck("browser-address-bar");
 }
 ```
 
-### 组件库
+## 组件库
 
-#### 覆盖 Ant Design Vue 样式
+### 覆盖 Ant Design Vue 样式
 
 1.使用 .less 文件
 
@@ -169,7 +169,7 @@ module.exports = {
 };
 ```
 
-#### 干掉无用的图标
+### 干掉无用的图标
 
 Ant Design Vue 把所有的 Icon 一次性引入（不管你因用了多少个组件），这使得体积打包后图标所占的体积竟然有几百 kb 之多。这些图标大多数不会被设计师所采纳，所以部分图标都应该被干掉：
 创建一个 icons.js 来管理 Ant Design Vue 图标，这里以一个 Loading 图标为例：
@@ -199,7 +199,7 @@ module.exports = {
 };
 ```
 
-#### 解决 Moment 多国语
+### 解决 Moment 多国语
 
 解决到这之后，Ant Design Vue 居然还很大，这是因为 moment 是 Ant Design Vue 中有强依赖该插件，所以使用 webpack 插件减小打包体积，这里我们只保留 zh-cn 语言包：
 
@@ -214,7 +214,7 @@ module.exports = {
 };
 ```
 
-#### 部分组件需要在页面内引用
+### 部分组件需要在页面内引用
 
 Ant Design Vue 中部分体积较大的组件，例如 DatePicker，根据业务需求，应考虑在页面中进行加载，尽量保证首屏加载的速度：
 
@@ -229,9 +229,9 @@ export default {
 </script>
 ```
 
-#### 异步请求
+### 异步请求
 
-### 封装 Axios
+## 封装 Axios
 
 1. 在 @/libs/request.js 路径下对 Axios 进行封装，封装了请求参数，请求头，以及错误提示信息、 request 拦截器、response 拦截器、统一的错误处理、baseURL 设置等。
 2. 通过 VUE_APP_BASE_URL 区分线上与开发环境的 API 地址。
@@ -332,7 +332,7 @@ request.interceptors.response.use((response) => {
 export default request;
 ```
 
-#### 跨域
+### 跨域
 
 跨域问题一般情况直接找后端解决了，你要是不好意思打扰他们的话，可以用 devServer 提供的 proxy 代理：
 
@@ -353,7 +353,7 @@ devServer: {
 
 ```
 
-#### Mock 数据
+### Mock 数据
 
 Mock 数据功能是基于 mock.js (opens new window)开发，通过 webpack 进行自动加载 mock 配置文件。
 
@@ -416,9 +416,9 @@ export default [
 ];
 ```
 
-### 路由
+## 路由
 
-#### Layout
+### Layout
 
 布局暂时分为三大类：
 
@@ -428,7 +428,7 @@ frameOut：不需要动态判断权限的路由，如登录页或通用页面。
 
 errorPage：例如 404。
 
-#### 权限验证
+### 权限验证
 
 通过获取当前用户的权限去比对路由表，生成当前用户具的权限可访问的路由表，通过 router.addRoutes 动态挂载到 router 上。
 
@@ -438,12 +438,12 @@ errorPage：例如 404。
 
 在路由中，集成了权限验证的功能，需要为页面增加权限时，在 meta 下添加相应的 key：
 
-#### auth
+### auth
 
 类型：Boolean
 说明：当 auth 为 true 时，此页面需要进行登陆权限验证，只针对 frameIn 路由有效。
 
-#### permissions
+### permissions
 
 类型：Object
 说明：permissions 每一个 key 对应权限功能的验证，当 key 的值为 true 时，代表具有权限，若 key 为 false，配合 v-permission 指令，可以隐藏相应的 DOM。

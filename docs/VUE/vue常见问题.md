@@ -1,4 +1,4 @@
-### 1、什么是 MVC MVP MVVM？
+### 什么是 MVC MVP MVVM？
 
 MVC、MVP 和 MVVM 是三种常见的软件架构设计模式，主要通过分离关注点的方式来组织代码结构，优化我们的开发效率。
 一种架构模式往往使用了多种设计模式。
@@ -27,7 +27,7 @@ MVC、MVP 和 MVVM 是三种常见的软件架构设计模式，主要通过分�
   - View，View 是视图层，也就是用户界面。前端主要由 HTML 和 CSS 来构建 。
   - Model 层前端来说就是后端提供的 api 接口里面的数据，vue 就是 data 里面的数据。
 
-### 2、说说你对 SPA 单页面的理解，它的优缺点分别是什么？
+### 说说你对 SPA 单页面的理解，它的优缺点分别是什么？
 
 - SPA（ single-page application ）仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，UI 与用户的交互，避免页面的重新加载。
 - 优点：
@@ -39,11 +39,11 @@ MVC、MVP 和 MVVM 是三种常见的软件架构设计模式，主要通过分�
   - 前进后退路由管理：由于单页应用在一个页面中显示所有的内容，所以不能使用浏览器的前进后退功能，所有的页面切换需要自己建立堆栈管理；
   - SEO 难度较大：由于所有的内容都在一个页面中动态替换显示，所以在 SEO 上其有着天然的弱势。
 
-### 3、new Vue()经历了什么？
+### new Vue()经历了什么？
 
 当 new Vue()后，首先会初始化事件和生命周期，接着会执行 beforeCreate 生命周期钩子，在这个钩子里面还拿不到 this.$el和this.$data;接着往下走会初始化 inject 和将 data 的数据进行侦测也就是进行双向绑定；接着会执行 create 钩子函数，在这个钩子里面能够拿到 this.$data还拿不到this.$el;到这里初始化阶段就走完了。然后会进入一个模版编译阶段，在这个阶段首先会判断有没有 el 选项如果有的话就继续往下走，如果没有的话会调用 vm.$mount(el);接着继续判断有没有template选项，如果有的话，会将template提供的模版编译到render函数中；如果没有的话，会通过el选项选择模版；到这个编译阶段就结束了。（温馨提示：这个阶段只有完整版的Vue.js才会经历，也是就是通过cmd引入的方式；在单页面应用中，没有这个编译阶段，因为vue-loader已经提前帮编译好，因此，单页面使用的vue.js是运行时的版本）。模版编译完之后（这里说的是完整版，如果是运行时的版本会在初始化阶段结束后直接就到挂载阶段），然后进入挂载阶段，在挂在阶段首先或触发beforeMount钩子，在这个钩子里面只能拿到this.$data 还是拿不到 this.$el;接着会执行mounted钩子，在这个钩子里面就既能够拿到this.$el 也能拿到 this.$data；到这个挂载阶段就已经走完了，整个实例也已经挂载好了。当数据发生变更的时候，就会进入更新阶段，首先会触发beforeUpdate钩子，然后触发updated钩子，这个阶段会重新计算生成新的Vnode,然后通过patch函数里面的diff算法,将新生成的Vnode和缓存中的旧Vnode进行一个比对，最后将差异部分更新到视图中。当vm.$destory 被调用的时候，就会进入卸载阶段，在这个阶段，首先触发 beforeDestory 钩子接着触发 destoryed 钩子，在这个阶段 Vue 会将自身从父组件中删除，取消实例上的所有追踪并且移除所有的事件监听。到这里 Vue 整个生命周期就结束了。
 
-### 4、Vue 的父组件和子组件生命周期钩子函数执行顺序？
+### Vue 的父组件和子组件生命周期钩子函数执行顺序？
 
 - 加载渲染过程
   - 父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
@@ -54,19 +54,19 @@ MVC、MVP 和 MVVM 是三种常见的软件架构设计模式，主要通过分�
 - 销毁过程
   - 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 
-### 5、第一次页面加载会触发哪几个钩子？
+### 第一次页面加载会触发哪几个钩子？
 
 第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这四个钩子
 
-### 6、在哪个生命周期内调用异步请求？
+### 在哪个生命周期内调用异步请求？
 
 可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
 
-### 7、在什么阶段才能访问操作 DOM？
+### 在什么阶段才能访问操作 DOM？
 
 mounted
 
-### 8、父组件可以监听到子组件的生命周期吗？
+### 父组件可以监听到子组件的生命周期吗？
 
 - 可以，并且有两种方法实现。
 - 第一种
@@ -74,11 +74,11 @@ mounted
 - 第二种
   - 在父组件里面监听@hock 生命周期函数，比如@hook:beforeCreate="xxx"。生命周期函数都能使用该方法监听。
 
-### 9、为什么组件的 data 是方法?
+### 为什么组件的 data 是方法?
 
 因为组件是不断复用的，同一个组件在不同的地方数据应该是相互独立的。组件中的 data 写成一个函数，数据以函数返回值形式定义，这样每复用一次组件，就会返回一份新的 data，类似于给每个组件实例创建一个私有的数据空间，让各个组件实例维护各自的数据。而单纯的写成对象形式，就使得所有组件实例共用了一份 data，就会造成一个变了全都会变的结果。
 
-### 10、谈谈你对 keep-alive 的了解？
+### 谈谈你对 keep-alive 的了解？
 
 keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，避免重新渲染 ，其有以下特性：
 
@@ -86,7 +86,7 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
 - 提供 include 和 exclude 属性，两者都支持字符串或正则表达式， include 表示只有名称匹配的组件会被缓存，exclude 表示任何名称匹配的组件都不会被缓存 ，其中 exclude 的优先级比 include 高；
 - 对应两个钩子函数 activated 和 deactivated ，当组件被激活时，触发钩子函数 activated，当组件被移除时，触发钩子函数 deactivated。
 
-### 11、v-model 的原理？
+### v-model 的原理？
 
 我们在 vue 项目中主要使用 v-model 指令在表单 input、textarea、select 等元素上创建双向数据绑定，我们知道 v-model 本质上不过是语法糖，v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
 
@@ -95,7 +95,7 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
 - select 字段将 value 属性和 change 作为事件。
 - 如果在自定义组件中，v-model 默认会利用名为 value 的 prop 和名为 input 的事件，我们可以在组件中使用 model 更改默认属性和事件 model:{prop:'xxx', event:'xxx'}
 
-### 12、Vue 组件间通信有哪几种方式？
+### Vue 组件间通信有哪几种方式？
 
     1. props $emit 适用 父子组件通信
     2. $parent / $children 适用 父子组件通信。$children是一个数组。
@@ -103,7 +103,7 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
     4. EventBus （$emit / $on） 适用于 父子、隔代、兄弟组件通信。通过一个空的 Vue 实例作为中央事件总线（事件中心），用它来触发事件和监听事件
     5. Vuex 适用于 父子、隔代、兄弟组件通信
 
-### 13、SSR 服务端渲染
+### SSR 服务端渲染
 
     优点
       更好的SEO
@@ -112,19 +112,19 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
       加大了服务器压力
       开发有限制，比如只有beforeCreate和created生命周期函数
 
-### 14、vue-router 路由模式有几种？
+### vue-router 路由模式有几种？
 
 - hash: 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器；
 - history : 依赖 HTML5 History API 和服务器配置。具体可以查看 HTML5 History 模式；
 - abstract : 支持所有 JavaScript 运行环境，如 Node.js 服务器端。如果发现没有浏览器的 API，路由会自动强制进入这个模式.
 
-### 15、为什么在 Vue3.0 采用了 Proxy,抛弃了 Object.defineProperty？
+### 为什么在 Vue3.0 采用了 Proxy,抛弃了 Object.defineProperty？
 
 - Object.defineProperty 是通过 递归 + 遍历 data 对象来实现对数据的监控的,如果属性值也是对象那么需要深度遍历,显然如果能劫持一个完整的对象是才是更好的选择。消耗大，性能不够好。
 - Object.defineProperty 在某些情况下是劫持不到的。比如说通过下标方式修改数组数据或者给对象新增属性。我们需要使用另外的 set 方法才能完成该操作，非常不便捷。
 - Proxy 可以劫持整个对象,并返回一个新的对象。Proxy 不仅可以代理对象,还可以代理数组。还可以代理动态增加的属性。利用 Proxy 和 Reflect 实现之后，不用在考虑数组的操作是否触发 setter，只要操作经过 proxy 代理层，各种操作都会被捕获到，达到页面响应式的要求。
 
-### 16、vue3.0 特性
+### vue3.0 特性
 
 - Performance 性能好
 
@@ -151,7 +151,7 @@ keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状�
 
 - 数据劫持由 Object.defineProperty 改为 proxy
 
-### 17、vue 中 key 值的作用？
+### vue 中 key 值的作用？
 
 key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速
 
@@ -182,13 +182,13 @@ function createKeyToOldIdx(children, beginIdx, endIdx) {
 // 其实这里b和c完全是可以复用的，但是因为key变了 所以会触发响应式更新。随机数也是同样的道理。所以需要保证节点key唯一不变。
 ```
 
-### 18、vue 中 mixin 和 mixins 区别？
+### vue 中 mixin 和 mixins 区别？
 
 mixin 用于全局混入，会影响到每个组件实例。
 
 mixins 应该是我们最常使用的扩展组件的方式了。如果多个组件中有相同的业务逻辑，就可以将这些逻辑剥离出来，通过 mixins 混入代码，比如上拉下拉加载数据这种逻辑等等。另外需要注意的是 mixins 混入的钩子函数会先于组件内的钩子函数执行，并且在遇到同名选项的时候也会有选择性的进行合并。只有生命周期函数和 watch 不会合并，并且 mixin 的生命周期函数和 watch 方法会先与组件运行。
 
-### 19、你对 vue 项目进行过哪些优化
+### 你对 vue 项目进行过哪些优化
 
     代码层面的优化
       v-if 和 v-show 区分使用场景
@@ -218,7 +218,7 @@ mixins 应该是我们最常使用的扩展组件的方式了。如果多个组�
       使用cdn，CDN可以通过不同的域名来加载文件，从而使下载文件的并发连接数大大增加，且CDN具有更好的可用性，更低的网络延迟和丢包率
       使用 Chrome Performance 查找性能瓶颈。
 
-### 20、vue 图片问题
+### vue 图片问题
 
 - 在 data 里面定义图片路径，然后在 img 里面通过:src 绑定图片地址，图片是显示不出来的。因为 webpack 在打包的时候回检测引用图片的地方，并把图片压缩成 base64 的形式放在引用的地方，如果我们通过后面的 vue 动态绑定，我们是拿不到图片的。如果需要在 data 里面通过:src 的方式使用图片，我们可以使用 import 或 require 先把图片引进来，然后在使用。
 
@@ -226,11 +226,11 @@ mixins 应该是我们最常使用的扩展组件的方式了。如果多个组�
 
 - url-loader 会将引入的图片编码，生成 dataURI。相当于把图片数据翻译成一串字符，再把这些字符打包到文件当中，最终只需要引入这个文件就可以访问这个图片。当然如果图片较大，编码会消耗性能，因此 url-loader 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy，一般会放在 static 文件夹下面。
 
-### 21、在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
+### 在 Vue 实例中编写生命周期 hook 或其他 option/propertie 时，为什么不使用箭头函数？
 
 箭头函数自己没有定义 this 上下文，而是绑定到其父函数的上下文中。当你在 Vue 程序中使用箭头函数（=>）时，this 关键字病不会绑定到 Vue 实例，因此会引发错误。所以强烈建议改用标准函数声明。
 
-### 22、Vue3.x 响应式数据原理？
+### Vue3.x 响应式数据原理？
 
 因为 Proxy 可以直接监听对象和数组的变化，并且有多达 13 种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
 
@@ -242,7 +242,7 @@ Proxy 只会代理对象的第一层，Vue3 是怎样处理这个问题的呢？
 
 - key 是否为当前被代理对象 target 自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行 trigger。
 
-### 23、Proxy 与 Object.defineProperty 优劣对比
+### Proxy 与 Object.defineProperty 优劣对比
 
 Proxy 的优势如下:
 
@@ -259,6 +259,6 @@ Object.defineProperty 的优势如下:
 
 兼容性好，支持 IE9，而 Proxy 的存在浏览器兼容性问题,而且无法用 polyfill 磨平，因此 Vue 的作者才声明需要等到下个大版本( 3.0 )才能用 Proxy 重写。
 
-### 24、Vue 事件绑定原理是什么？
+### Vue 事件绑定原理是什么？
 
 原生事件绑定是通过 addEventListener 绑定给真实元素的，组件事件绑定是通过 Vue 自定义的`$on` 实现的。

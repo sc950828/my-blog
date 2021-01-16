@@ -1,4 +1,10 @@
-### 1、什么是 FLy.js
+## fly 文档
+
+[fly 文档](https://wendux.github.io/dist/#/doc/flyio/readme)
+
+## fly 知识点
+
+### 什么是 FLy.js
 
 一个支持所有 JavaScript 运行环境的基于 Promise 的、支持请求转发、强大的 http 请求库。可以让您在多个端上尽可能大限度的实现代码复用。
 
@@ -6,7 +12,7 @@
 
 在浏览器环境下，一个库的大小是非常重要的。这方面 Fly 做的很好，它在保持强大的功能的同时，将自己的身材控制到了最好。min 只有 4.6K 左右，GZIP 压缩后不到 2K，体积是 axios 的四分之一。
 
-### 2、特点
+### 特点
 
 - 提供统一的 Promise API。
 - 浏览器环境下，轻量且非常轻量 。
@@ -17,7 +23,7 @@
 - 浏览器端支持全局 Ajax 拦截 。
 - H5 页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片。
 
-### 3、使用
+### 使用
 
 安装
 
@@ -59,7 +65,7 @@ var Fly = require("flyio/dist/npm/weex");
 var fly = new Fly();
 ```
 
-### 4、发送请求
+### 发送请求
 
 ```js
 // 发送get请求
@@ -131,7 +137,7 @@ fly.delete(url,data,options)
 fly.patch(url,data,options)
 ```
 
-### 5、拦截器
+### 拦截器
 
 ```js
 //添加请求拦截器
@@ -185,7 +191,7 @@ fly.interceptors.request.use(null)
 fly.interceptors.response.use(null,null)
 ```
 
-### 6、错误处理
+### 错误处理
 
 ```js
 {
@@ -197,7 +203,7 @@ fly.interceptors.response.use(null,null)
 }
 ```
 
-### 7、config 配置
+### config 配置
 
 可配置选项
 
@@ -235,7 +241,7 @@ fly.config.timeout = 10000;
 fly.config.baseURL = "https://wendux.github.io/";
 ```
 
-### 8、与 axios 对比
+### 与 axios 对比
 
 共同点
 
@@ -254,7 +260,7 @@ node 环境下下 Fly 的功能要明显强于 axios，Fly 在 node 下不仅提
 
 Http Engine Fly 中提出了 Http Engine 的概念，Fly 可以通过更换 Http Engine 的方式实现很多有趣的功能，比如全局 Ajax 拦截。
 
-### 8、与 Fetch 对比
+### 与 Fetch 对比
 
 fetch 必须手动设置 header 的 content-type，Fetch 不会自动设置。
 
@@ -279,7 +285,7 @@ fetch("doAct.action", {
   credentials: "include",
   body: "key=value",
 })
-  .then(function (res) {
+  .then(function(res) {
     if (res.ok) {
       // To do with res
     } else if (res.status == 401) {
@@ -290,7 +296,7 @@ fetch("doAct.action", {
       //
     }
   })
-  .catch(function (e) {
+  .catch(function(e) {
     // Handling errors
   });
 ```

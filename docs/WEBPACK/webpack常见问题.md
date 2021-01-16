@@ -1,4 +1,4 @@
-### 1、Loader 和 Plugin 的区别？
+### Loader 和 Plugin 的区别？
 
 Loader 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。 因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。
 
@@ -8,7 +8,7 @@ Loader 在 module.rules 中配置，作为模块的解析规则，类型为数�
 
 Plugin 在 plugins 中单独配置，类型为数组，每一项是一个 Plugin 的实例，参数都通过构造函数传入。
 
-### 2、Webpack 构建流程简单说一下
+### Webpack 构建流程简单说一下
 
 Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
 
@@ -22,7 +22,7 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果。
 
-### 3、watch 文件监听原理呢？
+### watch 文件监听原理呢？
 
 轮询判断文件的最后编辑时间是否变化，如果某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 aggregateTimeout 后再执行
 
@@ -39,12 +39,12 @@ module.export = {
     // 监听到变化发生后会等300ms再去执行，默认300ms
     aggregateTimeout: 300,
     // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-    poll: 1000
-  }
+    poll: 1000,
+  },
 };
 ```
 
-### 4、说一下 Webpack 的热更新原理
+### 说一下 Webpack 的热更新原理
 
 Webpack 的热更新又称热替换（Hot Module Replacement），缩写为 HMR。 这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块。
 
@@ -52,7 +52,7 @@ HMR 的核心就是客户端从服务端拉去更新后的文件，准确的说�
 
 后续的部分(拿到增量更新之后如何处理？哪些状态该保留？哪些又需要更新？)由 HotModulePlugin 来完成，提供了相关 API 以供开发者针对自身场景进行处理，像 react-hot-loader 和 vue-loader 都是借助这些 API 实现 HMR。
 
-### 5、占位符名称及含义
+### 占位符名称及含义
 
 - id chunk 的唯一标识 从 0 开始
 - ext 资源后缀名
@@ -64,7 +64,7 @@ HMR 的核心就是客户端从服务端拉去更新后的文件，准确的说�
 - contenthash：根据文件内容来定义 hash，文件内容不变，则 contenthash 不变。
 - emoji 一个随机的指代文件内容的 emoj
 
-### 6、在实际工程中，配置文件上百行乃是常事，如何保证各个 loader 按照预想方式工作？
+### 在实际工程中，配置文件上百行乃是常事，如何保证各个 loader 按照预想方式工作？
 
 可以使用 enforce 强制执行 loader 的作用顺序，pre 代表在所有正常 loader 之前执行，post 是所有 loader 之后执行。(inline/行内 官方不推荐使用)
 
@@ -77,7 +77,7 @@ HMR 的核心就是客户端从服务端拉去更新后的文件，准确的说�
     所有普通，后置和前置 loader 可以通过在请求中加上 !! 前缀来忽略（覆盖）。
     不应该使用行内 loader 和 ! 前缀，因为它们是非标准的。它们可在由 loader 生成的代码中使用。
 
-### 7、多页面应用打包
+### 多页面应用打包
 
 使用 HtmlWebpackPlugin 多实例出几个页面就行了，根据不同的 chunks 配置引入不同的 js。
 
@@ -85,16 +85,16 @@ HMR 的核心就是客户端从服务端拉去更新后的文件，准确的说�
 new HtmlWebpackPlugin({
   template: "index2.html",
   filename: "index.html",
-  chunks: ["index"] // 只引入自己需要的入口chunk
+  chunks: ["index"], // 只引入自己需要的入口chunk
 }),
   new HtmlWebpackPlugin({
     template: "index2.html",
     filename: "main.html",
-    chunks: ["main"] // 只引入自己需要的入口chunk
+    chunks: ["main"], // 只引入自己需要的入口chunk
   });
 ```
 
-### 8、使用 webpack.DefinePlugin 注意事项和 webpack.ProvidePlugin 区别
+### 使用 webpack.DefinePlugin 注意事项和 webpack.ProvidePlugin 区别
 
 ```js
 // 如果 value 是一个字符串，会被当做 code 片段
@@ -102,13 +102,13 @@ new HtmlWebpackPlugin({
 // 如果 value 是一个对象，正常对象定义即可
 // 如果 key 中有 typeof，它只针对 typeof 调用定义
 new webpack.DefinePlugin({
-  DEV: JSON.stringify("我通过DefinePlugin定义")
+  DEV: JSON.stringify("我通过DefinePlugin定义"),
 });
 ```
 
 `webpack.ProvidePlugin`用来处理自动引入的变量，减少 import 或者 require。webpack.DefinePlugin 主要是用来自定义一些全局变量。
 
-### 9、webpack 构建速度优化？
+### webpack 构建速度优化？
 
 - 1.使用高版本的 Webpack 和 Node.js
 
@@ -136,7 +136,7 @@ new webpack.DefinePlugin({
 
   - DllPlugin 和 DLLReferencePlugin 可以实现拆分 bundles，并且可以大大提升构建速度，DllPlugin 和 DLLReferencePlugin 都是 webpack 的内置模块。
 
-### 10、webpack 对代码的优化？
+### webpack 对代码的优化？
 
 - 1.压缩代码
 

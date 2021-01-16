@@ -1,9 +1,9 @@
-### 1、什么是错误优先的回调函数？
+### 什么是错误优先的回调函数？
 
 错误优先的回调函数用于传递错误和数据。第一个参数始终应该是一个错误对象， 用于检查程序是否发生了错误。其余的参数用于传递数据。
 
 ```js
-fs.readFile(filePath, function (err, data) {
+fs.readFile(filePath, function(err, data) {
   if (err) {
     //handle the error
   }
@@ -11,7 +11,7 @@ fs.readFile(filePath, function (err, data) {
 });
 ```
 
-### 2、require 的模块加载机制
+### require 的模块加载机制
 
 ```js
 // require 其实内部调用 Module._load 方法
@@ -52,7 +52,7 @@ Module._load = function(request, parent, isMain) {
 };
 ```
 
-### 3、Node 事件循环的流程
+### Node 事件循环的流程
 
 在进程启动时，Node 便会创建一个类似于 while(true)的循环，每执行一次循环体的过程我们成为 Tick。
 
@@ -85,17 +85,17 @@ Node 端事件循环中的异步队列也是这两种：macro（宏任务）队�
 console.log("start");
 setTimeout(() => {
   console.log("timer1");
-  Promise.resolve().then(function () {
+  Promise.resolve().then(function() {
     console.log("promise1");
   });
 }, 0);
 setTimeout(() => {
   console.log("timer2");
-  Promise.resolve().then(function () {
+  Promise.resolve().then(function() {
     console.log("promise2");
   });
 }, 0);
-Promise.resolve().then(function () {
+Promise.resolve().then(function() {
   console.log("promise3");
 });
 console.log("end");
@@ -153,7 +153,7 @@ process.nextTick
 ```js
 setTimeout(() => {
   console.log("timer1");
-  Promise.resolve().then(function () {
+  Promise.resolve().then(function() {
     console.log("promise1");
   });
 }, 0);
@@ -179,13 +179,13 @@ Node 与浏览器的 Event Loop 差异
 ```js
 setTimeout(() => {
   console.log("timer1");
-  Promise.resolve().then(function () {
+  Promise.resolve().then(function() {
     console.log("promise1");
   });
 }, 0);
 setTimeout(() => {
   console.log("timer2");
-  Promise.resolve().then(function () {
+  Promise.resolve().then(function() {
     console.log("promise2");
   });
 }, 0);
@@ -199,7 +199,7 @@ setTimeout(() => {
 // 如果是第二个定时器已经在完成队列中，则最后的结果为timer1=>timer2=>promise1=>promise2
 ```
 
-### 4、如何查看 V8 的内存使用情况
+### 如何查看 V8 的内存使用情况
 
 ```js
 // 使用process.memoryUsage()
@@ -211,7 +211,7 @@ setTimeout(() => {
 }
 ```
 
-### 5、v8 引擎的垃圾回收
+### v8 引擎的垃圾回收
 
 - v8 引擎将内存分为了新生代和老生代。
 
@@ -237,7 +237,7 @@ setTimeout(() => {
 
 - 由于在进行垃圾回收的时候会暂停应用的逻辑，对于新生代方法由于内存小，每次停顿的时间不会太长，但对于老生代来说每次垃圾回收的时间长，停顿会造成很大的影响。 为了解决这个问题 V8 引入了增量标记的方法，将一次停顿进行的过程分为了多步，每次执行完一小步就让运行逻辑执行一会，就这样交替运行。
 
-### 6、请简述一下 node 的多进程架构
+### 请简述一下 node 的多进程架构
 
 Node 是个单进程单线程模型，他线程安全。
 
@@ -253,7 +253,7 @@ for (var i = 0; i < cpus.length; i++) {
 }
 ```
 
-### 7、node 创建子进程的方法大致有：
+### node 创建子进程的方法大致有：
 
 - spawn()： 启动一个子进程来执行命令
 - exec(): 启动一个子进程来执行命令，与 spawn()不同的是其接口不同，它有一个回调函数获知子进程的状况
