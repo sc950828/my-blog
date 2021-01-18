@@ -292,3 +292,902 @@ echo "第三个参数为：$3";
 </table>
 
 ## Shell 基本运算符
+
+Shell 和其他编程语言一样，支持多种运算符，包括：
+
+- 算数运算符
+- 关系运算符
+- 布尔运算符
+- 字符串运算符
+- 文件测试运算符
+
+原生 bash 不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用。
+
+```shell
+val=`expr 2 + 2`
+echo "两数之和为 : $val"
+```
+
+### 算术运算符
+
+乘号`(*)`前边必须加反斜杠`(\)`才能实现乘法运算；
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        运算符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        +
+      </td>
+      <td>
+        加法
+      </td>
+      <td>
+        `expr $a + $b` 结果为&nbsp;30。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -
+      </td>
+      <td>
+        减法
+      </td>
+      <td>
+        `expr $a - $b` 结果为 -10。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        *
+      </td>
+      <td>
+        乘法
+      </td>
+      <td>
+        `expr $a \* $b` 结果为 &nbsp;200。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        /
+      </td>
+      <td>
+        除法
+      </td>
+      <td>
+        `expr $b / $a` 结果为&nbsp;2。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        %
+      </td>
+      <td>
+        取余
+      </td>
+      <td>
+        `expr $b % $a` 结果为&nbsp;0。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        =
+      </td>
+      <td>
+        赋值
+      </td>
+      <td>
+        a=$b 将把变量 b 的值赋给 a。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        ==
+      </td>
+      <td>
+        相等。用于比较两个数字，相同则返回 true。
+      </td>
+      <td>
+        [ $a == $b ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        !=
+      </td>
+      <td>
+        不相等。用于比较两个数字，不相同则返回 true。
+      </td>
+      <td>
+        [ $a != $b ] 返回 true。
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```shell
+a=10
+b=20
+
+val=`expr $a + $b`
+echo "a + b : $val"
+
+val=`expr $a - $b`
+echo "a - b : $val"
+
+val=`expr $a \* $b`
+echo "a * b : $val"
+
+val=`expr $b / $a`
+echo "b / a : $val"
+
+val=`expr $b % $a`
+echo "b % a : $val"
+
+if [ $a == $b ]
+then
+   echo "a 等于 b"
+fi
+if [ $a != $b ]
+then
+   echo "a 不等于 b"
+fi
+```
+
+### 关系运算符
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        运算符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        -eq
+      </td>
+      <td>
+        检测两个数是否相等，相等返回 true。
+      </td>
+      <td>
+        [ $a -eq $b ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -ne
+      </td>
+      <td>
+        检测两个数是否不相等，不相等返回 true。
+      </td>
+      <td>
+        [ $a -ne $b ] 返回 true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -gt
+      </td>
+      <td>
+        检测左边的数是否大于右边的，如果是，则返回 true。
+      </td>
+      <td>
+        [ $a -gt $b ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -lt
+      </td>
+      <td>
+        检测左边的数是否小于右边的，如果是，则返回 true。
+      </td>
+      <td>
+        [ $a -lt $b ] 返回 true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -ge
+      </td>
+      <td>
+        检测左边的数是否大于等于右边的，如果是，则返回 true。
+      </td>
+      <td>
+        [ $a -ge $b ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -le
+      </td>
+      <td>
+        检测左边的数是否小于等于右边的，如果是，则返回 true。
+      </td>
+      <td>
+        [ $a -le $b ] 返回 true。
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```shell
+a=10
+b=20
+
+if [ $a -eq $b ]
+then
+   echo "$a -eq $b : a 等于 b"
+else
+   echo "$a -eq $b: a 不等于 b"
+fi
+if [ $a -ne $b ]
+then
+   echo "$a -ne $b: a 不等于 b"
+else
+   echo "$a -ne $b : a 等于 b"
+fi
+if [ $a -gt $b ]
+then
+   echo "$a -gt $b: a 大于 b"
+else
+   echo "$a -gt $b: a 不大于 b"
+fi
+if [ $a -lt $b ]
+then
+   echo "$a -lt $b: a 小于 b"
+else
+   echo "$a -lt $b: a 不小于 b"
+fi
+if [ $a -ge $b ]
+then
+   echo "$a -ge $b: a 大于或等于 b"
+else
+   echo "$a -ge $b: a 小于 b"
+fi
+if [ $a -le $b ]
+then
+   echo "$a -le $b: a 小于或等于 b"
+else
+   echo "$a -le $b: a 大于 b"
+fi
+```
+
+### 布尔运算符
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        运算符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        !
+      </td>
+      <td>
+        非运算，表达式为 true 则返回 false，否则返回 true。
+      </td>
+      <td>
+        [ ! false ] 返回 true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -o
+      </td>
+      <td>
+        或运算，有一个表达式为 true 则返回 true。
+      </td>
+      <td>
+        [ $a -lt 20 -o $b -gt 100 ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -a
+      </td>
+      <td>
+        与运算，两个表达式都为 true 才返回 true。
+      </td>
+      <td>
+        [ $a -lt 20 -a $b -gt 100 ] 返回&nbsp;false。
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```shell
+a=10
+b=20
+
+if [ $a != $b ]
+then
+   echo "$a != $b : a 不等于 b"
+else
+   echo "$a == $b: a 等于 b"
+fi
+if [ $a -lt 100 -a $b -gt 15 ]
+then
+   echo "$a 小于 100 且 $b 大于 15 : 返回 true"
+else
+   echo "$a 小于 100 且 $b 大于 15 : 返回 false"
+fi
+if [ $a -lt 100 -o $b -gt 100 ]
+then
+   echo "$a 小于 100 或 $b 大于 100 : 返回 true"
+else
+   echo "$a 小于 100 或 $b 大于 100 : 返回 false"
+fi
+if [ $a -lt 5 -o $b -gt 100 ]
+then
+   echo "$a 小于 5 或 $b 大于 100 : 返回 true"
+else
+   echo "$a 小于 5 或 $b 大于 100 : 返回 false"
+fi
+```
+
+### 逻辑运算符
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        运算符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        &amp;&amp;
+      </td>
+      <td>
+        逻辑的 AND
+      </td>
+      <td>
+        [[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false
+      </td>
+    </tr>
+    <tr>
+      <td>
+        ||
+      </td>
+      <td>
+        逻辑的 OR
+      </td>
+      <td>
+        [[ $a -lt 100 || $b -gt 100 ]] 返回 true
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```shell
+a=10
+b=20
+
+if [[ $a -lt 100 && $b -gt 100 ]]
+then
+   echo "返回 true"
+else
+   echo "返回 false"
+fi
+
+if [[ $a -lt 100 || $b -gt 100 ]]
+then
+   echo "返回 true"
+else
+   echo "返回 false"
+fi
+```
+
+### 字符串运算符
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        运算符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        =
+      </td>
+      <td>
+        检测两个字符串是否相等，相等返回 true。
+      </td>
+      <td>
+        [ $a = $b ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        !=
+      </td>
+      <td>
+        检测两个字符串是否相等，不相等返回 true。
+      </td>
+      <td>
+        [ $a != $b ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -z
+      </td>
+      <td>
+        检测字符串长度是否为0，为0返回 true。
+      </td>
+      <td>
+        [ -z $a ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -n
+      </td>
+      <td>
+        检测字符串长度是否不为 0，不为 0 返回 true。
+      </td>
+      <td>
+        [ -n "$a" ] 返回 true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        $
+      </td>
+      <td>
+        检测字符串是否为空，不为空返回 true。
+      </td>
+      <td>
+        [ $a ] 返回&nbsp;true。
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```shell
+a="abc"
+b="efg"
+
+if [ $a = $b ]
+then
+echo "$a = $b : a 等于 b"
+else
+echo "$a = $b: a 不等于 b"
+fi
+if [ $a != $b ]
+then
+echo "$a != $b : a 不等于 b"
+else
+echo "$a != $b: a 等于 b"
+fi
+if [ -z $a ]
+then
+echo "-z $a : 字符串长度为 0"
+else
+   echo "-z $a : 字符串长度不为 0"
+fi
+if [ -n "$a" ]
+then
+echo "-n $a : 字符串长度不为 0"
+else
+   echo "-n $a : 字符串长度为 0"
+fi
+if [ $a ]
+then
+echo "$a : 字符串不为空"
+else
+   echo "$a : 字符串为空"
+fi
+```
+
+### 文件测试运算符
+
+<table class="reference">
+  <tbody>
+    <tr>
+      <th>
+        操作符
+      </th>
+      <th>
+        说明
+      </th>
+      <th>
+        举例
+      </th>
+    </tr>
+    <tr>
+      <td>
+        -b file
+      </td>
+      <td>
+        检测文件是否是块设备文件，如果是，则返回 true。
+      </td>
+      <td>
+        [ -b $file ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -c file
+      </td>
+      <td>
+        检测文件是否是字符设备文件，如果是，则返回 true。
+      </td>
+      <td>
+        [ -c $file ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -d file
+      </td>
+      <td>
+        检测文件是否是目录，如果是，则返回 true。
+      </td>
+      <td>
+        [ -d $file ] 返回 false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -f file
+      </td>
+      <td>
+        检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回
+        true。
+      </td>
+      <td>
+        [ -f $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -g file
+      </td>
+      <td>
+        检测文件是否设置了 SGID 位，如果是，则返回 true。
+      </td>
+      <td>
+        [ -g $file ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -k file
+      </td>
+      <td>
+        检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。
+      </td>
+      <td>
+        [ -k $file ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -p file
+      </td>
+      <td>
+        检测文件是否是有名管道，如果是，则返回 true。
+      </td>
+      <td>
+        [ -p $file ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -u file
+      </td>
+      <td>
+        检测文件是否设置了 SUID 位，如果是，则返回 true。
+      </td>
+      <td>
+        [ -u $file ] 返回&nbsp;false。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -r file
+      </td>
+      <td>
+        检测文件是否可读，如果是，则返回 true。
+      </td>
+      <td>
+        [ -r $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -w file
+      </td>
+      <td>
+        检测文件是否可写，如果是，则返回 true。
+      </td>
+      <td>
+        [ -w $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -x file
+      </td>
+      <td>
+        检测文件是否可执行，如果是，则返回 true。
+      </td>
+      <td>
+        [ -x $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -s file
+      </td>
+      <td>
+        检测文件是否为空（文件大小是否大于0），不为空返回 true。
+      </td>
+      <td>
+        [ -s $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+    <tr>
+      <td>
+        -e file
+      </td>
+      <td>
+        检测文件（包括目录）是否存在，如果是，则返回 true。
+      </td>
+      <td>
+        [ -e $file ] 返回&nbsp;true。
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Shell 流程控制
+
+### if
+
+注意：条件表达式要放在方括号之间，并且要有空格，例如: `[$a==$b]` 是错误的，必须写成 `[ $a == $b ]`。
+
+```shell
+if condition1
+then
+    command1
+elif condition2
+then
+    command2
+else
+    commandN
+fi
+
+# 实例
+a=10
+b=20
+if [ $a == $b ]
+then
+   echo "a 等于 b"
+elif [ $a -gt $b ]
+then
+   echo "a 大于 b"
+elif [ $a -lt $b ]
+then
+   echo "a 小于 b"
+else
+   echo "没有符合的条件"
+fi
+```
+
+### for
+
+```shell
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+
+# 写成一行
+for var in item1 item2 ... itemN; do command1; command2… done;
+
+# 实例
+for loop in 1 2 3 4 5
+do
+    echo "The value is: $loop"
+done
+```
+
+### while
+
+```shell
+while condition
+do
+    command
+done
+
+# 实例
+int=1
+while(( $int<=5 ))
+do
+    echo $int
+    let "int++"
+done
+```
+
+### until
+
+until 循环执行一系列命令直至条件为 true 时停止。
+
+```shell
+until condition
+do
+    command
+done
+
+# 实例
+a=0
+
+until [ ! $a -lt 10 ]
+do
+   echo $a
+   a=`expr $a + 1`
+done
+```
+
+### case
+
+```shell
+case 值 in
+模式1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+模式2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+
+# 实例
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+read aNum
+case $aNum in
+    1)  echo '你选择了 1'
+    ;;
+    2)  echo '你选择了 2'
+    ;;
+    3)  echo '你选择了 3'
+    ;;
+    4)  echo '你选择了 4'
+    ;;
+    *)  echo '你没有输入 1 到 4 之间的数字'
+    ;;
+esac
+```
+
+### 跳出循环
+
+break 和 continue 跟 js 里面一样
+
+break 命令允许跳出所有循环（终止执行后面的所有循环）。
+
+continue 命令与 break 命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。
+
+## Shell 函数
+
+### 普通函数
+
+```shell
+[ function ] funname [()]
+
+{
+
+    action;
+
+    [return int;]
+
+}
+
+# 实例
+demoFun(){
+    echo "这是我的第一个 shell 函数!"
+}
+echo "-----函数开始执行-----"
+demoFun
+echo "-----函数执行完毕-----"
+```
+
+### 带 return 的函数
+
+```shell
+funWithReturn(){
+    echo "这个函数会对输入的两个数字进行相加运算..."
+    echo "输入第一个数字: "
+    read aNum
+    echo "输入第二个数字: "
+    read anotherNum
+    echo "两个数字分别为 $aNum 和 $anotherNum !"
+    return $(($aNum+$anotherNum))
+}
+funWithReturn
+echo "输入的两个数字之和为 $? !"
+```
+
+### 传递参数
+
+```shell
+funWithParam(){
+    echo "第一个参数为 $1 !"
+    echo "第二个参数为 $2 !"
+    echo "第十个参数为 $10 !"
+    echo "第十个参数为 ${10} !"
+    echo "第十一个参数为 ${11} !"
+    echo "参数总数有 $# 个!"
+    echo "作为一个字符串输出所有参数 $* !"
+}
+funWithParam 1 2 3 4 5 6 7 8 9 34 73
+```
+
+## Shell 文件包含
+
+和其他语言一样，Shell 也可以包含外部脚本。这样可以很方便的封装一些公用的代码作为一个独立的文件。
+
+```shell
+. filename   # 注意点号(.)和文件名中间有一空格
+
+或
+
+source filename
+
+# 实例
+#使用 . 号来引用test1.sh 文件
+. ./test1.sh
+
+# 或者使用以下包含文件代码
+# source ./test1.sh
+```

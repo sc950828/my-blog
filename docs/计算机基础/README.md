@@ -6,10 +6,4 @@
 
 ### 3、[linux 文件权限](./linux文件权限)
 
-### 4、[ubuntu](./ubuntu)
-
-### 5、[windows](./windows)
-
-### 6、[mac](./mac)
-
-### 7、[shell](./shell)
+### 4、[shell](./shell)
