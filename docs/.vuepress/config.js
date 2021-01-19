@@ -121,7 +121,8 @@ module.exports = {
         title: "UNIAPP",
         children: [
           ["/UNIAPP/uniapp基础", "uniapp基础"],
-          ["/UNIAPP/跨端开发", "跨端开发"]
+          ["/UNIAPP/跨端开发", "跨端开发"],
+          ["/UNIAPP/hybrid", "hybrid"]
         ]
       },
       {
