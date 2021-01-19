@@ -255,7 +255,13 @@ git revert commit_id 生成一个撤销指定提交版本的新提交
 
 ### cherry-pick
 
-将指定的提交 commit 应用于当前分支（可以用于恢复不小心撤销（revert/reset）的提交）
+将指定的提交 commit 应用于当前分支（可以用于在错误的分支提交代码）
+
+例如 我修改了一个文件 commit 完之后才发现在 master 分支上，这时我们就可以用到 cherry-pick 功能了。
+
+1. 我们在 master 分支上用 git log 找到我们刚才的提交，复制 commitId。
+2. 我们切换到自己的分支上 使用 git cherry-pick commitId 把刚才的 commit 应用到我们的分支就可以了
+3. 然后我们就可以在自己的分支上 push 了
 
 git cherry-pick commit_id
 
