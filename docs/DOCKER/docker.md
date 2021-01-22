@@ -2,6 +2,29 @@
 
 [docker 菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
 
+## 安装
+
+```shell
+# ubuntu 安装
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+```
+
+## 镜像加速
+
+使用默认镜像仓库是国外的，所以需要配置国内镜像。我们可以使用阿里云的容器镜像服务。创建 docker 镜像专属加速链接。
+
+```shell
+# ubuntu
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["自己的加速链接"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
 ### 什么是 docker
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。
