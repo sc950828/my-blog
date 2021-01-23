@@ -1,5 +1,7 @@
 #! /bin/bash
 
+git checkout .
+
 git pull origin master
 
 npm install
