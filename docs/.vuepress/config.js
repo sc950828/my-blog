@@ -2,7 +2,7 @@ module.exports = {
   title: "苏纯的博客",
   description: "前端路上的点点滴滴",
   base: "/my-blog/",
-  head: [["link", { rel: "icon", href: "/randy.jpg" }]],
+  head: [["link", { rel: "icon", href: "/randy.ico" }]],
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
