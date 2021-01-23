@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# 首页部署到github
+
 # 终止一个错误
 set -e
 

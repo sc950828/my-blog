@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# docker部署博客到阿里云
+
 git checkout .
 
 git pull origin master
@@ -8,7 +10,7 @@ npm install
 
 npm run build
 
-docker build -t iblog .
+docker build -t iblog -f ./docker/blog.Dockerfile .
 
 docker stop myblog
 
