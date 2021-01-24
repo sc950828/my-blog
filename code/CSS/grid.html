@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid响应式布局</title>
+    <!-- 在这里用link标签引入中文渐变色 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/chinese-gradient"
+    />
+    <style>
+      /* 清除默认样式 */
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      /* 父元素 */
+      ul {
+        /* 清除默认样式 */
+        list-style: none;
+
+        /* 显示为grid */
+        display: grid;
+
+        /* 自动添加行数 列数自动填充 每列不低于100px */
+        grid: auto-flow auto / repeat(auto-fit, minmax(100px, 1fr));
+
+        /* 5px的间距 */
+        gap: 5px;
+      }
+
+      /* 子元素 */
+      li {
+        /* 100px的高度 */
+        height: 100px;
+
+        /* 绿色渐变 */
+        background: var(--极光绿);
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>

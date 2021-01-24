@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex响应式布局</title>
+    <!-- 在这里用link标签引入中文渐变色 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/chinese-gradient"
+    />
+    <style>
+      /* 清除默认样式 */
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        list-style: none;
+      }
+
+      /* 父元素 */
+      ul {
+        /* 显示为flex布局 */
+        display: flex;
+
+        /* 允许换行 */
+        flex-flow: wrap;
+      }
+
+      /* 子元素 */
+      li {
+        /* 2px的外边距 */
+        margin: 2px;
+
+        /* 墨色渐变 */
+        background: var(--墨色);
+
+        /* 100px的高度 */
+        height: 100px;
+
+        /* 令其可伸展 */
+        flex: 1;
+
+        /* 100px的宽 */
+        flex-basis: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>
