@@ -5,10 +5,10 @@ module.exports = {
   head: [["link", { rel: "icon", href: "/randy.ico" }]],
   themeConfig: {
     nav: [
-      { text: "首页", link: "/" },
       { text: "导航", link: "/GUIDE/" },
-      // { text: "代码实例", link: "http://sc950828.top" },
-      { text: "GitHub地址", link: "https://github.com/sc950828" },
+      { text: "博客首页", link: "/" },
+      { text: "个人首页", link: "https://sc950828.github.io" },
+      { text: "GitHub", link: "https://github.com/sc950828" },
     ],
     sidebar: [
       {
