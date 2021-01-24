@@ -10,7 +10,7 @@ npm install
 
 npm run build
 
-docker build -t iblog -f ./docker/blog.Dockerfile .
+docker build -t iblog .
 
 docker stop myblog
 
