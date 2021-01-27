@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>classTest</title>
+  </head>
+  <body>
+    <script>
+      // ES6的类
+      class Father {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+        }
+        // 这个方法类似ES5里面的原型链上
+        add() {
+          return this.x + this.y;
+        }
+      }
+
+      // 继承
+      class Child extends Father {
+        constructor(x, y, z) {
+          // 继承父类
+          super(x, y);
+          this.z = z;
+          this._x = -1;
+        }
+
+        get x() {
+          return this._x;
+        }
+
+        set x(val) {
+          this._x = val;
+        }
+      }
+
+      const c1 = new Child(1, 2, 3);
+      console.log(c1.x);
+      c1.x = 1;
+      console.log(c1.x);
+      console.log(c1.z);
+    </script>
+  </body>
+</html>

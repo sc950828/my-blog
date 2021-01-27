@@ -4,6 +4,14 @@
 - 使用 instanceof xx instanceof Array 通过原型链来判断
 - Object.prototype.toString.call(arr) 常用于判断浏览器内置对象。null 也能正确判断出来。
 
+```js
+// typeof只能判断基本数据类型 引用数据类型都是返回object
+// 我们使用Object.prototype.toString.call({})来判断基本数据类型和内置的引用数据类型
+// 返回的是[object Object]
+// 所以需要截取 从第八位截取到倒数第一位
+Object.prototype.toString.call(param).slice(8, -1);
+```
+
 ### 立即执行函数(IIFE)的作用？
 
 - 模拟块级作用域。
@@ -547,4 +555,35 @@ function foo(a, b = 1, c) {
   console.log(foo.length);
 }
 foo("a", "b"); // 1
+```
+
+### 对象循环的方式
+
+1. 使用 for in
+2. 使用 Object.keys() Object.values()
+3. 使用 Object.getOwnPropertyNames()
+4. 使用 Reflect.ownKeys(obj)
+
+```js
+let obj = {
+  name: "xiecheng",
+  age: 34,
+  school: "imooc",
+};
+// for in
+for (let key in obj) {
+  console.log(key, obj[key]);
+}
+// Object.keys()
+Object.keys(obj).forEach((key) => {
+  console.log(key, obj[key]);
+});
+// Object.getOwnPropertyNames()
+Object.getOwnPropertyNames(obj).forEach((key) => {
+  console.log(key, obj[key]);
+});
+// Reflect.ownKeys(obj)
+Reflect.ownKeys(obj).forEach((key) => {
+  console.log(key, obj[key]);
+});
 ```

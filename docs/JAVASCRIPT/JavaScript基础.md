@@ -40,6 +40,10 @@
   - 在一个对象上定义多个新属性，或者修改一个对象的现有属性， 并返回这个对象。
   - 该方法创建的对象 初始的属性 value get set 是 undefined，enumerable writable configurable 都是 false。需要配置才能正常赋值。
 
+- Object.getOwnPropertyNames(obj)
+
+  - 获取对象的 keys
+
 - Object.getOwnPropertyDescriptor(obj,prop)
 
   - 返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）。

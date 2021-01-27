@@ -200,12 +200,7 @@ console.log(sum(...[4, 5])); // 12
 console.log(sum(...[4, 5, 6])); // 15
 ```
 
-## for of
-
-- 可以 break，得到的是值。而不像 for in 一样，得到的是数组的下标或对象的 key。
-- 但是 for of 不能遍历对象
-
-### 8、promise async await
+### promise async await
 
 - promise 有三种状态: fulfilled, rejected, pending
 - promise 的优点
@@ -216,7 +211,7 @@ console.log(sum(...[4, 5, 6])); // 15
   - 当处于 pending 状态时，无法得知目前进展到哪一个阶段
 - Promise 的构造函数是同步执行的。then 是异步执行的。
 
-### 9、Set Map
+### Set Map
 
     Set可以去重，类似数组只是里面的元素不能重复，并且set的键值是相同的，不像数组有下标
       const set = new Set([1, 2, 3, 4, 4]);
@@ -237,29 +232,138 @@ console.log(sum(...[4, 5, 6])); // 15
         delete：删除成员
         clear：清空所有
 
-### 10、新的数据类型 symbol
+## symbol
 
-- 调用 Symbol()返回的每个实例都是唯一的，因此当你比较两个 Symbol 实例的时候总是返回 false
-  - 1.可以用来做对象的 key，但是使用 Symbol()创建的对象的 key 通过 Object.keys()或者 for in 循环获取不到。
-  - 2.可以用做常量的值，这样值就永远不会相同 const VAL = Symbol()
+新增的原始数据类型 symbol
 
-### 11、class
+调用 Symbol()返回的每个实例都是唯一的，因此当你比较两个 Symbol 实例的时候总是返回 false
+
+1. 可以用来做对象的 key，但是使用 Symbol()创建的对象的 key 通过 Object.keys()或者 for in 循环获取不到。
+2. 可以用做常量的值，这样值就永远不会相同 const VAL = Symbol()
 
 ```js
-class Name {
+let s1 = Symbol();
+let s2 = Symbol();
+console.log(s1 === s2);
+console.log(s1.description); //undefined
+
+// Symbol函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，
+// 或者转为字符串时，比较容易区分。
+let s3 = Symbol("name");
+let s4 = Symbol("name");
+console.log(s3 === s4);
+console.log(s3.description); // name
+
+// Symbol.for() 接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。
+// 如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，并将其注册到全局。
+let s5 = Symbol.for("randy");
+let s6 = Symbol.for("randy");
+console.log(s5 === s6);
+console.log(s5.description); // randy
+
+// Symbol.keyFor()方法返回一个已登记的 Symbol 类型值的key。
+const s7 = Symbol("foo");
+console.log(Symbol.keyFor(s7)); // undefined
+
+const s8 = Symbol.for("foo");
+console.log(Symbol.keyFor(s8)); // foo
+```
+
+```js
+// 可以用来做对象的 key
+const stu1 = Symbol("李四");
+const stu2 = Symbol("李四");
+const grade = {
+  [stu1]: {
+    address: "yyy",
+    tel: "222",
+  },
+  [stu2]: {
+    address: "zzz",
+    tel: "333",
+  },
+};
+console.log(grade);
+console.log(grade[stu1]);
+console.log(grade[stu2]);
+```
+
+## 类和对象
+
+类（class）是对象的模板，定义了同一组对象共有的属性和方法
+
+```js
+// es5的类
+function People(name, age) {
+  // 实例属性
+  this.name = name;
+  this.age = age;
+  // 父类的方法我们一般不定义在类里面 而是使用prototype 定义在类的原型上
+  // 这样我们每次new一个实例的时候 方法就不会每次都在实例里面
+  this.sayName = function() {
+    console.log(this.name);
+  };
+}
+// 应该这样写
+People.prototype.sayName = function() {
+  console.log(this.name);
+};
+
+// 静态属性 静态方法只初始化一次
+// 静态属性
+People.count = 12;
+// 直接使用
+console.log(People.count);
+// 静态方法
+People.getCount = function() {
+  console.log(People.count);
+};
+// 直接使用
+People.getCount();
+```
+
+```js
+// ES6的类
+class Father {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
+  // 这个方法类似ES5里面的原型链上
   add() {
     return this.x + this.y;
   }
 }
+
+// 继承
+class Child extends Father {
+  constructor(x, y, z) {
+    // 继承父类
+    // 继承使用 extends 关键字 注意子类构造函数中需要第一行需要显示调用父类构造函数 super(x, y)
+    super(x, y);
+    this.z = z;
+  }
+}
+
+// 静态属性 静态方法
+class People {
+  constructor(name) {
+    this.name = name;
+  }
+  // 静态方法
+  static getName() {
+    return 1;
+  }
+}
+// 调用
+People.getName(); //只能使用类调用
+
+// 定义静态属性 类似ES5
+People.count = 7;
+console.log(People.count);
 ```
 
-继承使用 extends 关键字 注意子类构造函数中需要第一行需要显示调用父类构造函数 super(x, y)
-
-### 11、Symbol 类型的注意点？
+### Symbol 类型的注意点？
 
 （1）Symbol 函数前不能使用 new 命令，否则会报错。
 
@@ -274,25 +378,25 @@ class Name {
 
 （6）Symbol.keyFor 方法返回一个已登记的 Symbol 类型值的 key。
 
-### 12、 Set 和 WeakSet 结构？
+### Set 和 WeakSet 结构？
 
 （1）ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
 
 （2）WeakSet 结构与 Set 类似，也是不重复的值的集合。但是 WeakSet 的成员只能是对象，而不能是其他类型的值。WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用，
 
-### 13、Map 和 WeakMap 结构？
+### Map 和 WeakMap 结构？
 
 （1）Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
 
 （2）WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合。但是 WeakMap 只接受对象作为键名（ null 除外），不接受其他类型的值作为键名。而且 WeakMap 的键名所指向的对象，不计入垃圾回收机制。
 
-### 14、什么是 Proxy ？
+### 什么是 Proxy ？
 
 Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”，即对编程语言进行编程。
 
 Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。
 
-### 15、Reflect 对象创建目的？
+### Reflect 对象创建目的？
 
 （1）将 Object 对象的一些明显属于语言内部的方法（比如 Object.defineProperty），放到 Reflect 对象上。
 
