@@ -136,7 +136,7 @@
 属性
   length 数组长度
 常用方法
-  Array.from(arr)  通过给定的对象中创建一个数组。 使用该方法能实现数组的深拷贝。
+  Array.from(arr[, mapFn[, thisArg])  通过给定的对象中创建一个数组。使用该方法能实现数组的深拷贝。或者把伪数组变为真数组。mapFn如果指定了该参数，新数组中的每个元素会执行该回调函数。thisArg可选参数，执行回调函数 mapFn 时 this 对象
   Array.isArray(arr)  判断对象是否为数组。
   arr.concat(arr2)  连接两个或更多的数组，并返回结果。arr1.concat(arr2)不该变原数组。
   arr.copyWithin(指定位置插入, 复制开始index, 复制结束index 不包括结束下标)  从数组的指定位置拷贝元素到数组的另一个指定位置中。修改原数组,并不会改变数组长度。
@@ -155,7 +155,7 @@
   arr.fill(xx, start, end)  使用一个固定值来填充数组。会改变原数组。start end可选。
   arr.find((item, index, arr)=>{})  返回符合传入测试（函数）条件的第一个数组元素。
   arr.findIndex((item, index, arr)=>{})  返回符合传入测试（函数）条件的数组第一个元素索引。
-  arr.indexOf(xx)  搜索数组中的元素，并返回它所在的位置。没有返回-1
+  arr.indexOf(xx)  搜索数组中的元素，并返回它所在的位置。没有返回-1。不能检测到NaN。
   arr.lastIndexOf(xx)  返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索。
   arr.includes(xx)  判断一个数组是否包含一个指定的值。
   arr.join(str)  把数组的所有元素放入根据指定字符/字符串连接起来形成一个字符串。

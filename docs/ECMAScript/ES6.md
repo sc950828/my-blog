@@ -1,28 +1,148 @@
-### 1、let const 是什么？和 var 区别是什么？
+## let const
+
+let const 是什么？和 var 区别是什么？
 
 - 是什么
   - let const 是 es6 新增的两种定义变量的方式。
   - 使用 const 申明的变量。基本类型变量的值不可以变，引用类型不能重新赋值。
   - 使用 let 申请的变量值可以更改。
 - 区别
+  - let const 声明的全局变量不是全局对象 window 的属性而 var 申明的变量挂载在 window 下
   - var 声明变量可以重复声明,而 let const 不能重复声明变量。
-  - var 申明的变量或函数可以提升，即可以先使用变量然后再申明，而 let const 不行，必须先声明然后再使用。
+  - var 申明的变量或函数可以提升，即可以先使用变量然后再申明，而 let const 不存在变量提升，必须先声明然后再使用。
   - 函数提升优先于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部并赋值为 undefined。
-  - var 在全局作用域下声明变量会导致变量挂载在 window 上，而 let const 定义的变量不会。
+  - let const 声明的变量具有暂时性死区，而 var 不存在
+  - let const 声明的变量拥有块级作用域，而 var 不存在
 
-### 2、模板字符串
+```js
+// 1、暂时性死区
+// 只要块级作用域内存在 let 命令，它所声明的变量就绑定在了这个区域，不再受外部的影响。
+var a = 5;
+if (true) {
+  a = 6;
+  let a;
+  // var a; // 这样就不会报错
+}
+// Uncaught ReferenceError: Cannot access 'a' before initialization
+
+// 2、let 声明的变量拥有块级作用域
+{
+  let a = 5;
+}
+console.log(a); // undefined
+
+// ES5定义常量
+Object.defineProperty(window, "PI", {
+  value: 3.14,
+  writable: false,
+});
+console.log(PI);
+```
+
+## 解构赋值
+
+- 数组解构一一对应。字符串的解构和数组类似。
+- 对象解构 key 相同，不同使用 key:newkey 指定。
+
+```js
+// 数组解构
+const arr = [1, 2, 3];
+
+const [a, b, c] = arr;
+
+console.log(a, b, c); // 1 2 3
+
+// 字符串解构
+const str = "randy";
+
+const [d, e, f, g, h] = str;
+
+console.log(d, e, f, g, h); // r a n d y
+
+// 对象解构
+const obj = { name: "randy", age: 24 };
+
+const { name, age: userAge } = obj;
+
+console.log(name, userAge);
+
+// 默认值
+const obj2 = { name: "randy", age: 24 };
+
+const { name, age: userAge, sex = "男" } = obj2;
+
+console.log(name, userAge, sex);
+
+// rest 运算符
+let options = {
+  title: "Menu",
+  height: 200,
+  width: 100,
+};
+
+let { title, ...rest } = options;
+
+// title="Menu", rest={height: 200, width: 100}
+console.log(rest.height); // 200
+console.log(rest.width); // 100
+
+// 嵌套解构
+let options = {
+  size: {
+    width: 100,
+    height: 200,
+  },
+  items: ["Cake", "Donut"],
+  extra: true, // something extra that we will not destruct
+};
+
+// destructuring assignment on multiple lines for clarity
+let {
+  size: {
+    // put size here
+    width,
+    height,
+  },
+  items: [item1, item2], // assign items here
+  title = "Menu", // not present in the object (default value is used)
+} = options;
+
+console.log(title); // Menu
+console.log(width); // 100
+console.log(height); // 200
+console.log(item1); // Cake
+console.log(item2); // Donut
+```
+
+## 模板字符串
 
 在模板字符串里面能使用变量。const foo = `this is a ${example}`;
 
-### 3、箭头函数是什么？和普通函数有什么区别？
+## 属性名表达式
+
+在 ES6 可以直接用变量或者表达式来定义 Object 的 key。
+
+```js
+let s = "school";
+let obj = {
+  foo: "bar",
+  [s]: "imooc",
+};
+
+console.log(obj); // { foo: "bar", school: "imooc" };
+```
+
+## 箭头函数
+
+箭头函数是什么？和普通函数有什么区别？
 
 - 是什么
   - 箭头函数是 es6 新增的定义函数的方式。
 - 区别
   - 箭头函数不能做构造函数。
-  - 箭头函数的 this 是定义时确定的不是运行时确定的,等于包裹他的第一个普通函数的 this。
+  - 箭头函数的 this 是定义时确定的而不是运行时确定的,等于包裹他的第一个普通函数的 this（父作用域的 this）。而普通函数的 this 是运行时确定的。
   - 箭头函数更简洁，能解决 this 问题。
-  - 箭头函数没有 arguments 变量。需要用展开表达式 ...args 定义参数列表。
+  - 箭头函数没有 arguments 变量。需要用 reset 表达式 ...args 定义参数列表。
   - 箭头函数不能通过 apply call bind 改变 this。
 - 例子
 
@@ -31,12 +151,12 @@ function fn() {
   console.log("real", this); // {a: 100} ，该作用域下的 this 的真实的值
   var arr = [1, 2, 3];
   // 普通 JS
-  arr.map(function (item) {
+  arr.map(function(item) {
     console.log("js", this); // window 。普通函数，这里打印出来的是全局变量，令人费解
     return item + 1;
   });
   // 箭头函数
-  arr.map(item => {
+  arr.map((item) => {
     console.log("es6", this); // {a: 100} 。箭头函数，这里打印的就是父作用域的 this
     return item + 1;
   });
@@ -44,7 +164,7 @@ function fn() {
 fn.call({ a: 100 });
 ```
 
-### 4、默认参数
+## 默认参数
 
 ```js
 function f(x, y = 7, z = 42) {
@@ -52,26 +172,35 @@ function f(x, y = 7, z = 42) {
 }
 ```
 
-如果我们想要最后一个参数使用默认参数我们可以省略不传。
-当需要使用默认值的参数不是最后一个的时候我们需要显示指定为 undefined f(1, undefined, 4) 算出来是 12。
-当我们不用默认值的时候我们需要传 null。
+1. 如果我们想要最后一个参数使用默认参数我们可以省略不传。
+2. 当需要使用默认值的参数不是最后一个的时候我们需要显示指定为 undefined f(1, undefined, 4) 算出来是 12。
+3. 当我们不用默认值的时候我们需要传 null。
 
-### 5、可变参数 也是 rest 参数 ...
+## rest 参数 ...
 
 ```js
 // ...arr 参数数组。
 function f(...arr) {
-  console.log(arr); //1,2,3
+  console.log(arr); //[1,2,3]
 }
 f(1, 2, 3);
 ```
 
-### 6、解构赋值
+## 扩展运算符
 
-- 数组解构一一对应。
-- 对象解构 key 相同，不同使用 newkey:key 指定。
+扩展运算符 和 Rest 参数是形似但相反意义的操作符，简单的来说 Rest 参数 是把不定的参数“收敛”到数组，而 扩展运算符 是把固定的数组内容“打散”到对应的参数。
 
-### 7、for of 遍历
+```js
+function sum(x = 1, y = 2, z = 3) {
+  return x + y + z;
+}
+
+console.log(sum(...[4])); // 9
+console.log(sum(...[4, 5])); // 12
+console.log(sum(...[4, 5, 6])); // 15
+```
+
+## for of
 
 - 可以 break，得到的是值。而不像 for in 一样，得到的是数组的下标或对象的 key。
 - 但是 for of 不能遍历对象

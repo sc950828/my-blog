@@ -44,13 +44,14 @@ function myInstanceof(l, r) {
 }
 ```
 
-### for in for of forEach map 区别？
+### for for in for of forEach map filter 区别？
 
 - 普通 for 循环支持 break
 - for of 得到的是数组的值，不能遍历对象，支持 break。
 - for in 得到的是数组的下标，遍历对象的时候得到的是 key，支持 break。能获取对象原型上的属性，属性描述需要是 enumerable。
 - forEach 只能遍历数组，不支持 break，要 break 需要 throw error 然后 try catch 住。
 - map 只能遍历数组，不支持 break。对数组元素统一操作并会返回一个新的数组。空元素也会被保留。比如`[1,,2]`会保留重中间的元素。
+- filter 只能遍历数组，不支持 break。对数组元素统一操作并返回为 true 组成的一个新的数组。
 
 ### 什么叫变量提升？
 
@@ -254,6 +255,7 @@ Object.prototype.toString.call(/regex-literal/i);
 - NaN 意指“不是一个数字”（not a number），NaN 是一个“警戒值”（sentinel value，有特殊用途的常规值），用于指出数字类型中的错误情况，即“执行数学运算没有成功，这是失败后返回的结果”。
 - typeof NaN; // "number"
 - NaN 是一个特殊值，它和自身不相等，是唯一一个自反（自反，reflexive，即 x === x 不成立）的值。而 NaN != NaN 为 true。使用 Object.is()判断 NaN 会是 true。
+- 数组里面有 NaN 我们需要使用 includes()来判断，不能使用 indexOf()
 
 ### 全局函数 isNaN 和 Number.isNaN 函数的区别？
 
@@ -496,4 +498,53 @@ window.getComputedStyle(dom).width / height;
 
 //获取渲染后即时运行的宽高，值是准确的。兼容性也很好，一般用来获取元素的绝对位置和大小。
 dom.getBoundingClientRect().width / height;
+```
+
+### 伪数组变数组
+
+数组是开发中经常用到的数据结构，它非常好用。在 JavaScript 的世界里有些对象被理解为数组，然而缺不能使用数组的原生 API，比如函数中的 arguments、DOM 中的 NodeList 等。当然，还有一些可遍历的对象，看上去都像数组却不能直接使用数组的 API，因为它们是伪数组（Array-Like）。要想对这些对象使用数组的 API 就要想办法把它们转化为数组，传统的做法是这样的：
+
+```js
+let args = [].slice.call(arguments);
+let imgs = [].slice.call(document.querySelectorAll("img"));
+```
+
+基本原理是使用 call 将数组的 api 应用在新的对象上，换句话说是利用改变函数的上下文来间接使用数组的 api。在 ES6 中提供了新的 api 来解决这个问题，就是 Array.from，代码如下：
+
+```js
+let args = Array.from(arguments);
+let imgs = Array.from(document.querySelectorAll("img"));
+```
+
+伪数组具备两个特征，1. 按索引方式储存数据 2. 具有 length 属性；如：
+
+```js
+let arrLike = {
+  0: "a",
+  1: "b",
+  2: "c",
+  length: 3,
+};
+```
+
+### funtion 的 length 属性
+
+在函数体内，有时候需要判断函数有几个参数，一共有 2 个办法。在 ES5 中可以在函数体内使用 arguments 来判断。
+
+```js
+function foo(a, b = 1, c) {
+  console.log(arguments.length);
+}
+foo("a", "b"); //2
+```
+
+然而在 ES6 中不能再使用 arguments 来判断了，但可以借助 Function.length 来判断。
+
+函数指定了默认值以后，函数的 length 属性，将返回没有指定默认值的参数个数。但是 Function.length 是统计第一个默认参数前面的变量数
+
+```js
+function foo(a, b = 1, c) {
+  console.log(foo.length);
+}
+foo("a", "b"); // 1
 ```

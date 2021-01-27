@@ -41,7 +41,6 @@ module.exports = {
           ["/JAVASCRIPT/JavaScript基础", "JavaScript基础"],
           ["/JAVASCRIPT/JavaScript常见问题", "JavaScript常见问题"],
           ["/JAVASCRIPT/JavaScript事件", "JavaScript事件"],
-          ["/JAVASCRIPT/ES6", "ES6"],
           ["/JAVASCRIPT/TypeScript", "TypeScript"],
           ["/JAVASCRIPT/闭包", "闭包"],
           ["/JAVASCRIPT/数据类型转换", "数据类型转换"],
@@ -60,6 +59,13 @@ module.exports = {
           ["/JAVASCRIPT/常用正则", "常用正则"],
           ["/JAVASCRIPT/前端二进制", "前端二进制"],
           ["/JAVASCRIPT/JQuery", "JQuery"]
+        ],
+      },
+      {
+        title: "ECMAScript",
+        children: [
+          ["/ECMAScript/前言", "前言"],
+          ["/ECMAScript/ES6", "ES6"],
         ],
       },
       {
