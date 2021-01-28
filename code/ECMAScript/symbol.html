@@ -46,6 +46,38 @@
       console.log(grade);
       console.log(grade[stu1]);
       console.log(grade[stu2]);
+
+      const sym = Symbol("name");
+      class User {
+        constructor(name) {
+          this.name = name;
+          this[sym] = "randy";
+        }
+        getName() {
+          return this.name + this[sym];
+        }
+      }
+      const user = new User("randy");
+      console.log(user.getName());
+      // 不能获取Symbol做的key
+      for (let key in user) {
+        console.log(key);
+      }
+
+      // 不能获取Symbol做的key
+      for (let key of Object.keys(user)) {
+        console.log(key);
+      }
+
+      // 只能获取Symbol做的key
+      for (let key of Object.getOwnPropertySymbols(user)) {
+        console.log(key);
+      }
+
+      // 能获取所有key包括Symbol做的key
+      for (let key of Reflect.ownKeys(user)) {
+        console.log(key);
+      }
     </script>
   </body>
 </html>

@@ -17,6 +17,19 @@
 - 创建 XMLHttpRequest 对象的语法：现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。variable=new XMLHttpRequest();
 - 老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：variable=new ActiveXObject("Microsoft.XMLHTTP");
 
+```js
+const url = "http://jsonplaceholder.typicode.com/users";
+
+let xmlhttp;
+if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp = new XMLHttpRequest();
+} else {
+  // code for IE6, IE5
+  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+```
+
 ## 实例方法 发送请求
 
 - xmlhttp.open(method,url,async)
@@ -25,23 +38,47 @@
   - async：true（异步）或 false（同步）
 - xmlhttp.send(string)仅用于 POST 请求，get 方法的 string 值为空
 
+```js
+// 发送请求
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+```
+
 ## 响应
 
 - xmlhttp.responseText 获得字符串形式的响应数据。
 - xmlhttp.responseXML 获得 XML 形式的响应数据。
 
+```js
+xmlhttp.onreadystatechange = function() {
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //    console.log(xmlhttp.responseText)
+    let obj = JSON.parse(xmlhttp.responseText);
+    console.log(obj);
+  }
+};
+```
+
 ## 同步和异步
 
 - 如果是异步请求，open 方法的第三个参数是 true，此时我们接收响应需要使用 xmlhttp 对象的 onstatechange 事件方法来监听响应
-- 如果是 false 就是同步请求 我们只需要在 send()方法的使用 xmlhttp.responseText 或者 xmlhttp.responseXML 接收响应数据就可以了。
+- 如果是 false 就是同步请求 我们只需要在 send()方法后使用 xmlhttp.responseText 或者 xmlhttp.responseXML 获取响应数据就可以了。
 
-```Javascript
-// 方法的使用
+```js
+xmlhttp.open("GET", "/try/ajax/ajax_info.txt", false);
+xmlhttp.send();
+
+// 异步
 xmlhttp.onreadystatechange = function() {
   if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-    //这里就是成功了
+    //    console.log(xmlhttp.responseText)
+    let obj = JSON.parse(xmlhttp.responseText);
+    console.log(obj);
   }
 };
+
+// 同步
+document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
 ```
 
 ## readyState status
@@ -58,7 +95,7 @@ status
   404: 未找到页面
 ```
 
-## Ajax 解决浏览器缓存问题？
+## Ajax 怎么解决浏览器缓存问题？
 
 - （1）在 ajax 发送请求前加上 anyAjaxObj.setRequestHeader("If-Modified-Since","0")。
 

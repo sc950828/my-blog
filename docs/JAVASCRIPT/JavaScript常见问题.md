@@ -344,6 +344,22 @@ Object.prototype.toString.call(/regex-literal/i);
 
 ### 为什么 0.1 + 0.2 != 0.3？如何解决这个问题？
 
+js 中采用双精度二进制标准存储，0.1 在变为二进制的时候精度丢失了
+
+```js
+35 => 00100011
+0.375 => 0.011
+0.1 => 0.000110011... // 不能整除 末尾的被截取掉了 所以丢失精度了
+// 0.1转二进制
+0.1 * 2 = 0.2 => 0
+0.2 * 2 = 0.4 => 0
+0.4 * 2 = 0.8 => 0
+0.8 * 2 = 1.6 => 1
+0.6 * 2 = 1.2 => 1
+0.2 * 2 = 0.4 => 0
+...
+```
+
 对于这样的情况，我们可以将其转换为整数后再进行运算，运算后再转换为对应的小数，以这种方式来解决这个问题。
 
 ### offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别？
@@ -586,4 +602,38 @@ Object.getOwnPropertyNames(obj).forEach((key) => {
 Reflect.ownKeys(obj).forEach((key) => {
   console.log(key, obj[key]);
 });
+```
+
+### 进制的转换
+
+ES5
+
+```js
+// 十进制转二进制
+const a = 5;
+const b = a.toString(2);
+console.log(b);
+
+// 十进制转二进制
+const a1 = 5;
+const b1 = a1.toString(8);
+console.log(b1);
+
+// 二进制转十进制
+const a2 = 101;
+const b2 = parseInt(a2, 2);
+console.log(b2);
+
+// 八进制转十进制
+const a3 = 101;
+const b3 = parseInt(a3, 8);
+console.log(b3); //65
+```
+
+ES6 中使用 0B 表示二进制 0O 表示八进制 0X 表示十六进制
+
+```js
+console.log(0b101); //5
+console.log(00101); // 65
+console.log(0x101); // 257
 ```

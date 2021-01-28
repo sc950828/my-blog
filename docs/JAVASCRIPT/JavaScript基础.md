@@ -96,7 +96,7 @@
 ## String
 
 ```
-创建Number有两种种方法
+创建String有两种种方法
   var str = "xxx";或者var str = 'xxx'
   var str = new String("xxx");
 属性
@@ -186,12 +186,14 @@
   Number.isNaN(x)  判断是不是NaN，是NaN就为true。
   Number.isInteger(): 用来判断给定的参数是否为整数。
   Number.isSafeInteger(): 判断传入的参数值是否是一个"安全整数"。安全整数范围为 -(2的53次方 - 1)到2的53次方 - 1之间的整数。
+  Number.parseFloat()  解析一个字符串并返回一个浮点数。
+  Number.parseInt()  解析一个字符串并返回一个整数。不会四舍五入
 
-num.toExponential()  把对象的值转换为指数计数法。
-num.toFixed(x)  把数字转换为字符串，结果的小数点后有指定位数的数字。会四舍五入。
-num.toPrecision(x)  把数字格式化为指定的长度。会四舍五入。
-num.toString()  把数字转换为字符串，使用指定的基数。
-num.valueOf()  返回一个 Number 对象的基本数字值。
+  num.toExponential()  把对象的值转换为指数计数法。
+  num.toFixed(x)  把数字转换为字符串，结果的小数点后有指定位数的数字。会四舍五入。
+  num.toPrecision(x)  把数字格式化为指定的长度。会四舍五入。
+  num.toString()  把数字转换为字符串，使用指定的基数。
+  num.valueOf()  返回一个 Number 对象的基本数字值。
 ```
 
 ## Boolean
@@ -235,6 +237,8 @@ Math.random()  返回 0 ~ 1 之间的随机数。
 Math.round(x)  截取整数部分，会四舍五入。
 Math.trunc(x) 截取整数部分，不会四舍五入。
 Math.sqrt(x)  返回数的平方根。
+Math.sign(x) x是正数返回1 是负数返回-1 是0返回0
+Math.cbrt(x) 返回x的立方根 8=>2
 ```
 
 ## date

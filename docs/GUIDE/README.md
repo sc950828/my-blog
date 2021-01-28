@@ -6,6 +6,10 @@
 
 ### [JAVASCRIPT](/JAVASCRIPT/)
 
+### [ECMAScript](/ECMAScript/)
+
+### [TypeScript](/TypeScript/)
+
 ### [WEB 移动端](/WEB移动端/)
 
 ### [HTTP](/HTTP/)

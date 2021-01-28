@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>proxy</title>
+  </head>
+  <body>
+    <script>
+      let user = {
+        name: "xiecheng",
+        age: 34,
+        _password: "***",
+      };
+      user = new Proxy(user, {
+        get(target, prop) {
+          if (prop.startsWith("_")) {
+            throw new Error("不可访问");
+          } else {
+            return target[prop];
+          }
+        },
+        set(target, prop, val) {
+          if (prop.startsWith("_")) {
+            throw new Error("不可访问");
+          } else {
+            target[prop] = val;
+            return true;
+          }
+        },
+        deleteProperty(target, prop) {
+          // 拦截删除
+          if (prop.startsWith("_")) {
+            throw new Error("不可删除");
+          } else {
+            delete target[prop];
+            return true;
+          }
+        },
+        ownKeys(target) {
+          return Object.keys(target).filter((key) => !key.startsWith("_"));
+        },
+      });
+      console.log(user.age);
+      // console.log(user._password);
+      user.age = 18;
+      console.log(user.age);
+      try {
+        user._password = "xxx";
+      } catch (e) {
+        console.log(e.message);
+      }
+
+      try {
+        // delete user.age
+        delete user._password;
+      } catch (e) {
+        console.log(e.message);
+      }
+      console.log(user.age);
+
+      for (let key in user) {
+        console.log(key);
+      }
+    </script>
+  </body>
+</html>
