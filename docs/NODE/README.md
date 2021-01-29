@@ -1,21 +1,21 @@
 ## NODE
 
-### 1、[node](./node)
+### [node](./node/)
 
-### 2、[npm](./npm)
+### [npm](./npm/)
 
-### 3、[yarn](./yarn)
+### [yarn](./yarn/)
 
-### 4、[express](./express)
+### [express](./express/)
 
-### 5、[koa](./koa)
+### [koa](./koa/)
 
-### 6、[node 常见问题](./node常见问题)
+### [node 常见问题](./node常见问题/)
 
-### 7、[数据库安装](./数据库安装)
+### [数据库安装](./数据库安装/)
 
-### 8、[GraphQL](./GraphQL)
+### [GraphQL](./GraphQL/)
 
-### 9、[egg](./egg)
+### [egg](./egg/)
 
-### 10、[mongodb](./mongodb)
+### [mongodb](./mongodb/)

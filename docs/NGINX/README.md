@@ -1,3 +1,3 @@
 ## NGINX
 
-### 1、[nginx](./nginx)
+### 1、[nginx](./nginx/)

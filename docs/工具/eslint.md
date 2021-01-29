@@ -1,3 +1,7 @@
+## ESLint 文档
+
+[ESLint 中文文档](https://eslint.bootcss.com)
+
 ### ESLint 支持几种格式的配置文件，如果同一个目录下有多个配置文件，ESLint 只会使用一个。
 
     优先级顺序如下：
@@ -65,7 +69,7 @@ let map = new BMap.Map("map");
 export function getAddressByLngLat(lng, lat) {
   return new Promise((resolve) => {
     let myGeo = new BMap.Geocoder();
-    myGeo.getLocation(new BMap.Point(lng, lat), function(result) {
+    myGeo.getLocation(new BMap.Point(lng, lat), function (result) {
       if (result) {
         resolve(result);
       }

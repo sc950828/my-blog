@@ -1,17 +1,17 @@
 ## 工具
 
-### 1、[vscode](./vscode)
+### [vscode](./vscode/)
 
-### 2、[editorconfig](./editorconfig)
+### [editorconfig](./editorconfig/)
 
-### 3、[eslint](./eslint)
+### [eslint](./eslint/)
 
-### 4、[charles 抓包](./charles)
+### [charles 抓包](./charles/)
 
-### 5、[postman](./postman)
+### [postman](./postman/)
 
-### 6、[代码规范](./代码规范)
+### [代码规范](./代码规范/)
 
-### 7、[markdown](./markdown)
+### [markdown](./markdown/)
 
-### 8、[browserslist](./browserslist)
+### [browserslist](./browserslist/)

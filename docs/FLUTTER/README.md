@@ -1,9 +1,9 @@
 ## FLUTTER
 
-### [移动开发简介](./移动开发简介)
+### [移动开发简介](./移动开发简介/)
 
-### [flutter](./flutter)
+### [flutter](./flutter/)
 
-### [dart](./dart)
+### [dart](./dart/)
 
-### [widget](./widget)
+### [widget](./widget/)

@@ -1,31 +1,31 @@
 ## HTTP 基础知识
 
-### [HTTP](./HTTP)
+### [HTTP](./HTTP/)
 
-### [HTTP 常见问题](./HTTP常见问题)
+### [HTTP 常见问题](./HTTP常见问题/)
 
-### [缓存](./缓存)
+### [缓存](./缓存/)
 
-### [跨域](./跨域)
+### [跨域](./跨域/)
 
-### [Cookie 和 Session 和 Token 和 JWT](./Cookie和Session和Token和JWT)
+### [Cookie 和 Session 和 Token 和 JWT](./Cookie和Session和Token和JWT/)
 
-### [Ajax](./Ajax)
+### [Ajax](./Ajax/)
 
-### [JqueryAjax](./JqueryAjax)
+### [JqueryAjax](./JqueryAjax/)
 
-### [Fetch](./Fetch)
+### [Fetch](./Fetch/)
 
-### [Axios](./Axios)
+### [Axios](./Axios/)
 
-### [Fly](./Fly)
+### [Fly](./Fly/)
 
-### [权限](./权限)
+### [权限](./权限/)
 
-### [web 安全](./web安全)
+### [web 安全](./web安全/)
 
-### [TCP](./TCP)
+### [TCP](./TCP/)
 
-### [UDP](./UDP)
+### [UDP](./UDP/)
 
-### [DNS](./DNS)
+### [DNS](./DNS/)
