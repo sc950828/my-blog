@@ -7,7 +7,7 @@ module.exports = {
     nav: [
       { text: "导航", link: "/GUIDE/" },
       { text: "博客首页", link: "/" },
-      { text: "个人首页", link: "https://sc950828.github.io" },
+      { text: "个人首页", link: "https://home.suchun.vip" },
       { text: "GitHub", link: "https://github.com/sc950828" },
     ],
     sidebar: [
