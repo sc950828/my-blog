@@ -3,11 +3,6 @@ home: true
 heroImage: /randy.jpg
 actionText: 一起共勉 →
 actionLink: /GUIDE/
-meta:
-  - name: description
-    content: 苏纯的个人博客
-  - name: keywords
-    content: 苏纯 博客 个人博客
 features:
   - title: 简明优先
     details: 对以 markdown 为中心的项目结构，做最简化的配置，帮助你专注于创作。
