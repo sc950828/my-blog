@@ -1,3 +1,7 @@
+## babel 文档
+
+[babel 中文文档](https://www.babeljs.cn/docs/)
+
 ## babel 简介
 
 ### babel 是什么？
@@ -235,12 +239,12 @@ Babel 构建在插件之上，使用现有的或者自己编写的插件可以�
 ```js
 // 可以简单的返回一个插件数组;
 
-module.exports = function() {
+module.exports = function () {
   return { plugins: ["A", "B", "C"] };
 };
 
 // preset 中也可以包含其他的 preset，以及带有参数的插件。
-module.exports = function() {
+module.exports = function () {
   return {
     presets: [require("@babel/preset-env")],
     plugins: [
