@@ -11,7 +11,6 @@ features:
   - title: 性能高效
     details: VuePress 将每个页面生成为预渲染的静态 HTML，每个页面加载之后，然后作为单页面应用程序(SPA)运行。
 footer: 湘ICP备2021001552号
-footerLink: https://beian.miit.gov.cn/#/Integrated/index
 ---
 
 <!-- https://beian.miit.gov.cn/#/Integrated/index -->
