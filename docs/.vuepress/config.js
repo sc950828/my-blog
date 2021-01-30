@@ -4,7 +4,7 @@ module.exports = {
   base: "/my-blog/",
   head: [["link", { rel: "icon", href: "/randy.ico" }]],
   themeConfig: {
-    lastUpdated: '上一次修改时间：',
+    lastUpdated: '上一次修改',
     nav: [
       { text: "导航", link: "/GUIDE/" },
       { text: "博客首页", link: "/" },
