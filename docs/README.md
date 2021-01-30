@@ -5,7 +5,7 @@ actionText: 一起共勉 →
 actionLink: /GUIDE/
 meta:
   - name: baidu-site-verification
-    content: code-waxjIPIyFu
+    content: code-hUu5cIisna
 features:
   - title: 简明优先
     details: 对以 markdown 为中心的项目结构，做最简化的配置，帮助你专注于创作。
