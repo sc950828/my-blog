@@ -4,10 +4,17 @@ module.exports = {
   base: "/my-blog/",
   head: [
     ["link", { rel: "icon", href: "/randy.ico" }],
-    ['meta', { name: 'keywords', content: '苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客' }]
+    [
+      "meta",
+      {
+        name: "keywords",
+        content:
+          "苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客",
+      },
+    ],
   ],
   themeConfig: {
-    lastUpdated: '上一次修改',
+    lastUpdated: "上一次修改",
     nav: [
       { text: "导航", link: "/GUIDE/" },
       { text: "博客首页", link: "/" },
@@ -74,7 +81,10 @@ module.exports = {
       {
         title: "TypeScript",
         children: [
-          ["/TypeScript/TypeScript", "TypeScript"],
+          ["/TypeScript/前言", "前言"],
+          ["/TypeScript/数据类型", "数据类型"],
+          ["/TypeScript/接口", "接口"],
+          ["/TypeScript/类", "类"],
         ],
       },
       {
@@ -82,7 +92,7 @@ module.exports = {
         children: [
           ["/WEB移动端/移动端", "移动端"],
           ["/WEB移动端/移动端常见问题", "移动端常见问题"],
-          ["/WEB移动端/H5坑位指南", "H5坑位指南"]
+          ["/WEB移动端/H5坑位指南", "H5坑位指南"],
         ],
       },
       {
@@ -138,8 +148,8 @@ module.exports = {
         children: [
           ["/UNIAPP/uniapp基础", "uniapp基础"],
           ["/UNIAPP/跨端开发", "跨端开发"],
-          ["/UNIAPP/hybrid", "hybrid"]
-        ]
+          ["/UNIAPP/hybrid", "hybrid"],
+        ],
       },
       {
         title: "FLUTTER",
@@ -148,7 +158,7 @@ module.exports = {
           ["/FLUTTER/flutter", "flutter"],
           ["/FLUTTER/dart", "dart"],
           ["/FLUTTER/widget", "widget"],
-        ]
+        ],
       },
       {
         title: "WEBPACK",
@@ -211,7 +221,7 @@ module.exports = {
           ["/计算机基础/计算机基础", "计算机基础"],
           ["/计算机基础/linux常用命令", "linux常用命令"],
           ["/计算机基础/linux文件权限", "linux文件权限"],
-          ["/计算机基础/shell", "shell"]
+          ["/计算机基础/shell", "shell"],
         ],
       },
       {
@@ -250,7 +260,7 @@ module.exports = {
           ["/工具/charles", "charles抓包"],
           ["/工具/postman", "postman"],
           ["/工具/代码规范", "代码规范"],
-          ["/工具/markdown", "markdown"]
+          ["/工具/markdown", "markdown"],
         ],
       },
       {
