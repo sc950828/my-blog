@@ -2,7 +2,10 @@ module.exports = {
   title: "苏纯的博客",
   description: "前端路上的点点滴滴",
   base: "/my-blog/",
-  head: [["link", { rel: "icon", href: "/randy.ico" }]],
+  head: [
+    ["link", { rel: "icon", href: "/randy.ico" }],
+    ['meta', { name: 'keywords', content: '苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客' }]
+  ],
   themeConfig: {
     lastUpdated: '上一次修改',
     nav: [
