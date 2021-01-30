@@ -3,6 +3,9 @@ home: true
 heroImage: /randy.jpg
 actionText: 一起共勉 →
 actionLink: /GUIDE/
+meta:
+  - name: baidu-site-verification
+    content: code-waxjIPIyFu
 features:
   - title: 简明优先
     details: 对以 markdown 为中心的项目结构，做最简化的配置，帮助你专注于创作。
@@ -10,7 +13,7 @@ features:
     details: 享用 Vue + webpack 开发环境，在 markdown 中使用 Vue 组件，并通过 Vue 开发自定义主题。
   - title: 性能高效
     details: VuePress 将每个页面生成为预渲染的静态 HTML，每个页面加载之后，然后作为单页面应用程序(SPA)运行。
-footer: 湘ICP备2021001552号
+footer: 湘ICP备2021001552号-1
 ---
 
-<!-- https://beian.miit.gov.cn/#/Integrated/index -->
+<!-- https://beian.miit.gov.cn -->
