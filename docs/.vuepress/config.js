@@ -81,10 +81,14 @@ module.exports = {
       {
         title: "TypeScript",
         children: [
-          ["/TypeScript/前言", "前言"],
+          ["/TypeScript/基础", "基础"],
           ["/TypeScript/数据类型", "数据类型"],
           ["/TypeScript/接口", "接口"],
           ["/TypeScript/类", "类"],
+          ["/TypeScript/泛型", "泛型"],
+          ["/TypeScript/命名空间", "命名空间"],
+          ["/TypeScript/装饰器", "装饰器"],
+          ["/TypeScript/配置文件", "配置文件"],
         ],
       },
       {
