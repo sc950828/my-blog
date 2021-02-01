@@ -2,7 +2,7 @@
 
 这里配置的代码规范规则优先级高于编辑器默认的代码格式化规则。如果需要使用 editorconfig 生效只有配置文件是不够的，还需要对应编辑器的插件，比如 vscode 需要下载 EditorConfig for VS Code 插件，配置才会生效
 
-官网 http://editorconfig.org
+[官网](http://editorconfig.org)
 
 ### 常用属性配置
 

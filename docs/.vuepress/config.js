@@ -92,31 +92,10 @@ module.exports = {
         ],
       },
       {
-        title: "WEB移动端",
+        title: "H5",
         children: [
-          ["/WEB移动端/移动端", "移动端"],
-          ["/WEB移动端/移动端常见问题", "移动端常见问题"],
-          ["/WEB移动端/H5坑位指南", "H5坑位指南"],
-        ],
-      },
-      {
-        title: "HTTP",
-        children: [
-          ["/HTTP/HTTP", "HTTP"],
-          ["/HTTP/HTTP常见问题", "HTTP常见问题"],
-          ["/HTTP/缓存", "缓存"],
-          ["/HTTP/跨域", "跨域"],
-          ["/HTTP/权限", "权限"],
-          ["/HTTP/Ajax", "Ajax"],
-          ["/HTTP/Axios", "Axios"],
-          ["/HTTP/Fly", "Fly"],
-          ["/HTTP/Fetch", "Fetch"],
-          ["/HTTP/JqueryAjax", "JqueryAjax"],
-          ["/HTTP/Cookie和Session和Token和JWT", "Cookie和Session和Token和JWT"],
-          ["/HTTP/web安全", "web安全"],
-          ["/HTTP/TCP", "TCP"],
-          ["/HTTP/UDP", "UDP"],
-          ["/HTTP/DNS", "DNS"],
+          ["/H5/H5基础", "H5基础"],
+          ["/H5/H5坑位指南", "H5坑位指南"],
         ],
       },
       {
@@ -148,29 +127,27 @@ module.exports = {
         ],
       },
       {
-        title: "UNIAPP",
+        title: "微信",
         children: [
-          ["/UNIAPP/uniapp基础", "uniapp基础"],
-          ["/UNIAPP/跨端开发", "跨端开发"],
-          ["/UNIAPP/hybrid", "hybrid"],
+          ["/微信/微信公众号", "微信公众号"],
+          ["/微信/服务器配置", "服务器配置"],
+          ["/微信/小程序与H5的区别", "小程序与H5的区别"],
+          ["/微信/微信小程序优化", "微信小程序优化"],
+          ["/微信/微信小程序", "微信小程序"],
         ],
+      },
+      {
+        title: "UNIAPP",
+        children: [["/UNIAPP/uniapp基础", "uniapp基础"]],
       },
       {
         title: "FLUTTER",
         children: [
           ["/FLUTTER/移动开发简介", "移动开发简介"],
+          ["/FLUTTER/hybrid", "hybrid"],
           ["/FLUTTER/flutter", "flutter"],
           ["/FLUTTER/dart", "dart"],
           ["/FLUTTER/widget", "widget"],
-        ],
-      },
-      {
-        title: "WEBPACK",
-        children: [
-          ["/WEBPACK/webpack", "webpack"],
-          ["/WEBPACK/webpack常见问题", "webpack常见问题"],
-          ["/WEBPACK/webpack优化", "webpack优化"],
-          ["/WEBPACK/babel", "babel"],
         ],
       },
       {
@@ -178,22 +155,43 @@ module.exports = {
         children: [
           ["/NODE/node", "node"],
           ["/NODE/npm", "npm"],
+          ["/NODE/常用npm包", "常用npm包"],
           ["/NODE/yarn", "yarn"],
-          ["/NODE/koa", "koa"],
-          ["/NODE/express", "express"],
           ["/NODE/node常见问题", "node常见问题"],
-          ["/NODE/数据库安装", "数据库安装"],
-          ["/NODE/GraphQL", "GraphQL"],
-          ["/NODE/egg", "egg"],
-          ["/NODE/mongodb", "mongodb"],
+        ],
+      },
+      {
+        title: "服务端框架",
+        children: [
+          ["/服务端框架/express", "express"],
+          ["/服务端框架/koa", "koa"],
+          ["/服务端框架/egg", "egg"],
+          ["/服务端框架/GraphQL", "GraphQL"],
+        ],
+      },
+      {
+        title: "数据库",
+        children: [
+          ["/数据库/数据库安装", "数据库安装"],
+          ["/数据库/mongodb", "mongodb"],
         ],
       },
       {
         title: "GIT",
         children: [
           ["/GIT/git", "git"],
-          ["/GIT/git规范", "git规范"],
           ["/GIT/gitaction", "gitaction"],
+        ],
+      },
+      {
+        title: "前端构建",
+        children: [
+          ["/前端构建/webpack", "webpack"],
+          ["/前端构建/webpack常见问题", "webpack常见问题"],
+          ["/前端构建/webpack优化", "webpack优化"],
+          ["/前端构建/babel", "babel"],
+          ["/前端构建/eslint", "eslint"],
+          ["/前端构建/browserslist", "browserslist"],
         ],
       },
       {
@@ -209,14 +207,10 @@ module.exports = {
         children: [["/NGINX/nginx", "nginx"]],
       },
       {
-        title: "微信",
+        title: "性能优化",
         children: [
-          ["/微信/微信公众号", "微信公众号"],
-          ["/微信/服务器配置", "服务器配置"],
-          ["/微信/小程序与H5的区别", "小程序与H5的区别"],
-          ["/微信/微信小程序优化", "微信小程序优化"],
-          ["/微信/微信小程序", "微信小程序"],
-          ["/微信/mpvue", "mpvue"],
+          ["/性能优化/前端性能优化", "前端性能优化"],
+          ["/性能优化/首屏和白屏", "首屏和白屏"],
         ],
       },
       {
@@ -226,6 +220,29 @@ module.exports = {
           ["/计算机基础/linux常用命令", "linux常用命令"],
           ["/计算机基础/linux文件权限", "linux文件权限"],
           ["/计算机基础/shell", "shell"],
+        ],
+      },
+      {
+        title: "计算机网络",
+        children: [
+          ["/计算机网络/HTTP", "HTTP"],
+          ["/计算机网络/HTTP常见问题", "HTTP常见问题"],
+          ["/计算机网络/缓存", "缓存"],
+          ["/计算机网络/跨域", "跨域"],
+          ["/计算机网络/权限", "权限"],
+          ["/计算机网络/Ajax", "Ajax"],
+          ["/计算机网络/Axios", "Axios"],
+          ["/计算机网络/Fly", "Fly"],
+          ["/计算机网络/Fetch", "Fetch"],
+          ["/计算机网络/JqueryAjax", "JqueryAjax"],
+          [
+            "/计算机网络/Cookie和Session和Token和JWT",
+            "Cookie和Session和Token和JWT",
+          ],
+          ["/计算机网络/web安全", "web安全"],
+          ["/计算机网络/TCP", "TCP"],
+          ["/计算机网络/UDP", "UDP"],
+          ["/计算机网络/DNS", "DNS"],
         ],
       },
       {
@@ -249,34 +266,21 @@ module.exports = {
         ],
       },
       {
-        title: "性能优化",
-        children: [
-          ["/性能优化/前端性能优化", "前端性能优化"],
-          ["/性能优化/首屏和白屏", "首屏和白屏"],
-        ],
-      },
-      {
         title: "工具",
         children: [
           ["/工具/vscode", "vscode"],
           ["/工具/editorconfig", "editorconfig"],
-          ["/工具/eslint", "eslint"],
           ["/工具/charles", "charles抓包"],
           ["/工具/postman", "postman"],
-          ["/工具/代码规范", "代码规范"],
           ["/工具/markdown", "markdown"],
         ],
       },
       {
         title: "优秀",
         children: [
-          ["/优秀/前端常用工具官网", "前端常用工具官网"],
-          ["/优秀/常用npm包", "常用npm包"],
           ["/优秀/前端好文章", "前端好文章"],
           ["/优秀/前端好文章2", "前端好文章2"],
-          ["/优秀/图片处理", "图片处理"],
           ["/优秀/常用正则", "常用正则"],
-          ["/优秀/前端二进制", "前端二进制"],
         ],
       },
     ],
