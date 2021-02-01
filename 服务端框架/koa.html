@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>koa | 苏纯的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/my-blog/randy.ico">
+    <meta name="description" content="前端路上的点点滴滴">
+    <meta name="keywords" content="苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客">
+    <link rel="preload" href="/my-blog/assets/css/0.styles.033d3846.css" as="style"><link rel="preload" href="/my-blog/assets/js/app.0140a108.js" as="script"><link rel="preload" href="/my-blog/assets/js/2.e17d958a.js" as="script"><link rel="preload" href="/my-blog/assets/js/143.fd866d23.js" as="script"><link rel="prefetch" href="/my-blog/assets/js/10.9fc8ced1.js"><link rel="prefetch" href="/my-blog/assets/js/100.02793be2.js"><link rel="prefetch" href="/my-blog/assets/js/101.05e6dd97.js"><link rel="prefetch" href="/my-blog/assets/js/102.8d055461.js"><link rel="prefetch" href="/my-blog/assets/js/103.c5f8adf1.js"><link rel="prefetch" href="/my-blog/assets/js/104.4d7fd0c7.js"><link rel="prefetch" href="/my-blog/assets/js/105.a9f5effb.js"><link rel="prefetch" href="/my-blog/assets/js/106.daed2b21.js"><link rel="prefetch" href="/my-blog/assets/js/107.08666227.js"><link rel="prefetch" href="/my-blog/assets/js/108.775caefd.js"><link rel="prefetch" href="/my-blog/assets/js/109.21596a9b.js"><link rel="prefetch" href="/my-blog/assets/js/11.e35f6802.js"><link rel="prefetch" href="/my-blog/assets/js/110.174f852d.js"><link rel="prefetch" href="/my-blog/assets/js/111.ef6c2ad9.js"><link rel="prefetch" href="/my-blog/assets/js/112.703105d1.js"><link rel="prefetch" href="/my-blog/assets/js/113.5bfacecd.js"><link rel="prefetch" href="/my-blog/assets/js/114.62f245f5.js"><link rel="prefetch" href="/my-blog/assets/js/115.2b071bef.js"><link rel="prefetch" href="/my-blog/assets/js/116.6762f2d0.js"><link rel="prefetch" href="/my-blog/assets/js/117.ae9478bf.js"><link rel="prefetch" href="/my-blog/assets/js/118.21d4dc4b.js"><link rel="prefetch" href="/my-blog/assets/js/119.d5a9ed79.js"><link rel="prefetch" href="/my-blog/assets/js/12.bc265eb8.js"><link rel="prefetch" href="/my-blog/assets/js/120.ac715377.js"><link rel="prefetch" href="/my-blog/assets/js/121.aa7e70a2.js"><link rel="prefetch" href="/my-blog/assets/js/122.9f91b232.js"><link rel="prefetch" href="/my-blog/assets/js/123.843b13a8.js"><link rel="prefetch" href="/my-blog/assets/js/124.3b49eafd.js"><link rel="prefetch" href="/my-blog/assets/js/125.b8723109.js"><link rel="prefetch" href="/my-blog/assets/js/126.76180697.js"><link rel="prefetch" href="/my-blog/assets/js/127.1a515719.js"><link rel="prefetch" href="/my-blog/assets/js/128.f68a7a18.js"><link rel="prefetch" href="/my-blog/assets/js/129.e741007c.js"><link rel="prefetch" href="/my-blog/assets/js/13.d7cd22d2.js"><link rel="prefetch" href="/my-blog/assets/js/130.7ddb4462.js"><link rel="prefetch" href="/my-blog/assets/js/131.07d84e6f.js"><link rel="prefetch" href="/my-blog/assets/js/132.253eb20e.js"><link rel="prefetch" href="/my-blog/assets/js/133.9fa365f0.js"><link rel="prefetch" href="/my-blog/assets/js/134.95f02a10.js"><link rel="prefetch" href="/my-blog/assets/js/135.cc3d57e4.js"><link rel="prefetch" href="/my-blog/assets/js/136.e62f9aa0.js"><link rel="prefetch" href="/my-blog/assets/js/137.a63f97d5.js"><link rel="prefetch" href="/my-blog/assets/js/138.0778be3e.js"><link rel="prefetch" href="/my-blog/assets/js/139.be176ff8.js"><link rel="prefetch" href="/my-blog/assets/js/14.44bd627a.js"><link rel="prefetch" href="/my-blog/assets/js/140.aed40a1c.js"><link rel="prefetch" href="/my-blog/assets/js/141.0b502a90.js"><link rel="prefetch" href="/my-blog/assets/js/142.29596212.js"><link rel="prefetch" href="/my-blog/assets/js/144.f2824aea.js"><link rel="prefetch" href="/my-blog/assets/js/145.fbab168e.js"><link rel="prefetch" href="/my-blog/assets/js/146.a2f3161a.js"><link rel="prefetch" href="/my-blog/assets/js/147.79e2cda9.js"><link rel="prefetch" href="/my-blog/assets/js/148.c8f9ca2a.js"><link rel="prefetch" href="/my-blog/assets/js/149.6add464b.js"><link rel="prefetch" href="/my-blog/assets/js/15.4070e3ae.js"><link rel="prefetch" href="/my-blog/assets/js/150.7300a7ac.js"><link rel="prefetch" href="/my-blog/assets/js/151.7a210f52.js"><link rel="prefetch" href="/my-blog/assets/js/152.50e3e476.js"><link rel="prefetch" href="/my-blog/assets/js/153.20ad0777.js"><link rel="prefetch" href="/my-blog/assets/js/154.93b60005.js"><link rel="prefetch" href="/my-blog/assets/js/155.bcf308f8.js"><link rel="prefetch" href="/my-blog/assets/js/156.ddeb0f66.js"><link rel="prefetch" href="/my-blog/assets/js/157.dc9b3ead.js"><link rel="prefetch" href="/my-blog/assets/js/158.a07401ec.js"><link rel="prefetch" href="/my-blog/assets/js/159.696c0a9c.js"><link rel="prefetch" href="/my-blog/assets/js/16.bf00f855.js"><link rel="prefetch" href="/my-blog/assets/js/160.10530274.js"><link rel="prefetch" href="/my-blog/assets/js/161.b15e6e21.js"><link rel="prefetch" href="/my-blog/assets/js/162.f0cb6c1d.js"><link rel="prefetch" href="/my-blog/assets/js/163.bf2867e2.js"><link rel="prefetch" href="/my-blog/assets/js/164.37035a9c.js"><link rel="prefetch" href="/my-blog/assets/js/165.030dddd7.js"><link rel="prefetch" href="/my-blog/assets/js/166.f503c5e4.js"><link rel="prefetch" href="/my-blog/assets/js/167.7d6617e4.js"><link rel="prefetch" href="/my-blog/assets/js/168.c7078cf0.js"><link rel="prefetch" href="/my-blog/assets/js/17.4c612a5c.js"><link rel="prefetch" href="/my-blog/assets/js/18.f1330fdf.js"><link rel="prefetch" href="/my-blog/assets/js/19.98b1c4a3.js"><link rel="prefetch" href="/my-blog/assets/js/20.a689fca3.js"><link rel="prefetch" href="/my-blog/assets/js/21.8cadadad.js"><link rel="prefetch" href="/my-blog/assets/js/22.225d735c.js"><link rel="prefetch" href="/my-blog/assets/js/23.db1ed49f.js"><link rel="prefetch" href="/my-blog/assets/js/24.e0c96604.js"><link rel="prefetch" href="/my-blog/assets/js/25.6ff1556a.js"><link rel="prefetch" href="/my-blog/assets/js/26.4f9335d7.js"><link rel="prefetch" href="/my-blog/assets/js/27.06ee7512.js"><link rel="prefetch" href="/my-blog/assets/js/28.f94eda44.js"><link rel="prefetch" href="/my-blog/assets/js/29.cae1c959.js"><link rel="prefetch" href="/my-blog/assets/js/3.aa988536.js"><link rel="prefetch" href="/my-blog/assets/js/30.dc6db180.js"><link rel="prefetch" href="/my-blog/assets/js/31.ce6e0be0.js"><link rel="prefetch" href="/my-blog/assets/js/32.eea97bfd.js"><link rel="prefetch" href="/my-blog/assets/js/33.f11174f7.js"><link rel="prefetch" href="/my-blog/assets/js/34.e0795045.js"><link rel="prefetch" href="/my-blog/assets/js/35.55a7d17e.js"><link rel="prefetch" href="/my-blog/assets/js/36.e167817c.js"><link rel="prefetch" href="/my-blog/assets/js/37.a730f480.js"><link rel="prefetch" href="/my-blog/assets/js/38.b88e1ba7.js"><link rel="prefetch" href="/my-blog/assets/js/39.495b53e3.js"><link rel="prefetch" href="/my-blog/assets/js/4.5ed19beb.js"><link rel="prefetch" href="/my-blog/assets/js/40.6b218940.js"><link rel="prefetch" href="/my-blog/assets/js/41.4387429f.js"><link rel="prefetch" href="/my-blog/assets/js/42.0713f88e.js"><link rel="prefetch" href="/my-blog/assets/js/43.dfdeecc1.js"><link rel="prefetch" href="/my-blog/assets/js/44.e2baa312.js"><link rel="prefetch" href="/my-blog/assets/js/45.864c655e.js"><link rel="prefetch" href="/my-blog/assets/js/46.dfa315cb.js"><link rel="prefetch" href="/my-blog/assets/js/47.f9746e9c.js"><link rel="prefetch" href="/my-blog/assets/js/48.9cbb37bf.js"><link rel="prefetch" href="/my-blog/assets/js/49.49098bd8.js"><link rel="prefetch" href="/my-blog/assets/js/5.18b0e396.js"><link rel="prefetch" href="/my-blog/assets/js/50.52687e2c.js"><link rel="prefetch" href="/my-blog/assets/js/51.9c4b04e5.js"><link rel="prefetch" href="/my-blog/assets/js/52.7c48aef2.js"><link rel="prefetch" href="/my-blog/assets/js/53.30a88853.js"><link rel="prefetch" href="/my-blog/assets/js/54.aa361c4e.js"><link rel="prefetch" href="/my-blog/assets/js/55.0fd9d7a4.js"><link rel="prefetch" href="/my-blog/assets/js/56.8889dcdb.js"><link rel="prefetch" href="/my-blog/assets/js/57.98015c3b.js"><link rel="prefetch" href="/my-blog/assets/js/58.fb1ba61c.js"><link rel="prefetch" href="/my-blog/assets/js/59.99d05523.js"><link rel="prefetch" href="/my-blog/assets/js/6.a89eb866.js"><link rel="prefetch" href="/my-blog/assets/js/60.d5f76b2e.js"><link rel="prefetch" href="/my-blog/assets/js/61.4032e64f.js"><link rel="prefetch" href="/my-blog/assets/js/62.e3aabe21.js"><link rel="prefetch" href="/my-blog/assets/js/63.0c321d25.js"><link rel="prefetch" href="/my-blog/assets/js/64.1b3a610c.js"><link rel="prefetch" href="/my-blog/assets/js/65.6525bbdd.js"><link rel="prefetch" href="/my-blog/assets/js/66.0cbf6ba7.js"><link rel="prefetch" href="/my-blog/assets/js/67.34fe2990.js"><link rel="prefetch" href="/my-blog/assets/js/68.f5edb1c9.js"><link rel="prefetch" href="/my-blog/assets/js/69.0665eb24.js"><link rel="prefetch" href="/my-blog/assets/js/7.22d50736.js"><link rel="prefetch" href="/my-blog/assets/js/70.85915aa4.js"><link rel="prefetch" href="/my-blog/assets/js/71.6c509124.js"><link rel="prefetch" href="/my-blog/assets/js/72.922d9486.js"><link rel="prefetch" href="/my-blog/assets/js/73.698f6836.js"><link rel="prefetch" href="/my-blog/assets/js/74.53231dc3.js"><link rel="prefetch" href="/my-blog/assets/js/75.df905408.js"><link rel="prefetch" href="/my-blog/assets/js/76.c45301eb.js"><link rel="prefetch" href="/my-blog/assets/js/77.784e3d84.js"><link rel="prefetch" href="/my-blog/assets/js/78.78e09b14.js"><link rel="prefetch" href="/my-blog/assets/js/79.6bd0e465.js"><link rel="prefetch" href="/my-blog/assets/js/8.ab3bdc45.js"><link rel="prefetch" href="/my-blog/assets/js/80.c210d5f9.js"><link rel="prefetch" href="/my-blog/assets/js/81.3e93e7b5.js"><link rel="prefetch" href="/my-blog/assets/js/82.084110c2.js"><link rel="prefetch" href="/my-blog/assets/js/83.e4987c96.js"><link rel="prefetch" href="/my-blog/assets/js/84.f229cbb2.js"><link rel="prefetch" href="/my-blog/assets/js/85.6847b2a0.js"><link rel="prefetch" href="/my-blog/assets/js/86.50fbde43.js"><link rel="prefetch" href="/my-blog/assets/js/87.fd91f02f.js"><link rel="prefetch" href="/my-blog/assets/js/88.e3d10911.js"><link rel="prefetch" href="/my-blog/assets/js/89.667c8f70.js"><link rel="prefetch" href="/my-blog/assets/js/9.68bfb4b6.js"><link rel="prefetch" href="/my-blog/assets/js/90.217c6c82.js"><link rel="prefetch" href="/my-blog/assets/js/91.6625701a.js"><link rel="prefetch" href="/my-blog/assets/js/92.d9a48420.js"><link rel="prefetch" href="/my-blog/assets/js/93.6779b7a0.js"><link rel="prefetch" href="/my-blog/assets/js/94.83cef3f8.js"><link rel="prefetch" href="/my-blog/assets/js/95.cf428b78.js"><link rel="prefetch" href="/my-blog/assets/js/96.8956abff.js"><link rel="prefetch" href="/my-blog/assets/js/97.119f5363.js"><link rel="prefetch" href="/my-blog/assets/js/98.00aafe10.js"><link rel="prefetch" href="/my-blog/assets/js/99.eb515b1e.js">
+    <link rel="stylesheet" href="/my-blog/assets/css/0.styles.033d3846.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/my-blog/" class="home-link router-link-active"><!----> <span class="site-name">苏纯的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/my-blog/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="/my-blog/" class="nav-link">
+  博客首页
+</a></div><div class="nav-item"><a href="https://home.suchun.vip" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  个人首页
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/my-blog/GUIDE/" class="nav-link">
+  导航
+</a></div><div class="nav-item"><a href="/my-blog/" class="nav-link">
+  博客首页
+</a></div><div class="nav-item"><a href="https://home.suchun.vip" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  个人首页
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/sc950828" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>HTML</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>CSS</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JAVASCRIPT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ECMAScript</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>TypeScript</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>H5</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>VUE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>REACT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微信</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>UNIAPP</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>FLUTTER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NODE</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>服务端框架</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/my-blog/服务端框架/express.html" class="sidebar-link">express</a></li><li><a href="/my-blog/服务端框架/koa.html" class="active sidebar-link">koa</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/my-blog/服务端框架/egg.html" class="sidebar-link">egg</a></li><li><a href="/my-blog/服务端框架/GraphQL.html" class="sidebar-link">GraphQL</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>GIT</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>前端构建</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>DOCKER</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>NGINX</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>性能优化</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>计算机基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>计算机网络</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>浏览器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>工具</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>优秀</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="koa"><a href="#koa" class="header-anchor">#</a> koa</h3> <p>koa 是一个新的 web 框架，由 express 幕后的原班人马打造。核心是中间件 Middleware 和上下文 context。</p> <h3 id="koa-特点"><a href="#koa-特点" class="header-anchor">#</a> koa 特点</h3> <p>路由方法里面的参数是 context 对象，里面包含 request 和 response</p> <p>Context 中有两部分，一部分是自身属性，主要是应用于框架内部使用，一部分是 Request 和 Response 委托的操作方法，主要为提供给用户更方便从 Request 获取想要的参数和更方便的设置 Response 内容。</p> <h3 id="创建-app"><a href="#创建-app" class="header-anchor">#</a> 创建 app</h3> <div class="language- extra-class"><pre><code>const koa = require(&quot;koa&quot;)
+const app = new koa()
+
+app.listen(1995); //在这里创建server
+</code></pre></div><h3 id="路由"><a href="#路由" class="header-anchor">#</a> 路由</h3> <div class="language- extra-class"><pre><code>const KoaRouter = require('koa-router')
+const router = new KoaRouter()
+app.use(router.routes()).use(router.allowedMethods()) //启用路由
+路由文件使用module.exports = router.routes()导出模块
+</code></pre></div><h3 id="context-对象"><a href="#context-对象" class="header-anchor">#</a> context 对象</h3> <p>koa 中每一个请求都将创建一个 Context 对象，context 对象里面是 response request 等</p> <h3 id="request"><a href="#request" class="header-anchor">#</a> request</h3> <div class="language- extra-class"><pre><code>request.header 查看请求头对象
+request.header= 设置请求头
+request.headers 查看请求头对象。别名为 request.header
+request.headers= 设置请求头对象。别名为 request.header=
+request.method 查看请求方法。
+request.method= 设置请求方法，对于实现诸如 methodOverride() 的中间件是有用的。
+request.length 返回以数字返回请求的 Content-Length，或 undefined。
+request.url 获取请求 URL
+request.url= 设置请求 URL, 对 url 重写有用
+request.originalUrl 获取请求原始URL。
+request.origin 获取URL的来源，包括 protocol 和 host。
+request.href 获取完整的请求URL，包括 protocol，host 和 url。
+request.path 获取请求路径名。
+request.path= 设置请求路径名，并在存在时保留查询字符串。
+request.querystring 根据 ? 获取原始查询字符串.
+request.querystring= 设置原始查询字符串。
+request.search 使用 ? 获取原始查询字符串。
+request.search= 设置原始查询字符串。
+request.host 获取当前主机（hostname:port）。当 app.proxy 是 true 时支持 X-Forwarded-Host，否则使用 Host。
+request.hostname 存在时获取主机名。当 app.proxy 是 true 时支持 X-Forwarded-Host，否则使用 Host。
+request.type 获取请求 Content-Type 不含参数 &quot;charset&quot;。
+request.charset 在存在时获取请求字符集，或者 undefined
+request.query 获取解析的查询字符串, 当没有查询字符串时，返回一个空对象。不支持嵌套对象
+request.query= 将查询字符串设置为给定对象。不支持嵌套对象
+...等等
+</code></pre></div><h3 id="response"><a href="#response" class="header-anchor">#</a> response</h3> <div class="language- extra-class"><pre><code>response.header 响应标头对象。
+response.headers 响应标头对象。别名是 response.header。
+response.status 获取响应状态。默认情况下，response.status 设置为 404 而不是像 node 的 res.statusCode 那样默认为 200。
+response.body 获取响应主体。
+response.body= 将响应体设置为以下之一：
+  string 写入
+  Buffer 写入
+  Stream 管道
+  Object || Array JSON-字符串化
+  null 无内容响应
+如果 response.status 未被设置, Koa 将会自动设置状态为 200 或 204。
+response.get(field) 不区分大小写获取响应标头字段值 field。
+response.set(field, value) 设置响应标头 field 到 value:
+response.append(field, value) 用值 val 附加额外的标头 field。
+response.set(fields) 用一个对象设置多个响应标头fields
+response.remove(field) 删除标头 field。
+response.type 获取响应 Content-Type 不含参数 &quot;charset&quot;。
+response.type= 设置响应 Content-Type 通过 mime 字符串或文件扩展名。
+response.redirect(url, [alt])重定向
+...等等
+</code></pre></div><h3 id="request-别名-不想-ctx-request-xxx-我们提供了别名。ctx-就代表-ctx-request"><a href="#request-别名-不想-ctx-request-xxx-我们提供了别名。ctx-就代表-ctx-request" class="header-anchor">#</a> request 别名 不想 ctx.request.xxx,我们提供了别名。ctx 就代表 ctx.request</h3> <div class="language- extra-class"><pre><code>ctx.header
+ctx.headers
+ctx.method
+ctx.method=
+ctx.url
+ctx.url=
+ctx.originalUrl
+ctx.origin
+ctx.href
+ctx.path
+ctx.path=
+ctx.query
+ctx.query=
+ctx.querystring
+ctx.querystring=
+ctx.host
+ctx.hostname
+ctx.fresh
+ctx.stale
+ctx.socket
+ctx.protocol
+ctx.secure
+ctx.ip
+ctx.ips
+ctx.subdomains
+ctx.is()
+ctx.accepts()
+ctx.acceptsEncodings()
+ctx.acceptsCharsets()
+ctx.acceptsLanguages()
+ctx.get()
+</code></pre></div><h3 id="response-别名-不想-ctx-response-xxx-我们提供了别名。ctx-就代表-ctx-response"><a href="#response-别名-不想-ctx-response-xxx-我们提供了别名。ctx-就代表-ctx-response" class="header-anchor">#</a> response 别名 不想 ctx.response.xxx,我们提供了别名。ctx 就代表 ctx.response</h3> <div class="language- extra-class"><pre><code>ctx.body
+ctx.body=
+ctx.status
+ctx.status=
+ctx.message
+ctx.message=
+ctx.length=
+ctx.length
+ctx.type=
+ctx.type
+ctx.headerSent
+ctx.redirect()
+ctx.attachment()
+ctx.set()
+ctx.append()
+ctx.remove()
+ctx.lastModified=
+ctx.etag=
+</code></pre></div><h3 id="处理静态资源-比如静态目录为-static"><a href="#处理静态资源-比如静态目录为-static" class="header-anchor">#</a> 处理静态资源 比如静态目录为 static</h3> <div class="language- extra-class"><pre><code>npm i koa-static
+// 静态资源配置
+// app.use(require('koa-static')('static'))
+
+// or
+// app.use(require('koa-static')('./static'))
+
+// or
+// app.use(require('koa-static')(__dirname + '/static'))
+使用
+&lt;img src=&quot;/image/account.eb695dc.png&quot;/&gt;
+</code></pre></div><h3 id="获取参数"><a href="#获取参数" class="header-anchor">#</a> 获取参数</h3> <div class="language- extra-class"><pre><code>ctx.request.query获取?=xx类query参数
+ctx.params获取路径参数
+安装koa-body并配置使用通过ctx.request.body获取参数 (post请求 put请求)
+</code></pre></div><h3 id="洋葱模型"><a href="#洋葱模型" class="header-anchor">#</a> 洋葱模型</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;koa&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">ctx</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3001</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 执行结果是1=&gt;2=&gt;3</span>
+</code></pre></div><h3 id="常用中间件"><a href="#常用中间件" class="header-anchor">#</a> 常用中间件</h3> <p>koa-router 处理路由</p> <p>koa-static 处理静态资源</p> <p>koa-pramater 参数验证</p> <p>koa-body 处理请求体参数</p> <p>koa-json-error 处理 error</p> <p>koa-jwt token 验证</p> <h3 id="koa-和-express-区别"><a href="#koa-和-express-区别" class="header-anchor">#</a> koa 和 express 区别</h3> <p>Express 功能丰富，随取随用，并且框架自身封装了大量便利的功能，比如路由、视图处理等等。koa 更轻量，框架自身并没集成太多功能，大部分功能需要用户自行 require 中间件去解决。路由都需要额外的中间件。</p> <p>回调函数不同 express 是同步的回调函数，包含 req res next 三个参数。koa 是异步函数，包含 context next 两个参数。</p> <p>express 异步基于回调函数，koa 基于 async await。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上一次修改:</span> <span class="time">2/1/2021, 2:00:36 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/my-blog/服务端框架/express.html" class="prev">
+        express
+      </a></span> <span class="next"><a href="/my-blog/服务端框架/egg.html">
+        egg
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/my-blog/assets/js/app.0140a108.js" defer></script><script src="/my-blog/assets/js/2.e17d958a.js" defer></script><script src="/my-blog/assets/js/143.fd866d23.js" defer></script>
+  </body>
+</html>
