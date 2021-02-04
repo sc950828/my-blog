@@ -2,7 +2,7 @@
 
 [fly 文档](https://wendux.github.io/dist/#/doc/flyio/readme)
 
-## fly 知识点
+## fly 定义和特点
 
 ### 什么是 FLy.js
 
@@ -23,9 +23,9 @@
 - 浏览器端支持全局 Ajax 拦截 。
 - H5 页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片。
 
-### 使用
+## 使用
 
-安装
+### 安装
 
 ```js
 // 使用npm
@@ -35,7 +35,7 @@ npm install flyio
 <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
 ```
 
-引入使用
+### 引入使用
 
 浏览器、Node、React Native 中引入
 
@@ -203,7 +203,7 @@ fly.interceptors.response.use(null,null)
 }
 ```
 
-### config 配置
+## config 配置
 
 可配置选项
 
@@ -241,7 +241,7 @@ fly.config.timeout = 10000;
 fly.config.baseURL = "https://wendux.github.io/";
 ```
 
-### 与 axios 对比
+## 与 axios 对比
 
 共同点
 
@@ -260,7 +260,7 @@ node 环境下下 Fly 的功能要明显强于 axios，Fly 在 node 下不仅提
 
 Http Engine Fly 中提出了 Http Engine 的概念，Fly 可以通过更换 Http Engine 的方式实现很多有趣的功能，比如全局 Ajax 拦截。
 
-### 与 Fetch 对比
+## 与 Fetch 对比
 
 fetch 必须手动设置 header 的 content-type，Fetch 不会自动设置。
 

@@ -17,5 +17,3 @@ features:
     details: VuePress 将每个页面生成为预渲染的静态 HTML，每个页面加载之后，然后作为单页面应用程序(SPA)运行。
 footer: 湘公网安备 43068102001051号  湘ICP备2021001552号-1
 ---
-
-<!-- https://beian.miit.gov.cn -->

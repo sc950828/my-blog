@@ -1,4 +1,4 @@
-### GitHub Actions 是什么？
+## GitHub Actions 是什么？
 
 大家知道，持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等。GitHub 把这些操作就称为 actions。
 
@@ -12,7 +12,7 @@ actions/setup-node@v1.0 # 指向一个标签
 actions/setup-node@master # 指向一个分支
 ```
 
-### 基本概念
+## 基本概念
 
 GitHub Actions 有一些自己的术语。
 
@@ -24,7 +24,7 @@ GitHub Actions 有一些自己的术语。
 
 （4）action （动作）：每个 step 可以依次执行一个或多个命令（action）。
 
-### workflow 文件
+## workflow 文件
 
 GitHub Actions 的配置文件叫做 workflow 文件，存放在代码仓库的.github/workflows 目录。
 
@@ -32,7 +32,7 @@ workflow 文件采用 YAML 格式，文件名可以任意取，但是后缀名�
 
 workflow 文件。GitHub 只要发现.github/workflows 目录里面有.yml 文件，就会自动运行该文件。
 
-### workflow 文件 常用参数
+## workflow 文件 常用参数
 
 1. name
 
@@ -90,7 +90,7 @@ jobs.<job_id>.steps.env：该步骤所需的环境变量。
 jobs.<job_id>.steps.uses：该步骤所需要使用的action
 ```
 
-### 项目部署
+## 项目部署
 
 1. 在个人设置(setting)里面左侧菜单栏找到 Developer settings 菜单
 2. 在 Personal access token 里面创建自己的 ACCESS_TOKEN
