@@ -106,12 +106,13 @@ module.exports = {
           ["/VUE/vuex", "vuex"],
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
-          ["/VUE/vue源码分析", "vue源码分析"],
           ["/VUE/vue常用技巧", "vue常用技巧"],
           ["/VUE/vue服务端渲染", "vue服务端渲染"],
           ["/VUE/jsx", "jsx"],
           ["/VUE/nuxt", "nuxt"],
           ["/VUE/vue项目总结", "vue项目总结"],
+          ["/VUE/vue源码分析概览", "vue源码分析概览"],
+          ["/VUE/vue源码分析数据驱动", "vue源码分析数据驱动"]
         ],
       },
       {

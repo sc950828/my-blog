@@ -6,21 +6,58 @@
 
 Vue.js 的源码利用了 flow 来做静态类型检查
 
-为什么用 flow？
+[Flow](https://flow.org/en/docs/getting-started/)是 facebook 出品的 JavaScript 静态类型检查工具。Vue.js 的源码利用了 Flow 做了静态类型检查，所以了解 Flow 有助于我们阅读源码。
+
+### 为什么用 flow？
 
 JavaScript 是动态类型语言，它的灵活性有目共睹，但是过于灵活的副作用就是很容易就写出非常隐蔽的隐患代码，在编译期甚至运行时看上去都不会报错，但是可能会发生各种各样奇怪的和难以解决的 bug。
 项目越复杂就越需要通过工具的手段来保证项目的维护性和增强代码的可读性。Vue.js 在做 2.0 重构的时候，在 ES2015 的基础上，除了 ESLint 保证代码风格之外，也引入了 flow 做静态类型检查。
 
-flow 常用的两种类型检查方式是：
+### flow 常用的两种类型检查方式是：
 
-- 类型推断：通过变量的使用上下文来推断出变量类型，然后根据这些推断来检查类型。
-- 类型注释：事先注释好我们期待的类型，flow 会基于这些注释来判断。
+1. 类型推断：通过变量的使用上下文来推断出变量类型，然后根据这些推断来检查类型。
+
+```js
+/*@flow*/
+
+function split(str) {
+  return str.split(" ");
+}
+
+split(11);
+
+// Flow 检查上述代码后会报错，因为函数 split 期待的参数是字符串，而我们输入了数字。
+```
+
+2. 类型注释：事先注释好我们期待的类型，flow 会基于这些注释来判断。
+
+```js
+/*@flow*/
+
+function add(x: number, y: number): number {
+  return x + y;
+}
+
+add("Hello", 11);
+
+// 现在 Flow 就能检查出错误，因为函数参数的期待类型为数字，而我们提供了字符串。
+```
 
 Flow 提出了一个 libdef 的概念，可以用来识别这些第三方库或者是自定义类型
 
-### 源码目录分析
+## 源码目录分析
 
-compiler(编译相关)
+```
+src
+├── compiler        # 编译相关
+├── core            # 核心代码
+├── platforms       # 不同平台的支持
+├── server          # 服务端渲染
+├── sfc             # .vue 文件解析
+├── shared          # 共享代码
+```
+
+### compiler(编译相关)
 
 - compiler 目录包含 Vue.js 所有编译相关的代码。将 template 模板编译为 render 函数。在 Vue 中使用 render 函数来创建 VNode，而在开发的时候我们更多的是使用 template 来编写 HTML，所以需要将 template 编译为 render 函数。
 
@@ -30,7 +67,9 @@ compiler(编译相关)
 
 - 编译的工作可以在构建时做（借助 webpack、vue-loader 等辅助插件）；也可以在运行时做，使用包含构建功能的 Vue.js。显然，编译是一项耗性能的工作，所以更推荐前者——离线编译。
 
-core(核心代码)
+### core(核心代码)
+
+core 目录包含了 Vue.js 的核心代码，包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。
 
 ```
 ├── core        # Vue 核心代码
@@ -42,7 +81,9 @@ core(核心代码)
   ├── vdom          # 虚拟 DOM 相关代码
 ```
 
-platforms(不同平台的支持)
+### platforms(不同平台的支持)
+
+Vue.js 是一个跨平台的 MVVM 框架，它可以跑在 web 上，也可以配合 weex 跑在 native 客户端上。platform 是 Vue.js 的入口，2 个目录代表 2 个主要入口，分别打包成运行在 web 上和 weex 上的 Vue.js。
 
 ```
 ├── platforms   # 平台相关代码
@@ -54,152 +95,315 @@ platforms(不同平台的支持)
   ├── weex          # 配合 weex 运行在 native 平台
 ```
 
-server
+### server
 
 Vue 从 2.0 起支持服务端渲染（SSR）。server 目录下存放的是与服务端渲染相关代码，这也就意味着这些代码是运行在服务端的 Node.js 代码，而不是运行在浏览器端。
 
-sfc
+### sfc
 
 sfc 下只有一个 parser.js，实际上就是一个解析器，用于将我们编写的 .vue 文件解析成一个 js 对象。
 
-shared
+### shared
 
 shared 目录中定义了常量和工具函数，供其他文件引用。
 
-### 源码构建
+## 源码构建
 
-Rollup
+Vue.js 源码是基于 [Rollup](https://github.com/rollup/rollup)构建的，它的构建相关配置都在 scripts 目录下。
+
+### Rollup
 
 - Vue.js 源码使用 Rollup 构建。Rollup 和 Webpack 都是打包工具，但两者的应用场景不同。Webpack 功能相比 Rollup 更加强大，它可以将各种静态资源（包括 css，js，图片等）通通打包成一个或多个 bundle，并按需加载；同时正因为 Webpack 功能强大，打包出来的文件体积也较大。因此 Webpack 更适用于应用的开发。
 - 而 Rollup 相对于 Webpack 更加轻量，它只处理 js 文件而不处理其他静态资源文件，打包出来的文件体积也更小，因此 Rollup 更适用于像类库这种只有 js 代码的项目构建。所以大部分类库例如 Vue，React，Angular 等都采用 Rollup 来打包。
 
-Runtime Only VS Runtime + Compiler
+### Runtime Only VS Runtime + Compiler
 
 通常我们利用 vue-cli 去初始化我们的 Vue.js 项目的时候会询问我们用 Runtime Only 版本的还是 Runtime + Compiler 版本。下面我们来对比这两个版本。
 
-Runtime Only
+#### Runtime Only
+
 我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 JavaScript，因为是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。
 
-Runtime + Compiler
+#### Runtime + Compiler
+
 我们如果没有对代码做预编译，但又使用了 Vue 的 template 属性并传入一个字符串，则需要在客户端编译模板。很显然，这个编译过程对性能会有一定损耗，所以通常我们更推荐使用 Runtime-Only 的 Vue.js
 
-### new Vue 发生了什么？
+## 入口
 
-Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。
+在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是 src/platforms/web/entry-runtime-with-compiler.js
 
-在初始化的最后，检测到如果有 el 属性，则调用 `vm.$mount` 方法挂载 vm，挂载的目标就是把模板渲染成最终的 DOM
-
-所以第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这四个钩子。
+当我们的代码执行 import Vue from 'vue' 的时候，就是从这个入口执行代码来初始化 Vue。
 
 ```js
-initLifecycle(vm);
-initEvents(vm);
-initRender(vm);
-callHook(vm, "beforeCreate");
-initInjections(vm); // resolve injections before data/props
-initState(vm); // 初始化 props、data、methods、watch、computed 等属性
-initProvide(vm); // resolve provide after data/props
-callHook(vm, "created");
+/* @flow */
 
-if (vm.$options.el) {
-  vm.$mount(vm.$options.el);
-}
-```
+import config from "core/config";
+import { warn, cached } from "core/util/index";
+import { mark, measure } from "core/util/perf";
 
-### 挂载
+import Vue from "./runtime/index";
+import { query } from "./util/index";
+import { compileToFunctions } from "./compiler/index";
+import {
+  shouldDecodeNewlines,
+  shouldDecodeNewlinesForHref,
+} from "./util/compat";
 
-如果没有定义 render 方法，则会把 el 或者 template 字符串转换成 render 方法。这里我们要牢记，在 Vue 2.0 版本中，所有 Vue 的组件的渲染最终都需要 render 方法，无论我们是用单文件 .vue 方式开发组件，还是写了 el 或者 template 属性，最终都会转换成 render 方法，那么这个过程是 Vue 的一个“在线编译”的过程，它是调用 compileToFunctions 方法实现的。最后，调用原先原型上的 `$mount` 方法挂载。如果我们用的是 Runtime Only 版本则没有在线编译这一步，因为编译在我们打包的时候使用 webpack 的 vue-loader 就已经编译好了，已经编译成渲染函数了。
+const idToTemplate = cached((id) => {
+  const el = query(id);
+  return el && el.innerHTML;
+});
 
-`$mount` 方法实际上会去调用 mountComponent 方法
-
-mountComponent 核心就是先实例化一个渲染 Watcher，在它的回调函数中会调用 updateComponent 方法，在此方法中调用 `vm._render` 方法把渲染函数生成虚拟 Node，最终调用 `vm._update` 把虚拟 DOM 变成真实 DOM。
-
-Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数。每个 Vue 组件都有一个对应的 Watcher。
-
-函数最后判断为根节点的时候设置 `vm._isMounted` 为 true， 表示这个实例已经挂载了，同时执行 mounted 钩子函数。
-
-```js
-export function mountComponent(
-  vm: Component,
-  el: ?Element,
+const mount = Vue.prototype.$mount;
+Vue.prototype.$mount = function(
+  el?: string | Element,
   hydrating?: boolean
 ): Component {
-  vm.$el = el;
-  if (!vm.$options.render) {
-    vm.$options.render = createEmptyVNode;
-    if (process.env.NODE_ENV !== "production") {
-      /* istanbul ignore if */
-      if (
-        (vm.$options.template && vm.$options.template.charAt(0) !== "#") ||
-        vm.$options.el ||
-        el
-      ) {
-        warn(
-          "You are using the runtime-only build of Vue where the template " +
-            "compiler is not available. Either pre-compile the templates into " +
-            "render functions, or use the compiler-included build.",
-          vm
-        );
+  el = el && query(el);
+
+  /* istanbul ignore if */
+  if (el === document.body || el === document.documentElement) {
+    process.env.NODE_ENV !== "production" &&
+      warn(
+        `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
+      );
+    return this;
+  }
+
+  const options = this.$options;
+  // resolve template/el and convert to render function
+  if (!options.render) {
+    let template = options.template;
+    if (template) {
+      if (typeof template === "string") {
+        if (template.charAt(0) === "#") {
+          template = idToTemplate(template);
+          /* istanbul ignore if */
+          if (process.env.NODE_ENV !== "production" && !template) {
+            warn(
+              `Template element not found or is empty: ${options.template}`,
+              this
+            );
+          }
+        }
+      } else if (template.nodeType) {
+        template = template.innerHTML;
       } else {
-        warn(
-          "Failed to mount component: template or render function not defined.",
-          vm
-        );
+        if (process.env.NODE_ENV !== "production") {
+          warn("invalid template option:" + template, this);
+        }
+        return this;
+      }
+    } else if (el) {
+      template = getOuterHTML(el);
+    }
+    if (template) {
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== "production" && config.performance && mark) {
+        mark("compile");
+      }
+
+      const { render, staticRenderFns } = compileToFunctions(
+        template,
+        {
+          shouldDecodeNewlines,
+          shouldDecodeNewlinesForHref,
+          delimiters: options.delimiters,
+          comments: options.comments,
+        },
+        this
+      );
+      options.render = render;
+      options.staticRenderFns = staticRenderFns;
+
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== "production" && config.performance && mark) {
+        mark("compile end");
+        measure(`vue ${this._name} compile`, "compile", "compile end");
       }
     }
   }
-  callHook(vm, "beforeMount");
+  return mount.call(this, el, hydrating);
+};
 
-  let updateComponent;
-  /* istanbul ignore if */
-  if (process.env.NODE_ENV !== "production" && config.performance && mark) {
-    updateComponent = () => {
-      const name = vm._name;
-      const id = vm._uid;
-      const startTag = `vue-perf-start:${id}`;
-      const endTag = `vue-perf-end:${id}`;
-
-      mark(startTag);
-      const vnode = vm._render();
-      mark(endTag);
-      measure(`vue ${name} render`, startTag, endTag);
-
-      mark(startTag);
-      vm._update(vnode, hydrating);
-      mark(endTag);
-      measure(`vue ${name} patch`, startTag, endTag);
-    };
+/**
+ * Get outerHTML of elements, taking care
+ * of SVG elements in IE as well.
+ */
+function getOuterHTML(el: Element): string {
+  if (el.outerHTML) {
+    return el.outerHTML;
   } else {
-    updateComponent = () => {
-      vm._update(vm._render(), hydrating);
+    const container = document.createElement("div");
+    container.appendChild(el.cloneNode(true));
+    return container.innerHTML;
+  }
+}
+
+Vue.compile = compileToFunctions;
+
+export default Vue;
+```
+
+在这个入口 JS 的上方我们可以找到 Vue 的来源：import Vue from './runtime/index'，我们先来看一下这块儿的实现，它定义在 src/platforms/web/runtime/index.js 中
+
+```js
+import Vue from "core/index";
+import config from "core/config";
+import { extend, noop } from "shared/util";
+import { mountComponent } from "core/instance/lifecycle";
+import { devtools, inBrowser, isChrome } from "core/util/index";
+
+import {
+  query,
+  mustUseProp,
+  isReservedTag,
+  isReservedAttr,
+  getTagNamespace,
+  isUnknownElement,
+} from "web/util/index";
+
+import { patch } from "./patch";
+import platformDirectives from "./directives/index";
+import platformComponents from "./components/index";
+
+// install platform specific utils
+Vue.config.mustUseProp = mustUseProp;
+Vue.config.isReservedTag = isReservedTag;
+Vue.config.isReservedAttr = isReservedAttr;
+Vue.config.getTagNamespace = getTagNamespace;
+Vue.config.isUnknownElement = isUnknownElement;
+
+// install platform runtime directives & components
+extend(Vue.options.directives, platformDirectives);
+extend(Vue.options.components, platformComponents);
+
+// install platform patch function
+Vue.prototype.__patch__ = inBrowser ? patch : noop;
+
+// public mount method
+Vue.prototype.$mount = function(
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && inBrowser ? query(el) : undefined;
+  return mountComponent(this, el, hydrating);
+};
+
+// ...
+
+export default Vue;
+```
+
+这里关键的代码是 import Vue from 'core/index'，之后的逻辑都是对 Vue 这个对象做一些扩展。
+
+我们来看一下真正初始化 Vue 的地方，在 src/core/index.js 中。
+
+```js
+import Vue from "./instance/index";
+import { initGlobalAPI } from "./global-api/index";
+import { isServerRendering } from "core/util/env";
+import { FunctionalRenderContext } from "core/vdom/create-functional-component";
+
+initGlobalAPI(Vue);
+
+Object.defineProperty(Vue.prototype, "$isServer", {
+  get: isServerRendering,
+});
+
+Object.defineProperty(Vue.prototype, "$ssrContext", {
+  get() {
+    /* istanbul ignore next */
+    return this.$vnode && this.$vnode.ssrContext;
+  },
+});
+
+// expose FunctionalRenderContext for ssr runtime helper installation
+Object.defineProperty(Vue, "FunctionalRenderContext", {
+  value: FunctionalRenderContext,
+});
+
+Vue.version = "__VERSION__";
+
+export default Vue;
+```
+
+这里有 2 处关键的代码，import Vue from './instance/index' 和 initGlobalAPI(Vue)，初始化全局 Vue API。
+
+在这里，我们终于看到了 Vue 的庐山真面目，它实际上就是一个用 Function 实现的类，我们只能通过 new Vue 去实例化它。
+
+```js
+import { initMixin } from "./init";
+import { stateMixin } from "./state";
+import { renderMixin } from "./render";
+import { eventsMixin } from "./events";
+import { lifecycleMixin } from "./lifecycle";
+import { warn } from "../util/index";
+
+function Vue(options) {
+  if (process.env.NODE_ENV !== "production" && !(this instanceof Vue)) {
+    warn("Vue is a constructor and should be called with the `new` keyword");
+  }
+  this._init(options);
+}
+
+// 通过下面的几个方法给 Vue 的原型 prototype 上扩展方法
+initMixin(Vue);
+stateMixin(Vue);
+eventsMixin(Vue);
+lifecycleMixin(Vue);
+renderMixin(Vue);
+
+export default Vue;
+```
+
+initGlobalAPI
+
+Vue.js 在整个初始化过程中，除了给它的原型 prototype 上扩展方法，还会给 Vue 这个对象本身扩展全局的静态方法，它的定义在 src/core/global-api/index.js 中
+
+```js
+export function initGlobalAPI(Vue: GlobalAPI) {
+  // config
+  const configDef = {};
+  configDef.get = () => config;
+  if (process.env.NODE_ENV !== "production") {
+    configDef.set = () => {
+      warn(
+        "Do not replace the Vue.config object, set individual fields instead."
+      );
     };
   }
+  Object.defineProperty(Vue, "config", configDef);
 
-  // we set this to vm._watcher inside the watcher's constructor
-  // since the watcher's initial patch may call $forceUpdate (e.g. inside child
-  // component's mounted hook), which relies on vm._watcher being already defined
-  new Watcher(
-    vm,
-    updateComponent,
-    noop,
-    {
-      before() {
-        if (vm._isMounted) {
-          callHook(vm, "beforeUpdate");
-        }
-      },
-    },
-    true /* isRenderWatcher */
-  );
-  hydrating = false;
+  // exposed util methods.
+  // NOTE: these are not considered part of the public API - avoid relying on
+  // them unless you are aware of the risk.
+  Vue.util = {
+    warn,
+    extend,
+    mergeOptions,
+    defineReactive,
+  };
 
-  // manually mounted instance, call mounted on self
-  // mounted is called for render-created child components in its inserted hook
-  if (vm.$vnode == null) {
-    vm._isMounted = true;
-    callHook(vm, "mounted");
-  }
-  return vm;
+  Vue.set = set;
+  Vue.delete = del;
+  Vue.nextTick = nextTick;
+
+  Vue.options = Object.create(null);
+  ASSET_TYPES.forEach((type) => {
+    Vue.options[type + "s"] = Object.create(null);
+  });
+
+  // this is used to identify the "base" constructor to extend all plain-object
+  // components with in Weex's multi-instance scenarios.
+  Vue.options._base = Vue;
+
+  extend(Vue.options.components, builtInComponents);
+
+  initUse(Vue);
+  initMixin(Vue);
+  initExtend(Vue);
+  initAssetRegisters(Vue);
 }
 ```
 
