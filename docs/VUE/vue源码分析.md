@@ -1,4 +1,8 @@
-### vue 类型检查
+## vue 源码揭秘文档
+
+[vue 源码揭秘文档](https://ustbhuangyi.github.io/vue-analysis/)
+
+## vue 类型检查
 
 Vue.js 的源码利用了 flow 来做静态类型检查
 

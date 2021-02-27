@@ -4,10 +4,8 @@ heroImage: /randy.jpg
 actionText: 一起共勉 →
 actionLink: /GUIDE/
 meta:
-  - name: baidu-site-verification
-    content: code-hUu5cIisna
   - name: keywords
-    content: 苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客
+    content: 苏纯，苏纯的博客，苏纯的个人博客，苏纯个人博客，苏纯博客，汨罗苏纯，苏纯前端博客，前端博客
 features:
   - title: 简明优先
     details: 对以 markdown 为中心的项目结构，做最简化的配置，帮助你专注于创作。

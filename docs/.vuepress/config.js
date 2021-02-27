@@ -9,15 +9,15 @@ module.exports = {
       {
         name: "keywords",
         content:
-          "苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客",
+          "苏纯，苏纯的博客，苏纯的个人博客，苏纯个人博客，苏纯博客，汨罗苏纯，苏纯前端博客，前端博客",
       },
     ],
   ],
   themeConfig: {
     lastUpdated: "上一次修改",
     nav: [
-      { text: "导航", link: "/GUIDE/" },
       { text: "博客首页", link: "/" },
+      { text: "导航", link: "/GUIDE/" },
       { text: "个人首页", link: "https://home.suchun.vip" },
       { text: "GitHub", link: "https://github.com/sc950828" },
     ],
