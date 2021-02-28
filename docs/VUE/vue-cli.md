@@ -1,4 +1,8 @@
-### 创建 vue 项目
+## vue-cli 文档
+
+[vue-cli 中文官方文档](https://cli.vuejs.org/zh/guide/)
+
+## 创建 vue 项目
 
 利用 vue-cli 创建 vue 应用，这里的 vue-cli 是 vue2.0 及以上版本，不适用 vue3.0。需要安装 mode.js，版本需要大于等于 6.0，大于等于 8.0 的最好，npm 需要大于等于 3.0
 
@@ -18,7 +22,7 @@ vue3.0 的安装
 - 第四步： npm install 这里会根据 package.json 文件里面的依赖下载对应的模块。
 - 第五步： npm run serve 运行 vue 项目。
 
-### vue 项目中怎么使用 elementui？
+## vue 项目中怎么使用 elementui？
 
 - 第一步： npm install element-ui --save 安装 elementui。
 - 第二步： 在 main.js 中引入并使用。
@@ -28,7 +32,7 @@ vue3.0 的安装
     - 其实在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 size 与 zIndex 字段。size 用于改变组件的默认尺寸，
     - zIndex 设置弹框的初始 z-index（默认值：2000）。Vue.use(Element, { size: 'small', zIndex: 3000 });
 
-### vue 项目中怎么使用国际化
+## vue 项目中怎么使用国际化
 
 - 第一步： 安装 vue-i18n npm install vue-i18n
 - 第二步： 新建 lang 文件夹
@@ -75,14 +79,14 @@ new Vue({
     修改语言我们使用this.$i18n.local="en"
 ```
 
-### vue 项目中怎么使用 axios?
+## vue 项目中怎么使用 axios?
 
 - 第一步： npm install axios
 - 第二步： 在 main.js 中引入并使用。axios 并不是 vue 插件，所以不能 使用 Vue.use(),为了解决这个问题，我们在引入 axios 之后，通过修改原型链，来更方便的使用。
   - import 'axios' from 'axios'
   - Vue.prototype.$axios = axios;在项目中就能使用this.$axios 调用 axios 的各种方法了。
 
-### vue 项目中怎么使用 router？
+## vue 项目中怎么使用 router？
 
     第一步： npm install vue-router --save-dev
     第二步： 在main.js中引入并使用
@@ -105,7 +109,7 @@ new Vue({
       this.$route.params.username
       this.$router.go(-1)
 
-### vue 项目中怎么使用 less？
+## vue 项目中怎么使用 less？
 
     第一步： 安装less less-loader 就是 npm install less less-loader --save-dev
     第二步： 配置loader，在webpack.base.conf.js中加上如下配置即可。
@@ -114,7 +118,7 @@ new Vue({
         loader: "style-loader!css-loader!less-loader",
       }
 
-### vue 项目怎么配置 favicon？
+## vue 项目怎么配置 favicon？
 
     第一步： 准备好favicon，放在项目的根目录
     第二步： 在index.html中加上 <link rel="shortcut icon" href="favicon.ico"  type="image/x-icon">
@@ -126,7 +130,7 @@ new Vue({
         favicon: './favicon.ico'
       }),
 
-### vue 项目怎么使用 vuex
+## vue 项目怎么使用 vuex
 
     第一步： npm install vuex --save-dev 安装vuex
     第二步： 引入并使用
@@ -152,7 +156,7 @@ new Vue({
 
     通过this.$store访问store里面的东西
 
-### 解决 vue 的跨域问题
+## 解决 vue 的跨域问题
 
     域名 协议 端口号三者有一个不同即为跨域
     假如我们前端项目在localhost:8080 后端项目在localhost:3000
@@ -196,13 +200,13 @@ new Vue({
         }
       }
 
-### vue 使用 echarts
+## vue 使用 echarts
 
     第一步: 安装 npm install echarts -D
     第二步: 引入使用 import echarts from 'echarts'  Vue.prototype.$echarts = echarts
     使用this.$echarts 就能绘图了
 
-### vue-cli
+## vue-cli
 
     static目录和assets目录
       src下面的assets目录存放的静态资源是会被webpack处理的
@@ -210,7 +214,7 @@ new Vue({
         assetsSubDirectory: 'static' //这个是配置静态资源的目录
         assetsPublicPath: '/', //静态资源前缀 如果是/public 则引用静态资源的地方路径是/public/static
 
-### vue3
+## vue3
 
     环境变量
       在根目录创建文件
@@ -224,12 +228,12 @@ new Vue({
         .env.[mode].local > .env.[mode] > .env.local > .env
         除了相同配置项权重大的覆盖小的，不同配置项它们会进行合并操作，类似于 Javascript 中的 Object.assign 的用法。
 
-### vue 中使用 font-awesome
+## vue 中使用 font-awesome
 
 - 第一步 npm install font-awesome
 - 第二步 在 main.js 引入 font-awesome/css/font-awesome.min.css
 
-### vue 中使用 bootstrap-vue
+## vue 中使用 bootstrap-vue
 
     安装
       npm install bootstrap-vue
@@ -239,14 +243,14 @@ new Vue({
       import 'bootstrap-vue/dist/bootstrap-vue.css'
       Vue.use(BootstrapVue)
 
-### vue cli2 和 vue cli3 的区别
+## vue cli2 和 vue cli3 的区别
 
 - 创建方式不同 vue2 是 vue init webpack name, vue3 是 vue create name
 - webpack 配置文件不同
   - vue2 在 build 文件夹里面 包括 webpack.base.conf.js webpack.dev.conf.js webpack.prod.conf.js
   - vue3 默认已经配置好 如需自定义新建 vue.config.js 文件配置即可
 
-### vue.config.js
+## vue.config.js
 
 - baseurl 其改变的其实是 webpack 配置文件中 output 的 publicPath 项，就是将项目地址加一个二级目录,比如你配置了 baseUrl: 'vue',你的首页就需要通过http://localhost:8080/vue/打开。在vue-cli.3.3版本后 baseUrl 被废除了，要写成 publicPath
 - outputDir 这其实改变了 webpack 配置中 output 下的 path 项，修改了文件的输出路径。默认打包在 dist 文件夹下 如果你配置了 outputDir: 'output',打包的文件会在 output 下面
@@ -270,7 +274,7 @@ new Vue({
     }
 ```
 
-### h5 调试 vue
+## h5 调试 vue
 
     npm install VConsole
     import Vconsole from 'VConsole'

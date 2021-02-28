@@ -1,3 +1,7 @@
+## vue 文档
+
+[vue 中文官方文档](https://cn.vuejs.org/v2/guide/)
+
 ## 什么是 vue.js,vue.js 的优点
 
 vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是可以由浅入深 由简单到复杂
