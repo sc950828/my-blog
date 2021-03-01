@@ -9,15 +9,15 @@ module.exports = {
       {
         name: "keywords",
         content:
-          "苏纯,汨罗苏纯,苏纯博客,苏纯的博客,苏纯个人博客,苏纯的个人博客,前端博客,苏纯前端博客",
+          "苏纯，苏纯的博客，苏纯的个人博客，苏纯个人博客，苏纯博客，汨罗苏纯，苏纯前端博客，前端博客",
       },
     ],
   ],
   themeConfig: {
     lastUpdated: "上一次修改",
     nav: [
-      { text: "导航", link: "/GUIDE/" },
       { text: "博客首页", link: "/" },
+      { text: "导航", link: "/GUIDE/" },
       { text: "个人首页", link: "https://home.suchun.vip" },
       { text: "GitHub", link: "https://github.com/sc950828" },
     ],
@@ -106,12 +106,13 @@ module.exports = {
           ["/VUE/vuex", "vuex"],
           ["/VUE/vue-cli", "vue-cli"],
           ["/VUE/vue-router", "vue-router"],
-          ["/VUE/vue源码分析", "vue源码分析"],
           ["/VUE/vue常用技巧", "vue常用技巧"],
           ["/VUE/vue服务端渲染", "vue服务端渲染"],
           ["/VUE/jsx", "jsx"],
           ["/VUE/nuxt", "nuxt"],
           ["/VUE/vue项目总结", "vue项目总结"],
+          ["/VUE/vue源码分析概览", "vue源码分析概览"],
+          ["/VUE/vue源码分析数据驱动", "vue源码分析数据驱动"]
         ],
       },
       {

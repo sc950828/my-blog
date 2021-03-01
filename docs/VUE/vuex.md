@@ -1,8 +1,12 @@
-### vuex 是什么？
+## vuex 文档
+
+[vuex 中文官方文档](https://vuex.vuejs.org/zh/)
+
+## vuex 是什么？
 
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。或者是共享数据仓库。如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择，因为 Vuex 的状态存储是响应式的。
 
-### state
+## state
 
 状态
 
@@ -42,7 +46,7 @@ computed: {
 }
 ```
 
-### getter
+## getter
 
 getter 可以简单的理解为 store 的计算属性，它是基于 state 派生出来的一些状态，就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
 
@@ -80,7 +84,7 @@ computed: {
 }
 ```
 
-### mutations
+## mutations
 
 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。Vuex 中的 mutation 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数。
 一条重要的原则就是要记住 mutation 必须是同步函数。
@@ -128,7 +132,7 @@ changeMyAge() {
 }
 ```
 
-### actions
+## actions
 
 Action 类似于 mutation，不同在于：Action 提交的是 mutation，而不是直接变更状态。Action 可以包含任意异步操作。
 
@@ -175,7 +179,7 @@ changeHeightAction() {
 })
 ```
 
-### module
+## module
 
 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter。
 
@@ -219,7 +223,7 @@ const store = new Vuex.Store({
   actions 里面的 context 对象有 state rootState getters rootGetters 等属性，如果没有设置 namespaced:true，getters 和 rootGetters 会是相同的。
   默认在 action 里面可以提交其他模块的 mutations/actions，但是设置了 namespaced:true 后我们的 actions 只能提交本地的 mutations/actions，如果要提交外部模块的 mutations/actions 需要在 commit/dispatch 的时候传递第三个参数{root: true}
 
-### vuex 数据持久化
+## vuex 数据持久化
 
     第一种可以使用localStorage或者sessionStorage备份一份，然后再取得时候先取state取不到再去storage中取
     第二种使用插件 vuex-persistedstate
@@ -251,7 +255,7 @@ const store = new Vuex.Store({
       })]
     })
 
-### 严格模式
+## 严格模式
 
 - 开启严格模式，仅需在创建 store 的时候传入 strict: true。
 - 在严格模式下，无论何时发生了状态变更且不是由 mutation 函数引起的，将会抛出错误。这能保证所有的状态变更都能被调试工具跟踪到。
@@ -271,6 +275,8 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== "production",
 });
 ```
+
+## vuex 常见问题
 
 ### 为什么 Vuex 的 mutation 中不能做异步操作？
 

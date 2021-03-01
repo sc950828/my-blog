@@ -1,4 +1,4 @@
-### require.context()
+## require.context()
 
 ```js
 const path = require("path");
@@ -19,7 +19,7 @@ useSubdirectories：是否检索子目录
 regExp: 匹配文件的正则表达式,一般是文件名
 ```
 
-### watch 的立即执行和深度监听
+## watch 的立即执行和深度监听
 
 ```js
 watch:{
@@ -34,7 +34,7 @@ watch:{
 }
 ```
 
-### 组件通讯
+## 组件通讯
 
 ```js
 props和$emit
@@ -110,7 +110,7 @@ this.$eventBus.$on("eventTarget",v=>{
 })
 ```
 
-### 路由懒加载
+## 路由懒加载
 
 ```js
 webpack< 2.4 时
@@ -128,11 +128,11 @@ webpack> 2.4 时
 }
 ```
 
-### 递归组件
+## 递归组件
 
 递归组件必须设置 name 和结束的阀值
 
-### 函数式组件
+## 函数式组件
 
 定义:无状态,无法实例化，内部没有任何生命周期处理方法
 规则:在 2.3.0 之前的版本中，如果一个函数式组件想要接收 prop，则 props 选项是必须的。
@@ -156,7 +156,7 @@ context 属性有:
 </template>
 ```
 
-### Vue.version
+## Vue.version
 
 ```js
 var version = Number(Vue.version.split(".")[0]);
@@ -170,7 +170,7 @@ if (version === 2) {
 }
 ```
 
-### v-pre
+## v-pre
 
 ```html
 <!-- vue 是响应式系统,但是有些静态的标签不需要多次编译,这样可以节省性能 -->
@@ -179,7 +179,7 @@ compiled }}
 <span v-pre>{{msg}}</span> 即使data里面定义了msg这里仍然是显示的{{msg}}
 ```
 
-### v-once
+## v-once
 
 ```html
 <!-- 有些 template 中的静态 dom 没有改变,这时就只需要渲染一次,可以降低性能开销 -->
@@ -187,7 +187,7 @@ compiled }}
 <!-- v-once 和 v-pre 的区别: v-once只渲染一次；v-pre不编译,原样输出 -->
 ```
 
-### v-cloak
+## v-cloak
 
 ```
 在网速慢的情况下,在使用vue绑定数据的时候，渲染页面时会出现变量闪烁
@@ -204,7 +204,7 @@ compiled }}
 }
 ```
 
-### router-view 的 key
+## router-view 的 key
 
 ```html
 <!-- 由于 Vue 会复用相同组件, 即 /page/1 => /page/2 或者 /page?id=1 => /page?id=2 这类链接跳转时, 将不在执行created, mounted之类的钩子 -->
@@ -212,7 +212,7 @@ compiled }}
 <!-- 这样组件的 created 和 mounted 就都会执行 -->
 ```
 
-### 调试 template
+## 调试 template
 
 在 Vue 开发过程中, 经常会遇到 template 模板渲染时 JavaScript 变量出错的问题, 此时也许你会通过 console.log 来进行调试 这时可以在开发环境挂载一个 log 函数
 
@@ -224,7 +224,7 @@ Vue.prototype.$log = window.console.log;
 <div>{{$log(info)}}</div>
 ```
 
-### vue-loader 小技巧 preserveWhitespace
+## vue-loader 小技巧 preserveWhitespace
 
 开发 vue 代码一般会有空格,这个时候打包压缩如果不去掉空格会加大包的体积 配置 preserveWhitespace 可以减小包的体积
 
@@ -236,7 +236,7 @@ Vue.prototype.$log = window.console.log;
 }
 ```
 
-### vue-loader 小技巧 transformToRequire
+## vue-loader 小技巧 transformToRequire
 
 以前在写 Vue 的时候经常会写到这样的代码：把图片提前 require 传给一个变量再传给组件
 
@@ -297,7 +297,7 @@ module.exports = {
 </template>
 ```
 
-### 为路径设置别名
+## 为路径设置别名
 
 ```js
 // vue-cli 2.x 配置
@@ -325,7 +325,7 @@ module.exports = {
 }
 ```
 
-### img 加载失败
+## img 加载失败
 
 有些时候后台返回图片地址不一定能打开,所以这个时候应该加一张默认图片
 
@@ -348,7 +348,7 @@ export default{
 </script>
 ```
 
-### 使用 hook 监听生命周期函数
+## 使用 hook 监听生命周期函数
 
 在 Vue 组件中，可以用过$on,$once 去监听所有的生命周期钩子函数，如监听组件的 updated 钩子函数可以写成 `this.$on('hook:updated', () => {})`
 

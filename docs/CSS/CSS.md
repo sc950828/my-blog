@@ -300,6 +300,11 @@ word-wrap 这个属性也是控制单词如何被拆分换行的 作为word-brea
 /* 全局变量 */
 :root {
   --main-bg-color: coral;
+
+  --box {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .a {
@@ -310,7 +315,58 @@ word-wrap 这个属性也是控制单词如何被拆分换行的 作为word-brea
 .b {
   /* 使用 第一个参数为自定义属性名，第二个参数用作缺省值*/
   color: var(--main-bg-color, "red");
+  /* 使用@apply 引用一个类 类似预处理器的混合 */
+  @apply --box;
 }
 ```
 
-CSS 变量类似于我们在 SCSS、LESS 中定义的变量，但前者支持通过 JS 来控制变量的值，以--开头，(e.g. --main-color: #b4a078)，通过 var(--main-color)来引用。var()函数接受两个参数（e.g. var(--main-color, gray)），第一个参数为自定义属性名，第二个参数用作缺省值。
+CSS 变量类似于我们在 SCSS、LESS 中定义的变量，但前者支持通过 JS 来控制变量的值，以--开头，(e.g. --main-color: #b4a078)，通过 var(--main-color)来引用。
+
+var()函数接受两个参数（e.g. var(--main-color, gray)），第一个参数为自定义属性名，第二个参数用作缺省值。
+
+### css 的模块化
+
+有两种方案
+
+第一种 随机转换类名，就是把你定义的类名按一定规则随机转换成一长串字符。这样类名就不会重复，就达到了模块化效果。
+
+第二种 给元素添加属性，就是把你的元素添加随机属性，选择器就变成类名+[属性名]这样类名就不会重复，就达到了模块化效果。
+
+#### 在 vue 中使用两种方式
+
+```html
+<!-- 第一种 随机转换类名 使用module关键字  -->
+<!-- 定义  -->
+<style module>
+  .a {
+    color: red;
+  }
+</style>
+<!-- 使用  -->
+<div :class="$style.a"></div>
+
+<!-- 第二种 给元素添加属性  -->
+<!-- 定义  -->
+<style scoped>
+  .a {
+    color: red;
+  }
+</style>
+<!-- 使用  -->
+<div class="a"></div>
+;
+```
+
+#### 在 react 中的使用
+
+```html
+<!-- 第一种 随机转换类名  -->
+<!-- 在webpack构建css的css-loader中打开modules -->
+<!-- options: {
+  modules: true
+} -->
+
+<!-- 使用 -->
+import style from './a.css'
+<div className="{style.a}"></div>
+```

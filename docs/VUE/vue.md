@@ -1,4 +1,8 @@
-### 什么是 vue.js,vue.js 的优点
+## vue 文档
+
+[vue 中文官方文档](https://cn.vuejs.org/v2/guide/)
+
+## 什么是 vue.js,vue.js 的优点
 
 vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是可以由浅入深 由简单到复杂
 
@@ -7,36 +11,41 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
   - 运行效率高 采用虚拟 dom 技术。没有操作真实的 dom，而是操作 dom 的 javascript 对象，并优化计算出真实的 dom。
   - 采用双向数据绑定技术，开发人员不需要操作 dom 就可以更新视图。
 
-### 生命周期
+## 生命周期
 
-- 什么是 vue 的生命周期
-  - Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
-- vue 生命周期的作用是什么
-  - 它的生命周期中有多个事件钩子，让我们更容易控制整个 Vue 实例的生命过程
-- vue 生命周期总共有几个阶段
-  - beforeCreate 此时获取不到 prop 和 data 中的数据。在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。有生命周期函数和一些默认事件。
-  - created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，`$el` 属性目前不可见。
-  - beforeMount 相关的 render 函数首次被调用 获取到了 VDOM
-  - mounted VDOM 解析成了真实 DOM，能获取 dom，能进行 dom 操作
-  - beforeUpdate 数据更新时调用，能获取到新数据，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
-  - updated 当这个钩子被调用时，组件 DOM 已经更新
-  - activated keep-alive 里面的组件被激活时调用
-  - deactivated keep-alive 里面的组件停止时调用
-  - beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。函数 data prop 都能用。
-  - destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
-  - errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
+### 什么是 vue 的生命周期
 
-### 插值绑定
+-Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
+
+### vue 生命周期的作用是什么
+
+它的生命周期中有多个事件钩子，让我们更容易控制整个 Vue 实例的生命过程
+
+### vue 生命周期总共有几个阶段
+
+1. beforeCreate 此时获取不到 prop 和 data 中的数据。在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。有生命周期函数和一些默认事件。
+2. created 可以获取到 prop 和 data 中的数据。在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，`$el` 属性目前不可见。
+3. beforeMount 相关的 render 函数首次被调用 获取到了 VDOM
+4. mounted VDOM 解析成了真实 DOM，能获取 dom，能进行 dom 操作
+5. beforeUpdate 数据更新时调用，能获取到新数据，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
+6. updated 当这个钩子被调用时，组件 DOM 已经更新
+7. activated keep-alive 里面的组件被激活时调用
+8. deactivated keep-alive 里面的组件停止时调用
+9. beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。函数 data prop 都能用。
+10. destroyed Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+11. errorCaptured 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。
+
+## 插值绑定
 
 - v-text 全部当文本处理
-- `{{}}` 能解析 html，但是会出现`{{}}`
+- `{{}}` 能解析 html，但是未加载数据前会出现`{{}}`
 - v-html 会解析 html
 
-### 属性绑定
+## 属性绑定
 
     v-bind: 或 :
 
-### 类名和样式的绑定
+## 类名和样式的绑定
 
 ```js
   // :class 有字符串 对象 数组方式
@@ -70,6 +79,8 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
       }
     }
 ```
+
+## 事件
 
 ### 事件的绑定
 
@@ -107,7 +118,7 @@ vue.js 是一套用于构建用户界面的渐进式框架.渐进式的意思是
 - 1. 调用的地方直接写方法名 不带括号 默认就会有事件对象 @keyup="handleKeyUp"
 - 2. 或者在调用的地方传$event参数 这个参数名字固定不能变 @keyup="handleKeyUp($event)"
 
-### 双向绑定
+## 双向绑定
 
 v-model
 
@@ -117,11 +128,11 @@ v-model
     v-model.trim 去除用户输入两端的空格
     v-model.lazy 将用户输入的数据赋值于变量的时机由输入时延迟到数据改变时
 
-### methods computed watch
+## methods computed watch
 
-- methods 方法， 不能用箭头函数定义方法
-- computed 只有相关的属性值变化才会重新计算， 必须有返回值。 不能用箭头函数定义方法。xx(){return xxxx} 具有缓存特性
-- watch 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。 xx(){xxxx} 或者 xx(newValue, oldValue) {xxxx}
+1. methods 方法， 不能用箭头函数定义方法
+2. computed 只有相关的属性值变化才会重新计算， 必须有返回值。 不能用箭头函数定义方法。xx(){return xxxx} 具有缓存特性
+3. watch 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。 xx(){xxxx} 或者 xx(newValue, oldValue) {xxxx}
 
 ```js
 watch: {
@@ -137,19 +148,20 @@ let unwatch = this.$watch("a", function(newValue, oldValue) {
 });
 ```
 
-### v-if v-show
+## v-if v-show
 
-- v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
-- v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。display:none / block
+v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
 
-### v-for 循环
+v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。display:none / block
+
+## v-for 循环
 
     v-for="item in items"
     v-for="item of items"
     v-for="(item, index) in items"
     v-for="(item, index) of items"
 
-### 数组变异方法
+## 数组变异方法
 
 Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
 
@@ -175,7 +187,7 @@ Vue.set(vm.items, indexOfItem, newValue);
 this.$set(vm.items, indexOfItem, newValue);
 ```
 
-### DOM 渲染
+## DOM 渲染
 
     挂载
       el: css选择器或者dom节点
@@ -183,7 +195,7 @@ this.$set(vm.items, indexOfItem, newValue);
     template 视图字符串模板 挂载后模板将替换挂载元素。
     渲染函数render
 
-### 过滤器 filter
+## 过滤器 filter
 
 ```
 改变数据，可以用做数据格式化
@@ -220,7 +232,7 @@ this.$set(vm.items, indexOfItem, newValue);
         }
 ```
 
-### 指令 directive 自定义指令
+## 指令 directive
 
 ```
 全局注册
@@ -240,7 +252,8 @@ this.$set(vm.items, indexOfItem, newValue);
       }
     }
   }
-调用统一加v-前缀  v-focus
+调用统一加v-前缀 v-focus
+
 生命周期函数
   bind 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
   inserted 被绑定元素插入父节点时调用
@@ -254,35 +267,37 @@ this.$set(vm.items, indexOfItem, newValue);
   oldVnode 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
 ```
 
-### 组件
+## 组件
 
-    父向子传数据 属性 子props接受
-    子向父传数据 方法 this.$emit()
-    非父子用bus
-      定义一个新的vue实例 bus export default new Vue()
-      在A组件引入bus 然后用bus.$emit(事件名, 数据)暴露一个事件，默认参数是event对象，也可以自定义传参
-      在B组件引入bus 然后用bus.$on(事件名, function(val){}) 监听事件，就能通过val拿到传过来的数据，需要注意的是function(val){this}里面的this
-      是bus不是我们的vue，如果要设置vue实例上的属性，需要在外面吧this接收一下 const that=this
-      移除事件监听用bus.$off(事件名)
+```
+父向子传数据 属性 子props接受
+子向父传数据 方法 this.$emit()
+非父子用bus
+  定义一个新的vue实例 bus export default new Vue()
+  在A组件引入bus 然后用bus.$emit(事件名, 数据)暴露一个事件，默认参数是event对象，也可以自定义传参
+  在B组件引入bus 然后用bus.$on(事件名, function(val){}) 监听事件，就能通过val拿到传过来的数据，需要注意的是function(val){this}里面的this
+  是bus不是我们的vue，如果要设置vue实例上的属性，需要在外面吧this接收一下 const that=this
+  移除事件监听用bus.$off(事件名)
 
-    组件需要绑定原生事件的时候需要加上.native
-      <base-input v-on:focus.native="onFocus"></base-input>
+组件需要绑定原生事件的时候需要加上.native
+  <base-input v-on:focus.native="onFocus"></base-input>
 
-    属性验证
-      props: {
-        propsA: {
-          type: Array,
-          required: false,
-          default: function() {
-            return []//对象或数组默认值必须是函数返回，基本数据类型可以直接写默认值
-          },
-          validator: function(value){
-            return value.length >= 2 //自定义函数验证
-          }
-        }
+属性验证
+  props: {
+    propsA: {
+      type: Array,
+      required: false,
+      default: function() {
+        return []//对象或数组默认值必须是函数返回，基本数据类型可以直接写默认值
+      },
+      validator: function(value){
+        return value.length >= 2 //自定义函数验证
       }
+    }
+  }
+```
 
-### 混入 mixin
+## 混入 mixin
 
 - 主要是代码重用
 - 定义公共的 mixin 对象，类似一个的 export default{}部分。混入对象可以包含任意组件选项。
@@ -292,16 +307,17 @@ this.$set(vm.items, indexOfItem, newValue);
   - 生命周期函数和 watch 会全部调用。且先调用 mixin 里面的 watch 方法和生命周期函数。
   - 以上合并策略可以通过 Vue.config.optionMergeStrategies 修改
 
-### model
+## model
 
 允许一个自定义组件在使用 v-model 时定制 prop 和 event。所以当我们在一个自定义组件上使用 v-model 并不能实现双向绑定，因为自定的组件并没有默认的 value 和 input 事件，在使用时我们需要使用 model 显示的改变 v-model 绑定属性和方法。
 
-- 从官网上看到，v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
-  - text 和 textarea 元素使用 value 属性和 input 事件
-  - checkbox 和 radio 使用 checked 属性和 change 事件
-  - select 使用 value 和 change 事件
+从官网上看到，v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
 
-### 响应式增删
+- text 和 textarea 元素使用 value 属性和 input 事件
+- checkbox 和 radio 使用 checked 属性和 change 事件
+- select 使用 value 和 change 事件
+
+## 响应式增删
 
     Vue.set()或this.$set()
       对象 set(obj, key, value)
@@ -310,7 +326,7 @@ this.$set(vm.items, indexOfItem, newValue);
       对象 delete(obj, key)
       数组 delete(arr, index)
 
-### nextTick
+## nextTick
 
 this.nextTick()或者 Vue.nextTick()，将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
 
@@ -333,11 +349,11 @@ new Vue({
 });
 ```
 
-### keep-alive
+## keep-alive
 
 `<keep-alive>` 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。
 
-### transition 过渡
+## transition 过渡
 
     使用<transition></transition>包裹
     v-enter 元素展示,开始过渡瞬间
@@ -351,11 +367,11 @@ new Vue({
       out-in 当前元素先进行过渡，完成之后新元素过渡进入。
       in-out 新元素先进行过渡，完成之后当前元素过渡离开。
 
-### 动态组件
+## 动态组件
 
 `<component is="组件名">` 动态加载组件
 
-### 插槽 slot
+## 插槽 slot
 
 默认插槽不需要定义名字 直接使用 slot 标签就能接收全部。
 
@@ -382,7 +398,7 @@ new Vue({
 </template>
 ```
 
-### extends
+## extends
 
 允许声明扩展另一个组件(可以是一个简单的选项对象或构造函数)，而无需使用 Vue.extend。这主要是为了便于扩展单文件组件。这和 mixins 类似。
 
@@ -392,15 +408,15 @@ new Vue({
   - mixins 可以混入多个 mixin，extends 只能继承一个
   - extends 的优先级高于 mixins 优先级 extend>extends>mixins
 
-### name
+## name
 
 - 允许组件模板递归地调用自身。
 - 指定 name 选项的另一个好处是便于调试。
 
-### `v-pre`
+## v-pre
 
 跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
 
-### `v-once`
+## v-once
 
 只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
