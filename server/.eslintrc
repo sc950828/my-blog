@@ -1,0 +1,40 @@
+{
+  // 配置步骤
+  // 1. 安装eslint npm i eslint -S
+  // 2. 初始化配置文件 .eslintrc .eslintignore 配置相应规则
+
+  // ESLint 一旦发现配置文件中有 "root": true，它就会停止在父级目录中寻找
+  "root": true,
+  // 使用eslint:recommended 所有在 规则页面 被标记为 “” 的规则将会默认开启
+  "extends": "eslint:recommended",
+  //
+  "parserOptions": {
+    "ecmaVersion": 11
+    // "sourceType": "module"
+  },
+  // "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  // "off" 或 0 - 关闭规则
+  // "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
+  // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
+  "rules": {
+    // 缩进
+    "indent": ["error", 2],
+    // 要求或禁止在语句间填充空行
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "var", "next": "return" }
+    ],
+    // 禁止行尾出现空格
+    "no-trailing-spaces": "error",
+    // 强制末尾加分号
+    "semi": "error",
+    // 强制在代码块中开括号前和闭括号后有空格
+    "block-spacing": "error",
+    // 该规则强制在对象字面量、解构赋值 和 import/export 说明符的花括号中使用一致的空格。
+    "object-curly-spacing": ["error", "always"]
+  }
+}

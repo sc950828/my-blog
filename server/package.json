@@ -1,0 +1,36 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "苏纯的个人博客",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "prod": "cross-env NODE_ENV=production node index.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [
+    "苏纯的博客"
+  ],
+  "author": "randy",
+  "license": "ISC",
+  "dependencies": {
+    "ali-oss": "^6.13.2",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-json-error": "^3.1.2",
+    "koa-jwt": "^4.0.0",
+    "koa-parameter": "^3.0.1",
+    "koa-router": "^10.0.0",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.11.18",
+    "nodemailer": "^6.5.0",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.21.0",
+    "nodemon": "^2.0.7"
+  }
+}
