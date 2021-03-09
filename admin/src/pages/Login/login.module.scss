@@ -1,0 +1,19 @@
+// css模块化
+.login-box {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form {
+    width: 400px;
+    padding: 20px;
+
+    .login-remember {
+      float: left;
+    }
+    .login-forget {
+      float: right;
+    }
+  }
+}
