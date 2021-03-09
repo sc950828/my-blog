@@ -8,7 +8,8 @@ const Login = () => {
   };
 
   return (
-    <div className={styles['login-box']}>
+    <div className={styles['login-wrapper']}>
+      <div className={styles['login-title']}>博客后台管理系统</div>
       <Form
         name="normal_login"
         className={styles['login-form']}
@@ -44,9 +45,7 @@ const Login = () => {
         </Form.Item>
   
         <Form.Item>
-          <Button type="primary" htmlType="submit" block>
-            登 录
-          </Button>
+          <Button type="primary" htmlType="submit" block> 登 录</Button>
         </Form.Item>
       </Form>
     </div>
