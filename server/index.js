@@ -55,7 +55,7 @@ const main = async () => {
   routing(app);
 
   // 启动app
-  app.listen(3000, () => console.log("server启动成功"));
+  app.listen(5000, () => console.log("server启动成功"));
 };
 
 main();

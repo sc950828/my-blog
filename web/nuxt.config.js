@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'web',
+    title: '苏纯的个人博客',
     htmlAttrs: {
       lang: 'en',
     },
@@ -14,11 +14,12 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['ant-design-vue/dist/antd.css'],
+  css: ['~/assets/styles/common.less', 'ant-design-vue/dist/antd.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui',
+    '@/plugins/axios',
     { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],
 
@@ -40,7 +41,26 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true, // 表示开启代理
+    prefix: '/api', // 表示给请求url加个前缀 /api
+    credentials: true, // 表示跨域请求时是否需要使用凭证
+  },
+  env: {
+    NODE_ENV: process.env.NODE_ENV,
+  },
+  proxy: {
+    '/api': {
+      target:
+        process.env.NODE_ENV === 'development' // 本地
+          ? 'http://localhost:5000'
+          : 'http://test.simq.org.cn/api', // 生产
+      changeOrigin: true, // 表示是否跨域
+      pathRewrite: {
+        '^/api': '', // 把 /api 替换成 /
+      },
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
