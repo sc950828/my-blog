@@ -1,10 +1,12 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import styles from './login.module.scss';
+import {connect} from 'react-redux'
+import {login} from '../../sotre/actions/creatorUserActions'
 
-const Login = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+const Login = (props) => {
+  const onFinish = (formData) => {
+    props.handleLogin(formData)
   };
 
   return (
@@ -18,17 +20,17 @@ const Login = () => {
         size="large"
       >
         <Form.Item
-          name="username"
+          name="name"
           rules={[{ required: true, message: '请输入用户名' }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入用户名" />
+          <Input prefix={<UserOutlined />} placeholder="请输入用户名" />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[{ required: true, message: '请输入密码' }]}
         >
           <Input.Password
-            prefix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined />}
             placeholder="请输入密码"
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
           />
@@ -52,4 +54,20 @@ const Login = () => {
   );
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    // 因为使用了immutable管理了store数据 需要使用get获取数据 使用set设置数据
+    hasChange: state.get("user").get("userInfo")
+    // hasChange: state.getIn(['password', 'hasChange'])
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin(formData) {
+      dispatch(login(formData))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

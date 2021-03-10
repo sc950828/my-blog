@@ -16,9 +16,9 @@ const {
 // 用户管理某些功能只能是超级管理员才能操作
 router.get("/", tokenTimeVerify, checkIsAdmin, find);
 
-router.get("/:id", tokenTimeVerify, checkIsAdmin, findById);
-
 router.get("/userInfo", getUserInfo);
+
+router.get("/:id", tokenTimeVerify, checkIsAdmin, findById);
 
 router.post("/create", tokenTimeVerify, checkIsAdmin, create);
 

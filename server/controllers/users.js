@@ -37,6 +37,7 @@ class UserCtrl {
 
   // 获取用户信息
   async getUserInfo(ctx) {
+    console.log(111);
     const selectFields =
       "+educations +employments +origin_locations +locations +headline";
     const user = await User.findById(ctx.state.user.id).select(selectFields);
@@ -68,19 +69,26 @@ class UserCtrl {
       name: { type: "string", required: true },
       password: { type: "string", required: true },
     });
-    const user = await User.findOne(ctx.request.body);
+    const { name, password, remember } = ctx.request.body;
+    const user = await User.findOne({ name, password });
     if (!user) {
       ctx.throw(401, "用户名或密码不正确");
     }
-    const { _id, name, is_admin } = user;
+    const { _id, name: _name, is_admin } = user;
     const id = _id.toString();
     const secret = await initSecret();
     // 不设置过期时间, expiresIn: '2h'
-    const token = jsonwebtoken.sign({ id, name, is_admin }, secret);
+    const token = jsonwebtoken.sign({ id, name: _name, is_admin }, secret);
     // redis设置token
     await setAsync(id, token);
-    // 设置token的过期时间为2小时
-    await expireAsync(id, 60 * 60 * 2);
+    // 记住我
+    if(remember) {
+      // 设置token的过期时间为7天
+      await expireAsync(id, 60 * 60 * 24 * 7);
+    } else {
+      // 设置token的过期时间为2小时
+      await expireAsync(id, 60 * 60 * 2);
+    }
     ctx.body = { token };
   }
 

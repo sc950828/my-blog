@@ -1,4 +1,4 @@
-// import Login from './pages/Login';
+import Login from './pages/Login';
 import Password from './pages/Password';
 import { Fragment } from 'react'
 import {Provider} from 'react-redux'
