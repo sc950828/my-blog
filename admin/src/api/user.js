@@ -18,9 +18,28 @@ export const getUserInfo = () => {
 }
 
 // 发送邮件
-export const sendEmail = () => {
+export const sendUpdatePasswordEmail = (data) => {
   return request({
-    url: "/users/userInfo",
-    method: "post"
+    url: "/home/sendUpdatePasswordMail",
+    method: "post",
+    data
+  });
+}
+
+// 验证验证码
+export const verifyCode = (data) => {
+  return request({
+    url: "/users/verifyUpdatePasswordEmailCode",
+    method: "post",
+    data
+  });
+}
+
+// 验证验证码
+export const updatePassword = (data) => {
+  return request({
+    url: "/users/updatePassword",
+    method: "put",
+    data
   });
 }

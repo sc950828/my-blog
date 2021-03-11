@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+// 使用styled-components解决样式冲突问题
 export const PasswordWrapper = styled.section`
   min-height: 100%;
   display: flex;

@@ -11,6 +11,8 @@ const {
   login,
   logout,
   getUserInfo,
+  verifyUpdatePasswordEmailCode,
+  updatePassword
 } = require("../controllers/users");
 
 // 用户管理某些功能只能是超级管理员才能操作
@@ -22,6 +24,8 @@ router.get("/:id", tokenTimeVerify, checkIsAdmin, findById);
 
 router.post("/create", tokenTimeVerify, checkIsAdmin, create);
 
+router.put("/updatePassword", updatePassword);
+
 router.put("/:id", tokenTimeVerify, update);
 
 router.delete("/:id", tokenTimeVerify, checkIsAdmin, del);
@@ -29,5 +33,8 @@ router.delete("/:id", tokenTimeVerify, checkIsAdmin, del);
 router.post("/login", login);
 
 router.post("/logout", tokenTimeVerify, logout);
+
+router.post("/verifyUpdatePasswordEmailCode", verifyUpdatePasswordEmailCode);
+
 
 module.exports = router;

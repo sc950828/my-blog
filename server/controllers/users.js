@@ -1,6 +1,6 @@
 const User = require("../models/users");
 const jsonwebtoken = require("jsonwebtoken");
-const { setAsync, expireAsync, delAsync } = require("../utils/redis");
+const { setAsync, expireAsync, delAsync, getAsync } = require("../utils/redis");
 const { initSecret } = require("../utils/secret");
 
 class UserCtrl {
@@ -37,7 +37,6 @@ class UserCtrl {
 
   // 获取用户信息
   async getUserInfo(ctx) {
-    console.log(111);
     const selectFields =
       "+educations +employments +origin_locations +locations +headline";
     const user = await User.findById(ctx.state.user.id).select(selectFields);
@@ -54,8 +53,8 @@ class UserCtrl {
       password: { type: "string", required: true },
       email: { type: "string", required: true },
     });
-    const { name } = ctx.request.body;
-    const repeatedUser = await User.findOne({ name });
+    const { name, email } = ctx.request.body;
+    const repeatedUser = await User.findOne({ name, email });
     if (repeatedUser) {
       ctx.throw(409, "用户已存在");
     }
@@ -119,6 +118,39 @@ class UserCtrl {
       ctx.throw(404, "用户不存在");
     }
     ctx.status = 204;
+  }
+
+  async verifyUpdatePasswordEmailCode(ctx) {
+    ctx.verifyParams({
+      email: { type: "string", required: true },
+      code: { type: "string", required: true },
+    });
+    const { email, code } = ctx.request.body;
+    // redis设置token
+    const randomCode = await getAsync(email);
+    if(randomCode !== code) {
+      ctx.throw(401, "验证码验证失败");
+      console.log(randomCode);
+      console.log(code);
+    }
+
+    ctx.status = 200;
+  }
+
+  async updatePassword(ctx) {
+    ctx.verifyParams({
+      email: { type: "string", required: true },
+      password: { type: "string", required: true },
+    });
+    const { email, password } = ctx.request.body;
+    const user = await User.findOneAndUpdate({ email }, { password }, {
+      new: true,
+    });
+    if (!user) {
+      ctx.throw(404, "用户不存在");
+    }
+
+    ctx.body = user;
   }
 }
 

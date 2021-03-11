@@ -1,6 +1,7 @@
 const path = require("path");
 const { uploadImg, uploadFile, del } = require("../utils/alioss");
-const { sendEmail } = require("../utils/mail");
+const { sendEmail, sendUpdatePasswordEmail } = require("../utils/mail");
+const { setAsync, expireAsync } = require("../utils/redis");
 
 class HomeCtrl {
   // 上传到本地服务器
@@ -48,6 +49,23 @@ class HomeCtrl {
       text: "内容"
     };
     const results = await sendEmail(option);
+    ctx.body = results;
+  }
+
+  // 找回密码邮件
+  async sendUpdatePasswordMail(ctx) {
+    const { email } = ctx.request.body;
+    // 四位随机数
+    const randomCode = Math.ceil(Math.random() * 10000);
+    // redis设置randomCode
+    await setAsync(email, randomCode);
+    // 设置token的过期时间为5分钟
+    await expireAsync(email, 60 * 5);
+    const option = {
+      toUser: email,
+      code: randomCode,
+    };
+    const results = await sendUpdatePasswordEmail(option);
     ctx.body = results;
   }
 }

@@ -42,7 +42,15 @@ const main = async () => {
 
   const secret = await initSecret();
   // jwt验证 排除静态文件夹和登录接口
-  app.use(jwt({ secret }).unless({ path: [/^\/uploads/, /^\/users\/login/] }));
+  app.use(jwt({ secret }).unless({
+    path: [
+      /^\/uploads/,
+      /^\/users\/login/,
+      /^\/home\/sendUpdatePasswordMail/,
+      /^\/users\/verifyUpdatePasswordEmailCode/,
+      /^\/users\/updatePassword/,
+    ]
+  }));
 
   // 静态文件处理 把路径设为能公开访问的文件夹
   // http://localhost:3000/uploads/xxx获取uploads下的资源

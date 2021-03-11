@@ -29,23 +29,37 @@ export const changeStepAction = (payload) => {
   }
 }
 
-export const sendEmail = (payload) => {
+export const sendUpdatePasswordEmail = (payload) => {
   return {
-    type: actionTypes.SEND_EMAIL,
+    type: actionTypes.SEND_UPDATE_PASSWORD_EMAIL,
     payload
   }
 }
 
-export const sendEmailSuccessed = (payload) => {
+export const sendUpdatePasswordEmailSuccessed = (payload) => {
   return {
-    type: actionTypes.SEND_EMAIL_SUCCESSED,
+    type: actionTypes.SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED,
     payload
   }
 }
 
-export const sendEmailFailed = (payload) => {
+export const sendUpdatePasswordEmailFailed = (payload) => {
   return {
-    type: actionTypes.SEND_EMAIL_FAILED,
+    type: actionTypes.SEND_UPDATE_PASSWORD_EMAIL_FAILED,
+    payload
+  }
+}
+
+export const verifyUpdatePasswordEmailCode = (payload) => {
+  return {
+    type: actionTypes.VERIFY_UPDATE_PASSWORD_CODE,
+    payload
+  }
+}
+
+export const changePassword = (payload) => {
+  return {
+    type: actionTypes.CHANGE_PASSWORD,
     payload
   }
 }

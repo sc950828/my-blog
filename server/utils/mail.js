@@ -22,8 +22,6 @@ const initMail = async () => {
 
 initMail();
 
-
-
 const sendEmail = async (option) => {
   const { fromUser, toUser, subject, text } = option;
   return await transporter.sendMail({
@@ -35,7 +33,19 @@ const sendEmail = async (option) => {
   });
 };
 
+const sendUpdatePasswordEmail = async (option) => {
+  const { toUser, code } = option;
+  return await transporter.sendMail({
+    from: `博客后台管理系统 ${mailUser}`, // sender address
+    to: toUser, // list of receivers
+    subject: "找回密码", // Subject line
+    text: `您的验证码是 ${code}，五分钟内有效。`, // plain text body
+    // html: "<b>Hello world?</b>", // html body
+  });
+};
+
 
 module.exports = {
-  sendEmail
+  sendEmail,
+  sendUpdatePasswordEmail
 };

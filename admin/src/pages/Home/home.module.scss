@@ -1,0 +1,22 @@
+.logo {
+  height: 32px;
+  margin: 14px 12px;
+  // background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.head {
+  background: #fff;
+  padding: 0;
+}
+
+.content {
+  background: #fff;
+  padding: 24px;
+  min-height: calc(100% - 54px);
+  border-radius: 5px;
+}

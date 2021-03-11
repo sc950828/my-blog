@@ -1,20 +1,17 @@
 import { fromJS } from 'immutable'
 import { 
-  LOGIN_SUCCEEDED, 
-  LOGIN_FAILED, 
-  CHANGE_STEP, 
-  SEND_EMAIL_SUCCESSED,
-  SEND_EMAIL_FAILED, 
-  VERIFY_CODE, 
-  UPDATE_PASSWORD } from '../actionTypes'
+  LOGIN_SUCCEEDED,
+  LOGIN_FAILED,
+  CHANGE_STEP,
+  SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED,
+  SEND_UPDATE_PASSWORD_EMAIL_FAILED
+} from '../actionTypes'
 
 // 使用immutable来管理store中的数据
 const defaultState = fromJS({
   userInfo: null,
   current: 0,
-  email: "",
-  code: "",
-  password: ""
+  email: ""
 })
 
 // 纯函数 必须返回全新的对象
@@ -27,16 +24,12 @@ const reducer = (state = defaultState, action) => {
       return state.set("userInfo", payload)
     case CHANGE_STEP:
       return state.set("current", payload)
-    case SEND_EMAIL_SUCCESSED:
+    case SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED:
       return state.set("email", payload)
-    case SEND_EMAIL_FAILED:
+    case SEND_UPDATE_PASSWORD_EMAIL_FAILED:
       return state.set("email", payload)
-    case VERIFY_CODE:
-      return state.set("code", payload)
-    case UPDATE_PASSWORD:
-      return state.set("password", payload)
     default:
-      return defaultState
+      return state
   }
 }
 
