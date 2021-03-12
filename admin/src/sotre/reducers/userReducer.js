@@ -4,14 +4,17 @@ import {
   LOGIN_FAILED,
   CHANGE_STEP,
   SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED,
-  SEND_UPDATE_PASSWORD_EMAIL_FAILED
+  SEND_UPDATE_PASSWORD_EMAIL_FAILED,
+  GET_USER_LISTS_SUCCESSED,
+  GET_USER_LISTS_FAILED
 } from '../actionTypes'
 
 // 使用immutable来管理store中的数据
 const defaultState = fromJS({
   userInfo: null,
   current: 0,
-  email: ""
+  email: "",
+  userLists: []
 })
 
 // 纯函数 必须返回全新的对象
@@ -28,6 +31,10 @@ const reducer = (state = defaultState, action) => {
       return state.set("email", payload)
     case SEND_UPDATE_PASSWORD_EMAIL_FAILED:
       return state.set("email", payload)
+    case GET_USER_LISTS_SUCCESSED:
+      return state.set("userLists", payload)
+    case GET_USER_LISTS_FAILED:
+      return state.set("userLists", payload)
     default:
       return state
   }

@@ -8,7 +8,8 @@ import {
   FileOutlined,
   ProjectOutlined,
   UserOutlined,
-  MessageOutlined
+  MessageOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 
 import styles from './home.module.scss'
@@ -19,6 +20,8 @@ import Article from '../Article'
 import Message from '../Message'
 import Material from '../Material'
 import Project from '../Project'
+import Setting from '../Setting'
+import { connect } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 // const { SubMenu } = Menu;
@@ -44,6 +47,7 @@ class Home extends PureComponent {
 
   render() {
     const { collapsed, path } = this.state;
+    const {userInfo} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -70,6 +74,9 @@ class Home extends PureComponent {
             <Menu.Item key="/message" icon={<MessageOutlined  />}>
               留言管理
             </Menu.Item>
+            <Menu.Item key="/setting" icon={<SettingOutlined  />}>
+              设置管理
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
@@ -80,18 +87,23 @@ class Home extends PureComponent {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className={styles.content}>
-              <Switch>
-                <Route path="/welcome" component={Welcome}></Route>
-                <Route path="/user" component={User}></Route>
-                <Route path="/material" component={Material}></Route>
-                <Route path="/category" component={Category}></Route>
-                <Route path="/article" component={Article}></Route>
-                <Route path="/message" component={Message}></Route>
-                <Route path="/project" component={Project}></Route>
-                <Route path="/">
-                  <Redirect to="/welcome"></Redirect>
-                </Route>
-              </Switch>
+              {
+                userInfo ?
+                  <Switch>
+                    <Route path="/welcome" component={Welcome}></Route>
+                    <Route path="/user" component={User}></Route>
+                    <Route path="/material" component={Material}></Route>
+                    <Route path="/category" component={Category}></Route>
+                    <Route path="/article" component={Article}></Route>
+                    <Route path="/message" component={Message}></Route>
+                    <Route path="/project" component={Project}></Route>
+                    <Route path="/setting" component={Setting}></Route>
+                    <Route path="/">
+                      <Redirect to="/welcome"></Redirect>
+                    </Route>
+                  </Switch> :
+                  <Redirect to="/login"></Redirect>
+              }
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Created by Randy ©2021</Footer>
@@ -101,4 +113,14 @@ class Home extends PureComponent {
   }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+  return {
+    userInfo: 123//state.get("user").get("userInfo")
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

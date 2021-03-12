@@ -1,24 +1,19 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getUserLists } from '../../sotre/actions/creatorUserActions';
+import { getSettingLists } from '../../sotre/actions/creatorSettingActions';
 
-class User extends PureComponent {
+class Setting extends PureComponent {
   constructor(props) {
     super(props)
     this.columns = [
       {
-        title: '姓名',
-        dataIndex: 'name',
+        title: '键',
+        dataIndex: 'key'
       },
       {
-        title: '性别',
-        dataIndex: 'gender',
-        render: text => text === "male" ? "男" : "女"
-      },
-      {
-        title: '邮箱',
-        dataIndex: 'email'
+        title: '值',
+        dataIndex: 'value'
       },
       {
         title: '创建时间',
@@ -28,7 +23,6 @@ class User extends PureComponent {
         title: '操作',
         render: (text, record) => (
           <Space size="middle">
-            <Button type="primary" size="small">查看</Button>
             <Button type="danger" size="small">删除</Button>
           </Space>
         ),
@@ -45,7 +39,7 @@ class User extends PureComponent {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    this.props.handleGetUserLists(params)
+    this.props.handleGetSettingLists(params)
   }
 
   changePageNo = (page, pageSize) => {
@@ -56,7 +50,7 @@ class User extends PureComponent {
       pageNo: page,
       pageSize: pageSize
     }
-    this.props.handleGetUserLists(params)
+    this.props.handleGetSettingLists(params)
   }
 
   changePageSize = (current, size) => {
@@ -67,11 +61,11 @@ class User extends PureComponent {
       pageNo: current,
       pageSize: size
     }
-    this.props.handleGetUserLists(params)
+    this.props.handleGetSettingLists(params)
   }
 
   render() {
-    const {userLists} = this.props
+    const {settingLists} = this.props
     const {pageNo, pageSize} = this.state
     return (
       <section>
@@ -80,13 +74,13 @@ class User extends PureComponent {
           pagination={{
             current: pageNo,
             pageSize,
-            total: userLists.total,
+            total: settingLists.total,
             showSizeChanger: true,
             onChange: this.changePageNo,
             onShowSizeChange: this.changePageSize
           }}
           columns={this.columns}
-          dataSource={userLists.users}
+          dataSource={settingLists.settings}
         />
       </section>
     )
@@ -95,16 +89,16 @@ class User extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    userLists: state.get("user").get("userLists")
+    settingLists: state.get("setting").get("settingLists")
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleGetUserLists(params) {
-      dispatch(getUserLists(params))
+    handleGetSettingLists(params) {
+      dispatch(getSettingLists(params))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(User)
+export default connect(mapStateToProps, mapDispatchToProps)(Setting)

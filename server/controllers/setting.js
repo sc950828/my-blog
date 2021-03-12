@@ -5,11 +5,11 @@ class SettingCtrl {
     const { pageNo = 1, pageSize = 10 } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
-    const tags = await Setting.find()
+    const settings = await Setting.find()
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize);
     const total = await Setting.find().countDocuments();
-    ctx.body = { tags, total, pageNo: _pageNo, pageSize: _pageSize };
+    ctx.body = { settings, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
   async getSetting(ctx) {

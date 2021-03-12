@@ -1,6 +1,3 @@
-import user from './user'
-
-
 const modules = {};
 const requireAll = (r) => {
   r.keys().forEach(key => {

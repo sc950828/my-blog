@@ -43,3 +43,12 @@ export const updatePassword = (data) => {
     data
   });
 }
+
+// 验证验证码
+export const getUserList = (params) => {
+  return request({
+    url: "/users",
+    method: "get",
+    params
+  });
+}

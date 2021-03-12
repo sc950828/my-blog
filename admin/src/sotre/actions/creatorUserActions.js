@@ -63,3 +63,26 @@ export const changePassword = (payload) => {
     payload
   }
 }
+
+export const getUserLists = (payload) => {
+  return {
+    type: actionTypes.GET_USER_LISTS,
+    payload
+  }
+}
+
+
+export const getUserListsSuccessed = (payload) => {
+  return {
+    type: actionTypes.GET_USER_LISTS_SUCCESSED,
+    payload
+  }
+}
+
+
+export const getUserListsFailed = (payload) => {
+  return {
+    type: actionTypes.GET_USER_LISTS_FAILED,
+    payload
+  }
+}

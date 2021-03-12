@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { message } from 'antd';
-import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword } from '../../api/user'
-import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD } from '../actionTypes'
-import {loginSuccessed, loginFailed,sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction} from '../actions/creatorUserActions'
+import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList } from '../../api/user'
+import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS } from '../actionTypes'
+import {loginSuccessed, loginFailed,sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
 
 function* _userLogin(action) {
   try {
@@ -78,11 +78,28 @@ function* changePassword() {
   yield takeLatest(CHANGE_PASSWORD, _changePassword);
 }
 
+function* _getUserLists(action) {
+  try {
+    // 获取用户列表
+    const result = yield call(getUserList, action.payload);
+    // 进入下一步
+    yield put(getUserListsSuccessed(result));
+  } catch (e) {
+    console.error(e)
+    yield put(getUserListsFailed([]));
+  }
+}
+
+function* getUserLists() {
+  yield takeLatest(GET_USER_LISTS, _getUserLists);
+}
+
 const sagas = {
   loginSaga,
   sendEmailSaga,
   verifyEmailCode,
-  changePassword
+  changePassword,
+  getUserLists
 }
 
 export default sagas

@@ -40,6 +40,7 @@ class ArticleCtrl {
     ctx.verifyParams({
       title: { type: "string", required: true },
       content: { type: "string", required: true },
+      category: { type: "string", required: true },
     });
     const { title } = ctx.request.body;
     const repeatedArticle = await Article.findOne({ title });
