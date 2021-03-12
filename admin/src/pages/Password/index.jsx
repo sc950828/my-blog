@@ -3,7 +3,7 @@ import {PureComponent} from 'react'
 import { Steps, Form, Input, Button, } from 'antd';
 import { MailOutlined, CodepenOutlined , LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import {PasswordWrapper, Title, StepWrap, FormWrap} from './style'
-import {changeStepAction, sendUpdatePasswordEmail, verifyUpdatePasswordEmailCode, changePassword} from '../../sotre/actions/creatorUserActions'
+import {changeStepAction, sendUpdatePasswordEmail, verifyUpdatePasswordEmailCode, changePassword} from '../../store/actions/creatorUserActions'
 const { Step } = Steps;
 
 class Password extends PureComponent {

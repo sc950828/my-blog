@@ -1,7 +1,7 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getArticleLists } from '../../sotre/actions/creatorArticleActions';
+import { getArticleLists } from '../../store/actions/creatorArticleActions';
 
 class Article extends PureComponent {
   constructor(props) {

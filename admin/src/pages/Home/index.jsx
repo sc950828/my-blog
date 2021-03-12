@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {Route, Switch, Redirect} from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   HomeOutlined,
@@ -13,19 +12,12 @@ import {
 } from '@ant-design/icons';
 
 import styles from './home.module.scss'
-import Welcome from '../Welcome'
-import User from '../User'
-import Category from '../Category'
-import Article from '../Article'
-import Message from '../Message'
-import Material from '../Material'
-import Project from '../Project'
-import Setting from '../Setting'
 import { connect } from 'react-redux';
-import { getUserInfoAction } from '../../sotre/actions/creatorUserActions';
+import { getUserInfoAction } from '../../store/actions/creatorUserActions';
+// const { SubMenu } = Menu;
+import renderRouter from '../../utils/renderRouter'
 
 const { Header, Content, Footer, Sider } = Layout;
-// const { SubMenu } = Menu;
 
 class Home extends Component {
   constructor(props) {
@@ -33,7 +25,7 @@ class Home extends Component {
     const path = props.history.location.pathname
     this.state = {
       collapsed: false,
-      path: path === "/" ? "/welcome" : path
+      path: path
     };
   }
 
@@ -47,22 +39,22 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const {userInfo, handleGetUserInfo} = this.props
-    console.log(userInfo);
-    if(!userInfo) {
-      handleGetUserInfo()
-    }
+    console.log(222);
+    // const {userInfo, handleGetUserInfo} = this.props
+    // if(!userInfo) {
+    //   handleGetUserInfo()
+    // }
   }
 
   render() {
     const { collapsed, path } = this.state;
-    const {userInfo} = this.props
+    const {userInfo, routes} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className={styles.logo}></div>
           <Menu theme="dark" defaultSelectedKeys={[path]} mode="inline" onClick={this.changeMenu}>
-            <Menu.Item key="/welcome" icon={<HomeOutlined />}>
+            <Menu.Item key="/" icon={<HomeOutlined />}>
               首页
             </Menu.Item>
             <Menu.Item key="/user" icon={<UserOutlined />}>
@@ -92,26 +84,12 @@ class Home extends Component {
           <Header className={styles.head} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>首页</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className={styles.content}>
               {
-                userInfo ?
-                  <Switch>
-                    <Route path="/welcome" component={Welcome}></Route>
-                    <Route path="/user" component={User}></Route>
-                    <Route path="/material" component={Material}></Route>
-                    <Route path="/category" component={Category}></Route>
-                    <Route path="/article" component={Article}></Route>
-                    <Route path="/message" component={Message}></Route>
-                    <Route path="/project" component={Project}></Route>
-                    <Route path="/setting" component={Setting}></Route>
-                    <Route path="/">
-                      <Redirect to="/welcome"></Redirect>
-                    </Route>
-                  </Switch> :
-                  <Redirect to="/login"></Redirect>
+                renderRouter(routes, true)
               }
             </div>
           </Content>
@@ -124,7 +102,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: 123//state.get("user").get("userInfo")
+    userInfo: state.get("user").get("userInfo")
   }
 }
 

@@ -1,7 +1,7 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getSettingLists } from '../../sotre/actions/creatorSettingActions';
+import { getSettingLists } from '../../store/actions/creatorSettingActions';
 
 class Setting extends PureComponent {
   constructor(props) {

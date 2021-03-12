@@ -1,7 +1,7 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getUserLists } from '../../sotre/actions/creatorUserActions';
+import { getUserLists } from '../../store/actions/creatorUserActions';
 
 class User extends PureComponent {
   constructor(props) {

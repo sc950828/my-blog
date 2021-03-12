@@ -1,7 +1,7 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getCategoryLists } from '../../sotre/actions/creatorCategoryActions';
+import { getCategoryLists } from '../../store/actions/creatorCategoryActions';
 
 class Category extends PureComponent {
   constructor(props) {

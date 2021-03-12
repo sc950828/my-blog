@@ -1,22 +1,25 @@
 import { Fragment, PureComponent } from 'react'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
-import Login from './pages/Login';
-import Password from './pages/Password';
-import Home from './pages/Home';
-import sotre from './sotre'
+import renderRouter from './utils/renderRouter'
+import routes from './router'
+import store from './store'
+import { getUserInfoAction } from './store/actions/creatorUserActions'
 
 class App extends PureComponent {
+  componentDidMount() {
+    console.log(store);
+  }
   render() {
+    const userInfo = store.getState().get("user").get("current")
+    if(!userInfo) {
+      console.log(store.dispatch(getUserInfoAction()));
+    }
     return (
-      <Provider store={sotre}>
+      <Provider store={store}>
         <BrowserRouter>
           <Fragment>
-            <Switch>
-              <Route path="/login" component={Login}></Route>
-              <Route path="/password" component={Password}></Route>
-              <Route path="/" component={Home}></Route>
-            </Switch>
+            {renderRouter(routes, true)}
           </Fragment>
         </BrowserRouter>
       </Provider>

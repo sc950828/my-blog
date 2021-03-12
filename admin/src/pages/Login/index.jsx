@@ -3,7 +3,7 @@ import {PureComponent} from 'react'
 import { UserOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import {connect} from 'react-redux'
 import styles from './login.module.scss';
-import {login} from '../../sotre/actions/creatorUserActions'
+import {login} from '../../store/actions/creatorUserActions'
 
 class Login extends PureComponent {
   render() {
