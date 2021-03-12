@@ -1,6 +1,7 @@
 export const LOGIN = "login"
 export const LOGIN_SUCCEEDED = "login_successed"
 export const LOGIN_FAILED = "login_failed"
+export const GET_USER_INFO = "get_user_info"
 export const CHANGE_STEP = "change_step"
 export const SEND_UPDATE_PASSWORD_EMAIL = "send_update_password_email"
 export const SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED = "send_update_password_email_successed"

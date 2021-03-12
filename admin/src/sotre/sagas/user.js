@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { message } from 'antd';
 import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList } from '../../api/user'
-import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS } from '../actionTypes'
-import {loginSuccessed, loginFailed,sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
+import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS, GET_USER_INFO } from '../actionTypes'
+import {loginSuccessed, loginFailed, getUserInfoAction, sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
 
 function* _userLogin(action) {
   try {
@@ -12,19 +12,33 @@ function* _userLogin(action) {
     // 缓存token
     localStorage.setItem("token", token)
     // 获取用户信息
-    const user = yield call(getUserInfo);
-    yield put(loginSuccessed(user));
+    yield put(getUserInfoAction());
     message.success("登录成功")
     // 去首页
     goHome()
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function* loginSaga() {
+  yield takeLatest(LOGIN, _userLogin);
+}
+
+function* _userInfo(action) {
+  try {
+    // 获取用户信息
+    const user = yield call(getUserInfo);
+    // 获取用户信息
+    yield put(loginSuccessed(user));
   } catch (e) {
     console.error(e)
     yield put(loginFailed(null));
   }
 }
 
-function* loginSaga() {
-  yield takeLatest(LOGIN, _userLogin);
+function* userInfoSaga() {
+  yield takeLatest(GET_USER_INFO, _userInfo);
 }
 
 function* _sendEmail(action) {
@@ -96,6 +110,7 @@ function* getUserLists() {
 
 const sagas = {
   loginSaga,
+  userInfoSaga,
   sendEmailSaga,
   verifyEmailCode,
   changePassword,

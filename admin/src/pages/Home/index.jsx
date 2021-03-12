@@ -1,4 +1,4 @@
-import {PureComponent} from 'react'
+import {Component} from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -22,11 +22,12 @@ import Material from '../Material'
 import Project from '../Project'
 import Setting from '../Setting'
 import { connect } from 'react-redux';
+import { getUserInfoAction } from '../../sotre/actions/creatorUserActions';
 
 const { Header, Content, Footer, Sider } = Layout;
 // const { SubMenu } = Menu;
 
-class Home extends PureComponent {
+class Home extends Component {
   constructor(props) {
     super(props)
     const path = props.history.location.pathname
@@ -43,6 +44,14 @@ class Home extends PureComponent {
   changeMenu = ({key}) => {
     this.setState({ path: key });
     this.props.history.push(key)
+  }
+
+  componentDidMount() {
+    const {userInfo, handleGetUserInfo} = this.props
+    console.log(userInfo);
+    if(!userInfo) {
+      handleGetUserInfo()
+    }
   }
 
   render() {
@@ -71,11 +80,11 @@ class Home extends PureComponent {
             <Menu.Item key="/project" icon={<ProjectOutlined  />}>
               项目管理
             </Menu.Item>
-            <Menu.Item key="/message" icon={<MessageOutlined  />}>
-              留言管理
-            </Menu.Item>
             <Menu.Item key="/setting" icon={<SettingOutlined  />}>
               设置管理
+            </Menu.Item>
+            <Menu.Item key="/message" icon={<MessageOutlined  />}>
+              留言管理
             </Menu.Item>
           </Menu>
         </Sider>
@@ -120,7 +129,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    handleGetUserInfo() {
+      dispatch(getUserInfoAction())
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

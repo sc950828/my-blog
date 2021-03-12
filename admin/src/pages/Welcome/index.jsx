@@ -1,9 +1,18 @@
 import {PureComponent} from 'react'
+import {connect} from 'react-redux'
 
 class Welcome extends PureComponent {
+
   render() {
-    return <div>Welcome</div>
+    const {userInfo} = this.props
+    return <div>Welcome {userInfo && userInfo.name}</div>
   }
 }
 
-export default Welcome
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.get("user").get("userInfo")
+  }
+}
+
+export default connect(mapStateToProps, null)(Welcome)

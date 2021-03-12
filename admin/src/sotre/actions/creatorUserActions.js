@@ -22,6 +22,12 @@ export const loginFailed = (payload) => {
   }
 }
 
+export const getUserInfoAction = () => {
+  return {
+    type: actionTypes.GET_USER_INFO
+  }
+}
+
 export const changeStepAction = (payload) => {
   return {
     type: actionTypes.CHANGE_STEP,
