@@ -1,16 +1,18 @@
 const { checkIsAdmin } = require("./help");
-const Category = require("../models/categorys");
+const ArticleCategory = require("../models/articleCategorys");
 const Article = require("../models/articles");
 const Visitor = require("../models/visitors");
 const Tag = require("../models/tags");
 const Material = require("../models/materials");
+const MaterialCategory = require("../models/materialCategorys");
+const Project = require("../models/projects");
 
 module.exports = {
-  async checkCategoryIsOwn(ctx, next) {
+  async checkArticleCategoryIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
     if (!isAdmin) {
-      const category = await Category.findById(ctx.params.id);
+      const category = await ArticleCategory.findById(ctx.params.id);
       if (!category) {
         ctx.throw(404, "类目不存在");
       }
@@ -67,6 +69,21 @@ module.exports = {
     }
     await next();
   },
+  async checkProjectlIsOwn(ctx, next) {
+    const isAdmin = checkIsAdmin(ctx);
+    const userId = ctx.state.user.id;
+    if (!isAdmin) {
+      const project = await Project.findById(ctx.params.id);
+      if (!project) {
+        ctx.throw(404, "项目不存在");
+      }
+      const createBy = project["create_by"].toString();
+      if (createBy !== userId) {
+        ctx.throw(403, "暂无权限");
+      }
+    }
+    await next();
+  },
   async checkMaterialIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
@@ -76,6 +93,21 @@ module.exports = {
         ctx.throw(404, "素材不存在");
       }
       const createBy = material["create_by"].toString();
+      if (createBy !== userId) {
+        ctx.throw(403, "暂无权限");
+      }
+    }
+    await next();
+  },
+  async checkMaterialCategoryIsOwn(ctx, next) {
+    const isAdmin = checkIsAdmin(ctx);
+    const userId = ctx.state.user.id;
+    if (!isAdmin) {
+      const materialCategory = await MaterialCategory.findById(ctx.params.id);
+      if (!materialCategory) {
+        ctx.throw(404, "素材类别不存在");
+      }
+      const createBy = materialCategory["create_by"].toString();
       if (createBy !== userId) {
         ctx.throw(403, "暂无权限");
       }

@@ -1,8 +1,11 @@
 import {PureComponent} from 'react'
-import { Table,Space, Button } from 'antd';
+import { Table, Space, Button, Row, Col, Modal } from 'antd';import {
+  ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { getUserLists } from '../../store/actions/creatorUserActions';
+import { getUserLists, deleteUserAction } from '../../store/actions/creatorUserActions';
+import {HeadWrap} from './style'
 
+const {confirm} = Modal
 class User extends PureComponent {
   constructor(props) {
     super(props)
@@ -12,13 +15,13 @@ class User extends PureComponent {
         dataIndex: 'name',
       },
       {
+        title: '邮箱',
+        dataIndex: 'email'
+      },
+      {
         title: '性别',
         dataIndex: 'gender',
         render: text => text === "male" ? "男" : "女"
-      },
-      {
-        title: '邮箱',
-        dataIndex: 'email'
       },
       {
         title: '创建时间',
@@ -26,19 +29,76 @@ class User extends PureComponent {
       },
       {
         title: '操作',
+        width: 200,
         render: (text, record) => (
           <Space size="middle">
-            <Button type="primary" size="small">查看</Button>
-            <Button type="danger" size="small">删除</Button>
+            <Button type="primary" size="small" onClick={() => this.lookUser(record)}>查看</Button>
+            <Button type="primary" size="small" onClick={() => this.editUser(record)}>编辑</Button>
+            <Button type="danger" size="small" onClick={() => this.deleteUser(record)}>删除</Button>
           </Space>
         ),
       }
     ];
     this.state = {
       pageNo: 1,
-      pageSize: 10
+      pageSize: 10,
+      isModalVisible: false,
+      title: ""
     }
   }
+
+  addUser = () => {
+    this.showModal()
+  }
+
+  lookUser = (record) => {
+    console.log(record);
+  }
+
+  editUser = (record) => {
+    console.log(record);
+  }
+
+  deleteUser = (record) => {
+    console.log(record);
+    const {handleDeleteUser} = this.props
+    confirm({
+      title: '删除用户',
+      icon: <ExclamationCircleOutlined />,
+      content: '确定删除该用户吗？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: "取消",
+      onOk() {
+        handleDeleteUser(record._id)
+        // return new Promise((resolve, reject) => {
+        //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        // }).catch(() => console.log('Oops errors!'));
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  showModal = (isAdd=true) => {
+    this.setState({
+      isModalVisible: true,
+      title: isAdd ? '添加用户' : "编辑用户"
+    })
+  };
+
+  handleOk = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  };
+
+  handleCancel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  };
 
   componentDidMount() {
     const params = {
@@ -75,6 +135,13 @@ class User extends PureComponent {
     const {pageNo, pageSize} = this.state
     return (
       <section>
+        <HeadWrap>
+          <Row>
+            <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}}>
+              <Button type="primary" style={{float: "right"}} onClick={this.addUser}>添加用户</Button>
+            </Col>
+          </Row>
+        </HeadWrap>
         <Table 
           rowKey="_id"
           pagination={{
@@ -88,6 +155,12 @@ class User extends PureComponent {
           columns={this.columns}
           dataSource={userLists.users}
         />
+
+        <Modal title={this.state.title} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </section>
     )
   }
@@ -103,6 +176,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleGetUserLists(params) {
       dispatch(getUserLists(params))
+    },
+    handleDeleteUser(id) {
+      dispatch(deleteUserAction(id))
     }
   }
 }

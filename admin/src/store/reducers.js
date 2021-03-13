@@ -4,15 +4,21 @@ import { combineReducers } from 'redux-immutable'
 import userReducer from './reducers/userReducer'
 import menuReducer from './reducers/menuReducer'
 import settingReducer from './reducers/settingReducer'
-import categoryReducer from './reducers/categoryReducer'
+import articleCategoryReducer from './reducers/articleCategoryReducer'
 import articleReducer from './reducers/articleReducer'
+import materialCategoryReducer from './reducers/materialCategoryReducer'
+import materialReducer from './reducers/materialReducer'
+import projectReducer from './reducers/projectReducer'
 
 const reducers = combineReducers({
   user: userReducer,
   menu: menuReducer,
   setting: settingReducer,
-  category: categoryReducer,
-  article: articleReducer
+  category: articleCategoryReducer,
+  article: articleReducer,
+  materialCategory: materialCategoryReducer,
+  material: materialReducer,
+  project: projectReducer
 })
 
 export default reducers

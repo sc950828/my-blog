@@ -71,7 +71,7 @@ class UserCtrl {
     const { name, password, remember } = ctx.request.body;
     const user = await User.findOne({ name, password });
     if (!user) {
-      ctx.throw(401, "用户名或密码不正确");
+      ctx.throw(400, "用户名或密码不正确");
     }
     const { _id, name: _name, is_admin } = user;
     const id = _id.toString();
@@ -113,7 +113,8 @@ class UserCtrl {
   }
 
   async delete(ctx) {
-    const user = await User.findByIdAndRemove(ctx.params.id);
+    console.log(ctx.params.id);
+    const user = 1;//await User.findByIdAndRemove(ctx.params.id);
     if (!user) {
       ctx.throw(404, "用户不存在");
     }
@@ -129,7 +130,7 @@ class UserCtrl {
     // redis设置token
     const randomCode = await getAsync(email);
     if(randomCode !== code) {
-      ctx.throw(401, "验证码验证失败");
+      ctx.throw(400, "验证码验证失败");
       console.log(randomCode);
       console.log(code);
     }

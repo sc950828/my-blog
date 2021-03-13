@@ -9,10 +9,15 @@ const request = axios.create({
 });
 
 // 异常处理器
-const errorHandler = error => {
+const errorHandler = async error => {
   if (error.response) {
     const {data: {message: errorMessage="", status=""}} = error.response
-    message.error(`${status} ${errorMessage}`)
+    if(status === 401) {
+      await message.error("登录已过期，请重新登录")
+      window.location = "/login"
+    } else {
+      message.error(`${status} ${errorMessage}`)
+    }
   }
   console.error(error.response)
   return Promise.reject(error.response);

@@ -6,12 +6,13 @@ import styles from './login.module.scss';
 import {login} from '../../store/actions/creatorUserActions'
 
 class Login extends PureComponent {
-  render() {
-    const {handleLogin, history} = this.props
 
-    const goPassword = () => {
-      history.push("/password")
-    }
+  goPassword = () => {
+    this.props.history.push("/password")
+  }
+
+  render() {
+    const {handleLogin} = this.props
 
     return (
       <div className={styles['login-wrapper']}>
@@ -44,7 +45,7 @@ class Login extends PureComponent {
               <Checkbox className={styles['login-remember']}>记住我</Checkbox>
             </Form.Item>
             <Form.Item noStyle>
-              <span className={styles['login-forget']} onClick={goPassword}>
+              <span className={styles['login-forget']} onClick={this.goPassword}>
                 忘记密码
               </span>
             </Form.Item>
@@ -70,7 +71,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleLogin(formData){
       formData.goHome = () => {
-        ownProps.history.push("/")
+        if(ownProps.location.state.from) {
+          ownProps.history.replace(ownProps.location.state.from)
+        } else {
+          ownProps.history.replace("/")
+        }
       }
       dispatch(login(formData))
     }

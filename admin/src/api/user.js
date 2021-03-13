@@ -35,7 +35,7 @@ export const verifyCode = (data) => {
   });
 }
 
-// 验证验证码
+// 更新密码
 export const updatePassword = (data) => {
   return request({
     url: "/users/updatePassword",
@@ -44,11 +44,19 @@ export const updatePassword = (data) => {
   });
 }
 
-// 验证验证码
+// 获取用户列表
 export const getUserList = (params) => {
   return request({
     url: "/users",
     method: "get",
     params
+  });
+}
+
+// 删除用户
+export const deleteUser = (id) => {
+  return request({
+    url: `/users/${id}`,
+    method: "delete"
   });
 }

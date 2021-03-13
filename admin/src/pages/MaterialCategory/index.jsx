@@ -1,38 +1,15 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getCategoryLists } from '../../store/actions/creatorCategoryActions';
+import { getMaterialCategoryLists } from '../../store/actions/creatorMaterialCategoryActions';
 
-class Category extends PureComponent {
+class MaterialCategory extends PureComponent {
   constructor(props) {
     super(props)
     this.columns = [
       {
-        title: '标题',
-        dataIndex: 'title'
-      },
-      {
-        title: '描述',
-        dataIndex: 'description'
-      },
-      {
-        title: '图片',
-        dataIndex: 'banner'
-      },
-      {
-        title: '文章数',
-        dataIndex: 'counts'
-      },
-      {
-        title: '浏览量',
-        dataIndex: 'views'
-      },
-      {
-        title: '是否发布',
-        dataIndex: 'is_publish',
-        render: (text, record) => (
-          text ? '已发布' : '未发布'
-        ),
+        title: '素材分类名',
+        dataIndex: 'name'
       },
       {
         title: '创建时间',
@@ -58,7 +35,7 @@ class Category extends PureComponent {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    this.props.handleGetCategoryLists(params)
+    this.props.handleGetMaterialCategoryLists(params)
   }
 
   changePageNo = (page, pageSize) => {
@@ -69,7 +46,7 @@ class Category extends PureComponent {
       pageNo: page,
       pageSize: pageSize
     }
-    this.props.handleGetCategoryLists(params)
+    this.props.handleGetMaterialCategoryLists(params)
   }
 
   changePageSize = (current, size) => {
@@ -80,11 +57,11 @@ class Category extends PureComponent {
       pageNo: current,
       pageSize: size
     }
-    this.props.handleGetCategoryLists(params)
+    this.props.handleGetMaterialCategoryLists(params)
   }
 
   render() {
-    const {categoryLists} = this.props
+    const {MaterialCategoryLists} = this.props
     const {pageNo, pageSize} = this.state
     return (
       <section>
@@ -93,13 +70,13 @@ class Category extends PureComponent {
           pagination={{
             current: pageNo,
             pageSize,
-            total: categoryLists.total,
+            total: MaterialCategoryLists.total,
             showSizeChanger: true,
             onChange: this.changePageNo,
             onShowSizeChange: this.changePageSize
           }}
           columns={this.columns}
-          dataSource={categoryLists.categorys}
+          dataSource={MaterialCategoryLists.MaterialCategorys}
         />
       </section>
     )
@@ -108,16 +85,16 @@ class Category extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    categoryLists: state.get("category").get("categoryLists")
+    MaterialCategoryLists: state.get("materialCategory").get("materialCategoryLists")
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleGetCategoryLists(params) {
-      dispatch(getCategoryLists(params))
+    handleGetMaterialCategoryLists(params) {
+      dispatch(getMaterialCategoryLists(params))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category)
+export default connect(mapStateToProps, mapDispatchToProps)(MaterialCategory)

@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { message } from 'antd';
-import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList } from '../../api/user'
-import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS, GET_USER_INFO } from '../actionTypes'
-import {loginSuccessed, loginFailed, getUserInfoAction, sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
+import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList, deleteUser } from '../../api/user'
+import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS, GET_USER_INFO, DELETE_USER } from '../actionTypes'
+import {loginSuccessed, loginFailed, sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
 
 function* _userLogin(action) {
   try {
@@ -12,7 +12,7 @@ function* _userLogin(action) {
     // 缓存token
     localStorage.setItem("token", token)
     // 获取用户信息
-    yield put(getUserInfoAction());
+    yield _userInfo()
     message.success("登录成功")
     // 去首页
     goHome()
@@ -25,7 +25,7 @@ function* loginSaga() {
   yield takeLatest(LOGIN, _userLogin);
 }
 
-function* _userInfo(action) {
+function* _userInfo() {
   try {
     // 获取用户信息
     const user = yield call(getUserInfo);
@@ -96,7 +96,6 @@ function* _getUserLists(action) {
   try {
     // 获取用户列表
     const result = yield call(getUserList, action.payload);
-    // 进入下一步
     yield put(getUserListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -108,13 +107,27 @@ function* getUserLists() {
   yield takeLatest(GET_USER_LISTS, _getUserLists);
 }
 
+function* _deleteUser(action) {
+  try {
+    // 删除用户
+    yield call(deleteUser, action.payload);
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function* deleteUserSaga() {
+  yield takeLatest(DELETE_USER, _deleteUser);
+}
+
 const sagas = {
   loginSaga,
   userInfoSaga,
   sendEmailSaga,
   verifyEmailCode,
   changePassword,
-  getUserLists
+  getUserLists,
+  deleteUserSaga
 }
 
 export default sagas

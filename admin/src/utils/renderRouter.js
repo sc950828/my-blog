@@ -1,7 +1,8 @@
 import {Switch, Route, Redirect} from "react-router-dom";
 
-const renderRoutes = (routes, authed, authPath = '/login', extraProps = {}, switchProps = {}) =>
-routes ? (
+const renderRoutes = (routes, authPath = '/login', extraProps = {}, switchProps = {}) => {
+  const token = localStorage.getItem("token")
+  return routes ? (
     <Switch {...switchProps}>
       {routes.map((route, i) => ( 
         <Route
@@ -10,8 +11,12 @@ routes ? (
           exact={route.exact}
           strict={route.strict}
           render={props => {
-            if (!route.requiresAuth || authed || route.path === authPath) {
-              return <route.component {...props} {...extraProps} routes={route.routes} />
+            if(token && route.path === authPath) {
+              localStorage.removeItem("token")
+              // return <Redirect to={{ pathname: "/"}} />
+            }
+            if (!route.requiresAuth || token) {
+              return <route.component {...props} {...extraProps} meta={route.meta} routes={route.routes} />
             }
             return <Redirect to={{ pathname: authPath, state: { from: props.location } }} />
           }
@@ -20,5 +25,6 @@ routes ? (
       ))}
     </Switch>
   ) : null;
+}
 
 export default renderRoutes;

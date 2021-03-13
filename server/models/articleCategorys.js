@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-// 类别
-const categorySchema = new Schema(
+// 文章类别
+const articleCategorySchema = new Schema(
   {
     // 标题
     title: { type: String, required: true, trim: true },
@@ -24,4 +24,4 @@ const categorySchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("Category", categorySchema);
+module.exports = model("ArticleCategory", articleCategorySchema);

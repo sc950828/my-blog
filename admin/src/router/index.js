@@ -3,10 +3,11 @@ import Password from '../pages/Password';
 import Home from '../pages/Home';
 import Welcome from '../pages/Welcome'
 import User from '../pages/User'
-import Category from '../pages/Category'
+import ArticleCategory from '../pages/ArticleCategory'
 import Article from '../pages/Article'
 import Message from '../pages/Message'
 import Material from '../pages/Material'
+import MaterialCategory from '../pages/MaterialCategory'
 import Project from '../pages/Project'
 import Setting from '../pages/Setting'
 
@@ -24,7 +25,8 @@ const routes = [
   {
     path: '/',
     component: Home,
-    requiresAuth: true, //需要登陆后才能跳转的页面
+    requiresAuth: false,
+    meta: {title: "首页"},
     routes: [
       {
         path: "/",
@@ -36,10 +38,11 @@ const routes = [
         path: "/user",
         component: User,
         requiresAuth: true, //需要登陆后才能跳转的页面
+        meta: {title: "用户管理"}
       },
       {
-        path: "/category",
-        component: Category,
+        path: "/articleCategory",
+        component: ArticleCategory,
         requiresAuth: true, //需要登陆后才能跳转的页面
       },
       {
@@ -50,6 +53,11 @@ const routes = [
       {
         path: "/message",
         component: Message,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+      },
+      {
+        path: "/materialCategory",
+        component: MaterialCategory,
         requiresAuth: true, //需要登陆后才能跳转的页面
       },
       {

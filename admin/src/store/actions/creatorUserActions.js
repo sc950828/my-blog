@@ -28,6 +28,13 @@ export const getUserInfoAction = () => {
   }
 }
 
+export const deleteUserAction = (payload) => {
+  return {
+    type: actionTypes.DELETE_USER,
+    payload
+  }
+}
+
 export const changeStepAction = (payload) => {
   return {
     type: actionTypes.CHANGE_STEP,

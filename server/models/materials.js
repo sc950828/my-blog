@@ -8,7 +8,7 @@ const materialSchema = new Schema(
     // 链接
     link: { type: String, required: true, trim: true },
     // 属于哪个分类的素材
-    category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
+    material_category: { type: Schema.Types.ObjectId, ref: "MaterialCategory", required: true },
     // 谁创建的素材
     create_by: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },

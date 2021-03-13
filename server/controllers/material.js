@@ -37,10 +37,10 @@ class MaterialCtrl {
   async create(ctx) {
     ctx.verifyParams({
       link: { type: "string", required: true },
-      category: { type: "string", required: true },
+      materialCategory: { type: "string", required: true },
     });
-    const { name, category } = ctx.request.body;
-    const repeatMaterial = await Material.findOne({ name, category });
+    const { name, materialCategory } = ctx.request.body;
+    const repeatMaterial = await Material.findOne({ name, materialCategory });
     if (repeatMaterial) {
       ctx.throw(409, "素材已存在");
     }

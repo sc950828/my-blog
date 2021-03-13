@@ -1,9 +1,9 @@
 import request from "./request";
 
-// 获取分类
-export const getCategoryList = (params) => {
+// 获取项目
+export const getProjectList = (params) => {
   return request({
-    url: "/categorys",
+    url: "/projects",
     method: "get",
     params
   });

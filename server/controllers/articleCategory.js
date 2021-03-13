@@ -1,7 +1,7 @@
-const Category = require("../models/categorys");
+const ArticleCategory = require("../models/articleCategorys");
 const { checkIsAdmin } = require("../utils/help");
 
-class CategoryCtrl {
+class ArticleCategoryCtrl {
   async find(ctx) {
     const { pageNo = 1, pageSize = 10 } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
@@ -17,16 +17,16 @@ class CategoryCtrl {
         query = {};
       }
     }
-    const categorys = await Category.find(query)
+    const articleCategorys = await ArticleCategory.find(query)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("create_by");
-    const total = await Category.find(query).countDocuments();
-    ctx.body = { categorys, total, pageNo: _pageNo, pageSize: _pageSize };
+    const total = await ArticleCategory.find(query).countDocuments();
+    ctx.body = { articleCategorys, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
   async findById(ctx) {
-    const category = await Category.findById(ctx.params.id);
+    const category = await ArticleCategory.findById(ctx.params.id);
     if (!category) {
       ctx.throw(404, "类目不存在");
     }
@@ -39,11 +39,11 @@ class CategoryCtrl {
       description: { type: "string", required: true },
     });
     const { title } = ctx.request.body;
-    const repeatedCategory = await Category.findOne({ title });
-    if (repeatedCategory) {
+    const repeatedArticleCategory = await ArticleCategory.findOne({ title });
+    if (repeatedArticleCategory) {
       ctx.throw(409, "类目已存在");
     }
-    const category = await new Category({
+    const category = await new ArticleCategory({
       ...ctx.request.body,
       create_by: ctx.state.user.id,
     }).save();
@@ -55,7 +55,7 @@ class CategoryCtrl {
       title: { type: "string", required: false },
       description: { type: "string", required: false },
     });
-    const category = await Category.findByIdAndUpdate(
+    const category = await ArticleCategory.findByIdAndUpdate(
       ctx.params.id,
       ctx.request.body,
       {
@@ -69,7 +69,7 @@ class CategoryCtrl {
   }
 
   async delete(ctx) {
-    const category = await Category.findByIdAndRemove(ctx.params.id);
+    const category = await ArticleCategory.findByIdAndRemove(ctx.params.id);
     if (!category) {
       ctx.throw(404, "类目不存在");
     }
@@ -77,4 +77,4 @@ class CategoryCtrl {
   }
 }
 
-module.exports = new CategoryCtrl();
+module.exports = new ArticleCategoryCtrl();

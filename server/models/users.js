@@ -12,7 +12,7 @@ const userSchema = new Schema(
     // 手机
     phone: { type: String, required: false },
     // 头像
-    avatar_url: { type: String, required: false },
+    avatar_url: { type: String, default: "https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_8ec88423ab91c4fb3387aebf37f0364b.jpg" },
     // 是否是管理员否则就是创作者
     is_admin: { type: Boolean, default: false },
     // 性别
@@ -20,7 +20,6 @@ const userSchema = new Schema(
       type: String,
       enum: ["male", "female"],
       default: "male",
-      required: false,
     },
     // 生日
     birthday: { type: Date, required: false },

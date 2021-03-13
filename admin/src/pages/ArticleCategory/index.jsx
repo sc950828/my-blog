@@ -1,35 +1,38 @@
 import {PureComponent} from 'react'
 import { Table,Space, Button } from 'antd';
 import { connect } from 'react-redux';
-import { getProjectLists } from '../../store/actions/creatorProjectActions';
+import { getArticleCategoryLists } from '../../store/actions/creatorArticleCategoryActions';
 
-class Project extends PureComponent {
+class Category extends PureComponent {
   constructor(props) {
     super(props)
     this.columns = [
       {
-        title: '项目名',
-        dataIndex: 'name'
+        title: '标题',
+        dataIndex: 'title'
       },
       {
-        title: '项目链接',
-        dataIndex: 'link'
-      },
-      {
-        title: '项目图',
-        dataIndex: 'banner'
-      },
-      {
-        title: '项目描述',
+        title: '描述',
         dataIndex: 'description'
       },
       {
-        title: '项目开始时间',
-        dataIndex: 'start_date'
+        title: '图片',
+        dataIndex: 'banner'
       },
       {
-        title: '项目结束时间',
-        dataIndex: 'end_date'
+        title: '文章数',
+        dataIndex: 'counts'
+      },
+      {
+        title: '浏览量',
+        dataIndex: 'views'
+      },
+      {
+        title: '是否发布',
+        dataIndex: 'is_publish',
+        render: (text, record) => (
+          text ? '已发布' : '未发布'
+        ),
       },
       {
         title: '创建时间',
@@ -55,7 +58,7 @@ class Project extends PureComponent {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    this.props.handleGetProjectLists(params)
+    this.props.handleGetCategoryLists(params)
   }
 
   changePageNo = (page, pageSize) => {
@@ -66,7 +69,7 @@ class Project extends PureComponent {
       pageNo: page,
       pageSize: pageSize
     }
-    this.props.handleGetProjectLists(params)
+    this.props.handleGetCategoryLists(params)
   }
 
   changePageSize = (current, size) => {
@@ -77,11 +80,11 @@ class Project extends PureComponent {
       pageNo: current,
       pageSize: size
     }
-    this.props.handleGetProjectLists(params)
+    this.props.handleGetCategoryLists(params)
   }
 
   render() {
-    const {ProjectLists} = this.props
+    const {articleCategoryLists} = this.props
     const {pageNo, pageSize} = this.state
     return (
       <section>
@@ -90,13 +93,13 @@ class Project extends PureComponent {
           pagination={{
             current: pageNo,
             pageSize,
-            total: ProjectLists.total,
+            total: articleCategoryLists.total,
             showSizeChanger: true,
             onChange: this.changePageNo,
             onShowSizeChange: this.changePageSize
           }}
           columns={this.columns}
-          dataSource={ProjectLists.Projects}
+          dataSource={articleCategoryLists.categorys}
         />
       </section>
     )
@@ -105,16 +108,16 @@ class Project extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    ProjectLists: state.get("material").get("materialLists")
+    articleCategoryLists: state.get("category").get("articleCategoryLists")
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleGetProjectLists(params) {
-      dispatch(getProjectLists(params))
+    handleGetCategoryLists(params) {
+      dispatch(getArticleCategoryLists(params))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Project)
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

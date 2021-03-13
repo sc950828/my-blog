@@ -13,9 +13,9 @@ import {
 
 import styles from './home.module.scss'
 import { connect } from 'react-redux';
-import { getUserInfoAction } from '../../store/actions/creatorUserActions';
 // const { SubMenu } = Menu;
 import renderRouter from '../../utils/renderRouter'
+import { getUserInfoAction } from '../../store/actions/creatorUserActions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -39,16 +39,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log(222);
-    // const {userInfo, handleGetUserInfo} = this.props
-    // if(!userInfo) {
-    //   handleGetUserInfo()
-    // }
+    const { userInfo, getUserInfo} = this.props
+    if(!userInfo) {
+      getUserInfo()
+    }
   }
 
   render() {
     const { collapsed, path } = this.state;
-    const {userInfo, routes} = this.props
+    const {routes} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -60,22 +59,25 @@ class Home extends Component {
             <Menu.Item key="/user" icon={<UserOutlined />}>
               用户管理
             </Menu.Item>
+            <Menu.Item key="/materialCategory" icon={<FolderOutlined />}>
+              素材分类管理
+            </Menu.Item>
             <Menu.Item key="/material" icon={<PictureOutlined  />}>
               素材管理
             </Menu.Item>
-            <Menu.Item key="/category" icon={<FolderOutlined  />}>
-              分类管理
+            <Menu.Item key="/articleCategory" icon={<FolderOutlined />}>
+              文章分类管理
             </Menu.Item>
             <Menu.Item key="/article" icon={<FileOutlined />}>
               文章管理
             </Menu.Item>
-            <Menu.Item key="/project" icon={<ProjectOutlined  />}>
+            <Menu.Item key="/project" icon={<ProjectOutlined />}>
               项目管理
             </Menu.Item>
-            <Menu.Item key="/setting" icon={<SettingOutlined  />}>
+            <Menu.Item key="/setting" icon={<SettingOutlined />}>
               设置管理
             </Menu.Item>
-            <Menu.Item key="/message" icon={<MessageOutlined  />}>
+            <Menu.Item key="/message" icon={<MessageOutlined />}>
               留言管理
             </Menu.Item>
           </Menu>
@@ -85,11 +87,10 @@ class Home extends Component {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>首页</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className={styles.content}>
               {
-                renderRouter(routes, true)
+                renderRouter(routes)
               }
             </div>
           </Content>
@@ -102,13 +103,13 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.get("user").get("userInfo")
+    userInfo: state.getIn(["user", "userInfo"])
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleGetUserInfo() {
+    getUserInfo() {
       dispatch(getUserInfoAction())
     }
   }
