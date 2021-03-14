@@ -1,6 +1,6 @@
 import {PureComponent} from 'react'
-import { Table, Space, Button, Row, Col, Modal } from 'antd';import {
-  ExclamationCircleOutlined } from '@ant-design/icons';
+import { Table, Space, Button, Row, Col, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getUserLists, deleteUserAction } from '../../store/actions/creatorUserActions';
 import {HeadWrap} from './style'
@@ -71,9 +71,6 @@ class User extends PureComponent {
       cancelText: "取消",
       onOk() {
         handleDeleteUser(record._id)
-        // return new Promise((resolve, reject) => {
-        //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        // }).catch(() => console.log('Oops errors!'));
       },
       onCancel() {
         console.log('Cancel');
@@ -156,7 +153,13 @@ class User extends PureComponent {
           dataSource={userLists.users}
         />
 
-        <Modal title={this.state.title} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+        <Modal
+          okText="确定"
+          cancelText="取消"
+          title={this.state.title}
+          visible={this.state.isModalVisible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>

@@ -1,3 +1,4 @@
+import Dashboard from '../components/Dashboard'
 import Login from '../pages/Login';
 import Password from '../pages/Password';
 import Home from '../pages/Home';
@@ -7,6 +8,7 @@ import ArticleCategory from '../pages/ArticleCategory'
 import Article from '../pages/Article'
 import Message from '../pages/Message'
 import Material from '../pages/Material'
+import OperateMaterial from '../pages/Material/operate.jsx'
 import MaterialCategory from '../pages/MaterialCategory'
 import Project from '../pages/Project'
 import Setting from '../pages/Setting'
@@ -64,6 +66,18 @@ const routes = [
         path: "/material",
         component: Material,
         requiresAuth: true, //需要登陆后才能跳转的页面
+      },
+      {
+        path: "/materialoperate",
+        component: Dashboard,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        routes: [
+          {
+            path: "/materialoperate/:id?",
+            component: OperateMaterial,
+            requiresAuth: true,
+          }
+        ]
       },
       {
         path: "/project",

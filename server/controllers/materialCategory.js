@@ -24,6 +24,23 @@ class MaterialCategoryCtrl {
     ctx.body = { materialCategorys, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
+  async findAll(ctx) {
+    // 默认查自己
+    let query = { create_by: ctx.state.user.id };
+    const isAdmin = checkIsAdmin(ctx);
+    // 传了id查id 没传查所有
+    if (isAdmin) {
+      if (ctx.query.createBy) {
+        query["create_by"] = ctx.query.createBy;
+      } else {
+        query = {};
+      }
+    }
+    const materialCategorys = await MaterialCategory.find(query);
+    const total = await MaterialCategory.find(query).countDocuments();
+    ctx.body = { materialCategorys, total };
+  }
+
   // 保存素材
   async create(ctx) {
     ctx.verifyParams({

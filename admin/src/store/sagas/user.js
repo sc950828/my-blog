@@ -111,6 +111,9 @@ function* _deleteUser(action) {
   try {
     // 删除用户
     yield call(deleteUser, action.payload);
+    message.success("用户删除成功")
+    // 再次获取用户数据
+    yield _getUserLists({})
   } catch (e) {
     console.error(e)
   }

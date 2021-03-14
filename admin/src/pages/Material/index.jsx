@@ -1,7 +1,8 @@
 import {PureComponent} from 'react'
-import { Table,Space, Button } from 'antd';
+import { Table,Space, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { getMaterialLists } from '../../store/actions/creatorMaterialActions';
+import {HeadWrap} from './style'
 
 class Material extends PureComponent {
   constructor(props) {
@@ -60,11 +61,22 @@ class Material extends PureComponent {
     this.props.handleGetMaterialLists(params)
   }
 
+  addMaterial = async () => {
+    this.props.history.push("/materialoperate")
+  }
+
   render() {
     const {MaterialLists} = this.props
     const {pageNo, pageSize} = this.state
     return (
       <section>
+        <HeadWrap>
+          <Row>
+            <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}}>
+              <Button type="primary" style={{float: "right"}} onClick={this.addMaterial}>添加素材</Button>
+            </Col>
+          </Row>
+        </HeadWrap>
         <Table 
           rowKey="_id"
           pagination={{

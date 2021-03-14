@@ -1,34 +1,102 @@
-import {PureComponent} from 'react'
-import { Table,Space, Button } from 'antd';
+import React, {PureComponent} from 'react'
+import { Table,Space, Button, Modal, Row, Col, Form, Input } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { getMaterialCategoryLists } from '../../store/actions/creatorMaterialCategoryActions';
+import { getMaterialCategoryLists, addMaterialCategoryAction, updateMaterialCategoryAction, deleteMaterialCategoryAction } from '../../store/actions/creatorMaterialCategoryActions';
+import {HeadWrap} from './style'
+
+const {confirm} = Modal
 
 class MaterialCategory extends PureComponent {
+  formRef = React.createRef();
+  columns = [
+    {
+      title: '素材分类名',
+      dataIndex: 'name'
+    },
+    {
+      title: '素材个数',
+      dataIndex: 'count'
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createdAt'
+    },
+    {
+      title: '操作',
+      width: 240,
+      render: (text, record) => (
+        <Space size="middle">
+        <Button type="primary" size="small" onClick={() => this.lookMaterialCategory(record)}>查看素材</Button>
+        <Button type="primary" size="small" onClick={() => this.editMaterialCategory(record)}>编辑</Button>
+        <Button type="danger" size="small" onClick={() => this.deleteMaterialCategory(record)}>删除</Button>
+        </Space>
+      ),
+    }
+  ];
+
   constructor(props) {
     super(props)
-    this.columns = [
-      {
-        title: '素材分类名',
-        dataIndex: 'name'
-      },
-      {
-        title: '创建时间',
-        dataIndex: 'createdAt'
-      },
-      {
-        title: '操作',
-        render: (text, record) => (
-          <Space size="middle">
-            <Button type="danger" size="small">删除</Button>
-          </Space>
-        ),
-      }
-    ];
     this.state = {
       pageNo: 1,
-      pageSize: 10
+      pageSize: 10,
+      isAdd: true,
+      id: ""
     }
   }
+
+  addMaterialCategory = async () => {
+    await this.showModal()
+    this.formRef.current.resetFields();
+  }
+
+  lookMaterialCategory = (record) => {
+    console.log(record);
+  }
+
+  editMaterialCategory = async (record) => {
+    await this.showModal(false, record._id)
+    this.formRef.current.setFieldsValue({
+      name: record.name
+    });
+  }
+
+  deleteMaterialCategory = (record) => {
+    console.log(record);
+    const {handleDeleteMaterialCategory} = this.props
+    confirm({
+      title: '删除素材类别',
+      icon: <ExclamationCircleOutlined />,
+      content: '确定删除该素材类别吗？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: "取消",
+      onOk() {
+        handleDeleteMaterialCategory(record._id)
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  showModal = (isAdd=true, id="") => {
+    this.setState({
+      isModalVisible: true,
+      isAdd,
+      id
+    })
+  };
+
+  handleOk = () => {
+    this.formRef.current.submit()
+  };
+
+  handleCancel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  };
 
   componentDidMount() {
     const params = {
@@ -60,24 +128,69 @@ class MaterialCategory extends PureComponent {
     this.props.handleGetMaterialCategoryLists(params)
   }
 
+  onFinish = (formData) => {
+    if(this.state.isAdd) {
+      this.props.handleAddMaterialCategory(formData)
+    } else {
+      formData.id = this.state.id
+      this.props.handleUpdateMaterialCategory(formData)
+    }
+    this.setState({
+      isModalVisible: false
+    })
+  }
+
   render() {
-    const {MaterialCategoryLists} = this.props
+    const {materialCategoryLists} = this.props
     const {pageNo, pageSize} = this.state
     return (
       <section>
+        <HeadWrap>
+          <Row>
+            <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}}>
+              <Button type="primary" style={{float: "right"}} onClick={this.addMaterialCategory}>添加素材分类</Button>
+            </Col>
+          </Row>
+        </HeadWrap>
         <Table 
           rowKey="_id"
           pagination={{
             current: pageNo,
             pageSize,
-            total: MaterialCategoryLists.total,
+            total: materialCategoryLists.total,
             showSizeChanger: true,
             onChange: this.changePageNo,
             onShowSizeChange: this.changePageSize
           }}
           columns={this.columns}
-          dataSource={MaterialCategoryLists.MaterialCategorys}
+          dataSource={materialCategoryLists.materialCategorys}
         />
+
+        <Modal
+          okText="确定"
+          cancelText="取消"
+          title={this.state.isAdd ? '添加素材分类' : '编辑素材分类'}
+          visible={this.state.isModalVisible}
+          maskClosable={false}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}>
+            <Form
+              ref={this.formRef}
+              onFinish={this.onFinish}
+            >
+              <Form.Item
+                label="素材分类名"
+                name="name"
+                rules={[
+                  { required: true, message: '请输入素材分类名' },
+                  { whitespace: true, message: '请输入正确的素材分类名' },
+                  { type: "string", max: 10 , message: '请输入正确的素材分类名(不超过10个字符)' }
+                ]}
+              >
+                <Input placeholder="请输入素材分类名"/>
+              </Form.Item>
+          </Form>
+        </Modal>
       </section>
     )
   }
@@ -85,7 +198,7 @@ class MaterialCategory extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    MaterialCategoryLists: state.get("materialCategory").get("materialCategoryLists")
+    materialCategoryLists: state.get("materialCategory").get("materialCategoryLists")
   }
 }
 
@@ -93,6 +206,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleGetMaterialCategoryLists(params) {
       dispatch(getMaterialCategoryLists(params))
+    },
+    handleAddMaterialCategory(params) {
+      dispatch(addMaterialCategoryAction(params))
+    },
+    handleUpdateMaterialCategory(params) {
+      dispatch(updateMaterialCategoryAction(params))
+    },
+    handleDeleteMaterialCategory(params) {
+      dispatch(deleteMaterialCategoryAction(params))
     }
   }
 }

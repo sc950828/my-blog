@@ -50,7 +50,7 @@ class Home extends Component {
     const {routes} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} breakpoint="lg">
           <div className={styles.logo}></div>
           <Menu theme="dark" defaultSelectedKeys={[path]} mode="inline" onClick={this.changeMenu}>
             <Menu.Item key="/" icon={<HomeOutlined />}>

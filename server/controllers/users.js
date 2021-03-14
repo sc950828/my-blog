@@ -114,7 +114,7 @@ class UserCtrl {
 
   async delete(ctx) {
     console.log(ctx.params.id);
-    const user = 1;//await User.findByIdAndRemove(ctx.params.id);
+    const user = await User.findByIdAndRemove(ctx.params.id);
     if (!user) {
       ctx.throw(404, "用户不存在");
     }
