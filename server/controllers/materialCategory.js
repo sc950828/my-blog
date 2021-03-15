@@ -49,7 +49,7 @@ class MaterialCategoryCtrl {
     const { name } = ctx.request.body;
     const repeatMaterial = await MaterialCategory.findOne({ name,create_by: ctx.state.user.id });
     if (repeatMaterial) {
-      ctx.throw(409, "素材类别已存在");
+      ctx.throw(409, "素材文件夹已存在");
     }
     const materialCategory = await new MaterialCategory({ name: name, create_by: ctx.state.user.id }).save();
     ctx.body = materialCategory;
@@ -69,17 +69,22 @@ class MaterialCategoryCtrl {
       }
     );
     if (!materialCategory) {
-      ctx.throw(409, "素材类别不存在");
+      ctx.throw(404, "素材文件夹不存在");
     }
 
     ctx.body = materialCategory;
   }
 
   async delete(ctx) {
-    const materialCategory = await MaterialCategory.findByIdAndRemove(ctx.params.id);
+    const materialCategory = await MaterialCategory.findById(ctx.params.id);
     if (!materialCategory) {
-      ctx.throw(404, "素材类别不存在");
+      ctx.throw(404, "素材文件夹不存在");
     }
+    if (materialCategory.count > 0) {
+      ctx.throw(409, "素材文件不为空，不能删除");
+    }
+
+    await MaterialCategory.findByIdAndRemove(ctx.params.id);
 
     ctx.status = 204;
   }

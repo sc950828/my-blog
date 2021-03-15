@@ -1,6 +1,7 @@
 import {Switch, Route, Redirect} from "react-router-dom";
+import { Menu, Breadcrumb } from 'antd';
 
-const renderRoutes = (routes, authPath = '/login', extraProps = {}, switchProps = {}) => {
+const renderRouter = (routes, authPath = '/login', extraProps = {}, switchProps = {}) => {
   const token = localStorage.getItem("token")
   return routes ? (
     <Switch {...switchProps}>
@@ -27,4 +28,28 @@ const renderRoutes = (routes, authPath = '/login', extraProps = {}, switchProps 
   ) : null;
 }
 
-export default renderRoutes;
+const renderMenu = (routes) => {
+  let menus = []
+  routes.forEach(item => {
+    if(item.menuShow) {
+      menus.push(<Menu.Item key={item.path} icon={item.meta.icon}>{item.meta.title}</Menu.Item>)
+    }
+  });
+  return menus
+}
+
+const renderBreadcrumb = (routes, path, ) => {
+  let breadcrumbs = []
+  routes.forEach(item => {
+    if(item.path === path) {
+      breadcrumbs.push(<Breadcrumb.Item key={item.path}>{item.meta.title}</Breadcrumb.Item>)
+    }
+  });
+  return breadcrumbs
+}
+
+export{
+  renderRouter,
+  renderMenu,
+  renderBreadcrumb
+}

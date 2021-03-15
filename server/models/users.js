@@ -3,8 +3,10 @@ const { Schema, model } = require("mongoose");
 // 用户
 const userSchema = new Schema(
   {
-    // 姓名
+    // 账号
     name: { type: String, required: true, trim: true },
+    // 姓名
+    nick_name: { type: String, required: false, trim: true },
     // 密码 不想被查询到使用 select: false
     password: { type: String, required: true, select: false },
     // 邮箱

@@ -1,20 +1,8 @@
 import {Component} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  HomeOutlined,
-  PictureOutlined,
-  FolderOutlined,
-  FileOutlined,
-  ProjectOutlined,
-  UserOutlined,
-  MessageOutlined,
-  SettingOutlined
-} from '@ant-design/icons';
-
 import styles from './home.module.scss'
 import { connect } from 'react-redux';
-// const { SubMenu } = Menu;
-import renderRouter from '../../utils/renderRouter'
+import {renderRouter, renderMenu, renderBreadcrumb} from '../../utils/renderRouter'
 import { getUserInfoAction } from '../../store/actions/creatorUserActions';
 import { changePathAction, changeCollapsedAction } from '../../store/actions/creatorMenuActions';
 
@@ -42,10 +30,6 @@ class Home extends Component {
     if(!userInfo) {
       getUserInfo()
     }
-
-    // this.props.history.listen(route => {
-    //   this.setState({ path: route.pathname });
-    // })
   }
 
   render() {
@@ -55,40 +39,14 @@ class Home extends Component {
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} breakpoint="lg">
           <div className={styles.logo}></div>
           <Menu theme="dark" selectedKeys={[path]} mode="inline" onClick={this.changeMenu}>
-            <Menu.Item key="/" icon={<HomeOutlined />}>
-              首页
-            </Menu.Item>
-            <Menu.Item key="/user" icon={<UserOutlined />}>
-              用户管理
-            </Menu.Item>
-            <Menu.Item key="/materialCategory" icon={<FolderOutlined />}>
-              素材文件夹管理
-            </Menu.Item>
-            <Menu.Item key="/material" icon={<PictureOutlined  />}>
-              素材管理
-            </Menu.Item>
-            <Menu.Item key="/articleCategory" icon={<FolderOutlined />}>
-              文章分类管理
-            </Menu.Item>
-            <Menu.Item key="/article" icon={<FileOutlined />}>
-              文章管理
-            </Menu.Item>
-            <Menu.Item key="/project" icon={<ProjectOutlined />}>
-              项目管理
-            </Menu.Item>
-            <Menu.Item key="/setting" icon={<SettingOutlined />}>
-              设置管理
-            </Menu.Item>
-            <Menu.Item key="/message" icon={<MessageOutlined />}>
-              留言管理
-            </Menu.Item>
+            {renderMenu(routes)}
           </Menu>
         </Sider>
         <Layout>
           <Header className={styles.head} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
+              {renderBreadcrumb(routes, path)}
             </Breadcrumb>
             <div className={styles.content}>
               {renderRouter(routes)}

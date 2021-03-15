@@ -1,7 +1,7 @@
 import {Component } from 'react'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
-import renderRouter from './utils/renderRouter'
+import {renderRouter} from './utils/renderRouter'
 import routes from './router'
 import store from './store'
 

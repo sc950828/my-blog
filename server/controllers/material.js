@@ -1,4 +1,5 @@
 const Material = require("../models/materials");
+const MaterialCategory = require("../models/materialCategorys");
 const { checkIsAdmin } = require("../utils/help");
 const { del } = require("../utils/alioss");
 
@@ -44,6 +45,12 @@ class MaterialCtrl {
     });
     const { fileList, materialCategory } = ctx.request.body;
     const materialLists = [];
+
+    const findMaterialCategory = MaterialCategory.findById(materialCategory);
+    if (!findMaterialCategory) {
+      ctx.throw(404, "素材文件夹不存在");
+    }
+
     for (const file of fileList) {
       const { uid, url } = file;
       const material = await new Material({
@@ -52,9 +59,50 @@ class MaterialCtrl {
         material_category: materialCategory,
         create_by: ctx.state.user.id
       }).save();
+
       materialLists.push(material);
     }
+    findMaterialCategory.count += materialLists.length;
+
+    await MaterialCategory.findByIdAndUpdate(
+      materialCategory,
+      { $inc: { count: materialLists.length } },
+      {
+        new: true,
+      }
+    );
+    if (!findMaterialCategory) {
+      ctx.throw(404, "素材文件夹不存在");
+    }
+
     ctx.body = materialLists;
+  }
+
+  async update(ctx) {
+    ctx.verifyParams({
+      materialCategory: { type: "string", required: true },
+    });
+    const { materialCategory } = ctx.request.body;
+    const material = await Material.findById(ctx.params.id);
+    if (!material) {
+      ctx.throw(404, "素材不存在");
+    }
+    const newMaterial = await Material.findByIdAndUpdate(
+      ctx.params.id,
+      { material_category: materialCategory },
+      { new: true }
+    );
+
+    await MaterialCategory.findByIdAndUpdate(
+      material.material_category,
+      { $inc: { count: -1 } }
+    );
+    await MaterialCategory.findByIdAndUpdate(
+      materialCategory,
+      { $inc: { count: 1 } }
+    );
+
+    ctx.body = newMaterial;
   }
 
   async delete(ctx) {
@@ -62,6 +110,14 @@ class MaterialCtrl {
     if (!material) {
       ctx.throw(404, "素材不存在");
     }
+
+    await MaterialCategory.findByIdAndUpdate(
+      material.material_category,
+      { $inc: { count: -1 } },
+      {
+        new: true,
+      }
+    );
 
     // 删除oss上面的相应文件
     await del(material.name);

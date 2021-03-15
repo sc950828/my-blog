@@ -18,6 +18,15 @@ export const addMaterial = (data) => {
   });
 }
 
+// 编辑素材
+export const updateMaterial = (data) => {
+  return request({
+    url: `/materials/${data.id}`,
+    method: "put",
+    data
+  });
+}
+
 // 删除素材
 export const deleteMaterial = (id) => {
   return request({

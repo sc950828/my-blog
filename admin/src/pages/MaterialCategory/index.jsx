@@ -3,6 +3,7 @@ import { Table,Space, Button, Modal, Row, Col, Form, Input } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getMaterialCategoryLists, addMaterialCategoryAction, updateMaterialCategoryAction, deleteMaterialCategoryAction } from '../../store/actions/creatorMaterialCategoryActions';
+import { changePathAction} from '../../store/actions/creatorMenuActions';
 import {HeadWrap} from './style'
 
 const {confirm} = Modal
@@ -20,7 +21,16 @@ class MaterialCategory extends PureComponent {
     },
     {
       title: '创建时间',
-      dataIndex: 'createdAt'
+      dataIndex: 'createdAt',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
+    },{
+      title: '修改时间',
+      dataIndex: 'updatedAt',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
     },
     {
       title: '操作',
@@ -52,6 +62,7 @@ class MaterialCategory extends PureComponent {
   }
 
   lookMaterialCategory = (record) => {
+    this.props.handleChangeMenuPath("/material")
     this.props.history.push({pathname: "/material", state: {materialCategory: record._id}})
   }
 
@@ -215,6 +226,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleDeleteMaterialCategory(params) {
       dispatch(deleteMaterialCategoryAction(params))
+    },
+    handleChangeMenuPath(params) {
+      dispatch(changePathAction(params))
     }
   }
 }

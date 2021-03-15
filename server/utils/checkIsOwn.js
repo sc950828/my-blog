@@ -105,7 +105,7 @@ module.exports = {
     if (!isAdmin) {
       const materialCategory = await MaterialCategory.findById(ctx.params.id);
       if (!materialCategory) {
-        ctx.throw(404, "素材类别不存在");
+        ctx.throw(404, "素材文件夹不存在");
       }
       const createBy = materialCategory["create_by"].toString();
       if (createBy !== userId) {

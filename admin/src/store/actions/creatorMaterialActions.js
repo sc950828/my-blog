@@ -35,3 +35,10 @@ export const deleteMaterial = (payload) => {
     payload
   }
 }
+
+export const updateMaterial = (payload) => {
+  return {
+    type: actionTypes.UPDATE_MATERIAL,
+    payload
+  }
+}

@@ -42,6 +42,7 @@ export const GET_MATERIAL_LISTS_SUCCESSED = "get_material_lists_successed"
 export const GET_MATERIAL_LISTS_FAILED = "get_material_list_failed"
 export const ADD_MATERIAL = "add_material"
 export const DELETE_MATERIAL = "delete_material"
+export const UPDATE_MATERIAL = "update_material"
 
 // material category
 export const GET_MATERIAL_CATEGORY_LISTS = "get_material_category_lists"

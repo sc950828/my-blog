@@ -20,11 +20,21 @@ class Setting extends PureComponent {
     },
     {
       title: '创建时间',
-      dataIndex: 'createdAt'
+      dataIndex: 'createdAt',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
+    },
+    {
+      title: '修改时间',
+      dataIndex: 'updatedAt',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
     },
     {
       title: '操作',
-      width: 200,
+      width: 150,
       render: (text, record) => (
         <Space size="middle">
           <Button type="primary" size="small" onClick={() => {this.editSetting(record)}}>编辑</Button>

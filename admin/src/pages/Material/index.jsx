@@ -1,14 +1,16 @@
-import {PureComponent} from 'react'
-import { Table, Space, Button, Row, Col, Image, Select, Modal } from 'antd';
+import React, {PureComponent} from 'react'
+import { Table, Space, Button, Row, Col, Image, Select, Modal, Form} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { getMaterialLists, deleteMaterial } from '../../store/actions/creatorMaterialActions';
+import { getMaterialLists, deleteMaterial, updateMaterial } from '../../store/actions/creatorMaterialActions';
 import {getAllMaterialCategoryLists} from '../../store/actions/creatorMaterialCategoryActions'
 import {HeadWrap} from './style'
+import {copyLink} from '../../utils/help'
 
 const {confirm} = Modal
 const { Option } = Select;
 class Material extends PureComponent {
+  formRef = React.createRef();
   constructor(props) {
     super(props)
     this.columns = [
@@ -20,18 +22,25 @@ class Material extends PureComponent {
         }
       },
       {
-        title: '素材链接',
-        dataIndex: 'link'
+        title: '素材链接 (点击复制)',
+        dataIndex: 'link',
+        render: (text) => {
+          return <span onClick={copyLink}>{text}</span>
+        }
       },
       {
         title: '创建时间',
-        dataIndex: 'createdAt'
+        dataIndex: 'createdAt',
+        render: (text) => {
+          return new Date(text).toLocaleString()
+        }
       },
       {
         title: '操作',
-        width: 100,
+        width: 200,
         render: (text, record) => (
           <Space size="middle">
+            <Button type="primary" onClick={() => {this.editMaterial(record)}} size="small">调整文件夹</Button>
             <Button type="danger" onClick={() => {this.deleteMaterial(record)}} size="small">删除</Button>
           </Space>
         ),
@@ -40,7 +49,9 @@ class Material extends PureComponent {
     this.state = {
       pageNo: 1,
       pageSize: 10,
-      materialCategory: ""
+      id: "",
+      materialCategory: "",
+      isModalVisible: false
     }
   }
 
@@ -121,7 +132,48 @@ class Material extends PureComponent {
   }
 
   addMaterial = async () => {
-    this.props.history.push("/materialoperate")
+    this.props.history.push("/materialoperate/add")
+  }
+
+  
+  editMaterial = async (record) => {
+    await this.showModal(record._id)
+    this.formRef.current.setFieldsValue({
+      materialCategory: record.material_category
+    });
+  }
+
+  showModal = (id="") => {
+    this.setState({
+      isModalVisible: true,
+      id
+    })
+  };
+
+  handleOk = () => {
+    this.formRef.current.submit()
+  };
+
+  handleCancel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  };
+
+  onFinish = (formData) => {
+    const{id, pageNo, pageSize, materialCategory} = this.state
+    const params = {
+      pageNo,
+      pageSize,
+      materialCategory
+    }
+    formData.params = params
+    formData.id = id
+
+    this.props.handleUpdateMaterial(formData)
+    this.setState({
+      isModalVisible: false
+    })
   }
 
   render() {
@@ -166,6 +218,42 @@ class Material extends PureComponent {
           columns={this.columns}
           dataSource={materialLists.materials}
         />
+
+        <Modal
+          okText="确定"
+          cancelText="取消"
+          title="调整素材文件夹"
+          width={420}
+          visible={this.state.isModalVisible}
+          maskClosable={false}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}>
+            <Form
+              ref={this.formRef}
+              onFinish={this.onFinish}
+            >
+              <Form.Item
+                label="素材文件夹名"
+                name="materialCategory"
+                rules={[
+                  { required: true, message: '请选择素材文件夹名' },
+                ]}
+              >
+                <Select
+                  style={{ width: 200 }}
+                  placeholder="请选择素材文件夹"
+                >
+                  {
+                    allMaterialCategoryLists.materialCategorys && allMaterialCategoryLists.materialCategorys.map((item) => {
+                      return (
+                        <Option key={item._id} value={item._id}>{item.name}</Option>
+                      )
+                    })
+                  }
+                </Select>
+              </Form.Item>
+          </Form>
+        </Modal>
       </section>
     )
   }
@@ -188,6 +276,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleDeleteMaterial(params) {
       dispatch(deleteMaterial(params))
+    },
+    handleUpdateMaterial(params) {
+      dispatch(updateMaterial(params))
     }
   }
 }
