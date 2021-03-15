@@ -16,25 +16,24 @@ import { connect } from 'react-redux';
 // const { SubMenu } = Menu;
 import renderRouter from '../../utils/renderRouter'
 import { getUserInfoAction } from '../../store/actions/creatorUserActions';
+import { changePathAction, changeCollapsedAction } from '../../store/actions/creatorMenuActions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class Home extends Component {
+
   constructor(props) {
     super(props)
-    const path = props.history.location.pathname
-    this.state = {
-      collapsed: false,
-      path: path
-    };
+    const path = this.props.history.location.pathname
+    this.props.handleChangePath(path)
   }
 
   onCollapse = collapsed => {
-    this.setState({ collapsed });
+    this.props.handleChangeCollapsed(collapsed)
   };
 
   changeMenu = ({key}) => {
-    this.setState({ path: key });
+    this.props.handleChangePath(key)
     this.props.history.push(key)
   }
 
@@ -43,16 +42,19 @@ class Home extends Component {
     if(!userInfo) {
       getUserInfo()
     }
+
+    // this.props.history.listen(route => {
+    //   this.setState({ path: route.pathname });
+    // })
   }
 
   render() {
-    const { collapsed, path } = this.state;
-    const {routes} = this.props
+    const {routes, path, collapsed} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} breakpoint="lg">
           <div className={styles.logo}></div>
-          <Menu theme="dark" defaultSelectedKeys={[path]} mode="inline" onClick={this.changeMenu}>
+          <Menu theme="dark" selectedKeys={[path]} mode="inline" onClick={this.changeMenu}>
             <Menu.Item key="/" icon={<HomeOutlined />}>
               首页
             </Menu.Item>
@@ -60,7 +62,7 @@ class Home extends Component {
               用户管理
             </Menu.Item>
             <Menu.Item key="/materialCategory" icon={<FolderOutlined />}>
-              素材分类管理
+              素材文件夹管理
             </Menu.Item>
             <Menu.Item key="/material" icon={<PictureOutlined  />}>
               素材管理
@@ -89,9 +91,7 @@ class Home extends Component {
               <Breadcrumb.Item>首页</Breadcrumb.Item>
             </Breadcrumb>
             <div className={styles.content}>
-              {
-                renderRouter(routes)
-              }
+              {renderRouter(routes)}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Created by Randy ©2021</Footer>
@@ -103,7 +103,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.getIn(["user", "userInfo"])
+    userInfo: state.getIn(["user", "userInfo"]),
+    path: state.getIn(["menu", "path"]),
+    collapsed: state.getIn(["menu", "collapsed"]),
   }
 }
 
@@ -111,6 +113,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserInfo() {
       dispatch(getUserInfoAction())
+    },
+    handleChangePath(path) {
+      dispatch(changePathAction(path))
+    },
+    handleChangeCollapsed(collapsed) {
+      dispatch(changeCollapsedAction(collapsed))
     }
   }
 }

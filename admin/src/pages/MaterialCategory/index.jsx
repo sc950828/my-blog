@@ -11,7 +11,7 @@ class MaterialCategory extends PureComponent {
   formRef = React.createRef();
   columns = [
     {
-      title: '素材分类名',
+      title: '素材文件夹名',
       dataIndex: 'name'
     },
     {
@@ -40,6 +40,7 @@ class MaterialCategory extends PureComponent {
     this.state = {
       pageNo: 1,
       pageSize: 10,
+      isModalVisible: false,
       isAdd: true,
       id: ""
     }
@@ -51,7 +52,7 @@ class MaterialCategory extends PureComponent {
   }
 
   lookMaterialCategory = (record) => {
-    console.log(record);
+    this.props.history.push({pathname: "/material", state: {materialCategory: record._id}})
   }
 
   editMaterialCategory = async (record) => {
@@ -62,12 +63,11 @@ class MaterialCategory extends PureComponent {
   }
 
   deleteMaterialCategory = (record) => {
-    console.log(record);
     const {handleDeleteMaterialCategory} = this.props
     confirm({
-      title: '删除素材类别',
+      title: '删除素材文件夹',
       icon: <ExclamationCircleOutlined />,
-      content: '确定删除该素材类别吗？',
+      content: '确定删除该素材文件夹吗？',
       okText: '确定',
       okType: 'danger',
       cancelText: "取消",
@@ -148,7 +148,7 @@ class MaterialCategory extends PureComponent {
         <HeadWrap>
           <Row>
             <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}}>
-              <Button type="primary" style={{float: "right"}} onClick={this.addMaterialCategory}>添加素材分类</Button>
+              <Button type="primary" style={{float: "right"}} onClick={this.addMaterialCategory}>添加素材文件夹</Button>
             </Col>
           </Row>
         </HeadWrap>
@@ -169,7 +169,7 @@ class MaterialCategory extends PureComponent {
         <Modal
           okText="确定"
           cancelText="取消"
-          title={this.state.isAdd ? '添加素材分类' : '编辑素材分类'}
+          title={this.state.isAdd ? '添加素材文件夹' : '编辑素材文件夹'}
           visible={this.state.isModalVisible}
           maskClosable={false}
           onOk={this.handleOk}
@@ -179,15 +179,15 @@ class MaterialCategory extends PureComponent {
               onFinish={this.onFinish}
             >
               <Form.Item
-                label="素材分类名"
+                label="素材文件夹名"
                 name="name"
                 rules={[
-                  { required: true, message: '请输入素材分类名' },
-                  { whitespace: true, message: '请输入正确的素材分类名' },
-                  { type: "string", max: 10 , message: '请输入正确的素材分类名(不超过10个字符)' }
+                  { required: true, message: '请输入素材文件夹名' },
+                  { whitespace: true, message: '请输入正确的素材文件夹名' },
+                  { type: "string", max: 10 , message: '请输入正确的素材文件夹名(不超过10个字符)' }
                 ]}
               >
-                <Input placeholder="请输入素材分类名"/>
+                <Input placeholder="请输入素材文件夹名"/>
               </Form.Item>
           </Form>
         </Modal>

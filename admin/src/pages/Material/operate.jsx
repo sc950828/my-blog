@@ -1,8 +1,10 @@
-import React, { PureComponent } from 'react';
-import { Upload, Select, Form, Button, Space } from 'antd';
+import React, { PureComponent } from 'react'; 
+import { Upload, Select, Form, Button, Space, Radio } from 'antd';
+import { PlusOutlined  } from '@ant-design/icons';
 import {connect} from 'react-redux'
 import ImgCrop from 'antd-img-crop';
 import {getAllMaterialCategoryLists} from '../../store/actions/creatorMaterialCategoryActions'
+import {addMaterialAction} from '../../store/actions/creatorMaterialActions'
 
 const { Option } = Select;
 class MaterialOperate extends PureComponent{
@@ -11,8 +13,8 @@ class MaterialOperate extends PureComponent{
   constructor(props) {
     super(props)
     this.state = {
-      src: "https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_8ec88423ab91c4fb3387aebf37f0364b.jpg",
-      fileList: []
+      fileList: [],
+      materialType: 16/9
     };
   }
 
@@ -41,8 +43,40 @@ class MaterialOperate extends PureComponent{
     }
   };
 
+  onRemove = (file) => {
+    const files = this.state.fileList.filter(v => v.url !== file.url);
+    this.formRef.current.setFieldsValue({
+      fileList: files
+    });
+    this.setState({fileList: files});
+  }
+
+  onPreview = async file => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise(resolve => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
+
+  onRadioChange = (e) => {
+    this.setState({
+      materialType: e.target.value
+    })
+  }
+
   onFinish = (formData) => {
-    console.log(formData);
+    formData.goMaterial = () => {
+      this.props.history.goBack()
+    }
+    this.props.handleAddMaterial(formData)
   }
 
   render() {
@@ -53,44 +87,68 @@ class MaterialOperate extends PureComponent{
         <Form
           ref={this.formRef}
           onFinish={this.onFinish}
+          initialValues={{materialType: 16/9}}
         >
           <Form.Item
-            label="素材分类名"
+            label="素材文件夹"
             name="materialCategory"
             rules={[
-              { required: true, message: '请选择素材分类' },
+              { required: true, message: '请选择素材文件夹' },
             ]}
           >
             <Select
-              showSearch
               style={{ width: 200 }}
-              placeholder="请选择素材分类"
+              placeholder="请选择素材文件夹"
             >
               {
                 allMaterialCategoryLists.materialCategorys && allMaterialCategoryLists.materialCategorys.map((item) => {
                   return (
-                    <Option key={item._id} value={item.name}>{item.name}</Option>
+                    <Option key={item._id} value={item._id}>{item.name}</Option>
                   )
                 })
               }
             </Select>
           </Form.Item>
           <Form.Item
-            label="上传素材"
-            name="fileList"
+            label="素材裁剪比"
+            name="materialType"
             rules={[
-              { required: true, message: '请选择素材分类' },
+              { required: true, message: '请选择素材裁剪比' },
             ]}
           >
-            <ImgCrop rotate modalTitle="裁剪素材" modalOk="确定" modalCancel="取消">
+            <Radio.Group onChange={this.onRadioChange}>
+              <Radio value={16/9}>16/9</Radio>
+              <Radio value={4/3}>4/3</Radio>
+              <Radio value={2/1}>2/1</Radio>
+              <Radio value={1/1}>1/1</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            label="选择素材图"
+            name="fileList"
+            rules={[
+              { required: true, message: '请选择素材图片' },
+            ]}
+          >
+            <ImgCrop
+              rotate
+              modalTitle="裁剪素材"
+              modalOk="确定"
+              modalCancel="取消"
+              modalWidth="620px"
+              aspect={this.state.materialType}
+              minZoom={0.5}
+            >
               <Upload
                 action="/api/home/ossUploadImg"
                 headers={{Authorization: `Bearer ${token}`}}
                 listType="picture-card"
                 fileList={this.state.fileList}
                 onChange={this.onChange}
+                onRemove={this.onRemove}
+                onPreview={this.onPreview}
               >
-                {this.state.fileList.length < 5 && '+ 选择素材'}
+                {this.state.fileList.length < 5 && <PlusOutlined  />}
               </Upload>
             </ImgCrop>
           </Form.Item>
@@ -116,6 +174,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleGetAllMaterialCategoryLists() {
       dispatch(getAllMaterialCategoryLists())
+    },
+    handleAddMaterial(data) {
+      dispatch(addMaterialAction(data))
     }
   }
 }

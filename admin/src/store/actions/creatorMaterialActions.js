@@ -21,3 +21,17 @@ export const getMaterialListsFailed = (payload) => {
     payload
   }
 }
+
+export const addMaterialAction = (payload) => {
+  return {
+    type: actionTypes.ADD_MATERIAL,
+    payload
+  }
+}
+
+export const deleteMaterial = (payload) => {
+  return {
+    type: actionTypes.DELETE_MATERIAL,
+    payload
+  }
+}

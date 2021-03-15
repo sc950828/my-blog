@@ -8,3 +8,20 @@ export const getMaterialList = (params) => {
     params
   });
 }
+
+// 添加素材
+export const addMaterial = (data) => {
+  return request({
+    url: "/materials",
+    method: "post",
+    data
+  });
+}
+
+// 删除素材
+export const deleteMaterial = (id) => {
+  return request({
+    url: `/materials/${id}`,
+    method: "delete"
+  });
+}

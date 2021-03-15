@@ -1,3 +1,4 @@
+// user
 export const LOGIN = "login"
 export const LOGIN_SUCCEEDED = "login_successed"
 export const LOGIN_FAILED = "login_failed"
@@ -10,18 +11,39 @@ export const SEND_UPDATE_PASSWORD_EMAIL_SUCCESSED = "send_update_password_email_
 export const SEND_UPDATE_PASSWORD_EMAIL_FAILED = "send_update_password_email_failed"
 export const VERIFY_UPDATE_PASSWORD_CODE = "verify_update_password_code"
 export const CHANGE_PASSWORD = "change_password"
-export const CHANGE_PATH = "change_path"
 export const GET_USER_LISTS_SUCCESSED = "get_user_lists_successed"
 export const GET_USER_LISTS_FAILED = "get_user_lists_failed"
+
+// menu
+export const CHANGE_PATH = "change_path"
+export const CHANGE_COLLAPSED = "change_collapsed"
+
+// setting
 export const GET_SETTING_LISTS = "get_setting_lists"
 export const GET_SETTING_LISTS_SUCCESSED = "get_setting_lists_successed"
-export const GET_SETTING_LISTS_FAILED = "get_user_setting_failed"
+export const GET_SETTING_LISTS_FAILED = "get_setting_list_failed"
+export const ADD_SETTING = "add_setting"
+export const UPDATE_SETTING = "update_setting"
+export const DELETE_SETTING = "delete_setting"
+
+// article category
 export const GET_ARTICLE_CATEGORY_LISTS = "get_article_category_lists"
 export const GET_ARTICLE_CATEGORY_LISTS_SUCCESSED = "get_article_category_lists_successed"
-export const GET_ARTICLE_CATEGORY_LISTS_FAILED = "get_user_article_category_failed"
+export const GET_ARTICLE_CATEGORY_LISTS_FAILED = "get_article_category_list_failed"
+
+// article
 export const GET_ARTICLE_LISTS = "get_article_lists"
 export const GET_ARTICLE_LISTS_SUCCESSED = "get_article_lists_successed"
-export const GET_ARTICLE_LISTS_FAILED = "get_user_article_failed"
+export const GET_ARTICLE_LISTS_FAILED = "get_article_list_failed"
+
+// material
+export const GET_MATERIAL_LISTS = "get_material_lists"
+export const GET_MATERIAL_LISTS_SUCCESSED = "get_material_lists_successed"
+export const GET_MATERIAL_LISTS_FAILED = "get_material_list_failed"
+export const ADD_MATERIAL = "add_material"
+export const DELETE_MATERIAL = "delete_material"
+
+// material category
 export const GET_MATERIAL_CATEGORY_LISTS = "get_material_category_lists"
 export const GET_MATERIAL_CATEGORY_LISTS_SUCCESSED = "get_material_category_lists_successed"
 export const GET_MATERIAL_CATEGORY_LISTS_FAILED = "get_material_category_lists_failed"
@@ -31,9 +53,8 @@ export const GET_ALL_MATERIAL_CATEGORY_LISTS_FAILED = "get_all_material_category
 export const ADD_MATERIAL_CATEGORY = "add_material_category"
 export const UPDATE_MATERIAL_CATEGORY = "update_material_category"
 export const DELETE_MATERIAL_CATEGORY = "delete_material_category"
-export const GET_MATERIAL_LISTS = "get_material_lists"
-export const GET_MATERIAL_LISTS_SUCCESSED = "get_material_lists_successed"
-export const GET_MATERIAL_LISTS_FAILED = "get_user_material_failed"
+
+// project
 export const GET_PROJECT_LISTS = "get_project_lists"
 export const GET_PROJECT_LISTS_SUCCESSED = "get_project_lists_successed"
 export const GET_PROJECT_LISTS_FAILED = "get_user_project_failed"

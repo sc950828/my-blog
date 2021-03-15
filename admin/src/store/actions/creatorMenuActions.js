@@ -7,3 +7,10 @@ export const changePathAction = (payload) => {
     payload
   }
 }
+
+export const changeCollapsedAction = (payload) => {
+  return {
+    type: actionTypes.CHANGE_COLLAPSED,
+    payload
+  }
+}

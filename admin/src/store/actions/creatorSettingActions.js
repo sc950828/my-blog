@@ -21,3 +21,24 @@ export const getSettingListsFailed = (payload) => {
     payload
   }
 }
+
+export const addSettingAction = (payload) => {
+  return {
+    type: actionTypes.ADD_SETTING,
+    payload
+  }
+}
+
+export const updateSettingAction = (payload) => {
+  return {
+    type: actionTypes.UPDATE_SETTING,
+    payload
+  }
+}
+
+export const deleteSettingAction = (payload) => {
+  return {
+    type: actionTypes.DELETE_SETTING,
+    payload
+  }
+}
