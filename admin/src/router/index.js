@@ -4,6 +4,7 @@ import Password from '../pages/Password';
 import Home from '../pages/Home';
 import Welcome from '../pages/Welcome'
 import User from '../pages/User'
+import OperateUser from '../pages/User/operate.jsx'
 import ArticleCategory from '../pages/ArticleCategory'
 import Article from '../pages/Article'
 import Message from '../pages/Message'
@@ -46,41 +47,68 @@ const routes = [
         component: Welcome,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "首页", icon: <HomeOutlined />}
+        meta: {title: "首页", icon: <HomeOutlined />, activePath: "/"}
       },
       {
         path: "/user",
         component: User,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "用户管理", icon: <UserOutlined />}
+        meta: {title: "用户管理", icon: <UserOutlined />, activePath: "/user"}
+      },
+      {
+        path: "/useroperate",
+        component: Dashboard,
+        menuShow: false,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        meta: {title: "用户管理", icon: <UserOutlined />, activePath: "/user"},
+        routes: [
+          {
+            path: "/useroperate/add",
+            component: OperateUser,
+            requiresAuth: true,
+            meta: {title: "添加用户", activePath: "/user"}
+          },
+          {
+            path: "/useroperate/edit",
+            component: OperateUser,
+            requiresAuth: true,
+            meta: {title: "编辑用户", activePath: "/user"}
+          },
+          {
+            path: "/useroperate/look",
+            component: OperateUser,
+            requiresAuth: true,
+            meta: {title: "查看用户", activePath: "/user"}
+          }
+        ]
       },
       {
         path: "/materialCategory",
         component: MaterialCategory,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "素材文件夹管理", icon: <FolderOutlined />}
+        meta: {title: "素材文件夹管理", icon: <FolderOutlined />, activePath: "/materialCategory"}
       },
       {
         path: "/material",
         component: Material,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "素材管理", icon: <PictureOutlined />}
+        meta: {title: "素材管理", icon: <PictureOutlined />, activePath: "/material"}
       },
       {
         path: "/materialoperate",
         component: Dashboard,
         requiresAuth: true, //需要登陆后才能跳转的页面
         menuShow: false,
-        meta: {title: "素材管理", icon: <PictureOutlined />},
+        meta: {title: "素材管理", icon: <PictureOutlined />, activePath: "/material"},
         routes: [
           {
             path: "/materialoperate/add",
             component: OperateMaterial,
             requiresAuth: true,
-            meta: {title: "添加素材"}
+            meta: {title: "添加素材", activePath: "/material"}
           }
         ]
       },
@@ -89,35 +117,35 @@ const routes = [
         menuShow: true,
         component: ArticleCategory,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "文章分类管理", icon: <FolderOutlined />}
+        meta: {title: "文章分类管理", icon: <FolderOutlined />, activePath: "/articleCategory"}
       },
       {
         path: "/article",
         component: Article,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "文章管理", icon: <FileOutlined />}
+        meta: {title: "文章管理", icon: <FileOutlined />, activePath: "/article"}
       },
       {
         path: "/project",
         component: Project,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "项目管理", icon: <ProjectOutlined />}
+        meta: {title: "项目管理", icon: <ProjectOutlined />, activePath: "/project"}
       },
       {
         path: "/message",
         component: Message,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "留言管理", icon: <MessageOutlined />}
+        meta: {title: "留言管理", icon: <MessageOutlined />, activePath: "/message"}
       },
       {
         path: "/setting",
         component: Setting,
         menuShow: true,
         requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "设置管理", icon: <SettingOutlined />}
+        meta: {title: "设置管理", icon: <SettingOutlined />, activePath: "/setting"}
       },
     ]
   }

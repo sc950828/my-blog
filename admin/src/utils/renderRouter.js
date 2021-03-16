@@ -38,18 +38,58 @@ const renderMenu = (routes) => {
   return menus
 }
 
-const renderBreadcrumb = (routes, path, ) => {
-  let breadcrumbs = []
-  routes.forEach(item => {
-    if(item.path === path) {
-      breadcrumbs.push(<Breadcrumb.Item key={item.path}>{item.meta.title}</Breadcrumb.Item>)
+const formatPath = (path) => {
+  const pathArr = path.split("/").slice(1)
+  const arr = []
+  let i = 0
+  for (let index = 0; index < pathArr.length; index++) {
+    let newPath = ""
+    for (let index = 0; index <= i; index++) {
+      newPath += `/${pathArr[index]}`
     }
+    i++
+    arr.push(newPath)
+  }
+
+  return arr
+}
+
+const renderBreadcrumb = (routes, path) => {
+  const arr = formatPath(path)
+  const flattenRoutes = flatten(routes)
+  let breadcrumbs = []
+  flattenRoutes.forEach(item => {
+    arr.forEach(path => {
+      if(item.path === path) {
+        breadcrumbs.push(<Breadcrumb.Item key={item.path}>{item.meta.title}</Breadcrumb.Item>)
+      }
+    })
   });
   return breadcrumbs
+}
+
+// 数组扁平化
+const flatten = (arr) => {
+  return arr.reduce((result, item)=> {
+    return result.concat(Array.isArray(item.routes) ? [item].concat(flatten(item.routes)) : item);
+  }, []);
+}
+
+const findCurrentRoute = (routes, path) => {
+  const flattenRoutes = flatten(routes)
+  let activePath = ""
+  flattenRoutes.forEach(route => {
+    if(path === route.path) {
+      activePath = route.meta.activePath
+    }
+  })
+
+  return activePath
 }
 
 export{
   renderRouter,
   renderMenu,
-  renderBreadcrumb
+  renderBreadcrumb,
+  findCurrentRoute
 }

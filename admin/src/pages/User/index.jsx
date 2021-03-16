@@ -62,15 +62,17 @@ class User extends PureComponent {
   }
 
   addUser = () => {
-    this.showModal()
+    this.props.history.push("/useroperate/add")
   }
 
   lookUser = (record) => {
     console.log(record);
+    this.props.history.push("/useroperate/look")
   }
 
   editUser = (record) => {
     console.log(record);
+    this.props.history.push("/useroperate/edit")
   }
 
   deleteUser = (record) => {
@@ -91,25 +93,6 @@ class User extends PureComponent {
       },
     });
   }
-
-  showModal = (isAdd=true) => {
-    this.setState({
-      isModalVisible: true,
-      title: isAdd ? '添加用户' : "编辑用户"
-    })
-  };
-
-  handleOk = () => {
-    this.setState({
-      isModalVisible: false
-    })
-  };
-
-  handleCancel = () => {
-    this.setState({
-      isModalVisible: false
-    })
-  };
 
   componentDidMount() {
     const params = {
@@ -166,18 +149,6 @@ class User extends PureComponent {
           columns={this.columns}
           dataSource={userLists.users}
         />
-
-        <Modal
-          okText="确定"
-          cancelText="取消"
-          title={this.state.title}
-          visible={this.state.isModalVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
       </section>
     )
   }

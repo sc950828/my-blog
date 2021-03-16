@@ -2,19 +2,13 @@ import {Component} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import styles from './home.module.scss'
 import { connect } from 'react-redux';
-import {renderRouter, renderMenu, renderBreadcrumb} from '../../utils/renderRouter'
+import {renderRouter, renderMenu, renderBreadcrumb, findCurrentRoute} from '../../utils/renderRouter'
 import { getUserInfoAction } from '../../store/actions/creatorUserActions';
 import { changePathAction, changeCollapsedAction } from '../../store/actions/creatorMenuActions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class Home extends Component {
-
-  constructor(props) {
-    super(props)
-    const path = this.props.history.location.pathname
-    this.props.handleChangePath(path)
-  }
 
   onCollapse = collapsed => {
     this.props.handleChangeCollapsed(collapsed)
@@ -26,14 +20,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const { userInfo, getUserInfo} = this.props
+    const { userInfo, getUserInfo, routes, location} = this.props
     if(!userInfo) {
       getUserInfo()
     }
+    
+    const path = findCurrentRoute(routes, location.pathname)
+    this.props.handleChangePath(path)
   }
 
   render() {
-    const {routes, path, collapsed} = this.props
+    const {routes, path, collapsed, location} = this.props
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} breakpoint="lg">
@@ -46,7 +43,7 @@ class Home extends Component {
           <Header className={styles.head} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              {renderBreadcrumb(routes, path)}
+              {renderBreadcrumb(routes, location.pathname)}
             </Breadcrumb>
             <div className={styles.content}>
               {renderRouter(routes)}

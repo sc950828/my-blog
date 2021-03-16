@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'; 
-import { Upload, Select, Form, Button, Space, Radio } from 'antd';
-import { PlusOutlined  } from '@ant-design/icons';
+import { Upload, Select, Form, Button, Space, Radio, Modal, Image } from 'antd';
+import { UploadOutlined  } from '@ant-design/icons';
 import {connect} from 'react-redux'
 import ImgCrop from 'antd-img-crop';
 import {getAllMaterialCategoryLists} from '../../store/actions/creatorMaterialCategoryActions'
@@ -10,11 +10,29 @@ const { Option } = Select;
 class MaterialOperate extends PureComponent{
   formRef = React.createRef();
 
+  layout = {
+    labelCol: {
+      span: 4,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+
+  
+  tailLayout = {
+    wrapperCol: {
+      offset: 4
+    },
+  };
+
   constructor(props) {
     super(props)
     this.state = {
       fileList: [],
-      materialType: 16/9
+      materialType: 16/9,
+      isModalVisible: false,
+      image: ""
     };
   }
 
@@ -52,18 +70,10 @@ class MaterialOperate extends PureComponent{
   }
 
   onPreview = async file => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
+    this.setState({
+      image: file.url,
+      isModalVisible: true
+    })
   };
 
   onRadioChange = (e) => {
@@ -79,12 +89,25 @@ class MaterialOperate extends PureComponent{
     this.props.handleAddMaterial(formData)
   }
 
+  handleCancel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
+
+  handleOk = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
+
   render() {
     const {allMaterialCategoryLists, history} = this.props
     const token = localStorage.getItem("token")
     return (
       <div>
         <Form
+          {...this.layout}
           ref={this.formRef}
           onFinish={this.onFinish}
           initialValues={{materialType: 16/9}}
@@ -96,10 +119,7 @@ class MaterialOperate extends PureComponent{
               { required: true, message: '请选择素材文件夹' },
             ]}
           >
-            <Select
-              style={{ width: 200 }}
-              placeholder="请选择素材文件夹"
-            >
+            <Select placeholder="请选择素材文件夹">
               {
                 allMaterialCategoryLists.materialCategorys && allMaterialCategoryLists.materialCategorys.map((item) => {
                   return (
@@ -119,7 +139,9 @@ class MaterialOperate extends PureComponent{
             <Radio.Group onChange={this.onRadioChange}>
               <Radio value={16/9}>16/9</Radio>
               <Radio value={4/3}>4/3</Radio>
+              <Radio value={3/4}>3/4</Radio>
               <Radio value={2/1}>2/1</Radio>
+              <Radio value={1/2}>1/2</Radio>
               <Radio value={1/1}>1/1</Radio>
             </Radio.Group>
           </Form.Item>
@@ -142,23 +164,35 @@ class MaterialOperate extends PureComponent{
               <Upload
                 action="/api/home/ossUploadImg"
                 headers={{Authorization: `Bearer ${token}`}}
-                listType="picture-card"
+                listType="picture"
                 fileList={this.state.fileList}
                 onChange={this.onChange}
                 onRemove={this.onRemove}
                 onPreview={this.onPreview}
               >
-                {this.state.fileList.length < 5 && <PlusOutlined  />}
+                {this.state.fileList.length < 5 && <Button block icon={<UploadOutlined />}>点击选择素材</Button>}
               </Upload>
             </ImgCrop>
           </Form.Item>
-          <Form.Item>
+          <Form.Item {...this.tailLayout}>
             <Space size="middle">
               <Button onClick={()=>{history.goBack()}}>取消</Button>
               <Button type="primary" htmlType="submit">保存</Button>
             </Space>
           </Form.Item>
         </Form>
+
+        <Modal
+          okText="确定"
+          cancelText="取消"
+          title="预览"
+          visible={this.state.isModalVisible}
+          maskClosable={false}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+            <Image width={472} src={this.state.image}></Image>
+        </Modal>
       </div>
     )
   }
