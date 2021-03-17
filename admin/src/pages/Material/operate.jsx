@@ -12,17 +12,22 @@ class MaterialOperate extends PureComponent{
 
   layout = {
     labelCol: {
-      span: 4,
+      xxl: {span: 8},
+      lg: {span: 6},
+      sm: {span: 4},
     },
     wrapperCol: {
-      span: 16,
+      xxl: {span: 8},
+      lg: {span: 12},
+      sm: {span: 20},
     },
   };
 
-  
   tailLayout = {
     wrapperCol: {
-      offset: 4
+      xxl: {offset: 8},
+      lg: {offset: 6},
+      sm: {offset: 4},
     },
   };
 

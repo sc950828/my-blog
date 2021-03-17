@@ -22,7 +22,7 @@ router.get("/userInfo", getUserInfo);
 
 router.get("/:id", tokenTimeVerify, checkIsAdmin, findById);
 
-router.post("/create", tokenTimeVerify, checkIsAdmin, create);
+router.post("/", tokenTimeVerify, checkIsAdmin, create);
 
 router.put("/updatePassword", updatePassword);
 

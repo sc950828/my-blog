@@ -28,7 +28,7 @@ class UserCtrl {
   }
 
   async findById(ctx) {
-    const user = await User.findById(ctx.params.id);
+    const user = await User.findById(ctx.params.id).select("+password");
     if (!user) {
       ctx.throw(404, "用户不存在");
     }
@@ -50,15 +50,21 @@ class UserCtrl {
   async create(ctx) {
     ctx.verifyParams({
       name: { type: "string", required: true },
+      nickName: { type: "string", required: true },
       password: { type: "string", required: true },
       email: { type: "string", required: true },
+      gender: { type: "string", required: true },
     });
-    const { name, email } = ctx.request.body;
+    const  { name, nickName: nick_name, gender, email, password } = ctx.request.body;
     const repeatedUser = await User.findOne({ name, email });
     if (repeatedUser) {
       ctx.throw(409, "用户已存在");
     }
-    const user = await new User(ctx.request.body).save();
+    const user = await new User(
+      {
+        name, nick_name, password, gender, email
+      },
+    ).save();
     ctx.body = user;
   }
 
@@ -98,14 +104,23 @@ class UserCtrl {
 
   async update(ctx) {
     ctx.verifyParams({
-      name: { type: "string", required: false },
-      password: { type: "string", required: false },
-      locations: { type: "array", itemType: "string", required: false },
-      employments: { type: "array", itemType: "object", required: false },
+      id: { type: "string", required: true },
+      name: { type: "string", required: true },
+      nickName: { type: "string", required: true },
+      password: { type: "string", required: true },
+      email: { type: "string", required: true },
+      gender: { type: "string", required: true },
     });
-    const user = await User.findByIdAndUpdate(ctx.params.id, ctx.request.body, {
-      new: true,
-    });
+    const  { name, nickName: nick_name, gender, email, password } = ctx.request.body;
+    const user = await User.findByIdAndUpdate(
+      ctx.params.id,
+      {
+        name, nick_name, password, gender, email
+      },
+      {
+        new: true,
+      }
+    );
     if (!user) {
       ctx.throw(404, "用户不存在");
     }

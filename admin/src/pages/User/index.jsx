@@ -15,7 +15,7 @@ class User extends PureComponent {
         dataIndex: 'name',
       },
       {
-        title: '姓名',
+        title: '昵称',
         dataIndex: 'nick_name',
       },
       {
@@ -66,17 +66,20 @@ class User extends PureComponent {
   }
 
   lookUser = (record) => {
-    console.log(record);
-    this.props.history.push("/useroperate/look")
+    this.props.history.push({
+      pathname: "/useroperate/look",
+      state: {id: record._id, isLook: true}
+    })
   }
 
   editUser = (record) => {
-    console.log(record);
-    this.props.history.push("/useroperate/edit")
+    this.props.history.push({
+      pathname: "/useroperate/edit",
+      state: {id: record._id}
+    })
   }
 
   deleteUser = (record) => {
-    console.log(record);
     const {handleDeleteUser} = this.props
     confirm({
       title: '删除用户',

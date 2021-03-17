@@ -28,9 +28,44 @@ export const getUserInfoAction = () => {
   }
 }
 
+export const getUserInfoByIdAction = (payload) => {
+  return {
+    type: actionTypes.GET_USER_INFO_BY_ID,
+    payload
+  }
+}
+
+export const getUserInfoByIdSuccessed = (payload) => {
+  return {
+    type: actionTypes.GET_USER_INFO_BY_ID_SUCCESSED,
+    payload
+  }
+}
+
+export const getUserInfoByIdFailed = (payload) => {
+  return {
+    type: actionTypes.GET_USER_INFO_BY_ID_FAILED,
+    payload
+  }
+}
+
 export const deleteUserAction = (payload) => {
   return {
     type: actionTypes.DELETE_USER,
+    payload
+  }
+}
+
+export const addUserAction = (payload) => {
+  return {
+    type: actionTypes.ADD_USER,
+    payload
+  }
+}
+
+export const updateUserAction = (payload) => {
+  return {
+    type: actionTypes.UPDATE_USER,
     payload
   }
 }

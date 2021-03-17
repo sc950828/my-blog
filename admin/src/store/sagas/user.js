@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { message } from 'antd';
-import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList, deleteUser } from '../../api/user'
-import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS, GET_USER_INFO, DELETE_USER } from '../actionTypes'
-import {loginSuccessed, loginFailed, sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed} from '../actions/creatorUserActions'
+import { login, getUserInfo, sendUpdatePasswordEmail, verifyCode, updatePassword, getUserList, deleteUser, addUser, updateUser, getUserInfoById } from '../../api/user'
+import { LOGIN, SEND_UPDATE_PASSWORD_EMAIL, VERIFY_UPDATE_PASSWORD_CODE, CHANGE_PASSWORD, GET_USER_LISTS, GET_USER_INFO, DELETE_USER, ADD_USER, UPDATE_USER, GET_USER_INFO_BY_ID } from '../actionTypes'
+import {loginSuccessed, loginFailed, sendUpdatePasswordEmailSuccessed, sendUpdatePasswordEmailFailed, changeStepAction, getUserListsSuccessed, getUserListsFailed, getUserInfoByIdSuccessed, getUserInfoByIdFailed} from '../actions/creatorUserActions'
 
 function* _userLogin(action) {
   try {
@@ -39,6 +39,23 @@ function* _userInfo() {
 
 function* userInfoSaga() {
   yield takeLatest(GET_USER_INFO, _userInfo);
+}
+
+function* _userInfoById(action) {
+  try {
+    const {id, setFormData} = action.payload
+    // 获取用户信息
+    const user = yield call(getUserInfoById, id);
+    yield put(getUserInfoByIdSuccessed(user));
+    setFormData()
+  } catch (e) {
+    console.error(e)
+    yield put(getUserInfoByIdFailed(null));
+  }
+}
+
+function* userInfoByIdSaga() {
+  yield takeLatest(GET_USER_INFO_BY_ID, _userInfoById);
 }
 
 function* _sendEmail(action) {
@@ -123,14 +140,51 @@ function* deleteUserSaga() {
   yield takeLatest(DELETE_USER, _deleteUser);
 }
 
+function* _addUser(action) {
+  try {
+    // 添加用户
+    const {goUserList, name, nickName, password, email, gender} = action.payload
+    yield call(addUser, {name, nickName, password, email, gender});
+    message.success("添加用户成功")
+    // 返回列表
+    goUserList()
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function* addUserSaga() {
+  yield takeLatest(ADD_USER, _addUser);
+}
+
+function* _updateUser(action) {
+  try {
+    // 编辑用户
+    const {goUserList, id, name, nickName, password, email, gender} = action.payload
+    yield call(updateUser, {id, name, nickName, password, email, gender});
+    message.success("编辑用户成功")
+    // 返回列表
+    goUserList()
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function* updateUserSaga() {
+  yield takeLatest(UPDATE_USER, _updateUser);
+}
+
 const sagas = {
   loginSaga,
   userInfoSaga,
+  userInfoByIdSaga,
   sendEmailSaga,
   verifyEmailCode,
   changePassword,
   getUserLists,
-  deleteUserSaga
+  deleteUserSaga,
+  addUserSaga,
+  updateUserSaga,
 }
 
 export default sagas

@@ -17,6 +17,14 @@ export const getUserInfo = () => {
   });
 }
 
+// 获取用户信息通过id
+export const getUserInfoById = (id) => {
+  return request({
+    url: `/users/${id}`,
+    method: "get"
+  });
+}
+
 // 发送邮件
 export const sendUpdatePasswordEmail = (data) => {
   return request({
@@ -58,5 +66,23 @@ export const deleteUser = (id) => {
   return request({
     url: `/users/${id}`,
     method: "delete"
+  });
+}
+
+// 添加用户
+export const addUser = (data) => {
+  return request({
+    url: "/users",
+    method: "post",
+    data
+  });
+}
+
+// 编辑用户
+export const updateUser = (data) => {
+  return request({
+    url: `/users/${data.id}`,
+    method: "put",
+    data
   });
 }
