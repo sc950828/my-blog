@@ -1,0 +1,141 @@
+<template>
+  <div class="home-wrapper">
+    <div class="banner">
+      <img
+        src="https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_b4ecd0428bb9577059e9151bcb045c08.jpg"
+      />
+      <div class="user-info">
+        <div class="avatar-name">
+          <a-avatar size="large" :src="userInfo.avatar_url" />
+          <div class="name-job">
+            <div class="name">{{ userInfo.nick_name }}</div>
+            <div class="job">{{ userInfo.job }}</div>
+          </div>
+        </div>
+        <div class="info">
+          <div class="item-box">
+            <div class="item">
+              <a-icon type="wechat" />
+              <span class="value">{{ userInfo.wechat }}</span>
+            </div>
+            <div class="item">
+              <a-icon type="mail" theme="filled" />
+              <span class="value">{{ userInfo.email }}</span>
+            </div>
+          </div>
+          <div class="item-box">
+            <div class="item">
+              <a-icon type="qq" /> <span class="value">{{ userInfo.qq }}</span>
+            </div>
+            <div v-if="userInfo.phone" class="item">
+              <a-icon type="phone" theme="filled" />
+              <span class="value">{{ userInfo.phone }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="introduction" v-html="userInfo.introduction.htmlValue"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  async asyncData({ app }) {
+    const { data: userInfo } = await app.$axios.get(`/users/web/userInfo`)
+
+    return {
+      userInfo,
+    }
+  },
+}
+</script>
+<style lang="less" scoped>
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145.44deg, #f2f4fa 0, #fafbfc 100%);
+  padding-bottom: 50px;
+  .banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+    .user-info {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
+      padding: 20px;
+      width: 90%;
+      position: relative;
+      bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      .avatar-name {
+        display: flex;
+        align-items: center;
+        .ant-avatar-lg {
+          width: 120px;
+          height: 120px;
+        }
+        .name-job {
+          margin: 0 18px;
+          .name {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .job {
+            padding: 5px 0;
+          }
+        }
+      }
+      .info {
+        display: flex;
+        padding: 10px 0;
+        .item-box {
+          padding: 0 5px;
+          .item {
+            padding: 5px;
+            .value {
+              color: #5e6e80;
+              margin-left: 2px;
+            }
+          }
+        }
+
+        @media screen and(max-width: 576px) {
+          .item-box {
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    @media screen and(max-width: 576px) {
+      .user-info {
+        width: 95%;
+        padding: 20px 10px;
+      }
+    }
+  }
+  .introduction {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
+    padding: 24px;
+    width: 90%;
+  }
+
+  @media screen and(max-width: 576px) {
+    .introduction {
+      width: 95%;
+    }
+  }
+}
+</style>

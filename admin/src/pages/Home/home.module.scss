@@ -1,0 +1,47 @@
+.logo {
+  height: 32px;
+  margin: 14px 12px;
+  // background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.sider {
+  overflow: auto;
+}
+
+.right-content {
+  overflow: auto;
+  .head {
+    background: #fff;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .collapsed {
+      font-size: 18px;
+    }
+  }
+
+  .main {
+    margin: 0 16px;
+    min-height: auto;
+    .breadcrumb {
+      margin: 16px 0;
+    }
+    .content {
+      background: #fff;
+      padding: 24px;
+      min-height: calc(100% - 54px);
+      border-radius: 5px;
+    }
+  }
+
+  .footer {
+    text-align: center;
+  }
+}

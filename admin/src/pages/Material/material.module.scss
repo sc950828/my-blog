@@ -1,0 +1,9 @@
+// 样式覆盖
+:global {
+  .ant-upload-list-item-thumbnail {
+    width: auto !important;
+    .ant-upload-list-item-image {
+      width: auto !important;
+    }
+  }
+}

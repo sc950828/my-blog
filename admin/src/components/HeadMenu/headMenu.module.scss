@@ -1,0 +1,17 @@
+.dropdown {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .name {
+      max-width: 120px;
+      display: inline-block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
