@@ -4,7 +4,7 @@
   "description": "苏纯的个人博客",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "cross-env NODE_ENV=development nodemon index.js",
     "prod": "cross-env NODE_ENV=production node index.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --fix"

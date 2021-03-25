@@ -1,5 +1,13 @@
 const redis = require("redis");
-const redisClient = redis.createClient();
+// docker 部署
+let url = "localhost";
+let port = 6379;
+if(process.env.NODE_ENV === "production") {
+  url = "redis";
+  port = 6380;
+}
+const redisClient = redis.createClient(port, url);
+
 // 让redis能异步
 const { promisify } = require("util");
 
