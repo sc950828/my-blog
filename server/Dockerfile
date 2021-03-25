@@ -5,4 +5,4 @@ COPY . /app
 WORKDIR /app
 EXPOSE 5000
 RUN npm install
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "prod"]
