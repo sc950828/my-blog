@@ -6,7 +6,7 @@ module.exports = () => {
     // docker 部署
     let url = "mongodb://localhost/blog";
     if(process.env.NODE_ENV === "production") {
-      url = "mongodb://mongo:27018/blog";
+      url = "mongodb://mongo/blog";
     }
     mongoose
       .connect(url, {
