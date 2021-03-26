@@ -3,8 +3,7 @@ const redis = require("redis");
 let url = "localhost";
 let port = 6379;
 if(process.env.NODE_ENV === "production") {
-  url = "redis";
-  port = 6380;
+  url = "172.19.196.91";
 }
 const redisClient = redis.createClient(port, url);
 
