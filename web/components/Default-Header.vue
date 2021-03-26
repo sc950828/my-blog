@@ -7,7 +7,7 @@
     <!-- xl ≥1200px -->
     <!-- xxl ≥1600px -->
     <a-col :xs="18" :sm="18" :lg="6" :xl="6" :xxl="6">
-      <div class="title">苏纯的博客</div>
+      <div class="title">{{ title }}</div>
     </a-col>
     <a-col :xs="6" :sm="6" :lg="0" :xl="0" :xxl="0">
       <div class="menu-icon">
@@ -46,6 +46,7 @@ export default {
   data() {
     return {
       current: [],
+      title: process.env.NAME === 'sc' ? '苏纯的博客' : '晏海燕的博客',
     }
   },
   computed: {
