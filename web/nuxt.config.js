@@ -55,7 +55,7 @@ export default {
       target:
         process.env.NODE_ENV === 'development' // 本地
           ? 'http://localhost:5000'
-          : 'http://test.simq.org.cn/api', // 生产
+          : 'http://172.19.196.91:5000', // 生产
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {
         '^/api': '', // 把 /api 替换成 /
