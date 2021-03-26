@@ -44,11 +44,11 @@ const main = async () => {
   // jwt验证 排除静态文件夹和登录接口
   app.use(jwt({ secret }).unless({
     path: [
-      /\/uploads/,
-      /\/users\/login/,
-      /\/home\/sendUpdatePasswordMail/,
-      /\/users\/verifyUpdatePasswordEmailCode/,
-      /\/users\/updatePassword/,
+      /^\/uploads/,
+      /^\/users\/login/,
+      /^\/home\/sendUpdatePasswordMail/,
+      /^\/users\/verifyUpdatePasswordEmailCode/,
+      /^\/users\/updatePassword/,
     ]
   }));
 
