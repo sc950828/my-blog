@@ -14,7 +14,8 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: process.env.NAME === 'sc' ? '/favicon-sc.ico' : '/favico-yhy.ico',
+        href:
+          process.env.NAME === 'sc' ? '/favicon-sc.ico' : '/favicon-yhy.ico',
       },
     ],
   },
