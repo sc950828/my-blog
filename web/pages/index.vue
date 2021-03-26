@@ -43,7 +43,6 @@
 export default {
   async asyncData({ app }) {
     const { data: userInfo } = await app.$axios.get(`/users/web/userInfo`)
-
     return {
       userInfo,
     }

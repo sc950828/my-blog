@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '苏纯的博客',
+    title: process.env.NAME === 'sc' ? '苏纯的博客' : '晏海燕的博客',
     htmlAttrs: {
       lang: 'en',
     },
@@ -10,7 +10,13 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: process.env.NAME === 'sc' ? '/favicon-sc.ico' : '/favico-yhy.ico',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -56,6 +62,7 @@ export default {
         process.env.NODE_ENV === 'development' // 本地
           ? 'http://localhost:5000'
           : 'http://172.19.196.91:5000', // 生产
+      // 'http://47.117.129.194:5000', // 生产
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {
         '^/api': '', // 把 /api 替换成 /
