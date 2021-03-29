@@ -56,6 +56,7 @@ export default {
   },
   env: {
     NODE_ENV: process.env.NODE_ENV,
+    NAME: process.env.NAME,
   },
   proxy: {
     '/api': {
