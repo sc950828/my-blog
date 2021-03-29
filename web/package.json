@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cross-env NAME=sc nuxt",
     "build": "cross-env NAME=sc nuxt build",
     "start": "cross-env NAME=sc nuxt start",
     "build:yhy": "cross-env NAME=yhy nuxt build",

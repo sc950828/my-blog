@@ -12,6 +12,7 @@
         加载更多
       </a-button>
     </div>
+    <a-back-top />
   </div>
 </template>
 <script>

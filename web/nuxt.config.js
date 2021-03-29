@@ -1,21 +1,32 @@
+const isDev = process.env.NODE_ENV === 'development'
+const name = process.env.NAME === 'sc' ? '苏纯' : '晏海燕'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: process.env.NAME === 'sc' ? '苏纯的博客' : '晏海燕的博客',
+    title: `${name}的博客`,
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: `${name}，${name}的博客，${name}的个人博客`,
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: `${name}的博客，是记录学习和成长的博客，专注于互联网技术的开发及研究，分享个人心得，记录所遇问题。`,
+      },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href:
-          process.env.NAME === 'sc' ? '/favicon-sc.ico' : '/favicon-yhy.ico',
+        href: `/favicon-${process.env.NAME}.ico`,
       },
     ],
   },
@@ -60,10 +71,9 @@ export default {
   },
   proxy: {
     '/api': {
-      target:
-        process.env.NODE_ENV === 'development' // 本地
-          ? 'http://localhost:5000'
-          : 'http://172.19.196.91:5000', // 生产
+      target: isDev
+        ? 'http://47.117.129.194:5000' // 本地
+        : 'http://172.19.196.91:5000', // 生产
       // 'http://47.117.129.194:5000', // 生产
       changeOrigin: true, // 表示是否跨域
       pathRewrite: {

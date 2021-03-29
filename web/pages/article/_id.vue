@@ -14,6 +14,7 @@
         :toolbars-flag="false"
       />
     </no-ssr>
+    <a-back-top />
   </div>
 </template>
 <script>

@@ -1,10 +1,13 @@
 import {connect} from 'react-redux'
 import {PureComponent} from 'react'
-import { Steps, Form, Input, Button, } from 'antd';
+import { Steps, Form, Input, Button, Layout} from 'antd';
 import { MailOutlined, CodepenOutlined , LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
-import {PasswordWrapper, Title, StepWrap, FormWrap} from './style'
 import {changeStepAction, sendUpdatePasswordEmail, verifyUpdatePasswordEmailCode, changePassword} from '../../store/actions/creatorUserActions'
+import MyFooter from '../../components/MyFooter'
+import styles from './password.module.scss';
+
 const { Step } = Steps;
+const { Header, Content, Footer } = Layout;
 
 class Password extends PureComponent {
   render() {
@@ -28,8 +31,6 @@ class Password extends PureComponent {
       }
       handleChangePassword(formData)
     }
-
-
 
     const emailForm = (
       <Form
@@ -131,20 +132,27 @@ class Password extends PureComponent {
     )
 
     return (
-      <PasswordWrapper>
-        <Title>博客后台管理系统</Title>
-        <StepWrap>
-          <Steps current={current} responsive onChange={changeStep}>
-            <Step title="邮箱" description="请填写账号绑定的邮箱" />
-            <Step title="验证码" description="请填写收到的验证码" />
-            <Step title="新密码" description="请输入并确定新密码" />
-          </Steps>
-        </StepWrap>
-        
-        <FormWrap>
-          {current === 0 ? emailForm : (current === 1 ? codeForm: passForm)}
-        </FormWrap>
-      </PasswordWrapper>
+      <Layout className={styles['password-wrapper']}>
+        <Header className={styles['head']}>
+          <div className={styles['password-title']}>博客后台管理系统</div>
+        </Header>
+
+        <Content>
+          <div className={styles['step-wrap']}>
+            <Steps current={current} responsive onChange={changeStep}>
+              <Step title="邮箱" description="请填写账号绑定的邮箱" />
+              <Step title="验证码" description="请填写收到的验证码" />
+              <Step title="新密码" description="请输入并确定新密码" />
+            </Steps>
+          </div>
+          
+          <div className={styles['password-form']}>
+            {current === 0 ? emailForm : (current === 1 ? codeForm: passForm)}
+          </div>
+        </Content>
+
+        <Footer><MyFooter /></Footer>
+      </Layout>
     )
   }
 }

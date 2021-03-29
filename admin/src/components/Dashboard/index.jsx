@@ -1,5 +1,5 @@
-import {PureComponent } from 'react'
-import {renderRouter} from '../utils/renderRouter'
+import { PureComponent } from 'react'
+import { renderRouter} from '../../utils/renderRouter'
 
 class Dashboard extends PureComponent {
 

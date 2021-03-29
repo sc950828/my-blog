@@ -7,6 +7,7 @@ import {renderRouter, renderMenu, renderBreadcrumb, findCurrentRoute} from '../.
 import { getUserInfoAction } from '../../store/actions/creatorUserActions';
 import { changePathAction, changeCollapsedAction } from '../../store/actions/creatorMenuActions';
 import HeadMenu from '../../components/HeadMenu'
+import MyFooter from '../../components/MyFooter'
 
 const { Header, Content, Footer, Sider } = Layout;
 class Home extends Component {
@@ -61,7 +62,7 @@ class Home extends Component {
               {renderRouter(routes)}
             </div>
           </Content>
-          <Footer className={styles.footer}>©2021 Created by Randy</Footer>
+          <Footer><MyFooter /></Footer>
         </Layout>
       </Layout>
     );

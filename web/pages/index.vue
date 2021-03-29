@@ -8,15 +8,17 @@
         <div class="avatar-name">
           <a-avatar size="large" :src="userInfo.avatar_url" />
           <div class="name-job">
-            <div class="name">{{ userInfo.nick_name }}</div>
+            <div class="name">
+              <span>{{ userInfo.nick_name }}</span>
+              <a-icon :type="userInfo.gender === 'male' ? 'man' : 'woman'" />
+            </div>
             <div class="job">{{ userInfo.job }}</div>
           </div>
         </div>
         <div class="info">
           <div class="item-box">
             <div class="item">
-              <a-icon type="wechat" />
-              <span class="value">{{ userInfo.wechat }}</span>
+              <a-icon type="qq" /> <span class="value">{{ userInfo.qq }}</span>
             </div>
             <div class="item">
               <a-icon type="mail" theme="filled" />
@@ -25,11 +27,8 @@
           </div>
           <div class="item-box">
             <div class="item">
-              <a-icon type="qq" /> <span class="value">{{ userInfo.qq }}</span>
-            </div>
-            <div v-if="userInfo.phone" class="item">
-              <a-icon type="phone" theme="filled" />
-              <span class="value">{{ userInfo.phone }}</span>
+              <a-icon type="wechat" />
+              <span class="value">{{ userInfo.wechat }}</span>
             </div>
           </div>
         </div>
@@ -82,6 +81,10 @@ export default {
         .ant-avatar-lg {
           width: 120px;
           height: 120px;
+          transition: all 2.6s cubic-bezier(0.17, 0.67, 0.62, 1.22);
+          &:hover {
+            transform: rotate(360deg);
+          }
         }
         .name-job {
           margin: 0 18px;

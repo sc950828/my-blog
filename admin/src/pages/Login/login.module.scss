@@ -2,20 +2,22 @@
 // 这是解决样式冲突的一种方案
 .login-wrapper {
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  .login-title {
-    padding-top: 12%;
-    padding-bottom: 20px;
-    font-size: 36px;
-    font-weight: bold;
+  .head {
+    background: none;
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    .login-title {
+      font-size: 36px;
+      font-weight: bold;
+    }
   }
 
   .login-form {
     width: 400px;
     padding: 20px;
+    margin: 0 auto;
 
     .login-remember {
       float: left;
