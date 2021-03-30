@@ -110,6 +110,9 @@ export default {
 
 <style lang="less" scoped>
 .source-wrapper {
+  .ant-list-split .ant-list-item {
+    border: none;
+  }
   .ant-list-item-meta-title {
     border-bottom: 1px solid #ebebeb;
     font-weight: 700;

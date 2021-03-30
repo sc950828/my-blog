@@ -71,7 +71,7 @@ class SourceCtrl {
   // 保存学习资源
   async create(ctx) {
     ctx.verifyParams({
-      title: { type: "string", required: true, max: 10 },
+      title: { type: "string", required: true, max: 20 },
       link: { type: "string", required: true },
       description: { type: "string", required: true, max: 300 },
       isPublish: { type: "boolean", required: true },
@@ -109,7 +109,7 @@ class SourceCtrl {
   async update(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true },
-      title: { type: "string", required: true, max: 10 },
+      title: { type: "string", required: true, max: 20 },
       description: { type: "string", required: true, max: 300 },
       isPublish: { type: "boolean", required: true },
       sourceCategory: { type: "string", required: true },

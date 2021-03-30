@@ -117,10 +117,10 @@ class SourceOperate extends PureComponent {
             rules={[
               { required: true, message: '请输入学习资源标题' },
               { whitespace: true, message: '请输入正确的学习资源标题' },
-              { type: "string", max: 10 , message: '请输入正确的学习资源标题(不超过10个字符)' }
+              { type: "string", max: 20 , message: '请输入正确的学习资源标题(不超过20个字符)' }
             ]}
           >
-            <Input disabled={isLook} placeholder="请输入学习资源标题，不超过10个字符"></Input>
+            <Input disabled={isLook} placeholder="请输入学习资源标题，不超过20个字符"></Input>
           </Form.Item>
           <Form.Item
             label="logo链接"
