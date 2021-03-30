@@ -50,7 +50,7 @@ class ArticleOperate extends PureComponent {
       this.mdEditor.setView({menu: true, html: false, md: true})
       const params = {id: location.state.id}
       params.setFormData = () => {
-        const {content, title, description, article_category: articleCategory, banner, is_publish: isPublish} = this.props.articleCategory
+        const {content, title, description, article_category: articleCategory, banner, is_publish: isPublish} = this.props.articleInfo
         this.formRef.current.setFieldsValue({
           title,
           description,
@@ -199,7 +199,7 @@ class ArticleOperate extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     allArticleCategoryLists: state.get("articleCategory").get("allArticleCategoryLists"),
-    articleCategory: state.get("article").get("articleInfo"),
+    articleInfo: state.get("article").get("articleInfo"),
   }
 }
 

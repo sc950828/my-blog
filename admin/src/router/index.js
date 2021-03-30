@@ -13,6 +13,9 @@ import Message from '../pages/Message'
 import Material from '../pages/Material'
 import OperateMaterial from '../pages/Material/operate.jsx'
 import MaterialCategory from '../pages/MaterialCategory'
+import SourceCategory from '../pages/SourceCategory';
+import Source from '../pages/Source';
+import OperateSource from '../pages/Source/operate.jsx';
 import Setting from '../pages/Setting'
 
 import {
@@ -22,7 +25,8 @@ import {
   FileOutlined,
   UserOutlined,
   MessageOutlined,
-  SettingOutlined
+  SettingOutlined,
+  HddOutlined 
 } from '@ant-design/icons';
 
 const routes = [
@@ -186,6 +190,47 @@ const routes = [
             component: OperateArticle,
             requiresAuth: true,
             meta: {title: "查看文章", activePath: "/article"}
+          }
+        ]
+      },
+      {
+        path: "/sourceCategory",
+        component: SourceCategory,
+        menuShow: true,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        meta: {title: "学习资源分类管理", icon: <FolderOutlined />, activePath: "/sourceCategory"}
+      },
+      {
+        path: "/source",
+        component: Source,
+        menuShow: true,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        meta: {title: "学习资源管理", icon: <HddOutlined />, activePath: "/source"}
+      },
+      {
+        path: "/sourceOperate",
+        component: Dashboard,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        menuShow: false,
+        meta: {title: "学习资源管理", icon: <HddOutlined />, activePath: "/source"},
+        routes: [
+          {
+            path: "/sourceOperate/add",
+            component: OperateSource,
+            requiresAuth: true,
+            meta: {title: "添加学习资源", activePath: "/source"}
+          },
+          {
+            path: "/sourceOperate/edit",
+            component: OperateSource,
+            requiresAuth: true,
+            meta: {title: "编辑学习资源", activePath: "/source"}
+          },
+          {
+            path: "/sourceOperate/look",
+            component: OperateSource,
+            requiresAuth: true,
+            meta: {title: "查看学习资源", activePath: "/source"}
           }
         ]
       },

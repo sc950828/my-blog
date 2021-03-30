@@ -4,6 +4,8 @@ const Article = require("../models/articles");
 const Visitor = require("../models/visitors");
 const Material = require("../models/materials");
 const MaterialCategory = require("../models/materialCategorys");
+const SourceCategory = require("../models/sourceCategorys");
+const Source = require("../models/sources");
 
 module.exports = {
   async checkArticleCategoryIsOwn(ctx, next) {
@@ -19,9 +21,9 @@ module.exports = {
         ctx.throw(403, "暂无权限");
       }
     }
-
     await next();
   },
+
   async checkArticleIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
@@ -37,6 +39,7 @@ module.exports = {
     }
     await next();
   },
+
   async checkVisitorIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
@@ -52,6 +55,7 @@ module.exports = {
     }
     await next();
   },
+
   async checkMaterialIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
@@ -67,6 +71,7 @@ module.exports = {
     }
     await next();
   },
+
   async checkMaterialCategoryIsOwn(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     const userId = ctx.state.user.id;
@@ -82,6 +87,39 @@ module.exports = {
     }
     await next();
   },
+
+  async checkSourceCategoryIsOwn(ctx, next) {
+    const isAdmin = checkIsAdmin(ctx);
+    const userId = ctx.state.user.id;
+    if (!isAdmin) {
+      const sourceCategory = await SourceCategory.findById(ctx.params.id);
+      if (!sourceCategory) {
+        ctx.throw(404, "学习资源分类不存在");
+      }
+      const createBy = sourceCategory["create_by"].toString();
+      if (createBy !== userId) {
+        ctx.throw(403, "暂无权限");
+      }
+    }
+    await next();
+  },
+
+  async checkSourceIsOwn(ctx, next) {
+    const isAdmin = checkIsAdmin(ctx);
+    const userId = ctx.state.user.id;
+    if (!isAdmin) {
+      const source = await Source.findById(ctx.params.id);
+      if (!source) {
+        ctx.throw(404, "学习资源不存在");
+      }
+      const createBy = source["create_by"].toString();
+      if (createBy !== userId) {
+        ctx.throw(403, "暂无权限");
+      }
+    }
+    await next();
+  },
+
   async checkIsAdmin(ctx, next) {
     const isAdmin = checkIsAdmin(ctx);
     if (!isAdmin) {

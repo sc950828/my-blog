@@ -78,9 +78,6 @@ class MaterialCtrl {
         new: true,
       }
     );
-    if (!findMaterialCategory) {
-      ctx.throw(404, "素材文件夹不存在");
-    }
 
     ctx.body = materialLists;
   }

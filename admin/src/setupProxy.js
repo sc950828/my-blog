@@ -4,8 +4,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function (app) {
   app.use(
     createProxyMiddleware('/api',{
-        // "target": "http://localhost:5000",
-        "target": "http://47.117.129.194:5000",// 生产
+        "target": "http://localhost:5000",
+        // "target": "http://47.117.129.194:5000",// 生产
         "pathRewrite": {
             "^/api": ""
         },

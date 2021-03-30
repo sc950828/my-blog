@@ -8,6 +8,8 @@ import articleCategoryReducer from './reducers/articleCategoryReducer'
 import articleReducer from './reducers/articleReducer'
 import materialCategoryReducer from './reducers/materialCategoryReducer'
 import materialReducer from './reducers/materialReducer'
+import sourceCategoryReducer from './reducers/sourceCategoryReducer'
+import sourceReducer from './reducers/sourceReducer'
 
 const reducers = combineReducers({
   user: userReducer,
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   article: articleReducer,
   materialCategory: materialCategoryReducer,
   material: materialReducer,
+  sourceCategory: sourceCategoryReducer,
+  source: sourceReducer
 })
 
 export default reducers
