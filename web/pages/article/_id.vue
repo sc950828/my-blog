@@ -6,14 +6,7 @@
         {{ new Date(article.createdAt).toLocaleDateString() }}
       </div>
     </div>
-    <no-ssr>
-      <mavon-editor
-        v-model="article.content.mdValue"
-        :subfield="false"
-        default-open="preview"
-        :toolbars-flag="false"
-      />
-    </no-ssr>
+    <div class="markdown-body" v-html="article.content.htmlValue"></div>
     <a-back-top />
   </div>
 </template>
@@ -33,10 +26,10 @@ export default {
   },
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .article-wrapper {
   .title-time {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     .title {
       font-size: 32px;
       font-weight: bold;

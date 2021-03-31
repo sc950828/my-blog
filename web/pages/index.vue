@@ -34,7 +34,10 @@
         </div>
       </div>
     </div>
-    <div class="introduction" v-html="userInfo.introduction.htmlValue"></div>
+    <div
+      class="introduction markdown-body"
+      v-html="userInfo.introduction.htmlValue"
+    ></div>
   </div>
 </template>
 
@@ -48,7 +51,7 @@ export default {
   },
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .home-wrapper {
   display: flex;
   flex-direction: column;

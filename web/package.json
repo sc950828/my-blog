@@ -33,7 +33,6 @@
     "core-js": "^3.8.3",
     "cross-env": "^7.0.3",
     "less-loader": "^5.0.0",
-    "mavon-editor": "^2.9.1",
     "nuxt": "^2.14.12",
     "vue-infinite-scroll": "^2.0.2"
   },
