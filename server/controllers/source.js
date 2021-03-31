@@ -42,7 +42,7 @@ class SourceCtrl {
     const totalArr = await Source.aggregate([
       { $match: query },
       {
-        $group: { _id: '$source_category' }
+        $group: { _id: '$source_category', name: { $first: '$source_category_name' }, lists: { $push: "$$ROOT" } }
       }
     ]);
 
