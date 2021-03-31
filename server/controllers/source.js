@@ -39,7 +39,12 @@ class SourceCtrl {
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
     let query = { create_by: mongoose.Types.ObjectId( ctx.state.user.id), is_publish: true };
-    const total = await Source.find(query).countDocuments();
+    const totalArr = await Source.aggregate([
+      { $match: query },
+      {
+        $group: { _id: '$source_category' }
+      }
+    ]);
 
     const sources = await Source.aggregate([
       { $match: query },
@@ -53,7 +58,7 @@ class SourceCtrl {
         $skip: (_pageNo - 1) * _pageSize
       }
     ]);
-    ctx.body = { sources, total, pageNo: _pageNo, pageSize: _pageSize };
+    ctx.body = { sources, total: totalArr.length, pageNo: _pageNo, pageSize: _pageSize };
   }
 
   // 通过id找

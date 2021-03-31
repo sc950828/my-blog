@@ -95,7 +95,8 @@ export default {
 }
 
 .ant-layout-content {
-  padding: 84px 50px 20px;
+  margin-top: 64px;
+  padding: 24px 50px;
 }
 
 @media screen and (max-width: 576px) {
@@ -104,7 +105,8 @@ export default {
   }
 
   .ant-layout-content {
-    padding: 84px 24px 24px;
+    margin-top: 64px;
+    padding: 24px;
   }
 
   .ant-layout-footer {
