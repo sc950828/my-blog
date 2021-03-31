@@ -205,6 +205,7 @@ class SourceCategory extends PureComponent {
             <Form
               ref={this.formRef}
               onFinish={this.onFinish}
+              initialValues={{isPublish: false}}
             >
               <Form.Item
                 label="学习资源分类名"

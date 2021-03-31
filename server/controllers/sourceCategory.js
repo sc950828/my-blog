@@ -1,4 +1,5 @@
 const SourceCategory = require("../models/sourceCategorys");
+const Source = require("../models/sources");
 const { checkIsAdmin } = require("../utils/help");
 
 class SourceCategoryCtrl {
@@ -59,7 +60,7 @@ class SourceCategoryCtrl {
     ctx.body = sourceCategory;
   }
 
-  // 更新学习资源分类
+  // 更新学习资源
   async update(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true },
@@ -70,13 +71,20 @@ class SourceCategoryCtrl {
     const sourceCategory = await SourceCategory.findByIdAndUpdate(
       ctx.params.id,
       { name, is_publish },
-      {
-        new: true,
-      }
+      { new: true }
     );
-    // 需要修改资源的source_category_name
     if (!sourceCategory) {
       ctx.throw(404, "学习资源分类不存在");
+    }
+
+    // 修改资源的分类名字
+    const sources = await Source.find({ source_category: ctx.params.id });
+    for (const source of sources) {
+      await Source.findByIdAndUpdate(
+        source._id,
+        { source_category_name: name },
+        { new: true, }
+      );
     }
 
     ctx.body = sourceCategory;
