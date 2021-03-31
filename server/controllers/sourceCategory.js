@@ -74,6 +74,7 @@ class SourceCategoryCtrl {
         new: true,
       }
     );
+    // 需要修改资源的source_category_name
     if (!sourceCategory) {
       ctx.throw(404, "学习资源分类不存在");
     }

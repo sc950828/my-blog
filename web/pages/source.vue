@@ -77,12 +77,12 @@ export default {
       try {
         this.loading = true
         const {
-          data: { articles, total, pageNo, pageSize },
+          data: { sources, total, pageNo, pageSize },
         } = await this.$axios.get(`/sources/web`, {
           params: { pageNo: page },
         })
 
-        this.articles = this.articles.concat(articles)
+        this.sources = this.sources.concat(sources)
         this.total = total
         this.pageNo = pageNo
         this.pageSize = pageSize
