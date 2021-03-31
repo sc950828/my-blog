@@ -50,6 +50,9 @@ class SourceCtrl {
     const sources = await Source.aggregate([
       { $match: query },
       {
+        $sort: { createdAt: 1 }
+      },
+      {
         $group: { _id: '$source_category', name: { $first: '$source_category_name' }, lists: { $push: "$$ROOT" } }
       },
       {
@@ -59,7 +62,6 @@ class SourceCtrl {
         $limit: _pageSize
       }
     ]);
-    console.log(_pageNo);
     ctx.body = { sources, total: totalArr.length, pageNo: _pageNo, pageSize: _pageSize };
   }
 

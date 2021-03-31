@@ -157,7 +157,6 @@ class ArticleCategoryCtrl {
     // 默认查自己
     let query = { create_by: ctx.state.user.id, is_publish: true };
     const articleCategorys = await ArticleCategory.find(query)
-      .sort({ createdAt: -1 })
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .select("+description");

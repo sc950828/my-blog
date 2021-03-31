@@ -11,6 +11,7 @@ class TimeLineCtrl {
     const query = { user: mongoose.Types.ObjectId( ctx.state.user.id) };
 
     const timeLines = await TimeLine.find(query)
+      .sort({ createdAt: 'desc' })
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("article");
