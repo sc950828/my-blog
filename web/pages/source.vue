@@ -78,7 +78,7 @@ export default {
         this.loading = true
         const {
           data: { articles, total, pageNo, pageSize },
-        } = await this.$axios.get(`/articles/web`, {
+        } = await this.$axios.get(`/sources/web`, {
           params: { pageNo: page },
         })
 

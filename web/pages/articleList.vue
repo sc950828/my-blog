@@ -83,6 +83,7 @@ export default {
         this.pageNo = pageNo
         this.pageSize = pageSize
         this.loading = false
+        this.noMore = total <= pageSize * pageNo
       } catch (e) {
         console.error(e)
         this.loading = false
@@ -90,9 +91,8 @@ export default {
     },
     // 节流
     handleInfiniteOnLoad: debounce(function () {
-      const { total, pageSize, pageNo } = this
-      if (total > pageSize * pageNo) {
-        this._getData(pageNo + 1)
+      if (!this.noMore) {
+        this._getData(this.pageNo + 1)
       } else {
         this.noMore = true
       }
