@@ -50,7 +50,7 @@ class SourceCtrl {
     const sources = await Source.aggregate([
       { $match: query },
       {
-        $sort: { createdAt: 1 }
+        $sort: { source_category: 1 }
       },
       {
         $group: { _id: '$source_category', name: { $first: '$source_category_name' }, lists: { $push: "$$ROOT" } }

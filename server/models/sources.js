@@ -8,7 +8,7 @@ const sourceSchema = new Schema(
     // link 资源地址
     link: { type: String, required: true, trim: true },
     // logo 资源logo
-    logo: { type: String, trim: true, default: "https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_369aa9951c75ea20b712124bd4623d52.jpg" },
+    logo: { type: String, trim: true, default: "https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_adb7032cf3270acd358a95361fecd375.svg" },
     // 描述
     description: { type: String, required: true, trim: true },
     // 是否发布

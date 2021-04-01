@@ -1,5 +1,5 @@
 <template>
-  <div class="home-wrapper">
+  <div class="index-wrapper">
     <div class="banner">
       <img
         src="https://xiaosu72.oss-cn-shanghai.aliyuncs.com/blog/images/upload_b4ecd0428bb9577059e9151bcb045c08.jpg"
@@ -8,9 +8,11 @@
         <div class="avatar-name">
           <a-avatar size="large" :src="userInfo.avatar_url" />
           <div class="name-job">
-            <div class="name">
-              <span>{{ userInfo.nick_name }}</span>
-              <a-icon :type="userInfo.gender === 'male' ? 'man' : 'woman'" />
+            <div class="name-count">
+              <span class="name">{{ userInfo.nick_name }}</span>
+              <span class="icon"
+                ><a-icon :type="userInfo.gender === 'male' ? 'man' : 'woman'"
+              /></span>
             </div>
             <div class="job">{{ userInfo.job }}</div>
           </div>
@@ -51,8 +53,8 @@ export default {
   },
 }
 </script>
-<style lang="less">
-.home-wrapper {
+<style lang="less" scoped>
+.index-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +70,7 @@ export default {
     }
     .user-info {
       background-color: #fff;
-      border-radius: 20px;
+      border-radius: 10px;
       box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
       padding: 20px;
       width: 90%;
@@ -91,9 +93,14 @@ export default {
         }
         .name-job {
           margin: 0 18px;
-          .name {
-            font-size: 20px;
+          .name-count {
             font-weight: 600;
+            .name {
+              font-size: 24px;
+            }
+            .icon {
+              font-size: 20px;
+            }
           }
           .job {
             padding: 5px 0;
@@ -131,7 +138,7 @@ export default {
   }
   .introduction {
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
     padding: 24px;
     width: 90%;

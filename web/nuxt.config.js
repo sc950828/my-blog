@@ -10,7 +10,10 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, user-scalable=no',
+      },
       {
         hid: 'keywords',
         name: 'keywords',
@@ -77,8 +80,8 @@ export default {
     '/api': {
       target: isDev
         ? 'http://localhost:5000' // 本地
-        : // 'http://47.117.129.194:5000'
-          // ? 'http://47.117.129.194:5000' // 本地
+        : // 'http://47.117.129.194:5000' // 本地
+          // 'http://47.117.129.194:5000'
           'http://172.19.196.91:5000', // 生产
       // 'http://47.117.129.194:5000', // 生产
       changeOrigin: true, // 表示是否跨域

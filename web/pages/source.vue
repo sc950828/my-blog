@@ -34,9 +34,13 @@
                   :alt="list.title"
                   :src="list.logo"
                 />
-                <div class="title ellipsis">{{ list.title }}</div>
+                <div class="title ellipsis" :title="list.title">
+                  {{ list.title }}
+                </div>
               </div>
-              <div class="description ellipsis-2">{{ list.description }}</div>
+              <div class="description ellipsis-2" :title="list.description">
+                {{ list.description }}
+              </div>
             </div>
           </a-col>
         </a-row>
@@ -100,7 +104,7 @@ export default {
       } else {
         this.noMore = true
       }
-    }, 1000),
+    }, 600),
     goSource(item) {
       window.open(item.link, '_blank')
     },

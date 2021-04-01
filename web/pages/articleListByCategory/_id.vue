@@ -15,9 +15,10 @@
         slot="renderItem"
         slot-scope="item"
         :row-key="item._id"
+        class="article"
         @click="goArticle(item)"
       >
-        <img slot="extra" width="260" :src="item.banner" />
+        <img slot="extra" class="img" width="260" :src="item.banner" />
         <a-list-item-meta>
           <div slot="title" class="ellipsis-1">{{ item.title }}</div>
         </a-list-item-meta>
@@ -97,7 +98,7 @@ export default {
       } else {
         this.noMore = true
       }
-    }, 1000),
+    }, 600),
     goArticle(item) {
       this.$router.push(`/article/${item._id}`)
     },
@@ -107,6 +108,17 @@ export default {
 
 <style lang="less" scoped>
 .article-category-wrapper {
-  //
+  .article {
+    transition: opacity 0.35s;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  .img {
+    transition: transform 0.6s;
+    &:hover {
+      transform: scale(1.08, 1.08);
+    }
+  }
 }
 </style>

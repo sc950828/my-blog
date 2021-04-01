@@ -1,5 +1,5 @@
 <template>
-  <div class="category-wrapper">
+  <div class="category-list-wrapper">
     <a-list
       :grid="{ gutter: 16, xs: 1, sm: 1, lg: 2, xl: 3, xxl: 4 }"
       :data-source="articleCategorys"
@@ -12,7 +12,16 @@
         @click="goArticleList(item)"
       >
         <a-card hoverable>
-          <img slot="cover" :alt="item.title" :src="item.banner" />
+          <div slot="cover" class="img-box">
+            <img :alt="item.title" width="100%" :src="item.banner" />
+            <div class="count-time">
+              <div class="count">{{ item.count }}</div>
+              <div class="line"></div>
+              <div class="time">
+                {{ new Date(item.createdAt).toLocaleDateString() }}
+              </div>
+            </div>
+          </div>
           <a-card-meta :title="item.title">
             <template slot="description">{{ item.description }} </template>
           </a-card-meta>
@@ -68,7 +77,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.category-wrapper {
+.category-list-wrapper {
   /deep/ .ant-row {
     display: flex;
     flex-wrap: wrap;
@@ -86,6 +95,32 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+  }
+
+  .img-box {
+    position: relative;
+    .count-time {
+      position: absolute;
+      padding: 5px 10px;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 2px;
+      .count {
+        font-size: 20px;
+      }
+      .line {
+        height: 3px;
+        width: 100%;
+        margin: 2px 0;
+        background-color: #fff;
+      }
     }
   }
 }
