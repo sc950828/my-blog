@@ -7,7 +7,7 @@
     <!-- xl ≥1200px -->
     <!-- xxl ≥1600px -->
     <a-col :xs="18" :sm="18" :lg="6" :xl="6" :xxl="6">
-      <div class="title">{{ title }}</div>
+      <div class="title pointer" @click="goIndex">{{ title }}</div>
     </a-col>
     <a-col :xs="6" :sm="6" :lg="0" :xl="0" :xxl="0">
       <div class="menu-icon">
@@ -67,6 +67,9 @@ export default {
     },
     clickMenu() {
       this.changeCollapsed()
+    },
+    goIndex() {
+      this.$router.push('/')
     },
   },
 }

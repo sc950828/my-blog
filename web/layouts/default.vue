@@ -101,16 +101,16 @@ export default {
 
 @media screen and (max-width: 576px) {
   .ant-layout-header {
-    padding: 0 24px;
+    padding: 0 14px;
   }
 
   .ant-layout-content {
     margin-top: 64px;
-    padding: 24px;
+    padding: 14px;
   }
 
   .ant-layout-footer {
-    padding: 24px;
+    padding: 14px;
   }
 }
 </style>

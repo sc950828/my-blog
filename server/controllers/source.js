@@ -50,10 +50,10 @@ class SourceCtrl {
     const sources = await Source.aggregate([
       { $match: query },
       {
-        $sort: { source_category: 1 }
+        $group: { _id: '$source_category', name: { $first: '$source_category_name' }, lists: { $push: "$$ROOT" } }
       },
       {
-        $group: { _id: '$source_category', name: { $first: '$source_category_name' }, lists: { $push: "$$ROOT" } }
+        $sort: { source_category: 1 }
       },
       {
         $skip: (_pageNo - 1) * _pageSize

@@ -104,7 +104,7 @@ export default {
       } else {
         this.noMore = true
       }
-    }, 600),
+    }, 400),
     goSource(item) {
       window.open(item.link, '_blank')
     },

@@ -97,7 +97,7 @@ export default {
       } else {
         this.noMore = true
       }
-    }, 600),
+    }, 400),
     goArticle(item) {
       this.$router.push(`/article/${item._id}`)
     },
