@@ -1,6 +1,6 @@
 {
   "name": "my-blog",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "我的博客",
   "main": "index.js",
   "dependencies": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.zhlh6.cn:sc950828/my-blog.git"
+    "url": "https://github.com/sc950828/my-blog"
   },
   "keywords": [
     "博客"
