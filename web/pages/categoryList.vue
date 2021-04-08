@@ -100,6 +100,13 @@ export default {
 
   .img-box {
     position: relative;
+    overflow: hidden;
+    img {
+      transition: transform 0.6s;
+      &:hover {
+        transform: scale(1.08, 1.08);
+      }
+    }
     .count-time {
       position: absolute;
       padding: 5px 10px;

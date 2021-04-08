@@ -96,7 +96,7 @@ export default {
           .name-count {
             font-weight: 600;
             .name {
-              font-size: 24px;
+              font-size: 26px;
             }
             .icon {
               font-size: 20px;
@@ -104,12 +104,14 @@ export default {
           }
           .job {
             padding: 5px 0;
+            font-size: 16px;
           }
         }
       }
       .info {
         display: flex;
         padding: 10px 0;
+        font-size: 16px;
         .item-box {
           padding: 0 5px;
           .item {

@@ -111,8 +111,11 @@ export default {
   .article {
     transition: opacity 0.35s;
     &:hover {
-      opacity: 0.9;
+      opacity: 0.85;
     }
+  }
+  /deep/ .ant-list-item-extra {
+    overflow: hidden;
   }
   .img {
     transition: transform 0.6s;
