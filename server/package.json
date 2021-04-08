@@ -6,8 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index.js",
     "prod": "cross-env NODE_ENV=production node index.js",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . --ext .js --ignore-path .eslintignore .",
+    "lint:fix": "eslint . --ext .js --fix --ignore-path .eslintignore ."
   },
   "keywords": [
     "苏纯的博客"

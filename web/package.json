@@ -11,14 +11,14 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .eslintignore .",
     "lint:style": "stylelint \"**/*.{vue,less,css}\" --ignore-path .eslintignore",
-    "lintfix:js": "eslint  --fix --ext \".js,.vue\" --ignore-path .eslintignore .",
+    "lintfix:js": "eslint --fix --ext \".js,.vue\" --ignore-path .eslintignore .",
     "lintfix:style": "stylelint --fix \"**/*.{vue,less,css}\" --ignore-path .eslintignore",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:fix": "npm run lintfix:js && npm run lintfix:style",
     "test": "jest"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint  --fix --ext \".js,.vue\" --ignore-path .eslintignore .",
+    "*.{js,vue}": "eslint --fix --ext \".js,.vue\" --ignore-path .eslintignore .",
     "*.{less,vue,css}": "stylelint --fix \"**/*.{vue,less,css}\" --ignore-path .eslintignore"
   },
   "husky": {
