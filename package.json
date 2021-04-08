@@ -1,0 +1,22 @@
+{
+  "name": "my-blog",
+  "version": "1.1.0",
+  "description": "我的博客",
+  "main": "index.js",
+  "dependencies": {
+    "standard-version": "^9.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.zhlh6.cn:sc950828/my-blog.git"
+  },
+  "keywords": [
+    "博客"
+  ],
+  "author": "randy",
+  "license": "ISC"
+}
