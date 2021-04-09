@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/sc950828/my-blog/compare/v1.1.6...v1.1.7) (2021-04-09)
+
+
+### Code Refactoring
+
+* **web,server:** 优化博客页面效果和服务端分页功能 ([55f9e05](https://github.com/sc950828/my-blog/commit/55f9e05ec75711b4c01ca7afced3d71f6b90f7ac))
+
 ### [1.1.6](https://github.com/sc950828/my-blog/compare/v1.1.5...v1.1.6) (2021-04-08)
 
 
