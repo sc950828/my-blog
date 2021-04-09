@@ -34,7 +34,8 @@
     "cross-env": "^7.0.3",
     "less-loader": "^5.0.0",
     "nuxt": "^2.14.12",
-    "vue-infinite-scroll": "^2.0.2"
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

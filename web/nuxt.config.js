@@ -40,6 +40,12 @@ export default {
     // markdown css https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css
     '~/assets/styles/markdown.css',
     'ant-design-vue/dist/antd.css',
+    // vue-quill-edit css
+    'quill/dist/quill.core.css',
+    // for snow theme
+    'quill/dist/quill.snow.css',
+    // for bubble theme
+    'quill/dist/quill.bubble.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -47,6 +53,7 @@ export default {
     '@/plugins/antd-ui',
     '@/plugins/axios',
     { src: '@/plugins/infinite-scroll', ssr: false },
+    { src: '@/plugins/quill-editor', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
