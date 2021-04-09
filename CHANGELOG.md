@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/sc950828/my-blog/compare/v1.1.7...v1.2.0) (2021-04-09)
+
+
+### Features
+
+* **web:** 添加了自定义loading 优化了nuxt的错误页面 ([2275819](https://github.com/sc950828/my-blog/commit/22758195502aeee82db5f4f1840664133bc0b148))
+
+
+### Bug Fixes
+
+* **web:** 优化页面 ([be773ad](https://github.com/sc950828/my-blog/commit/be773add96ea18ca8bb3ffd8d226500594e08958))
+
 ### [1.1.7](https://github.com/sc950828/my-blog/compare/v1.1.6...v1.1.7) (2021-04-09)
 
 
