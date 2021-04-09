@@ -60,11 +60,14 @@ export default {
   align-items: center;
   background: linear-gradient(145.44deg, #f2f4fa 0, #fafbfc 100%);
   padding-bottom: 50px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   .banner {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     img {
       width: 100%;
     }
@@ -135,6 +138,7 @@ export default {
       .user-info {
         width: 95%;
         padding: 20px 10px;
+        bottom: 20px;
       }
     }
   }
@@ -150,6 +154,12 @@ export default {
     .introduction {
       width: 95%;
     }
+  }
+}
+
+@media screen and(max-width: 576px) {
+  .index-wrapper {
+    padding-bottom: 10px;
   }
 }
 </style>

@@ -22,8 +22,13 @@
               </div>
             </div>
           </div>
-          <a-card-meta :title="item.title">
-            <template slot="description">{{ item.description }} </template>
+          <a-card-meta>
+            <span slot="title" :title="item.title">
+              {{ item.title }}
+            </span>
+            <span slot="description" :title="item.description">
+              {{ item.description }}
+            </span>
           </a-card-meta>
         </a-card>
       </a-list-item>
@@ -113,6 +118,7 @@ export default {
       top: 10px;
       right: 10px;
       background: rgba(0, 0, 0, 0.3);
+      transition: background 0.6s;
       color: #fff;
       display: flex;
       align-items: center;
@@ -127,6 +133,9 @@ export default {
         width: 100%;
         margin: 2px 0;
         background-color: #fff;
+      }
+      &:hover {
+        background: rgba(0, 0, 0, 0.4);
       }
     }
   }
