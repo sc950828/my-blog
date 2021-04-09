@@ -90,6 +90,9 @@ export default {
     },
   },
 
+  // 自定义loading
+  loading: '~/components/Nav-Loading.vue',
+
   server: {
     host: '0.0.0.0',
     port: 4000,
