@@ -18,7 +18,7 @@
         class="article"
         @click="goArticle(item)"
       >
-        <img slot="extra" class="img" width="260" :src="item.banner" />
+        <img slot="extra" class="img" :src="item.banner" />
         <a-list-item-meta>
           <div slot="title" class="ellipsis-1">{{ item.title }}</div>
         </a-list-item-meta>
@@ -118,9 +118,15 @@ export default {
     overflow: hidden;
   }
   .img {
+    width: 260px;
     transition: transform 0.6s;
     &:hover {
       transform: scale(1.08, 1.08);
+    }
+  }
+  @media screen and(max-width: 576px) {
+    .img {
+      width: 100%;
     }
   }
 }

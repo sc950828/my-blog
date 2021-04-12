@@ -15,6 +15,10 @@ export default {
         content: 'width=device-width, initial-scale=1, user-scalable=no',
       },
       {
+        name: 'referrer',
+        content: 'no-referrer',
+      },
+      {
         hid: 'keywords',
         name: 'keywords',
         content: `${name}，${name}的博客，${name}的个人博客`,
@@ -96,6 +100,9 @@ export default {
       },
     },
   },
+
+  // 自定义loading
+  loading: '~/components/Nav-Loading.vue',
 
   server: {
     host: '0.0.0.0',
