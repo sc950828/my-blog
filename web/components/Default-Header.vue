@@ -17,7 +17,7 @@
         />
       </div>
     </a-col>
-    <a-col :xs="0" :sm="0" :lg="18" :xl="14" :xxl="14">
+    <a-col :xs="0" :sm="0" :lg="18" :xl="14" :xxl="10">
       <a-menu v-model="current" mode="horizontal" @click="selectMenu">
         <a-menu-item key="/"> <a-icon type="home" />首页 </a-menu-item>
         <a-menu-item key="/articleList">
