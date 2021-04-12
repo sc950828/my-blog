@@ -1,5 +1,6 @@
 const Message = require("../models/messages");
 const Visitor = require("../models/visitors");
+const Article = require("../models/articles");
 // const { checkIsAdmin } = require("../utils/help");
 // const mongoose = require("mongoose");
 
@@ -10,17 +11,27 @@ class MessageCtrl {
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查一级
-    let query = { create_by: ctx.state.user.id };
+    let query = { create_by: ctx.state.user.id, message: null , article: null };
+    let countQuery = { create_by: ctx.state.user.id, article: null };
     if(articleId) {
       query.article = articleId;
+      countQuery.article = articleId;
     }
     const messages = await Message.find(query)
       .sort({ createdAt: -1 })
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
-      .populate("visitor message children.message children.visitor");
+      .populate({
+        path: "visitor children",
+        populate: {
+          path: 'visitor message',
+          populate: {
+            path: 'visitor message'
+          }
+        }
+      });
 
-    const total = await Message.find(query).countDocuments();
+    const total = await Message.find(countQuery).countDocuments();
     ctx.body = { messages, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
@@ -33,30 +44,34 @@ class MessageCtrl {
     });
     const { content, name, email, articleId, messageId, parentMessageId } = ctx.request.body;
     let visitor = null;
-    visitor = await Visitor.findOne({ email });
+    visitor = await Visitor.findOne({ name, email });
     if(!visitor) {
       visitor = await new Visitor({ name, email, create_by: ctx.state.user.id }).save();
     }
     let message = null;
-    const newMessage = new Message({
+    const newMessage = await new Message({
       content,
       article: articleId,
-      visitor: visitor._id,
       message: messageId,
+      visitor: visitor._id,
       create_by: ctx.state.user.id
-    });
+    }).save();
     // 一级留言
-    if(!parentMessageId) {
-      message = await newMessage.save();
-    } else {
-      // $pull删除
+    if(parentMessageId) {
+      // $pull删除 $push添加
       message = await Message.findByIdAndUpdate(
         parentMessageId,
-        { "$push" : { children: newMessage } },
+        { "$push" : { children: newMessage._id } },
         {
           new: true,
-        });
+        }
+      );
     }
+    // 增加留言量
+    await Article.findByIdAndUpdate(
+      articleId,
+      { $inc: { comments: 1 } },
+      { new: true });
 
     ctx.body = message;
   }
