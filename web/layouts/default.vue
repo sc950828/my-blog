@@ -12,6 +12,7 @@
       </a-layout-footer>
       <a-drawer
         :z-index="1501"
+        :width="200"
         title="菜单"
         :visible="getterCollapsed"
         @close="close"

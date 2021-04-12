@@ -12,6 +12,8 @@
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
+  box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
+  padding: 20px;
 }
 .markdown-body .pl-c {
   color: #6a737d;
