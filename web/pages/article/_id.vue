@@ -488,6 +488,8 @@ export default {
 
   .message-wrap {
     margin-top: 30px;
+    box-shadow: 0 20px 40px rgb(103 118 128 / 3%);
+    padding: 20px;
     /deep/ .ant-form {
       .ant-form-item {
         margin-bottom: 0;
