@@ -49,6 +49,7 @@
         <a-spin tip="加载中..." />
       </div>
     </a-list>
+
     <a-back-top />
   </div>
 </template>
@@ -75,7 +76,6 @@ export default {
       loading: false,
     }
   },
-  created() {},
   methods: {
     async _getData(page) {
       try {
