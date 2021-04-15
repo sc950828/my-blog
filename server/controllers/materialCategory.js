@@ -2,9 +2,9 @@ const MaterialCategory = require("../models/materialCategorys");
 const { checkIsAdmin } = require("../utils/help");
 
 class MaterialCategoryCtrl {
-  // 查询
+  // 分页查询素材文件夹
   async find(ctx) {
-    const { pageNo = 1, pageSize = 10, createBy } = ctx.query;
+    const { pageNo = 1, pageSize = 10, createBy, sortField, sortOrder } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
@@ -18,20 +18,24 @@ class MaterialCategoryCtrl {
         query = {};
       }
     }
+    const sortQuery = {};
+    if(sortOrder && sortField) {
+      sortQuery[sortField] = sortOrder.slice(0, -3);
+    }
     const materialCategorys = await MaterialCategory.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortQuery)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize).populate("create_by");
     const total = await MaterialCategory.find(query).countDocuments();
     ctx.body = { materialCategorys, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
-  // 查询
+  // 查询所有素材文件夹
   async findAll(ctx) {
     // 默认查自己
     let query = { create_by: ctx.state.user.id };
     const isAdmin = checkIsAdmin(ctx);
-    // 传了id查id 没传查所有
+    // 传了createBy查createBy 没传查所有
     if (isAdmin) {
       if (ctx.query.createBy) {
         query["create_by"] = ctx.query.createBy;
@@ -79,7 +83,7 @@ class MaterialCategoryCtrl {
     ctx.body = materialCategory;
   }
 
-  // 删除
+  // 删除素材文件夹
   async delete(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true }

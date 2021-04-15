@@ -4,11 +4,11 @@ import {  ADD_MATERIAL_CATEGORY, GET_MATERIAL_CATEGORY_LISTS, GET_ALL_MATERIAL_C
 import {getMaterialCategoryListsSuccessed, getMaterialCategoryListsFailed, getAllMaterialCategoryListsSuccessed, getAllMaterialCategoryListsFailed} from '../actions/creatorMaterialCategoryActions'
 import { message } from 'antd';
 
-function* _getMaterialCategoryLists(action = {}) {
+function* _getMaterialCategoryLists(action) {
   try {
     // 获取素材分类列表
     const result = yield call(getMaterialCategoryList, action.payload);
-    // 进入下一步
+    // 存入store
     yield put(getMaterialCategoryListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -20,11 +20,11 @@ function* getMaterialCategoryListsSaga() {
   yield takeLatest(GET_MATERIAL_CATEGORY_LISTS, _getMaterialCategoryLists);
 }
 
-function* _getAllMaterialCategoryLists(action = {}) {
+function* _getAllMaterialCategoryLists(action) {
   try {
     // 获取素材分类列表
     const result = yield call(getAllMaterialCategoryList, action.payload);
-    // 进入下一步
+    // 存入store
     yield put(getAllMaterialCategoryListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -39,9 +39,11 @@ function* getAllMaterialCategoryListsSaga() {
 function* _addMaterialCategory(action) {
   try {
     // 添加素材分类
-    yield call(addMaterialCategory, action.payload);
+    const {name, params} = action.payload
+    yield call(addMaterialCategory, {name});
     message.success("添加素材分类成功")
-    yield _getMaterialCategoryLists()
+    // 获取当前页面数据
+    yield _getMaterialCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -54,9 +56,11 @@ function* addMaterialCategorySaga() {
 function* _updateMaterialCategory(action) {
   try {
     // 编辑素材分类
-    yield call(updateMaterialCategory, action.payload);
+    const {id, name, params} = action.payload
+    yield call(updateMaterialCategory, {id, name});
     message.success("编辑素材分类成功")
-    yield _getMaterialCategoryLists()
+    // 获取当前页面数据
+    yield _getMaterialCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -69,9 +73,11 @@ function* updateMaterialCategorySaga() {
 function* _deleteMaterialCategory(action) {
   try {
     // 删除素材分类
-    yield call(deleteMaterialCategory, action.payload);
+    const {id, params} = action.payload
+    yield call(deleteMaterialCategory, id);
     message.success("删除素材分类成功")
-    yield _getMaterialCategoryLists()
+    // 获取当前页面数据
+    yield _getMaterialCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }

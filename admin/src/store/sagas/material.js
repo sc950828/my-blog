@@ -40,9 +40,10 @@ function* addMaterialSaga() {
 function* _deleteMaterial(action) {
   try {
     const {id, params} = action.payload
-    // 添加素材
+    // 删除素材
     yield call(deleteMaterial, id);
     message.success("素材删除成功")
+    // 重新获取素材
     yield _getMaterialLists({payload: params})
   } catch (e) {
     console.error(e)
@@ -59,6 +60,7 @@ function* _updateMaterial(action) {
     // 编辑素材
     yield call(updateMaterial, {id, materialCategory});
     message.success("素材文件夹调整成功")
+    // 重新获取素材
     yield _getMaterialLists({payload: params})
   } catch (e) {
     console.error(e)

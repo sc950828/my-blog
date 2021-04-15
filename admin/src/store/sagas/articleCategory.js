@@ -90,9 +90,11 @@ function* updateArticleCategorySaga() {
 function* _deleteArticleCategoory(action) {
   try {
     // 删除文章分类
-    yield call(deleteArticleCategory, action.payload);
+    const {id, params} = action.payload
+    yield call(deleteArticleCategory, id);
     message.success("文章分类删除成功")
-    yield _getArticleCategoryLists()
+    // 重新获取文章分类
+    yield _getArticleCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -105,11 +107,11 @@ function* deleteArticleCategorySaga() {
 function* _updateArticleCategoryStatus(action) {
   try {
     // 编辑文章分类状态
-    const {id, status} = action.payload
+    const {id, status, params} = action.payload
     yield call(updateArticleCategoryStatus, {id, status});
     message.success("修改文章分类状态成功")
     // 重新获取列表
-    yield _getArticleCategoryLists()
+    yield _getArticleCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }

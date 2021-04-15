@@ -2,10 +2,9 @@ const ArticleCategory = require("../models/articleCategorys");
 const { checkIsAdmin } = require("../utils/help");
 class ArticleCategoryCtrl {
   // admin端
-
-  // 分页查询
+  // 分页查询章分类文件夹
   async find(ctx) {
-    const { pageNo = 1, pageSize = 10, createBy } = ctx.query;
+    const { pageNo = 1, pageSize = 10, createBy, sortField, sortOrder } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
@@ -19,8 +18,12 @@ class ArticleCategoryCtrl {
         query = {};
       }
     }
+    const sortQuery = {};
+    if(sortOrder && sortField) {
+      sortQuery[sortField] = sortOrder.slice(0, -3);
+    }
     const articleCategorys = await ArticleCategory.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortQuery)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("create_by");
@@ -28,7 +31,7 @@ class ArticleCategoryCtrl {
     ctx.body = { articleCategorys, total, pageNo: _pageNo, pageSize: _pageSize };
   }
 
-  // 不分页查询所有
+  // 不分页查询所有章分类文件夹
   async findAll(ctx) {
     const { createBy } = ctx.query;
     // 默认查自己
@@ -47,7 +50,7 @@ class ArticleCategoryCtrl {
     ctx.body = { articleCategorys, total };
   }
 
-  // 通过id查询
+  // 通过id查询章分类文件夹
   async findById(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true },
@@ -61,7 +64,7 @@ class ArticleCategoryCtrl {
     ctx.body = articleCategory;
   }
 
-  // 创建
+  // 创建文章分类文件夹
   async create(ctx) {
     ctx.verifyParams({
       title: { type: "string", required: true, trim: true, max: 20 },
@@ -84,7 +87,7 @@ class ArticleCategoryCtrl {
     ctx.body = articleCategory;
   }
 
-  // 修改
+  // 修改章分类文件夹
   async update(ctx) {
     ctx.verifyParams({
       title: { type: "string", required: true, trim: true, max: 20 },
@@ -129,7 +132,7 @@ class ArticleCategoryCtrl {
     ctx.body = articleCategory;
   }
 
-  // 删除
+  // 删除章分类文件夹
   async delete(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true }
@@ -148,8 +151,7 @@ class ArticleCategoryCtrl {
   }
 
   // web端
-
-  // 查询
+  // 查询章分类文件夹
   async findWeb(ctx) {
     const { pageNo = 1, pageSize = 12 } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
