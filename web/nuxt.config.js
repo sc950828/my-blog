@@ -35,6 +35,11 @@ export default {
         type: 'image/x-icon',
         href: `/favicon-${process.env.NAME}.ico`,
       },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css',
+      },
     ],
   },
 
@@ -42,7 +47,7 @@ export default {
   css: [
     '~/assets/styles/common.less',
     // markdown css https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css
-    '~/assets/styles/markdown.css',
+    // '~/assets/styles/markdown.css',
     'ant-design-vue/dist/antd.css',
   ],
 
