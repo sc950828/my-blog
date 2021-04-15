@@ -4,9 +4,9 @@ const { checkIsAdmin } = require("../utils/help");
 const { del } = require("../utils/alioss");
 
 class MaterialCtrl {
-  // 查找
+  // 查找所有素材
   async find(ctx) {
-    const { pageNo = 1, pageSize = 10, createBy, materialCategory } = ctx.query;
+    const { pageNo = 1, pageSize = 10, createBy, materialCategory, sortField, sortOrder } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
@@ -23,8 +23,12 @@ class MaterialCtrl {
     if(materialCategory) {
       query.material_category = materialCategory;
     }
+    const sortQuery = {};
+    if(sortOrder && sortField) {
+      sortQuery[sortField] = sortOrder.slice(0, -3);
+    }
     const materials = await Material.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortQuery)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("create_by material_category");

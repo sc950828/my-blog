@@ -5,10 +5,9 @@ const { checkIsAdmin } = require("../utils/help");
 
 class ArticleCtrl {
   // admin端
-
   // 分页查找文章
   async find(ctx) {
-    const { pageNo = 1, pageSize = 10, createBy, articleCategory } = ctx.query;
+    const { pageNo = 1, pageSize = 10, createBy, articleCategory, sortField, sortOrder } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
@@ -25,8 +24,12 @@ class ArticleCtrl {
     if(articleCategory) {
       query.article_category = articleCategory;
     }
+    const sortQuery = {};
+    if(sortOrder && sortField) {
+      sortQuery[sortField] = sortOrder.slice(0, -3);
+    }
     const articles = await Article.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortQuery)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("create_by article_category");
@@ -177,7 +180,6 @@ class ArticleCtrl {
   }
 
   // web端
-
   // 分页查找文章
   async findWeb(ctx) {
     const { pageNo = 1, pageSize = 10, articleCategory } = ctx.query;

@@ -1,207 +1,269 @@
-import React, {PureComponent} from 'react'
-import { Table, Space, Button, Row, Col, Image, Select, Modal, Form} from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { connect } from 'react-redux';
-import { getMaterialLists, deleteMaterial, updateMaterial } from '../../store/actions/creatorMaterialActions';
-import {getAllMaterialCategoryLists} from '../../store/actions/creatorMaterialCategoryActions'
-import HeadWrap from "../../components/HeadWrap"
-import {copyLink} from '../../utils/help'
+import React, { PureComponent } from "react";
+import {
+  Table,
+  Space,
+  Button,
+  Row,
+  Col,
+  Image,
+  Select,
+  Modal,
+  Form,
+} from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { connect } from "react-redux";
+import {
+  getMaterialLists,
+  deleteMaterial,
+  updateMaterial,
+} from "../../store/actions/creatorMaterialActions";
+import { getAllMaterialCategoryLists } from "../../store/actions/creatorMaterialCategoryActions";
+import HeadWrap from "../../components/HeadWrap";
+import { copyLink } from "../../utils/help";
 
-const {confirm} = Modal
+const { confirm } = Modal;
 const { Option } = Select;
 class Material extends PureComponent {
   formRef = React.createRef();
   constructor(props) {
-    super(props)
+    super(props);
     this.columns = [
       {
-        title: '素材',
-        dataIndex: 'link',
+        title: "素材",
+        dataIndex: "link",
         render: (link) => {
-          return <Image width={120} src={link} placeholder={true}/>
-        }
+          return <Image width={120} src={link} placeholder={true} />;
+        },
       },
       {
-        title: '素材链接 (点击复制)',
-        dataIndex: 'link',
+        title: "素材链接 (点击复制)",
+        dataIndex: "link",
         ellipsis: true,
         render: (text) => {
-          return <span onClick={copyLink}>{text}</span>
-        }
+          return <span onClick={copyLink}>{text}</span>;
+        },
       },
       {
-        title: '所属分类',
-        dataIndex: 'material_category',
+        title: "所属分类",
+        dataIndex: "material_category",
         ellipsis: true,
         render: (text) => {
-          return text.name
-        }
+          return text.name;
+        },
       },
       {
-        title: '创建时间',
-        dataIndex: 'createdAt',
+        title: "创建时间",
+        dataIndex: "createdAt",
+        width: 180,
+        sorter: true,
+        render: (text) => {
+          return new Date(text).toLocaleString();
+        },
+      },
+      {
+        title: "修改时间",
+        dataIndex: "updatedAt",
         width: 180,
         render: (text) => {
-          return new Date(text).toLocaleString()
-        }
+          return new Date(text).toLocaleString();
+        },
       },
       {
-        title: '修改时间',
-        dataIndex: 'updatedAt',
-        width: 180,
-        render: (text) => {
-          return new Date(text).toLocaleString()
-        }
-      },
-      {
-        title: '操作',
+        title: "操作",
         width: 200,
         render: (text, record) => (
           <Space size="middle">
-            <Button type="primary" onClick={() => {this.editMaterial(record)}} size="small">调整文件夹</Button>
-            <Button type="danger" onClick={() => {this.deleteMaterial(record)}} size="small">删除</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                this.editMaterial(record);
+              }}
+              size="small"
+            >
+              调整文件夹
+            </Button>
+            <Button
+              type="danger"
+              onClick={() => {
+                this.deleteMaterial(record);
+              }}
+              size="small"
+            >
+              删除
+            </Button>
           </Space>
         ),
-      }
+      },
     ];
     this.state = {
       pageNo: 1,
       pageSize: 10,
       id: "",
       materialCategory: "",
-      isModalVisible: false
-    }
+      isModalVisible: false,
+      sortField: "createdAt",
+      sortOrder: "descend",
+    };
   }
 
   deleteMaterial = (record) => {
-    const {handleDeleteMaterial} = this.props
-    const{pageNo, pageSize, materialCategory} = this.state
+    const { handleDeleteMaterial, materialLists } = this.props;
+    const {
+      pageNo,
+      pageSize,
+      materialCategory,
+      sortField,
+      sortOrder,
+    } = this.state;
+    let _pageNo = pageNo;
+    // 当页只有一条数据就退回一页
+    if (materialLists.materials.length <= 1) {
+      _pageNo = Math.max(pageNo - 1, 1);
+    }
     confirm({
-      title: '删除素材',
+      title: "删除素材",
       icon: <ExclamationCircleOutlined />,
-      content: '确定删除该素材吗？',
-      okText: '确定',
-      okType: 'danger',
+      content: "确定删除该素材吗？",
+      okText: "确定",
+      okType: "danger",
       cancelText: "取消",
       onOk() {
-        const params = {
-          pageNo,
-          pageSize,
-          materialCategory
-        }
-        handleDeleteMaterial({id: record._id, params})
+        handleDeleteMaterial({
+          id: record._id,
+          params: {
+            pageNo: _pageNo,
+            pageSize,
+            materialCategory,
+            sortField,
+            sortOrder,
+          },
+        });
       },
       onCancel() {
-        console.log('Cancel');
+        console.log("Cancel");
       },
     });
-  }
+  };
 
   selectChange = async (value) => {
     await this.setState({
-      materialCategory: value
-    })
+      materialCategory: value,
+    });
     const params = {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize,
-      materialCategory: this.state.materialCategory
-    }
-    this.props.handleGetMaterialLists(params)
-  }
+      materialCategory: this.state.materialCategory,
+    };
+    this.props.handleGetMaterialLists(params);
+  };
 
   async componentDidMount() {
-    const {location} = this.props
-    if(location.state && location.state.materialCategory) {
+    const { location } = this.props;
+    if (location.state && location.state.materialCategory) {
       await this.setState({
-        materialCategory: location.state.materialCategory
-      })
+        materialCategory: location.state.materialCategory,
+      });
     }
+    const {
+      pageNo,
+      pageSize,
+      materialCategory,
+      sortField,
+      sortOrder,
+    } = this.state;
     const params = {
-      pageNo: this.state.pageNo,
-      pageSize: this.state.pageSize,
-      materialCategory: this.state.materialCategory
-    }
-    this.props.handleGetAllMaterialCategoryLists()
-    this.props.handleGetMaterialLists(params)
+      pageNo,
+      pageSize,
+      materialCategory,
+      sortField,
+      sortOrder,
+    };
+    this.props.handleGetAllMaterialCategoryLists();
+    this.props.handleGetMaterialLists(params);
   }
-
-  changePageNo = (page, pageSize) => {
-    this.setState({
-      pageNo: page
-    })
+  // 分页、排序、筛选变化时触发
+  handleTableChange = async (pagination, filters, sorter) => {
+    const { field, order } = sorter;
+    await this.setState({
+      pageNo: pagination.current,
+      pageSize: pagination.pageSize,
+      sortField: field ?? "createdAt",
+      sortOrder: order ?? "descend",
+    });
+    const {
+      pageNo,
+      pageSize,
+      materialCategory,
+      sortField,
+      sortOrder,
+    } = this.state;
     const params = {
-      pageNo: page,
-      pageSize: pageSize,
-      materialCategory: this.state.materialCategory
-    }
-    this.props.handleGetMaterialLists(params)
-  }
-
-  changePageSize = (current, size) => {
-    this.setState({
-      pageSize: size
-    })
-    const params = {
-      pageNo: current,
-      pageSize: size,
-      materialCategory: this.state.materialCategory
-    }
-    this.props.handleGetMaterialLists(params)
-  }
+      pageNo,
+      pageSize,
+      materialCategory,
+      sortField,
+      sortOrder,
+    };
+    this.props.handleGetMaterialLists(params);
+  };
 
   addMaterial = async () => {
-    this.props.history.push("/materialOperate/add")
-  }
+    this.props.history.push("/materialOperate/add");
+  };
 
-  
   editMaterial = async (record) => {
-    await this.showModal(record._id)
+    await this.showModal(record._id);
     this.formRef.current.setFieldsValue({
-      materialCategory: record.material_category._id
+      materialCategory: record.material_category._id,
     });
-  }
+  };
 
-  showModal = (id="") => {
+  showModal = (id = "") => {
     this.setState({
       isModalVisible: true,
-      id
-    })
+      id,
+    });
   };
 
   handleOk = () => {
-    this.formRef.current.submit()
+    this.formRef.current.submit();
   };
 
   handleCancel = () => {
     this.setState({
-      isModalVisible: false
-    })
+      isModalVisible: false,
+    });
   };
 
   onFinish = (formData) => {
-    const{id, pageNo, pageSize, materialCategory} = this.state
+    const { id, pageNo, pageSize, materialCategory } = this.state;
     const params = {
       pageNo,
       pageSize,
-      materialCategory
-    }
-    formData.params = params
-    formData.id = id
+      materialCategory,
+    };
+    formData.params = params;
+    formData.id = id;
 
-    this.props.handleUpdateMaterial(formData)
+    this.props.handleUpdateMaterial(formData);
     this.setState({
-      isModalVisible: false
-    })
-  }
+      isModalVisible: false,
+    });
+  };
 
   render() {
-    const {allMaterialCategoryLists, materialLists} = this.props
-    const {pageNo, pageSize} = this.state
+    const { allMaterialCategoryLists, materialLists } = this.props;
+    const { pageNo, pageSize } = this.state;
     return (
       <section>
         <HeadWrap>
           <Row>
-            <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}} xl={{span: 12}}>
+            <Col
+              xs={{ span: 24 }}
+              sm={{ span: 24 }}
+              lg={{ span: 24 }}
+              xl={{ span: 12 }}
+            >
               <Select
                 style={{ width: 240 }}
                 placeholder="请选择素材文件夹"
@@ -209,32 +271,43 @@ class Material extends PureComponent {
                 onChange={this.selectChange}
               >
                 <Option value="">全部</Option>
-                {
-                  allMaterialCategoryLists.materialCategorys && allMaterialCategoryLists.materialCategorys.map((item) => {
+                {allMaterialCategoryLists.materialCategorys &&
+                  allMaterialCategoryLists.materialCategorys.map((item) => {
                     return (
-                      <Option key={item._id} value={item._id}>{item.name}</Option>
-                    )
-                  })
-                }
+                      <Option key={item._id} value={item._id}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
               </Select>
             </Col>
-            <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 24}} xl={{span: 12}}>
-              <Button type="primary" style={{float: "right"}} onClick={this.addMaterial}>添加素材</Button>
+            <Col
+              xs={{ span: 24 }}
+              sm={{ span: 24 }}
+              lg={{ span: 24 }}
+              xl={{ span: 12 }}
+            >
+              <Button
+                type="primary"
+                style={{ float: "right" }}
+                onClick={this.addMaterial}
+              >
+                添加素材
+              </Button>
             </Col>
           </Row>
         </HeadWrap>
-        <Table 
+        <Table
           rowKey="_id"
           pagination={{
             current: pageNo,
             pageSize,
             total: materialLists.total,
             showSizeChanger: true,
-            onChange: this.changePageNo,
-            onShowSizeChange: this.changePageSize
           }}
           columns={this.columns}
           dataSource={materialLists.materials}
+          onChange={this.handleTableChange}
         />
 
         <Modal
@@ -245,60 +318,56 @@ class Material extends PureComponent {
           visible={this.state.isModalVisible}
           maskClosable={false}
           onOk={this.handleOk}
-          onCancel={this.handleCancel}>
-            <Form
-              ref={this.formRef}
-              onFinish={this.onFinish}
+          onCancel={this.handleCancel}
+        >
+          <Form ref={this.formRef} onFinish={this.onFinish}>
+            <Form.Item
+              label="素材文件夹名"
+              name="materialCategory"
+              rules={[{ required: true, message: "请选择素材文件夹名" }]}
             >
-              <Form.Item
-                label="素材文件夹名"
-                name="materialCategory"
-                rules={[
-                  { required: true, message: '请选择素材文件夹名' },
-                ]}
-              >
-                <Select
-                  style={{ width: 200 }}
-                  placeholder="请选择素材文件夹"
-                >
-                  {
-                    allMaterialCategoryLists.materialCategorys && allMaterialCategoryLists.materialCategorys.map((item) => {
-                      return (
-                        <Option key={item._id} value={item._id}>{item.name}</Option>
-                      )
-                    })
-                  }
-                </Select>
-              </Form.Item>
+              <Select style={{ width: 200 }} placeholder="请选择素材文件夹">
+                {allMaterialCategoryLists.materialCategorys &&
+                  allMaterialCategoryLists.materialCategorys.map((item) => {
+                    return (
+                      <Option key={item._id} value={item._id}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+            </Form.Item>
           </Form>
         </Modal>
       </section>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    allMaterialCategoryLists: state.get("materialCategory").get("allMaterialCategoryLists"),
-    materialLists: state.get("material").get("materialLists")
-  }
-}
+    allMaterialCategoryLists: state
+      .get("materialCategory")
+      .get("allMaterialCategoryLists"),
+    materialLists: state.get("material").get("materialLists"),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleGetAllMaterialCategoryLists() {
-      dispatch(getAllMaterialCategoryLists())
+      dispatch(getAllMaterialCategoryLists());
     },
     handleGetMaterialLists(params) {
-      dispatch(getMaterialLists(params))
+      dispatch(getMaterialLists(params));
     },
     handleDeleteMaterial(params) {
-      dispatch(deleteMaterial(params))
+      dispatch(deleteMaterial(params));
     },
     handleUpdateMaterial(params) {
-      dispatch(updateMaterial(params))
-    }
-  }
-}
+      dispatch(updateMaterial(params));
+    },
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Material)
+export default connect(mapStateToProps, mapDispatchToProps)(Material);

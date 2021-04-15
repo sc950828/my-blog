@@ -8,7 +8,7 @@ function* _getArticleLists(action={}) {
   try {
     // 获取文章列表
     const result = yield call(getArticleList, action.payload);
-    // 进入下一步
+    // 存储到store
     yield put(getArticleListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -73,10 +73,11 @@ function* updateArticleSaga() {
 
 function* _deleteArticle(action) {
   try {
+    const {id, params} = action.payload
     // 删除文章分类
-    yield call(deleteArticle, action.payload);
+    yield call(deleteArticle, id);
     message.success("文章删除成功")
-    yield _getArticleLists()
+    yield _getArticleLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -89,11 +90,11 @@ function* deleteArticleSaga() {
 function* _updateArticleStatus(action) {
   try {
     // 编辑文章状态
-    const {id, status} = action.payload
+    const {id, status, params} = action.payload
     yield call(updateArticleStatus, {id, status});
     message.success("修改文章状态成功")
     // 重新获取列表
-    yield _getArticleLists()
+    yield _getArticleLists({payload: params})
   } catch (e) {
     console.error(e)
   }
