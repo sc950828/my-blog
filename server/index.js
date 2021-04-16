@@ -7,6 +7,7 @@ const jwt = require("koa-jwt");
 const routing = require("./routes");
 const runmongodb = require("./utils/mongodb");
 const { initSecret } = require("./utils/secret");
+const getIp = require("./utils/getIp");
 const path = require("path");
 const app = new Koa();
 
@@ -22,6 +23,10 @@ const main = async () => {
   };
   app.use(KoaJsonError(options));
 
+
+  // 获取ip
+  getIp(app);
+
   // 获取请求体
   app.use(
     koaBody({
@@ -34,11 +39,6 @@ const main = async () => {
       },
     })
   );
-
-  // app.use(async (ctx, next) => {
-  //   console.log(ctx.request.url);
-  //   await next();
-  // });
 
   const secret = await initSecret();
   // jwt验证 排除静态文件夹和登录接口

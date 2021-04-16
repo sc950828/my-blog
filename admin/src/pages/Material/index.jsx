@@ -148,6 +148,7 @@ class Material extends PureComponent {
   selectChange = async (value) => {
     await this.setState({
       materialCategory: value,
+      pageNo: 1,
     });
     const params = {
       pageNo: this.state.pageNo,

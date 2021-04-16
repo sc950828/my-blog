@@ -235,6 +235,7 @@ class Article extends PureComponent {
   selectChange = async (value) => {
     await this.setState({
       articleCategory: value,
+      pageNo: 1,
     });
     const params = {
       pageNo: this.state.pageNo,
