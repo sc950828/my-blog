@@ -4,9 +4,9 @@ const { checkIsAdmin } = require("../utils/help");
 const mongoose = require("mongoose");
 
 class SourceCtrl {
-  // 查找
+  // 分页查找学习资源
   async find(ctx) {
-    const { pageNo = 1, pageSize = 10, createBy, sourceCategory } = ctx.query;
+    const { pageNo = 1, pageSize = 10, createBy, sourceCategory, sortField, sortOrder } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 默认查自己
@@ -23,8 +23,12 @@ class SourceCtrl {
     if(sourceCategory) {
       query.source_category = sourceCategory;
     }
+    const sortQuery = {};
+    if(sortOrder && sortField) {
+      sortQuery[sortField] = sortOrder.slice(0, -3);
+    }
     const sources = await Source.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortQuery)
       .limit(_pageSize)
       .skip((_pageNo - 1) * _pageSize)
       .populate("create_by source_category");
@@ -65,7 +69,7 @@ class SourceCtrl {
     ctx.body = { sources, total: totalArr.length, pageNo: _pageNo, pageSize: _pageSize };
   }
 
-  // 通过id找
+  // 通过id找学习资源
   async findById(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true }
@@ -159,7 +163,7 @@ class SourceCtrl {
     ctx.body = newSource;
   }
 
-  // 修改状态 是否发布
+  // 修改学习资源状态 是否发布
   async updateStatus(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true },
@@ -172,12 +176,12 @@ class SourceCtrl {
       { new: true, }
     );
     if (!source) {
-      ctx.throw(404, "文章不存在");
+      ctx.throw(404, "学习资源不存在");
     }
     ctx.body = source;
   }
 
-  // 删除
+  // 删除学习资源
   async delete(ctx) {
     ctx.verifyParams({
       id: { type: "string", required: true }

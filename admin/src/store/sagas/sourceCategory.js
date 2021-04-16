@@ -8,7 +8,7 @@ function* _getSourceCategoryLists(action = {}) {
   try {
     // 获取学习资源分类列表
     const result = yield call(getSourceCategoryList, action.payload);
-    // 进入下一步
+    // 存储到store
     yield put(getSourceCategoryListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -24,7 +24,7 @@ function* _getAllSourceCategoryLists(action = {}) {
   try {
     // 获取学习资源分类列表
     const result = yield call(getAllSourceCategoryList, action.payload);
-    // 进入下一步
+    // 存储到store
     yield put(getAllSourceCategoryListsSuccessed(result));
   } catch (e) {
     console.error(e)
@@ -38,10 +38,12 @@ function* getAllSourceCategoryListsSaga() {
 
 function* _addSourceCategory(action) {
   try {
+    const {name, isPublish, params} = action.payload
     // 添加学习资源分类
-    yield call(addSourceCategory, action.payload);
+    yield call(addSourceCategory, {name, isPublish});
     message.success("添加学习资源分类成功")
-    yield _getSourceCategoryLists()
+    // 重新回去学习资源分类
+    yield _getSourceCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -53,10 +55,12 @@ function* addSourceCategorySaga() {
 
 function* _updateSourceCategory(action) {
   try {
+    const {id, name, isPublish, params} = action.payload
     // 编辑学习资源分类
-    yield call(updateSourceCategory, action.payload);
+    yield call(updateSourceCategory, {id, name, isPublish});
     message.success("编辑学习资源分类成功")
-    yield _getSourceCategoryLists()
+    // 重新回去学习资源分类
+    yield _getSourceCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -69,11 +73,11 @@ function* updateSourceCategorySaga() {
 function* _updateSourceCategoryStatus(action) {
   try {
     // 编辑文章分类状态
-    const {id, status} = action.payload
+    const {id, status, params} = action.payload
     yield call(updateSourceCategoryStatus, {id, status});
     message.success("修改文章分类状态成功")
-    // 重新获取列表
-    yield _getSourceCategoryLists()
+    // 重新回去学习资源分类
+    yield _getSourceCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }
@@ -85,10 +89,12 @@ function* changeSourceCategoryStatusSaga() {
 
 function* _deleteSourceCategory(action) {
   try {
+    const {id, params} = action.payload
     // 删除学习资源分类
-    yield call(deleteSourceCategory, action.payload);
+    yield call(deleteSourceCategory, id);
     message.success("删除学习资源分类成功")
-    yield _getSourceCategoryLists()
+    // 重新回去学习资源分类
+    yield _getSourceCategoryLists({payload: params})
   } catch (e) {
     console.error(e)
   }

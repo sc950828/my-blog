@@ -55,7 +55,7 @@ class ArticleOperate extends PureComponent {
       const { id, isLook, listParams } = location.state;
       if (id) {
         this.mdEditor.setView({ menu: true, html: true, md: true });
-        const params = { id: location.state.id };
+        const params = { id };
         params.setFormData = () => {
           const {
             content,

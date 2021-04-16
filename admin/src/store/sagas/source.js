@@ -33,6 +33,10 @@ function* _addSource(action) {
   }
 }
 
+function* addSourceSaga() {
+  yield takeLatest(ADD_SOURCE, _addSource);
+}
+
 function* _getSourceById(action) {
   try {
     // 获取文章通过id
@@ -48,10 +52,6 @@ function* _getSourceById(action) {
 
 function* getSourceSaga() {
   yield takeLatest(GET_SOURCE, _getSourceById);
-}
-
-function* addSourceSaga() {
-  yield takeLatest(ADD_SOURCE, _addSource);
 }
 
 function* _deleteSource(action) {
@@ -90,11 +90,11 @@ function* updateSourceSaga() {
 function* _updateSourceStatus(action) {
   try {
     // 编辑文章分类状态
-    const {id, status} = action.payload
+    const {id, status, params} = action.payload
     yield call(updateSourceStatus, {id, status});
     message.success("修改学习资源状态成功")
     // 重新获取列表
-    yield _getSourceLists()
+    yield _getSourceLists({payload: params})
   } catch (e) {
     console.error(e)
   }

@@ -189,6 +189,8 @@ class ArticleCtrl {
     let query = { create_by: ctx.state.user.id, is_publish: true };
     if(articleCategory) {
       query.article_category = articleCategory;
+      // 增加阅读量
+      await ArticleCategory.findByIdAndUpdate(articleCategory, { $inc: { views: 1 } },{ new: true });
     }
 
     const articles = await Article.find(query)
