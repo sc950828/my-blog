@@ -62,14 +62,6 @@ const routes = [
         meta: {title: "用户管理", icon: <UserOutlined />, activePath: "/user"}
       },
       {
-        path: "/setting",
-        component: Setting,
-        menuShow: true,
-        onlyAdminShow: true,
-        requiresAuth: true, //需要登陆后才能跳转的页面
-        meta: {title: "设置管理", icon: <SettingOutlined />, activePath: "/setting"}
-      },
-      {
         path: "/userOperate",
         component: Dashboard,
         menuShow: false,
@@ -95,6 +87,14 @@ const routes = [
             meta: {title: "查看用户", activePath: "/user"}
           }
         ]
+      },
+      {
+        path: "/setting",
+        component: Setting,
+        menuShow: true,
+        onlyAdminShow: true,
+        requiresAuth: true, //需要登陆后才能跳转的页面
+        meta: {title: "设置管理", icon: <SettingOutlined />, activePath: "/setting"}
       },
       {
         path: "/materialCategory",

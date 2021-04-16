@@ -7,7 +7,7 @@
       <!-- lg ≥992px -->
       <!-- xl ≥1200px -->
       <!-- xxl ≥1600px -->
-      <a-col :xs="24" :sm="24" :lg="24" :xl="20" :xxl="16"> <Nuxt /> </a-col>
+      <a-col :xs="24" :sm="24" :lg="24" :xl="21" :xxl="17"> <Nuxt /> </a-col>
     </a-row>
   </div>
 </template>

@@ -6,7 +6,7 @@
     <!-- lg ≥992px -->
     <!-- xl ≥1200px -->
     <!-- xxl ≥1600px -->
-    <a-col :xs="18" :sm="18" :lg="6" :xl="6" :xxl="6">
+    <a-col :xs="18" :sm="18" :lg="6" :xl="5" :xxl="5">
       <div class="title pointer" @click="goIndex">{{ title }}</div>
     </a-col>
     <a-col :xs="6" :sm="6" :lg="0" :xl="0" :xxl="0">
@@ -17,7 +17,7 @@
         />
       </div>
     </a-col>
-    <a-col :xs="0" :sm="0" :lg="18" :xl="14" :xxl="10">
+    <a-col :xs="0" :sm="0" :lg="18" :xl="16" :xxl="12">
       <a-menu v-model="current" mode="horizontal" @click="selectMenu">
         <a-menu-item key="/"> <a-icon type="home" />首页 </a-menu-item>
         <a-menu-item key="/articleList">
@@ -35,6 +35,9 @@
         <a-menu-item key="/message">
           <a-icon type="message" />留言墙
         </a-menu-item>
+        <a-menu-item key="/user">
+          <a-icon type="user" />{{ getterUser ? getterUser.name : '登录/注册' }}
+        </a-menu-item>
       </a-menu>
     </a-col>
   </a-row>
@@ -50,7 +53,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getterCollapsed']),
+    ...mapGetters(['getterCollapsed', 'getterUser']),
   },
   watch: {
     $route: {

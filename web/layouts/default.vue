@@ -34,6 +34,11 @@
           <a-menu-item key="/message">
             <a-icon type="message" />留言墙
           </a-menu-item>
+          <a-menu-item key="/user">
+            <a-icon type="user" />{{
+              getterUser ? getterUser.name : '登录/注册'
+            }}
+          </a-menu-item>
         </a-menu>
       </a-drawer>
     </a-layout>
@@ -56,10 +61,11 @@ export default {
     return {
       zhCN,
       current: [],
+      user: null,
     }
   },
   computed: {
-    ...mapGetters(['getterCollapsed']),
+    ...mapGetters(['getterCollapsed', 'getterUser']),
   },
   watch: {
     $route: {
@@ -68,6 +74,12 @@ export default {
       },
       immediate: true,
     },
+  },
+  beforeMount() {
+    const user = localStorage.getItem('user')
+    if (user) {
+      this.$store.commit('changeUser', JSON.parse(user))
+    }
   },
   methods: {
     ...mapMutations(['changeCollapsed']),

@@ -22,17 +22,6 @@ const initMail = async () => {
 
 initMail();
 
-const sendEmail = async (option) => {
-  const { fromUser, toUser, subject, text } = option;
-  return await transporter.sendMail({
-    from: `${fromUser}的博客 ${mailUser}`, // sender address
-    to: toUser, // list of receivers
-    subject: subject, // Subject line
-    text: text, // plain text body
-    // html: "<b>Hello world?</b>", // html body
-  });
-};
-
 const sendUpdatePasswordEmail = async (option) => {
   const { toUser, code } = option;
   return await transporter.sendMail({
@@ -44,8 +33,20 @@ const sendUpdatePasswordEmail = async (option) => {
   });
 };
 
+// 发送注册验证码
+const sendRegisterEmail = async (option) => {
+  const { fromUser, toUser, code } = option;
+  return await transporter.sendMail({
+    from: `${fromUser}的博客 ${mailUser}`, // sender address
+    to: toUser, // list of receivers
+    subject: "博客注册", // Subject line
+    text: `您的验证码是 ${code}，五分钟内有效。`, // plain text body
+    // html: "<b>Hello world?</b>", // html body
+  });
+};
+
 
 module.exports = {
-  sendEmail,
-  sendUpdatePasswordEmail
+  sendUpdatePasswordEmail,
+  sendRegisterEmail
 };
