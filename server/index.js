@@ -23,6 +23,8 @@ const main = async () => {
   };
   app.use(KoaJsonError(options));
 
+  // 在 Koa 应用里设置 app.proxy 为 true。为了获取真实ip
+  app.proxy = true;
 
   // 获取ip
   getIp(app);

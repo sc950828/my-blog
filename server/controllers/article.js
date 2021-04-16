@@ -174,7 +174,7 @@ class ArticleCtrl {
       }
     );
     // 时间线减除当前文章记录
-    TimeLine.findOneAndRemove({ article: ctx.params.id });
+    await TimeLine.findOneAndRemove({ article: ctx.params.id });
 
     ctx.status = 204;
   }
