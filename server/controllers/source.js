@@ -54,7 +54,16 @@ class SourceCtrl {
     const sources = await Source.aggregate([
       { $match: query },
       {
-        $group: { _id: '$source_category', name: { $first: '$source_category_name' }, createdAt: { $first: '$createdAt' }, lists: { $push: "$$ROOT" } }
+        $lookup: {
+          // 表名
+          from: 'sourcecategories',
+          localField: 'source_category',
+          foreignField: '_id',
+          as: 'items',
+        },
+      },
+      {
+        $group: { _id: '$source_category', sourceCategory: { $first: '$items' }, createdAt: { $first: '$createdAt' }, lists: { $push: "$$ROOT" } }
       },
       {
         $sort: { "createdAt": 1 }
@@ -103,7 +112,6 @@ class SourceCtrl {
       description,
       is_publish,
       source_category: sourceCategory,
-      source_category_name: findSourceCategory.name,
       create_by: ctx.state.user.id
     }).save();
 
@@ -145,7 +153,6 @@ class SourceCtrl {
         logo,
         description,
         source_category: sourceCategory,
-        source_category_name: findSourceCategory.name,
         is_publish
       },
       { new: true }
