@@ -126,4 +126,12 @@ export default {
     padding: 14px;
   }
 }
+
+.ant-menu-vertical {
+  border: none;
+}
+
+.ant-menu-item {
+  font-weight: bold;
+}
 </style>

@@ -13,7 +13,9 @@
     >
       <a-list-item slot="renderItem" slot-scope="item" :row-key="item._id">
         <a-list-item-meta>
-          <div slot="title" class="name ellipsis">{{ item.name }}</div>
+          <div slot="title" class="name ellipsis">
+            {{ item.sourceCategory[0].name }}
+          </div>
         </a-list-item-meta>
         <a-row :gutter="[16, 16]">
           <a-col

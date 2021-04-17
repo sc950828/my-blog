@@ -1,5 +1,4 @@
 const SourceCategory = require("../models/sourceCategorys");
-const Source = require("../models/sources");
 const { checkIsAdmin } = require("../utils/help");
 
 class SourceCategoryCtrl {
@@ -79,16 +78,6 @@ class SourceCategoryCtrl {
     );
     if (!sourceCategory) {
       ctx.throw(404, "学习资源分类不存在");
-    }
-
-    // 修改学习资源分类
-    const sources = await Source.find({ source_category: ctx.params.id });
-    for (const source of sources) {
-      await Source.findByIdAndUpdate(
-        source._id,
-        { source_category_name: name },
-        { new: true, }
-      );
     }
 
     ctx.body = sourceCategory;

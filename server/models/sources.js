@@ -15,8 +15,6 @@ const sourceSchema = new Schema(
     is_publish: { type: Boolean, default: false },
     // 属于哪个分类的资源
     source_category: { type: Schema.Types.ObjectId, ref: "SourceCategory", required: true },
-    // 分类名
-    source_category_name: { type: String, required: true },
     // 谁创建的素材
     create_by: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
