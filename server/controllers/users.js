@@ -99,11 +99,11 @@ class UserCtrl {
     if (!user.status) {
       ctx.throw(400, "该用户已禁用，请联系管理员");
     }
-    const { _id, name: _name, is_admin } = user;
+    const { _id, name: _name, is_admin, nick_name, email } = user;
     const id = _id.toString();
     const secret = await initSecret();
     // 不设置过期时间, expiresIn: '2h'
-    const token = jsonwebtoken.sign({ id, name: _name, is_admin }, secret);
+    const token = jsonwebtoken.sign({ id, email, name: _name, nickName: nick_name, is_admin }, secret);
     // redis设置token
     await setAsync(id, token);
     // 记住我

@@ -50,6 +50,31 @@ body {
   -webkit-box-orient: vertical;
 }
 
+.flex {
+  display: flex;
+}
+
+.flex-j-b {
+  justify-content: space-between;
+  .flex();
+}
+
+.flex-j-c {
+  justify-content: center;
+  .flex();
+}
+
+.flex-c {
+  justify-content: center;
+  align-items: center;
+  .flex();
+}
+
+.flex-a-c {
+  align-items: center;
+  .flex();
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -72,6 +97,12 @@ body {
 
 .ml-10 {
   margin-left: 10px;
+}
+
+// 兼容性
+// ios下输入框默认内阴影
+input {
+  -webkit-appearance: none;
 }
 
 // reset markdown

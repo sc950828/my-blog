@@ -2,7 +2,7 @@
   <div class="timeline-wrapper">
     <a-timeline mode="alternate">
       <a-timeline-item v-for="item of timeLines" :key="item._id">
-        <div class="pointer" @click="goArticle(item)">
+        <div class="pointer item" @click="goArticle(item)">
           {{ `${item.year}/${item.time} ${item.article.title}` }}
         </div>
       </a-timeline-item>
@@ -68,6 +68,12 @@ export default {
 </script>
 <style lang="less" scoped>
 .timeline-wrapper {
+  .item {
+    transition: all 0.1s;
+    &:hover {
+      font-style: italic;
+    }
+  }
   .load-more {
     text-align: center;
   }
