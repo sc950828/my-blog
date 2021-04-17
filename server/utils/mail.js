@@ -45,8 +45,19 @@ const sendRegisterEmail = async (option) => {
   });
 };
 
+const sendWebUpdatePasswordEmail = async (option) => {
+  const { fromUser, toUser, code } = option;
+  return await transporter.sendMail({
+    from: `${fromUser}的博客 ${mailUser}`, // sender address
+    to: toUser, // list of receivers
+    subject: "找回密码", // Subject line
+    text: `您的验证码是 ${code}，五分钟内有效。`, // plain text body
+    // html: "<b>Hello world?</b>", // html body
+  });
+};
 
 module.exports = {
   sendUpdatePasswordEmail,
-  sendRegisterEmail
+  sendRegisterEmail,
+  sendWebUpdatePasswordEmail
 };

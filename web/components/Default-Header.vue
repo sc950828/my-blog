@@ -36,7 +36,9 @@
           <a-icon type="message" />留言墙
         </a-menu-item>
         <a-menu-item key="/user">
-          <a-icon type="user" />{{ getterUser ? getterUser.name : '登录/注册' }}
+          <a-icon type="user" />{{
+            getterUser ? getterUser.visitor.name : '登录/注册'
+          }}
         </a-menu-item>
       </a-menu>
     </a-col>
@@ -84,6 +86,7 @@ export default {
   background-image: linear-gradient(90deg, #1890ff, #2db7f5, #6bc30d);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
 
 .menu-icon {
@@ -95,5 +98,9 @@ export default {
 .ant-menu-horizontal {
   line-height: 62px;
   border: none;
+}
+
+.ant-menu-item {
+  font-weight: bold;
 }
 </style>

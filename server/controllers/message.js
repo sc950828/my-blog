@@ -1,6 +1,7 @@
 const Message = require("../models/messages");
-const Visitor = require("../models/visitors");
 const Article = require("../models/articles");
+const jsonwebtoken = require("jsonwebtoken");
+const { initSecret } = require("../utils/secret");
 // const { checkIsAdmin } = require("../utils/help");
 // const mongoose = require("mongoose");
 
@@ -39,39 +40,42 @@ class MessageCtrl {
   async create(ctx) {
     ctx.verifyParams({
       content: { type: "string", required: true, max: 200 },
-      name: { type: "string", required: true, max: 10 },
-      email: { type: "email", required: true },
     });
-    const { content, name, email, articleId, messageId, parentMessageId } = ctx.request.body;
+    // visitor不一定有 管理员后台回复的留言就没有
     let visitor = null;
-    visitor = await Visitor.findOne({ name, email });
-    if(!visitor) {
-      visitor = await new Visitor({ name, email, create_by: ctx.state.user.id }).save();
+    if(ctx.request.headers.token) {
+      // 解析token 获取用户信息
+      const { token } = ctx.request.headers;
+      const secret = await initSecret();
+      visitor = jsonwebtoken.verify(token, secret);
     }
-    let message = null;
-    const newMessage = await new Message({
+    const { content, articleId, messageId, parentMessageId } = ctx.request.body;
+
+    const message = await new Message({
       content,
       article: articleId,
       message: messageId,
-      visitor: visitor._id,
+      visitor: visitor ? visitor.id : null,
       create_by: ctx.state.user.id
     }).save();
     // 一级留言
     if(parentMessageId) {
       // $pull删除 $push添加
-      message = await Message.findByIdAndUpdate(
+      await Message.findByIdAndUpdate(
         parentMessageId,
-        { "$push" : { children: newMessage._id } },
+        { "$push" : { children: message._id } },
         {
           new: true,
         }
       );
     }
-    // 增加留言量
-    await Article.findByIdAndUpdate(
-      articleId,
-      { $inc: { comments: 1 } },
-      { new: true });
+    if(articleId) {
+      // 增加留言量
+      await Article.findByIdAndUpdate(
+        articleId,
+        { $inc: { comments: 1 } },
+        { new: true });
+    }
 
     ctx.body = message;
   }

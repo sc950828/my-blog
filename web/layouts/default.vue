@@ -36,7 +36,7 @@
           </a-menu-item>
           <a-menu-item key="/user">
             <a-icon type="user" />{{
-              getterUser ? getterUser.name : '登录/注册'
+              getterUser ? getterUser.visitor.name : '登录/注册'
             }}
           </a-menu-item>
         </a-menu>

@@ -1,6 +1,6 @@
 const path = require("path");
 const { uploadImg, uploadFile, del } = require("../utils/alioss");
-const { sendUpdatePasswordEmail, sendRegisterEmail } = require("../utils/mail");
+const { sendUpdatePasswordEmail, sendRegisterEmail, sendWebUpdatePasswordEmail } = require("../utils/mail");
 const { setAsync, expireAsync } = require("../utils/redis");
 const { getRandomCode }  = require('../utils/help');
 
@@ -41,7 +41,7 @@ class HomeCtrl {
     ctx.status = 204;
   }
 
-  // 找回密码邮件
+  // 博客后台找回密码邮件
   async sendUpdatePasswordMail(ctx) {
     const { email } = ctx.request.body;
     // 四位随机数
@@ -59,7 +59,7 @@ class HomeCtrl {
   }
 
   // 注册博客邮件
-  async sendRegisterEmail(ctx) {
+  async sendRegisterMail(ctx) {
     const { email } = ctx.request.body;
     // 四位随机数
     const randomCode = getRandomCode();
@@ -73,6 +73,24 @@ class HomeCtrl {
       code: randomCode,
     };
     const results = await sendRegisterEmail(option);
+    ctx.body = results;
+  }
+
+  // 博客找回密码邮件
+  async sendWebUpdatePasswordMail(ctx) {
+    const { email } = ctx.request.body;
+    // 四位随机数
+    const randomCode = getRandomCode();
+    // redis设置randomCode
+    await setAsync(email, randomCode);
+    // 设置token的过期时间为5分钟
+    await expireAsync(email, 60 * 5);
+    const option = {
+      fromUser: ctx.state.user.nickName,
+      toUser: email,
+      code: randomCode,
+    };
+    const results = await sendWebUpdatePasswordEmail(option);
     ctx.body = results;
   }
 }

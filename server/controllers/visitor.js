@@ -51,10 +51,39 @@ class VisitorCtrl {
     }
     // redis获取code
     const randomCode = await getAsync(email);
+    if(!randomCode) {
+      ctx.throw(410, "验证码已失效");
+    }
     if(randomCode !== code) {
       ctx.throw(410, "验证码验证失败");
     }
     const visitor = await new Visitor({ name, email, password, create_by: ctx.state.user.id }).save();
+
+    ctx.body = visitor;
+  }
+
+  // 找回密码
+  async forgetPassword(ctx) {
+    ctx.verifyParams({
+      email: { type: "email", required: true },
+      code: { type: "string", required: true, max: 4, min: 4 },
+      password: { type: "string", required: true, min: 6, max: 18 },
+    });
+    const  { password, email, code } = ctx.request.body;
+    const oldVisitor = await Visitor.findOne({ email });
+    if(!oldVisitor) {
+      ctx.throw(410, "用户不存在");
+    }
+    // redis获取code
+    const randomCode = await getAsync(email);
+    if(!randomCode) {
+      ctx.throw(410, "验证码已失效");
+    }
+    if(randomCode !== code) {
+      ctx.throw(410, "验证码验证失败");
+    }
+
+    const visitor = await Visitor.findByIdAndUpdate(oldVisitor._id, { password }, { new: true });
 
     ctx.body = visitor;
   }
@@ -73,13 +102,13 @@ class VisitorCtrl {
     if (!visitor.status) {
       ctx.throw(410, "您已被禁用，请联系管理员");
     }
-    // const { _id, name: _name, email: _email } = visitor;
-    // const id = _id.toString();
-    // const secret = await initSecret();
-    // // 不设置过期时间
-    // const token = jsonwebtoken.sign({ id, name: _name, email: _email }, secret);
+    const { _id, name: _name, email: _email } = visitor;
+    const id = _id.toString();
+    const secret = await initSecret();
+    // 不设置过期时间
+    const token = jsonwebtoken.sign({ id, name: _name, email: _email }, secret);
 
-    ctx.body = { visitor };
+    ctx.body = { token, visitor };
   }
 
   // 删除
