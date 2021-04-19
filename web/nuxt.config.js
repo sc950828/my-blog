@@ -59,6 +59,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
+  // 自动引入组件
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

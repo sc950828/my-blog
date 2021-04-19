@@ -97,10 +97,10 @@ class VisitorCtrl {
     const { email, password } = ctx.request.body;
     const visitor = await Visitor.findOne({ email, password });
     if (!visitor) {
-      ctx.throw(410, "用户名或密码不正确");
+      ctx.throw(409, "用户名或密码不正确");
     }
     if (!visitor.status) {
-      ctx.throw(410, "您已被禁用，请联系管理员");
+      ctx.throw(403, "您已被禁用，请联系管理员");
     }
     const { _id, name: _name, email: _email } = visitor;
     const id = _id.toString();

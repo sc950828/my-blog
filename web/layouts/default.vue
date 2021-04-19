@@ -45,18 +45,10 @@
   </a-config-provider>
 </template>
 <script>
-import DefaultHeader from '@/components/Default-Header'
-import DefaultContent from '@/components/Default-Content'
-import DefaultFooter from '@/components/Default-Footer'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  components: {
-    DefaultFooter,
-    DefaultHeader,
-    DefaultContent,
-  },
   data() {
     return {
       zhCN,
