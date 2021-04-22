@@ -1,6 +1,7 @@
 <template>
   <div>
-    <a-row type="flex" justify="center">
+    <div v-if="$nuxt.isOffline">亲 您网络不佳哦~</div>
+    <a-row v-else type="flex" justify="center">
       <!-- xs <576px -->
       <!-- sm ≥576px -->
       <!-- md ≥768px -->

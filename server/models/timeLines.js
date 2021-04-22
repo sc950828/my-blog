@@ -11,6 +11,8 @@ const timeLineSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     // 文章id
     article: { type: Schema.Types.ObjectId, ref: "Article", required: true },
+    // 状态
+    status: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

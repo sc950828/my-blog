@@ -89,7 +89,7 @@ class ArticleCtrl {
     const date = new Date(article.createdAt).getDate();
 
     // 时间线加一条
-    new TimeLine({ year, time: `${month}/${date}`, user: ctx.state.user.id, article: article._id }).save();
+    new TimeLine({ year, time: `${month}/${date}`, user: ctx.state.user.id, article: article._id, status: is_publish }).save();
     ctx.body = article;
   }
 
@@ -123,6 +123,7 @@ class ArticleCtrl {
         new: true,
       }
     );
+
     // 说明换了分类
     if(article_category !== article.article_category.toString()) {
       await ArticleCategory.findByIdAndUpdate(
@@ -133,6 +134,12 @@ class ArticleCtrl {
         article.article_category,
         { $inc: { count: -1 } }
       );
+    }
+
+    // 说明修改了状态
+    if(article.is_publish !== is_publish) {
+      // 修改时间轴状态
+      await TimeLine.findOneAndUpdate({ article: ctx.params.id }, { status: is_publish });
     }
 
     ctx.body = article;
@@ -153,6 +160,9 @@ class ArticleCtrl {
     if (!article) {
       ctx.throw(404, "文章不存在");
     }
+    // 修改时间轴状态
+    await TimeLine.findOneAndUpdate({ article: ctx.params.id }, { status });
+
     ctx.body = article;
   }
 
@@ -213,7 +223,9 @@ class ArticleCtrl {
     const article = await Article.findByIdAndUpdate(
       ctx.params.id,
       { $inc: { views: 1 } },
-      { new: true }).select(selectFields);
+      { new: true })
+      .select(selectFields)
+      .populate("article_category");
     if (!article) {
       ctx.throw(404, "文章不存在");
     }

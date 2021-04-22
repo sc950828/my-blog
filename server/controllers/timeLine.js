@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 class TimeLineCtrl {
   // 查找
   async findWeb(ctx) {
-    const { pageNo = 1, pageSize = 10 } = ctx.query;
+    const { pageNo = 1, pageSize = 20 } = ctx.query;
     const _pageNo = Math.max(pageNo * 1, 1);
     const _pageSize = Math.max(pageSize * 1, 1);
     // 这里需要转成ObjectId
-    const query = { user: mongoose.Types.ObjectId( ctx.state.user.id) };
+    const query = { user: mongoose.Types.ObjectId( ctx.state.user.id), status: true };
 
     const timeLines = await TimeLine.find(query)
       .sort({ createdAt: 'desc' })

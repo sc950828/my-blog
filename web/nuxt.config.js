@@ -21,12 +21,12 @@ export default {
       {
         hid: 'keywords',
         name: 'keywords',
-        content: `${name}，${name}的博客，${name}的个人博客`,
+        content: `${name}, ${name}的博客, ${name}的个人博客`,
       },
       {
         hid: 'description',
         name: 'description',
-        content: `${name}的博客，是记录学习和成长的博客，专注于互联网技术的开发及研究，分享个人心得，记录所遇问题。`,
+        content: `${name}的博客，个人学习总结和工作心得。`,
       },
     ],
     link: [
@@ -59,6 +59,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
+  // 自动引入组件
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
