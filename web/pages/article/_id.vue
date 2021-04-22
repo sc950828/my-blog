@@ -234,6 +234,24 @@ export default {
       loading: false,
     }
   },
+  head() {
+    const name = process.env.NAME === 'sc' ? '苏纯' : '晏海燕'
+    return {
+      title: `${name}的博客 | ${this.article.title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `${name}, ${name}的博客, ${this.article.article_category.title}`,
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.article.description,
+        },
+      ],
+    }
+  },
   computed: {
     ...mapGetters(['getterUser']),
   },
